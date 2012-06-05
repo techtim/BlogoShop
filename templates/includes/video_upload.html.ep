@@ -1,0 +1,57 @@
+
+%= form_for '/akcia/send_video' => (method => 'post') => begin
+
+		
+    	<div class='row clearfloat'>
+    		<div class='upload__phone'>
+    			<label>Телефон:</label>
+    			<input type='text' placeholder='9000000000' name='num'/>
+    		</div>
+    		
+    		<div class='upload__pin'>
+    			<label>Пароль:</label>
+    			<input type='password' value='' placeholder='************' name='pin' />
+    		</div>
+    		
+			<p class='upload__hint'>
+				Пароль высылается победителям предыдущего этапа акции.
+				<a href='#' class='fake__link box__init' rel='feedback'>восстановление пароля</a>
+			</p>
+			
+		</div>
+		
+		<div class='row clearfloat'>
+			<label>Ваше имя</label>
+    		<input type="text" name="user_name" id="name" />
+    	</div>
+    	
+
+		<div class='row clearfloat'>
+			<label>Код для вставки 	&lt;embed&gt;:</label>
+			<textarea name="video_code"></textarea>
+    	</div>
+		
+
+		<ul class='upload__howto'>
+		 	<li><a href='http://support.google.com/youtube/bin/static.py?hl=ru&guide=1719823&page=guide.cs' target='_blank'>Как залить видео</a></li>
+		 	<li><a href='http://support.google.com/youtube/bin/answer.py?hl=ru&answer=171780' target='_blank'>Как сгенерировать код</a></li>
+		</ul>
+		
+		<div class='clear'></div>
+		
+		<p class='upload__status'></p>
+		
+		<div class='upload__controls clearfloat'>
+			<label class='checkbox'>Согласен с <a href='#' class='fake__link'>правилами размещения творческих  работ</a></label>
+			
+			<ul>
+				<li><a href='#' class='submit'>Добавить видео</a></li>
+			</ul>
+		</div>
+    
+%= end
+
+<div class='video__rules'>
+	<p>Размещая свою Творческую работу на сайте для открытого голосования, Участник соглашается с тем, что его Творческая работа может быть использована Организатором Акции в рекламно-информационных целях, включая, но не ограничиваясь, следующими способами: воспроизведение, распространение, доведение до всеобщего сведения (в т.ч. в сети Интернет), переработка и т.д, без получения дополнительного согласия автора или выплаты ему какого-либо вознаграждения, на весь срок действия авторских прав на территории всех стран мира (с учетом специфики сети Интернет)</p>
+	<p>Участник гарантирует, что предоставленная им на конкурс Творческая работа не нарушает прав третьих лиц, а, в случае предъявления Организатору Акции претензий/исков, связанных с использованием Творческой работы, предоставленной Участником, последний обязуется за свой счет урегулировать все разногласия, возникшие по вышеуказанному вопросу, а также возместить Организатору убытки в случае их причинения.</p>
+</div>

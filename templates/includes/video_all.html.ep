@@ -1,0 +1,28 @@
+<ul class='video__list b__videos__list__previews clearfloat'>
+% foreach (@$videos) {
+	<li>
+		<a href='/akcia/video/<%== $_->{video_code} %>'>
+			<span class='video__position'><%= $_->{position} %></span>
+			<div class='video__information'>
+				<div class='video__preview'>
+					<img src='http://img.youtube.com/vi/<%= $_->{video_code} %>/1.jpg' alt='' width=140 />
+					<!--<span class='video__timing'>
+						<span class='bg'></span>
+						<span class='text'>0:38</span>
+					</span>
+					-->
+				</div>
+				<h2><%= $_->{user_name} %></h2>
+				<div class='video__meta'>
+					<span class='rating'>
+						<%= $_->{score} %>
+					</span>
+					<span class='diff'>
+						(<%= $_->{day_position_diff} || 0 %>)
+					</span>
+				</div>
+			</div>
+		</a>
+	</li>
+% }
+</ul>

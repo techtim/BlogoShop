@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<articles>
+	% foreach my $art (@$articles) {
+	<article>
+		%foreach (keys %$art) {
+			<<%= $_ %>><%= $art->{$_} %> </<%= $_ %>>
+		% }
+	</article>
+	%}
+</articles>

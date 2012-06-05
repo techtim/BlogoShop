@@ -1,0 +1,30 @@
+% if (defined $message) {
+<font color="#0f0">
+<strong>
+% if ($message eq 'admin_added') {
+	Администратор добавлен
+% }
+
+% if ($message eq 'admin_edited') {
+	Администратор отредактирован
+% }
+
+% if ($message eq 'article_added') {
+	Статья добавлена
+% }
+
+% if ($message eq 'article_removed') {
+	Статья удалена
+% }
+
+% if ($message eq 'article_updated') {
+	Статья обновлена
+% }
+
+% if ($message eq 'author_added') {
+	Добавлен автор
+% }
+</strong>
+</font>
+<br/>
+% }

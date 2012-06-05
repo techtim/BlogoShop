@@ -1,0 +1,83 @@
+
+% my $ERRORS = {
+%	'no_email' => 'Укажите правильный E-mail',
+%	'no_login' => 'Укажите Логин'
+% };
+
+% if (defined $error_messages) {
+% foreach my $error_message (@$error_messages) {
+<font color="#f00">
+<strong>
+% if ($error_message eq 'no_email') {
+	Заполните поле "E-mail"
+% }
+
+% if ($error_message eq 'no_login') {
+	Поле "Логин" не может быть пустым
+% }
+
+% if ($error_message eq 'wrong_pass') {
+	Укажите правильный пароль
+% }
+
+% if ($error_message eq 'pass_dont_match') {
+	Укажите правильный пароль
+% }
+
+% if ($error_message eq 'wrong_pass_log') {
+	Неправильный логин или пароль
+% }
+
+% if ($error_message eq 'wrong_captcha') {
+	Неправильная каптча
+% }
+
+% if ($error_message eq 'login_exists') {
+	Такой логин уже занят
+% }
+
+
+% if ($error_message eq 'no_article_name') {
+	Укажите название статьи
+% }
+
+% if ($error_message eq 'no_article') {
+	Статья не найдена
+% }
+
+% if ($error_message eq 'no_preview_text') {
+	Заполните текст превью
+% }
+
+% if ($error_message eq 'no_article_text') {
+	Заполните текст статьи
+% }
+
+% if ($error_message eq 'no_rubric') {
+	Укажите рубрику
+% }
+
+% if ($error_message eq 'no_source') {
+	Укажите источник
+% }
+	
+% if ($error_message eq 'no_author') {
+	Укажите автора
+% }
+
+% if ($error_message eq 'bad_author_name') {
+	Имя автора должно содержать 2 слова и 1 пробел (Александр Петров)
+% }
+
+% if ($error_message eq 'article_blocked') {
+	Статья редактируется другим администратором
+% }
+
+% if ($error_message eq 'no_city') {
+	Укажите город мероприятия
+% }
+
+</font>
+	<br/>
+% }
+% }

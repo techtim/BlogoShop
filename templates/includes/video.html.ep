@@ -1,0 +1,18 @@
+<a href='<%= $video_src %>' style='display:block;width:655px;height:450px' id='<%== $video_id %>'></a> 
+<script>
+	flowplayer( '<%== $video_id %>', { src : '/i/flowplayer.commercial-3.2.7.swf', wmode: 'transparent'}, {
+		key: '#$3874073cb4a1c7a54d5',
+		clip : {
+			autoPlay: false, autoBuffering: true,  
+			onStart: function () {
+		      this.getPlugin("play").css({opacity: 1});
+		    },
+		    onBeforeFinish: function () {
+		      this.getPlugin("play").css({opacity: 0});
+	    	},
+		    onFinish: function () {
+		      this.getPlugin("play").css({opacity: 0});
+	    	} 
+	    }
+	} );
+</script>

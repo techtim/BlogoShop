@@ -1,0 +1,11 @@
+<div class='meta clearfloat'>
+	<span class='username'><%== $author_info->{name} %>,</span>
+	<span class='date'><%== $date %></span>
+</div>
+<div class='clear'></div>
+<div class='text__section'>
+	<h2 class='caption'><%== $name %></h2>
+	<%== $article_text %>
+	<!--
+	<p class='img-box'><img src='http://sochi-relax.com/img/art/sochi%5B1%5D.jpg' alt='' /></p> -->
+</div>

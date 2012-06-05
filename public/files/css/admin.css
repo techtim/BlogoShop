@@ -1,0 +1,168 @@
+/* @tags */
+
+body {
+	font-size: 12px;
+}
+
+a:link {
+    color: #2274A8;
+}
+
+a:visited {
+    color: #969;
+}
+
+.admin-container {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.3em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+textarea {
+    width: 100%;
+}
+
+/* @big_ones */
+
+.admin-container .section {
+	margin: 20px 0;
+}
+
+/* таблицы-списки */
+
+table.blackhead {
+	width: 100%;
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+    table.blackhead tbody tr {
+        border-bottom: 1px solid gray;
+    }
+
+    table.blackhead td {
+        padding: 2px;
+        vertical-align: top !important;
+    }
+
+    table.blackhead thead td {
+        background: black;
+        color: white;
+		border-right: 1px solid silver;
+		font-size: 10px;
+    }
+
+    table.blackhead tbody tr:hover td {
+        background: #eee;
+    }
+
+/* для позиционирования и тулбаров */
+
+table.layout {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+	table.layout td {
+		vertical-align: middle;
+		padding: 2px 0px 2px 5px;
+		border: none;
+	}
+
+	table.layout td.ta-right {
+		text-align: right !important;
+		padding: 2px 0px !important;
+	}
+
+
+	/* настройки статьи */
+
+	.article-metadata table {
+		width: 600px;
+	}
+
+		.article-metadata table select,
+		.article-metadata table input.wide {
+			width: 94%;
+		}
+
+		.article-metadata table input.date {
+			width: 70px ! important;
+		}
+
+	/* 'панелька' над формой */
+	.articles-toolbox table td {
+		width: 50%;
+	}
+
+	.articles-toolbox table td.filter {
+	   text-align: right;
+	}
+
+	/* кнопки под формой */
+	.submit-buttons table td.save-wrapper {
+		text-align: right;
+	}
+
+	.submit-buttons table td.delete-wrapper span {
+		display: inline-block;
+		background: pink;
+		padding: 2px;
+	}
+
+	.new-user-form-container table {
+		width: 500px;
+	}
+
+		.new-user-form-container table input.wide {
+			width: 93%;
+		}
+
+
+/*@ пагинация в списке статей*/
+
+.pager {
+	text-align: center;
+}
+
+.pager a {
+	font-size: 20px;
+	font-weight: bold;
+	display: inline-block;
+	padding: 0 10px;
+	line-height: 24px;
+	border: 1px solid silver;
+	text-decoration: none;
+}
+
+.pager a:hover {
+	background: #eee;
+	text-decoration: underline;
+}
+
+a.article-link-bold {
+    font-weight: bold;
+}
+
+.bg-pink {
+	background: pink;
+}
+
+.input-wrap {
+	display: inline-block;
+	padding: 3px;
+}
+
+label b {
+	color: red;
+}

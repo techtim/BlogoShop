@@ -1,0 +1,11 @@
+<select name="<%= $name %>">
+	<option value="">выбрать</option>
+
+% if (ref $options eq 'ARRAY') {
+% foreach my $option (@$options) {
+	<option value="<%= $option->{_id} %>" <%= (defined $select && $select eq $option->{_id} ? 'selected' :'') %>>
+		<%== $option->{name} %>
+	</option>
+% }
+% }
+</select>

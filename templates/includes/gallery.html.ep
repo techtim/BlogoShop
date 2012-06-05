@@ -1,0 +1,11 @@
+% if (ref $gallery eq 'ARRAY') { 
+<div class="fotorama-container">
+    <div class="fotorama">
+     	% foreach my $img (@$gallery) {
+     		<a href="<%= $img_url.$img->{tag} %>">
+     			<img src="<%= config->{nginx_img_resize}.$img_url.$img->{tag} %>" alt="<%= $img->{descr} %><%== $img->{source} ? " ($img->{source})" : '' %>">
+     		</a>
+     	% }
+    </div>
+</div>
+% }

@@ -1,0 +1,89 @@
+% layout 'admin';
+% title 'Редактирование администратора';
+
+<div class="admin-container">
+	<div class="section main-heading">
+		<h1><a href="/admin">Админка</a> &gt; Редактирование администратора</h1>
+	</div>
+
+	<div class="section messages">
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+		%= include 'includes/info_message', message => stash 'message'
+	</div>
+
+	<div class="section new-user-form-container">
+
+		%= form_for '' => (method => 'post') => begin
+
+			<input type="hidden" name="id" value="<%= $admin->{_id} %>">
+
+			<table class="layout">
+				<tr>
+					<td class="ta-right">
+						<label>Логин<b>*</b>:</label>
+					</td>
+					<td>
+						<input class="wide"type="text" name="login" value="<%== $admin->{login} %>">
+					</td>
+				</tr>
+				<tr>
+					<td class="ta-right">
+						<label>Имя:</label>
+					</td>
+					<td>
+						<input class="wide"type="text" name="name" value="<%= $admin->{name} %>" size=40>
+					</td>
+				</tr>
+				<tr>
+					<td class="ta-right">
+						<label>E-mail<b>*</b>:</label>
+					</td>
+					<td>
+						<input class="wide" type="text" name="email" value="<%== $admin->{email} %>" size=30>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ta-right">
+						<label>Новый пароль:</label>
+					</td>
+					<td>
+						<input type="password" name="new_pass">
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ta-right">
+						<label>Новый пароль:</label>
+					</td>
+					<td>
+						<input type="password" name="new_pass_ctrl">
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ta-right">
+					</td>
+					<td>
+						<i>Чтобы сохранить изменения, введите ваш текущий пароль<br/>и нажмите "сохранить":</i>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ta-right">
+						<label>Пароль<b>*</b>:</label>
+					</td>
+					<td>
+						<input type="password" name="old_pass" value="">
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ta-right" colspan="2">
+						<input type="submit" value="Сохранить изменения"/>
+					</td>
+				</tr>
+			</table>
+		% end
+	</div>
+</div>

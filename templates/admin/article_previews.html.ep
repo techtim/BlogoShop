@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<title><%= title %></title>
+
+		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
+
+
+    	<link rel='stylesheet' type='text/css' href='/css/admin.css' media='all' />
+    	
+		<script type='text/javascript' src="//www.google.com/jsapi"></script>
+		<script type='text/javascript'>google.load("jquery", "1.7.0");</script>
+		<script type='text/javascript' src='/j/j.js'></script>
+	</head>
+	<body>
+        <div id='content' class='clearfloat'>
+        	<div class='back clearfloat'>
+        		<div class='wrap'>
+        			<div id='content' class='clearfloat'>
+        				<div class='back clearfloat'>
+        					<div class='wrap'>
+        						% $article->{preview_size} = 50;
+        						%= include 'includes/preview_article', article => $article, even => 0, count => 0
+        						<div class='clear'></div>
+        						% $article->{preview_size} = 100;
+        						%= include 'includes/preview_article', article => $article, even => 0, count => 0
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+    </body>
+	<script type="text/javascript" src="/j/EventHelpers.js"></script>
+	<script type="text/javascript" src="/j/cssQuery-p.js"></script>
+	<script type="text/javascript" src="/j/sylvester.js"></script>
+	<script type="text/javascript" src="/j/cssSandpaper.js"></script>
+</html>
+
+

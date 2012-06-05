@@ -1,0 +1,39 @@
+% if ($cuts && $rubrics) {
+
+<div id='main-nav' class="offsets-fanat-widget">
+	<ul class='wrap'>
+		<li class='home'>
+			<a href='/' title='На главную'></a>
+		</li>
+
+% foreach my $elem (@$cuts) {
+%
+		<li class="<%= ($elem->{_id} eq $cuts->[0]->{_id} ? 'first ' : '') . $elem->{_id} . ($elem->{_id} eq $cut ? ' current' : '') %>">
+			<a href="/<%= $elem->{_id} %>" title='<%= $elem->{name} %>' class="<%= ($elem->{_id} eq $cuts->[0]->{_id} ? 'first ' : '') . $elem->{_id} . ($elem->{_id} eq $cut ? ' current' : '') %>">
+				<span class='text'><%= $elem->{name} %></span>
+				<span class='back'></span>
+			</a>
+		</li>
+%
+% }
+	</ul>
+</div>
+<div id='sub-nav' class="offsets-fanat-widget">
+	<ul class='wrap'>
+
+% foreach my $elem (@$rubrics) {
+		<li <%= $elem->{_id} eq $rubric ? 'class=current' : '' %>> 
+		<a title='<%= $elem->{name} %>'
+%		if ($active_rubrics_in_cuts->{ ($cut ? $cut : '').':'.$elem->{_id} }) {
+			 href="/<%= ($cut ? $cut.'/' : '') . ($elem->{_id} eq $rubric ? '' : $elem->{_id}) %>"
+%		} else {
+			class='disabled'
+%		}
+		><%= $elem->{name} %></a>			
+		</li>
+		
+% }
+	</ul>
+</div>
+% }
+

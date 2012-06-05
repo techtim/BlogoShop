@@ -1,0 +1,61 @@
+% layout 'admin';
+% title 'Админка';
+
+<div class="admin-container">
+
+    <div class="section main-heading user-status">
+    	<table class="layout">
+    		<tr>
+    			<td>
+					<h1>Админка</h1>
+				</td>
+				<td>
+					% if (defined 'name') {
+						Привет, <b><%== stash 'name' %></b> [<a href="logout">Выйти</a>]<br/>
+						<%= link_to 'Редактировать профиль' => 'admin/edit_admin' %>
+					% }
+				</td>
+			</tr>
+		</table>
+    </div>
+
+    <div class="section">
+        %= include 'includes/error_message', error_messages => stash 'error_message'
+        %= include 'includes/info_message', message => stash 'message'
+        <%= $self->render('info_message', partial => 1) %>
+    </div>
+
+
+	<div class="section user-tools">
+		<h3>Управление пользователями:</h3>
+		<ul>
+			<li><%= link_to 'Добавить автора' => '/admin/add_author' %></li>
+
+			% my $type = stash 'type';
+			% if ($type && $type eq 'super') {
+				<li><%= link_to 'Добавить администратора' => '/admin/add_admin' %></li>
+			% }
+		</p>
+	</div>
+
+	<div id="section content-tools">
+
+		<h3>Статьи:</h3>
+		<ul>
+			<li><%= link_to 'Список статей' => '/admin/articles' %></li>
+			<li><%= link_to 'Создать новую статью' => '/admin/article/edit' %></li>
+		</ul>
+
+		<h3>Новости:</h3>
+		<ul>
+			<li><%= link_to 'Cписок новостей' => '/admin/news' %></li>
+			<li><%= link_to 'Добавить новую новость' => '/admin/news/edit' %></li>
+		</ul>
+		
+		<h3>Большие игры:</h3>
+		<ul>
+			<li><%= link_to 'Cписок новостей Больших игр' => '/admin/big_games_news' %></li>
+			<li><%= link_to 'Добавить новую новость в Большие игры' => '/admin/big_games_news/edit' %></li>
+		</ul>
+	</div>
+<br/>

@@ -1,0 +1,36 @@
+% layout 'admin';
+% title 'Логин';
+
+<div class="admin-container">
+    <div class="main-heading section">
+        <h1>Вход в систему управления сайтом</h1> 
+    </div>
+    
+    <div class="section">
+        %= include 'includes/error_message', error_messages => stash 'error_message'
+    </div>
+        
+    <div  class="section">
+        
+        %= form_for '' => (method => 'post') => begin
+        	<%== $recaptcha_html %>
+            <div class="clearfix">
+                <label for="login">Login:</label>
+                <div class="input">
+                    <input type="text" name="login" id="login" />
+                </div>
+            </div>
+            
+            <div class="clearfix">
+                <label for="pass">Password:</label>
+                <div class="input">
+                    <input type="password" name="pass" id="pass" />
+                </div>
+            </div>
+            
+            <div class="actions">
+                <input type="submit" class="btn primary" value="Log in" />
+            </div>
+        %= end
+    </div>
+</div>

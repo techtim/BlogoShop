@@ -1,0 +1,66 @@
+% layout 'admin';
+% title 'Добавление администратора';
+
+<div class="admin-container">
+	<div class="section main-heading">
+		<h1><a href="/admin">Админка</a> &gt; Добавление администратора</h1>
+	</div>
+
+	<div class="section messages">
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+		% if (defined 'message') {
+			<p><%= stash 'message' %></p>
+		% }
+	</div>
+
+	<div class="section new-user-form-container">
+		%= form_for '' => (method => 'post') => begin
+			<table class="layout">
+
+				<col width="64" align="right"/>
+				<col>
+
+				<tr>
+					<td class="ta-right">
+						<label>Логин<b>*</b>:</label>
+					</td>
+					<td>
+						<input type="text" class="wide" name="login" value="<%= stash 'login' %>" />
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ta-right">
+						<label>Имя:</label>
+					</td>
+					<td>
+						<input type="text" class="wide" name="name" value="<%= stash 'name' %>" />
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ta-right">
+						<label>E-mail<b>*</b>:</label>
+					</td>
+					<td>
+						<input type="text" class="wide"  name="email" value="<%= stash 'email' %>">
+					</td>
+				</tr>
+				<tr>
+					<td class="ta-right">
+						<input type="checkbox" name="type" value="super" <%= ($type eq 'super' ? 'CHECKED' : '') %>>
+					</td>
+					<td>
+						<label>Пользователь может создавать новых администраторов</label>
+					</td>
+				<tr>
+					<td colspan="2" class="ta-right">
+						<button type="submit" name="submit" value=1>Добавить</button>
+					</td>
+				</tr>
+			</table>
+		%= end
+	</div>
+
+</div>
+<!-- /admin-container -->

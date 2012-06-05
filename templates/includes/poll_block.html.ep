@@ -1,0 +1,14 @@
+% if (ref $poll->{answers} eq 'HASH') {
+<div class="poll">
+<b><%= $poll->{question} %></b>
+% foreach (keys %{$poll->{answers}}) {
+% my $answer = $poll->{answers}->{$_};
+	<p> 
+	<a href="/vote/<%= join('/', $rubric, $alias, $poll->{hash}, $answer->{hash}) %>"><%= $answer->{text} %></a> &minus;&gt;<%= $answer->{count} %> / <%= $answer->{total_count} %>
+%	if ($answer->{img}) {
+		<img src="<%= $img_url.$answer->{img} %>">
+% 	}
+ 	</p>
+% }
+</div>
+% }

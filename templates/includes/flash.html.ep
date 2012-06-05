@@ -1,0 +1,11 @@
+<script type="text/javascript">
+	var flashvars = {};
+	var attributes = {};
+	var params = {};
+		params.play = "true";
+		params.wmode = "transparent";
+	swfobject.embedSWF("<%== $flash_url %>", "<%= $obj_id %>", "655", "<%== $height %>", "8.0.0", "", flashvars, params, attributes);
+</script>
+<div id="<%= $obj_id %>">
+	<p>Флэш ролик</p>
+</div>

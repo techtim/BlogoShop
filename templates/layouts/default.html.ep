@@ -1,0 +1,34 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=1070" />
+		<title><%= title %></title>
+		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
+		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
+    	%= include 'includes/fanat_com_style'
+	    %= include 'includes/fanat_com_jquery'
+	    %= include 'includes/fanat_com_script'
+		<script type='text/javascript' src='/j/routing.js'></script>
+		<script type='text/javascript' src='/j/infinitescroll.js'></script>
+		<script type='text/javascript' src='/j/j.js'></script>
+		<%= jquery_ajax_csrf_protection %>
+	</head>
+	<body>
+		%= include 'includes/header'
+		%= include 'includes/top', cuts => stash 'cuts'
+		<%= content %>
+
+		<div id='footer' class='wrap'>
+		 	<p>© 2011 ОАО «МегаФон». МегаФон Генеральный партнер XXII Олимпийских зимних игр 2014 года в городе Сочи.</p>
+		 	<p>© 2011 «МегаФон Спорт» поддержка и развитие — компания <a href='http://sup.com' target='_blank'>SUP Media</a>.</p>
+		</div>
+
+        %= include 'includes/google_analytics'
+        %= include 'includes/yandex_metrika'
+        %= include 'includes/adriver'
+    </body>
+</html>

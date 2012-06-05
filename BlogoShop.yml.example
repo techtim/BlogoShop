@@ -1,0 +1,26 @@
+---
+mojo_mode: 'development' # 'production'
+log_level: 'debug' # 'warn'
+
+db_name: 'blogoshop'
+db_host: '127.0.0.1'
+db_port: 27017
+
+image_dir: '/home/ttavlintsev/BlogoShop/public/files/i/articles/'
+default_img_dir: 'default'
+image_url: '/i/articles/'
+nginx_img_resize: '/res/64'
+
+cookie_name: 'BlogoShop'
+cookie_expiration: 604800 # week
+cookie_secret: '$w3Et /|\3gaF0/V)'
+
+block_voter_ip_time: 180 # 3 min
+
+articles_on_page: 10
+related_articles_count: 6
+
+articles_on_admin_page: 30
+
+superadmin_mail: 'timmy88@gmail.com'
+

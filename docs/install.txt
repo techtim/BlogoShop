@@ -1,0 +1,37 @@
+Размещение проекта в SVN
+https://svn.bulyon.com/repos/Sport.MegaFon.ru/
+Инсталляция
+adduser --uid 20049 --home /opt/BlogoShop BlogoShop
+cd /opt
+svn co https://svn.bulyon.com/repos/Sport.MegaFon.ru/tags/1.0.0 BlogoShop
+Кратенько про nginx: 
+cd /usr/src
+svn export https://svn.bulyon.com/repos/packages/nginx/squezee/nginx_new_1.0.10_squezee_amd64.deb
+aptitude install libgd2-xpm libgeoip1
+dpkg -i nginx_new_1.0.10_squezee_amd64.deb
+
+Некоторые пакеты берутся из backports или из следующей, нестабильной, версии Debian, если выполняются зависимости и нет собранного разработчиком (или администратором) пакета. Сначала стандартные пакеты: 
+aptitude install libjs-jquery libdata-dump-perl libhttp-parser-xs-perl libnet-server-perl libplack-perl libwww-perl libdigest-sha-perl
+
+Теперь самосборные:
+svn co https://svn.bulyon.com/repos/Sport.MegaFon.ru/packages packages
+dpkg -i --force-all packages/*.deb
+
+Mojolicious: 
+wget http://backports.debian.org/debian-backports/pool/main/j/jquery/libjs-jquery_1.6.4-1~bpo60+1_all.deb
+wget http://ftp.ru.debian.org/debian/pool/main/libm/libmojolicious-perl/libmojolicious-perl_2.23-1_all.deb
+dpkg -i libjs-jquery_1.6.4-1~bpo60+1_all.deb; dpkg -i libmojolicious-perl_2.23-1_all.deb
+
+Starman:
+wget http://ftp.ru.debian.org/debian/pool/main/s/starman/starman_0.2014-1_all.deb
+dpkg -i starman_0.2014-1_all.deb
+
+Настройка:
+cd /opt/BlogoShop
+cp BlogoShop.yml.example BlogoShop.yml
+
+Поправить по сути всего два параметра (тут приведены значения для продакшна): 
+db_host: 'champmegam'
+...
+image_dir: '/opt/BlogoShop/public/files/i/articles/'
+поставить правильные права на папку

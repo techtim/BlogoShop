@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<title><%= title %></title>
+
+    	<link rel='stylesheet' type='text/css' href='/css/admin.css' media='all' />
+    	
+		<script type='text/javascript' src="//www.google.com/jsapi"></script>
+		<script type='text/javascript'>google.load("jquery", "1.7.0");</script>
+
+	</head>
+	<body><%= content %>
+	</body>
+</html>

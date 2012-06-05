@@ -1,0 +1,103 @@
+% layout 'viktorina';
+% title 'МегаФон Спорт';
+
+<link rel='stylesheet' type='text/css' href='/css/single_article_style.css' media='all' />
+%= include 'includes/fanat_com_style'
+%= include 'includes/fanat_com_script'
+	    
+<div class='content__strip clearfloat'>
+	<div id='content' class='clearfloat'>
+		<div class='content__back'>
+			<div class='wrap'>
+				<h2 class='title'></h2>
+				
+				<ul class='menu__block'>
+					<li><a href='#' class='box__init' rel='rules'>Правила акции</a></li>
+					<li><a href='#' class='box__init' rel='faq'>Вопросы и ответы</a></li>
+					<li><a href='#' class='box__init' rel='feedback'>Обратная связь</a></li>
+				</ul>
+				
+				<div class='box video__view'>
+					<h2 class='box__caption'>Номер видео <%= $video->{inn} %>. <br/> <small>Чтобы проголосовать, отправьте SMS с этим номером на 2012.</small></h2>
+					<a class='box__close' href='/akcia'></a>
+					<div class='clear'></div>
+					
+					<div class='video__player'>
+						<iframe width="640" height="480" src="http://www.youtube.com/embed/<%= stash 'id' %>?wmode=opaque&rel=0" frameborder="0" allowfullscreen></iframe>
+					</div>
+					
+					<div class='video__meta'>
+						<span class='rating'><%= $video->{score} %> голосов</span>
+						<span class='diff tooltip__init' rel='diff'>(<%= $video->{day_position_diff} || 0 %>)</span>
+					</div>
+					
+					<a href='#' class='tooltip__init video__vote' rel='vote'>Голосовать</a>
+					<div class='clear'></div>
+
+					<div class="comments" id="comments">
+						<h3 class="bold-and-violet section-header">Комментарии:</h3>
+						% my $preview = 'Акция &laquo;Стань первым в Лондоне&raquo;, видео №'. $video->{inn} . ($video->{user_name}? ', автор: '.$video->{user_name} : '');
+						
+						<div class="fanat-talks">
+						    % if ( config->{mojo_mode} eq 'production' ) {
+						        <a id="fanat_talks_preview" href="http://fanat.ru/talks/megafonsport/<%= stash('cut') || 'other' %>/<%= $rubric %>_<%= $alias %>" data-template-preview-text="<%== $preview %>">Обсуждение материала на Фанат.ру</a>
+							% } else {
+						        <a id="fanat_talks_preview" href="http://t.fanat.ru/talks/megafonsport/<%= stash('cut') || 'other' %>/<%= $rubric %>_<%= $alias %>" data-template-preview-text="<%== $preview %>">Обсуждение материала на Фанат.ру</a>
+						    % }
+						</div>
+					</div>
+					
+				</div>
+				
+				<div id='news__block'>
+					<h2 class='header'>Новости</h2>
+					<div class='text__section'>
+						<ul>
+							% foreach my $new (@$news) {
+								<li class='item clearfloat'>
+									<a href='/akcia/<%== $new->{alias} %>' rel='news' class='box__init'>
+										<span class='username'><%== $new->{author_info}->{name} %>,</span>
+										<span class='date'><%== $new->{date} %></span>
+										<span class='text'>
+											<%== $new->{name} %>
+										</span>
+									</a>
+								</li>
+							% }
+						</ul>
+					</div>
+				</div>
+				
+				<div class='clear'></div>
+				
+				<div id='phone__number'></div>
+				
+				<ul id='bottom__nav' class='clearfloat'>
+					<li>
+						<a href='#rules' class='rules box__init' rel='rules' title='Правила акции'>Правила акции</a>
+					</li>
+					<li>
+						<a href='#faq' class='faq box__init' rel='faq' title='Вопросы и ответы'>Вопросы и ответы</a>
+					</li>
+					<li>
+						<a href='#feedback' class='feedback box__init' rel='feedback' title='Обратная связь'>Обратная связь</a>
+					</li>
+				</ul>
+				<div class='clear'></div>
+				
+				<div class='tooltip'>
+					<div class='vote__section'>
+						<p>Отправь SMS на 2012 с номером «<%= $video->{inn} %>» для того,  чтобы проголосовать за это видео</p>
+					</div>
+					
+					<div class='video__diff__section'>
+						<p>Измненение в рейтинге за сутки</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(fc.showComments);
+</script>

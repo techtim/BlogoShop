@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+	<title>МегаФон Спорт: Новости</title>
+	<link><%= $domain %></link>
+	<description></description>
+	<language>ru-RU</language>
+	% foreach my $art (@$articles) {
+	<item>
+		<title><%== $art->{name} %></title>         
+		<link><%== $domain . '/' . ($art->{cut} ? "$art->{cut}/" : '') . join '/', $art->{rubric}, $art->{alias} %></link>
+		<description><%= $art->{preview_text} %></description>
+		% if ($art->{preview_image}) {
+		<enclosure url="<%== $domain.config->{image_url}.$art->{rubric}.'/'.$art->{alias}.'/'.$art->{preview_image} %>" length="" type="image/jpeg"></enclosure>
+		% }
+		<category><%== $art->{rubric_alias} %></category>
+		<pubDate><%= utils->date_time_from_mongoid($art->{_id}->{value},1) %></pubDate>
+	</item>
+	%}
+</channel>
+</rss>
+
+
+   
