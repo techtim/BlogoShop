@@ -1,56 +1,9 @@
 % layout 'default';
-% title 'МегаФон Спорт'.($cut ? " $cuts_alias->{$cut}" : '');
+% title 'Xoxloveka'.($cut ? " $cuts_alias->{$cut}" : '');
 
 <div id='content' class='clearfloat'>
 	<div class='back clearfloat'>
 		<div class='wrap'>
-			
-			<div class='adfox__left fl'>
-				<!--AdFox START-->
-				<!--championat.ru-->
-				<!--��������: championat.ru / * / *-->
-				<!--��� �������: 449x261js-->
-				<!--������������: <���� ��������>-->
-				<script type="text/javascript">
-				<!--
-				if (typeof(pr) == 'undefined') { var pr = Math.floor(Math.random() * 1000000); }
-				if (typeof(document.referrer) != 'undefined') {
-				  if (typeof(afReferrer) == 'undefined') {
-				    afReferrer = escape(document.referrer);
-				  }
-				} else {
-				  afReferrer = '';
-				}
-				var addate = new Date(); 
-				document.write('<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=eock&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>');
-				// -->
-				</script>
-				<!--AdFox END-->
-			</div>
-
-			<div class='adfox__right fr'>
-				<!--AdFox START-->
-				<!--championat.ru-->
-				<!--��������: championat.ru / * / *-->
-				<!--��� �������: 464x294js-->
-				<!--������������: <���� ��������>-->
-				<script type="text/javascript">
-				<!--
-				if (typeof(pr) == 'undefined') { var pr = Math.floor(Math.random() * 1000000); }
-				if (typeof(document.referrer) != 'undefined') {
-				  if (typeof(afReferrer) == 'undefined') {
-				    afReferrer = escape(document.referrer);
-				  }
-				} else {
-				  afReferrer = '';
-				}
-				var addate = new Date(); 
-				document.write('<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=eocl&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>');
-				// -->
-				</script>
-				<!--AdFox END-->
-			</div>
-			<div class='clear'></div>
 			
 			%= include 'includes/list_articles'
 
