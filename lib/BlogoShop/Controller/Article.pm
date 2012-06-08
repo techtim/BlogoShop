@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 
 use utf8;
 
-use constant ARTICLE_FILTER => qw(cut rubric alias);
+use constant ARTICLE_FILTER => qw(tag alias brand type);
 use constant RSS_FIELDS => {map {$_ => 1} qw( name alias cut cut_alias rubric rubric_alias preview_text preview_image date article_text_rendered ) };
 
 sub show {
@@ -19,7 +19,7 @@ sub show {
 
 	return $self->redirect_to(($self->req->url =~ m/([\d\w\/]+?)\/[\d\w]+$/)[0]) if !$article;
 	
-	$article->{preview_text} =~ s/\r//g; # temporary  
+#	$article->{preview_text} =~ s/\r//g; # temporary  
 
 	# Temporary add date while no such field in db
 	$article->{date} = $self->utils->date_from_mongoid($article->{_id});# if !$article->{date};
@@ -34,7 +34,7 @@ sub show {
 
 	my %images = map { $_->{tag} => {descr => $_->{descr}, source => $_->{source}} } @{$article->{images}} if ref $article->{images} eq 'ARRAY';
 
-	my $img_url = $self->config('image_url').($article->{rubric}|| $self->config('default_img_dir')).'/'.$article->{alias}.'/';
+	my $img_url = $self->config('image_url').($article->{type} || $self->config('default_img_dir')).'/'.$article->{alias}.'/';
 	# Polls check
 	foreach (keys %{$article->{polls}}) {
 		$article->{polls}->{$_}->{total_count} = 0;
@@ -68,22 +68,22 @@ sub list {
 
 	my $art = $self->articles->get_filtered_articles($filter, $self->config('articles_on_page'), $self->stash('move'), $self->stash('id')||0);
 	my $flag = 0;
-	foreach (@$art) {
-		if ($flag) {
-			$_->{preview_size} = '50';
-			$flag = !$flag;
-		} else {
-			$flag = !$flag if defined $_->{preview_size} && $_->{preview_size} eq '50'; # set flag that we have 50% width article, to make next width 50% 
-			$_->{preview_size} = '100' if $art->[-1]->{_id} eq $_->{_id}; # make 100% width if article is last and haven't got pair
-		}
-	}
+#	foreach (@$art) {
+#		if ($flag) {
+#			$_->{preview_size} = '50';
+#			$flag = !$flag;
+#		} else {
+#			$flag = !$flag if defined $_->{preview_size} && $_->{preview_size} eq '50'; # set flag that we have 50% width article, to make next width 50% 
+#			$_->{preview_size} = '100' if $art->[-1]->{_id} eq $_->{_id}; # make 100% width if article is last and haven't got pair
+#		}
+#	}
 
 	$self->res->headers->header('Cache-Control' => 'no-cache');
 
 	return $self->render(
 		host => $self->req->url->base,
-		cut => $filter->{cut} || '', 
-		rubric => $filter->{rubric} || '',
+		tag => $filter->{tag} || '', 
+		type => $filter->{type} || '',
 		articles => $art,
 		template => $self->stash('move') && $self->req->headers->header('X-Requested-With') ? 'includes/list_articles' : 'index', # return only
 		format => 'html', 

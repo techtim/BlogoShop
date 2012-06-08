@@ -11,4 +11,4 @@
   <div class='clear'></div>
 % }
 % }
-<div class='screw screw-replace' rel='<%== @$articles > 0 && $articles->[-1]->{show_fwd} ? $host. '/' . ($cut ? "$cut/" : '') . ($rubric ? "$rubric/" : '').'next/'.($articles->[-1]->{_id}) : '' %>'></div>
+<div class='screw screw-replace' rel='<%== @$articles > 0 && $articles->[-1]->{show_fwd} ? $host. '/' . ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . 'next/'.($articles->[-1]->{_id}) : '' %>'></div>

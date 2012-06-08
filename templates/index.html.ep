@@ -1,74 +1,53 @@
 % layout 'default';
-% title 'МегаФон Спорт'.($cut ? " $cuts_alias->{$cut}" : '');
+% title 'Хохловка';
 
-<div id='content' class='clearfloat'>
-	<div class='back clearfloat'>
-		<div class='wrap'>
+%= include 'includes/left_bar'
+%= include 'includes/list_articles'
+
+<div class='content__section'>
+
+    <div class='carousel'>
+        <ul class='items'>
+            <li>
+                <a href='#'>
+                    <img src='i/tmp/carousel-1.jpg' alt='' />
+                </a>
+            </li>
+        </ul>
+        <ul class='controls'></ul>
+    </div>
+
+    <div class='blogs__section'>
+        <div class='caption__section'>
+            <h2></h2>
+        </div>
+        <ul>
+            <li>
+                <a href='#'>
+                    <img src='i/tmp/blogs-preview.jpg' alt='' />
+                    <span class='caption'>Кризис арт-бизнеса: сдача на милость государству?</span>
+                    <span class='text'>Владимир Сорокин, Станислав Львовский, Мария Галина и Линор Горалик о том, что значил для них Брэдбери</span>
+                    <span class='date'>8 июня</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class='clear'></div>
 			
-			<div class='adfox__left fl'>
-				<!--AdFox START-->
-				<!--championat.ru-->
-				<!--��������: championat.ru / * / *-->
-				<!--��� �������: 449x261js-->
-				<!--������������: <���� ��������>-->
-				<script type="text/javascript">
-				<!--
-				if (typeof(pr) == 'undefined') { var pr = Math.floor(Math.random() * 1000000); }
-				if (typeof(document.referrer) != 'undefined') {
-				  if (typeof(afReferrer) == 'undefined') {
-				    afReferrer = escape(document.referrer);
-				  }
-				} else {
-				  afReferrer = '';
-				}
-				var addate = new Date(); 
-				document.write('<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=eock&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>');
-				// -->
-				</script>
-				<!--AdFox END-->
-			</div>
 
-			<div class='adfox__right fr'>
-				<!--AdFox START-->
-				<!--championat.ru-->
-				<!--��������: championat.ru / * / *-->
-				<!--��� �������: 464x294js-->
-				<!--������������: <���� ��������>-->
-				<script type="text/javascript">
-				<!--
-				if (typeof(pr) == 'undefined') { var pr = Math.floor(Math.random() * 1000000); }
-				if (typeof(document.referrer) != 'undefined') {
-				  if (typeof(afReferrer) == 'undefined') {
-				    afReferrer = escape(document.referrer);
-				  }
-				} else {
-				  afReferrer = '';
-				}
-				var addate = new Date(); 
-				document.write('<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=eocl&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>');
-				// -->
-				</script>
-				<!--AdFox END-->
-			</div>
-			<div class='clear'></div>
-			
-			%= include 'includes/list_articles'
-
-		</div>
-
+<!--
 		<ul id='pagination' class='clearfloat'>
 		% if (@$articles > 0 && $articles->[0]->{show_prev}) {
-			<li class='left'><a href='/<%== ($cut ? "$cut/" : '') . ($rubric ? "$rubric/" : '') . (join '/', 'prev', $articles->[0]->{_id}) %>'>Назад</a></li>
+			<li class='left'><a href='/<%== ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . (join '/', 'prev', $articles->[0]->{_id}) %>'>Назад</a></li>
 		% } else {
 			<li class='left'><a class='disabled'>Назад</a></li>
 		% }
 		% if (@$articles > 0 && $articles->[-1]->{show_fwd}) {
-			<li class='right'><a href='/<%== ($cut ? "$cut/" : '') . ($rubric ? "$rubric/" : '') . join '/', 'next', $articles->[-1]->{_id} %>'>Вперед</a></li>
+			<li class='right'><a href='/<%== ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . join '/', 'next', $articles->[-1]->{_id} %>'>Вперед</a></li>
 		% } else {
 			<li class='right'><a class='disabled'>Вперед</a></li>
 		% }
 		</ul>
-
-	</div>
-
-</div>
+-->

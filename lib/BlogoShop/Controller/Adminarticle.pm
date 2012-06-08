@@ -8,7 +8,7 @@ use utf8;
 
 use File::Path qw(make_path remove_tree);
 use Encode;
-use constant ARTICLE_PARAMS => qw( active alias name cut rubric preview_size preview_type preview_text preview_image preview_image_wide article_text images source author foto article_time article_date);
+use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size preview_type preview_text preview_image preview_image_wide article_text images source article_time article_date);
 
 sub get {
 	my $self = shift;
@@ -38,8 +38,8 @@ sub post {
 # Utils
 sub add_params {
 	my $self = shift;
-	$self->stash(sources => $self->articles->get_sources());
-	$self->stash(authors => $self->articles->get_authors());
+	$self->stash(brands => $self->app->db->brands->find());
+	$self->stash(tags => $self->articles->get_tags());
 }
 
 sub check_input {
@@ -85,8 +85,8 @@ sub check_input {
 	
 		$article->{source_info} = $self->articles->get_sources($article->{source}) if $article->{source};
 
-		push @$error_message, 'no_rubric' if !$article->{rubric};
-		push @$error_message, 'no_source' if !$article->{source_info};
+		push @$error_message, 'no_type' if !$article->{type};
+#		push @$error_message, 'no_source' if !$article->{source_info};
 		push @$error_message, 'no_preview_text' if !$article->{preview_text} || $article->{preview_text} eq '';
 #		push @$error_message, 'no_author' if !$article->{author_info};
 	} elsif ($self->{collection} eq 'big_games_news'){

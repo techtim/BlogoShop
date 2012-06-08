@@ -1,2444 +1,293 @@
-@-o-viewport {
-  width: 1070px;
-	}
-
-html {
-	width:100%;
-	height: 100%;
-	}
-	
-body {
-	position:relative;
-	min-height:100%;
-	height:auto !important;
-	height:100%;
-	width:100%;	
-	padding-top: 23px;
-	font:75% "PT Sans",verdana, arial, sans-serif;
-	color:#646464;
-}
-
-.clearfloat:after {
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both  !important;
-	visibility: hidden;
-}
 .clearfloat {
-	display: inline-block;
-}
+  display: inline-block; }
+
+s
+.clearfloat:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both  !important;
+  visibility: hidden; }
 
 * html .clearfloat {
-	height: 1%;
-}
+  height: 1%; }
+
 .clearfloat {
-	display: block;
-}
+  display: block; }
+
 .clear {
-	clear: both;
-}
+  clear: both; }
 
 .fl {
-	float:left
-}
+  float: left; }
 
 .fr {
-	float:right;
-}
+  float: right; }
 
-.fixed {
-	position: fixed!important;
-	width:100%;
-	z-index:20;
-}
-
-.wrap-main {
-	height:100%;
-	min-width:1072px;
-	position:relative;
-	padding-bottom:90px;
-}
+body {
+  padding-top: 1px;
+  background: url("../i/body-bg.png") repeat-x left top;
+  font-family: Arial, sans-serif; }
 
 .wrap {
-	width:966px;
-	margin:0 auto;
-}
+  width: 980px;
+  margin: 0 auto; }
 
-.flash__fix {
-	width: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-}
+.header__section {
+  height: 71px;
+  margin-bottom: 10px;
+  background: url("../i/header/bg.png") repeat-x left top;
+  border-bottom: 8px solid #e60000; }
+  .header__section h1 {
+    height: 52px;
+    width: 222px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px; }
+  .header__section a {
+    display: block;
+    height: 52px;
+    width: 222px;
+    background: url("../i/header/logo.png") no-repeat; }
+  .header__section .row {
+    padding-top: 8px;
+    padding-right: 12px;
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase; }
+    .header__section .row label {
+      color: #bfbfbf; }
 
-#top__menu {
-	top: 0;
-	height: 24px;
-	width: 100%;
-	display: block;
-	background: url(/i/header/top-menu/bg.png) repeat-x left top;	
-}
-	#top__menu.fixed {
-		z-index:21;
-	}
-	
-	#top__menu .flash__fix {
-		height: 24px;
-	}
-	
-	#top__menu li {
-		float: right;
-	}
+.navigation__section {
+  height: 32px;
+  margin-bottom: 18px;
+  border-top: 1px dotted #444;
+  border-bottom: 1px dotted #444;
+  font-size: 13px;
+  line-height: 32px;
+  overflow: hidden; }
+  .navigation__section ul {
+    float: left;
+    width: 770px; }
+    .navigation__section ul li {
+      float: left; }
+      .navigation__section ul li.item__2 {
+        margin-left: 42px; }
+      .navigation__section ul li.item__3 {
+        margin-left: 54px; }
+      .navigation__section ul li.item__4 {
+        margin-left: 54px; }
+      .navigation__section ul li.item__5 {
+        margin-left: 52px; }
+      .navigation__section ul li.item__6 {
+        margin-left: 48px; }
+      .navigation__section ul li.item__7 {
+        margin-left: 56px; }
+    .navigation__section ul a {
+      color: #444;
+      font-size: 13px;
+      text-decoration: none;
+      text-transform: uppercase; }
+      .navigation__section ul a.current {
+        color: #aeaeae; }
+  .navigation__section .shopping__cart__section {
+    float: right; }
+    .navigation__section .shopping__cart__section.empty {
+      color: #aeaeae; }
 
-		#top__menu .tickets {
-			width: 127px;
-			height: 40px;
-			background: url(/i/header/top-menu/tickets.png) no-repeat left top;
-			text-indent: -9999px;
-		}
-		
-			#top__menu .tickets a {
-				display:block;
-				width: 112px;
-				height: 26px;
-				margin-left: 2px;
-				text-decoration: none;
-			}
-		
-		#top__menu .quiz {
-			width: 308px;
-			height: 40px;
-			margin-right: 142px;
-			background: url(/i/header/top-menu/big-games.png) no-repeat left top;
-			text-indent: -9999px;
-		}
-		
-			#top__menu .quiz.viktorina {
-				margin-right: 216px;
-				
-			}
-			
-			#top__menu .quiz a {
-				width: 292px;
-				height: 36px;
-				display: block;
-				margin-left: 6px;
-			}
-			
-#header {
-	height:98px;	
-	position:relative;
-}
-	#header .wrap {
-		width:auto;
-		height:98px;
-	}
-	
-	.wrap-main #header {
-		position:relative;
-		}
-		
-	.wrap-main #header .back {
-		background:url(/i/header/backs/main.jpg) no-repeat center top;
-		}
-	
-	.wrap-main.euro2012 #header {
-		background:url(/i/header/backs/main.png) repeat-x;
-		}
-		
-		.wrap-main.euro2012 #header .wrap {
-			background:url(/i/header/parts-logos/euro.png) no-repeat center top;
-			}
-			
-		.wrap-main.euro2012 #header .back {
-			background:url(/i/header/backs/euro.png) no-repeat right top;
-			}
-	
-	.wrap-main.london2012 #header {
-		background:url(/i/header/backs/london.png) no-repeat center top;
-		}
-		
-		.wrap-main.london2012 #header .back {
-			background:url(/i/header/backs/london.png) no-repeat center top;
-			}
-	
-	.wrap-main.football #header {
-		background:url(/i/header/backs/wrap-football.png) repeat-x;
-		}
-	
-		.wrap-main.football #header .back {
-			background:url(/i/header/backs/football.jpg) no-repeat center top;
-			}
-	
-	.wrap-main.sochi2014 #header {
-		background:none
-		}
-	
-		.wrap-main.sochi2014 #header .back {
-			background:url(/i/header/backs/sochi.jpg) no-repeat center top;
-			}	
-	
-	.wrap-main.kazan2013 #header {
-		background:url(/i/header/backs/main.png) repeat-x;
-		}
-		
-		.wrap-main.kazan2013 #header .wrap {
-			background:none;
-			}
-				
-		.wrap-main.kazan2013 #header .back {
-			background:url(/i/header/backs/kazan.png) no-repeat right top;
-			}	
-	
-	.wrap-main.hockey #header {
-		background:url(/i/header/backs/wrap-hockey.png) repeat-x;
-		}
-		
-		.wrap-main.hockey #header .back {
-			background:url(/i/header/backs/hockey.jpg) no-repeat center top;
-			}
-		
-	.wrap-main.biathlon #header {
-		background:#f2f0f3
-		}
-		
-		.wrap-main.biathlon #header .back {
-			background:url(/i/header/backs/biathlon.jpg) no-repeat center top;
-			}
-	
-	#header h1 {
-		float:left;
-	}
-	
-		#header h1 a {
-			display:block;
-			width:254px;
-			height:42px;
-			position:absolute;
-			left: 14%;
-			top:36px;
-			background:url(/i/header/logo.png) no-repeat;
-			text-indent:-9999px;
-			}
-			
-	#header .logo-block {		
-		position:absolute;
-		right:10px;
-		top:36px;
-		}
-		
-		#header ul.logo-block {
-			top:14px!important;
-			}
-			 
-			 .wrap-main.sochi2014 #header ul.logo-block {
-			 	top:28px!important;
-			 	}
-			 	
-	#header a.megafon-logo {
-		display:block;
-		width:168px;
-		height:42px;
-		background:url(/i/header/megafon-logo.png) no-repeat;
-		text-indent:-9999px;
-		}
-	
-	#header a.megafon-logo-blue {
-		display:block;
-		width:168px;
-		height:42px;
-		background:url(/i/header/megafon-blue.png) no-repeat;
-		text-indent:-9999px;
-		}
-	
-	#header a.megafon-logo-sochi {
-		display:block;
-		width:224px;
-		height:90px;
-		top:5px!important;
-		background:url(/i/header/logos/sochi.jpg) no-repeat;
-		text-indent:-9999px;
-		}
-		
-	#header ul.logos {
-		width:140px;
-		height:70px;
-		background:#fff;
-		}
-		
-		.wrap-main.sochi2014 #header ul.logos {
-			width:224px;	
-			} 
-	
-		#header ul.logos li {
-			float:left;
-			margin-top:8px;
-			}
-		
-		#header ul.logos li.item {
-			margin-left:10px;	
-			}
-		
-		#header ul.logos li.delimeter {
-			width:1px;
-			height:58px;
-			margin:6px 9px 0 9px;
-			background:#918f90;
-			}
-			
-			.wrap-main.sochi2014 #header li.delimeter {
-				background:none;
-				margin:0 12px;
-				} 
-					
-		#header ul.logos li.megafon {
-			margin-right:10px;
-		}
-		
-#main-nav {
-	height:50px;
-	background:url(/i/main-nav/bg.png) repeat-x;
-}	
+.sidebar__section {
+  width: 230px; }
+  .sidebar__section h2 {
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #a1a1a1;
+    color: #b4b4b4;
+    font-size: 13px;
+    text-transform: uppercase; }
+  .sidebar__section .title {
+    color: #959494;
+    font-size: 11px;
+    font-style: italic; }
+  .sidebar__section ul {
+    margin-bottom: 4px; }
+  .sidebar__section li {
+    padding-bottom: 8px; }
+    .sidebar__section li a {
+      margin-left: 12px;
+      color: #444;
+      font-size: 13px;
+      text-decoration: none;
+      text-transform: uppercase; }
+  .sidebar__section .subscribe__section {
+    padding-top: 62px;
+    background: url("../i/subscribe-bg.png") no-repeat center 16px;
+    border-top: 1px dotted #a1a1a1; }
+    .sidebar__section .subscribe__section label {
+      display: block;
+      padding-bottom: 10px;
+      color: #959494;
+      font-size: 10px;
+      font-style: italic;
+      line-height: 13px;
+      text-align: center; }
+    .sidebar__section .subscribe__section input[type='text'] {
+      display: block;
+      width: 100%;
+      height: 20px;
+      border: 1px solid #c1c1c1;
+      line-height: 20px; }
+      .sidebar__section .subscribe__section input[type='text']:after {
+        content: '';
+        display: block;
+        width: 230px;
+        height: 20px;
+        margin-top: 2px;
+        background: url("../i/subscribe-shadow.png") no-repeat; }
+    .sidebar__section .subscribe__section input[type='submit'] {
+      display: block;
+      width: 102px;
+      height: 22px;
+      margin: 20px auto;
+      background: url("../i/submit-bg.png") repeat-x left top;
+      border: 0;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 11px;
+      font-style: italic; }
 
-	#main-nav .flash__fix {
-		height: 50px;
-	}
-	
-	#main-nav.fixed {
-		top:23px;
-	}
-	
-	#main-nav .wrap {
-		position: relative;
-	}
-	
-	#main-nav li {
-		float:left;
-	}
-	
-	#main-nav a {
-		float:left;	
-		padding:12px 0 17px;
-		position:relative;
-		color:#e2e0e0;
-		font-size:1.417em;
-		font-weight:bold;
-		text-decoration:none;
-		text-align:left;
-	}
-	
-		#main-nav li.home a {
-			display: none;
-			position:absolute;
-			width: 14px;
-			height: 16px;
-			left: -54px;
-			top: 13px;
-			padding: 0;
-			background: url(/i/main-nav/home.png) no-repeat;
-			text-indent: -9999px;
-		}
-		
-	#main-nav a.current {
-		color:#fff;
-	}
-	
-	
-	#main-nav li.euro2012 {
-		width:126px;
-	}
-	
-	#main-nav li.london2012 {
-		width:145px;
-	}
-	
-	#main-nav li.kazan2013 {
-		width:143px;
-	}
-	
-	#main-nav li.sochi2014 {
-		width:130px;
-	}
-	
-	#main-nav li.football {
-		width:107px;
-	}
-	
-	#main-nav li.hockey {
-		width:72px;
-		padding-right:33px;
-	}
-	
-	#main-nav li.biathlon {
-		width:79px;
-	}
-	
-		#main-nav a .text {
-			position:relative;
-			z-index:2;
-		}
-		
-		#main-nav a .back {
-			cursor:pointer;
-		}
-		
-	#main-nav a.euro2012.current .back, #main-nav a.euro2012:hover .back {
-		width:121px;
-		height:56px;
-		position:absolute;
-		left:-9px;
-		top:-9px;
-		background:url(/i/main-nav/euro.png) no-repeat left top;
-		z-index:1;
-	}
-	
-	#main-nav a.london2012.current .back, #main-nav a.london2012:hover .back {
-		width:121px;
-		height:56px;
-		position:absolute;
-		left:-6px;
-		top:-9px;
-		background:url(/i/main-nav/london.png) no-repeat left top;
-		z-index:1;
-	}
-	
-	#main-nav a.kazan2013.current .back, #main-nav a.kazan2013:hover .back {
-		width:121px;
-		height:56px;
-		position:absolute;
-		left:-9px;
-		top:-9px;
-		background:url(/i/main-nav/kazan.png) no-repeat left top;
-		z-index:1;
-	}
-	
-	#main-nav a.sochi2014.current .back, #main-nav a.sochi2014:hover .back {
-		width:121px;
-		height:56px;
-		position:absolute;
-		left:-10px;
-		top:-9px;
-		background:url(/i/main-nav/sochi.png) no-repeat left top;
-		z-index:1;
-	}
-	
-	#main-nav a.football.current .back, #main-nav a.football:hover .back {
-		width:90px;
-		height:56px;
-		position:absolute;
-		left:-13px;
-		top:-9px;
-		background:url(/i/main-nav/football.png) no-repeat left top;
-		z-index:1;
-	}	
-	
-	#main-nav a.hockey.current .back, #main-nav a.hockey:hover .back {
-		width:121px;
-		height:56px;
-		position:absolute;
-		left:-12px;
-		top:-9px;
-		background:url(/i/main-nav/hockey.png) no-repeat left top;
-		z-index:1;
-	}
-	
-	
-	#main-nav a.biathlon.current .back, #main-nav a.biathlon:hover .back {
-		width:121px;
-		height:56px;
-		position:absolute;
-		left:-12px;
-		top:-9px;
-		background:url(/i/main-nav/biathlon.png) no-repeat left top;
-		z-index:1;
-	}
-	#main-nav a.biathlon.current .back {top:-10px;}
-	#main-nav a:hover span.back {
-		background-position:left bottom!important;
-	}
-	
-	#main-nav a.current:hover span.back {
-		background-position:left top!important;
-	}
-	
-	
-#sub-nav {
-	position:relative;
-	height:44px;
-	background: #fff;
-}
+.content__section {
+  width: 680px;
+  float: right; }
+  .content__section .caption__section {
+    position: relative;
+    margin-top: 34px;
+    border-top: 1px dotted #a1a1a1; }
+    .content__section .caption__section h2 {
+      position: absolute;
+      left: 50%;
+      top: -4px; }
 
-	#sub-nav .flash__fix {
-		height: 44px;
-	}
-	
-	#sub-nav.fixed {
-		top: 73px;
-	}
-	
-	#sub-nav:after, #sub-nav-strip {
-		display: block;
-		width: 100%;
-		height:15px;
-		content: ".";
-		background: url(/i/header/sub-nav-shadow.png) repeat-x left bottom
-	}
-	
-		#sub-nav-strip {
-			position: absolute;
-			top: 194px;
-		}
-		
-		#sub-nav-strip.fixed {
-			top: 114px;
-		}
-		
-	#sub-nav ul {
-		margin-bottom:20px;
-		padding:10px 0 14px 0;
-	}
-	
-		#sub-nav li {
-			float:left;
-			color:#d3cece;
-			font-size:13px;
-			}
-			
-			#sub-nav li.current {
-				background:#3d2a83;
-				padding-bottom:4px;
-				}
-					
-		#sub-nav a {
-			margin:0 10px;
-			padding-bottom:1px;
-			border-bottom:1px dashed #999999;
-			color:#434343;
-			text-decoration:none;
-			zoom:1;
-			}
-		
-			#sub-nav li:first-child {
-				position:relative;
-				left:-10px;
-				margin-right:-10px;
-				}
-				
-			#sub-nav a:hover {
-				color:#3f7108;
-				}
-			
-			#sub-nav li.current a {
-				color:#fff;
-				}
-				
-			#sub-nav a.disabled {
-				border:none;
-				color:#d3cece;
-				text-decoration:none;				
-				}
-			
-				#sub-nav a.disabled:hover {
-					color:#d3cece;					
-					}
-				
-		#sub-nav li.delimiter {
-			color:#434343;
-			padding:0 5px;
-			}
+.carousel {
+  height: 330px;
+  position: relative;
+  padding-bottom: 10px; }
+  .carousel .items {
+    display: block;
+    height: 330px;
+    width: 680px;
+    overflow: hidden; }
+    .carousel .items a {
+      display: block;
+      height: 330px;
+      width: 680px; }
+  .carousel .jcarousel-clip {
+    width: 680px;
+    overflow: hidden; }
+  .carousel .jcarousel-prev {
+    position: absolute;
+    left: 8px;
+    top: 140px;
+    width: 31px;
+    height: 49px;
+    background: url("../i/carousel-arrows-spr.png") no-repeat left top;
+    cursor: pointer;
+    visibility: hidden; }
+  .carousel .jcarousel-next {
+    position: absolute;
+    right: 8px;
+    top: 140px;
+    width: 31px;
+    height: 49px;
+    background: url("../i/carousel-arrows-spr.png") no-repeat right top;
+    cursor: pointer;
+    visibility: hidden; }
+  .carousel .controls {
+    position: absolute;
+    bottom: -10px;
+    left: 50%; }
+    .carousel .controls li {
+      float: left;
+      margin-left: 5px; }
+      .carousel .controls li.first {
+        margin-left: 0; }
+      .carousel .controls li a {
+        display: block;
+        height: 11px;
+        width: 13px;
+        background: url("../i/carousel-controls-spr.png") no-repeat;
+        text-decoration: none; }
+        .carousel .controls li a.current {
+          position: relative;
+          top: 1px;
+          background-position: right bottom; }
 
+.blogs__section h2 {
+  height: 10px;
+  width: 78px;
+  margin-left: -39px;
+  background: url("../i/captions/blog.png") no-repeat; }
+.blogs__section ul {
+  padding-top: 18px; }
+.blogs__section li {
+  float: left;
+  width: 212px;
+  margin-right: 20px;
+  margin-bottom: 36px; }
+  .blogs__section li:nth-child(3n+3) {
+    margin-right: 0; }
+  .blogs__section li h3 a {
+    color: #999;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 14px;
+    text-decoration: none;
+    text-transform: uppercase; }
+  .blogs__section li p {
+    padding-top: 6px;
+    padding-bottom: 4px;
+    color: #464646;
+    font-size: 12px;
+    line-height: 14px; }
+  .blogs__section li .date {
+    color: #959494;
+    font-size: 12px;
+    font-style: italic; }
 
-#content {
-	
-}
-	.adfox__left {
-		height: 348px;
-		position: relative;
-		left: -6px;
-		padding-top: 16px;
-	}
-	
-	.adfox__right {
-		margin-right: -36px;
-		height: 362px;
-	}
-	
-	.spacer {
-		padding-top:94px;
-	}
-	
-	.wrap-main.euro2012 #content {
-		background:url(/i/content/left-strips/euro.png) repeat-y left top;
-		}
-		
-	.wrap-main.london2012 #content {
-		background:url(/i/content/left-strips/london.png) repeat-y left top;
-		}
-		
-	.wrap-main.football #content {
-		background:url(/i/content/left-strips/football.png) repeat-y left top;
-		}
-		
-	.wrap-main.kazan2013 #content {
-		background:url(/i/content/left-strips/kazan.png) repeat-y left top;
-		}
-		
-	.wrap-main.hockey #content {
-		background:url(/i/content/left-strips/hockey.png) repeat-y left top;
-		}
-		
-	.wrap-main.biathlon #content {
-		background:url(/i/content/left-strips/biathlon.png) repeat-y left top;
-		}
-		
-	.wrap-main.sochi2014 #content {
-		background:url(/i/content/left-strips/sochi.png) repeat-y left top;
-		}
-		
-		.wrap-main #content .back {
-			background-attachment: fixed!important;
-		}
-		
-		.wrap-main #content .back {
-			padding-left:10px;
-			background:#f1f3f2 url(/i/content/backs/main.jpg) no-repeat center top ;
-		}
-		
-			.wrap-main.euro2012 #content .back {
-				margin-left:10px;
-				padding-left:0;
-				-webkit-background-size:1400px 1400px;
-				background:#cbbdc9 url(/i/content/backs/euro.png) no-repeat center top ;
-			}
-			
-			.wrap-main.football #content .back {
-				margin-left:10px;
-				padding-left:0;
-				background:#bccac7 url(/i/content/backs/football.png) no-repeat center top ;
-			}
-			
-			.wrap-main.kazan2013 #content .back {
-				margin-left:10px;
-				padding-left:0;
-				background:#e0eff4 url(/i/content/backs/kazan.jpg) no-repeat center top ;
-			}
-			
-			.wrap-main.london2012 #content .back {
-				margin-left:10px;
-				padding-left:0;
-				background:#eceded url(/i/content/backs/london.png) no-repeat center top ;
-			}
-			
-			.wrap-main.sochi2014 #content .back {
-				margin-left: 10px;
-				padding-left:0;
-				background: #5dabdc url(/i/content/backs/sochi.jpg) no-repeat center top ;
-			}
-			
-			.wrap-main.hockey #content .back {
-				margin-left:10px;
-				padding-left:0;
-				background:#bdcbc8 url(/i/content/backs/hockey.png) no-repeat center top ;
-			}
-			
-			.wrap-main.biathlon #content .back {
-				margin-left:10px;
-				padding-left:0;
-				background:#e6e3ea url(/i/content/backs/biathlon.jpg) no-repeat center top ;
-			}
-
-.adfox_ads {
-	margin-left: -16px;
-	margin-bottom: 30px;
-}
-
-#content .wrap {
-	padding-top:40px;
-}	
-
-#content .wide {
-	position:relative;
-	width:969px;
-	height:251px;
-	margin:0 auto;
-}
-
-#content .narrow {
-	position:relative;
-	width:482px;
-	height:326px;
-}
-
-#content .fr {
-	background-position:right top;
-} 
-
-	#content .back-link {
-		position:absolute;
-		top:0;		
-		z-index:4;
-	}
-	#content .fl .back-link {left:0}
-	#content .fr .back-link {right:0}
-	
-	#content .img-box {
-		z-index:2;
-	}
-	
-		#content .img-box .img div {
-			background-position:center center;
-			background-repeat:no-repeat;			
-		}
-		
-	#content h2.caption {
-		margin-bottom:8px;
-		color:#000;
-		font-size:16px;
-		font-style: italic;
-		font-weight:bold;
-		line-height:1;
-	}
-	
-		#content h2.caption a {
-			color:#000;
-			text-decoration:none;
-		}
-		
-	#content div.text {
-		color:#313131;
-		line-height:1.1;
-		overflow:hidden;
-		z-index:3;
-	}
-	
-		#content div.text p a {
-			color:#313131;
-			text-decoration: none;
-		}
-		
-	.twitter-in-text, iframe #b {
-		position:relative;
-		padding:0 8px;
-		margin-left:6px;
-		background:url(/i/content/twitter-small.png) no-repeat left center;
-		cursor:pointer;
-		z-index:10;
-		zoom:1;
-	}
-	
-	.comments-bubble {
-		float:left;
-		position:relative;
-		left:2px;
-		margin-left:3px;
-		padding: 0 4px;
-		background:url(/i/content/comments-bubble.png) no-repeat right -29px;
-		text-decoration:none;
-		z-index:10;
-	}
-	
-		.comments-bubble span {
-			float:left;
-			padding:6px 4px 0 8px;
-			height:20px;
-			margin-left:-9px;
-			background:url(/i/content/comments-bubble.png) no-repeat left 3px;
-			color:#666565;
-			font-size:11px;
-			text-align:center;
-		}
-	
-		#content .wide .comments-bubble {
-			float:right;
-			margin-right:3px;
-		}
-
-/* maps */
-	.maps.narrow {
-		background:url(/i/content/blocks/guide/backs/default-narrow.png) no-repeat
-	}
-		.fl.maps.narrow {
-			left:-16px;
-			}
-			
-		.fr.maps.narrow {
-			right:-18px;
-			}
-	
-		.euro2012.maps.narrow {
-			background:url(/i/content/blocks/guide/backs/euro-narrow.png) no-repeat
-			}
-			
-		.london2012.maps.narrow {
-			background:url(/i/content/blocks/guide/backs/london-narrow.png) no-repeat
-			}
-			
-		.kazan2013.maps.narrow {
-			background:url(/i/content/blocks/guide/backs/kazan-narrow.png) no-repeat
-			}
-		
-		.sochi2014.maps.narrow {
-			background:url(/i/content/blocks/guide/backs/sochi-narrow.png) no-repeat
-			}
-				
-		.football.maps.narrow {
-			background:url(/i/content/blocks/guide/backs/football-narrow.png) no-repeat
-			}	
-			
-		.hockey.maps.narrow {
-			background:url(/i/content/blocks/guide/backs/hockey-narrow.png) no-repeat
-			}
-			
-		.biathlon.maps.narrow {
-			background:url(/i/content/blocks/guide/backs/biathlon-narrow.png) no-repeat
-			}
-		
-			.fl.biathlon.maps.narrow {
-				width:489px!important;
-				left:-27px;
-				margin-left:-7px;
-				}
-	
-		.maps.narrow .back-link {
-			width:437px;
-			height:253px;
-			}
-			
-			.fl.maps.narrow .back-link {
-				left:14px!important;
-				}
-				 
-			.fr.maps.narrow .back-link {
-				right:19px!important;
-				}
-				
-		.maps.narrow .img {
-			float:left;
-			width:150px;
-			height:155px;
-			margin-left:10px;
-			margin-top:57px;
-			overflow:hidden;
-			-webkit-transform: rotate(10.5deg);  
-			-moz-transform: rotate(10.5deg); 
-			-o-transform: rotate(10.5deg); 
-			transform: rotate(10.5deg);  
-					filter: progid:DXImageTransform.Microsoft.Matrix(  
-						M11=0.9832549075639546, M12=-0.18223552549214747, M21=0.18223552549214747, M22=0.9832549075639546, sizingMethod='auto expand');
-					zoom: 1;	
-			
-			}
-			
-				.ie9 .maps.narrow .img {
-					margin-left: 8px!important;				
-				}
-				
-				.ie9 .fl.maps.narrow .img {
-					margin-top: 44px!important;
-					margin-left: -4px!important;
-					margin-right: 4px;				
-				}
-				
-				.sochi2014.maps.narrow .img {
-					margin-top:55px;
-				}
-					
-				.fr.maps.narrow .img  {
-					margin-top:56px!important;
-					margin-left:22px;
-					}
-				
-					.ie9 .fr.maps.narrow .img  { 
-						margin-top: 46px!important;
-					}
-					
-					.fr.sochi2014.maps.narrow .img {
-						margin-left:23px;
-					}
-					
-					.ie9 .fr.sochi2014.maps.narrow .img {
-						margin-top: 44px!important;
-						margin-left: 10px!important;
-					}
-						
-				.fl.biathlon.maps.narrow .img {
-					margin-left:26px;
-					}
-	
-					.fl.sochi2014.maps.narrow .img {
-						margin-left:14px;
-					}
-						
-					.ie9 .fl.sochi2014.maps.narrow .img {
-						margin-top: 44px!important;
-						margin-left: 1px!important;
-					} 
-				
-				.ie9 .fl.football.maps.narrow .img {
-					margin-top: 44px!important;
-					margin-left: -2px!important;
-					margin-right: 10px!important;
-				}
-				
-				.ie9 .fl.kazan2013.maps.narrow .img {
-					margin-top: 44px!important;
-					margin-left: -4px!important;
-					margin-right: 6px;
-				}
-				
-				.ie9 .biathlon.maps.narrow .img {
-					margin-top: 44px!important;
-					margin-left: 14px!important;
-					margin-right: 6px;
-				}
-				
-				.ie .maps.narrow .img {
-					margin-left:-2px!important;
-					margin-top:43px;
-					}
-					
-				.ie .fr.maps.narrow .img  {
-					width: 160px;
-					margin-left:10px!important;
-					margin-top: 44px!important;
-					}
-	
-			.maps.narrow .img div {
-				width:156px;
-				height:156px;
-				}	
-		
-			.maps.narrow .mask {
-				width:404px;
-				height:248px;
-				position:absolute;
-				left:-9px;top:26px;
-				background:url(/i/content/blocks/guide/mask-narrow.png) no-repeat;
-				}
-				
-				.fr.maps.narrow .mask {
-					left:3px;
-					}
-					
-					.fr.sochi2014.maps.narrow .mask {
-						left:7px;
-						}
-							
-				.fl.biathlon.maps.narrow .mask {
-					left:14px;
-					}
-	
-					.fl.sochi2014.maps.narrow .mask {
-						left:-3px;
-						}
-						
-			.maps.narrow .text {
-				float:left;
-				height:142px;
-				width:204px;
-				margin-top:62px;
-				margin-left:26px;
-				overflow:hidden;
-				}
-				
-					.fr.maps.narrow .text  {
-						margin-left:33px;
-						}
-				
-
-	
-	.maps.wide {
-		top:-12px;
-		width:987px!important;
-		background:url(/i/content/blocks/guide/backs/default-wide.png) no-repeat;
-		}
-		
-			.euro2012.maps.wide {
-				width:987px!important;
-				background:url(/i/content/blocks/guide/backs/euro-wide.png) no-repeat;
-				}
-					
-			.london2012.maps.wide {
-				width:987px!important;
-				background:url(/i/content/blocks/guide/backs/london-wide.png) no-repeat;
-				}
-				
-			.kazan2013.maps.wide {
-				width:987px!important;
-				background:url(/i/content/blocks/guide/backs/kazan-wide.png) no-repeat;
-				}
-				
-			.sochi2014.maps.wide {
-				width:987px!important;
-				background:url(/i/content/blocks/guide/backs/sochi-wide.png) no-repeat;
-				}
-				
-			.football.maps.wide {
-				width:987px!important;
-				background:url(/i/content/blocks/guide/backs/football-wide.png) no-repeat;
-				}
-				
-			.hockey.maps.wide {
-				width:987px!important;
-				background:url(/i/content/blocks/guide/backs/hockey-wide.png) no-repeat;
-				}
-			
-		.biathlon.maps.wide {
-			width:1015px!important;
-			left:-33px;
-			background:url(/i/content/blocks/guide/backs/biathlon-wide.png) no-repeat;
-			}
-
-		.maps.wide .back-link {
-			width:982px;
-			height:162px;
-			top:13px!important;
-			left:0;
-			}
-		
-			.biathlon.maps.wide .back-link {
-				left:33px;
-				}
-				
-		.maps.wide .img-box {
-			float:left;
-			margin-left:32px;
-			margin-top:23px;
-			}
-			
-			.ie9 .maps.wide .img-box {
-				margin-top: 26px!important;
-			}
-			
-			.euro2012 .maps.wide .img-box {
-				margin-top:24px;
-				}
-			
-			.london2012 .maps.wide .img-box {
-				margin-top:24px;
-				}
-			
-			.kazan2013 .maps.wide .img-box {
-				margin-top:24px;
-				}
-			
-			.sochi2014 .maps.wide .img-box {
-				margin-top:24px;
-				}
-				
-			.football .maps.wide .img-box {
-				margin-top:24px;
-				}
-			
-			
-			.hockey .maps.wide .img-box {
-				margin-top:24px;
-				}
-			
-			.biathlon .maps.wide .img-box {
-				margin-top:24px;
-				}
-					
-			.ie .maps.wide .img-box {
-				margin-left:20px;
-				margin-top:12px;
-			}
-			
-			.biathlon.maps.wide .img-box {
-				margin-left:55px;
-				}
-
-			.maps.wide .img-box .img {
-				width:150px;
-				height:154px;
-				overflow:hidden;
-				-webkit-transform: rotate(10.1deg);
-				-moz-transform: rotate(10.1deg);
-				-o-transform: rotate(10.1deg); 
-				transform: rotate(10.1deg); 
-					filter: progid:DXImageTransform.Microsoft.Matrix( 
-							M11=0.9845031799744366, M12=-0.1753667260919871, M21=0.1753667260919871, M22=0.9845031799744366, sizingMethod='auto expand');
-					zoom: 1; 
-				}
-				
-				.ie .maps.wide .img-box .img {
-					width:162px; 
-					margin-left:-1px;
-					margin-top:6px;
-				}
-					
-				.ie9 .maps.wide .img-box .img {
-					margin-top: -13px!important;
-					margin-left: -12px!important;
-				}
-				
-			.maps.wide .img-box .img div {
-				width:150px;
-				height:154px;
-				}
-		
-				.hockey .maps.wide .img-box .img div {
-					width:162px;
-					height:152px;
-					}
-					
-			.maps.wide .img-box .mask {
-				position:absolute;
-				left:20px;top:-1px;
-				width:192px;
-				height:188px;
-				background:url(/i/content/blocks/guide/mask-wide.png) no-repeat;
-				}
-				
-				.biathlon.maps.wide .img-box .mask {
-					left:43px;
-					top:0;
-					}
-					
-			.maps.wide .text {
-				float:left;
-				height:100px;
-				width:354px;
-				margin-top:10px;
-				margin-left:92px;
-				padding:8px 26px 0 34px;
-				overflow:hidden;
-				}
-	
-/* interviews */		
-	.interviews.narrow {
-		position:relative;
-		top:-38px;
-		height:262px!important;
-		margin-top:54px;
-		background:url(/i/content/blocks/interview/backs/default-narrow.png) no-repeat left top;
-		}
-		
-		.fr.interviews.narrow {
-			right:-20px;
-			}
-			
-		.euro2012.interviews.narrow {
-			background:url(/i/content/blocks/interview/backs/euro-narrow.png) no-repeat left top;
-			}
-			
-		.london2012.interviews.narrow {
-			background:url(/i/content/blocks/interview/backs/london-narrow.png) no-repeat left top;
-			}
-			
-		.kazan2013.interviews.narrow {
-			background:url(/i/content/blocks/interview/backs/kazan-narrow.png) no-repeat left top;
-			}
-		
-		.sochi2014.interviews.narrow {
-			background:url(/i/content/blocks/interview/backs/sochi-narrow.png) no-repeat left top;
-			}
-				
-		.football.interviews.narrow {
-			background:url(/i/content/blocks/interview/backs/football-narrow.png) no-repeat left top;
-			}
-			
-			.fl.football.interviews.narrow {
-				left:-31px;	
-				}
-				
-		.hockey.interviews.narrow {
-			background:url(/i/content/blocks/interview/backs/hockey-narrow.png) no-repeat left top;
-			}
-			
-		.fl.hockey.interviews.narrow {
-			left:-32px
-			}
-			
-		.biathlon.interviews.narrow {
-			background:url(/i/content/blocks/interview/backs/biathlon-narrow.png) no-repeat left top;
-			}
-			
-			.fl.biathlon.interviews.narrow {
-				left:-34px;
-				}
-		
-		.interviews.narrow .back-link {
-			width:438px;
-			height:259px;
-			}
-			
-			.fr.interviews.narrow .back-link {
-				right:4px!important;
-				}
-				
-			.fl.hockey.interviews.narrow .back-link {
-				left:32px!important;
-				}
-				
-			.fl.biathlon.interviews.narrow .back-link {
-				left:34px!important;
-				}
-					
-		.interviews.narrow .img-box {
-			float:left;
-			margin-left:0;
-			width:212px
-			}
-			
-			.fl.interviews.narrow .img-box {
-				margin-right:28px;
-				margin-right:0;
-				}
-				
-			.fr.interviews.narrow .img-box {
-				margin-left:14px;
-				}
-			
-			.ie .fr.football.interviews.narrow .img-box {
-				margin-right:20px!important
-				}		
-			
-			.hockey.interviews.narrow .img-box {
-				width:176px;
-				}
-				
-			.fl.football.interviews.narrow .img-box {
-				width:176px;
-				margin-right:62px;
-				}
-					
-			.hockey.interviews.narrow .img-box {
-				margin-left:62px
-				}
-	
-		.interviews.narrow .img-box .img {
-			float:left;
-			width:173px;
-			height:174px;
-			margin-top:16px;
-			margin-left:7px;
-			overflow:hidden;
-			
-			-webkit-transform: rotate(-11.9deg); 
-			-moz-transform: rotate(-11.9deg);  
-			-o-transform: rotate(-11.9deg);  
-			transform: rotate(-11.9deg);				  
-			filter: progid:DXImageTransform.Microsoft.Matrix(
-					M11=0.9785089851017784, M12=0.20620418539662963, M21=-0.20620418539662963, M22=0.9785089851017784, sizingMethod='auto expand');
-			zoom: 1;
-		}
-		
-			
-			
-			.ie9 .fr.interviews.narrow .img {
-				margin-top: 0;
-				margin-left: 20px!important;
-			}
-			
-			.ie9 .fl.interviews.narrow .img {
-				margin-top: 0;
-				margin-left: -8px!important;
-			}
-				
-			.fl.football.interviews.narrow .img-box .img {
-				margin-left:38px;
-			}
-			
-				.ie9 .fl.football.interviews.narrow .img-box .img {
-					margin-left: 21px!important;
-				}
-			
-			.hockey.interviews.narrow .img-box .img {
-				margin-left:-22px;
-				}
-				
-				.ie9 .fl.hockey.interviews.narrow .img {
-					margin-left: -38px!important;
-				}
-				
-			.fr.hockey.interviews.narrow .img-box {
-				margin-left:14px
-				}
-				
-				
-				
-			.fl.biathlon.interviews.narrow .img-box {
-				margin-left:34px;
-				}
-		
-				
-				
-		.interviews.narrow .img-box .img div {
-			width:173px;
-			height:173px;
-			}
-			
-			.ie .fl.interviews.narrow .img-box .img  {
-				margin-left:-10px!important;
-				margin-top:1px!important;
-				}
-			
-			.ie .fl.football.interviews.narrow .img-box .img {
-				margin-left:22px!important;
-				}
-				
-			.ie .fl.hockey.interviews.narrow .img-box .img {
-				margin-left:-38px!important;
-				}
-			
-			.ie .fr.interviews.narrow .img-box .img  {
-				margin-left:18px!important;
-				margin-top:1px!important;
-				}
-		
-			.fr.interviews.narrow .img-box .img {
-				margin-left:35px;
-				}
-			
-		.interviews.narrow .img-box .mask {
-			width:328px;
-			height:274px;
-			position:absolute;
-			left:-44px;top:-36px;
-			background:url(/i/content/blocks/interview/mask-narrow.png) no-repeat;
-			}
-			
-			.fl.football.interviews.narrow .img-box .mask {
-				left:-13px;
-				}
-				
-			.hockey.interviews.narrow .img-box .mask {
-				left:-10px;
-				}
-				
-			.fl.biathlon.interviews.narrow .mask {
-				left:-10px;
-				}
-				
-			.fr.interviews.narrow .img-box .mask {
-				left:-2px;
-				}
-		
-		
-		.interviews.narrow div.text {
-			float:left;
-			width:220px;
-			height:156px;
-			margin-top:40px;
-			}
-	
-			.fr.interviews.narrow div.text {
-				float:right;
-				margin-right:8px;
-				}
-
-
-	
-	.interviews.wide {
-		padding-bottom:38px;
-		background:url(/i/content/blocks/interview/backs/default-wide.png) no-repeat right top;
-		}
-	
-		.euro2012.interviews.wide {
-			background:url(/i/content/blocks/interview/backs/euro-wide.png) no-repeat right top;
-			}
-			
-		.london2012.interviews.wide {
-			background:url(/i/content/blocks/interview/backs/london-wide.png) no-repeat right top;
-			}	
-			
-		.kazan2013.interviews.wide {
-			background:url(/i/content/blocks/interview/backs/kazan-wide.png) no-repeat right top;
-			}
-		
-		.sochi2014.interviews.wide {
-			background:url(/i/content/blocks/interview/backs/sochi-wide.png) no-repeat right top;
-			}
-				
-		.football.interviews.wide {
-			background:url(/i/content/blocks/interview/backs/football-wide.png) no-repeat right top;
-			}
-			
-		.hockey.interviews.wide {
-			background:url(/i/content/blocks/interview/backs/hockey-wide.png) no-repeat right top;
-			}
-			
-		.biathlon.interviews.wide {
-			background:url(/i/content/blocks/interview/backs/biathlon-wide.png) no-repeat right top;
-			}
-
-		.interviews.wide .back-link {
-			width:946px;
-			height:211px;
-			left:13px;
-			top:12px!important;
-			}
-		
-		.interviews.wide .img-box {
-			position:absolute;
-			left:0;top:0;
-			z-index:2;
-			}
-	
-			.interviews.wide .img-box .img {
-				float:left;
-				width:164px;
-				height:161px;
-				margin-left:190px;
-				margin-top:17px;
-				overflow:hidden;
-				-webkit-transform: rotate(-12.3deg);
-				-moz-transform: rotate(-12.3deg); 
-				-o-transform: rotate(-12.3deg);  
-				transform: rotate(-12.3deg); 
-					filter: progid:DXImageTransform.Microsoft.Matrix( 
-							M11=0.9770455744352636, M12=0.21303038627497659, M21=-0.21303038627497659, M22=0.9770455744352636, sizingMethod='auto expand');
-					zoom: 1;
-				}
-				
-				.ie .interviews.wide .img-box .img  {
-					position:absolute;
-					left:-16px!important;
-					top:-15px!important; 
-					}	
-				
-				.ie9 .interviews.wide .img-box .img {
-					margin-top: 0!important;
-					margin-left: 175px!important;
-				} 	
-				
-			.interviews.wide .img-box .img div {
-				width:164px;
-				height:161px;
-				}
-			
-			
-			
-		.interviews.wide .img-box .mask {
-			width:498px;
-			height:238px;
-			position:absolute;
-			left:-20px;top:-25px;
-			background:url(/i/content/blocks/interview/mask-wide.png) no-repeat left top;
-			}
-		
-	.interviews.wide .text {
-		float:left;
-		width:342px;
-		position:relative;
-		margin-left:434px;
-		margin-top:50px;
-		z-index:3;
-		}
-		
-/* trends */
-	.trends.narrow {
-		background:url(/i/content/blocks/theme/backs/default-narrow.png) no-repeat;
-		}
-
-		.euro2012.trends.narrow {
-			background:url(/i/content/blocks/theme/backs/euro-narrow.png) no-repeat;
-			}	
-			
-		.london2012.trends.narrow {
-			background:url(/i/content/blocks/theme/backs/london-narrow.png) no-repeat;
-			}
-			
-		.kazan2013.trends.narrow {
-			background:url(/i/content/blocks/theme/backs/kazan-narrow.png) no-repeat;
-			}
-		
-		.sochi2014.trends.narrow {
-			background:url(/i/content/blocks/theme/backs/sochi-narrow.png) no-repeat;
-			}
-				
-		.football.trends.narrow {
-			background:url(/i/content/blocks/theme/backs/football-narrow.png) no-repeat;
-			}
-			
-		.hockey.trends.narrow {
-			background:url(/i/content/blocks/theme/backs/hockey-narrow.png) no-repeat;
-			}
-			
-		.biathlon.trends.narrow {
-			background:url(/i/content/blocks/theme/backs/biathlon-narrow.png) no-repeat;
-			}			
-	
-			.trends.narrow .back-link {
-				width:439px;
-				height:253px;
-				}
-			
-			.trends.narrow .img-box {
-				margin-top: 76px;
-				position:relative;
-				}
-	
-				.fr.trends.narrow .img-box {
-					float:right;
-					}
-					
-				.fl.trends.narrow .img-box {
-					float:right;
-					margin-right:42px;
-					}
-	
-			.trends.narrow .img-box .img {
-				width:106px;
-				height:140px;
-				overflow:hidden;
-				}
-				
-				.trends.narrow .img-box .img div {
-					width:106px;
-					height:140px;
-					background-color:#000;
-					}
-			
-			.trends.narrow .mask {
-				position:absolute;
-				top: -80px;
-				left: -10px;
-				width:138px;
-				height:280px;
-				background:url(/i/content/blocks/theme/mask-narrow.png) no-repeat left top
-				}
-		
-			.trends.narrow .text {
-				width:278px;
-				margin-left:46px;
-				margin-top:80px;
-				}
-	
-				.fr.trends.narrow .text {
-					float:right;
-					margin-right:24px;
-					}
-					
-				.fl.trends.narrow .text {
-					float:left;
-					}
-	
-
-
-	.trends.wide {
-		background:url(/i/content/blocks/theme/backs/default-wide.png) no-repeat;
-		} 
-
-		.euro2012.trends.wide {
-			background:url(/i/content/blocks/theme/backs/euro-wide.png) no-repeat;
-			}
-			
-		.london2012.trends.wide {
-			background:url(/i/content/blocks/theme/backs/london-wide.png) no-repeat;
-			}
-			
-		.football.trends.wide {
-			top:-19px;
-			background:url(/i/content/blocks/theme/backs/football-wide.png) no-repeat;
-			}
-			
-		.kazan2013.trends.wide {
-			background:url(/i/content/blocks/theme/backs/kazan-wide.png) no-repeat;
-			}
-		
-		.sochi2014.trends.wide {
-			background:url(/i/content/blocks/theme/backs/sochi-wide.png) no-repeat;
-			}
-				
-		.hockey.trends.wide {
-			background:url(/i/content/blocks/theme/backs/hockey-wide.png) no-repeat;
-			}
-			
-		.biathlon.trends.wide {
-			background:url(/i/content/blocks/theme/backs/biathlon-wide.png) no-repeat;
-			}
-
-		.trends.wide .back-link {
-				width:969px;
-				height:163px;
-			}
-			
-			.football.trends.wide .back-link {
-				top:19px!important;
-				} 
-				
-		.trends.wide div.img-box, .trends.wide div.img-box div.mask {
-			width: 518px;
-			height:158px;
-			position:absolute;
-			left:-24px;
-			top:40px;
-			}
-			
-			.hockey.trends.wide div.img-box {
-				left:-23px;
-				}
-	
-			.football .trends.wide div.img-box {
-				left:-5px
-				}
-	
-		.trends.wide div.img-box div.mask {
-			top: 12px;
-			left: 4px;
-			background:url(/i/content/blocks/theme/mask-wide.png) no-repeat left top;
-			}
-		
-			.football.trends.wide div.img-box div.mask {
-				top:24px;
-				}
-		
-		.trends.wide div.img-box .img {
-			float:left;
-			width:175px;
-			height:106px;
-			margin-left:88px;
-			margin-top: 12px;
-			overflow:hidden;
-			}
-			
-			.football.trends.wide  div.img-box .img {
-				margin-top:32px;
-				}
-			
-			.trends.wide div.img-box .img div {
-				width:184px;
-				height:126px;
-				background-position: center center;
-				background-repeat: no-repeat;
-			}
-			
-		.trends.wide div.text {
-			float:right;
-			width:578px;
-			height:90px;
-			margin-top:54px;
-			margin-right:56px;
-			}
-	
-			.football.trends.wide div.text {
-				margin-top:73px;
-				}
-
-
-/* blogs */ 
-
-	.blogs.narrow {
-		background:url(/i/content/blocks/blogs/backs/default-narrow.png) no-repeat;
-		}	
-
-		.fr.blogs.narrow {
-			right:-19px;
-			}
-
-		.euro2012.blogs.narrow {
-			top:-8px;
-			background:url(/i/content/blocks/blogs/backs/euro-narrow.png) no-repeat;
-			}
-		
-		.london2012.blogs.narrow {
-			background:url(/i/content/blocks/blogs/backs/london-narrow.png) no-repeat;
-			}
-			
-		.kazan2013.blogs.narrow {
-			top:-16px;
-			margin-bottom:16px;
-			background:url(/i/content/blocks/blogs/backs/kazan-narrow.png) no-repeat;
-			}
-		
-		.sochi2014.blogs.narrow {
-			background:url(/i/content/blocks/blogs/backs/sochi-narrow.png) no-repeat;
-			}
-				
-		.football.blogs.narrow {
-			background:url(/i/content/blocks/blogs/backs/football-narrow.png) no-repeat;
-			}
-			
-		.hockey.blogs.narrow {
-			top:-20px;
-			margin-bottom:10px;
-			background:url(/i/content/blocks/blogs/backs/hockey-narrow.png) no-repeat;
-			}
-				
-		.biathlon.blogs.narrow {
-			top:-33px;
-			background:url(/i/content/blocks/blogs/backs/biathlon-narrow.png) no-repeat;
-			}
-
-		.blogs.narrow .back-link {
-			width:439px;
-			height:252px;
-		}
-			.kazan2013.blogs.narrow .back-link {
-				top:16px!important;
-				}
-				
-			.hockey.blogs.narrow .back-link {
-				top:18px!important;
-				}
-			
-			.biathlon.blogs.narrow .back-link {
-				top:33px!important;
-				}	
-				
-			.fr.blogs.narrow .back-link {
-				right:22px!important;
-				}
-				
-			.blogs.narrow .img-box {
-				float:left;
-				position:relative;
-				margin-left:26px;
-				margin-top:100px;
-				}
-				
-				.hockey.blogs.narrow .img-box {
-					margin-top:110px;				
-					}
-					
-				.biathlon.blogs.narrow .img-box {
-					margin-top:133px;
-					margin-left:6px;
-					}
-					
-					.fr.biathlon.blogs.narrow .img-box {
-						margin-left:26px;
-						}
-							
-		.blogs.narrow .img-box .img {
-			width:95px;
-			height:105px;
-			overflow:hidden;
-			}
-	
-		.blogs.narrow .img-box .img div {
-			width:95px;
-			height:105px;
-			}
-		
-		.blogs.narrow .mask {
-			position:absolute;
-			left:-23px;top:-73px;
-			width:170px;
-			height:202px;
-			background:url(/i/content/blocks/blogs/mask-narrow.png) no-repeat;
-			}
-	
-	
-		.blogs.narrow div.text {
-			float:left;
-			width:260px;
-			margin-left:32px;
-			margin-top:74px;
-			}
-
-				
-			.biathlon.blogs.narrow div.text {
-				width:280px;
-				margin-top:88px;
-				}
-		
-	
-	.blogs.wide {
-		background:url(/i/content/blocks/blogs/backs/default-wide.png) no-repeat left top;
-		}
-		
-		.euro2012.blogs.wide {
-			width:975px!important;
-			left:-6px;
-			background:url(/i/content/blocks/blogs/backs/euro-wide.png) no-repeat left top;
-			}
-		
-		.london2012.blogs.wide {
-			background:url(/i/content/blocks/blogs/backs/london-wide.png) no-repeat left top;
-			}	
-			
-		.kazan2013.blogs.wide {
-			width:979px!important;
-			top:-24px;
-			left:-10px;
-			background:url(/i/content/blocks/blogs/backs/kazan-wide.png) no-repeat left top;
-			}
-		
-		.sochi2014.blogs.wide {
-			background:url(/i/content/blocks/blogs/backs/sochi-wide.png) no-repeat left top;
-			}
-				
-		.football.blogs.wide {
-			background:url(/i/content/blocks/blogs/backs/football-wide.png) no-repeat left top;
-			}
-			
-		.hockey.blogs.wide {
-			top:-25px;
-			background:url(/i/content/blocks/blogs/backs/hockey-wide.png) no-repeat left top;
-			}
-			
-		.biathlon.blogs.wide {
-			top:-25px;
-			background:url(/i/content/blocks/blogs/backs/biathlon-wide.png) no-repeat left top;
-			}
-
-		.blogs.wide .back-link {
-			width:969px;
-			height:162px;
-			left:0;
-			}
-			
-			.kazan2013.blogs.wide .back-link {
-				top:24px!important;
-				}
-				
-			.hockey.blogs.wide .back-link {
-				top:24px!important;
-				}
-				
-			.biathlon.blogs.wide .back-link {
-				top:24px!important;
-				}
-				
-	.blogs.wide .img-box {
-		width:170px;
-		height:186px;
-		position:absolute;
-		left:72px;top:0px;
-	}
-		.kazan2013.blogs.wide .img-box {top:29px;}
-		.biathlon.blogs.wide .img-box {top:34px;}
-		.hockey.blogs.wide .img-box {top:16px;}
-		
-	.blogs.wide div.mask {
-		width:158px;
-		height:204px;
-		position:absolute;
-		left:0;top:0;	
-		background:url(/i/content/blocks/blogs/mask-wide.png) no-repeat;
-	}
-	
-	.blogs.wide div.img {
-		float:left;
-		width:94px;
-		height:106px;
-		margin-top:54px;
-		margin-left:22px;
-		overflow:hidden;
-	}
-		.blogs.wide div.img div {
-			width:94px;
-			height:106px;
-			}
-			
-	.blogs.wide .text {
-		float:left;
-		width:440px;
-		margin-top:48px;
-		margin-left:262px;
-		
-	}	
-		
-		.kazan2013.blogs.wide div.text {margin-top:68px;}
-		.biathlon.blogs.wide div.text {margin-top:72px}
-
-/* stories */ 
-
-	.stories.narrow {
-		margin-top:0;
-		background:url(/i/content/blocks/stories/backs/default-narrow.png) no-repeat;
-		}
-	
-		.euro2012.stories.narrow {
-			background:url(/i/content/blocks/stories/backs/euro-narrow.png) no-repeat;
-			}
-		
-		.london2012.stories.narrow {
-			background:url(/i/content/blocks/stories/backs/london-narrow.png) no-repeat;
-			}
-		
-		.kazan2013.stories.narrow {
-			position:relative;
-			top:-7px;
-			margin-bottom:8px;
-			background:url(/i/content/blocks/stories/backs/kazan-narrow.png) no-repeat;
-			}
-			
-			.fr.kazan2013.stories.narrow {
-				right:-12px;
-				}
-				
-		.sochi2014.stories.narrow {
-			background:url(/i/content/blocks/stories/backs/sochi-narrow.png) no-repeat;
-			}
-					
-		.football.stories.narrow {
-			position:relative;
-			top:-15px;
-			margin-bottom:15px;
-			background:url(/i/content/blocks/stories/backs/football-narrow.png) no-repeat;
-			}
-			
-			.fr.football.stories.narrow {
-				right:-18px;
-				}
-			
-
-			
-		.hockey.stories.narrow {
-			background:url(/i/content/blocks/stories/backs/hockey-narrow.png) no-repeat;
-			}
-			
-		.biathlon.stories.narrow {
-			top:-16px;
-			background:url(/i/content/blocks/stories/backs/biathlon-narrow.png) no-repeat;
-		}
-		
-			.fr.biathlon.stories.narrow {
-				right:-2px;
-				}
-		
-		.stories.narrow .back-link {
-			width:438px;
-			height:253px;
-		}	
-			.fr.stories.narrow .back-link {
-				right:3px!important;
-				}
-			
-			.football.stories.narrow .back-link {
-				top:15px!important;
-				}
-				
-				.fr.football.stories.narrow .back-link {
-					right:18px!important;
-					}
-					
-			.kazan2013.stories.narrow .back-link {
-				top:7px!important;
-				right:12px!important;
-				}	  
-				
-				.fr.kazan2013.stories.narrow .back-link {
-					right:12px!important;
-					}
-					
-			.biathlon.stories.narrow .back-link {
-				top:15px!important;
-				}
-			
-		.hockey.stories.narrow .text {
-			margin-left:26px;
-		}
-		
-			.stories.narrow .img-box {
-				float:right;
-				position:relative;
-				width:128px;
-				height:136px;
-				margin-right:62px;
-				margin-top:52px;
-			}
-				.fr.stories.narrow .img-box {margin-right:44px;}		
-				.fl.stories.narrow .img-box {margin-right:84px;}
-		
-				.kazan2013.stories.narrow .img-box {
-					margin-top:58px;
-					margin-right:84px;
-				}
-					.fr.kazan2013.stories.narrow .img-box {margin-right:58px;}
-			
-				.football.stories.narrow .img-box {
-					margin-top:68px;
-					margin-right:84px;
-				}
-					.fr.football.stories.narrow .img-box {margin-right:60px;}
-			
-				.hockey.stories.narrow .img-box {margin-right:86px;}
-					.fr.hockey.stories.narrow .img-box {margin-right:41px;}
-			
-				.biathlon.stories.narrow .img-box {margin-top:64px;}
-			
-			.stories.narrow .img-box .img {
-				width:128px;
-				height:136px;
-				overflow:hidden;
-			}
-				.stories.narrow .img-box .img div {
-					width:128px;
-					height:136px;
-				}
-			
-				.stories.narrow .img-box .mask {
-					position:absolute;
-					top:-14px;left:-14px;
-					width:163px;
-					height:174px;
-					background:url(/i/content/blocks/stories/mask-narrow.png) no-repeat;
-				}
-			
-				.stories.narrow .text {
-					float:right;
-					width:202px;
-					margin-top:52px;
-					margin-right:8px;
-				}
-					.stories.narrow .text {width:214px;}
-					.kazan2013.stories.narrow .text {margin-top:61px;}	
-					.football.stories.narrow .text {margin-top:68px;}	
-					.biathlon.stories.narrow .text {margin-top:60px;}
-					
-					.fr.biathlon.stories.narrow .text {width:226px;}
-	 
-	
-		
-	.stories.wide {
-		background:url(/i/content/blocks/stories/backs/default-wide.png) no-repeat left top;
-	}	
-	
-		.euro2012.stories.wide {
-			background:url(/i/content/blocks/stories/backs/euro-wide.png) no-repeat left top;
-			}	
-		.london2012.stories.wide {
-			background:url(/i/content/blocks/stories/backs/london-wide.png) no-repeat left top;
-			}
-		.kazan2013.stories.wide {
-			background:url(/i/content/blocks/stories/backs/kazan-wide.png) no-repeat left top;
-			}
-			
-		.sochi2014.stories.wide {
-			background:url(/i/content/blocks/stories/backs/sochi-wide.png) no-repeat left top;
-			}
-			
-		.football.stories.wide {
-			top:-27px;
-			background:url(/i/content/blocks/stories/backs/football-wide.png) no-repeat left top;
-			}
-		.hockey.stories.wide {
-			background:url(/i/content/blocks/stories/backs/hockey-wide.png) no-repeat left top;
-			}
-		.biathlon.stories.wide {
-			width:990px!important;
-			top:-6px;
-			background:url(/i/content/blocks/stories/backs/biathlon-wide.png) no-repeat left top;
-			}
-	
-		.stories.wide .back-link {
-			left:0;
-			width:969px;
-			height:162px;
-			}
-			
-			.football .stories.wide .back-link {
-				top:27px
-				}
-			.biathlon .stories.wide .back-link {
-				top:6px;
-				}
-		.stories.wide div.img-box {
-			width:210px;
-			height:164px;
-			position:absolute;
-			left:0;top:0;
-			}
-			.football.stories.wide div.img-box {
-				top:28px;
-				}
-			.biathlon.stories.wide div.img-box {
-				top:8px
-				}
-		
-		.stories.wide div.img-box .img {
-			float:right;
-			width:130px;
-			height:136px;
-			margin-top:14px;
-			overflow:hidden;
-			}
-				.biathlon.stories.wide .img {
-					margin-top:21px;
-					}
-			
-		.stories.wide div.img-box .img div {
-			width:130px;
-			height:136px;
-		}
-			
-		.stories.wide div.mask {
-			width:163px;
-			height:174px;
-			position:absolute;
-			left:66px;top:0;
-			background:url(/i/content/blocks/stories/mask-narrow.png) no-repeat;
-			}
-		
-		.stories.wide .text {
-			float:left;
-			position:relative;
-			width:440px;
-			margin-left:260px;
-			margin-top:40px;
-			z-index:3;
-			}
-		
-			.football.stories.wide div.text {
-				margin-top:72px
-				}
-			.biathlon.stories.wide div.text {
-				margin-top:57px;
-				}
-	
-	
-/* paralympics */	
-
-	.paralympics.narrow {
-		width:483px!important;
-		top:-7px;
-		background:url(/i/content/blocks/paralympic/backs/default-narrow.png) no-repeat;
-		}	
-		.fr.paralympics.narrow {
-			right:-44px;
-			}
-	
-		.london2012.paralympics.narrow {
-			background:url(/i/content/blocks/paralympic/backs/london-narrow.png) no-repeat;
-			}	
-		.kazan2013.paralympics.narrow {
-			background:url(/i/content/blocks/paralympic/backs/kazan-narrow.png) no-repeat;
-			}
-			
-		.sochi2014.paralympics.narrow {
-			background:url(/i/content/blocks/paralympic/backs/sochi-narrow.png) no-repeat;
-			}
-			
-		.football.paralympics.narrow {
-			background:url(/i/content/blocks/paralympic/backs/football-narrow.png) no-repeat;
-			}	
-		.hockey.paralympics.narrow {
-			background:url(/i/content/blocks/paralympic/backs/hockey-narrow.png) no-repeat;
-			}	
-		.biathlon.paralympics.narrow {
-			background:url(/i/content/blocks/paralympic/backs/biathlon-narrow.png) no-repeat;
-			}
-		
-			.paralympics.narrow .back-link {
-				width:438px;
-				height:253px;
-				top:8px!important;
-				}
-				
-				.fr.paralympics.narrow .back-link {
-					right:44px!important;
-					}
-					
-			.paralympics.narrow .img-box {
-				float:left;
-				}
-		
-			.paralympics.narrow .img-box .img {
-				width:135px;
-				height:138px;
-				margin-top:60px;
-				margin-left:37px;
-				overflow:hidden;
-				-webkit-transform: rotate(-15deg);  
-				-moz-transform: rotate(-15deg); 
-				-o-transform: rotate(-15deg); 
-				transform: rotate(-15deg);  
-					filter: progid:DXImageTransform.Microsoft.Matrix(  
-						M11=0.9659258262890683, M12=0.25881904510252074, M21=-0.25881904510252074, M22=0.9659258262890683, sizingMethod='auto expand');
-					zoom: 1;	
-				}
-		
-		
-				.ie .paralympics.narrow .img-box .img {				
-				}
-				
-				.paralympics.narrow .img-box .img div {
-					width:138px;
-					height:138px;
-					}
-			
-			.paralympics.narrow .img-box .mask {
-				width:222px;
-				height:254px;
-				position:absolute;
-				left:-13px;top:2px;
-				background:url(/i/content/blocks/paralympic/mask-narrow.png) no-repeat;
-				}
-				
-				.fr.paralympics.narrow .img-box .mask {
-					left:-12px;
-					}
-		
-				.ie .paralympics.narrow .img-box, .ie9 .paralympics.narrow .img-box   {
-					margin-left:-14px;
-					margin-top:-14px;
-					}
-					
-			.paralympics.narrow .text {
-				float:left;
-				width:176px;
-				margin-top:50px;
-				margin-left:34px;
-				}
-				
-				
-				
-	.paralympics.wide {
-		width:984px!important;
-		left:-6px;
-		background:url(/i/content/blocks/paralympic/backs/default-wide.png) no-repeat;
-	}
-		.london2012.paralympics.wide {
-			background:url(/i/content/blocks/paralympic/backs/london-wide.png) no-repeat;
-			}	
-		.kazan2013.paralympics.wide {
-			background:url(/i/content/blocks/paralympic/backs/kazan-wide.png) no-repeat;
-			}
-			
-		.sochi2014.paralympics.wide {
-			background:url(/i/content/blocks/paralympic/backs/sochi-wide.png) no-repeat;
-			}	
-				
-		.football.paralympics.wide {
-			background:url(/i/content/blocks/paralympic/backs/football-wide.png) no-repeat;
-			}
-				
-		.hockey.paralympics.wide {
-			background:url(/i/content/blocks/paralympic/backs/hockey-wide.png) no-repeat;
-			}	
-		.biathlon.paralympics.wide {
-			background:url(/i/content/blocks/paralympic/backs/biathlon-wide.png) no-repeat;
-			}
-	
-		.paralympics.wide .back-link {
-				width:984px;
-				height:169px;
-				top:6px;
-				left:0;
-			}
-			
-		.paralympics.wide .img-box {
-			float:left;
-			width:130px;
-			position:relative;
-			margin-left:90px;
-			margin-top:50px;
-			}
-		
-			.paralympics.wide .img-box .img {
-				float:left;
-				width:112px;
-				height:114px;
-				margin-left:34px;
-				overflow:hidden;
-				-webkit-transform: rotate(-14.7deg);
-				-moz-transform: rotate(-14.7deg); 
-				-o-transform: rotate(-14.7deg); 
-				transform: rotate(-14.7deg); 
-					filter: progid:DXImageTransform.Microsoft.Matrix(  
-							M11=0.9672677527758768, M12=0.2537579445848056, M21=-0.2537579445848056, M22=0.9672677527758768, sizingMethod='auto expand');
-					zoom: 1; 
-				}
-				
-				.ie .paralympics.wide .img-box .img {
-					margin-left:22px!important;
-					margin-top:-6px!important;
-				}
-				
-				.ie9 .paralympics.wide .img-box .img {
-					margin-left: 20px!important;
-					margin-top: -16px!important;
-				}
-				
-				.paralympics.wide .img-box .img div {
-					width:112px;
-					height:114px;				
-					}
-			
-			.paralympics.wide .img-box .mask {
-				position:absolute;
-				top:-52px;left:0;
-				width:180px;
-				height:208px;
-				background:url(/i/content/blocks/paralympic/mask-wide.png) no-repeat;
-				}
-			
-			.paralympics.wide .text {
-				float:left;
-				width:440px;
-				margin-top:48px;
-				margin-left:76px;
-				}
-	
-	
-
-		
-	.activities .img-box {
-		display:none;
-		}
-	
-		.activities.wide {
-			width:1001px!important;
-			top:-36px;
-			left:-12px;
-			background:url(/i/content/blocks/activities/backs/wide.png) no-repeat;	
-			}
-			
-			.activities.wide .back-link {
-					width:966px;
-					height:161px;
-					left:14px;
-					top:46px!important;
-				}
-				
-			.activities.wide div.text {
-				width:638px;
-				float:left;
-				margin-left:100px;
-				margin-top:84px;
-			}
-			
-			
-		.activities.narrow {
-			top:-32px;
-			height:314px;
-			background:url(/i/content/blocks/activities/backs/narrow.png) no-repeat;
-			}	
-		
-			.fl.activities.narrow {
-				left:-15px;
-				}
-				
-			.fr.activities.narrow {
-				right:-17px;
-				}
-			
-			.activities.narrow .back-link {
-				width:437px;
-				height:250px;
-				top:40px!important;
-				}
-			
-				.fl.activities.narrow .back-link {
-					left:16px!important;					
-				}
-				
-				.fr.activities.narrow .back-link {
-					right:16px!important;					
-				}
-				
-			.activities.narrow .text {
-				float:left;
-				width:322px;
-				margin-top:104px;
-				}
-				
-				.fl.activities.narrow .text {
-					width:312px;
-					margin-left:80px;
-					}
-					
-				.fr.activities.narrow .text {
-					width:312px;
-					margin-left:96px;
-					}
-	
-
-.only-image.narrow {
-	width:482px!important;
-	height:326px!important;
-	top:-17px;
-	margin-bottom:30px;
-	background-repeat:no-repeat;
-	}
-	
-	.fl.only-image.narrow {
-		left:-16px!important;
-		}
-	
-	.fr.only-image.narrow {
-		right:-16px!important;
-		}
-		
-	.only-image.narrow .back-link {
-		width:408px;
-		height:260px;
-		top:18px!important;
-		}
-		
-		.fl.only-image.narrow  .back-link {
-			top: 18px !important;
-			left: 28px !important;
-			} 
-			
-		.fr.only-image.narrow  .back-link{
-			right:48px!important;
-			} 
-					
-.only-image.wide {
-	display:block;
-	width:999px!important;
-	height:228px!important;
-	padding-bottom:30px;
-	background-repeat:no-repeat;
-}
-
-	.only-image.wide .back-link {
-		width:966px;
-		height:162px;
-		top:21px!important;
-		
-		}
-		
-#pagination {
-	padding:40px 0 20px 0;
-	line-height:1;
-	text-align:center;
-}
-
-	#pagination li {
-		display:inline;
-		}
-		
-		#pagination li.left {
-			padding-right:20px;
-			} 
-		
-		#pagination a {
-			background:url(/i/pagination-arrows.png) no-repeat;
-			color:#3d2c82;
-			font-size:20px;
-			text-transform:uppercase;
-			}
-		
-			#pagination li.left a {
-				padding-left:20px;
-				background-position:left 7px;
-			}
-			
-			#pagination li.right a {
-				padding-right:20px;
-				background-position:right -19px;
-			}
-			
-		#pagination .current, #pagination .disabled {
-			color:#919192;
-			cursor:default;
-			}
-			
-		
-#footer {
-	position:absolute;
-	left:50%;bottom:0;
-	height:60px;
-	padding-top:30px;
-	background:#fff;
-	color:#585858;
-	font-size:13px;
-	margin-left:-497px;
-}
-	#footer a {
-		color:#585858;
-		text-decoration:underline
-	}
-
-
-.screw {
-	text-align:center;
-}
+.footer__section {
+  background: #444;
+  overflow: hidden; }
+  .footer__section .wrap {
+    height: 94px; }
+  .footer__section .copyright {
+    float: left;
+    padding-top: 12px;
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase; }
+  .footer__section .contacts {
+    float: right;
+    padding-top: 12px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold; }
+    .footer__section .contacts span {
+      color: #adec3f; }
+  .footer__section li {
+    margin-top: 14px;
+    margin-right: 14px;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    padding-left: 18px;
+    float: left;
+    background: url("../i/footer-social-spr.png") no-repeat; }
+    .footer__section li.vk {
+      background-position: left -14px; }
+    .footer__section li.lj {
+      background-position: left bottom; }
+    .footer__section li a {
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      text-decoration: none;
+      text-transform: uppercase; }
