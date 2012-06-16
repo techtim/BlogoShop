@@ -24,17 +24,17 @@
 
 			% if ($action_type ne 'add') {
 
-				<a href="/admin/articles">Список статей</a> &gt;
+				<a href="/admin/articles">Список постов</a> &gt;
 
-				<span>Правка статьи
+				<span>Правка поста
 					% if (stash 'alias') {
-						<a href="/<%== join '/', $rubric, $alias %>" TARGET='_blank'><%== stash 'name' %></a>
+						<a href="/<%== join '/', $type, $alias %>" TARGET='_blank'><%== stash 'name' %></a>
 					% } else {
 						"<%== stash 'name' %>"
 					% }
 				</span>
 			% } else {
-				<span>Новая статья</span>
+				<span>Новый пост</span>
 			% }
 		</h1>
 
@@ -73,7 +73,7 @@
 
 					<tr>
 						<td class="bg-pink ta-right">
-							<label>Статья активна:</label>
+							<label>Пост активен:</label>
 						</td>
 						<td>
 							<span class="bg-pink input-wrap" >
@@ -86,7 +86,7 @@
 						% if (stash 'alias') {
 							<tr>
 								<td class="ta-right">
-									Алиас статьи:
+									Алиас поста:
 								</td>
 								<td>
 									<input class="wide" type="text" value="<%== $alias %>" />
@@ -96,7 +96,7 @@
 
 						<tr>
 							<td class="ta-right">
-								<label>Дата статьи:</label>
+								<label>Дата поста:</label>
 							</td>
 							<td>
 								<input type="text" size=11 name="article_date" class="date" value="<%= stash 'article_date' %>">&nbsp;
@@ -107,40 +107,29 @@
 
 					<tr>
 						<td class="ta-right">
-							<label>Срез:</label>
+							<label>Тип:</label>
 						</td>
 						<td>
-							%= include 'includes/select_block', name => 'cut', select => $cut, options => stash 'cuts'
+							%= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
 						</td>
 					</tr>
 
 					<tr>
 						<td class="ta-right">
-							<label>Рубрика:</label>
+							<label>Бренд:</label>
 						</td>
 						<td>
-							%= include 'includes/select_block', name => 'rubric', select => $rubric, options => stash 'rubrics'
+							%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'brands'
 						</td>
 					</tr>
-
-
-					<tr>
-						<td class="ta-right">
-							<label>Источник:</label>
-						</td>
-						<td>
-							%= include 'includes/select_block', name => 'source', select => $source, options => stash 'sources'
-						</td>
-					</tr>
-
-					<tr>
-						<td class="ta-right">
-							<label>Автор:</label>
-						</td>
-						<td>
-							%= include 'includes/select_block', name => 'author', select => $author, options => stash 'authors'
-						</td>
-					</tr>
+                    <tr>
+                        <td class="ta-right">
+                            <label>Тэги:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="tags" size="90" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>" "/>(через&nbsp;","&nbsp;или&nbsp;";")
+                        </td>
+                    </tr>
 
 				</table>
 			</div>
@@ -148,11 +137,6 @@
 			<div class="section article-preview">
 
 				<h3>Текст превью:</h3>
-
-				<p>Размер превью:
-					<input type="radio" name="preview_size" value="50" <%= ($preview_size eq '50' ? 'CHECKED' : '') %>/>50%
-					<input type="radio" name="preview_size" value="100" <%= ($preview_size eq '100' ? 'CHECKED' : '') %>/> 100%
-				</p>
 
 				<p>
 					<textarea type="text" name="preview_text" cols=80 rows=5><%= stash 'preview_text' %></textarea>
@@ -175,15 +159,9 @@
 
 					<thead>
 						<tr>
-							<td colspan=2>превью:</td>
-							<td colspan=4></td>
-						</tr>
-						<tr>
-							<td width="50">узк.</td>
-							<td width="50">шир.</td>
-							<td width="230">описание</td>
-							<td width="230">источник</td>
-							<td width="120">таг (для вставки)</td>
+							<td width="100">превью:</td>
+							<td width="330">описание</td>
+							<td width="250">таг (для вставки)</td>
 							<td>превью (уменьшено)</td>
 						</tr>
 					</thead>
@@ -192,9 +170,6 @@
 						<tr>
 							<td>
 								<input type="radio" name="preview_image" value="0" checked="<%== !$preview_image ? 'CHECKED' : '' %>">off
-							</td>
-							<td>
-								<input type="radio" name="preview_image_wide" value="0" checked="<%== !$preview_image_wide ? 'CHECKED' : '' %>">off
 							</td>
 							<td colspan="4"></td>
 						</tr>
@@ -208,26 +183,17 @@
 									</td>
 
 									<td>
-										<input type="radio" name="preview_image_wide" value="<%== $image->{tag} %>" <%== $image->{tag} eq $preview_image_wide ? 'CHECKED' : '' %> />
+										<input type="text" name="image_descr" size=60 value="<%== $image->{descr} %>"/>
 									</td>
 
 									<td>
-										<input type="text" name="image_descr" size=40 value="<%== $image->{descr} %>"/>
-									</td>
-
-									<td>
-										<input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
-										<input type="text" name="image_source" size=40 value="<%== $image->{source} %>">
-<!-- 									<br/>Таг: <%== $image->{tag} %> -->
-									</td>
-
-									<td>
-										<input type="text" value="<%== $image->{tag} %>"/>
+										<input type="text" size=40 value="<%== $image->{tag} %>"/>
+                                        <input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
 									</td>
 
 									<td>
 										<input type="checkbox" name="image_delete" value="<%== $image->{tag}  %>"/> <label>Удалить при сохранении статьи</label><br/>
-										<img width="160px" src="<%== config->{image_url}.($rubric ? $rubric : config->{default_img_dir}).'/'.$alias.'/'.$image->{tag} %>"/>
+										<img width="160px" src="<%== config->{image_url}.($type ? $type : config->{default_img_dir}).'/'.$alias.'/'.$image->{tag} %>"/>
 									</td>
 								</tr>
 							% }
@@ -344,17 +310,7 @@
 
 	</div>
 
-</div><!-- /admin-container -->
-
-% if ($action_type ne 'add') {
-	<iframe
-		src="/admin/article/preview/<%= stash '_id' %>"
-		frameborder="no"
-		height="1000px"
-		width="100%"
-		name="_preview" >
-	</iframe>
-% }
+</div>
 
 <script type="text/javascript">
 

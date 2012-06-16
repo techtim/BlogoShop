@@ -3,12 +3,13 @@
 % foreach my $article (@$articles) {
 % next if !$article->{alias};
 % $count++;
-% $even = !$even if $article->{preview_size} eq '100';
+%# $even = !$even if $article->{preview_size} eq '100';
 
 %= include 'includes/preview_article', article => $article, even => $even, count => $count
-
-%  if ($count % 2 == $even && $article->{preview_size} ne '100') {
-  <div class='clear'></div>
+<!--
+% if ($count % 2 == $even && $article->{preview_size} ne '100') {
+    <div class='clear'></div>
 % }
+-->
 % }
 <div class='screw screw-replace' rel='<%== @$articles > 0 && $articles->[-1]->{show_fwd} ? $host. '/' . ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . 'next/'.($articles->[-1]->{_id}) : '' %>'></div>

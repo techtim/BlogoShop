@@ -2,7 +2,6 @@
 % title 'Хохловка';
 
 %= include 'includes/left_bar'
-%= include 'includes/list_articles'
 
 <div class='content__section'>
 
@@ -22,14 +21,7 @@
             <h2></h2>
         </div>
         <ul>
-            <li>
-                <a href='#'>
-                    <img src='i/tmp/blogs-preview.jpg' alt='' />
-                    <span class='caption'>Кризис арт-бизнеса: сдача на милость государству?</span>
-                    <span class='text'>Владимир Сорокин, Станислав Львовский, Мария Галина и Линор Горалик о том, что значил для них Брэдбери</span>
-                    <span class='date'>8 июня</span>
-                </a>
-            </li>
+            %= include 'includes/list_articles'
         </ul>
     </div>
 </div>

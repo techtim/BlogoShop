@@ -1,5 +1,6 @@
 <select name="<%= $name %>">
-	<option value="">выбрать</option>
+% my $must = stash 'must_fill';
+	<option value=""><%= $must && $must eq 'no' ? 'нет' : 'выбрать' %></option>
 
 % if (ref $options eq 'ARRAY') {
 % foreach my $option (@$options) {

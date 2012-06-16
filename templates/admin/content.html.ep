@@ -1,0 +1,65 @@
+% layout 'admin';
+% title 'Список '. $content eq 'brands' ? 'брендов' : 'типов';
+
+<div class="admin-container">
+
+	<div class="main-heading section">
+
+		<h1>
+			<a href="/admin">Админка</a>
+			&gt; Список <%== $content eq 'brands' ? 'брендов' : 'типов' %>
+		</h1>
+
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+
+		%= include 'includes/info_message', message => stash 'message'
+
+	</div>
+
+    % if ($content eq 'brands') {
+    %= form_for '' => (method => 'post') => begin
+	<div class="section article-list">
+		<table class="blackhead">
+			<thead>
+				<tr>
+					<td colspan="1">Бренд</td>
+					<td colspan="1">Категория</td>
+					<td colspan="1">Описание</td>
+					<td colspan="1">Лого</td>
+                    <td colspan="1">Удалить</td>
+				</tr>
+			</thead>
+			<tbody>
+				% foreach my $brand (@$brands) {
+					<tr>
+						<td>
+							<a href="/brand/<%= $brand->{name} %>" TARGET='_blank' title="просмотреть '<%= $brand->{name} %>'" class="<%= !$brand->{active} ? 'article-link-bold' : '' %>">
+								<%= $brand->{name} %>
+							</a>
+						</td>
+						<td>
+							<input type="text" name="name_<%= $brand->{_id} %>" value="<%= $brand->{alias} %>" size=100>
+						</td>
+						<td>
+							<%= $brand->{_id} %> (ИНН:<%= $brand->{inn} %>)
+						</td>
+						<td>
+							<input type="checkbox" value="1" name="<%= $brand->{_id} %>" <%= $brand->{active} ? 'CHECKED' : '' %>>
+						</td>
+					</tr>
+				% }
+			</tbody>
+		</table>
+    </div>
+	<input type="submit" name="save" value="Сохранить">
+    % end
+    % }
+    <div class='pager'>
+
+		% foreach my $i (1..$pages) {
+			<a href='?<%== "page=$i" %>'><%= $i %></a>
+		% }
+
+	</div>
+
+</div>

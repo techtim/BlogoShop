@@ -19,7 +19,7 @@
 	<body>
         <div class='wrap clearfloat'>
             %= include 'includes/header'
-            %= include 'includes/top', cuts => stash 'cuts'
+            %= include 'includes/top'
             <%= content %>
             
         </div>
