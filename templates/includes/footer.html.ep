@@ -1,91 +1,21 @@
-<ul class='b__videos__list__previews list_sms <%= !$show_liked ? 'active' : '' %>'>
-% for (0..4) {
-	<li class='<%= $_ == 0 ? 'first__item' : '' %> <%= $_ == 3 ? 'first__item' : '' %>'>
-		<a href='/akcia/video/<%== $videos->[$_]->{video_code} %>'>
-			<span class='video__position'><%= $videos->[$_]->{position} %></span>
-			<div class='video__information'>
-				<div class='video__preview'>
-					<img src='http://img.youtube.com/vi/<%= $videos->[$_]->{video_code} %>/1.jpg' alt='' width=140 />
-					<!-- <span class='video__timing'>
-						<span class='bg'></span>
-						<span class='text'></span>
-					</span>
-					-->
-				</div>
-				<h2><%= $videos->[$_]->{user_name} %></h2>
-				<div class='video__meta'>
-					<span class='rating'>
-						<%= $videos->[$_]->{score} %>
-					</span>
-					<span class='diff'>
-						(<%= $videos->[$_]->{day_position_diff} || 0 %>)
-					</span>
-				</div>
-			</div>
-		</a>
-	</li>
-% }
-</ul>
+<div class='footer__section'>
+    <div class='wrap clearfloat'>
+        <p class='copyright'>2010-2012 &copy; магазин хохловка</p>
 
-<ul class='b__videos__list__previews list_experts'>
-% my $i=0;
-% foreach (@$videos_popular) {
-	
-	<li class=<%= ($i++ == 0 || $i == 4 )? 'first__item' : '' %>>
-		<a href='/akcia/video/<%== $_->{video_code} %>'>
-			<span class='video__position'><%= $_->{position} %></span>
-			<div class='video__information'>
-				<div class='video__preview'>
-					<img src='http://img.youtube.com/vi/<%= $_->{video_code} %>/1.jpg' alt='' width=140 />
-					<!--<span class='video__timing'>
-						<span class='bg'></span>
-						<span class='text'>0:38</span>
-					</span>
-					-->
-				</div>
-				<h2><%= $_->{user_name} %></h2>
-				<div class='video__meta'>
-					<span class='rating'>
-						<%= $_->{score} %>
-					</span>
-					<span class='diff'>
-						(<%= $_->{day_position_diff} || 0 %>)
-					</span>
-				</div>
-			</div>
-		</a>
-	</li>
-% }
-</ul>
+        <div class='contacts'>
+            <p>МОСКВА, М. КИТАЙ-ГОРОД, ХОХЛОВСКИЙ 7, <span>ТЕЛЕФОН: +7 (926) 930 90-05</sapn></p>
 
-
-<ul class='b__videos__list__previews list_users <%= $show_liked ? 'active' : '' %>'>
-% my $i=0;
-% foreach (@$videos_liked) {
-	
-	<li class=<%= ($i++ == 0 || $i == 4 )? 'first__item' : '' %>>
-		<a href='/akcia/video/<%== $_->{video_code} %>'>
-			<span class='video__position'><%= $_->{position} %></span>
-			<div class='video__information'>
-				<div class='video__preview'>
-					<img src='http://img.youtube.com/vi/<%= $_->{video_code} %>/1.jpg' alt='' width=140 />
-					<!--<span class='video__timing'>
-						<span class='bg'></span>
-						<span class='text'>0:38</span>
-					</span>
-					-->
-				</div>
-				<h2><%= $_->{user_name} %></h2>
-				<div class='video__meta'>
-					<span class='rating'>
-						<%= $_->{score} %>
-					</span>
-					<span class='diff'>
-						(<%= $_->{day_position_diff} || 0 %>)
-					</span>
-				</div>
-			</div>
-		</a>
-	</li>
-% }
-</ul>
+            <ul>
+                <li class='fb'>
+                    <a href='http://www.facebook.com/xoxloveka'>facebook</a>
+                </li>
+                <li class='vk'>
+                    <a href='http://vk.com/id98564642'>вконтакте</a>
+                </li>
+                <li class='lj'>
+                    <a href='http://xoxloveka-ru.livejournal.com/'>ЖЖ</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

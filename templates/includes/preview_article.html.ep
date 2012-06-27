@@ -1,30 +1,10 @@
-% if ($article->{preview_image_wide}) {
-<div class='only-image <%= $article->{preview_size} eq '100' ? 'wide' : 'narrow '.($count % 2 == $even ? 'fr' : 'fl') %> clearfloat' style="background-image:url(<%== config->{image_url}.$article->{rubric}.'/'.$article->{alias}.'/'.($article->{preview_size} eq '100' ? $article->{preview_image_wide} : $article->{preview_image}) %>);">
-	<a class='back-link' href='/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>'></a>   
- </div>
-% } else { 
- <div class='<%== defined $article->{cut} ? $article->{cut} : '' %> <%= $article->{rubric} %> <%= $article->{preview_size} eq '100' ? 'wide' : 'narrow '.($count % 2 == $even ? 'fr' : 'fl') %> clearfloat'>
-  <a href='/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>'  class='back-link'></a>
-  <div class='img-box'>
-   <div class='img'>
-    % if ($article->{preview_image}) {
-    <div style="background-image:url(<%== config->{image_url}.$article->{rubric}.'/'.$article->{alias}.'/'.$article->{preview_image} %>);"></div>
-    % }
-   </div>
-   <div class='mask'></div>
-  </div>
-  <div class='text'>
-   <h2 class='caption'><a href='/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>'><%== $article->{name} %></a></h2>
-   <p><a href='/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>'><%== $article->{preview_text} %></a>
-	<a href='http://twitter.com/share?url=http://sport.megafon.ru/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>&amp;text=<%= $article->{preview_text} %>' title='Twitter' class='twitter-in-text'></a></p>
-   <a class='comments-bubble clearfloat' href='/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>#comments'>
-      <span
-          class="fanat-talks-count"
-          data-site="megafonsport"
-                   data-area="<%= $article->{cut} || 'other' %>"
-                   data-page="<%= $article->{rubric} %>_<%= $article->{alias} %>"
-                   >0</span>
-      </a>
-  </div>
- </div>
-% }
+<li>
+    <a href='/<%== join '/', $article->{type}, $article->{alias} %>'>
+    	<span class='img__box' style='background-image: url(<%== config->{image_url} .
+            join ('/', $article->{type}, $article->{alias}, $article->{preview_image}) %>)'>
+		</span>
+        <span class='caption'><%= $article->{name} %></span>
+        <span class='text'><%= substr($article->{preview_text}, 0, 102) %></span>
+        <span class='date'><%= $article->{date} %></span>
+    </a>
+</li>

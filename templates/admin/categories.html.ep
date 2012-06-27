@@ -1,9 +1,9 @@
 % layout 'admin';
-% title 'Добавление автора';
+% title 'Редактирование категорий';
 
 <div class="admin-container">
 	<div class="section main-heading">
-		<h1><a href="/admin">Админка</a> &gt; Добавление автора</h1>
+		<h1><a href="/admin">Админка</a> &gt; Редактирование категорий</h1>
 	</div>
 
 	<div class="section error-messages">
@@ -12,24 +12,63 @@
 
 	<div class="section new-user-form-container">
 
-		%= form_for '' => (method => 'post') => begin
-			<table class="layout">
-				<tr>
-					<td class="ta-right">
-						<label>Имя Фамилия<b>*</b>:</label>
-					</td>
-					<td>
-						<input type="text" name="name" class="wide" size=40 value="<%= stash 'name' %>" />
-					</td>
-				</tr>
-
-				<tr>
-					<td colspan=2 class="ta-right">
-						<button type="submit" name="submit" value=1>Добавить</button>
-					</td>
-				</tr>
-			</table>
+		%= form_for '/admin/categories/save' => (method => 'post') => begin
+        
+        % foreach my $cat (@$categories) {
+            <p><strong><%= $cat->{name} %></strong> &emsp;&emsp; <input type="checkbox" name="delete_cat" value="<%= $cat->{_id} %>">удалить<br>
+            % foreach my $subcat (@{$cat->{subcats}}) {
+                &emsp;&mdash;&emsp;<%= $subcat->{name} %> &emsp;&emsp; <input type="checkbox" name="delete_subcat" value="<%= $cat->{_id}.':'.$subcat->{_id} %>"><br>
+            % }
+                &emsp;&mdash;&emsp;<input type="text" name="new_subcat:<%= $cat->{_id} %>" value="">
+            <p>
+        % }
+        <p>
+            Новая категория:<input type="text" name="new_cat" value="">
+        </p>
+                
+        <input type="submit" name="save" value="Сохранить">
 		% end
 
 	</div>
 </div>
+
+<!--
+<p id="add-image-upload-fields-wrapper">
+<span id="add-image-upload-fields">Добавить поля для заливки (8 штук!)</span>
+</p>
+
+<script type="text/javascript">
+    
+    $( "#add-image-upload-fields" ).click( function () {
+
+    var more_fields =
+        '<tr>' +
+            '<td width="100"></td>' +
+            '<td>' +
+            '<input type="text" name="image_descr" size=40/>' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" name="image_source" size=40/>' +
+            '</td>' +
+            '<td>' +
+            '<input type="file" name="image"/>' +
+            '</td>' +
+        '</tr>';
+
+    var $tbody = $("#new_upload_fields tbody");
+
+    function jack_in( to, what ) {
+    var $what = $(what);
+    to.append( what );
+    }
+
+    for ( var z = 0; z < 8; z++ ) {
+    jack_in( $tbody, more_fields );
+    console.log(z);
+    // $tbody.append( $more_fields );
+    }
+
+    });
+
+</script>
+-->

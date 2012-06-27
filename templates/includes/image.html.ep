@@ -1,8 +1,5 @@
-<div class="image-container">
-	<div class="image-outer-wrapper">
-		<div class="image-inner-wrapper"><img src="<%= $img_url %>" /></div>
-	</div>
-	<div class="caption-wrapper">
-		<p class="caption"><%== $img_descr %><%== $img_source ? " ($img_source)" : '' %> </p>
-	</div>
-</div>
+<span class='img__description'>
+<img src='<%= $img_url %>' />
+<%== $img_descr %>
+</span>
+

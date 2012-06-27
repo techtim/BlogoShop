@@ -1,130 +1,78 @@
 % layout 'article';
-% title $name.': МегаФон Спорт'.($cut ? " $cuts_alias->{$cut}" : '');
+% title $name;
 
-<div id='content' class='clearfloat article'>
-	<div class='back clearfloat'>
-		<div class='wrap'>
-			<div class="col-main">
+%= include 'includes/left_bar'
 
-				<div class="article-header">
-					<h1><%== stash 'name' %></h1>
-				</div>
-				<!-- /article_header -->
+<div class='content__section post__page'>
+    <h2><%= stash 'name' %></h2>
+    
+    <%== stash 'article_text_rendered' %>
+    
+    <div class='tags__section'>
+    % if (ref $tags eq 'ARRAY') {
+        % my $ct = 0;
+        % foreach (@$tags) {
+        <a href='/tag/<%= $_ %>'><%= $_ %></a><%= ',' if $tags->[-1] ne $_ %>
+        % } }
+    </div>    
+    <div class='clear'></div>
+    
+    <ul class='socials__section clearfloat'>
+    	<li class='fb'>
+    		<div id="fb-root"></div>
+		    <fb:like send="false" layout="button_count" width="160" show_faces="false"></fb:like>
+			<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+    	</li>
+    	<li class='vk'>
+    		<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
 
-				<div class="article-body">
+			<script type="text/javascript">
+				VK.init({apiId: 3005244, onlyWidgets: true});
+				VK.Widgets.Like("vk_like", {type: "button", height: 20});
+			</script>
 
-					<p class="metadata">
-						% if (ref $author_info eq 'HASH') {
-							<img src="/i/content/author-icon.png" class="author-icon"/>
-							<span class="name"><%== $author_info->{name} %></span><span>, </span>
-						% }
-						% if (ref $source_info eq 'HASH') {
-							<span class="name"><%== $source_info->{name} %></span><span>, </span>
-						% }
-						<span href="#" class="timestamp"><%== stash 'date' %></span>
-					</p>
-
-					<p class="article-lead-text bold-and-violet"><%== stash 'preview_text' %></p>
-					<!-- lead-for-twitter -->
-
-					<div class="article-text"><%== stash 'article_text' %></div>
-					<!-- /article-text -->
-				</div>
-				<!-- /atricle_body -->
-
-				<div class="sharing-tools">
-				  <p>
-					<!-- NB: скрипт в шаблоне layouts/article.html.ep -->
-					<div class="yashare-auto-init"
-						data-yashareL10n="ru"
-						data-yashareType="link"
-						data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,yaru,moimir,lj">
-					</div>
-
-				  </p>
-				</div>
-				<!-- /sharing_tools -->
-
-				<div class="comments" id="comments">
-
-					<h3 class="bold-and-violet section-header">Комментарии:</h3>
-
-                    %= include 'includes/fanat_com_drop_point_anchor'				                       				   
-				   				    
-				</div>
-				<!-- /comments -->
-
-			</div>
-			<!-- /main_content -->
-
-			<div class="col-sidebar">
-
-				<div class="megafon-articles sidebar-section sidebar-section-first">
-					<div class="sidebar-section-wrapper">
-						<ul class="link-list">
-							<li><a href="<%= $host %>/sochi2014/activities">Большие игры МегаФона</a></li>
-							<li><a href="http://moscow.megafon.ru/services/joy/video_portal.html">Трансляции матчей КХЛ в твоем мобильном</a></li>
-							<li><a href="<%= $host %>/activities/flagmanskij_salon_megafon_v_gume">Флагманский салон МегаФона в ГУМе</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="banners sidebar-section">
-					<div class="sidebar-section-wrapper">
-						<p class="title"><span class="shifted-up">Реклама</span></p>
-						<div class="banner">
-							<!--AdFox START-->
-								<script type="text/javascript">
-								<!--
-								if (typeof(pr) == 'undefined') { var pr = Math.floor(Math.random() * 1000000); }
-								var DIVID = 'banner_' + pr;
-								if (typeof(document.referrer) != 'undefined') {
-								  if (typeof(afReferrer) == 'undefined') {
-									afReferrer = escape(document.referrer);
-								  }
-								} else {
-								  afReferrer = '';
-								}
-								var addate = new Date();
-
-								document.write('<div id="' + DIVID + '"></div>');
-
-								if($.browser.msie){
-									document.write('<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=emjf&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>');
-								}else{
-									$(function(){
-										var html = ''
-										html += '<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=emjf&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>'
-										$('#'+ DIVID).html(writeCapture.sanitize(html))
-									})
-								}
-								// -->
-								</script>
-							<!--AdFox END-->
-						</div>
-					</div>
-				</div>
-
-			% if (ref $related_articles eq 'ARRAY') {
-				<div class="related-articles sidebar-section sidebar-section-last">
-				    <div class="sidebar-section-wrapper">
-					<h3 class="bold-and-violet">Читайте далее:</h3>
-					<ul>
-			% 	foreach my $article (@$related_articles) {
-			% 	next if !$article->{alias};
-						<li>
-							<a class="article-link" href="/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>"><%= $article->{name} %></a><span class="timestamp"><%= $article->{date} ? ' '.$article->{date} : '' %></span>
-						</li>
-			% 	}
-					</ul>
-				    </div>
-				</div>
-			% }
-
-			</div>
-			<!-- /sidebar-right -->
-
-			<div class="clearfloat"></div>
-		</div>
-	</div>
+			<div id="vk_like"></div>
+    	</li>
+    	<li class='gp'>
+    		<g:plusone size='medium' annotation="inline" width="160" href="магазин Хохловка"></g:plusone>
+			<script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/plusone.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+    	</li>
+    </ul>
+    
+    <ul class='post__navigation clearfloat'>
+       	% if ($prev_article->{name}) {
+        <li>
+            <a class='prev' href='/<%== join '/', $prev_article->{type}, $prev_article->{alias} %>' class='clearfloat'>
+				<%= $prev_article->{name} %>
+            </a>
+        </li>
+        % }
+        % if ($next_article -> {name}) {
+        <li class='next'>
+            <a class='next' href='/<%== join '/', $next_article->{type}, $next_article->{alias} %>' class='clearfloat'>
+            	<%= $next_article->{name} %>
+            </a>
+        </li>
+        % }
+    </ul>
+    <div class='clear'></div>
+    <ul class='blogs__section'>
+        % foreach my $article (@$related_articles) {
+            %= include 'includes/preview_article', article => $article
+        % }
+    </ul>
 </div>
+
+<div class='clear'></div>

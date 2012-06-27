@@ -1,127 +1,18 @@
-<div class='wrap-main <%== $cut eq '' ? 'main' : $cut  %>'>
-	
-				
-			<div id='top__menu' class='offsets-fanat-widget fixed'>
-				<ul class='wrap'>
+<div class='header__section clearfloat'>
+    <h1><a href='/'></a></h1>
 
-% if (stash 'viktorina') {
-	<li class='quiz viktorina'>
-% }else{
-	<li class='quiz '>
-% }					
-						<a href='/big_games'>Большие игры МегаФона</a>
-					</li>
-				
-				</ul>
-			</div>
-			
-			<div id='header' class='clearfloat'>
-% if (stash 'viktorina') {
-<div class='wrap'>
-	<h1><a href='/'>Мегафон Спорт</a></h1>
-	<a class='megafon__logo__sochi logo__block' href='http://www.megafon.ru'>Мегафон. Будущее зависит от тебя</a>
-</div>
-% } elsif (!$cut || $cut eq '') {
-<div class='back'>
-	<div class='wrap'>
-		<h1><a href='/'>Мегафон Спорт</a></h1>
-		<a class='megafon-logo-blue logo-block' href='http://www.megafon.ru'>Мегафон. Будущее зависит от тебя</a>
-	</div>
-</div>
-% } elsif ($cut eq 'euro2012') { 
-	<div class='back'>
-		<div class='wrap'>
-			<h1><a href='/'>Мегафон Спорт</a></h1>
-			<a class='megafon-logo logo-block' href='http://www.megafon.ru'>Мегафон. Будущее зависит от тебя</a>
-		</div>
-	</div>
-% } elsif ($cut eq 'london2012') {
-	<div class='wrap'>
-		<h1><a href='/'>Мегафон Спорт</a></h1>
-		<a class='megafon-logo-blue logo-block' href='http://www.megafon.ru'>Мегафон. Будущее зависит от тебя</a>
-	</div>
-% } elsif ($cut eq 'kazan2013') {
-<div class='back'>
-	<div class='wrap'>
-		<h1><a href='/'>Мегафон Спорт</a></h1>
-		<ul class='logos logo-block'>
-			<li class='item'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/kazan.png' alt='' />
-				</a>
-			</li>
-			<li class='delimeter'></li>
-			<li class='megafon'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/megafon.png' alt='' />
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>			
-% } elsif ($cut eq 'sochi2014') {
-<div class='back'>
-	<div class='wrap'>
-		<h1><a href='/'>Мегафон Спорт</a></h1>
-		<a class='megafon-logo-sochi logo-block' href='http://www.megafon.ru'>Мегафон. Будущее зависит от тебя</a>
-	</div>
-</div>
-% } elsif ($cut eq 'football') {
-<div class='back'>
-	<div class='wrap'>
-		<h1><a href='/'>Мегафон Спорт</a></h1>
-		<ul class='logos logo-block'>
-			<li class='item'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/football.png' alt='' />
-				</a>
-			</li>
-			<li class='delimeter'></li>
-			<li class='megafon'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/megafon.png' alt='' />
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>
-% } elsif ($cut eq 'hockey') {
-<div class='back'>
-	<div class='wrap'>
-		<h1><a href='/'>Мегафон Спорт</a></h1>
-		<ul class='logos logo-block'>
-			<li class='item'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/hockey.png' alt='' />
-				</a>
-			</li>
-			<li class='delimeter'></li>
-			<li class='megafon'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/megafon.png' alt='' />
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>
-% } elsif ($cut eq 'biathlon') {
-<div class='back'>
-	<div class='wrap'>
-		<h1><a href='/'>Мегафон Спорт</a></h1>
-		<ul class='logos logo-block'>
-			<li class='item'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/biathlon.png' alt='' />
-				</a>
-			</li>
-			<li class='delimeter'></li>
-			<li class='megafon'>
-				<a href='http://www.megafon.ru'>
-					<img src='/i/header/logos/megafon.png' alt='' />
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>
-% } 
+    <div class='contacts__section fr'>
+        <div class='row'>
+            <label>АДРЕС:</label>
+            МОСКВА, ХОХЛОВСКИЙ ПЕРЕУЛОК 7
+        </div>
+        <div class='row'>
+            <label>ТЕЛЕФОН:</label>
+            +7 (926) 930 90-05
+        </div>
+        <div class='row'>
+            <label>ЭЛЕКТРОПОЧТА:</label>
+            XOXLOVEKA@YANDEX.RU
+        </div>
+    </div>
 </div>

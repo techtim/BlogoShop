@@ -8,20 +8,7 @@
 		<h1>
 			<a href="/admin">Админка</a>
 
-			% if ( $cut || $rubric ) {
-			   &gt; <a href="/admin/articles">Список статей</a> &gt;
-
-			   <i><%= $cut ? "'" . $cuts_alias->{$cut} . "'" : "" %></i>
-
-			   % if ( $cut && $rubric ) {
-				   <span>+</span>
-			   % }
-
-			   <i><%= $rubric ? "'" . $rubrics_alias->{$rubric} . "'" : "" %></i>
-
-			% } else {
-			   &gt; Список статей
-			% }
+			&gt; Список статей
 
 		</h1>
 
@@ -43,12 +30,12 @@
 				<td class="filter">
 					%= form_for '' => (method => 'get') => begin
 						<span>
-							Срез:
-							%= include 'includes/select_block', name => 'cut', select => $cut, options => stash 'cuts'
+							Тип:
+							%= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
 						</span>
 						<span>
-							Рубрика:
-							%= include 'includes/select_block', name => 'rubric', select => $rubric, options => stash 'rubrics'
+                            Таг:
+							<input type="text" name="tag" value="<%=stash 'tag' %>">
 						</span>
 						<button type="submit" name="submit" value="1">Показать</button>
 					% end
@@ -60,7 +47,7 @@
 
     <div class='pager'>
 	    % foreach my $i (1..$pages) {
-	    	<a href='?<%== ($cut ? "cut=$cut\&amp;" : '') . ($rubric ? "rubric=$rubric\&amp;" : '')."page=$i"%>'><%= $i %></a>
+	    	<a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
 	    % }
 	</div>
 
@@ -69,17 +56,17 @@
 			<thead>
 				<tr>
 					<td colspan="2">Название</td>
-					<td>Срез</td>
+					<td>Тип</td>
 					<td>*</td>
-					<td>Рубрика</td>
+					<td>Брэнд</td>
 				</tr>
 			</thead>
 			<tbody>
 				% foreach my $article (@$articles) {
 					<tr>
 						<td>
-							<a href="/<%== join '/', $article->{rubric}, $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'" class="<%= !$article->{active} ? 'article-link-bold' : '' %>">
-								<%= $article->{name} %> <%= ref $article->{author_info} eq 'HASH' ? '('.$article->{author_info}->{name}.')' : '' %>
+							<a href="/<%== join '/', $article->{type}, $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'" class="<%= !$article->{active} ? 'article-link-bold' : '' %>">
+								<%= $article->{name} %>
 							</a>
 						</td>
 						<td>
@@ -88,19 +75,19 @@
 							% }
 						</td>
 						<td>
-							% if ( $article->{cut} ) {
-		    					<a href="/admin/articles?cut=<%= $article->{cut} %>"><%= $cuts_alias->{$article->{cut}} %></a>
-		   					% }
-						</td>
-						<td>
-							% if ( $article->{cut} && $article->{rubric} ) {
-								<a href="/admin/articles?cut=<%= $article->{cut} %>&rubric=<%= $article->{rubric} %>">&</a>
+							% if ( $article->{type} ) {
+                                <a href="/admin/articles?type=<%= $article->{type} %>"><%= $types_alias->{$article->{type}} %></a>
 							% }
 						</td>
 						<td>
-							% if ( $article->{rubric} ) {
-								<a href="/admin/articles?rubric=<%= $article->{rubric} %>"><%= $rubrics_alias->{$article->{rubric}} %></a>
+							% if ( defined $article->{tag} && ref $article->{tag} eq 'ARRAY') {
+                                % foreach my $t (@{$article->{tag}}) {
+                                    <a href="/admin/articles?tag=<%= $t %>"><%= $t %></a>
+                                % }
 							% }
+						</td>
+						<td>
+							
 						</td>
 					</tr>
 				% }
@@ -110,11 +97,9 @@
     <!-- /article-list -->
 
     <div class='pager'>
-
-		% foreach my $i (1..$pages) {
-			<a href='?<%== ($cut ? "cut=$cut\&amp;" : '') . ( $rubric ? "rubric=$rubric\&amp;" : '') . "page=$i" %>'><%= $i %></a>
-		% }
-
-	</div>
+        % foreach my $i (1..$pages) {
+            <a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
+        % }
+    </div>
 
 </div>

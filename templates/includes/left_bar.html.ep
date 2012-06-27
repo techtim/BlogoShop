@@ -1,0 +1,41 @@
+<div class='sidebar__section fl'>
+    <h2>КОРНЕРЫ</h2>
+    % foreach my $cat (@$categories) {
+    <ul>
+        <li class='title'><%= $cat->{name} %></li>
+        % foreach my $brand (@{$list_brands->{$cat->{_id}}}) {
+        <li><a href='/brand/<%= $brand->{_id}%>'><%= $brand->{name} %></a></li>
+        % }
+    </ul>
+    % }
+
+    <div class='subscribe__section'>
+        %= form_for '/subscribe' => (method => 'post') => begin
+        <label for='subsribe'>
+            Узнавайте первыми о скидках,<br/> 
+            спецпредложениях  и других интересных<br/>
+            акциях магазина ХОХЛОВКА:
+        </label>
+
+        <input type='text' name="subscribe" id='subscribe' placeholder="e-mail"/>
+        <input type='submit' value='подписаться' />
+        %= end
+    </div>
+    <div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-like-box" 
+    		data-href="http://www.facebook.com/xoxloveka" 
+    		data-width="260" 
+    		data-height="288" 
+    		data-show-faces="true" 
+    		data-border-color="C1C1C1" 
+    		data-stream="false" 
+    		data-header="false">
+    </div>
+</div>
