@@ -1,53 +1,32 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="ru-RU" xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
 		<meta charset='utf-8' />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-		<!-- data for Yandex.Metrika counter -->
-		<meta property="og:site_name" content="МегаФон Спорт" />
-		<meta property="og:type" content="article" />
-		<meta property="og:title" content="<%= title %>" />
-		<meta property="og:url" content="<%== $host . '/' . ($cut ? $cut.'/' : '') . join '/', $rubric, $alias %>" />
-		<meta property="og:description" content="<%= stash 'preview_text' %>" />
-		% if (stash 'preview_image') {
-    		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $rubric, $alias, stash 'preview_image' %>" />
-		% }
-		<meta property="fb:admins" content="1345620696" />
-		<!-- /data for Yandex.Metrika counter -->
-		
-		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
 		<title><%= title %></title>
-		
 		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/single_article_style.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
-	    %= include 'includes/fanat_com_style'
-	    %= include 'includes/fanat_com_jquery'
-	    %= include 'includes/fanat_com_script'
-		<script type='text/javascript' src="/j/fotorama.js"></script>
-		<script type='text/javascript' src='/j/infinitescroll.js'></script>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<script src="https://www.google.com/jsapi?key=ABQIAAAAq40cyT39xbh4SxII4iAAQhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQq6XU15uRy_aHLn2Ie3000LpSbxg" type="text/javascript"></script>
+		<script type='text/javascript'>
+			google.load("jquery", "1.7.1");
+            </script>
 		<script type='text/javascript' src='/j/j.js'></script>
-		<script type='text/javascript' src='/j/j.article.js'></script>
-		<script type="text/javascript" src="/j/swfobject.js"></script>
-		<script type="text/javascript" src="/j/banners-lazy-load.js"></script>
-		<script type="text/javascript" src="/j/flowplayer-3.2.6.min.js"></script>
-		<%= jquery_ajax_csrf_protection %>
 	</head>
-	<body class="<%== $cut %>">
-		%= include 'includes/header'
-		%= include 'includes/top', cuts => stash 'cuts'
-		<%= content %>
+	
+	<body>
+        <div class='wrap clearfloat'>
+            %= include 'includes/header'
+            %= include 'includes/top'
+            <%= content %>
+            
+        </div>
 
-		<div id='footer' class='wrap'>
-		 	<p>© 2011 ОАО «МегаФон». МегаФон Генеральный партнер XXII Олимпийских зимних игр 2014 года в городе Сочи.</p>
-		 	<p>© 2011 «МегаФон Спорт» поддержка и развитие — компания <a href='http://sup.com' target='_blank'>SUP Media</a>.</p>
-		</div>
+		%= include 'includes/footer'
 
         <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
         %= include 'includes/google_analytics'
-        %= include 'includes/yandex_metrika'
-        %= include 'includes/adriver'
+        %# = include 'includes/yandex_metrika'
+        %# = include 'includes/adriver'
 	</body>
 </html>

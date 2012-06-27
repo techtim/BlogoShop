@@ -8,7 +8,7 @@ use utf8;
 
 use File::Path qw(make_path remove_tree);
 use Encode;
-use constant ARTICLE_PARAMS => qw( active alias name cut rubric preview_size preview_type preview_text preview_image preview_image_wide article_text images source author foto article_time article_date);
+use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date);
 
 sub get {
 	my $self = shift;
@@ -38,8 +38,8 @@ sub post {
 # Utils
 sub add_params {
 	my $self = shift;
-	$self->stash(sources => $self->articles->get_sources());
-	$self->stash(authors => $self->articles->get_authors());
+	$self->stash(brands => [$self->app->db->brands->find()->all] || []);
+	$self->stash(tags => (map {$_->{tag}} $self->app->db->tags->find()->sort({_id => 1})->all) || [] );
 }
 
 sub check_input {
@@ -74,29 +74,16 @@ sub check_input {
 	if ($self->{collection} eq 'articles') {
 		# treat like article with collection = 'articles'
 
-		$article->{preview_size} = 50 if !$article->{preview_size};
 		$article->{preview_image_wide} = '' if !$article->{preview_image_wide};
 		$article->{preview_image} = '' if !$article->{preview_image};
 
-		$article->{cut_alias} = $self->articles->get_cuts($article->{cut});
-		$article->{rubric_alias} = $self->articles->get_rubrics($article->{rubric}) if $article->{rubric};
+		my @tags = $article->{tags} ? split /\s*[;,]\s*/ , $article->{tags} : ();
+        $article->{tags} = \@tags;
 
-		$article->{polls} = $self->utils->get_polls($article);
-	
-		$article->{source_info} = $self->articles->get_sources($article->{source}) if $article->{source};
-
-		push @$error_message, 'no_rubric' if !$article->{rubric};
-		push @$error_message, 'no_source' if !$article->{source_info};
+		push @$error_message, 'no_type' if !$article->{type};
+#		push @$error_message, 'no_source' if !$article->{source_info};
 		push @$error_message, 'no_preview_text' if !$article->{preview_text} || $article->{preview_text} eq '';
 #		push @$error_message, 'no_author' if !$article->{author_info};
-	} elsif ($self->{collection} eq 'big_games_news'){
-		$article->{preview_image} = '' if !$article->{preview_image};
-
-		$article->{city} = $self->app->db->big_games_cities->find_one({_id =>  $self->req->param('city')})
-			if $self->req->param('city') && $self->req->param('city') =~ /([\w]+)/i;
-
-		push @$error_message, 'no_city' if !$article->{city};
-		push @$error_message, 'no_preview_text' if !$article->{preview_text} || $article->{preview_text} eq '';
 	} else {
 		push @$error_message, 'no_author' if !$article->{author_info};
 	}
@@ -140,8 +127,9 @@ sub get_images {
 		$image->{tag} =~ s![^\w\d\.\_]+!!g;
 
 		my $folder_path = $self->config('image_dir').
-			($article->{rubric} ? $article->{rubric} : $self->config('default_img_dir')).'/'.
+			($article->{type} ? $article->{type} : $self->config('default_img_dir')).'/'.
 			($article->{alias} ? $article->{alias} : $self->config('default_img_dir')).'/';
+        
 		make_path($folder_path) or die 'Error on creating article folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
 		$file->move_to($folder_path.$image->{tag});
 
@@ -163,8 +151,6 @@ sub add {
 	$self->add_params();
 
 	$self->stash($_ => '') foreach ARTICLE_PARAMS;
- 	$self->stash(cities => [$self->app->db->big_games_cities->find({})->sort({'_id' => 1})->all], city => '')
- 		if $self->{'collection'} eq 'big_games_news';
 
 	$self->render(
 		action_type => 'add',
@@ -185,7 +171,7 @@ sub create {
 
 	$self->articles->block_article($id, $self->session('admin')->{_id}, $self->{collection});
 
-	$self->utils->update_active_rubrics($self) if $self->{'collection'} eq 'articles';
+#	$self->utils->update_active_rubrics($self) if $self->{'collection'} eq 'articles';
 
 	return $self->redirect_to('/admin/' . ($self->{collection} ne 'articles' ? $self->{collection} : 'article') . '/edit/'.$id) if $self->stash('error_message');
 	return $self->redirect_to('/admin/' . ($self->{collection} ne 'articles' ? $self->{collection} : 'article') . '/edit/'.$id) if $self->req->param('update');
@@ -214,11 +200,10 @@ sub edit {
 	$self->articles->block_article($self->stash('id'), $self->session('admin')->{_id}, $self->{collection});
 	$article->{$_} = ($article->{$_} ? $article->{$_} : '') foreach ARTICLE_PARAMS;
 	($article->{article_date}, $article->{article_time}) = $self->utils->date_time_from_mongoid($self->stash('id'));
+    $article->{tag} = join '; ', @{$article->{tag}} if ref $article->{tag} eq 'ARRAY';
 
 	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
 
-	$self->stash(cities => [$self->app->db->big_games_cities->find({})->sort({'_id' => 1})->all], city => '')
- 		if $self->{'collection'} eq 'big_games_news';
 
 	$self->render(
 		%$article,
@@ -255,7 +240,7 @@ sub update {
 
 		my $id = $self->articles->update_article($self->stash('id'), $article, $self->{collection}); # id can change when change article time
 
-		$self->utils->update_active_rubrics($self) if $self->{collection} eq 'articles';
+#		$self->utils->update_active_rubrics($self) if $self->{collection} eq 'articles';
 
 		$self->flash(message => 'article_updated');
 		if ($self->req->param('update')) {
@@ -276,8 +261,8 @@ sub list {
 	my $filter = {};
 	my $page = $self->req->param('page') ? $self->req->param('page') : 1;
 
-	$filter->{cut} = $self->req->param('cut') if $self->req->param('cut');
-	$filter->{rubric} = $self->req->param('rubric') if $self->req->param('rubric'); 
+	$filter->{tag} = $self->req->param('tag') if $self->req->param('tag');
+	$filter->{brand} = $self->req->param('brand') if $self->req->param('brand'); 
 	$self->stash('message' => $self->flash('message')) if $self->flash('message');
 	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
 
@@ -289,8 +274,10 @@ sub list {
 	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
 
 	return $self->render(
-		cut => $filter->{cut} || '', 
-		rubric => $filter->{rubric} || '',
+		tag => $filter->{tag} || '', 
+        type => $filter->{type} || '',
+		brand => $filter->{brand} || '',
+        
 		articles => \@arts,
 		pages => $pages || 0,
 		template => 'admin/list_articles',

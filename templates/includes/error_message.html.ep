@@ -65,6 +65,22 @@
 	Укажите автора
 % }
 
+% if ($error_message eq 'no_name') {
+    Заполните название
+% }
+
+% if ($error_message eq 'no_descr') {
+    Заполните описание
+% }
+
+% if ($error_message eq 'no_logo') {
+    Добавьте лого
+% }
+
+% if ($error_message eq 'no_category') {
+    Укажите категорию
+% }
+
 % if ($error_message eq 'bad_author_name') {
 	Имя автора должно содержать 2 слова и 1 пробел (Александр Петров)
 % }

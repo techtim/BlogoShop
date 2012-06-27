@@ -1,27 +1,50 @@
 % layout 'default';
-% title 'Xoxloveka'.($cut ? " $cuts_alias->{$cut}" : '');
+% title 'магазин Хохловка';
 
-<div id='content' class='clearfloat'>
-	<div class='back clearfloat'>
-		<div class='wrap'>
+%= include 'includes/left_bar'
+
+<div class='content__section<%= ' post__page' if $brand %>'>
+    % if ($brand) {
+        <h2><%= $brand->{name} %></h2>
+        <p><img src="<%= $brand->{logo} %>"><p>
+        <p><%== $brand->{descr} %></p>
+    % } else {
+    <div class='carousel'>
+        <ul class='items'>
+            <li>
+                <a href='#'>
+                    <img src='/i/tmp/carousel-1.jpg' alt='' />
+                </a>
+            </li>
+        </ul>
+        <ul class='controls'></ul>
+    </div>
+
+    <div class='blogs__section clearfloat'>
+        <div class='caption__section'>
+            <h2>Блоги</h2>
+        </div>
+        <ul>
+            %= include 'includes/list_articles'
+        </ul>
+    </div>
+    % }
+</div>
+
+<div class='clear'></div>
 			
-			%= include 'includes/list_articles'
 
-		</div>
-
+<!--
 		<ul id='pagination' class='clearfloat'>
 		% if (@$articles > 0 && $articles->[0]->{show_prev}) {
-			<li class='left'><a href='/<%== ($cut ? "$cut/" : '') . ($rubric ? "$rubric/" : '') . (join '/', 'prev', $articles->[0]->{_id}) %>'>Назад</a></li>
+			<li class='left'><a href='/<%== ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . (join '/', 'prev', $articles->[0]->{_id}) %>'>Назад</a></li>
 		% } else {
 			<li class='left'><a class='disabled'>Назад</a></li>
 		% }
 		% if (@$articles > 0 && $articles->[-1]->{show_fwd}) {
-			<li class='right'><a href='/<%== ($cut ? "$cut/" : '') . ($rubric ? "$rubric/" : '') . join '/', 'next', $articles->[-1]->{_id} %>'>Вперед</a></li>
+			<li class='right'><a href='/<%== ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . join '/', 'next', $articles->[-1]->{_id} %>'>Вперед</a></li>
 		% } else {
 			<li class='right'><a class='disabled'>Вперед</a></li>
 		% }
 		</ul>
-
-	</div>
-
-</div>
+-->

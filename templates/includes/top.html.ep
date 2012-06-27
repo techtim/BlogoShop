@@ -1,39 +1,17 @@
-% if ($cuts && $rubrics) {
-
-<div id='main-nav' class="offsets-fanat-widget">
-	<ul class='wrap'>
-		<li class='home'>
-			<a href='/' title='На главную'></a>
-		</li>
-
-% foreach my $elem (@$cuts) {
-%
-		<li class="<%= ($elem->{_id} eq $cuts->[0]->{_id} ? 'first ' : '') . $elem->{_id} . ($elem->{_id} eq $cut ? ' current' : '') %>">
-			<a href="/<%= $elem->{_id} %>" title='<%= $elem->{name} %>' class="<%= ($elem->{_id} eq $cuts->[0]->{_id} ? 'first ' : '') . $elem->{_id} . ($elem->{_id} eq $cut ? ' current' : '') %>">
-				<span class='text'><%= $elem->{name} %></span>
-				<span class='back'></span>
-			</a>
-		</li>
-%
-% }
-	</ul>
+<div class='fixed__navigation__helper'>
+	<div class='navigation__section clearfloat'>
+	    <ul>
+	        <li class='item__1'><a href='/'>БЛОГ</a></li>
+	        <li class='item__2'><a href='/map'>ГДЕ МЫ</a></li>
+	        <li class='item__3'><a href='/about'>КТО МЫ</a></li>
+	        <li class='item__4'><a href='#' class='disabled'>ONLINE-МАГАЗИН</a></li>
+	        <li class='item__5'><a href='/delivery'>ДОСТАВКА</a></li>
+	        <li class='item__6'><a href='/pay'>ОПЛАТА</a></li>
+	        <li class='item__7'><a href='/special'>SPECIAL</a></li>
+	    </ul>
+	
+	    <div class='shopping__cart__section empty'>
+	        <!--КОРЗИНА: ПУСТО-->
+	    </div>
+	</div>
 </div>
-<div id='sub-nav' class="offsets-fanat-widget">
-	<ul class='wrap'>
-
-% foreach my $elem (@$rubrics) {
-		<li <%= $elem->{_id} eq $rubric ? 'class=current' : '' %>> 
-		<a title='<%= $elem->{name} %>'
-%		if ($active_rubrics_in_cuts->{ ($cut ? $cut : '').':'.$elem->{_id} }) {
-			 href="/<%= ($cut ? $cut.'/' : '') . ($elem->{_id} eq $rubric ? '' : $elem->{_id}) %>"
-%		} else {
-			class='disabled'
-%		}
-		><%= $elem->{name} %></a>			
-		</li>
-		
-% }
-	</ul>
-</div>
-% }
-

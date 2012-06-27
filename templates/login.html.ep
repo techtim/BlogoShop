@@ -5,7 +5,7 @@
     <div class="main-heading section">
         <h1>Вход в систему управления сайтом</h1> 
     </div>
-    
+
     <div class="section">
         %= include 'includes/error_message', error_messages => stash 'error_message'
     </div>
@@ -13,7 +13,6 @@
     <div  class="section">
         
         %= form_for '' => (method => 'post') => begin
-        	<%== $recaptcha_html %>
             <div class="clearfix">
                 <label for="login">Login:</label>
                 <div class="input">
