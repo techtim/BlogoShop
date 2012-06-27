@@ -1,0 +1,21 @@
+<div class='footer__section'>
+    <div class='wrap clearfloat'>
+        <p class='copyright'>2010-2012 &copy; магазин хохловка</p>
+
+        <div class='contacts'>
+            <p>МОСКВА, М. КИТАЙ-ГОРОД, ХОХЛОВСКИЙ 7, <span>ТЕЛЕФОН: +7 (926) 930 90-05</sapn></p>
+
+            <ul>
+                <li class='fb'>
+                    <a href='http://www.facebook.com/xoxloveka'>facebook</a>
+                </li>
+                <li class='vk'>
+                    <a href='http://vk.com/id98564642'>вконтакте</a>
+                </li>
+                <li class='lj'>
+                    <a href='http://xoxloveka-ru.livejournal.com/'>ЖЖ</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

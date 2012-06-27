@@ -1,0 +1,229 @@
+% layout 'admin';
+% title 'Редактирование брендов';
+
+<div class="admin-container">
+
+	<div class="main-heading section">
+
+		<h1>
+			<a href="/admin">Админка</a>
+			&gt; <a href="/admin/brands">Редактирование брендов</a>
+            <%== '&gt; '.$name if $do eq 'edit' %>
+		</h1>
+
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+
+		%= include 'includes/info_message', message => stash 'message'
+
+	</div>
+
+	<div class="section article-list">
+        %= form_for '/admin/brands/edit' => (method => 'post', enctype =>"multipart/form-data") => begin
+		<table class="blackhead">
+			<thead>
+				<tr>
+					<td colspan="1">Бренд</td>
+					<td colspan="1">Категория</td>
+					<td colspan="1">Лого</td>
+					<td colspan="1">Редактировать</td>
+				</tr>
+			</thead>
+			<tbody>
+				% foreach my $brand (@$brands) {
+					<tr>
+						<td>
+							<a href="/brand/<%= $brand->{name} %>" TARGET='_blank' title="просмотреть '<%= $brand->{name} %>'">
+								<%= $brand->{name} %>
+							</a>
+						</td>
+						<td>
+							<%= $brand->{category}->{name} if $brand->{category} %>
+						</td>
+						<td>
+							<img width="160px" src="<%= $brand->{logo} %>">
+						</td>
+						<td>
+							<a href="/admin/brands/edit/<%= $brand->{_id} %>">
+                                <button type="button" ><%= $brand->{name} %></button>
+                            </a>
+						</td>
+					</tr>
+				% }
+			</tbody>
+		</table>
+        % end
+    </div>
+    
+    <div class="article-form-container">
+        
+    	<!-- start FORM -->
+	    %= form_for '/admin/brands/save' => (method => 'post', enctype =>"multipart/form-data") => begin
+        
+        <div class="section article-title">
+            % if ($do eq 'edit') {
+                <h3>Редактирование бренда</h3>
+                <input type="hidden" name="id" value="<%= stash '_id' %>">
+            % } else {
+                <h3>Добавление бренда</h3>    
+            % }
+            <p>
+                <b>Название:</b></br/>
+                <input type="text" name="name" size="40" value="<%= stash 'name' %>" style="font-size: 18px; font-weight: bold;"/>
+            </p>
+            <p>
+                <b>Категория:</b></br/>
+                    %= include 'includes/select_block', name => 'category', select => (ref $category eq 'HASH' ? $category->{_id} : ''), options => stash 'categories'
+            </p>
+            <p>
+                <b>Описание:</b></br/>
+                <textarea type="text" name="descr" cols=90 rows=15><%= stash 'descr' %></textarea>
+            </p>
+            <p>
+                <b>Лого:</b>
+                % if ($logo) {
+                    <input type="hidden" name="logo_loaded" value="<%= $logo %>">
+                    <img src="<%= $logo %>"><br>
+                % }
+                    <input type="file" name="logo" /> <%= $logo ? 'изменить': 'добавить' %>
+            </p>
+        </div>
+        
+        <!--
+        <div class="section loaded-images">
+            <h3>Загруженные картинки:</h3>
+            
+            <table class="blackhead">
+                
+                <thead>
+                    <tr>
+                        <td width="100">лого</td>
+                        <td width="330">описание</td>
+                        <td width="250">таг (для вставки)</td>
+                        <td>превью (уменьшено)</td>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="radio" name="logo" value="0" checked="<%== !$logo ? 'CHECKED' : '' %>">off
+                                </td>
+                        <td colspan="4"></td>
+                    </tr>
+                    
+                    % if (ref $images eq 'ARRAY') {
+                    % my $counter=1;
+                    % foreach my $image (@$images) {
+                    <tr>
+                        <td>
+                            <input type="radio" name="logo" value="<%== $image->{tag} %>" <%== $image->{tag} eq $logo ? 'CHECKED' : '' %> />
+                                </td>
+                        
+                        <td>
+                            <input type="text" name="image_descr" size=60 value="<%== $image->{descr} %>"/>
+                        </td>
+                        
+                        <td>
+                            <input type="text" size=40 value="<%== $image->{tag} %>"/>
+                            <input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
+                        </td>
+                        
+                        <td>
+                            <input type="checkbox" name="image_delete" value="<%== $image->{tag}  %>"/> <label>Удалить при сохранении статьи</label><br/>
+                            <img width="160px" src="<%== config->{image_url}.'brands/'.stash('_id').'/'.$image->{tag} %>"/>
+                        </td>
+                    </tr>
+                    % }
+                    % }
+                    
+                </tbody>
+            </table>
+            
+        </div>
+        
+        <div class="section new-images">
+            
+            <h3>Выбрать картинки для добавления:</h3>
+            
+            <table class="blackhead" id="new_upload_fields">
+                
+                <thead>
+                    <tr>
+                        <td width="100"></td>
+                        <td width="430">описание</td>
+                        <td>файл</td>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    % foreach (0..2) {
+                    <tr>
+                        <td width="100"></td>
+                        <td>
+                            <input type="text" name="image_descr" size=80/>
+                        </td>
+                        <td>
+                            <input type="file" name="image"/>
+                        </td>
+                    </tr>
+                    % }
+                </tbody>
+            </table>
+            
+            <p id="add-image-upload-fields-wrapper">
+            <span id="add-image-upload-fields">Добавить поля для заливки (8 штук!)</span>
+            </p>
+             
+        </div>
+        -->
+        <div class="section submit-buttons">
+            
+            <table class="layout">
+                <tr>
+                    <td class="delete-wrapper">
+                        % if ($do eq 'edit') {
+                        <span>
+                            <button type="submit" name="delete" value="<%= stash '_id' %>" onCLick="return confirm('Удалить бренд?');">Удалить бренд!</button>
+                        </span>
+                        % }
+                    </td>
+                    <td class="save-wrapper">
+                        <button type="submit" name="save" value="1">
+                            <%== ($do eq 'edit' ? 'Сохранить бренд' : 'Добавить бренд') %>
+                        </button>
+                        % if ($do eq 'edit') {
+                        <button type="submit" name="cancel" value="1">
+                            Отмена
+                        </button>
+                        % }
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+        <!-- /submit-buttons -->
+        
+		% end
+		<!-- end FORM -->
+        
+        <!--
+        <table class="layout">
+            <tr>
+                <td class="save-wrapper">
+                    <input type="submit" name="save" value="Сохранить">
+                </td>
+                <td class="delete-wrapper">
+                    % if ($do eq 'edit') {
+                    <span>
+                        <button type="submit" name="delete" value="1" onCLick="return confirm('Удалить 	статью?');">Удалить статью!</button>
+                    </span>
+                    % }
+                </td>
+            </tr>    
+        </table>
+         -->
+
+    
+    </div>
+
+</div>
