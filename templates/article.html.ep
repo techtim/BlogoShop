@@ -1,67 +1,130 @@
 % layout 'article';
-% title 'Хохловка: '.$name;
+% title $name.': МегаФон Спорт'.($cut ? " $cuts_alias->{$cut}" : '');
 
-%= include 'includes/left_bar'
+<div id='content' class='clearfloat article'>
+	<div class='back clearfloat'>
+		<div class='wrap'>
+			<div class="col-main">
 
-<div class='content__section post__page'>
-    <h2><%= stash 'name' %></h2>
-    <%== stash 'article_text_rendered' %>
-    <!--
-    <blockquote>
-        Друзья, у нас временно не работает сайт! Звоните и приходите в магазин. Мы работаем в обычном режиме с 12-22 и у нас много классных новых вещей!
-    </blockquote>
-    -->
-    <div class='tags__section'>
-    % if (ref $tags eq 'ARRAY') {
-        % my $ct = 0;
-        % foreach (@$tags) {
-        <a href='/tag/<%= $_ %>'><%= $_ %></a><%= ',' if $tags->[-1] ne $_ %>
-        % } }
-    </div>
-    
-    <div class='clear'></div>
-    
-    <ul class='post__navigation clearfloat'>
-        <li class='prev'>
-            <a href='#' class='clearfloat'>
-                <span></span>
-                Ситро, леденец и лесенка прощаются с вами
-            </a>
-        </li>
-        <li class='next'>
-            <a href='#' class='clearfloat'>
-                <span></span>
-                Кризис арт-бизнеса: сдача на милость государству?
-            </a>
-        </li>
-    </ul>
-    <div class='clear'></div>
-    <ul class='blogs__section'>
-        <li>
-            <a href='#'>
-                <img src='/i/tmp/blogs-preview.jpg' alt='' />
-                <span class='caption'>Кризис арт-бизнеса: сдача на милость государству?</span>
-                <span class='text'>Владимир Сорокин, Станислав Львовский, Мария Галина и Линор Горалик о том, что значил для них Брэдбери</span>
-                <span class='date'>8 июня</span>
-            </a>
-        </li>
-        <li>
-            <a href='#'>
-                <img src='/i/tmp/blogs-preview.jpg' alt='' />
-                <span class='caption'>Кризис арт-бизнеса: сдача на милость государству?</span>
-                <span class='text'>Владимир Сорокин, Станислав Львовский, Мария Галина и Линор Горалик о том, что значил для них Брэдбери</span>
-                <span class='date'>8 июня</span>
-            </a>
-        </li>
-        <li>
-            <a href='#'>
-                <img src='/i/tmp/blogs-preview.jpg' alt='' />
-                <span class='caption'>Кризис арт-бизнеса: сдача на милость государству?</span>
-                <span class='text'>Владимир Сорокин, Станислав Львовский, Мария Галина и Линор Горалик о том, что значил для них Брэдбери</span>
-                <span class='date'>8 июня</span>
-            </a>
-        </li>
-    </ul>
+				<div class="article-header">
+					<h1><%== stash 'name' %></h1>
+				</div>
+				<!-- /article_header -->
+
+				<div class="article-body">
+
+					<p class="metadata">
+						% if (ref $author_info eq 'HASH') {
+							<img src="/i/content/author-icon.png" class="author-icon"/>
+							<span class="name"><%== $author_info->{name} %></span><span>, </span>
+						% }
+						% if (ref $source_info eq 'HASH') {
+							<span class="name"><%== $source_info->{name} %></span><span>, </span>
+						% }
+						<span href="#" class="timestamp"><%== stash 'date' %></span>
+					</p>
+
+					<p class="article-lead-text bold-and-violet"><%== stash 'preview_text' %></p>
+					<!-- lead-for-twitter -->
+
+					<div class="article-text"><%== stash 'article_text' %></div>
+					<!-- /article-text -->
+				</div>
+				<!-- /atricle_body -->
+
+				<div class="sharing-tools">
+				  <p>
+					<!-- NB: скрипт в шаблоне layouts/article.html.ep -->
+					<div class="yashare-auto-init"
+						data-yashareL10n="ru"
+						data-yashareType="link"
+						data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,yaru,moimir,lj">
+					</div>
+
+				  </p>
+				</div>
+				<!-- /sharing_tools -->
+
+				<div class="comments" id="comments">
+
+					<h3 class="bold-and-violet section-header">Комментарии:</h3>
+
+                    %= include 'includes/fanat_com_drop_point_anchor'				                       				   
+				   				    
+				</div>
+				<!-- /comments -->
+
+			</div>
+			<!-- /main_content -->
+
+			<div class="col-sidebar">
+
+				<div class="megafon-articles sidebar-section sidebar-section-first">
+					<div class="sidebar-section-wrapper">
+						<ul class="link-list">
+							<li><a href="<%= $host %>/sochi2014/activities">Большие игры МегаФона</a></li>
+							<li><a href="http://moscow.megafon.ru/services/joy/video_portal.html">Трансляции матчей КХЛ в твоем мобильном</a></li>
+							<li><a href="<%= $host %>/activities/flagmanskij_salon_megafon_v_gume">Флагманский салон МегаФона в ГУМе</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="banners sidebar-section">
+					<div class="sidebar-section-wrapper">
+						<p class="title"><span class="shifted-up">Реклама</span></p>
+						<div class="banner">
+							<!--AdFox START-->
+								<script type="text/javascript">
+								<!--
+								if (typeof(pr) == 'undefined') { var pr = Math.floor(Math.random() * 1000000); }
+								var DIVID = 'banner_' + pr;
+								if (typeof(document.referrer) != 'undefined') {
+								  if (typeof(afReferrer) == 'undefined') {
+									afReferrer = escape(document.referrer);
+								  }
+								} else {
+								  afReferrer = '';
+								}
+								var addate = new Date();
+
+								document.write('<div id="' + DIVID + '"></div>');
+
+								if($.browser.msie){
+									document.write('<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=emjf&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>');
+								}else{
+									$(function(){
+										var html = ''
+										html += '<scr' + 'ipt type="text/javascript" src="http://ads.adfox.ru/6124/prepareCode?pp=g&amp;ps=fay&amp;p2=emjf&amp;pct=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() + '&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>'
+										$('#'+ DIVID).html(writeCapture.sanitize(html))
+									})
+								}
+								// -->
+								</script>
+							<!--AdFox END-->
+						</div>
+					</div>
+				</div>
+
+			% if (ref $related_articles eq 'ARRAY') {
+				<div class="related-articles sidebar-section sidebar-section-last">
+				    <div class="sidebar-section-wrapper">
+					<h3 class="bold-and-violet">Читайте далее:</h3>
+					<ul>
+			% 	foreach my $article (@$related_articles) {
+			% 	next if !$article->{alias};
+						<li>
+							<a class="article-link" href="/<%== ($article->{cut} ? "$article->{cut}/" : '') . join '/', $article->{rubric}, $article->{alias} %>"><%= $article->{name} %></a><span class="timestamp"><%= $article->{date} ? ' '.$article->{date} : '' %></span>
+						</li>
+			% 	}
+					</ul>
+				    </div>
+				</div>
+			% }
+
+			</div>
+			<!-- /sidebar-right -->
+
+			<div class="clearfloat"></div>
+		</div>
+	</div>
 </div>
-
-<div class='clear'></div>

@@ -1,0 +1,68 @@
+% layout 'admin';
+% title 'Список видео';
+
+<div class="admin-container">
+
+	<div class="main-heading section">
+
+		<h1>
+			<a href="/admin">Админка</a>
+			&gt; Список видео
+		</h1>
+
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+
+		%= include 'includes/info_message', message => stash 'message'
+
+	</div>
+
+    <div class='pager'>
+	    % foreach my $i (1..$pages) {
+	    	<a href='?<%== "page=$i" %>'><%= $i %></a>
+	    % }
+	</div>
+%= form_for '' => (method => 'post') => begin
+	<div class="section article-list">
+		<table class="blackhead">
+			<thead>
+				<tr>
+					<td colspan="1">Автор</td>
+					<td colspan="1">Название</td>
+					<td colspan="1">Телефон</td>
+					<td colspan="1">Одобренно</td>
+				</tr>
+			</thead>
+			<tbody>
+				% foreach my $video (@$videos) {
+					<tr>
+						<td>
+							<a href="http://youtu.be/<%== $video->{video_code} %>" TARGET='_blank' title="Предварительный просмотр '<%= $video->{user_name} %>'" class="<%= !$video->{active} ? 'article-link-bold' : '' %>">
+								<%= $video->{user_name} %>
+							</a>
+						</td>
+						<td>
+							<input type="text" name="name_<%= $video->{_id} %>" value="<%= $video->{alias} %>" size=100>
+						</td>
+						<td>
+							<%= $video->{_id} %> (ИНН:<%= $video->{inn} %>)
+						</td>
+						<td>
+							<input type="checkbox" value="1" name="<%= $video->{_id} %>" <%= $video->{active} ? 'CHECKED' : '' %>>
+						</td>
+					</tr>
+				% }
+			</tbody>
+		</table>
+    </div>
+	<input type="submit" name="save" value="Сохранить">
+% end
+
+    <div class='pager'>
+
+		% foreach my $i (1..$pages) {
+			<a href='?<%== "page=$i" %>'><%= $i %></a>
+		% }
+
+	</div>
+
+</div>

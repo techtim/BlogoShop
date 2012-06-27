@@ -40,23 +40,22 @@
 
 	<div id="section content-tools">
 
-		<h3>Посты:</h3>
+		<h3>Статьи:</h3>
 		<ul>
-			<li><%= link_to 'Список постов' => '/admin/articles' %></li>
-			<li><%= link_to 'Создать новый пост' => '/admin/article/edit' %></li>
+			<li><%= link_to 'Список статей' => '/admin/articles' %></li>
+			<li><%= link_to 'Создать новую статью' => '/admin/article/edit' %></li>
 		</ul>
-<!--
+
 		<h3>Новости:</h3>
 		<ul>
 			<li><%= link_to 'Cписок новостей' => '/admin/news' %></li>
 			<li><%= link_to 'Добавить новую новость' => '/admin/news/edit' %></li>
 		</ul>
--->		
-        <h3>Контент:</h3>
-            <ul>
-                <li><%= link_to 'Редактирование типов постов' => '/admin/types' %></li>
-                <li><%= link_to 'Редактирование брендов' => '/admin/brands' %></li>
-            </ul>
-
+		
+		<h3>Большие игры:</h3>
+		<ul>
+			<li><%= link_to 'Cписок новостей Больших игр' => '/admin/big_games_news' %></li>
+			<li><%= link_to 'Добавить новую новость в Большие игры' => '/admin/big_games_news/edit' %></li>
+		</ul>
 	</div>
 <br/>
