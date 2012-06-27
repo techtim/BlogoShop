@@ -31,15 +31,18 @@ sub check {
 sub update {
 	my ($self, $controller, $params) = @_;
 	my $id = $controller->session()->{admin}->{_id};
-	$self->{db}->get_collection(COLLECTION)->update(
-	{
-		_id => MojoX::MongoDB::OID->new(value => $id)
-	}, {
-		'$set' => $params
-	});
-
-	$controller->session(admin => $self->fetch_by_id($id));
-	
+    $params->{_id} = ref $id eq 'HASH' ? $id->{'$oid'} : $id;
+    delete $params->{_id};
+    warn 'ADM PAR '. $controller->dumper($params);
+#	$self->{db}->get_collection(COLLECTION)->update(
+#	{
+#		_id => MongoDB::OID->new(value => $id)
+#	}, {
+#		'$set' => $params
+#	});
+#
+#	$controller->session(admin => $self->fetch_by_id($id));
+    die;	
 	return 1;
 }
 
@@ -48,7 +51,7 @@ sub fetch_by_id {
 	my $id = shift;
 
 	return $self->{db}->get_collection(COLLECTION)->find_one({
-		_id => MojoX::MongoDB::OID->new(value => $id)
+		_id => MongoDB::OID->new(value => $id)
 	});
 }
 

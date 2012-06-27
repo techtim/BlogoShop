@@ -4,12 +4,20 @@ use Mojo::Base 'Mojolicious::Controller';
 
 use utf8;
 
-use constant ARTICLE_FILTER => qw(cut rubric alias);
-use constant RSS_FIELDS => {map {$_ => 1} qw( name alias cut cut_alias rubric rubric_alias preview_text preview_image date article_text_rendered ) };
+use constant ARTICLE_FILTER => qw(tag alias brand type);
+use constant RSS_FIELDS => {map {$_ => 1} qw( name alias type preview_text preview_image date article_text_rendered ) };
+
+sub add_vars {
+    my $self = shift;
+    $self->stash(
+        list_brands => $self->utils->get_list_brands($self->app->db),
+        categories => [$self->app->db->categories->find({})->all],
+    );
+}
 
 sub show {
 	my $self = shift;
-
+    
 	my $filter;
 	$filter->{active} = "1" unless $self->session('admin'); # show inactive articles to admin
 	foreach (ARTICLE_FILTER) {
@@ -18,12 +26,6 @@ sub show {
 	my $article = $self->articles->get_article($filter);
 
 	return $self->redirect_to(($self->req->url =~ m/([\d\w\/]+?)\/[\d\w]+$/)[0]) if !$article;
-	
-	$article->{preview_text} =~ s/\r//g; # temporary  
-
-	# Temporary add date while no such field in db
-	$article->{date} = $self->utils->date_from_mongoid($article->{_id});# if !$article->{date};
-	$article->{article_text_rendered} = $self->utils->render_article($self, $article) if !$article->{article_text_rendered};
 
 	$article->{article_text} = $article->{article_text_rendered};
 
@@ -31,10 +33,14 @@ sub show {
 	$self->stash(related_articles => $self->articles->get_related_articles(
 		$filter, $self->config('related_articles_count'), $article->{'_id'})
 	);
+    $self->stash(next_article => 
+    ($self->app->db->articles->find({_id => {'$lt' => $article->{'_id'}}, active => "1"})->sort({_id => -1})->limit(1)->all)[0] || {});
+    $self->stash(prev_article =>
+    ($self->app->db->articles->find({_id => {'$gt' => $article->{'_id'}}, active => "1"})->sort({_id => 1})->limit(1)->all)[0] || {});
 
 	my %images = map { $_->{tag} => {descr => $_->{descr}, source => $_->{source}} } @{$article->{images}} if ref $article->{images} eq 'ARRAY';
 
-	my $img_url = $self->config('image_url').($article->{rubric}|| $self->config('default_img_dir')).'/'.$article->{alias}.'/';
+	my $img_url = $self->config('image_url').($article->{type} || $self->config('default_img_dir')).'/'.$article->{alias}.'/';
 	# Polls check
 	foreach (keys %{$article->{polls}}) {
 		$article->{polls}->{$_}->{total_count} = 0;
@@ -48,7 +54,7 @@ sub show {
 	}
 
 	$self->stash(%$article);
-
+    $self->add_vars();
 	return $self->render(
 		host => $self->req->url->base,
 		cut => $self->stash('cut') || '',
@@ -66,24 +72,23 @@ sub list {
 		$filter->{$_} = $self->stash($_) if $self->stash($_);
 	}
 
+    if ($filter->{brand}) {
+        warn 'BRAND'.$filter->{brand};
+        my $brand = $self->app->db->brands->find_one({_id => $filter->{brand}});
+#        return $self->redirect_to('/') if !$brand;
+        $self->stash(brand => $brand);
+    }
 	my $art = $self->articles->get_filtered_articles($filter, $self->config('articles_on_page'), $self->stash('move'), $self->stash('id')||0);
 	my $flag = 0;
-	foreach (@$art) {
-		if ($flag) {
-			$_->{preview_size} = '50';
-			$flag = !$flag;
-		} else {
-			$flag = !$flag if defined $_->{preview_size} && $_->{preview_size} eq '50'; # set flag that we have 50% width article, to make next width 50% 
-			$_->{preview_size} = '100' if $art->[-1]->{_id} eq $_->{_id}; # make 100% width if article is last and haven't got pair
-		}
-	}
-
+    
 	$self->res->headers->header('Cache-Control' => 'no-cache');
-
+    $self->add_vars();
 	return $self->render(
 		host => $self->req->url->base,
-		cut => $filter->{cut} || '', 
-		rubric => $filter->{rubric} || '',
+		tag => $filter->{tag} || '', 
+		type => $filter->{type} || '',
+        brand => $self->stash('brand') || '',
+        is_index => keys %$filter == 0 ? 1 : 0,
 		articles => $art,
 		template => $self->stash('move') && $self->req->headers->header('X-Requested-With') ? 'includes/list_articles' : 'index', # return only
 		format => 'html', 

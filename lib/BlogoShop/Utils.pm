@@ -10,6 +10,7 @@ use Time::Local;
 use Data::Dumper;
 use Digest::MD5 qw( md5_hex );
 use POSIX qw(strftime);
+use File::Path qw(make_path remove_tree);
 
 use constant {	
 	ARTICLES_COLLECTION => 'articles',
@@ -24,34 +25,38 @@ sub new {
 
 sub translit($)
 { 
-	my ($self, $str) = @_;
-	$_ = $str;
-
-	s/Сх/S\'h/; s/сх/s\'h/; s/СХ/S\'H/;
+	my ($self, $str, $for_url) = @_;
+	return '' if !$str;
+    $_ = $for_url ? lc($str) : $str;
+    
+    s/\s+/_/g if $for_url; 
+    s/ъ|ь|Ъ|Ь|//g if $for_url;
+    
+	s/Сх/Sh/; s/сх/sh/; s/СХ/SH/;
 	s/Ш/Sh/g; s/ш/sh/g;
 	
-	s/Сцх/Sc\'h/; s/сцх/sc\'h/; s/СЦХ/SC\'H/;
+	s/Сцх/Sch/; s/сцх/sch/; s/СЦХ/SCH/;
 	s/Щ/Sch/g; s/щ/sch/g;
 	
-	s/Цх/C\'h/; s/цх/c\'h/; s/ЦХ/C\'H/;
+	s/Цх/Ch/; s/цх/ch/; s/ЦХ/CH/;
 	s/Ч/Ch/g; s/ч/ch/g;
 	
-	s/Йа/J\'a/; s/йа/j\'a/; s/ЙА/J\'A/;
+	s/Йа/Ja/; s/йа/ja/; s/ЙА/JA/;
 	s/Я/Ja/g; s/я/ja/g;
 	
-	s/Йо/J\'o/; s/йо/j\'o/; s/ЙО/J\'O/;
+	s/Йо/Jo/; s/йо/jo/; s/ЙО/JO/;
 	s/Ё/Jo/g; s/ё/jo/g;
 	
-	s/Йу/J\'u/; s/йу/j\'u/; s/ЙУ/J\'U/;
+	s/Йу/Ju/; s/йу/ju/; s/ЙУ/JU/;
 	s/Ю/Ju/g; s/ю/ju/g;
 	
-	s/Э/E\'/g; s/э/e\'/g;
+	s/Э/E/g; s/э/e/g;
 	s/Е/E/g; s/е/e/g;
 	
-	s/Зх/Z\'h/g; s/зх/z\'h/g; s/ЗХ/Z\'H/g;
+	s/Зх/Zh/g; s/зх/zh/g; s/ЗХ/ZH/g;
 	s/Ж/Zh/g; s/ж/zh/g;
 	
-	tr/
+    tr/
 	абвгдзийклмнопрстуфхцъыьАБВГДЗИЙКЛМНОПРСТУФХЦЪЫЬ/
 	abvgdzijklmnoprstufhc\"y\'ABVGDZIJKLMNOPRSTUFHC\"Y\'/;
 	
@@ -63,6 +68,7 @@ sub get_polls {
 	my ($self, $article) = @_;
 	my $polls;
 	my @questions;
+    return '' if !$article->{article_text};
 	while ($article->{article_text} =~ /<poll="([^"]+)">(.+?)<\/poll>/gs) {
 		my $poll = {};
 		my $orig = $poll->{question} = $1;
@@ -118,6 +124,53 @@ sub update_mongoid_with_time {
 	return $id;
 }
 
+sub get_images {
+	my ($self, $controller, $name, $path) = @_;
+    
+    return 0 if !$path || !$name;
+	my $images = [];
+	my @image_descr = $controller->req->param($name.'_descr');
+    
+	my %image_delete = map {$_ => 1} $controller->req->param($name.'_delete');
+
+	# Collect already uploaded files
+	foreach ($controller->req->param($name.'_tag')) {
+		my $tmp = {tag => $_, descr => shift @image_descr};
+		$tmp->{descr} =~ s/\"/&quot;/g;
+		push @$images, $tmp unless $image_delete{$_}; 
+	}
+    
+	# Collect new files
+	foreach my $file ($controller->req->upload($name)) {
+		next unless $file->filename || $file->filename =~ /\.(jpg|jpeg|bmp|gif|png|tif|swf|flv)$/i;;
+
+		my $image = {};
+		$image->{tag} = (time() =~ /(\d{5})$/)[0].'_'.lc($self->translit($file->filename));
+		$image->{tag} =~ s![\s\/\\]+!_!g;
+		$image->{tag} =~ s![^\w\d\.\_]+!!g;
+        
+		my $folder_path = $controller->config('image_dir').$path;
+        $folder_path =~ s/\/?$/\//;
+        warn '$folder_path'.$folder_path;
+		make_path($folder_path) or die 'Error on creating image folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
+		$file->move_to($folder_path.$image->{tag});
+        
+		$image->{descr} = shift @image_descr;
+		$image->{descr} =~ s/\"/&quot/g;
+
+		push @$images, $image;
+	}
+    
+	return $images if @$images>0;
+	return 0;
+}
+
+sub get_list_brands {
+    my ($self, $db) = @_;
+    my $list_brands = {};
+    push @{$list_brands->{$_->{category}->{_id}}}, $_ foreach ($db->brands->find({})->sort({name=>1})->all);
+    return $list_brands;
+}
 sub render_article {
 	my ($self, $controller, $article) = @_;
 
@@ -133,7 +186,8 @@ sub render_article {
 	};
 
 	my %images = map {$_->{tag} => $_} @{$article->{images}} if ref $article->{images} eq 'ARRAY';
-	my $img_url = $controller->config('image_url').($article->{rubric}|| $controller->config('default_img_dir')).'/'.$article->{alias}.'/';
+	my $img_url = $controller->config('image_url').($article->{type}|| $controller->config('default_img_dir')).'/'.$article->{alias}.'/';
+    warn '$img_url='.$img_url;
 	my @galleries;
 	while ($text =~ m/<gallery>(.+?)<\/gallery>/gs) {
 		my $html = $1;

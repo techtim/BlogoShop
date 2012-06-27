@@ -53,6 +53,23 @@ warn $self->dumper($file);
 	return $self->render(json => {success => 'true', result => $image});
 }
 
+sub subscribe {
+    my $self = shift;
+    my $mail = $self->req->param('subscribe') || undef;
+    if ($mail && $mail =~ m/(\@+)/ ) {
+        my $mail = $self->mail(
+            to      => 'v.berdyshev@gmail.com',
+            cc		=> $self->config('superadmin_mail'),
+            from    => 'noreply@'.$self->config('domain_name'),
+            subject => 'Xoxloveka SUBSCRIBE',
+            format => 'mail',
+            data => $mail,
+            handler => 'mail',
+		);
+    }
+    return $self->redirect_to($self->req->url);
+}
+
 # SERVICE STUFF
 sub import_sources {
 	my $self = shift;

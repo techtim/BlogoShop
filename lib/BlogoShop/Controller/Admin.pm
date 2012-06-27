@@ -32,7 +32,7 @@ sub index {
 
 	$self->stash('message' => $self->flash('message')) if $self->flash('message');
 	$self->stash(%$session);
-
+    
 	$self->render(
 		template => 'admin/admin',
 		format => 'html',
@@ -78,13 +78,14 @@ sub create_admin {
 		# Set random pass
 		$new_admin->{pass} = '';
 		$new_admin->{pass}.=$rndm_array[int(rand()*@rndm_array)] foreach (0..8);
-
+        $new_admin->{email} =~ s/^\s+|\s+$//g;
 		$self->stash(%$new_admin);
 
 		my $mail = $self->mail(
 		    to      => $new_admin->{email},
 		    cc		=> $self->config('superadmin_mail'),
-		    subject => 'MegafonSport Registration',
+            from    => 'noreply@'.$self->config('domain_name'),
+		    subject => 'Xoxloveka Login',
 		    format => 'mail',
 		    data => $self->render_mail(template => 'admin/registration_mail'),
             handler => 'mail',
