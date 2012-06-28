@@ -26,7 +26,7 @@ sub startup {
 
 	# Log conf
 	$self->log->level($self->config('log_level'));
-	$self->log->path('log/error.log');
+	$self->log->path('log/development.log');
 	$SIG{__WARN__} = sub {
 		my $mess = shift || '';
 		$mess =~ s/\n$//;
@@ -38,7 +38,7 @@ sub startup {
 	$self->renderer->cache->max_keys(500);
 
 	# Debug benchmarks
-	$self->plugin('request_timer') if $self->config('log_level') eq 'debug';
+#	$self->plugin('request_timer') if $self->config('log_level') eq 'debug';
 
 	# Make signed cookies secure
 	$self->secret($self->config('cookie_secret'));

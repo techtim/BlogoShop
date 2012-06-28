@@ -59,9 +59,10 @@ sub check_input {
 		$article->{preview_text} =~ s/\&raquo;|\&laquo;|\x{ab}|\x{bb}/\"/g if $article->{preview_text};
 		$article->{article_text} =~ s/\&raquo;|\&laquo;|\x{ab}|\x{bb}/\"/g if $article->{article_text};
     };
-	
+
 	# creaete new mongo format id from new timestamp
-	$article->{new_id} = $self->utils->update_mongoid_with_time($self->stash('id'), $article->{article_date}, $article->{article_time}) if $article->{article_date} && $article->{article_time}; 
+	$article->{new_id} = $self->utils->update_mongoid_with_time($self->stash('id'), $article->{article_date}, $article->{article_time}) 
+        if $article->{article_date} && $article->{article_time}; 
 
 	$article->{alias} = lc($self->utils->translit($article->{name}));
 	$article->{alias} =~ s![\s\/\\]+!_!g;
@@ -88,7 +89,7 @@ sub check_input {
 		push @$error_message, 'no_author' if !$article->{author_info};
 	}
 
-	$article->{date} = $self->utils->date_from_mongoid($self->stash('id')) if $self->stash('id');
+	$article->{date} = $self->utils->date_from_mongoid($article->{new_id}||$self->stash('id')) if $self->stash('id');
 
 	push @$error_message, 'no_article_name' if !$article->{name} || $article->{name} eq '';
 	push @$error_message, 'no_article_text' if !$article->{article_text} || $article->{article_text} eq '';
@@ -203,7 +204,6 @@ sub edit {
     $article->{tag} = join '; ', @{$article->{tag}} if ref $article->{tag} eq 'ARRAY';
 
 	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
-
 
 	$self->render(
 		%$article,
