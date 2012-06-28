@@ -8,6 +8,15 @@ db_port: 27017
 
 domain_name: 'xoxloveka.ru'
 
+hypnotoad:
+  workers: 4
+  listen: http://*:8080
+  lock_file: /var/lock/blogoshop.lock 
+  pid_file: /var/run/blogoshop.pid 
+  user: techtim 
+  group: techtim
+  proxy: 1
+
 image_dir: '/opt/blogoshop/public/files/i/'
 default_img_dir: 'default'
 image_url: '/i/'
