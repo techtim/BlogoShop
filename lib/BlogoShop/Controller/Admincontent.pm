@@ -29,7 +29,7 @@ sub list_categories {
             push @params, {$key=>$_};
         $even = !$even;
     }
-    warn $self->dumper(\@params);
+
     foreach my $par (@params) {
         my $key = ''.(keys %$par)[0];
         push @$error_message, 'no_name' && next unless $par->{$key} =~ m/([^\{\}\[\]]+)$/i;
@@ -43,8 +43,8 @@ sub list_categories {
             $self->app->db->categories->remove({_id => $par->{delete_cat}});
         } elsif ($key =~ m/(\:+)/ && $par->{$key} ne '') {
             my ($act, $cat) = split ':', $key;
-            warn $self->dumper($act, $cat);
-            
+#            warn $self->dumper($act, $cat);
+
             $self->app->db->categories->update(
                 {_id => $cat}, 
             {'$push' => {subcats => {_id => $self->utils->translit($par->{$key}, 1), name => $par->{$key}}}}
@@ -72,7 +72,6 @@ sub list_brands {
     if ($self->stash('do') eq 'edit') {
         my $brand = $self->stash('brand') || $self->req->param('brand') || '';
         $brand = $self->app->db->brands->find_one({_id => $brand});
-        warn 'EDIT BRAND '. $self->dumper($brand);
         return $self->redirect_to('admin/brands') if !$brand;
         $self->stash(%$brand);
    
@@ -97,7 +96,6 @@ sub list_brands {
                 my $type = $1;
                 my $folder_path = $self->config('image_dir').'brands/'.$id;
                 $folder_path =~ s!/?$!/!;
-                warn '$folder_path'.$folder_path;
                 make_path($folder_path) or die 'Error on creating image folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
                 $file->move_to($folder_path.'logo.'.$type);                
                 $brand->{logo} = $self->config('image_url').'brands/'.$id.'/logo.'.$type;
@@ -107,12 +105,12 @@ sub list_brands {
             if (delete $brand->{id}) { # delete returns true -> means save after edit
                 $self->app->db->brands->update({_id => $id }, {'$set' => {%$brand}});
                 $self->app->defaults->{list_brands} = $self->utils->get_list_brands($self->app->db);
-                warn 'BRAND UPD '. $self->dumper($brand);
+#                warn 'BRAND UPD '. $self->dumper($brand);
             } else {
                 $brand->{_id} = $id;
                 $self->app->db->brands->save($brand);
                 $self->app->defaults->{list_brands} = $self->utils->get_list_brands($self->app->db);
-                warn 'BRAND SAVE '. $self->dumper($brand);
+#                warn 'BRAND SAVE '. $self->dumper($brand);
             }
             return $self->redirect_to('admin/brands/edit/'.$id);
         } else {

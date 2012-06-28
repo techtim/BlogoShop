@@ -73,7 +73,6 @@ sub list {
 	}
 
     if ($filter->{brand}) {
-        warn 'BRAND'.$filter->{brand};
         my $brand = $self->app->db->brands->find_one({_id => $filter->{brand}});
 #        return $self->redirect_to('/') if !$brand;
         $self->stash(brand => $brand);
