@@ -146,14 +146,14 @@ sub startup {
 		$admin_bridge->route('/articles/render')->via('get')->to('controller-Adminarticle#render_all');
 		
 		# Viktorina
-		$admin_bridge->route('/news')->via('get')->to('controller-Adminarticle#list_news');
-		$admin_bridge->route('/news/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'news');
-		$admin_bridge->route('/news/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'news');
+#		$admin_bridge->route('/news')->via('get')->to('controller-Adminarticle#list_news');
+#		$admin_bridge->route('/news/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'news');
+#		$admin_bridge->route('/news/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'news');
 		
 		# Big Games
-		$admin_bridge->route('/big_games_news')->via('get')->to('controller-Adminarticle#list_big_games');
-		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'big_games_news');
-		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'big_games_news');
+#		$admin_bridge->route('/big_games_news')->via('get')->to('controller-Adminarticle#list_big_games');
+#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'big_games_news');
+#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'big_games_news');
 		
         # Content
 		$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');

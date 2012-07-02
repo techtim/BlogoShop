@@ -47,9 +47,7 @@
             '<td>' +
             '<input type="text" name="image_descr" size=40/>' +
             '</td>' +
-            '<td>' +
-            '<input type="text" name="image_source" size=40/>' +
-            '</td>' +
+
             '<td>' +
             '<input type="file" name="image"/>' +
             '</td>' +

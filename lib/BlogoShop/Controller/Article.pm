@@ -38,7 +38,7 @@ sub show {
     $self->stash(prev_article =>
     ($self->app->db->articles->find({_id => {'$gt' => $article->{'_id'}}, active => "1"})->sort({_id => 1})->limit(1)->all)[0] || {});
 
-	my %images = map { $_->{tag} => {descr => $_->{descr}, source => $_->{source}} } @{$article->{images}} if ref $article->{images} eq 'ARRAY';
+	my %images = map { $_->{tag} => {descr => $_->{descr}} } @{$article->{images}} if ref $article->{images} eq 'ARRAY';
 
 	my $img_url = $self->config('image_url').($article->{type} || $self->config('default_img_dir')).'/'.$article->{alias}.'/';
 	# Polls check

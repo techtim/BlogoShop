@@ -69,13 +69,13 @@ sub list_brands {
         return $self->redirect_to('admin/brands');
     }
 
-    if ($self->stash('do') eq 'edit') {
+    if ($self->stash('do') && $self->stash('do') eq 'edit') {
         my $brand = $self->stash('brand') || $self->req->param('brand') || '';
         $brand = $self->app->db->brands->find_one({_id => $brand});
         return $self->redirect_to('admin/brands') if !$brand;
         $self->stash(%$brand);
    
-    } elsif ($self->stash('do') eq 'save')  { 
+    } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         my $brand = {};
         $brand->{$_} = $self->req->param($_) foreach BRAND_PARAMS;
         delete $brand->{images};

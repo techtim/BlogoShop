@@ -11,7 +11,6 @@ use File::Copy;
 use constant {
 	ARTICLES_COLLECTION => 'articles',
 	VOTES_COLLECTION => 'votes',
-	SOURCES_COLLECTION => 'sources',
 	AUTHORS_COLLECTION => 'authors',
 };
 
@@ -212,11 +211,9 @@ sub check_existing_alias {
 
 sub block_article {
 	my ($self, $id, $admin_id, $collection) = @_;
-
     $id = ref $id eq 'MongoDB::OID' ? $id->{value} : $id;
 	my $params->{admin_id} = $admin_id;
 	$params->{time} = time + 10*60;
-    warn Dumper($id, $admin_id, $collection);
 	$self->{db}->get_collection($collection || ARTICLES_COLLECTION)->update(
 			{_id => MongoDB::OID->new(value => $id)},
 			{'$set' => {block => $params}}
@@ -226,7 +223,7 @@ sub block_article {
 
 sub unblock_article {
 	my ($self, $id, $collection) = @_;
-
+    $id = ref $id eq 'MongoDB::OID' ? $id->{value} : $id;
 	$self->{db}->get_collection($collection || ARTICLES_COLLECTION)->update(
 		{_id => MongoDB::OID->new(value => $id)},
 		{'$set' => {block => {admin_id => ''}}}

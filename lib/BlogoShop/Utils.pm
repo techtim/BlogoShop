@@ -151,7 +151,7 @@ sub get_images {
         
 		my $folder_path = $controller->config('image_dir').$path;
         $folder_path =~ s/\/?$/\//;
-        warn '$folder_path'.$folder_path;
+
 		make_path($folder_path) or die 'Error on creating image folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
 		$file->move_to($folder_path.$image->{tag});
         
@@ -187,7 +187,7 @@ sub render_article {
 
 	my %images = map {$_->{tag} => $_} @{$article->{images}} if ref $article->{images} eq 'ARRAY';
 	my $img_url = $controller->config('image_url').($article->{type}|| $controller->config('default_img_dir')).'/'.$article->{alias}.'/';
-    warn '$img_url='.$img_url;
+
 	my @galleries;
 	while ($text =~ m/<gallery>(.+?)<\/gallery>/gs) {
 		my $html = $1;
@@ -212,7 +212,7 @@ sub render_article {
 		while ($text =~ s/<gallery>.+?<\/gallery>/$controller->render("includes\/gallery", partial => 1, img_url => $img_url, gallery => $galleries[$i++])/gse) {;} 
 	}
 
-	$text =~ s/<img="([^"]+)">/$controller->render("includes\/image", partial => 1, img_url => $img_url.$1, img_descr => $images{$1}->{descr}, img_source => $images{$1}->{source})/eg;
+	$text =~ s/<img="([^"]+)">/$controller->render("includes\/image", partial => 1, img_url => $img_url.$1, img_descr => $images{$1}->{descr})/eg;
 	
 	$text =~ s/<flash="([^"]+)" ?height="([\d%]+)">/$controller->render("includes\/flash", partial => 1, flash_url => $img_url.$1, obj_id => "id-$1", height => $2||100)/eg;
 
