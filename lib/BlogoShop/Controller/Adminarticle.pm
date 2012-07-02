@@ -8,7 +8,7 @@ use utf8;
 
 use File::Path qw(make_path remove_tree);
 use Encode;
-use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size tags preview_text preview_image preview_image_wide article_text images article_time article_date);
+use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date);
 
 sub get {
 	my $self = shift;
@@ -111,7 +111,7 @@ sub get_images {
 
 	# Collect already uploaded files
 	foreach ($self->req->param($name.'_tag')) {
-		my $tmp = {tag => $_, descr => shift @image_descr;
+		my $tmp = {tag => $_, descr => shift @image_descr};
 		$tmp->{descr} =~ s/\"/&quot;/g;
 		push @$images, $tmp unless $image_delete{$_}; 
 	}
