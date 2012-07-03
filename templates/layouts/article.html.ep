@@ -12,6 +12,9 @@
 		<meta property="og:title" content="<%= $title %>" />
 		<meta property="og:url" content="<%== $host . '/' . $type . '/' . $alias %>" />
 		<meta property="og:description" content="<%= stash 'preview_text' %>" />
+		% if (stash 'preview_image') {
+    		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
+		% }
 		<script src="https://www.google.com/jsapi?key=ABQIAAAAq40cyT39xbh4SxII4iAAQhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQq6XU15uRy_aHLn2Ie3000LpSbxg" type="text/javascript"></script>
 		<script type='text/javascript'>
 			google.load("jquery", "1.7.1");
