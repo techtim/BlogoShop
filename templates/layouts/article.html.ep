@@ -7,6 +7,11 @@
 		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<meta property="og:site_name" content="магазин Хохловка" />
+		<meta property="og:type" content="<%= stash 'type' %>" />
+		<meta property="og:title" content="<%= $title %>" />
+		<meta property="og:url" content="<%== $host . '/' . $type . '/' . $alias %>" />
+		<meta property="og:description" content="<%= stash 'preview_text' %>" />
 		<script src="https://www.google.com/jsapi?key=ABQIAAAAq40cyT39xbh4SxII4iAAQhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQq6XU15uRy_aHLn2Ie3000LpSbxg" type="text/javascript"></script>
 		<script type='text/javascript'>
 			google.load("jquery", "1.7.1");
