@@ -26,7 +26,7 @@
         %= include 'includes/footer'
 
         %= include 'includes/google_analytics'
-        %# include 'includes/yandex_metrika'
+        %= include 'includes/yandex_metrika'
         %# include 'includes/adriver'
     </body>
 </html>
