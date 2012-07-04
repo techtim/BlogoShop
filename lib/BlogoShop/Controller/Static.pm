@@ -17,7 +17,9 @@ sub show {
     );
 
     return $self->render(
-        host => $self->req->url->base,
+        alias => $self->stash('template'),
+	type => '',
+	host => $self->req->url->base,
         format => 'html',
 	);
 }
