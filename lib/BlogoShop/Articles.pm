@@ -51,7 +51,8 @@ sub update_article {
 		system("mv $old $new");
 	}
 
-	my %old_questions = map { $_ => 1 } keys %{$old_article->{polls}} if ref($old_article->{polls}) eq 'HASH';  # check if polls didn't change, save previous data 
+    # check if polls didn't change, save previous data 
+	my %old_questions = map { $_ => 1 } keys %{$old_article->{polls}} if ref($old_article->{polls}) eq 'HASH';
 	foreach (keys %{ $article->{polls} }) {
 		$article->{polls}->{$_} = $old_article->{polls}->{$_} if $old_questions{$_};
 	}
@@ -108,12 +109,11 @@ sub get_filtered_articles {
     delete $filter->{tag};
 
 	# fetch $limit+1 objects to know is there one more page, and change order if moving backward for right limiting
-	my $cursor = $self->{db}->get_collection(ARTICLES_COLLECTION)->
-		find($filter)->
-		limit($limit ? $limit+1 : 0)->
-		sort({'_id' => !defined $type || $type eq 'next' ? -1 : 1});
-	$cursor->fields(LIST_FIELDS);
-	my @all_articles = $cursor->all;
+	my @all_articles = $self->{db}->
+		get_collection(ARTICLES_COLLECTION)->
+		find($filter)->limit($limit ? $limit+1 : 0)->
+		sort({'_id' => !defined $type || $type eq 'next' ? -1 : 1})->
+		fields(LIST_FIELDS)->all;
 
 	return \@all_articles unless $limit || $type; # show all to admins 
 
@@ -127,8 +127,10 @@ sub get_filtered_articles {
 
 	# set pager vars
 	if (@articles > 0) {
-		$articles[-1]->{show_fwd} = (defined $type && $type eq 'prev') || @all_articles > $limit ? 1 : 0; # add flag to show next page link
-		$articles[0]->{show_prev} = (defined $type && $type eq 'next') || (defined $type && $type eq 'prev' && @all_articles > $limit) ? 1 : 0;
+		$articles[-1]->{show_fwd} = 
+            (defined $type && $type eq 'prev') || @all_articles > $limit ? 1 : 0; # add flag to show next page link
+		$articles[0]->{show_prev} = 
+            (defined $type && $type eq 'next') || (defined $type && $type eq 'prev' && @all_articles > $limit) ? 1 : 0;
 	}
 	return \@articles;
 }
@@ -163,9 +165,9 @@ sub get_related_articles {
 	$filter->{_id} = {'$ne' => $id}; # uncomment when we'll have enought articles
  	$filter->{active} = "1";
 
-	my $cursor = $self->{db}->get_collection(ARTICLES_COLLECTION)->find($filter)->limit($limit)->sort({'_id' => -1});
-	$cursor->fields(LIST_FIELDS);
-	my @articles = $cursor->all;
+#	my $cursor = $self->{db}->get_collection(ARTICLES_COLLECTION)->find($filter)->limit($limit)->sort({'_id' => -1});
+#	$cursor->fields(LIST_FIELDS);
+	my @articles = $self->{db}->get_collection(ARTICLES_COLLECTION)->find($filter)->limit($limit)->sort({'_id' => -1})->all;
 	return \@articles ;
 }
 

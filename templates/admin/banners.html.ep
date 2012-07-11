@@ -1,0 +1,138 @@
+% layout 'admin';
+% title 'Редактирование баннеров';
+
+<div class="admin-container">
+    
+	<div class="main-heading section">
+        
+		<h1>
+			<a href="/admin">Админка</a>
+			&gt; <a href="/admin/banners">Редактирование баннеров</a>
+            <%== '&gt; '.$link if $do eq 'edit' %>
+		</h1>
+        
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+        
+		%= include 'includes/info_message', message => stash 'message'
+        
+	</div>
+
+	<div class="section article-list">
+        %= form_for '/admin/banners/edit' => (method => 'post', enctype =>"multipart/form-data") => begin
+		<table class="blackhead">
+			<thead>
+				<tr>
+					<td colspan="1">Баннер</td>
+					<td colspan="1">Ссылка</td>
+					<td colspan="1">Категория</td>
+                    <td colspan="1">Частота показа</td>
+					<td colspan="1">Действие</td>
+				</tr>
+			</thead>
+			<tbody>
+				% foreach my $banner (@$banners) {
+                <tr>
+                    <td>
+                        <a href="/banner/<%= $banner->{name} %>" TARGET='_blank' title="просмотреть '<%= $banner->{name} %>'">
+                            <img width=200 src="<%= $banner->{image} %>">
+                        </a>
+                    </td>
+                    <td>
+                        <%= $banner->{link} %>
+                    </td>
+                    <td>
+                        <%= $banner->{category} ? $cat_alias->{$banner->{category}} : 'главная'  %>
+                    </td>
+                    <td>
+                        <%= $banner->{weight} || 'не показывать' %>
+                    </td>
+                    <td>
+                        <a href="/admin/banners/edit/<%= $banner->{_id} %>">
+                            <button type="button">Редактировать</button>
+                        </a>
+                    </td>
+                </tr>
+				% }
+			</tbody>
+		</table>
+        % end
+    </div>
+
+    <div class="article-form-container">
+
+        <!-- start FORM -->
+        %= form_for '/admin/banners/save' => (method => 'post', enctype =>"multipart/form-data") => begin
+        
+        <div class="section article-title">
+            % if ($do eq 'edit') {
+            <h3>Редактирование баннера</h3>
+            <input type="hidden" name="id" value="<%= stash '_id' %>">
+            % } else {
+            <h3>Добавление баннера</h3>    
+            % }
+            <p>
+                <b>Банер:</b>
+                % if ($image) {
+                <input type="hidden" name="image_loaded" value="<%= $image %>">
+                <img src="<%= $image %>"><br>
+                % }
+                <input type="file" name="image" /> <%= $image ? 'изменить': 'добавить' %>
+            </p>
+            <p>
+                <b>Ссылка:</b></br/>
+                <input type="text" name="link" size="40" value="<%= stash 'link' %>" style="font-size: 18px; font-weight: bold;"/>
+            </p>
+            <p>
+                <b>Категория:</b></br/>
+                <select name="category">
+                    <option value=""><b>главная</b></option>
+                    % foreach my $cat (@$categories) {
+                        <option value="<%= $cat->{_id} %>" <%= ($category && $category eq $cat->{_id} ? 'selected' :'') %>>
+                            <b><%== $cat->{name} %></b>
+                        </option>
+                        % foreach my $subcat (@{$cat->{subcats}}) {
+                            <option value="<%= $subcat->{_id} %>" <%= ($category && $category eq $subcat->{_id} ? 'selected' :'') %>>
+                            - <%== $subcat->{name} %>
+                            </option>
+                        % }
+                    % }
+                </select>
+            </p>
+            <p>
+                <b>Частота показа:</b></br/>
+                %= include 'includes/select_block', name => 'weight', select => $weight, must_fill => 'no' , options => stash 'weights'
+            </p>
+        </div>
+        
+        <div class="section submit-buttons">
+            
+            <table class="layout">
+                <tr>
+                    <td class="delete-wrapper">
+                        <button type="submit" name="save" value="1">
+                            <%== ($do eq 'edit' ? 'Сохранить банер' : 'Добавить баннер') %>
+                        </button>
+                        % if ($do eq 'edit') {
+                        <button type="submit" name="cancel" value="1">
+                            Отмена
+                        </button>
+                        % }
+                    </td>
+                    <td class="save-wrapper">
+                        % if ($do eq 'edit') {
+                        <span>
+                            <button type="submit" name="delete" value="<%= stash '_id' %>" onCLick="return confirm('Удалить баннер?');">Удалить баннер!</button>
+                        </span>
+                        % }
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+        <!-- /submit-buttons -->
+        
+		% end
+        
+    </div>
+    
+</div>

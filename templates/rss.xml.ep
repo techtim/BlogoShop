@@ -11,9 +11,9 @@
 		<link><%== $domain . '/' . join '/', $art->{type}, $art->{alias} %></link>
 		<description><%= $art->{preview_text} %></description>
 		% if ($art->{preview_image}) {
-		<enclosure url="<%== $domain.config->{image_url}.$art->{type}.'/'.$art->{alias}.'/'.$art->{preview_image} %>" length="" type="image/jpeg"></enclosure>
+		<enclosure url="<%== $domain.config->{image_url}.$art->{type}.'/'.$art->{alias}.'/'.$art->{preview_image} %>" length="<%= $art->{preview_image_size} || 88 %>" type="image/jpeg"></enclosure>
 		% }
-		<category><%== $art->{rubric_alias} %></category>
+		<category><%== $art->{type} %></category>
 		<pubDate><%= utils->date_time_from_mongoid($art->{_id}->{value},1) %></pubDate>
 	</item>
 	%}

@@ -1,0 +1,175 @@
+% layout 'admin';
+% title ($action_type eq 'add' ? 'Новая статичная страница' : 'Правка статичной страницы');
+
+<div class="admin-container">
+
+    <div class="section main-heading">
+		<h1>
+			<a href="/admin">Админка</a> &gt;
+
+			% if ($action_type ne 'add') {
+
+				<a href="/admin/statics">Список статичных страниц</a> &gt;
+
+				<span>Правка новости
+					% if (stash 'alias') {
+						<a href="/<%== $alias %>" TARGET='_blank'><%== stash 'name' %></a>
+					% } else {
+						"<%== stash 'name' %>"
+					% }
+				</span>
+			% } else {
+				<span>Свежая статичная страница</span>
+			% }
+		</h1>
+
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+		%= include 'includes/info_message', message => stash 'message'
+
+    </div>
+
+    <div class="article-form-container">
+
+    	<!-- start FORM -->
+	    %= form_for '' => (method => 'post', enctype =>"multipart/form-data") => begin
+
+	    	<div class="section article-title">
+
+				% if ($action_type ne 'add') {
+					<input type="hidden" name="id" value="<%= stash '_id' %>">
+				% }
+
+				<p>
+					<b>Название:</b></br/>
+					<input type="text" name="name" size="90" value="<%= stash 'name' %>" style="font-size: 18px; font-weight: bold; width: 100%;"/>
+				</p>
+                <p>
+                    <b>Адрес страницы:</b></br/>
+                    <%= config->{domain_name}.'/' %><input class="wide" name="alias" type="text" value="<%== stash 'alias' %>" style="font-size: 18px; font-weight: bold;"/>
+                </p>
+
+			</div>
+
+
+			<div class="section article-content">
+				<h3>Текст страницы:</h3>
+				<p>
+					<textarea type="text" name="article_text" cols=100 rows=40><%= stash 'article_text' %></textarea>
+				</p>
+			</div>
+
+            <div class="section loaded-images">
+                <h3>Загруженные картинки:</h3>
+                
+                <table class="blackhead">
+                    
+                    <thead>
+                        <tr>
+                            <td width="100">превью:</td>
+                            <td width="330">описание</td>
+                            <td width="250">таг (для вставки)</td>
+                            <td>превью (уменьшено)</td>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="radio" name="preview_image" value="0" checked="<%== !$preview_image ? 'CHECKED' : '' %>">off
+                                    </td>
+                            <td colspan="4"></td>
+                        </tr>
+                        
+                        % if (ref $images eq 'ARRAY') {
+                        % my $counter=1;
+                        % foreach my $image (@$images) {
+                        <tr>
+                            <td>
+                                <input type="radio" name="preview_image" value="<%== $image->{tag} %>" <%== $image->{tag} eq $preview_image ? 'CHECKED' : '' %> />
+                                    </td>
+                            
+                            <td>
+                                <input type="text" name="image_descr" size=60 value="<%== $image->{descr} %>"/>
+                            </td>
+                            
+                            <td>
+                                <input type="text" size=40 value="<%== $image->{tag} %>"/>
+                                <input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
+                            </td>
+                            
+                            <td>
+                                <input type="checkbox" name="image_delete" value="<%== $image->{tag}  %>"/> <label>Удалить при сохранении статьи</label><br/>
+                                <img width="160px" src="<%== config->{image_url}.($type ? $type : config->{default_img_dir}).'/'.$alias.'/'.$image->{tag} %>"/>
+                            </td>
+                        </tr>
+                        % }
+                        % }
+                        
+                    </tbody>
+                </table>
+                
+            </div>
+            
+            <div class="section new-images">
+                
+                <h3>Выбрать картинки для добавления:</h3>
+                
+                <table class="blackhead" id="new_upload_fields">
+                    
+                    <thead>
+                        <tr>
+                            <td width="100"></td>
+                            <td width="430">описание</td>
+                            <td>файл</td>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        % foreach (0..3) { 
+                        <tr>
+                            <td width="100"></td>
+                            <td>
+                                <input type="text" name="image_descr" size=80/>
+                            </td>
+                            <td>
+                                <input type="file" name="image"/>
+                            </td>
+                        </tr>
+                        % }
+                    </tbody>
+                </table>
+                <p id="add-image-upload-fields-wrapper">
+                <span id="add-image-upload-fields">Добавить поля для заливки (8 штук!)</span>
+                </p>
+            </div>
+
+			<div class="section submit-buttons">
+
+				<table class="layout">
+					<tr>
+						<td class="delete-wrapper">
+							% if ($action_type  ne 'add') {
+                            <span>
+                                <button type="submit" name="delete" value="1" onCLick="return confirm('Удалить 	статью?');">Удалить статью!</button>
+                            </span>
+							% }
+						</td>
+						<td class="save-wrapper">
+							<button type="submit" name="update" value="1">
+								<%== ($action_type  eq 'add' ? 'Добавить и продолжить редактуру' : 'Сохранить и продолжить редактуру') %>
+							</button>
+							<button type="submit" name="submit" value="1">
+								<%== ($action_type  eq 'add' ? 'Добавить и вернуться к списку' : 'Сохранить и вернуться к списку') %>
+							</button>
+						</td>
+					</tr>
+				</table>
+
+			</div>
+			<!-- /submit-buttons -->
+
+		% end
+		<!-- end FORM -->
+	</div>
+
+</div><!-- /admin-container -->

@@ -39,7 +39,7 @@ sub post {
 sub add_params {
 	my $self = shift;
 	$self->stash(brands => [$self->app->db->brands->find()->all] || []);
-	$self->stash(tags => (map {$_->{tag}} $self->app->db->tags->find()->sort({_id => 1})->all) || [] );
+#	$self->stash(tags => (map {$_->{tag}} $self->app->db->tags->find()->sort({_id => 1})->all) || [] );
 }
 
 sub check_input {
@@ -63,18 +63,12 @@ sub check_input {
 	# creaete new mongo format id from new timestamp
 	$article->{new_id} = $self->utils->update_mongoid_with_time($self->stash('id'), $article->{article_date}, $article->{article_time}) 
         if $article->{article_date} && $article->{article_time}; 
-
-	$article->{alias} = lc($self->utils->translit($article->{name}));
-	$article->{alias} =~ s![\s\/\\]+!_!g;
-	$article->{alias} =~ s![^\w\d\_]+|\_$|^\_!!g;
-	$article->{alias} =~ s!\_+!_!g;
-	$article->{alias} .= $self->articles->check_existing_alias($self->stash('id') || '', $article);
 	
-	$article->{author_info} = ($article->{author} ? $self->articles->get_authors($article->{author}) : '');
+#	$article->{author_info} = ($article->{author} ? $self->articles->get_authors($article->{author}) : '') if $article->{author};
 	
 	if ($self->{collection} eq 'articles') {
 		# treat like article with collection = 'articles'
-
+		$article->{alias} = lc($self->utils->translit($article->{name}));
 		$article->{preview_image_wide} = '' if !$article->{preview_image_wide};
 		$article->{preview_image} = '' if !$article->{preview_image};
 
@@ -85,10 +79,16 @@ sub check_input {
 #		push @$error_message, 'no_source' if !$article->{source_info};
 		push @$error_message, 'no_preview_text' if !$article->{preview_text} || $article->{preview_text} eq '';
 #		push @$error_message, 'no_author' if !$article->{author_info};
-	} else {
-		push @$error_message, 'no_author' if !$article->{author_info};
+	} elsif ($self->{collection} eq 'statics') {
+        push @$error_message, 'no_alias' if !$article->{alias};
+        $article->{type} = $self->{collection};
 	}
 
+    $article->{alias} =~ s![\s\/\\]+!_!g;
+	$article->{alias} =~ s![^\w\d\_]+|\_$|^\_!!g;
+	$article->{alias} =~ s!\_+!_!g;
+	$article->{alias} .= $self->articles->check_existing_alias($self->stash('id') || '', $article, $self->{collection});
+    
 	$article->{date} = $self->utils->date_from_mongoid($article->{new_id}||$self->stash('id')) if $self->stash('id');
 
 	push @$error_message, 'no_article_name' if !$article->{name} || $article->{name} eq '';
@@ -96,7 +96,7 @@ sub check_input {
 	$article->{active} = 0,	$self->stash('error_message' => $error_message) if @$error_message > 0; 
 
 	if (@$error_message > 0) {
-		$self->flash('error_message' => $error_message);
+        $self->flash('error_message' => $error_message);
 		$self->redirect_to('/admin/article/edit/'.$self->stash('id')) if $self->stash('id');
 	}
 }
@@ -106,12 +106,12 @@ sub get_images {
 
 	my $images = [];
 	my @image_descr = $self->req->param($name.'_descr');
-
+	my @image_size = $self->req->param($name.'_size');
 	my %image_delete = map {$_ => 1} $self->req->param($name.'_delete');
 
 	# Collect already uploaded files
 	foreach ($self->req->param($name.'_tag')) {
-		my $tmp = {tag => $_, descr => shift @image_descr};
+		my $tmp = {tag => $_, descr => shift @image_descr, size => 0+shift @image_size};
 		$tmp->{descr} =~ s/\"/&quot;/g;
 		push @$images, $tmp unless $image_delete{$_}; 
 	}
@@ -126,12 +126,12 @@ sub get_images {
 		$image->{tag} =~ s![^\w\d\.\_]+!!g;
 
 		my $folder_path = $self->config('image_dir').
-			($article->{type} ? $article->{type} : $self->config('default_img_dir')).'/'.
+			($article->{type} || $self->config('default_img_dir')).'/'.
 			($article->{alias} ? $article->{alias} : $self->config('default_img_dir')).'/';
         
 		make_path($folder_path) or die 'Error on creating article folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
 		$file->move_to($folder_path.$image->{tag});
-
+		$image->{size} = $file->size;
 		$image->{descr} = shift @image_descr;
 		$image->{descr} =~ s/\"/&quot/g;
 		push @$images, $image;
@@ -200,6 +200,7 @@ sub edit {
     $article->{tag} = join '; ', @{$article->{tag}} if ref $article->{tag} eq 'ARRAY';
 
 	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
+    $self->stash('message' => $self->flash('message')) if $self->flash('message');
 
 	$self->render(
 		%$article,
@@ -227,6 +228,9 @@ sub update {
 		$self->check_input($article);
 
 		$article->{images} = $self->get_images('image', $article);
+		foreach (@{$article->{images}}) {
+            $article->{preview_image_size} = ($_->{size} || (int rand 100)+100) if $article->{preview_image} eq $_->{tag};
+		}
 		$article->{article_text_rendered} = $self->utils->render_article($self, $article);
 
 		if ($self->stash('error_message')) {
@@ -281,23 +285,23 @@ sub list {
 	);
 }
 
-sub list_news {
+sub list_statics {
 	my $self = shift;
 
 	my $page = $self->req->param('page') ? $self->req->param('page') : 1;
 
-	my @news = $self->app->db->news->find({})->
+	my @statics = $self->app->db->statics->find({})->
 		skip(($page-1)*($self->config('articles_on_admin_page')||30))->
 		limit($self->config('articles_on_admin_page')||30)->
 		sort({'_id' => -1})->all;
 
-	my $pages = $self->app->db->news->find({})->count/($self->config('articles_on_admin_page')||30);
+	my $pages = $self->app->db->statics->find({})->count/($self->config('articles_on_admin_page')||30);
 	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
 
 	return $self->render(
-		articles => \@news,
+		articles => \@statics,
 		pages => $pages || 0,
-		template => 'admin/list_news',
+		template => 'admin/list_statics',
 		format => 'html',
 	);
 }

@@ -1,0 +1,12 @@
+% layout 'article';
+% title $name;
+
+%= include 'includes/left_bar'
+
+<div class='content__section post__page'>
+    <h2><%= stash 'name' %></h2>
+    
+    <%== stash 'article_text_rendered' %>
+</div>
+
+<div class='clear'></div>

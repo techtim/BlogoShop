@@ -9,16 +9,20 @@
         <p><img src="<%= $brand->{logo} %>"><p>
         <p><%== $brand->{descr} %></p>
     % } else {
+    % if (@$banners > 0) {
     <div class='carousel'>
         <ul class='items'>
+            % foreach my $banner (@$banners) {
             <li>
-                <a href='#'>
-                    <img src='/i/tmp/carousel-1.jpg' alt='' />
+                <a href='<%= $banner->{link} %>'>
+                    <img src='<%= $banner->{image} %>' alt='' />
                 </a>
             </li>
+            % }
         </ul>
         <ul class='controls'></ul>
     </div>
+    % }
 
     <div class='blogs__section clearfloat'>
         <div class='caption__section'>

@@ -165,11 +165,37 @@ sub get_images {
 	return 0;
 }
 
+sub store_image {
+    my ($self, $ctrlr, $file, $path) = @_;
+    return unless $file->filename =~ /\.(jpg|jpeg|bmp|gif|png)/i;
+    $path =~ s!/?$!/!;
+    my $type = $1;
+    my $folder_path = $ctrlr->config('image_dir').$path;
+    make_path($folder_path) or die 'Error on creating image folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
+    my $filename = (int rand 1000).$file->filename;
+    $file->move_to($folder_path.$filename);                
+    return $ctrlr->config('image_url').$path.$filename;
+}
+
+
 sub get_list_brands {
     my ($self, $db) = @_;
     my $list_brands = {};
     push @{$list_brands->{$_->{category}->{_id}}}, $_ foreach ($db->brands->find({})->sort({name=>1})->all);
     return $list_brands;
+}
+
+sub get_banners {
+    my ($self, $ctrlr, $category) = @_;
+    my @banners = $ctrlr->app->db->banners->find({category=>$category})->all;
+    my @rand_array;
+    push @rand_array, (''.$_->{_id}) x $_->{weight} foreach @banners;
+    my $selected = $rand_array[int rand @rand_array];
+    foreach (@banners) {
+        $_->{selected} = 1 if $selected eq $_->{_id};
+    }
+
+    return \@banners;
 }
 sub render_article {
 	my ($self, $controller, $article) = @_;
@@ -218,8 +244,7 @@ sub render_article {
 
 	$text =~ s/<video="([^"]+)">/$controller->render("includes\/video", partial => 1, video_src => $img_url.$1, video_id => md5_hex($1))/eg;
 
-	$text =~ s/<vrez=([^>]+?)><br>/<vrez=$1>/g;
-	while ($text =~ s/<vrez=([^>]+?)>(.+?)<\/vrez>/$controller->render("includes\/blockquote", partial => 1, type => $1, quote_text => $2)/sge) {;} 
+	while ($text =~ s/<bq>(.+?)<\/bq>/$controller->render("includes\/blockquote", partial => 1, quote_text => $1)/sge) {;} 
 
 	return $text;
 }

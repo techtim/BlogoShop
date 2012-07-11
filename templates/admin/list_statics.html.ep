@@ -1,5 +1,5 @@
 % layout 'admin';
-% title 'Список статей';
+% title 'Список статичных страниц';
 
 <div class="admin-container">
 
@@ -7,7 +7,7 @@
 
 		<h1>
 			<a href="/admin">Админка</a>
-			&gt; Список новостей
+			&gt; Список статичных страниц
 		</h1>
 
 		%= include 'includes/error_message', error_messages => stash 'error_message'
@@ -22,7 +22,7 @@
 			<tr>
 				<td>
 					<b>Инструменты:</b>
-						[<a href="/admin/news/edit">Добавить новость<a/>]
+						[<a href="/admin/statics/edit">Добавить страницу<a/>]
 				</td>
 			</tr>
 		</table>
@@ -45,13 +45,13 @@
 				% foreach my $article (@$articles) {
 					<tr>
 						<td>
-							<a href="/<%== join '/', 'news', $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'" class="<%= !$article->{active} ? 'article-link-bold' : '' %>">
-								<%= $article->{name} %> <%= ref $article->{author_info} eq 'HASH' ? '('.$article->{author_info}->{name}.')' : '' %>
+							<a href="/<%== $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'">
+								<%= $article->{name} %> (<%= config->{domain_name}.'/'.$article->{alias} %>)
 							</a>
 						</td>
 						<td>
 							% if ( !$article->{block}->{time} || $article->{block}->{time} < time() || $article->{block}->{admin_id} eq session('admin')->{_id} ) {
-								[<i><a href="/admin/news/edit/<%== $article->{_id}->{value} %>">править</a></i>]
+								[<i><a href="/admin/statics/edit/<%== $article->{_id}->{value} %>">править</a></i>]
 							% }
 						</td>
 					</tr>

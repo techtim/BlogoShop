@@ -10,16 +10,12 @@ use utf8;
 
 sub show {
     my $self = shift;
-
-    $self->stash(
-        list_brands => $self->utils->get_list_brands($self->app->db),
-        categories => [$self->app->db->categories->find({})->all],
-    );
-
+    my $page = $self->app->db->statics->find_one({alias => $self->stash('template')});
     return $self->render(
-        alias => $self->stash('template'),
-	type => '',
-	host => $self->req->url->base,
+        %$page,
+        type => '',
+        host => $self->req->url->base,
+        template => 'static',
         format => 'html',
 	);
 }

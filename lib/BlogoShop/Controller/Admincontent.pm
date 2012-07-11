@@ -9,7 +9,7 @@ use utf8;
 use File::Path qw(make_path remove_tree);
 
 use constant BRAND_PARAMS => qw(name descr id category logo images);
-use constant BANNER_PARAMS => qw(link descr image);
+use constant BANNER_PARAMS => qw(id link image category weight);
 
 sub list_categories {
     my $self = shift;
@@ -17,7 +17,7 @@ sub list_categories {
     
     return $self->render(
         template => 'admin/categories',
-        categories => [$self->app->db->categories->find()->all] || [],
+#        categories => [$self->app->db->categories->find()->all] || [],
     ) unless $self->stash('save');
 
     my $pars = $self->req->params();
@@ -33,7 +33,7 @@ sub list_categories {
     foreach my $par (@params) {
         my $key = ''.(keys %$par)[0];
         push @$error_message, 'no_name' && next unless $par->{$key} =~ m/([^\{\}\[\]]+)$/i;
-
+        $self->flash('error_message' => $error_message);
         if ($par->{new_cat} && $par->{new_cat} ne '') {
             my $cat->{name} = $par->{new_cat};
             $cat->{_id} = $self->utils->translit($cat->{name}, 1);
@@ -49,11 +49,11 @@ sub list_categories {
                 {_id => $cat}, 
             {'$push' => {subcats => {_id => $self->utils->translit($par->{$key}, 1), name => $par->{$key}}}}
             ) if $act eq 'new_subcat';
+#            warn "$cat \-\> $par->{$key}" if $act eq 'delete_subcat'
     #        $self->app->db->types->remove({_id => MongoDB::OID->new(value => $self->req->param('id'))});
         }
     }
-    $self->app->defaults->{categories} = [$self->app->db->categories->find()->all];
-#    my $catigories = 
+
     $self->redirect_to('admin/categories');
 }
 
@@ -118,6 +118,7 @@ sub list_brands {
             $self->stash(%$brand);
         }
     } else {
+        $self->stash('error_message' => $error_message);
         $self->stash($_ => '') foreach BRAND_PARAMS;
     }
     $self->stash(brands => [$self->app->db->brands->find()->sort({_id => 1})->all] || []);
@@ -134,22 +135,64 @@ sub list_banners {
     my $self = shift;	
     my $error_message = [];
     
+    return $self->redirect_to('admin/banners') if $self->req->param('cancel');
+    
     my $banner = {};
-    if ($self->stash('do') eq 'save')  { 
+    if ($self->req->param('delete')) {
+        $self->app->db->banners->remove({_id => MongoDB::OID->new(value => ($self->req->param('delete')=~m/([^\{\}\[\]]+)/)[0])});
+        return $self->redirect_to('admin/banners');
+    }
+
+    if ($self->stash('do') && $self->stash('do') eq 'edit') {
+        my $banner = $self->stash('banner') || $self->req->param('banner') || '';
+        $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner)});
+        return $self->redirect_to('admin/banners') if !$banner;
+        $self->stash(%$banner);
+
+    } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         $banner->{$_} = $self->req->param($_) foreach BANNER_PARAMS;
         push @$error_message, 'no_link' if !$banner->{link};
-        push @$error_message, 'no_descr' if !$banner->{descr};
-
+        
         my $file = $self->req->upload('image');
         push @$error_message, 'no_logo' 
-            unless $file || $file->filename || $file->filename =~ /\.(jpg|jpeg|bmp|gif|png)/i;
+            unless $self->req->param('image_loaded') || $file || $file->filename || $file->filename =~ /\.(jpg|jpeg|bmp|gif|png)/i;
         if (@$error_message == 0) {
-            
+            $banner->{image} = $file && $file->filename ? 
+                $self->utils->store_image($self, $file, 'banners') :
+                $self->req->param('image_loaded');
+            $banner->{weight} += 0;
+            $banner->{link} = 'http://'.$banner->{link} unless $banner->{link} =~ m!^(http://)!;
+
+            my $id = delete $banner->{id};
+            if ($id) { # delete returns true -> means save after edit
+                $self->app->db->banners->update({_id => MongoDB::OID->new(value =>$id)}, {'$set' => {%$banner}});
+#                warn 'banner UPD '. $self->dumper($banner);
+            } else {
+                $id = $self->app->db->banners->save($banner);
+#                warn 'banner SAVE '. $self->dumper($banner);
+            }
+            return $self->redirect_to('admin/banners/edit/'.$id);
+
+        } else {
+            $self->stash('error_message' => $error_message);
+            $self->stash(%$banner);
         }
+
+    } else {
+        $self->stash($_ => '') foreach BANNER_PARAMS;
     }
-    
-    $self->stash(banners => [$self->app->db->banners->find()->sort({pos => 1})->all] || []);
+
+    my @weights; push @weights, {_id => $_, name => $_} foreach (1..5);
+    my %cat_alias;
+    foreach (@{$self->app->defaults->{categories}}) {
+        $cat_alias{$_->{_id}} = $_->{name};
+        $cat_alias{$_->{_id}} = $_->{name} foreach @{$_->{subcats}};
+    }
+
     return $self->render(
+        banners => [$self->app->db->banners->find()->sort({pos => 1})->all] || [],
+        weights => \@weights,
+        cat_alias => \%cat_alias || {},
         do => $self->stash('do') || '',
         template => 'admin/banners',
         format => 'html',

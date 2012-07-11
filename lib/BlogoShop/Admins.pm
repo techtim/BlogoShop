@@ -33,7 +33,7 @@ sub update {
 	my $id = $controller->session()->{admin}->{_id};
     $params->{_id} = ref $id eq 'HASH' ? $id->{'$oid'} : $id;
     delete $params->{_id};
-    warn 'ADM PAR '. $controller->dumper($params);
+#    warn 'ADM PAR '. $controller->dumper($params);
 #	$self->{db}->get_collection(COLLECTION)->update(
 #	{
 #		_id => MongoDB::OID->new(value => $id)

@@ -17,7 +17,7 @@
         % foreach my $cat (@$categories) {
             <p><strong><%= $cat->{name} %></strong> &emsp;&emsp; <input type="checkbox" name="delete_cat" value="<%= $cat->{_id} %>">удалить<br>
             % foreach my $subcat (@{$cat->{subcats}}) {
-                &emsp;&mdash;&emsp;<%= $subcat->{name} %> &emsp;&emsp; <input type="checkbox" name="delete_subcat" value="<%= $cat->{_id}.':'.$subcat->{_id} %>"><br>
+                &emsp;&mdash;&emsp;<%= $subcat->{name} %> &emsp;&emsp; <input type="checkbox" name="delete_subcat:<%= $cat->{_id} %>" value="<%= $subcat->{_id} %>"><br>
             % }
                 &emsp;&mdash;&emsp;<input type="text" name="new_subcat:<%= $cat->{_id} %>" value="">
             <p>

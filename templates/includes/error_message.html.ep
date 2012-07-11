@@ -93,6 +93,18 @@
 	Укажите город мероприятия
 % }
 
+% if ($error_message eq 'no_type') {
+    Укажите тип
+% }
+
+% if ($error_message eq 'no_alias') {
+    Укажите адрес страницы
+% }
+
+% if ($error_message eq 'no_link') {
+    Укажите ссылку
+% }
+
 </font>
 	<br/>
 % }

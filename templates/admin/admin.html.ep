@@ -41,15 +41,16 @@
 			<li><%= link_to 'Список постов' => '/admin/articles' %></li>
 			<li><%= link_to 'Создать новый пост' => '/admin/article/edit' %></li>
 		</ul>
-<!--
-		<h3>Новости:</h3>
+
+		<h3>Cтатичные страницы:</h3>
 		<ul>
-			<li><%= link_to 'Cписок новостей' => '/admin/news' %></li>
-			<li><%= link_to 'Добавить новую новость' => '/admin/news/edit' %></li>
+			<li><%= link_to 'Cписок статичных страниц' => '/admin/statics' %></li>
+			<li><%= link_to 'Добавить статичную страницу' => '/admin/statics/edit' %></li>
 		</ul>
--->		
+
         <h3>Контент:</h3>
             <ul>
+                <li><%= link_to 'Редактирование баннеров' => '/admin/banners' %></li>
                 <li><%= link_to 'Редактирование категорий' => '/admin/categories' %></li>
                 <li><%= link_to 'Редактирование брендов' => '/admin/brands' %></li>
             </ul>
