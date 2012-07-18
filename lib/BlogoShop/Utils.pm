@@ -189,14 +189,15 @@ sub get_banners {
     my ($self, $ctrlr, $category) = @_;
     my @banners = $ctrlr->app->db->banners->find({category=>$category})->all;
     my @rand_array;
-    push @rand_array, (''.$_->{_id}) x $_->{weight} foreach @banners;
-    my $selected = $rand_array[int rand @rand_array];
-    foreach (@banners) {
-        $_->{selected} = 1 if $selected eq $_->{_id};
-    }
-
+    my $i = 0;
+    # create array for randomization with number of banner position in array multiply on weight
+    push @rand_array, ($i++) x $_->{weight} foreach @banners;
+    my $selected = $rand_array[int rand @rand_array]; # get random position
+    my $banner = splice(@banners,$selected,1); # delete from position
+    unshift @banners, $banner; # put deleted at array front
     return \@banners;
 }
+
 sub render_article {
 	my ($self, $controller, $article) = @_;
 

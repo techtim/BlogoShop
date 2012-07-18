@@ -13,19 +13,14 @@
     % my $select_num = 1;
     <div class='carousel'>
         <ul class='items'>
-            % foreach my $count (0..@$banners-1) {
-            % $select_num = 1+$count if $banners->[$count]->{selected};
+            % foreach (@$banners) {
             <li>
-                <a href='<%= $banners->[$count]->{link} %>'>
-                	<img src='<%= $banners->[$count]->{image} %>' alt='' />
+                <a href='<%= $_->{link} %>'>
+                	<img src='<%= $_->{image} %>' alt='' />
                 </a>
-
             </li>
             % }
         </ul>
-        <script type='text/javascript'>
-        	_scroll_to = <%= $select_num %>;
-        </script>
         <ul class='controls'></ul>
     </div>
     % }

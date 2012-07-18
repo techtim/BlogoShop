@@ -22,7 +22,6 @@
     <div class="section">
         %= include 'includes/error_message', error_messages => stash 'error_message'
         %= include 'includes/info_message', message => stash 'message'
-        <%= $self->render('info_message', partial => 1) %>
     </div>
 
     % if ($type && $type eq 'super') {
