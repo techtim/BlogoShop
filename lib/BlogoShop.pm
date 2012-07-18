@@ -122,9 +122,10 @@ sub startup {
     $r->route('/tag/:tag', tag => qr/[а-яА-Я\w]+/i)->to('controller-article#list');
     $r->route('/brand/:brand', brand => qr/[^\{\}\[\]]+/)->to('controller-article#list');
 
+    $r->route('/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
 	$r->route('/:type/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
-	$r->route('/:type/:tag/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
-	$r->route('/:type/:brand/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
+#	$r->route('/:type/:tag/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
+#	$r->route('/:type/:brand/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
     #	$r->route('/:cut/:rubric/:move/:id', cut => qr/$bind_cuts/, rubric => qr/$bind_rubrics/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
     
 	$r->route('/rss')->to('controller-article#rss');

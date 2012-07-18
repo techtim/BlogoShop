@@ -75,7 +75,7 @@ sub list {
 	my $flag = 0;
     my $banners = $self->utils->get_banners($self, '');
 	$self->res->headers->header('Cache-Control' => 'no-cache');
-
+    warn 'NM:'.$self->config('articles_on_page');
 	return $self->render(
 		host => $self->req->url->base,
 		tag => $filter->{tag} || '', 

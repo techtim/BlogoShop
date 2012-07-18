@@ -10,16 +10,22 @@
         <p><%== $brand->{descr} %></p>
     % } else {
     % if (@$banners > 0) {
+    % my $select_num = 1;
     <div class='carousel'>
         <ul class='items'>
-            % foreach my $banner (@$banners) {
+            % foreach my $count (0..@$banners-1) {
+            % $select_num = 1+$count if $banners->[$count]->{selected};
             <li>
-                <a href='<%= $banner->{link} %>'>
-                    <img src='<%= $banner->{image} %>' alt='' />
+                <a href='<%= $banners->[$count]->{link} %>'>
+                	<img src='<%= $banners->[$count]->{image} %>' alt='' />
                 </a>
+
             </li>
             % }
         </ul>
+        <script type='text/javascript'>
+        	_scroll_to = <%= $select_num %>;
+        </script>
         <ul class='controls'></ul>
     </div>
     % }

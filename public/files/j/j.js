@@ -1,15 +1,17 @@
-$(window).scroll(function(){
-	_scrolled = ~~$(window).scrollTop();
-	$section = $('.fixed__navigation__helper');
-	
-	if(_scrolled > 81 ){
-		$section.addClass('active');	
-	}else{
-		$section.removeClass('active');
-	}
-});
+
 
 $(function(){
+	
+	$(window).scroll(function(){
+		_scrolled = $(window).scrollTop();
+		$section = $('.fixed__navigation__helper');
+		
+		if(_scrolled > 81 ){
+			$section.addClass('active');	
+		}else{
+			$section.removeClass('active');
+		}
+	});
 	
 	(function set_equal_height(){
 		_height = 200;
@@ -23,6 +25,9 @@ $(function(){
 		})
 	})();
 	
+	$("body").screw({
+		loadingHTML: '<img alt="Loading" src="/i/ajax-loader.gif">'
+	});
 	
 	(function carousel(){
 		$carousel_section = $('.carousel');
@@ -30,7 +35,6 @@ $(function(){
 		
 		setTimeout(function(){
 			$('.items',$carousel_section).jcarousel({
-				auto: 3,
 				scroll: 1,
 				visible: 1,
 				itemFallbackDimension: 330,
@@ -38,10 +42,12 @@ $(function(){
 				itemVisibleInCallback:{
 					onAfterAnimation: set_active
 				} 
-			})
+			});
+			
 		}, 100)
 			
-		function slider_callback (carousel){			
+		function slider_callback (carousel){
+			window.carousel = carousel;	
 			$slider = $('.items',$carousel_section);		
 			_total = $('li',$slider).length;
 			
@@ -65,19 +71,19 @@ $(function(){
 			
 			$('li a',$controls).on('click', function(e) {
 				e.preventDefault();
-		        carousel.scroll($.jcarousel.intval($(this).attr('data-id')));
+		        window.carousel.scroll($.jcarousel.intval($(this).attr('data-id')));
 		    });
 		    
-			carousel.clip.hover(function(){
+			window.carousel.clip.hover(function(){
 				$('.jcarousel-prev, .jcarousel-next').css({
 					'visibility':'visible'
 				})
-		        carousel.stopAuto();
+		        window.carousel.stopAuto();
 			},function(){
 				$('.jcarousel-prev, .jcarousel-next').css({
 					'visibility':'hidden'
 				})
-				carousel.startAuto();
+				window.carousel.startAuto();
 			});
 			
 			$('.jcarousel-prev, .jcarousel-next').hover(function(){
@@ -85,20 +91,22 @@ $(function(){
 					'visibility':'visible'
 				});
 				$(this).addClass('hover');
-				carousel.stopAuto();				
+				window.carousel.stopAuto();				
 			}, function(){
 				$('.jcarousel-prev, .jcarousel-next').css({
 					'visibility':'hidden'
 				});
 				$(this).removeClass('hover');
-				carousel.startAuto();
+				window.carousel.startAuto();
 			});
 			
 			$('li',$controls).hover(function(){
-		        carousel.stopAuto();
+		        window.carousel.stopAuto();
 			},function(){
-				carousel.startAuto();
+				window.carousel.startAuto();
 			});
+			
+			if(typeof _scroll_to != 'undefined') window.carousel.scroll($.jcarousel.intval(_scroll_to));
 		};
 			
 		function set_active(carousel){

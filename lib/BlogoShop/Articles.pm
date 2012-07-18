@@ -116,7 +116,7 @@ sub get_filtered_articles {
 		fields(LIST_FIELDS)->all;
 
 	return \@all_articles unless $limit || $type; # show all to admins 
-
+    warn 0+@all_articles;
 	$limit = @all_articles if @all_articles < $limit; 
 
 	my @articles = (
