@@ -1,6 +1,6 @@
 
 
-$(function(){
+jQuery(function($){
 	
 	$(window).scroll(function(){
 		_scrolled = $(window).scrollTop();

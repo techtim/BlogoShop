@@ -84,7 +84,7 @@
 		                        if($(this).attr('rel')){
 		                          $.get($(this).attr('rel'), function(data) {
 		                             o.replaceWith(data);
-		                             if(callback) callback.call();
+		                             callback.call()
 		                       	 	}, data_type);
 		                        } else if($(this).attr('rev')){
 		                            o.replaceWith($(this).attr('rev'));
@@ -94,7 +94,7 @@
 	                          $.get($(this).attr('rel'), function(data) {
 	                             o.append('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + data + '</div>');
 	                             showContent(rand);
-	                             if(callback) callback.call();
+	                             callback.call()
 	                        }, data_type);  
 	                        } else if($(this).attr('rev')){
 	                            o.append('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + $(this).attr('rev') + '</div>');
