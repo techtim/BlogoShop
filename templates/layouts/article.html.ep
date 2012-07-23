@@ -6,6 +6,7 @@
 		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<meta property="og:site_name" content="магазин Хохловка" />
 		<meta property="og:type" content="<%= stash 'type' %>" />
