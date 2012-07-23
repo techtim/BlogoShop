@@ -31,7 +31,7 @@ jQuery(function($){
 		});
 	};
 	
-	if(('.fotorama').length > 0 ) {		
+	if($('.fotorama').length > 0 ) {		
 	    $(".fotorama").fotorama({
 	        resize: true,
 	        thumbsPreview: true,
