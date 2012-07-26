@@ -1,5 +1,5 @@
 % layout 'article';
-% title $name;
+% title $name.' распродажа летней одежды';
 
 %= include 'includes/left_bar'
 
