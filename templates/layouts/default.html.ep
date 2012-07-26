@@ -13,9 +13,14 @@
         <script type='text/javascript'>
             google.load("jquery", "1.7.1");
         </script>
-        <script type='text/javascript' src='/j/carousel.js'></script>
-        <script type='text/javascript' src='/j/infinitescroll.js'></script>
-        <script type='text/javascript' src='/j/j.js'></script>
+        <script type='text/javascript' src='/j/head.js'></script>
+        <script>
+        	head.js(
+        		{carousel : '/j/libs/carousel.js'}, 
+        		{infinitescroll: '/j/libs/infinitescroll.js'},
+        		{cookies: '/j/libs/cookie.js'},
+        		'/j/j.js');
+        </script>
     </head>
 	<body>
         <div class='wrap clearfloat'>
