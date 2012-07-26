@@ -140,26 +140,4 @@
 	};
 
 		
-	(function bind__menu(){
-		$menu__section = $('.sidebar__section .menu__section');
-		_cookie = $.cookie('opened_menu');
-		
-		$('.title', $menu__section).click(function(){
-			$this = $(this);
-			$parent = $this.closest('ul')
-			_index = $parent.index();
-			$('.item', $menu__section).removeClass('active');
-			$parent.addClass('active');
-			$.cookie('opened_menu', _index, {
-				path: '/',
-				expires: 365
-			});
-		});
-		
-		if(_cookie){
-			_val = _cookie-1;
-			$('.item', $menu__section).eq(_val).addClass('active');
-		};
-		
-	})();
 })(jQuery)
