@@ -23,11 +23,19 @@
 		})
 	})();
 	
-	if($.screw){
-		$("body").screw({
-			loadingHTML: '<img alt="Loading" src="/i/ajax-loader.gif">'
+	
+	$("body").screw({
+		loadingHTML: '<img alt="Loading" src="/i/ajax-loader.gif">'
+	}, function(){
+		$('.blogs__section li').each(function(){
+			_h = $(this).height();
+			_height = _h > _height ? _h : _height;
 		});
-	};
+		$('.blogs__section li').css({
+			height: _height
+		});
+	});
+	
 	
 	if($('.fotorama').length > 0 ) {		
 	    jQuery(".fotorama").fotorama({
