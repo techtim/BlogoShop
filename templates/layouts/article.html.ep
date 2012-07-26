@@ -26,7 +26,7 @@
         		{carousel : '/j/libs/carousel.js'}, 
         		{infinitescroll: '/j/libs/infinitescroll.js'},
         		{cookies: '/j/libs/cookie.js'},
-        		{fotorama '/j/libs/fotorama.js'},
+        		{fotorama: '/j/libs/fotorama.js'},
         		'/j/j.js');
         </script>
 	</head>
