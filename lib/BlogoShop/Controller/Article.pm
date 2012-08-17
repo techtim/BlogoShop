@@ -11,7 +11,7 @@ sub show {
 	my $self = shift;
 
 	my $filter;
-	$filter->{active} = "1" unless $self->session('admin'); # show inactive articles to admin
+	$filter->{active} = 1 unless $self->session('admin'); # show inactive articles to admin
 	foreach (ARTICLE_FILTER) {
 		$filter->{$_} = $self->stash($_) if $self->stash($_);
 	}
@@ -53,6 +53,7 @@ sub show {
 		host => $self->req->url->base,
 		cut => $self->stash('cut') || '',
 		img_url => $img_url,
+		page_name => 'blog',
 		template => 'article',
 		format => 'html',
 	);
@@ -61,7 +62,7 @@ sub show {
 sub list {
 	my $self = shift;
 
-	my $filter->{active} = "1";
+	my $filter->{active} = 1;
 	foreach (ARTICLE_FILTER) {
 		$filter->{$_} = $self->stash($_) if $self->stash($_);
 	}
@@ -84,6 +85,7 @@ sub list {
         is_index => keys %$filter == 0 ? 1 : 0,
 		articles => $art,
         banners => $banners,
+        page_name => 'blog',
         template => $self->stash('move') && $self->req->headers->header('X-Requested-With') ? 'includes/list_articles' : 'index', # return only
 		format => 'html', 
 	);
@@ -92,7 +94,7 @@ sub list {
 sub rss {
 	my $self = shift;
 	
-	my @articles = $self->app->db->articles->find({"active"=>"1"})->fields(RSS_FIELDS)->sort({_id=>-1})->limit(10)->all;
+	my @articles = $self->app->db->articles->find({"active"=>1})->fields(RSS_FIELDS)->sort({_id=>-1})->limit(10)->all;
 #	$_->{_id} = $_->{_id}->{value} foreach (@articles);
 
 	return $self->render(

@@ -1,0 +1,110 @@
+% layout 'shop';
+% title 'магазин Хохловка: '.stash 'name';
+%= include 'includes/left_bar'
+
+<script>
+	head.js(
+		{tmpl: '/j/libs/tmpl.js'},
+		'/j/shop.js', function(){
+		shop_item.alias = <%== $json_params_alias %>;
+		shop_item.subitems = <%== $json_subitems %>; 
+		shop_item.init();
+		shop_gallery.init();
+	});
+</script>
+
+<script id='subitem' type='text/x-jquery-tmpl'>
+
+    <dl class='row clearfloat {{if name == 'color'}}color{{/if}}'>
+        <dt>
+            ${shop_item.get_alias(name)}
+        </dt>
+        <dd>
+           {{if name == 'price'}}
+                <span class='price'>
+           {{/if}}
+           
+           {{if name == 'color'}}
+                <ul class='color'>
+                    {{each value}}
+                    <li class='color__item' style='background-color: #${$value}' data-color='${$value}'>
+                    	<input type='checkbox' />
+                    </li>
+                    {{/each}}
+                </ul>
+           {{else}}
+				{{if name != 'price'}}
+					${value}
+				{{else}}
+					{{if value.length > 1}}
+						{{each(key, prop) value}}
+							{{if key == 0}}<s>{{/if}}${prop}{{if key == 0}}</s>{{/if}}
+						{{/each}}
+					{{else}}
+						${value}
+					{{/if}}
+				{{/if}}
+           {{/if}}
+           
+           {{if name == 'price'}}
+                </span>
+           {{/if}}
+        </dd>
+    </dl>
+</script>
+
+<div class='content__section shop__item__section'>
+
+<ul class='breadcrumps__section clearfloat'>
+	<li><a href='/<%= $category %>'><%= $cat_alias->{$category} %></a></li>
+	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $cat_alias->{$subcategory} %></a></li>
+	<li>/ <%= stash 'name' %></li>
+</ul>
+
+% if (ref $images eq 'ARRAY') {
+	%= include  'includes/shop_gallery', gallery => $images  
+% }
+
+<div class='information__section'>
+	
+	
+	<div class='description__section row'>
+		<%== stash 'descr' %>
+	</div>
+	
+	<dl class='clearfloat row size'>
+		<dt>Размер:</dt>
+		<dd>
+			<ul class='sizes__section clearfloat'>
+				% foreach (@$subitems) {
+				% next unless $_->{qty};
+				<li data-value="<%= $_->{size} %>"><%= $_->{size} %></li>
+				% }
+			</ul>
+		</dd>
+	</dl>
+	
+	<span id='params__helper'></span>
+	
+	<dl class='clearfloat row submit'>
+		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
+	</dl>
+</div>
+<div class='clear'></div>
+
+% if (@$items>0) {
+	<div class="shop__items__list">
+		<h2 class='dotted__caption'>
+			<span>рекомендуем</span>
+		</h2>
+		<ul class='list__section'>
+			%= include 'includes/list_items', items => stash 'items'
+		</ul>  
+	</div>
+% }
+
+</div>
+
+
+
+

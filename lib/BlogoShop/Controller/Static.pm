@@ -2,7 +2,6 @@ package BlogoShop::Controller::Static;
 
 use Mojo::Base 'Mojolicious::Controller';
 use LWP::UserAgent ();
-use Captcha::reCAPTCHA ();
 
 use utf8;
 
@@ -15,6 +14,7 @@ sub show {
         %$page,
         type => '',
         host => $self->req->url->base,
+        page_name => $self->stash('template'),
         template => 'static',
         format => 'html',
 	);

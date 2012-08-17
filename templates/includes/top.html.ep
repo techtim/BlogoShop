@@ -1,17 +1,36 @@
-<div class='fixed__navigation__helper'>
+<div class='fixed__navigation__helper clearfloat'>
 	<div class='navigation__section clearfloat'>
-	    <ul>
-	        <li class='item__1'><a href='/'>БЛОГ</a></li>
-	        <li class='item__2'><a href='/map'>ГДЕ МЫ</a></li>
-	        <li class='item__3'><a href='/about'>КТО МЫ</a></li>
-	        <li class='item__4'><a href='#' class='disabled'>ONLINE-МАГАЗИН</a></li>
-	        <li class='item__5'><a href='/delivery'>ДОСТАВКА</a></li>
-	        <li class='item__6'><a href='/pay'>ОПЛАТА</a></li>
-	        <li class='item__7'><a href='/special'>SPECIAL</a></li>
+	    <ul class='main__nav__strip clearfloat'>
+	    	<li><a href='/' class='home'></a></li>
+	        <li class='item__1 <%= 'current' if stash('page_name') eq 'blog' %>'><a href='http://<%= config->{domain_name} %>/'>БЛОГ</a></li>
+	        <li class='item__2 <%= 'current' if stash('page_name') eq 'map' %>'><a href='http://<%= config->{domain_name} %>/map'>ГДЕ МЫ</a></li>
+	        <li class='item__3 <%= 'current' if stash('page_name') eq 'about' %>'><a href='http://<%= config->{domain_name} %>/about'>КТО МЫ</a></li>
+	        <li class='item__4 <%= 'current' if stash('page_name') eq 'shop' %>'><a href='http://shop.<%= config->{domain_name} %>/'>ONLINE-МАГАЗИН</a></li>
+	        <li class='item__5 <%= 'current' if stash('page_name') eq 'delivery' %>'><a href='http://<%= config->{domain_name} %>/delivery'>ДОСТАВКА</a></li>
+	        <li class='item__6 <%= 'current' if stash('page_name') eq 'pay' %>'><a href='http://<%= config->{domain_name} %>/pay'>ОПЛАТА</a></li>
+	        <li class='item__7 <%= 'current' if stash('page_name') eq 'special' && stash('type') eq 'special' %>'><a href='http://<%= config->{domain_name} %>/special'>SPECIAL</a></li>
 	    </ul>
-	
-	    <div class='shopping__cart__section empty'>
-	        <!--КОРЗИНА: ПУСТО-->
+	    <div class='shopping__cart__section'>
+	        % if (stash('cart_count') eq '0') {
+	        <span class='empty'>КОРЗИНА: ПУСТО</span>
+	        % } else {
+	        <a href="http://shop.<%= config->{domain_name} %>/cart">КОРЗИНА: <%= stash 'cart_count' %> = <%= stash 'cart_price' %> Р</a>
+	        % }
 	    </div>
+	    
+	    <div class='clear'></div>
+		<!--<ul class='sub__nav__strip clearfloat'>
+			<li><a href='#'>новые поступления</a></li>
+			<li><a href='#'>скидки</a></li>
+			<li><a href='#'>специальные предложения</a></li>
+			
+			<li class='search__form__section'>
+				<form>
+					<input type='text' value='' />
+					<input type='submit' value='найти' />
+				</form>
+			</li>
+		</ul>-->
+		
 	</div>
 </div>

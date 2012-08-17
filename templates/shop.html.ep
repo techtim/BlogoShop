@@ -1,0 +1,38 @@
+% layout 'shop';
+% title 'магазин Хохловка';
+
+%= include 'includes/left_bar'
+
+<div class='content__section post__page'>
+	<ul class='breadcrumps__section clearfloat'>
+<!--		<li><a href='/'>ONLINE-МАГАЗИН</a></li> -->
+		% if (stash('category') ne '') {
+			<li <%= 'class=\'current\'' if stash('subcategory') eq '' %>>/<a href='/<%= stash('category') %>'><%= $cat_alias->{stash('category')} %></a></li>
+			% if (stash('subcategory') ne '') {
+				<li class='current'>/<a href='/<%= stash('category').'/'. stash('subcategory') %>'><%= $cat_alias->{stash('subcategory')} %></a></li>
+			% }
+		% }
+	</ul>
+
+	% if (@$banners > 0) {
+    % my $select_num = 1;
+    <div class='carousel'>
+        <ul class='items'>
+            % foreach (@$banners) {
+            <li>
+                <a href='<%= $_->{link} %>'>
+                	<img src='<%= $_->{image} %>' alt='' />
+                </a>
+            </li>
+            % }
+        </ul>
+        <ul class='controls'></ul>
+    </div>
+    % }
+	
+	<div class='shop__items__list'>
+		<ul class='list__section'>
+			%= include 'includes/list_items', items => stash 'items'
+		</ul>  
+	</div>
+</div>

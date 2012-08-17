@@ -3,37 +3,38 @@
 	$(window).scroll(function(){
 		_scrolled = $(window).scrollTop();
 		$section = $('.fixed__navigation__helper');
+		_section_height = $('.navigation__section', $section).outerHeight(true);
 		
 		if(_scrolled > 81 ){
+			$('.header__section').css({
+				marginBottom: _section_height
+			});
 			$section.addClass('active');	
 		}else{
+			$('.header__section').css({
+				marginBottom: 0
+			});
 			$section.removeClass('active');
 		}
 	});
 	
-	(function set_equal_height(){
-		_height = 200;
+	var set_equal_height = function(){
+		var _height = 150;
 		
-		$('.blogs__section li').each(function(){
+		$('.blogs__section li, .list__section li').each(function(){
 			_h = $(this).height();
 			_height = _h > _height ? _h : _height;
 		});
-		$('.blogs__section li').css({
+		$('.blogs__section li, .list__section li').css({
 			height: _height
 		})
-	})();
-	
+	};
+	set_equal_height()
 	
 	$("body").screw({
 		loadingHTML: '<img alt="Loading" src="/i/ajax-loader.gif">'
 	}, function(){
-		$('.blogs__section li').each(function(){
-			_h = $(this).height();
-			_height = _h > _height ? _h : _height;
-		});
-		$('.blogs__section li').css({
-			height: _height
-		});
+		set_equal_height()
 	});
 	
 	
@@ -139,5 +140,39 @@
 		})();
 	};
 
+	$('select:not(".not__custom")').selectik();
+	
+	$('.fake__checkbox').toggle(function(){
+		$('input', this).attr('checked', true);
+	}, function(){
+		$('input', this).attr('checked', false);
+	});
+
+	(function bind__menu(){
+		var $section = $('.sidebar__section .menu__section'),
+			$subitem = '',
+			_clicked = null,
+			timeout = null;
+			
 		
+		$section.on('click.title', '.title a', function(e){
+			var $this = $(this),
+				$parent = $this.closest('.item'),
+				_id = $parent.index();
+
+			$.cookie('menu_expand', _id, {
+				expires: 365,
+				path: '*.xoxloveka.ru'
+			});
+		});
+		
+		$section.on('click.expand_items', '.expand__items', function(){
+			var $this = $(this);
+			$this.toggleClass('opened');
+			$('.item', $section).toggleClass('toggled');
+		});
+		
+		
+	})();
+	
 })(jQuery)

@@ -71,6 +71,8 @@ sub is_admin {
 	my $self = shift;
 
 	if ($self->session('admin')){
+		my $session = $self->session();
+		$self->stash(admin => $session->{admin});
 		return 1;
 	}
 

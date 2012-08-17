@@ -204,7 +204,26 @@
         <!-- /submit-buttons -->
         
 		% end
+		<!-- end FORM -->
+        
+        <!--
+        <table class="layout">
+            <tr>
+                <td class="save-wrapper">
+                    <input type="submit" name="save" value="Сохранить">
+                </td>
+                <td class="delete-wrapper">
+                    % if ($do eq 'edit') {
+                    <span>
+                        <button type="submit" name="delete" value="1" onCLick="return confirm('Удалить 	статью?');">Удалить статью!</button>
+                    </span>
+                    % }
+                </td>
+            </tr>    
+        </table>
+         -->
 
+    
     </div>
 
 </div>

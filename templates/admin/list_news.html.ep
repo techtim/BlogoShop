@@ -1,0 +1,72 @@
+% layout 'admin';
+% title 'Список статей';
+
+<div class="admin-container">
+
+	<div class="main-heading section">
+
+		<h1>
+			<a href="/admin">Админка</a>
+			&gt; Список новостей
+		</h1>
+
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+
+		%= include 'includes/info_message', message => stash 'message'
+
+	</div>
+
+	<div class="section articles-toolbox">
+
+		<table class="layout">
+			<tr>
+				<td>
+					<b>Инструменты:</b>
+						[<a href="/admin/news/edit">Добавить новость<a/>]
+				</td>
+			</tr>
+		</table>
+	</div>
+
+    <div class='pager'>
+	    % foreach my $i (1..$pages) {
+	    	<a href='?<%== "page=$i" %>'><%= $i %></a>
+	    % }
+	</div>
+
+	<div class="section article-list">
+		<table class="blackhead">
+			<thead>
+				<tr>
+					<td colspan="2">Название</td>
+				</tr>
+			</thead>
+			<tbody>
+				% foreach my $article (@$articles) {
+					<tr>
+						<td>
+							<a href="/<%== join '/', 'news', $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'" class="<%= !$article->{active} ? 'article-link-bold' : '' %>">
+								<%= $article->{name} %> <%= ref $article->{author_info} eq 'HASH' ? '('.$article->{author_info}->{name}.')' : '' %>
+							</a>
+						</td>
+						<td>
+							% if ( !$article->{block}->{time} || $article->{block}->{time} < time() || $article->{block}->{admin_id} eq session('admin')->{_id} ) {
+								[<i><a href="/admin/news/edit/<%== $article->{_id}->{value} %>">править</a></i>]
+							% }
+						</td>
+					</tr>
+				% }
+			</tbody>
+		</table>
+    </div>
+    <!-- /article-list -->
+
+    <div class='pager'>
+
+		% foreach my $i (1..$pages) {
+			<a href='?<%== "page=$i" %>'><%= $i %></a>
+		% }
+
+	</div>
+
+</div>

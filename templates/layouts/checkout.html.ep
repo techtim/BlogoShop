@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<title><%= title %></title>
+		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
+		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
+        <link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
+        <script src="https://www.google.com/jsapi?key=ABQIAAAAq40cyT39xbh4SxII4iAAQhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQq6XU15uRy_aHLn2Ie3000LpSbxg" type="text/javascript"></script>
+        <script type='text/javascript'>
+            google.load("jquery", "1.7.1");
+        </script>
+        <script type='text/javascript' src='/j/head.js'></script>
+        <script>
+        	head.js(
+        		{carousel : '/j/libs/carousel.js'}, 
+        		{infinitescroll: '/j/libs/infinitescroll.js'},
+        		{cookies: '/j/libs/cookie.js'},
+        		{fotorama: '/j/libs/fotorama.js'},
+        		{selectik: '/j/libs/selectik.js'},
+        		'/j/j.js');
+       	</script>
+    </head>
+	<body>
+        <div class='wrap clearfloat'>
+            %= include 'includes/header'
+            %= include 'includes/top'
+            <%= content %>
+            
+        </div>
+        %= include 'includes/footer'
+        
+        %= include 'includes/google_analytics'
+        %= include 'includes/yandex_metrika'
+    </body>
+</html>

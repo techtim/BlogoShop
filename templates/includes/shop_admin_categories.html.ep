@@ -1,0 +1,25 @@
+<div class='sidebar__section categories fl'>
+	<h3 class='caption'>Категории</h3>
+	<a class='add' href='#'></a>
+	
+    <ul>
+        % foreach my $cat (@$categories) {
+        <li class='title'>
+        	<a href='#' class='active'></a>
+        	<a href="/admin/shop/<%= $cat->{_id} %>"><%= $cat->{name} %></a>
+            <!--<select name="pos">
+                % foreach (0..@$categories) {
+                <option value="<%= $_ %>" <%= 'selected' if $cat->{pos} == $_ %>><%= $_ %></option>
+                % }
+            </select>
+            -->
+        </li>
+        % foreach my $subcat (@{$cat->{subcats}}) {
+        <li>
+        	<a href='#' class='active'></a>
+        	<a href="/admin/shop/<%== $cat->{_id} %>/<%= $subcat->{_id} %>"><%= $subcat->{name} %></a>
+        </li>
+        % }
+        % }
+    </ul>
+</div>

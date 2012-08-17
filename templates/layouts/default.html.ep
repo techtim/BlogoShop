@@ -19,6 +19,7 @@
         		{carousel : '/j/libs/carousel.js'}, 
         		{infinitescroll: '/j/libs/infinitescroll.js'},
         		{cookies: '/j/libs/cookie.js'},
+        		{selectik: '/j/libs/selectik.js'},
         		'/j/j.js');
         </script>
     </head>
@@ -33,5 +34,6 @@
 
         %= include 'includes/google_analytics'
         %= include 'includes/yandex_metrika'
+        %# include 'includes/adriver'
     </body>
 </html>

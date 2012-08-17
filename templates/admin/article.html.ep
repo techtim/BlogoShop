@@ -41,6 +41,11 @@
 		%= include 'includes/error_message', error_messages => stash 'error_message'
 		%= include 'includes/info_message', message => stash 'message'
 
+		% if (defined 'message') {
+			<h3>
+				<%= stash 'message' %>
+			</h3>
+		% }
 	</div>
 
 	<div class="article-form-container">
@@ -122,7 +127,7 @@
                             <label>Тэги:</label>
                         </td>
                         <td>
-                            <input type="text" name="tags" size="90" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>"/>(через&nbsp;","&nbsp;или&nbsp;";")
+                            <input type="text" name="tags" size="90" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>" "/>(через&nbsp;","&nbsp;или&nbsp;";")
                         </td>
                     </tr>
 
@@ -184,7 +189,6 @@
 									<td>
 										<input type="text" size=40 value="<%== $image->{tag} %>"/>
                                         <input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
-                                        <input type="hidden" name="image_size" value="<%== $image->{size} %>"/>
 									</td>
 
 									<td>
@@ -215,7 +219,7 @@
 					</thead>
 
 					<tbody>
-                        % foreach (0..3) {
+
 							<tr>
 								<td width="100"></td>
 								<td>
@@ -225,7 +229,6 @@
 									<input type="file" name="image"/>
 								</td>
 							</tr>
-                        % }
 					</tbody>
 				</table>
 				<p id="add-image-upload-fields-wrapper">

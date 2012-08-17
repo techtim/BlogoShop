@@ -3,14 +3,43 @@
 	<head>
 		<meta charset='utf-8' />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<%= jquery_ajax_csrf_protection %>
 		<title><%= title %></title>
-
+		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
     	<link rel='stylesheet' type='text/css' href='/css/admin.css' media='all' />
     	
 		<script type='text/javascript' src="//www.google.com/jsapi"></script>
 		<script type='text/javascript'>google.load("jquery", "1.7.0");</script>
-
+		<script type='text/javascript' src='/j/head.js'></script>
+		<script>head.js('/j/admin/csrf.js')</script>
 	</head>
-	<body><%= content %>
+	<body>
+		<div class='wrap'>
+			<div class='header__section clearfloat'>
+				<h2>АДМИНЬ, блеать!</h2>
+				
+				<div class='user__section'>
+					<ul>
+						<li>Привет, <strong><%== (stash 'name' eq '') ? (stash 'name') : 'админъ' %></strong> 
+						<a href="logout" class='logout'>Выйти</a><li>
+						<li><%= link_to 'Редактировать профиль' => '/admin/edit_admin' %></li>
+					</ul>	
+				</div>
+			</div>
+			
+			<ul class='parts__section clearfloat'>
+				<li><a href='/admin/' class='home' title='Главная страница админки'></a></li>
+				<li><%= link_to 'БЛОГ' => '/admin' %></li>
+				<li><%= link_to 'ШОП' => '/admin/shop' %></li>
+				 % if ($admin->{type} && $admin->{type} eq 'super') {
+					<li><%= link_to 'Добавить администратора' => '/admin/add_admin' %></li>
+				 % }
+				 <li class='site__link'><a href='/' title='Вернуться на сайт'></a></li>				 	
+			</ul>
+
+			<%= content %>
+		</div>
 	</body>
 </html>

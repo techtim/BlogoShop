@@ -1,0 +1,32 @@
+---
+mojo_mode: 'development' # 'production'
+log_level: 'debug' # 'warn'
+
+db_name: 'dev_blogoshop'
+db_host: '127.0.0.1'
+db_port: 27017
+
+domain_name: 'dev.xoxloveka.ru'
+
+image_dir: '/home/techtim/blogoshop/public/files/i/'
+default_img_dir: 'default'
+image_url: '/i/'
+nginx_img_resize: '/res/64'
+
+cookie_name: 'BlogoShop'
+cookie_expiration: 604800 # week
+cookie_secret: '$w3Etx0X|_o\/eKa'
+
+block_voter_ip_time: 180 # 3 min
+
+articles_on_page: 9
+related_articles_count: 3
+
+items_on_page: 16
+
+articles_on_admin_page: 30
+
+superadmin_mail: 'timmy88@gmail.com'
+
+recaptcha_public_key: '6Lc9jtISAAAAABMneliM7sxkpvWGa6yT7iuk_Nd6'
+recaptcha_private_key: '6Lc9jtISAAAAAM6wAcAjkq5D3v4E2-sJoOnRsMjk'

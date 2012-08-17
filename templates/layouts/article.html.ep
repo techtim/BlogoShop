@@ -27,6 +27,7 @@
         		{infinitescroll: '/j/libs/infinitescroll.js'},
         		{cookies: '/j/libs/cookie.js'},
         		{fotorama: '/j/libs/fotorama.js'},
+        		{selectik: '/j/libs/selectik.js'},
         		'/j/j.js');
         </script>
 	</head>

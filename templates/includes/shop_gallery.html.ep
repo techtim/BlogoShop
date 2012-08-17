@@ -1,0 +1,21 @@
+<div class='gallery' id='shop__gallery'>
+	<div class='popup__full__img'>
+		<img src='' alt='' />
+	</div>
+	<div class='full__size__section'>
+		<a href='#'>
+			<img src='' alt='' />
+		</a>
+	</div>
+	% if (ref $gallery eq 'ARRAY') { 
+		<ul class='previews__section'>
+	 	% foreach my $img (@$gallery) {
+	 		<li>
+	 			<a href="<%= $img_url.$img->{tag} %>">
+		 			<img src="<%= config->{nginx_img_resize}.$img_url.$img->{tag} %>" alt="<%= $img->{descr} %>">
+	 			</a>
+	 		</li>
+	 	% }
+	 	</ul>
+	% }
+</div>

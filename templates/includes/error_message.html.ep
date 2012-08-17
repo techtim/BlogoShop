@@ -105,6 +105,13 @@
     Укажите ссылку
 % }
 
+% if ($error_message eq 'no_price') {
+    Укажите цену
+% }
+
+% if ($error_message eq 'no_preview_image') {
+	Укажите превью
+% }
 </font>
 	<br/>
 % }

@@ -8,6 +8,7 @@ use utf8;
 use Encode qw(decode_utf8);
 
 use Digest::MD5 qw(md5_hex);
+use BlogoShop::Item;
 
 use constant VOTE_PARAMS => qw( rubric alias question_hash answer_hash ); 
 
@@ -21,36 +22,12 @@ sub vote {
 	return $self->render(json => {result => $self->articles->vote($vote_params)});
 }
 
-sub write_file {
-	my $self= shift;
-
-#	my %cooks = map {$_->{name} => $_->{value}} @{$self->req->cookies};
-warn $self->dumper($self->req->params);
-	my $file = $self->req->param('POSTDATA') || undef;
-warn $self->dumper($file);
-	my $info = $self->req->param('img');
-	return $self->render(json => {success => 'false', error => 'no file'})
-		unless defined $file && $file->filename && $file->filename =~ /\.(jpg|jpeg|bmp|gif|png|tif|swf|flv)$/i;
-
-	my $article = $self->stash('id') ne 'add' ? $self->articles->get_article_by_id($self->stash('id')) : {};
-
-	my $image = {};
-	$image->{tag} = (time() =~ /(\d{5})$/)[0].'_'.lc($self->utils->translit($file->filename));
-	$image->{tag} =~ s![\s\/\\]+!_!g;
-	$image->{tag} =~ s![^\w\d\.\_]+!!g;
-
-#	my $folder_path = $self->config('image_dir').
-#		($article->{rubric} ? $article->{rubric} : $self->config('default_img_dir')).'/'.
-#		($article->{alias} ? $article->{alias} : $self->config('default_img_dir')).'/';
-#	make_path($folder_path) or die 'Error on creating article folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
-#	$file->move_to($folder_path.$image->{tag});
-
-	$image->{descr} = $info->{descr};
-	$image->{descr} =~ s/\"/&quot/g;
-	$image->{source}= $info->{source};
-	$image->{source} =~ s/\"/&quot/g;
-
-	return $self->render(json => {success => 'true', result => $image});
+sub activate {
+    my $self = shift;
+    $self->articles->activate($self->stash('id'), $self->stash('bool'));
+    return $self->render(
+        json => {ok => 1},
+	);
 }
 
 sub subscribe {
@@ -100,18 +77,72 @@ warn $str;
 	return $self->render(json => {result => ''});
 }
 
+
 use constant DUMP_FIELDS => {map {$_ => 1} qw( name alias cut cut_alias rubric rubric_alias preview_text date article_text_rendered ) }; 
 # source_info preview_image preview_image_wide author_info
-sub dumpXML {
+sub articles_update {
 	my $self = shift;
-	my @articles = $self->app->db->articles->find({"active"=>"1"})->fields(DUMP_FIELDS)->all;
-	$_->{_id} = $_->{_id}->{value} foreach (@articles);
-
+	my @articles = $self->app->db->articles->find({})->all;
+#	$_->{_id} = $_->{_id}->{value} foreach (@articles);
+warn $self->dumper($_->{active}) foreach @articles;
+	$self->app->db->articles->update({_id => $_->{_id}}, {'$set' => {active => 0+$_->{active}}}) foreach @articles;
+	
 	return $self->render(
-		articles => \@articles,
-		template => 'dump_articles', 
-		format => 'xml',
+		json => {ok => 1},
 	);
+}
+
+#SERVICE 
+sub items_update {
+	my $self = shift;
+	my $items = [$self->app->db->items->find({})->all];
+	foreach (@$items) {
+		foreach (@{$_->{subitems}}) {
+			$_->{qty} eq '' || $_->{qty} eq '0' ?  $_->{qty}=0 : $_->{qty} += 0;
+			$_->{price} += 0;
+		}
+		$_->{qty} eq '' || $_->{qty} eq '0' ?  $_->{qty}=0 : $_->{qty} += 0;
+		$_->{price} += 0;
+#		warn $self->dumper($_); 
+		$self->{app}->db->items->update({alias=> $_->{alias}} , 
+			{'$set' =>{qty => 0+$_->{qty}, price => $_->{price}, subitems => $_->{subitems}}}); 
+	}
+	return $self->render(
+		json => {ok => 1},
+	);
+}
+
+
+sub write_file {
+	my $self= shift;
+    
+    #	my %cooks = map {$_->{name} => $_->{value}} @{$self->req->cookies};
+    warn $self->dumper($self->req->params);
+	my $file = $self->req->param('POSTDATA') || undef;
+    warn $self->dumper($file);
+	my $info = $self->req->param('img');
+	return $self->render(json => {success => 'false', error => 'no file'})
+    unless defined $file && $file->filename && $file->filename =~ /\.(jpg|jpeg|bmp|gif|png|tif|swf|flv)$/i;
+    
+	my $article = $self->stash('id') ne 'add' ? $self->articles->get_article_by_id($self->stash('id')) : {};
+    
+	my $image = {};
+	$image->{tag} = (time() =~ /(\d{5})$/)[0].'_'.lc($self->utils->translit($file->filename));
+	$image->{tag} =~ s![\s\/\\]+!_!g;
+	$image->{tag} =~ s![^\w\d\.\_]+!!g;
+    
+    #	my $folder_path = $self->config('image_dir').
+    #		($article->{rubric} ? $article->{rubric} : $self->config('default_img_dir')).'/'.
+    #		($article->{alias} ? $article->{alias} : $self->config('default_img_dir')).'/';
+    #	make_path($folder_path) or die 'Error on creating article folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
+    #	$file->move_to($folder_path.$image->{tag});
+    
+	$image->{descr} = $info->{descr};
+	$image->{descr} =~ s/\"/&quot/g;
+	$image->{source}= $info->{source};
+	$image->{source} =~ s/\"/&quot/g;
+    
+	return $self->render(json => {success => 'true', result => $image});
 }
 
 1;

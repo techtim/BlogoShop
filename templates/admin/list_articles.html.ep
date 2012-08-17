@@ -1,105 +1,69 @@
-% layout 'admin';
-% title 'Список статей';
+<div class="section articles-toolbox">
 
-<div class="admin-container">
+    <table class="layout">
+        <tr>
+            <td>
+                <b>Инструменты:</b>
+                    [<a href="/admin/article/edit">Добавить статью<a/>]
+                    <!--[<a href="/admin/articles/render">Обновить все статьи</a>]-->
+            </td>
+            <td class="filter">
+                %= form_for '' => (method => 'get') => begin
+                    <span>
+                        Тип:
+                        %= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
+                    </span>
+                    <span>
+                        Бренд:
+                        %= include 'includes/select_block', name => 'brand', select => $brand, options => stash 'brands'
+                    </span>
+                    <span>
+                        Таг:
+                        <input type="text" name="tag" value="<%=stash 'tag' %>">
+                    </span>
+                    <button type="submit" name="submit" value="1">Показать</button>
+                % end
 
-	<div class="main-heading section">
+            </td>
+        </tr>
+    </table>
+</div>
 
-		<h1>
-			<a href="/admin">Админка</a>
+<div class='pager'>
+    % foreach my $i (1..$pages) {
+        <a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
+    % }
+</div>
 
-			&gt; Список статей
+<div class='items__list'>
+    % foreach my $article (@$articles) {
+        <li>
+        	
+            <a href="/<%== join '/', $article->{type}, $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'" class="<%= !$article->{active} ? 'article-link-bold' : '' %>">
+                <%= $article->{name} %>
+            </a>
 
-		</h1>
+            % if ( !$article->{block}->{time} || $article->{block}->{time} < time() || $article->{block}->{admin_id} eq session('admin')->{_id} ) {
+                <a href="/admin/article/edit/<%== $article->{_id}->{value} %>">править</a>
+            % }
+            
+            % if ( $article->{type} ) {
+                <a href="/admin/articles?type=<%= $article->{type} %>"><%= $types_alias->{$article->{type}} %></a>
+            % }
+            
+            % if ( defined $article->{tag} && ref $article->{tag} eq 'ARRAY') {
+                % foreach my $t (@{$article->{tag}}) {
+                    <a href="/admin/articles?tag=<%= $t %>"><%= $t %></a>
+                % }
+            % }
+            
+        </li>
+    % }
+</div>
 
-		%= include 'includes/error_message', error_messages => stash 'error_message'
 
-		%= include 'includes/info_message', message => stash 'message'
-
-	</div>
-
-	<div class="section articles-toolbox">
-
-		<table class="layout">
-			<tr>
-				<td>
-					<b>Инструменты:</b>
-						[<a href="/admin/article/edit">Добавить статью<a/>]
-						<!--[<a href="/admin/articles/render">Обновить все статьи</a>]-->
-				</td>
-				<td class="filter">
-					%= form_for '' => (method => 'get') => begin
-						<span>
-							Тип:
-							%= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
-						</span>
-						<span>
-                            Таг:
-							<input type="text" name="tag" value="<%=stash 'tag' %>">
-						</span>
-						<button type="submit" name="submit" value="1">Показать</button>
-					% end
-
-				</td>
-			</tr>
-		</table>
-	</div>
-
-    <div class='pager'>
-	    % foreach my $i (1..$pages) {
-	    	<a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
-	    % }
-	</div>
-
-	<div class="section article-list">
-		<table class="blackhead">
-			<thead>
-				<tr>
-					<td colspan="2">Название</td>
-					<td>Тип</td>
-					<td>*</td>
-					<td>Брэнд</td>
-				</tr>
-			</thead>
-			<tbody>
-				% foreach my $article (@$articles) {
-					<tr>
-						<td>
-							<a href="/<%== join '/', $article->{type}, $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'" class="<%= !$article->{active} ? 'article-link-bold' : '' %>">
-								<%= $article->{name} %>
-							</a>
-						</td>
-						<td>
-							% if ( !$article->{block}->{time} || $article->{block}->{time} < time() || $article->{block}->{admin_id} eq session('admin')->{_id} ) {
-								[<i><a href="/admin/article/edit/<%== $article->{_id}->{value} %>">править</a></i>]
-							% }
-						</td>
-						<td>
-							% if ( $article->{type} ) {
-                                <a href="/admin/articles?type=<%= $article->{type} %>"><%= $types_alias->{$article->{type}} %></a>
-							% }
-						</td>
-						<td>
-							% if ( defined $article->{tag} && ref $article->{tag} eq 'ARRAY') {
-                                % foreach my $t (@{$article->{tag}}) {
-                                    <a href="/admin/articles?tag=<%= $t %>"><%= $t %></a>
-                                % }
-							% }
-						</td>
-						<td>
-							
-						</td>
-					</tr>
-				% }
-			</tbody>
-		</table>
-    </div>
-    <!-- /article-list -->
-
-    <div class='pager'>
-        % foreach my $i (1..$pages) {
-            <a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
-        % }
-    </div>
-
+<div class='pager'>
+    % foreach my $i (1..$pages) {
+        <a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
+    % }
 </div>

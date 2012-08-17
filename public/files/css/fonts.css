@@ -8,7 +8,7 @@
 	}
 
 @font-face {
-	font-family: 'PT Sans'; 
+	font-family: 'PT Sans Italic'; 
 	font-style: italic;
 	src: url('/fonts/PTS56F_W.eot#'); 
 	src: local('PT Sans Italic'),
@@ -18,7 +18,7 @@
 	}
 
 @font-face {
-	font-family: 'PT Sans';
+	font-family: 'PT Sans bold';
 	src: url('/fonts/PTS75F_W.eot#');
 	font-style: normal;
 	font-weight: bold; 

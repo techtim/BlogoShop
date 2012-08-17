@@ -1,0 +1,58 @@
+% layout 'admin';
+% title 'Редактирование магазина';
+
+%= include 'includes/error_message', error_messages => stash 'error_message'
+%= include 'includes/info_message', message => stash 'message'
+    
+<script>
+	head.js('/j/admin/shop-items-list.js')
+</script>	
+    
+    %= include 'includes/shop_admin_categories', categories => stash 'categories'
+
+<div class="shop__items__list">
+	
+	<ul class='breadcrumps__section clearfloat'>
+		<li><a href="/admin/shop">Шоп</a></li>
+		% if ($category) {
+		<li>
+			//<a href="/admin/shop/<%== $category %>"><%= $categories_alias->{$category} %></a>
+		</li>
+		% }
+		% if ($subcategory) { 
+		<li>
+			/<a href="/admin/shop/<%== $category %>/<%== $subcategory %>"><%= $categories_alias->{$subcategory} %></a>
+		</li>
+		% }
+		<li>
+			<%== '&gt; '.$brand if $brand %>
+		</li>
+		% if ($category && $subcategory) {
+		<li>
+			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/add" class='add__item'>Добавить вещь</a>
+		</li>
+		% }
+	</ul>
+	
+	% if (@$items>0) {
+    <ul class='list__section'>
+        % foreach my $item (@$items) {
+        <li>
+            <a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
+                <span class='img__section'>
+            		<img src="<%== config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>">
+            	</span>
+            </a>            
+        	<a class='active controls' href=''></a>
+        	<a class='delete controls' href=''></a>
+        	
+        	<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
+                <span class='brand'><%= $item->{brand} %></span>
+                <span class='item__caption'><%= $item->{name} %></span>
+                <span class='price'><%= $item->{price} %>р</span>
+            </a>
+        </li>
+        % }
+    </ul>
+    % }
+</div>

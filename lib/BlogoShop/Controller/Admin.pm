@@ -25,17 +25,64 @@ sub index {
 	my $self = shift;
 
 	my $session = $self->session();
-
-#	$self->redirect_to('login') if !defined $session->{admin};
-
-	$session = $session->{admin};
-
-	$self->stash('message' => $self->flash('message')) if $self->flash('message');
-	$self->stash(%$session);
+	$self->stash(admin => $session->{admin});
+	$self->stash(message => $self->flash('message')) if $self->flash('message');
+    $self->stash(error_message => $self->flash('error_message')) if $self->flash('error_message');
     
-	$self->render(
-		template => 'admin/admin',
+    my $page = $self->req->param('page') ? $self->req->param('page') : 1;
+	my $filter = {};
+	$filter->{tags} = $self->req->param('tag') if $self->req->param('tag');
+	$filter->{brand} = $self->req->param('brand') if $self->req->param('brand'); 
+    $filter->{type} = $self->req->param('type') if $self->req->param('type'); 
+    $self->stash(brands => [$self->app->db->brands->find()->all] || []);
+    $self->stash(brands_alias => {map {$_->{_id} => $_->{name}} @{$self->stash('brands')}});
+
+    my @arts = $self->app->db->articles->find($filter)->
+    skip(($page-1)*($self->config('articles_on_admin_page')||30))->
+    limit($self->config('articles_on_admin_page')||30)->
+    sort({'_id' => -1})->all;
+	my $pages = $self->app->db->articles->find($filter)->count/($self->config('articles_on_admin_page')||30);
+	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
+
+	return $self->render(
+        tag => $filter->{tags} || '', 
+        type => $filter->{type} || '',
+        brand => $filter->{brand} || '',
+        banners => $self->utils->get_banners($self, ''),
+        articles => \@arts,
+        pages => $pages || 0,
+        template => 'admin/admin',
 		format => 'html',
+	);
+}
+
+sub list {
+	my $self = shift;
+    
+	my $filter = {};
+	my $page = $self->req->param('page') ? $self->req->param('page') : 1;
+    
+	$filter->{tag} = $self->req->param('tag') if $self->req->param('tag');
+	$filter->{brand} = $self->req->param('brand') if $self->req->param('brand'); 
+	$self->stash('message' => $self->flash('message')) if $self->flash('message');
+	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
+    
+	my @arts = $self->app->db->articles->find($filter)->
+    skip(($page-1)*($self->config('articles_on_admin_page')||30))->
+    limit($self->config('articles_on_admin_page')||30)->
+    sort({'_id' => -1})->all;
+	my $pages = $self->app->db->articles->find($filter)->count/($self->config('articles_on_admin_page')||30);
+	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
+
+	return $self->render(
+        tag => $filter->{tag} || '', 
+        type => $filter->{type} || '',
+        brand => $filter->{brand} || '',
+        
+        articles => \@arts,
+        pages => $pages || 0,
+        template => 'admin/list_articles',
+        format => 'html',
 	);
 }
 
