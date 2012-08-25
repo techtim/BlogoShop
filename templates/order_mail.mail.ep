@@ -1,0 +1,10 @@
+Здравствуйте!
+Вы произвели покупку на сайте Xoxloveka, номер заказа <%= stash('order_id') %>
+
+% my $sum = 0;
+% foreach (@$items) {
+	<%= $_->{name} %> x <%= $_->{count} %> = <%= $_->{price}*$_->{count} %>
+	% $sum += $_->{price}*$_->{count};
+% }
+
+Сумма: <%= $sum %> P
