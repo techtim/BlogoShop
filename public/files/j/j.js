@@ -57,6 +57,7 @@
 			
 			setTimeout(function(){
 				$('.items',$carousel_section).jcarousel({
+					auto: 5,
 					scroll: 1,
 					visible: 1,
 					itemFallbackDimension: 330,

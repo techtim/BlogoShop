@@ -4,14 +4,14 @@
 	<li class='sale'>
         <a href="http://shop.<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>">
             <span class='img__section'>
-        		<img src="<%== config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>" />
+        		<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>" />
             	% if ($item->{sale}->{sale_active} && 
 				%	$item->{sale}->{sale_start_stamp} <= time() &&
 				%	$item->{sale}->{sale_end_stamp} >= time()) {
             	<span class='ico__sale'></span>
             	% }
             </span>
-            <span class='brand'><%= $item->{brand} %></span>
+            <span class='brand'><%= $item->{brand_name} %></span>
             <span class='item__caption'><%= $item->{name} %></span>
             <!--<span class='subcategory'><%= $item->{subcategory} %></span>-->
         	<span class='price'>
@@ -21,7 +21,7 @@
 				  	<s><%= $item->{price} %></s>
 				  	<%= $item->{price} - (
 			  				$item->{sale}->{sale_value} =~ m/(%+)/ ?
-								$item->{price} * ($item->{sale}->{sale_value}/100) :
+								$item->{price} * (($item->{sale}->{sale_value}=~/(\d+)/)[0]/100) :
 								$item->{sale}->{sale_value}) %> 
 				% } else {
 					<%= $item->{price} %>

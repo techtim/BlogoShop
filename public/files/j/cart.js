@@ -4,7 +4,9 @@ cart.config = {
 	summ: '.summ__section',
 	submit: '.submit__form',
 	types_section: '.types__list',
+	deliver_section: '.deliver__section',
 	deliver_class: 'deliver__type',
+	pay_type: '.pay__type',
 	item_block: '.item__block',
 	error_block: '.message'
 };
@@ -18,14 +20,16 @@ cart.init = function(){
 		config = that.config,
 		$input = $(config.input),
 		$submit = $(config.submit),
+		$deliver_section = $(config.deliver_section),
 		$types_section = $('li', $(config.types_section)),
+		$pay_type = $(config.pay_type),
 		_total_price = 0;
 	
 	
 	that.calculate();
 	that.work_with_blocks();
 	
-	$input.bind('propertychange keyup input paste change focus', function(){
+	$input.not('[name="pay_type"]').on('propertychange keyup input paste change focus', function(){
 		that.calculate();
 	});
 	
@@ -41,12 +45,31 @@ cart.init = function(){
 	})
 	
 	$types_section.on('click', function(){
-		var $this = $(this);
-		$types_section.removeClass('selected');
-		$this.addClass('selected');
-		$('input:radio').attr('checked', false)
-		$('input:radio', $this).attr('checked', 'checked').focus();
-	})
+		var $this = $(this)
+			$parent = $this.closest('.item__block'),
+			_disabled = $parent.hasClass('disabled');
+
+		if(!_disabled){
+			$parent.find($types_section).removeClass('selected');
+			$('input:radio', $parent).attr('checked', false);
+
+			$this.addClass('selected');
+			$('input:radio', $this).attr('checked', true).focus();
+		}
+	});
+
+	$('input:radio', $deliver_section).on('focus.payType change.payType', function(){
+		var $this = $(this),
+			_type = $this.attr('value') === 'courier' ? 'cash' : 'nalog_payment';
+
+		$pay_type.find('li').hide();
+		$pay_type
+			.find('[data-type="'+_type+'"]').css('display','block')
+			.find('input').attr('checked', true);
+
+
+	});
+
 };
 
 cart.calculate = function(){
@@ -59,24 +82,22 @@ cart.calculate = function(){
 		_total_price = 0,
 		_price = 0,
 		_type = '';
-		
-	_total_price = 0;
 	
-	$input.each(function(i){
+	$input.not('[name="pay_type"]').not(':disabled').each(function(){
 		var $this = $(this),
 			_val = $this.val(),
-			_price = $.data($this, 'price');
-			
-		_type = $this.hasClass(config.deliver_class) ? 'deliver' : 'price';
-		
+			_price = $this.data('price'),
+			_type = $this.hasClass(config.deliver_class) ? 'deliver' : 'price';
+
 		if(_type == 'price'){
 			if(_val >=0) _price = _val * _price;
 			_total_price += _price;
 			$summ.html(_total_price);
 		}else{
 			var _checked = $this.is(':checked');
+			console.log($this)
 			if(_checked){
-				var _deliver_price = $.data($this, 'price');
+				var _deliver_price = $this.data('price');
 				$('.total '+config.summ).html(_total_price+_deliver_price)	
 			}
 		}
@@ -88,20 +109,17 @@ cart.work_with_blocks = function(){
 		$block = $(config.item_block),
 		_messages = this.messages;
 	
-	$('select').data('selectik').disableCS();
-	
 	$block.on('disabled.set', function(){
 		var $this = $(this);
 		$this.addClass('disabled');
 		$('input, select', $this).attr('disabled', true);
-		$('select').data('selectik').disableCS();
 	});
 	
 	$block.on('disabled.remove', function(){
 		var $this = $(this)
 		$this.removeClass('disabled');
 		$('input, select', $this).attr('disabled', false);
-		$('select').data('selectik').enableCS();
+		$('.finish__cart').removeClass('hidden disabled').attr('disabled', false);
 	});
 				
 	$block.each(function(){
@@ -114,7 +132,7 @@ cart.work_with_blocks = function(){
 		var validate = function(){
 			var $inputs = $('input[required]', $block),
 				_valid_block = true;
-				
+
 			$inputs.each(function(){
 				var _val = $(this).val();
 				if(_val == 0 || _val == ''){
@@ -157,6 +175,7 @@ cart.work_with_blocks = function(){
 							$next_block.next().trigger('disabled.remove');
 						}
 					}
+
 					$next_block.trigger('disabled.remove');
 				};
 				
@@ -167,27 +186,34 @@ cart.work_with_blocks = function(){
 	
 	
 	$('input', $block).on('focus.removeError change.removeError keyup.removeError', function(){
-		_val = $(this).val().length;
+		var _val = $(this).val().length;
 		if(_val > 0) $(this).removeClass('error');
 	})
 	
 	$('.pickup__checkbox').on('click', function(){
 		var $this = $(this);
 			$block = $this.closest(config.item_block),
-			_disabled = $block.hasClass('disabled');
+			_disabled = $block.hasClass('disabled'),
+			$next_block = $block.nextUntil('.not(.item__block)'),
+			_map_exist = $block.find('.map').children().length;
 			
-		if(!_disabled){	
-			$('.address').toggleClass('hidden');
-			$this.toggleClass('checked');
-			$block.toggleClass('active');
-			$next_block = $block.nextUntil('.not(.item__block)');
-			_next_block_disabled = $next_block.hasClass('disabled');
-			if(!_next_block_disabled){
-				$next_block.trigger('disabled.set');
-			}else{
-				$next_block.trigger('disabled.remove');
-			}
-		}
-		
+		$('.address').toggleClass('hidden');
+		$this.toggleClass('checked');
+		$block.toggleClass('active');
+		$next_block.toggleClass('hidden');
+	}).one('click', function(){
+
+		var map = new ymaps.Map("ymaps-map-id_134607452184377852671",
+				{center: [37.64300400000002, 55.75657763506392], zoom: 16, type: "yandex#map"});
+		map.controls.add("zoomControl").add("mapTools").add(new ymaps.control.TypeSelector(["yandex#map", "yandex#satellite", "yandex#hybrid", "yandex#publicMap"]));
+		map.geoObjects.add(new ymaps.Placemark([37.643004, 55.7559], {balloonContent: ""}, {preset: "twirl#lightblueDotIcon"}));
 	})
+
+	$('.checkout__button').on('click', function(e){
+		e.preventDefault();
+		$(this).hide();
+		$('.finish__cart').addClass('hidden');
+		$('.submit___section, .finish__cart').removeClass('hidden');
+	});
+
 }

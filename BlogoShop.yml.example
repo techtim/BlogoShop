@@ -21,6 +21,9 @@ image_dir: '/opt/blogoshop/public/files/i/'
 default_img_dir: 'default'
 image_url: '/i/'
 nginx_img_resize: '/res/64'
+nginx_res_post_prev: '/res/212'
+nginx_res_item_prev: '/res/152'
+nginx_res_item_main: '/res/338'
 
 cookie_name: 'BlogoShop'
 cookie_expiration: 604800 # week
@@ -28,8 +31,12 @@ cookie_secret: '$w3Etx0X|_o\/eKa'
 
 block_voter_ip_time: 180 # 3 min
 
-articles_on_page: 10
+articles_on_page: 9
+articles_on_startpage: 6
 related_articles_count: 3
+
+items_on_page: 16
+items_on_startpage: 8
 
 articles_on_admin_page: 30
 

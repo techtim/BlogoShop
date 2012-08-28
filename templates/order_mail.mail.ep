@@ -1,10 +1,32 @@
-Здравствуйте!
+<html>
+<body>
+<b>Здравствуйте!</b><br>
 Вы произвели покупку на сайте Xoxloveka, номер заказа <%= stash('order_id') %>
-
+<br><br>
+<b>Список покупок:</b><br>
 % my $sum = 0;
 % foreach (@$items) {
-	<%= $_->{name} %> x <%= $_->{count} %> = <%= $_->{price}*$_->{count} %>
-	% $sum += $_->{price}*$_->{count};
+<%= $_->{name} %> x <%= $_->{count} %> = <%= $_->{price}*$_->{count} %> Р
+<br>
+% $sum += $_->{price}*$_->{count};
 % }
-
-Сумма: <%= $sum %> P
+<br>
+<b>Способ доставки:</b>
+% if ($self_delivery ne '') {
+	Самовывоз
+% } elsif ($delivery_type eq "courier") {
+	Курьер + 350 Р
+	% $sum += 350;
+% } elsif ($delivery_type eq "russian_post") {
+	Почта России + 430 Р
+	% $sum += 430;
+% } elsif ($delivery_type eq "ems") {
+ 	EMS + 620 Р
+ 	% $sum += 620;
+% }
+<br><br>
+<b>Сумма заказа:</b> <%= $sum %> P
+<br><br>
+Адрес: <%= join ' ,' , ($country, $city, $zip, $address) %> &nbsp;<%= join ' - ' , ($dom, $korp, $flat) %>
+</body>
+</html>

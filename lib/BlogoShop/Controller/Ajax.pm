@@ -6,7 +6,8 @@ use strict;
 use warnings;
 use utf8;
 use Encode qw(decode_utf8);
-
+use XML::XPath;
+use XML::Simple;
 use Digest::MD5 qw(md5_hex);
 use BlogoShop::Item;
 
@@ -22,7 +23,7 @@ sub vote {
 	return $self->render(json => {result => $self->articles->vote($vote_params)});
 }
 
-sub activate {
+sub activate_post {
     my $self = shift;
     $self->articles->activate($self->stash('id'), $self->stash('bool'));
     return $self->render(
@@ -91,8 +92,7 @@ warn $self->dumper($_->{active}) foreach @articles;
 		json => {ok => 1},
 	);
 }
-
-#SERVICE 
+ 
 sub items_update {
 	my $self = shift;
 	my $items = [$self->app->db->items->find({})->all];
@@ -103,16 +103,32 @@ sub items_update {
 		}
 		$_->{qty} eq '' || $_->{qty} eq '0' ?  $_->{qty}=0 : $_->{qty} += 0;
 		$_->{price} += 0;
-#		warn $self->dumper($_); 
-		$self->{app}->db->items->update({alias=> $_->{alias}} , 
-			{'$set' =>{qty => 0+$_->{qty}, price => $_->{price}, subitems => $_->{subitems}}}); 
+#		warn $self->dumper($_);
+		# $_->{brand_name} = $self->app->db->brands->find_one({_id => $_->{brand}}, {name => 1}) || '';
+		# $_->{brand_name} = $_->{brand_name}->{name} if $_->{brand_name};
+		
+		# $self->{app}->db->items->update({alias=> $_->{alias}} , 
+		# 	{'$set' =>{qty => 0+$_->{qty}, price => $_->{price}, subitems => $_->{subitems}, brand_name => $_->{brand_name}}}); 
 	}
 	return $self->render(
 		json => {ok => 1},
 	);
 }
 
-
+sub items_update_alias {
+	my $self = shift;
+	my $alias = 'solncezaschitnye_ochki';
+	my $filter->{alias} = qr/^$alias\d+/;
+	my @check = $self->app->db->items->find($filter)->fields({alias => 1})->sort({alias => 1})->all;
+	my $ct=0;
+	foreach (@check) {
+		warn $self->dumper($_);
+		# $self->app->db->items->update({_id => $_->{_id}}, {'$set'=>{alias => 'solncezaschitnye_ochki1.21312141213122e+31'}});
+	}
+	return $self->render(
+		json => {ok => \@check},
+	);
+}
 sub write_file {
 	my $self= shift;
     
@@ -143,6 +159,33 @@ sub write_file {
 	$image->{source} =~ s/\"/&quot/g;
     
 	return $self->render(json => {success => 'true', result => $image});
+}
+
+sub import_cities {
+	my $self= shift;
+	
+#	my $xml = XML::XPath->new(filename => '/home/techtim/rocid.xml');
+	my $xml = XMLin('/home/techtim/rocid.xml',  KeyAttr => {item => 'name'});
+#	my $nodeset = $xml->find('/rocid/city'); # find all paragraphs
+#    warn $self->dumper($xml);
+ 	my $rus->{name} = 'Россия';
+ 	my $ukr->{name} = 'Украина';
+    foreach (@{$xml->{city}}) {
+    	$_->{name}=~s/^\s+|\n|\r|\s+$//g;
+    	next if $_->{name} =~ m/Москва|Петербург/;
+#    	warn $_->{name} if $_->{name} =~/Павловский.*/;
+    	push @{$rus->{cities}}, $_->{name} if $_->{country_id} == 3159;
+    	push @{$ukr->{cities}}, $_->{name} if $_->{country_id} == 9908; 
+    }
+
+    @{$rus->{cities}} = sort @{$rus->{cities}};
+    unshift @{$rus->{cities}}, 'Санкт-Петербург';
+    unshift @{$rus->{cities}}, 'Москва';
+#	$self->app->db->cities->save($rus);
+#	$self->app->db->cities->save($ukr);
+#	warn "$_ \n" foreach @cit;
+    
+    return $self->render(json => {success => $rus});	
 }
 
 1;

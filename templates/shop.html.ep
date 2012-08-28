@@ -7,7 +7,7 @@
 	<ul class='breadcrumps__section clearfloat'>
 <!--		<li><a href='/'>ONLINE-МАГАЗИН</a></li> -->
 		% if (stash('category') ne '') {
-			<li <%= 'class=\'current\'' if stash('subcategory') eq '' %>>/<a href='/<%= stash('category') %>'><%= $cat_alias->{stash('category')} %></a></li>
+			<li <%= 'class=\'current\'' if stash('subcategory') eq '' %>><a href='/<%= stash('category') %>'><%= $cat_alias->{stash('category')} %></a></li>
 			% if (stash('subcategory') ne '') {
 				<li class='current'>/<a href='/<%= stash('category').'/'. stash('subcategory') %>'><%= $cat_alias->{stash('subcategory')} %></a></li>
 			% }

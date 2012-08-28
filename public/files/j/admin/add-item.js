@@ -79,11 +79,13 @@
 			$select_api = $('select', ele).data('selectik');
 			
 			$select.change(function(){
-				$selected = $('option:selected', this);
-				_empty_selected = $selected.is(':disabled');
-				_sub_item = ele.hasClass('sub__item');
+				var $selected = $('option:selected', this),
+					_selected_value = $selected.val(),
+					_empty_selected = $selected.is(':disabled'),
+					_sub_item = ele.hasClass('sub__item'),
+					_ele_param = ele.find('[data-type="'+_selected_value+'"]').length; // check if parameter is already displayed
 				
-				if(!_empty_selected){
+				if(!_empty_selected && _ele_param === 0){
 					data = {};
 					data.id = ele.data('id');
 					data.type = $selected.val();
@@ -104,14 +106,14 @@
 					
 					/*
 					 * если кликнутый параметр был уже выбран
-					 * то ищем в списке параметров его и подсвечиваем
+					 * то ищем его в списке параметров и подсвечиваем
 					 */
-					
+
 					_type = $selected.data('value');
-					$('dl[data-type="'+_type+'"] dd').addClass('added');
+					$('dl[data-type="'+_selected_value+'"]').addClass('added');
 					setInterval(function(){
-						$('dl[data-type="'+_type+'"] dd').removeClass('added');
-					}, 1000);
+						$('dl[data-type="'+_selected_value+'"]').removeClass('added');
+					}, 2000);
 				}
 			});
 		
@@ -145,29 +147,46 @@
 			$('.selected__colors .delete', ele).live('click', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				$this = $(this);
-				$parent = $this.parent();
-				$row = $(this).closest('.params__item');
-				$colors_block = $('.colors__select', $row);
-				_color = $parent.data('color');
+				
+				var $this = $(this),
+					$parent = $this.parent(),
+					$row = $this.closest('.params__item'),
+					$colors_block = $('.colors__select', $row),
+					_color = $parent.data('color');
+					
 				$('li[data-color="'+_color+'"]', $colors_block).show();
 				$parent.remove();
 			});
 			
 			$('.delete__button').live('click', function(e){
 				e.preventDefault();
-				$this = $(this);
-				_type = $this.hasClass('item__delete') ? 'item' : 'row';
-				
+				var $this = $(this),
+					_type = $this.data('type');
+					
 				if(_type == 'row'){
-					$row = $this.closest('.row');
-					_type = $row.data('type');
+					var $row = $this.closest('.row'),
+						_type = $row.data('type');
+					
 					$this.closest('.params__item').remove();
 					$('option[value="'+_type+'"]', $row).attr('disabled', false);
-				}else{
+					
+				}else if(_type == 'item'){
+					decrement_sub_item($this);
 					$this.closest('.sub__item').remove();
 				}
 			});
+			
+			$('.sex__section a').click(function(e){
+				e.preventDefault();
+				var $this = $(this),
+					$input_group = $('.sex__section input');
+					
+				$input_group.attr('checked',false);
+				$('.sex__section a').removeClass('current');
+				$this.addClass('current');
+				$('input', $this).attr('checked', true);
+			});
+			
 		})();
 	
 		var draw__sub__item = function(params){
@@ -186,19 +205,28 @@
 			$new_last_item = $('.sub__item').last();
 			_pos_top = $new_last_item.offset().top;
 			$('html, body').animate({
-				scrollTop: _pos_top
+				scrollTop: _pos_top-40
 			}, 800)
 		};
 	
-		$('.sex__section a').click(function(e){
-			e.preventDefault();
-			$this = $(this);
-			$input_group = $('.sex__section input');
-			$input_group.attr('checked',false);
-			$('.sex__section a').removeClass('current');
-			$this.addClass('current');
-			$('input', $this).attr('checked', true);
-		});
+		var decrement_sub_item = function($ele){
+			var $parent = $ele.closest('.sub__item'),
+				$next_blocks = $parent.nextUntil('.sub__items')
+
+			$next_blocks.each(function(){
+				var $this = $(this),
+					_id = $this.data('i')-1;
+				$this.data('i', _id);
+				
+				$('input',$this).each(function(){
+					var $this = $(this),
+						_name = $this.attr('name'),
+						_decremented_name = '';
+					_decremented_name = _name.replace(/\d/, _id);
+					$this.attr('name', _decremented_name);
+				})
+			});
+		};
 		
 	})();
 	
@@ -259,7 +287,6 @@
 		});
 		
 	})();
-	
 	
 	$('select').selectik();	
 })(jQuery);

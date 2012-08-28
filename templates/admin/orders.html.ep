@@ -1,0 +1,56 @@
+% layout 'admin';
+% title 'Список заказов';
+
+%= include 'includes/error_message', error_messages => stash 'error_message'
+%= include 'includes/info_message', message => stash 'message'
+
+%= include 'includes/shop_admin_categories', categories => stash 'categories'
+
+<div class=''>
+    % foreach my $order (@$orders) {
+        %= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
+        <li>
+        	<b><%= localtime($order->{time}) %></b><br>
+        	<b>Список вещей:</b>
+        	% my $sum = 0;
+			% foreach (@{$order->{items}}) {
+			<%= $_->{name} %> x <%= $_->{count} %> = <%= $_->{price}*$_->{count} %> Р
+			<br>
+			% $sum += $_->{price}*$_->{count};
+			% }
+			<br>
+			<b>Способ доставки:</b>
+			% if ($order->{self_delivery} ne '') {
+				Самовывоз
+			% } elsif ($order->{delivery_type} eq "courier") {
+				Курьер + 350 Р
+				% $sum += 350;
+			% } elsif ($order->{delivery_type} eq "russian_post") {
+				Почта России + 430 Р
+				% $sum += 430;
+			% } elsif ($order->{delivery_type} eq "ems") {
+			 	EMS + 620 Р
+			 	% $sum += 620;
+			% }
+			<br><br>
+			<b>Сумма заказа:</b> <%= $sum %> P
+			<br><br>
+			ФИО: <%= $order->{name} %> <%= $order->{surname} %><br>
+			email: <%= $order->{email} %><br>
+			Телефон: <%= $order->{phone} %><br>
+			Адрес: <%= join ' ,' , ($order->{country}, $order->{city}, $order->{zip}, $order->{address}) %> 
+				&nbsp;<%= join ' - ' , ($order->{dom}, $order->{korp}, $order->{flat}) %>
+			<br><br>
+			<b>Статус:</b>
+			<select name="status">
+				<option value="new" 	 <%= 'selected' if $order->{status} eq 'new' 	 %>>новый</option>
+				<option value="proceed"  <%= 'selected' if $order->{status} eq 'proceed' %>>в обработке</option>
+				<option value="finished" <%= 'selected' if $order->{status} eq 'finished'%>>выполнен</option>
+			<select>
+			<input type="submit" name="save" value="обновить">
+        </li>
+        % end
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++
+        <br><br>
+   % }
+</div>

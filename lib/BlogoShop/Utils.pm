@@ -193,13 +193,13 @@ sub store_image {
 sub get_list_brands {
     my ($self, $db) = @_;
     my $list_brands = {};
-    push @{$list_brands->{$_->{category}->{_id}}}, $_ foreach ($db->brands->find({})->sort({name=>1})->all);
-    return $list_brands;
+    # push @{$list_brands->{$_->{category}->{_id}}}, $_ foreach ($db->brands->find({})->sort({name=>1})->all);
+    return [$db->brands->find({})->sort({name=>1})->all];
 }
 
 sub get_banners {
     my ($self, $ctrlr, $category) = @_;
-    my @banners = $ctrlr->app->db->banners->find({category=>$category})->all;
+    my @banners = $ctrlr->app->db->banners->find({category=>$category, weight => {'$gt' => 0}})->all;
     return [] if @banners == 0;
     my @rand_array;
     my $i = 0;
@@ -221,25 +221,55 @@ sub get_categories_alias {
     return \%cat_alias;
 }
 
-sub get_categories {
-	my ($self, $ctrl) = @_;
-	
-	my $res = $ctrl->app->db->run_command({
+sub get_active_categories {
+	my ($self, $db) = @_;
+
+	my $hash->{_id} = 'active_categories';
+	my $cats = $db->stuff->find_one({_id => $hash->{_id}});
+	return $cats if $cats;
+
+	my $res = $db->run_command({
 		group => {
 			ns 		=> 'items',
 			key 	=> {category=>1, subcategory=>1}, 
-			cond	=> { active => 1, '$or' => [ {qty => {'$gt' => 0}}, {'subitems.qty' => {'$gt' => 0}} ] },
-			'$reduce'	=> 'function(obj,prev) {prev.s.push(obj.sex) }',
+			cond	=> { active => 1, 'subitems.qty' => {'$gt' => 0} },
+			'$reduce'	=> 'function(obj,prev) { prev.s.push(obj.sex) }',
 			initial	=> {s => []},
 		}}
 	);
-	warn 'CATED:'.$ctrl->dumper($res);
-	foreach (@{$res->{retval}}) {
-		;
+	
+	foreach my $fetch (@{$res->{retval}}) {
+		foreach my $sex ( @{$fetch->{'s'}} ) {
+			if ($sex eq '') {
+				$hash->{$_}->{$fetch->{subcategory}} = $hash->{$_}->{$fetch->{category}} = 1 foreach qw(u m w);
+				last;
+			} else {
+				$hash->{$_}->{$fetch->{subcategory}} = $hash->{$_}->{$fetch->{category}} = 1 foreach ('u', $sex);
+			}
+		}
 	}
-#	foreach ($
-	return 0;
-#	$self->{redis}->set;
+
+	$hash->{time} = time();
+	warn '!!!!!!!!!!save_active_categories=>'.$db->stuff->save($hash);
+	return $hash;
+}
+
+sub check_item_price {
+	my $item = pop;
+	return $item if ref ${$item->{subitems}}[0]->{price} && ref ${$item->{subitems}}[0]->{price} eq ref []; 
+	if ($item->{sale}->{sale_active} && 
+		$item->{sale}->{sale_start_stamp} <= time() &&
+		$item->{sale}->{sale_end_stamp}   >= time() ) {
+			my $sale_value = $item->{sale}->{sale_value};
+			$_->{price} = [$_->{price}, $_->{price} - 
+				($sale_value =~ s/(%+)// ?
+					$_->{price} * ($sale_value/100) :
+					$sale_value)] 
+						foreach @{$item->{subitems}};
+	} else {
+		$_->{price} = [$_->{price}] foreach @{$item->{subitems}};
+	}
+	return $item;
 }
 
 sub render_article {
@@ -270,14 +300,7 @@ sub render_article {
 		}
 		push @galleries, $gallery;
 	}
-    
-    #	my $gallery = [];
-    #	while ($text =~ /img=\"([^\"]+?)\"/g) {
-    #			my $image->{tag} = $1;
-    #			push @$gallery, $image;
-    #		}
-    #	$galleries[0] = $gallery;
-    
+
 	if (@galleries > 0) {
 		my $i=0;
 		while ($text =~ s/<gallery>.+?<\/gallery>/$controller->render("includes\/gallery", partial => 1, img_url => $img_url, gallery => $galleries[$i++])/gse) {;} 
@@ -293,7 +316,7 @@ sub render_article {
     
 	return $text;
 }
-    
+
 sub update_active_rubrics {
     my ($self, $controller) = @_;
     $controller->app->defaults->{active_rubrics_in_cuts} = $controller->articles->get_active_rubrics_in_cuts();

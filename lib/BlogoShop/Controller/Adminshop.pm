@@ -19,11 +19,11 @@ sub show {
 #    warn $self->dumper($item->list($filter));
     return $self->render(
         %$filter,
-        items => $item->list($filter),
+        items => $item->list($filter, 1000),
         host => $self->req->url->base,
         template => 'admin/shop',
         format => 'html',
-	);
+    );
 }
 
 
@@ -40,6 +40,7 @@ sub item {
 
 	if ($self->req->method eq 'POST') {
 		# delete
+        $self->app->db->stuff->remove({_id => 'active_categories'});
 		$item->delete, return $self->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory})) 
 			if $self->req->param('delete') && $item->{_id};
 
@@ -53,7 +54,7 @@ sub item {
 	delete @opt_subitem_params{BlogoShop::Item::SUBITEM_PARAMS}; # to split required from opt for params dropdown
 	
 	shift @{$item->{subitems}} if ref $item->{subitems} eq ref []; # main item patrams duplicates in subitems[0]
-	
+#	warn $self->dumper($item->as_hash);
     return $self->render(
         %{$item->as_hash},
         action_type => $item->{_id} ? '' : 'add',
@@ -63,6 +64,7 @@ sub item {
         colors => BlogoShop::Item::COLORS,
         host => $self->req->url->base,
         url => $self->req->url,
+        error_message => $self->stash('error_message')||$self->flash('error_message'),
         template => 'admin/shop_item',
         format => 'html',
 	);

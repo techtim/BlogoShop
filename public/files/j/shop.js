@@ -6,14 +6,16 @@ shop_item.config = {
 	cart_button: '.submit__form',
 	select: '#size__select',
 	custom_select: '.custom-select', 
-	sub_item_to_draw: 0
+	sub_item_to_draw: 0,
+	href: ''
 };
 
 shop_item.init = function(data) {
+
 	var that = this,
 		config = that.config,
 		$size_select = $(config.select);
-		
+	config.href = $(config.cart_button).attr('href');	
 	
 	that.draw_subitem(config.sub_item_to_draw) //draw first subitem
 	
@@ -26,7 +28,7 @@ shop_item.init = function(data) {
 		that.draw_subitem(_value);
 	});	
 	
-	$(config.cart_button).on('click', function(e){
+	/*$(config.cart_button).on('click', function(e){
 		e.preventDefault();
 		var $this = $(this),
 			_enabled = $this.data('enabled');
@@ -34,41 +36,49 @@ shop_item.init = function(data) {
 		if(_enabled){
 			_href = $this.attr('href');
 			_item = $this.data('item_selected');
-			$this.attr('href', _href+'/'+_item);
-			window.location = window.location.href + '/' + _item;
+			$this.attr('href', _href+'/'+_item + '/buy');
+			window.location = window.location.href + '/' + _item + '/buy';
 		}
-	});
+	});*/
 	
 	$(config.block_to_append).on('click', '.color__item', function(){
 		var $this = $(this);
 		$('.color li').removeClass('selected').find('input').attr('checked', false);
 		$this.toggleClass('selected').find('input').attr('checked', true);
 	});
+	
 };
 
 shop_item.draw_subitem = function(_value){
 	var that = this,
 		subitems = that.subitems,
-		config = that.config;
-	
-	var _tmp = subitems[_value],
-		_tmp_array = [];
+		config = that.config
+		_href = config.href,
+		_tmp = subitems[_value],
+		_tmp_array = [],
+		_qty = _tmp.qty;
+
+	if(_qty != 0){ //если 0 товаров то _value + 1
+		for(key in _tmp){
+
+			if(_tmp.hasOwnProperty(key) && _tmp[key] != ''){
+				if(key == 'size' || key == 'qty' || key == 'meterial' || key == 'articol') continue;
+				
+				_tmp_array.push({
+					name: key,
+					value: _tmp[key]
+				});
+			}
+		};
 		
-	for(key in _tmp){
-
-		if(_tmp.hasOwnProperty(key) && _tmp[key] != ''){
-			if(key == 'size' || key == 'qty' || key == 'meterial') continue;
-			
-			_tmp_array.push({
-				name: key,
-				value: _tmp[key]
-			});
-		}
-	};
-
-	$(config.block_to_append).html('');
-	$(config.cart_button).addClass('enabled').data('enabled', true).data('item_selected', _value);
-	$(config.tmpl).tmpl(_tmp_array).appendTo(config.block_to_append);
+		$(config.cart_button).attr('href', _href + '/' + _value);
+		$(config.block_to_append).html('');
+		$(config.tmpl)
+			.tmpl(_tmp_array)
+			.appendTo(config.block_to_append);
+	}else{
+		shop_item.draw_subitem(_value+1);
+	}
 };
 
 shop_item.get_alias = function(name) {
@@ -82,6 +92,7 @@ shop_gallery.config = {
 	full_section: '.full__size__section',
 	popup: '.popup__full__img'	
 };
+
 shop_gallery.init = function(){
 	
 	var that = this,
@@ -95,8 +106,8 @@ shop_gallery.init = function(){
 		$popup = $(config.popup, $section),
 		w1,w2,w4,h1,h2,h4,rw,rh;
 	
+	$popup.find('img').attr('src', _href);
 	
-	$popup.find('img').attr('src', _href)
 	$full_size
 		.attr('href', _href)
 		.find('img')
@@ -145,6 +156,8 @@ shop_gallery.init = function(){
 		$popup.find('img').css({'left':xl*(-1),'top':xt*(-1)})
 	}
 	
+	
+	$('a:first', $preview_section).addClass('current');
 	$preview_section.on('click', 'a', function(e) {
 		e.preventDefault();
 		var $this = $(this),

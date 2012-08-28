@@ -92,7 +92,6 @@ body {
 
 .header__section {
   height: 71px;
-  margin-bottom: 10px;
   background: url($img__dir + 'header/bg.png') repeat-x left top;
   border-bottom: 8px solid #e60000;
   
@@ -126,6 +125,7 @@ body {
     
   }
 }
+
 
 .fixed__navigation__helper {
 	z-index: 6;
@@ -312,6 +312,7 @@ body {
   .menu__section {
   
   	.caption__section {
+  	  margin-bottom: 6px;
   		padding-bottom: 6px;
   		border-bottom: 1px dotted #a1a1a1;
   	}
@@ -406,7 +407,7 @@ body {
 			  
 			  &.title {
 					padding-top: 6px;
-					padding-left: 8px;
+					padding-left: 9px;
 				  color: #232323;
 				  font: {
 				    size: 12px;
@@ -1000,10 +1001,12 @@ body {
 			height: 480px;
 			width: 340px;
 			float: left;
-
+      background: #fff url($img__dir + 'spinner.gif') no-repeat center center;
+      
 			img {
 				max-height: 100%;
 				max-width: 100%;
+				border: 1px solid #B2B2B2;
         cursor: crosshair;
 				opacity: 0;
 				@include transition(opacity, .2s);
@@ -1030,6 +1033,10 @@ body {
 					
 					&.current, &:hover {
 						opacity: 1;
+					}
+					
+					img {
+					  border: 1px solid #B2B2B2;
 					}
 				}
 			}
@@ -1116,15 +1123,50 @@ body {
 			p {
 				margin-bottom: 20px;
 			}
+			
+			a {
+			  color: #555;
+        font-weight: bold;
+			}
 		}
 
-    select {
-      display: none;
+    &.size {
+      padding: 0;
+      
+      dt {
+        padding: 16px 0;
+      }
+      
     }
     
-		.custom-select {
-			margin: -9px 0;
-		}
+    .sizes__section {
+      padding-top: 10px;
+      
+      li {
+        margin-left: 4px;
+        margin-bottom: 4px;
+        padding: 0 7px;
+        float: left;
+        border: 1px solid #dadada;
+        cursor: pointer;
+        font-size: 11px;
+        line-height: 23px;
+        @include transition(all, .4s);
+        
+        &:first-child {
+          margin-left: 0;
+        }
+        
+        &:hover, &.current {
+          border-color: #323232;
+          color: #323232;
+        }
+        
+        &.current {
+          cursor: default;
+        }
+      }
+    }
 		
 		.color {
 			margin: -9px 0;
@@ -1163,15 +1205,19 @@ body {
 		
 	}
 	
+	.socials__section {
+    li {
+      margin-right: 8px;
+      float: left;
+      
+    }  
+	}
+	
 	.submit__form {
 	  cursor: default;
 	  opacity: .7;
 	  @include transition(opacity, .3s);
 	  
-	  &.enabled {
-	    cursor: pointer;
-	    opacity: 1;
-	  }
 	}
 	
 }
@@ -1210,6 +1256,7 @@ body {
 		li {
 			margin-right: 20px;
 			margin-bottom: 24px;
+			width: 153px;
 			float: left;
 			color: #666;
 			
@@ -1244,6 +1291,11 @@ body {
 						font-weight: bold;
 					}
 					
+					&.price {
+					  padding-right: 10px;
+					  display: inline-block;
+					  background: url($img__dir + 'ico-rub-small.png') no-repeat right center;
+					}
 				}
 			}
 			
@@ -1272,7 +1324,7 @@ body {
 			.img__section {
 			  position: relative;
 				height: 204px;
-				width: 152px;
+				width: 153px;
 				margin-bottom: 4px;
 				border: 1px solid #b2b2b2;
         overflow: hidden;

@@ -13,12 +13,12 @@
 	);
 </script>
 
+%= include 'includes/shop_admin_categories', categories => stash 'categories'
+
 
 %= include 'includes/error_message', error_messages => stash 'error_message'
 %= include 'includes/info_message', message => stash 'message'
 
-%= include 'includes/shop_admin_categories', categories => stash 'categories'
-	
 <div class='middle__section shop__add__item'>
     
 	%= form_for '' => (method => 'post', enctype =>"multipart/form-data") => begin
@@ -27,7 +27,9 @@
 	    	<li>
 	    		<a href="/admin/shop/<%== $category %>"><%= $categories_alias->{$category} %></a>
 	    	</li>
-
+	    	<li>
+	    		<a href="/admin/shop/<%== $category %>/<%== $subcategory %>"><%= $categories_alias->{$subcategory} %></a>
+	    	</li>
 			<li class='category'>
 				<select name="subcategory">
 					<!--
@@ -74,7 +76,6 @@
 	    		</li>
 			</ul>	
 			
-			
 			<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#'>
 				<input type="checkbox" name="active" value='1' <%== "checked" if $active %>/>
 			</a>
@@ -89,9 +90,11 @@
 		
 		<input type='hidden' name='category' value='<%= stash 'category' %>' /> 
 		<!--<input type='hidden' name='subcategory' value='<%= stash 'subcategory' %>' />-->
-		
+
 		<div class='row'>
+			(название не должно заканчиваться на цифру)
 			<input type="text" name="name" value="<%= stash 'name' %>" placeholder='Название' required="required"/>
+			<b>алиас:</b> <%= stash 'alias' %>
 		</div>
 
 	
@@ -164,7 +167,14 @@
 		    		<a class='button green' href='#' data-role='add__params'>Добавить параметр</a>
 		    		
 		    	</div>
-		    	
+
+		    	<dl class="params__item clearfloat" data-type="articol">   
+		    		<dd>артикул</dd>   
+		    		<dt>
+		    			<input type="text" class="articol" name="articol" value='<%= stash 'articol' %>' placeholder="?" />
+					</dt>  
+				</dl>
+				
 		    	<dl class='params__item clearfloat'>
 		    		<dd>размер</dd>
 		    		<dt>
@@ -173,7 +183,7 @@
 		    			<input type="text" name="qty" class='qty' value="<%= stash 'qty' %>" placeholder='кол-во'/>
 		    		</dt>
 		    	</dl>
-<!--       -->
+		    	
     		% foreach (sort keys %$opt_subitem_params) {
     			% if (stash($_) ne '') {
 	    		<dl class='params__item clearfloat' data-type='<%= $_ %>'>
@@ -201,11 +211,12 @@
 	    			% } else {
 	    				<input type="text" name="<%= $_ %>" class='<%= $_ %>' value="<%= stash($_) %>" placeholder='?'/>
 	    			% }
-	    				<a class='delete__button' href='#' title='Удалить параметр'></a>
+	    				<a class='delete__button' href='#' title='Удалить параметр' data-type='row'></a>
 	    			</dt>
     			</dl>
     			% }
     		% }
+    		
     		<span class='params__helper'></span>
 			</div>
 		
@@ -217,7 +228,7 @@
 			    		<h3>субтовар</h3>
 			    		<a class='button green' href='#' data-role='add__params'>Добавить параметр</a>
 			    		
-			    		<a class='delete__button item__delete' href='#'></a>
+			    		<a class='delete__button item__delete' href='#' data-type='item'></a>
     		
 			    		<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#' >
 			    			<input type="checkbox" name="sub${data.i}.active" value='1' />
@@ -260,7 +271,7 @@
 		    			% } else {
 		    				<input type="text" name="sub<%= $i %>.<%= $_ %>" class='<%= $_ %>' value="<%= $sub->{$_} %>" placeholder='?'/>
 		    			% }
-		    				<a class='delete__button' href='#' title='Удалить параметр'></a>
+		    				<a class='delete__button' href='#' title='Удалить параметр' data-type='item'></a>
 		    			</dt>
 	    			</dl>
 	    			% }
@@ -276,16 +287,12 @@
 		
 		<div class='loading__section clearfloat'>
 			<h2 class='caption'>Добавить фотографии</h2>
-			<a class='add' data-rol='image__upload'></a>
+			<a class='add' data-role='image__upload'></a>
 			
 			<div class='upload__section'>
 				
 				<div class='row clearfloat'>
-					<input type="text" name="image_descr" class='image__description' placeholder='Описание фотографии'/>
-					<div class='upload__button'>
-						Обзор
-	            		<input type="file" name="image"/>
-	            	</div>
+            		<input type="file" name="image"/>
 	            </div>
 	            
 	            <p class='warning'>вы можете добавить максимум 6 фотографий</p>
@@ -303,7 +310,7 @@
 								превью
 	            				<input type="radio" name="preview_image" value="<%== $image->{tag} %>" <%== $image->{tag} eq $preview_image ? 'CHECKED' : '' %> />
 	            			</a>
-		            		<!--<input type="text" name="image_descr" size=60 value="<%== $image->{descr} %>"/>
+		            		<!--<input type="text" name="image_descr" size=60 value="<%== $image->{descr} if $image->{descr} %>"/>
 		            		<input type="text" size=40 value="<%== $image->{tag} %>"/>-->
 		            		<input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
 		            		<input type="hidden" name="image_size" value="<%== $image->{size} %>"/>
@@ -323,7 +330,7 @@
 			            		<select name="image_subitem">
 			            			<option value="" <%= 'SELECTED' if $image->{subitem} %>></option>
 									% foreach (1..$i) {
-										<option value="<%= $_ %>" <%= 'SELECTED' if $image->{subitem} == $_ %>><%= $_ %></option>
+										<option value="<%= $_ %>" <%= 'SELECTED' if $image->{subitem} && $image->{subitem} == $_ %>><%= $_ %></option>
 									% }
 								</select>
 							</span>
@@ -341,7 +348,7 @@
         
 		<div class='submit__section'>
 			% if ($action_type  ne 'add') {
-	       		<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить товартовар');">Удалить товар!</button>
+	       		<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить товартовар');" class='button red delete__item'>Удалить товар!</button>
 	       	% }
 	       	
 			<a class='button gray submit__form' href='#' data-role='submit'>Сохранить товар</a>
@@ -399,7 +406,7 @@
 				<input type='text' class='${data.type}' name='{{if data.subitem}}sub${data.i}.{{/if}}${data.type}' placeholder='?'/>
 			{{/if}}
 			
-			<a class='delete__button' href='#' title='Удалить параметр'></a>
+			<a class='delete__button' href='#' title='Удалить параметр' data-type='row'></a>
 		</dt>
 	</dl>
 </script>
@@ -410,7 +417,7 @@
     		<h3>субтовар</h3>
     		<a class='button green' href='#' data-role='add__params'>Добавить параметр</a>
     		
-    		<a class='delete__button item__delete' href='#'></a>
+    		<a class='delete__button item__delete' href='#' data-type='item'></a>
     		
     		<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#' >
     			<input type="checkbox" name="sub${data.i}.active" value='1' />
@@ -431,10 +438,6 @@
 
 <script id='upload__field' type='text/x-jquery-tmpl'>
 	<div class='row clearfloat new'>
-		<input type="text" name="image_descr" class='image__description' placeholder='Описание фотографии'/>
-		<div class='upload__button'>
-			Обзор
-    		<input type="file" name="image"/>
-    	</div>
+		<input type="file" name="image"/>
     </div>
 </script>                                        

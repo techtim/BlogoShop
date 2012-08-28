@@ -6,8 +6,8 @@
 
 % if (defined $error_messages) {
 % foreach my $error_message (@$error_messages) {
-<font color="#f00">
-<strong>
+<font size="20" color="#f00">
+<strong style="font-size:2em;">
 % if ($error_message eq 'no_email') {
 	Заполните поле "E-mail"
 % }
@@ -112,6 +112,7 @@
 % if ($error_message eq 'no_preview_image') {
 	Укажите превью
 % }
+</strong>
 </font>
 	<br/>
 % }

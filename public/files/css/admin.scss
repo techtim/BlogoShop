@@ -34,6 +34,14 @@ $img__dir: '/i/admin/';
 	background: linear-gradient(to bottom, #c0c0c0, #9a9a9a);
 }
 
+@mixin red__gradient {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#640101));
+  background: -webkit-linear-gradient(top, #ff0000, #640101);
+  background: -moz-linear-gradient(top, #ff0000, #640101); 
+  background: -o-linear-gradient(top, #ff0000, #640101); 
+  background: linear-gradient(to bottom, #ff0000, #640101);
+}
+
 @mixin light__gray__gradient {
 	background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#ccc));
 	background: -webkit-linear-gradient(top, #dfdfdf, #ccc);
@@ -59,6 +67,7 @@ body {
 }
 
 .header__section {
+  margin-bottom: 10px;
 	background: #505050;
 }
 
@@ -598,6 +607,8 @@ body {
 		}
 		
 		.button {
+		  height: auto!important;
+		  width: auto!important;
 			display: inline-block;
 			padding: {
 				top: 10px;
@@ -605,12 +616,14 @@ body {
 				bottom: 10px;
 				left: 7px;
 			}
+			border: 0;
 			border-radius: 6px;
 			color: #fff;
 			font: {
 				family: "PT Sans";
 				size: 10px;
 			}
+			line-height: 1!important;
 			text: {
 				align: center;
 				decoration: none;
@@ -630,6 +643,10 @@ body {
 				@include green__gradient;
 			}	
 			
+			&.red {
+			  @include red__gradient;
+			}
+			
 			&.centered {
 				position: relative;
 				top: -4px;
@@ -641,6 +658,15 @@ body {
 			
 			&.submit__form {
 				margin: 40px auto;
+			}
+			
+			&.delete__item {
+			  float: left;
+			  margin-top: 40px;
+			}
+			
+			&.submit__form {
+			  float: right;
 			}
 		}
 		
@@ -728,6 +754,7 @@ body {
 				margin-right: 0;
 			}
 		}
+		
 		.sex__section {
 			padding-top: 2px;
 			padding-left: 10px;
@@ -1069,6 +1096,12 @@ body {
 				position: relative;
 				height: 46px;
 				border-bottom: 1px dashed #cacaca;
+				
+				&.added {
+				  dd {
+				    color: #ff0000;
+				  }
+				}
 			}
 			
 			dd {

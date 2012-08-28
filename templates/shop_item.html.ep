@@ -2,17 +2,6 @@
 % title 'магазин Хохловка: '.stash 'name';
 %= include 'includes/left_bar'
 
-<script>
-	head.js(
-		{tmpl: '/j/libs/tmpl.js'},
-		'/j/shop.js', function(){
-		shop_item.alias = <%== $json_params_alias %>;
-		shop_item.subitems = <%== $json_subitems %>; 
-		shop_item.init();
-		shop_gallery.init();
-	});
-</script>
-
 <script id='subitem' type='text/x-jquery-tmpl'>
 
     <dl class='row clearfloat {{if name == 'color'}}color{{/if}}'>
@@ -72,6 +61,16 @@
 		<%== stash 'descr' %>
 	</div>
 	
+	<dl class='clearfloat row'>
+		<dt>
+            Бренд:
+        </dt>
+        <dd>
+        	<!--<a href="/brand/<%= $brand %>"><%= $brand_name %></a>-->
+        	<%= $brand_name %>
+        </dd>
+    </dl>
+	
 	<dl class='clearfloat row size'>
 		<dt>Размер:</dt>
 		<dd>
@@ -90,8 +89,41 @@
 		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
 	</dl>
 </div>
+
 <div class='clear'></div>
 
+<ul class='socials__section'>
+	<li>
+		<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?52"></script>
+
+		<script type="text/javascript">
+			VK.init({apiId: 3005244, onlyWidgets: true});
+			VK.Widgets.Like("vk_like", {
+										type: "mini",
+										width: 60});
+		</script>
+		
+		<div id="vk_like"></div>
+	</li>
+	<li>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=188688837836508";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<div class="fb-like" data-send="false" data-layout="button_count" data-width="200" data-show-faces="true" data-font="lucida grande"></div>
+	</li>
+	<li>
+		<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+		<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fxoxloveka.ru&media=http%3A%2F%2Fxoxloveka.ru&description=f" 
+			class="pin-it-button" count-layout="horizontal">
+			<img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+		</a>
+	</li>
+</ul>
 % if (@$items>0) {
 	<div class="shop__items__list">
 		<h2 class='dotted__caption'>
@@ -105,6 +137,14 @@
 
 </div>
 
-
-
-
+<script>
+	head.js(
+		{tmpl: '/j/libs/tmpl.js'},
+		{zoom: '/j/libs/zoom.js'},
+		'/j/shop.js', function(){
+		shop_item.alias = <%== $json_params_alias %>;
+		shop_item.subitems = <%== $json_subitems %>; 
+		shop_item.init();
+		shop_gallery.init();
+	});
+</script>

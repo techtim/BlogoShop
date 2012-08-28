@@ -1,4 +1,4 @@
-
+% my ($type, $tag) = (stash('type'), stash('tag'));
 % my ($even, $count) = (0, 0);
 % foreach my $article (@$articles) {
 % next if !$article->{alias};

@@ -298,7 +298,7 @@ body {
   .sort__strip__section button {
     float: right;
     width: 70px;
-    margin-top: 5px;
+    margin-top: 3px;
     margin-right: 12px;
     background: #444444;
     border: 1px solid #757575;
@@ -399,15 +399,20 @@ body {
   margin-bottom: 12px;
   clear: both; }
 .shop__add__item form .button {
+  height: auto!important;
+  width: auto!important;
   display: inline-block;
   padding-top: 10px;
   padding-right: 7px;
   padding-bottom: 10px;
   padding-left: 7px;
+  border: 0;
   border-radius: 6px;
   color: #fff;
+  cursor: pointer;
   font-family: "PT Sans";
   font-size: 10px;
+  line-height: 1!important;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -433,6 +438,12 @@ body {
     background: -moz-linear-gradient(top, #8fe42c, #69be06);
     background: -o-linear-gradient(top, #8fe42c, #69be06);
     background: linear-gradient(to bottom, #8fe42c, #69be06); }
+  .shop__add__item form .button.red {
+    background: -webkit-gradient(linear, left top, left bottom, from(red), to(#640101));
+    background: -webkit-linear-gradient(top, red, #640101);
+    background: -moz-linear-gradient(top, red, #640101);
+    background: -o-linear-gradient(top, red, #640101);
+    background: linear-gradient(to bottom, red, #640101); }
   .shop__add__item form .button.centered {
     position: relative;
     top: -4px; }
@@ -440,6 +451,11 @@ body {
     margin-bottom: 4px; }
   .shop__add__item form .button.submit__form {
     margin: 40px auto; }
+  .shop__add__item form .button.delete__item {
+    float: left;
+    margin-top: 40px; }
+  .shop__add__item form .button.submit__form {
+    float: right; }
 .shop__add__item form input[type='text'] {
   height: 26px;
   width: 440px;
@@ -731,6 +747,8 @@ body {
     position: relative;
     height: 46px;
     border-bottom: 1px dashed #cacaca; }
+    .shop__add__item form .sub__items__section dl.added dd {
+      color: #ff0000; }
   .shop__add__item form .sub__items__section dd {
     width: 102px;
     padding-left: 8px;
