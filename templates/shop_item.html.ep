@@ -118,7 +118,7 @@
 	</li>
 	<li>
 		<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
-		<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fxoxloveka.ru&media=http%3A%2F%2Fxoxloveka.ru&description=f" 
+		<a href="http://pinterest.com/pin/create/button/" 
 			class="pin-it-button" count-layout="horizontal">
 			<img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
 		</a>

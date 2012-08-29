@@ -66,8 +66,14 @@ cart.init = function(){
 		$pay_type
 			.find('[data-type="'+_type+'"]').css('display','block')
 			.find('input').attr('checked', true);
+	});
 
 
+	$('.checkout__button').click(function(e){
+		e.preventDefault();
+		$(this).hide();
+		$('.finish__cart').addClass('hidden');
+		$('.submit___section, .finish__cart').removeClass('hidden');
 	});
 
 };
@@ -209,11 +215,5 @@ cart.work_with_blocks = function(){
 		map.geoObjects.add(new ymaps.Placemark([37.643004, 55.7559], {balloonContent: ""}, {preset: "twirl#lightblueDotIcon"}));
 	})
 
-	$('.checkout__button').on('click', function(e){
-		e.preventDefault();
-		$(this).hide();
-		$('.finish__cart').addClass('hidden');
-		$('.submit___section, .finish__cart').removeClass('hidden');
-	});
 
 }

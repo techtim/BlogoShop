@@ -2,17 +2,11 @@
 % title 'корзина Хохловка';
 
 %= include 'includes/left_bar'
-<script>
-	head.js(
-		{yandexapi: 'http://api-maps.yandex.ru/2.0/?coordorder=longlat&load=package.full&wizard=constructor&lang=ru-RU&onload=fid_134607452184377852671'},
-		'/j/cart.js', function(){
-		cart.init();
-	})
-</script>
+
 <div class='content__section cart__items__list__section'>
 	<h2 class='caption'>Корзина</h2>
  % if (@$items > 0) {
- 	%= form_for '' => (method => 'post') => begin
+ 	%= form_for '/cart' => (method => 'post') => begin
 	<ul class='items__list'>
 	% foreach my $item (@$items) {
 		<li class='clearfloat sale'>
@@ -62,7 +56,7 @@
 		</div>
 	</div>
 	
-	<a href='/cart' class='checkout__button'>оформить заказ</a>
+	<a href='/cart/checkout' class='checkout__button'>оформить заказ</a>
 	
 	<div class='submit___section hidden clearfloat'>
 
@@ -180,7 +174,7 @@
 			<ul class='types__list'>
 				<li class='clearfloat' data-type='cash'>
 					<input type='radio' name='pay_type' id='pay__courier' value='cash' disabled />
-					<label for='pay__courier'>Наличные курьеры</label>
+					<label for='pay__courier'>Наличные курьеру</label>
 				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='nalog_payment' value='nalog_payment' disabled />

@@ -5,7 +5,7 @@
 		<div class='caption__section clearfloat'>
 	    	<h2>Каталог</h2>
 	    	
-		    <a class='expand__items'></a>
+		    <a class='expand__items' href='#'></a>
 		    
 	    	% my $sex = stash 'sex';
 	    	% if (stash('shop') && stash('shop') eq '1') {

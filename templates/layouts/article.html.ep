@@ -21,15 +21,6 @@
 			google.load("jquery", "1.7.1");
         </script>
         <script type='text/javascript' src='/j/head.js'></script>
-        <script>
-        	head.js(
-        		{carousel : '/j/libs/carousel.js'}, 
-        		{infinitescroll: '/j/libs/infinitescroll.js'},
-        		{cookies: '/j/libs/cookie.js'},
-        		{fotorama: '/j/libs/fotorama.js'},
-        		{selectik: '/j/libs/selectik.js'},
-        		'/j/j.js');
-        </script>
 	</head>
 	
 	<body>
@@ -40,6 +31,15 @@
             
         </div>
 
+        <script>
+        	head.js(
+        		{carousel : '/j/libs/carousel.js'}, 
+        		{infinitescroll: '/j/libs/infinitescroll.js'},
+        		{cookies: '/j/libs/cookie.js'},
+        		{fotorama: '/j/libs/fotorama.js'},
+        		{selectik: '/j/libs/selectik.js'},
+        		'/j/j.js');
+        </script>
 		%= include 'includes/footer'
 		
 		<style>

@@ -31,12 +31,13 @@
 	};
 	set_equal_height()
 	
-	$("body").screw({
-		loadingHTML: '<img alt="Loading" src="/i/ajax-loader.gif">'
-	}, function(){
-		set_equal_height()
-	});
-	
+	if($.screw){
+		$("body").screw({
+			loadingHTML: '<img alt="Loading" src="/i/ajax-loader.gif">'
+		}, function(){
+			set_equal_height()
+		});
+	}
 	
 	if($('.fotorama').length > 0 ) {		
 	    jQuery(".fotorama").fotorama({
@@ -154,20 +155,9 @@
 			$subitem = '',
 			_clicked = null,
 			timeout = null;
-			
-		
-		$section.on('click.title', '.title a', function(e){
-			var $this = $(this),
-				$parent = $this.closest('.item'),
-				_id = $parent.index();
 
-			$.cookie('menu_expand', _id, {
-				expires: 365,
-				path: '*.xoxloveka.ru'
-			});
-		});
-		
-		$section.on('click.expand_items', '.expand__items', function(){
+		$section.on('click.expand_items', '.expand__items', function(e){
+			e.preventDefault();
 			var $this = $(this);
 			$this.toggleClass('opened');
 			$('.item', $section).toggleClass('toggled');

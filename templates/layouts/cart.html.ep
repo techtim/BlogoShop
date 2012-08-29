@@ -14,15 +14,6 @@
             google.load("jquery", "1.7.1");
         </script>
         <script type='text/javascript' src='/j/head.js'></script>
-        <script>
-        	head.js(
-        		{carousel : '/j/libs/carousel.js'}, 
-        		{infinitescroll: '/j/libs/infinitescroll.js'},
-        		{cookies: '/j/libs/cookie.js'},
-        		{fotorama: '/j/libs/fotorama.js'},
-        		{selectik: '/j/libs/selectik.js'},
-        		'/j/j.js');
-       	</script>
     </head>
 	<body>
         <div class='wrap clearfloat'>
@@ -31,9 +22,23 @@
             <%= content %>
             
         </div>
+        
+        <script>
+            head.js(
+                {carousel : '/j/libs/carousel.js'}, 
+                {infinitescroll: '/j/libs/infinitescroll.js'},
+                {cookies: '/j/libs/cookie.js'},
+                {fotorama: '/j/libs/fotorama.js'},
+                {selectik: '/j/libs/selectik.js'},
+                {yandexapi: 'http://api-maps.yandex.ru/2.0/?coordorder=longlat&load=package.full&wizard=constructor&lang=ru-RU&onload=fid_134607452184377852671'},
+                '/j/j.js',
+                '/j/cart.js', function(){
+                    cart.init();
+                });
+        </script>
         %= include 'includes/footer'
         
         %= include 'includes/google_analytics'
-        %= include 'includes/yandex_metrika'
+        %= include 'includes/yandex_metrika_shop'
     </body>
 </html>

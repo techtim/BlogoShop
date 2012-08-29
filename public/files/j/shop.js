@@ -7,6 +7,8 @@ shop_item.config = {
 	select: '#size__select',
 	custom_select: '.custom-select', 
 	sub_item_to_draw: 0,
+	pin_button: '.pin-it-button',
+	desc_section: '.description__section',
 	href: ''
 };
 
@@ -46,6 +48,21 @@ shop_item.init = function(data) {
 		$('.color li').removeClass('selected').find('input').attr('checked', false);
 		$this.toggleClass('selected').find('input').attr('checked', true);
 	});
+	that.work_with_pin();
+
+};
+
+shop_item.work_with_pin = function(){
+	var that = this,
+		config = that.config,
+		$pin_button = $(config.pin_button),
+		_pin_url = $pin_button.attr('href'),
+		_page_url = encodeURIComponent(window.location.href),
+		_desc = encodeURIComponent($(config.desc_section).text()),
+		_img_url = encodeURIComponent(window.location.origin + $(shop_gallery.config.preview_section).find('img').first().attr('src')),
+		_result_url = _pin_url + '?url='+ _page_url + '&amp;media=' + _img_url + '&amp;description='+ _desc;
+
+	$pin_button.attr('href', _result_url);
 	
 };
 
