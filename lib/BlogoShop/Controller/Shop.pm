@@ -124,7 +124,7 @@ sub _checkout {
 	$co_params->{items} = [];
 	$co_params->{$_} && $co_params->{$_} ne '' ? 
 		'' : ($all_is_ok = 0)
-			foreach qw(name surname phone email country city zip address dom korp flat);
+			foreach qw(name surname phone email);
 
 	my @not_enought_qty;
 	foreach my $it (@{$cart->{cart_items}}) {

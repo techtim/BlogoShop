@@ -199,18 +199,30 @@ cart.work_with_blocks = function(){
 	$('.pickup__checkbox').on('click', function(){
 		var $this = $(this);
 			$block = $this.closest(config.item_block),
-			_disabled = $block.hasClass('disabled'),
 			$next_block = $block.nextUntil('.not(.item__block)'),
-			_map_exist = $block.find('.map').children().length;
-			
+			$next_block_inputs = $next_block.find('input'),
+			_map_exist = $block.find('.map').children().length,
+			$prev_block_input = $block.prev().find('input');
+		
+		if($prev_block_input.is(':disabled')){
+			$prev_block_input.attr('disabled', false);
+		}else{
+			$prev_block_input.attr('disabled', true);
+		}
+
+		if($next_block_inputs.is(':disabled')){
+			$next_block_inputs.attr('disabled', false);
+		}else{
+			$next_block_inputs.attr('disabled', true);
+		}
+
 		$('.address').toggleClass('hidden');
 		$this.toggleClass('checked');
 		$block.toggleClass('active');
 		$next_block.toggleClass('hidden');
 	}).one('click', function(){
 
-		var map = new ymaps.Map("ymaps-map-id_134607452184377852671",
-				{center: [37.64300400000002, 55.75657763506392], zoom: 16, type: "yandex#map"});
+		var map = new ymaps.Map("ymaps-map-id_134607452184377852671", {center: [37.64300400000002, 55.75657763506392], zoom: 16, type: "yandex#map"});
 		map.controls.add("zoomControl").add("mapTools").add(new ymaps.control.TypeSelector(["yandex#map", "yandex#satellite", "yandex#hybrid", "yandex#publicMap"]));
 		map.geoObjects.add(new ymaps.Placemark([37.643004, 55.7559], {balloonContent: ""}, {preset: "twirl#lightblueDotIcon"}));
 	})

@@ -29,7 +29,7 @@
     % if (stash('items')) {
     <div class='shop__items__list'>
          <h2 class='dotted__caption'>
-            <span>последние поступлнения</span>
+            <span>последние поступления</span>
         </h2>
         <ul class='list__section'>
             %= include 'includes/list_items', items => stash 'items'
