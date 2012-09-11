@@ -1,5 +1,4 @@
 (function($){
-	
 	$(window).scroll(function(){
 		_scrolled = $(window).scrollTop();
 		$section = $('.fixed__navigation__helper');
@@ -58,7 +57,7 @@
 			
 			setTimeout(function(){
 				$('.items',$carousel_section).jcarousel({
-					auto: 5,
+					auto: 3,
 					scroll: 1,
 					visible: 1,
 					itemFallbackDimension: 330,
