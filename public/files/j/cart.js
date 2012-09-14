@@ -101,7 +101,6 @@ cart.calculate = function(){
 			$summ.html(_total_price);
 		}else{
 			var _checked = $this.is(':checked');
-			console.log($this)
 			if(_checked){
 				var _deliver_price = $this.data('price');
 				$('.total '+config.summ).html(_total_price+_deliver_price)	
