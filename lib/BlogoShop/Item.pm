@@ -112,7 +112,7 @@ sub get {
 }
 
 sub list {
-    my ($self, $filt, $limit) = @_;
+    my ($self, $filt, $limit, $sort) = @_;
     my %filter = ref $filt eq ref {} ? %$filt : ();
 	$limit ||= $self->{app}->config->{items_on_page}; 
     foreach (keys %filter) {
@@ -121,7 +121,9 @@ sub list {
     $filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
     # warn 'FLTR'. $self->{app}->dumper(\%filter);
 #    warn $self->{app}->dumper([$self->{app}->db->items->find(\%filter)->all]);
-	my @all = $self->{app}->db->items->find(\%filter)->limit($limit)->sort({_id => -1})->all;
+	$sort = {_id => -1} if !$sort || ref $sort ne ref {};
+
+	my @all = $self->{app}->db->items->find(\%filter)->limit($limit)->sort($sort)->all;
     return \@all;
 }
 

@@ -21,7 +21,7 @@ sub show {
 	my $banners = $self->utils->get_banners($self, $filter->{subcategory}||$filter->{category}||'');
 
     return $self->render(
-        items 	=> $item->list($filter, $filter->{category} ? 1000 : ''),
+        items 	=> $item->list($filter, $filter->{category} ? 1000 : '', $filter->{category} ? {price => 1} : ''),
         %{$self->check_cart},
         %$filter,
         cat_alias => $self->utils->get_categories_alias($self->app->defaults->{categories}),
@@ -50,7 +50,7 @@ sub item {
 			foreach qw(brand category subcategory);
 
 	$self->utils->check_item_price($item);
-warn $self->dumper($item->as_hash);
+
 	return $self->render(
 		%{$item->as_hash},
 		%{$self->check_cart},
@@ -134,13 +134,13 @@ sub _checkout {
 			$it->{not_enought} = 1;
 			$it->{count} = $it->{qty};
 		}
-		warn 'ITEM'.$self->dumper($it);
+		# warn 'ITEM'.$self->dumper($it);
 		push @{$co_params->{items}}, 
 			{_id => $it->{_id}, sub_id => $it->{sub_id}, count => $it->{count}, name => $it->{name}, price => $it->{price}[-1]} 
 				if $it->{count} > 0;
 	}
 	$all_is_ok = 0 if @{$co_params->{items}} == 0;
-	warn 'CO CART'.$self->dumper($co_params);
+
 	return $self->_proceed_checkout($co_params) 
 		if $all_is_ok;
 
@@ -174,7 +174,8 @@ sub _proceed_checkout {
 			{ '$inc' => { "subitems.$_->{sub_id}.qty" => -$_->{count}, total_qty => -$_->{count} } }
 		);
 	}
-
+# warn 'CO CART'.$self->dumper($co_params);
+# die;
 	my $session = $self->session();
 	$session->{client}->{items} = {};
 

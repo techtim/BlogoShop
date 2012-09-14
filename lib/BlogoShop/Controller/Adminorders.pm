@@ -24,7 +24,7 @@ sub update {
 
 	for ($self->req->param('status')) { 
 		$self->app->db->orders->update({_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {status => $_}})
-			if $_ || $_ =~ /(new|proceed|finished)/;
+			if $_ && $_ =~ /(new|proceed|finished)/;
 	}
 	return $self->redirect_to('/admin/orders');
 }
