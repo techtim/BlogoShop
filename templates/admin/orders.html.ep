@@ -10,7 +10,7 @@
     % foreach my $order (@$orders) {
         %= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
         <li>
-        	<b><%= localtime($order->{time}) %></b><br>
+        	<b><%= utils->date_from_timestamp($order->{time}) %></b><br>
         	<b>Список вещей:</b>
         	% my $sum = 0;
 			% foreach (@{$order->{items}}) {
@@ -43,9 +43,9 @@
 			<br><br>
 			<b>Статус:</b>
 			<select name="status">
-				<option value="new" 	 <%= 'selected' if $order->{status} eq 'new' 	 %>>новый</option>
-				<option value="proceed"  <%= 'selected' if $order->{status} eq 'proceed' %>>в обработке</option>
-				<option value="finished" <%= 'selected' if $order->{status} eq 'finished'%>>выполнен</option>
+				<option value="new" 	 <%= 'selected' if !$order->{status} || $order->{status} eq 'new' 	 %>>новый</option>
+				<option value="proceed"  <%= 'selected' if $order->{status} && $order->{status} eq 'proceed' %>>в обработке</option>
+				<option value="finished" <%= 'selected' if $order->{status} && $order->{status} eq 'finished'%>>выполнен</option>
 			<select>
 			<input type="submit" name="save" value="обновить">
         </li>

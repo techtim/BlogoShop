@@ -8,7 +8,9 @@ use utf8;
 
 use constant ITEM_FIELDS => qw(brand sale category subcategory tag sex);
 use constant CART_ITEM_FIELDS => ITEM_FIELDS, qw(name alias preview_image);
-use constant CHECKOUT_FIELDS => qw(name surname phone email country city zip address dom korp flat receiver delivery_type self_delivery pay_type);
+use constant CHECKOUT_FIELDS => qw(	name surname phone email 
+									country city zip address dom korp flat receiver 
+									delivery_type self_delivery pay_type);
 
 sub show {
     my $self = shift;
@@ -17,14 +19,14 @@ sub show {
        $filter->{'subitems.qty'}= {'$gt' => 0};
        $filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
 
+    my $sort = $filter->{category} ? {price => -1} : '';
     my $item 	= BlogoShop::Item->new($self);
 	my $banners = $self->utils->get_banners($self, $filter->{subcategory}||$filter->{category}||'');
 
     return $self->render(
-        items 	=> $item->list($filter, $filter->{category} ? 1000 : '', $filter->{category} ? {price => 1} : ''),
+        items 	=> $item->list($filter, $filter->{category} ? 1000 : '', $sort),
         %{$self->check_cart},
         %$filter,
-        cat_alias => $self->utils->get_categories_alias($self->app->defaults->{categories}),
         banners => $banners,
         type 	=> '',
         shop 	=> 1,
@@ -56,7 +58,6 @@ sub item {
 		%{$self->check_cart},
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
-		cat_alias => $self->utils->get_categories_alias($self->app->defaults->{categories}),
 		items 	=> $item->list($filter, 4),
 		type 	=> '',
 		shop 	=> 1,
@@ -238,7 +239,8 @@ sub check_cart {
 			for ($session->{client}->{items}->{$key}) {
 				$ct += $_->{count};
 				$sum += $_->{price}*$_->{count};
-				push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } if $need_full && $key=~m!:+!;
+				push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } 
+					if $need_full && $key=~m!:+!;
 			}
 		}
 	};

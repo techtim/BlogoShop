@@ -135,6 +135,15 @@ sub timestamp_from_date {
 		$time[5] += 100 ;
 	return sprintf("%d",timelocal(@time))
 }
+use POSIX qw(strftime);
+sub date_from_timestamp {
+	my ($self, $timestamp) = @_;
+	my @time = localtime($timestamp);
+	# $time[4]--;
+	$time[5]+= 100;
+	warn printf("%02d/%02d/%04d %02d:%02d:%02d", @time);
+	return strftime "%a %b %e %H:%M:%S %Y", @time;
+}
 
 sub get_images {
 	my ($self, $controller, $name, $path) = @_;

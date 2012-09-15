@@ -45,8 +45,8 @@
 <div class='content__section shop__item__section'>
 
 <ul class='breadcrumps__section clearfloat'>
-	<li><a href='/<%= $category %>'><%= $cat_alias->{$category} %></a></li>
-	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $cat_alias->{$subcategory} %></a></li>
+	<li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
+	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
 	<li>/ <%= stash 'name' %></li>
 </ul>
 
