@@ -10,7 +10,7 @@
     % foreach my $order (@$orders) {
         %= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
         <li>
-        	<b><%= utils->date_from_timestamp($order->{time}) %></b><br>
+        	<b><%= $order->{time} %></b><br>
         	<b>Список вещей:</b>
         	% my $sum = 0;
 			% foreach (@{$order->{items}}) {

@@ -61,7 +61,16 @@ sub list_categories {
 	foreach my $cat (@cats) {
 		my $pos = 0+$self->req->param('pos.cat.'.$cat->{_id});
 		warn $cat->{_id}.":  $cat->{pos} => $pos "; 
-		if ($pos != $cat->{pos}) {
+
+        if ($cat->{name} ne $self->req->param($cat->{_id}) &&
+            !($self->req->param($cat->{_id}) =~ m![^\{\}\[\]/]+!) ) {
+            $self->app->db->categories->update(
+                {_id => $cat->{_id}}, 
+                {'$set' => {name => $self->req->param($cat->{_id})}}
+            );
+        }
+
+        if ($pos != $cat->{pos}) {
 			$self->app->db->categories->update(
 				{pos => $pos},
 				{'$set' => {pos => $cat->{pos}}}

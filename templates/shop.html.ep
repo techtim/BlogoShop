@@ -36,3 +36,5 @@
 		</ul>  
 	</div>
 </div>
+
+<script>require(['app/equalHeight'])</script>

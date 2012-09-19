@@ -8,26 +8,17 @@
 		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
-        <script data-main='j/config' src='j/require.js'></script>
-        <!--<script type='text/javascript' src='/j/head.js'></script>-->
+        <script data-main='j/config' src='/j/require.js'></script>
+        <script>requirejs(['app/global'])</script>
     </head>
 	<body>
         <div class='wrap clearfloat'>
+            
             %= include 'includes/header'
             %= include 'includes/top'
             <%= content %>
             
         </div>
-        
-        <!--<script>
-            head.js(
-                {carousel : '/j/libs/carousel.js'}, 
-                {cookies: '/j/libs/cookie.js'},
-                {selectik: '/j/libs/selectik.js'},
-                '/j/j.js');
-        </script>-->
         
         %= include 'includes/footer'
 

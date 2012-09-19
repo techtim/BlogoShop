@@ -155,7 +155,7 @@ sub _proceed_checkout {
 	my $order_id 			= $self->app->db->orders->save($co_params);
 	$co_params->{order_id} 	= $order_id;
 	$co_params->{status} 	= 'new';
-	$co_params->{time}		= time();
+	$co_params->{time}		= localtime;
 	$self->stash(%$co_params);
 	my $mail = $self->mail(
 	    to      => $co_params->{email},

@@ -2,16 +2,6 @@
 % title 'Редактирование товара';
 
 <link rel='stylesheet' type='text/css' href='/css/ui.css' media='all' />
-<script>
-	head.js(
-		'/j/libs/ui.js',
-		'/j/libs/jquery.ui.datepicker-ru.js',
-		'/j/libs/mousewheel.js',
-		'/j/libs/selectik.js',
-		'/j/libs/tmpl.js',
-		'/j/admin/add-item.js'
-	);
-</script>
 
 %= include 'includes/shop_admin_categories', categories => stash 'categories'
 
@@ -440,4 +430,9 @@
 	<div class='row clearfloat new'>
 		<input type="file" name="image"/>
     </div>
-</script>                                        
+</script>      
+
+
+<script>
+	requirejs(['app/admin/addItem']);
+</script>

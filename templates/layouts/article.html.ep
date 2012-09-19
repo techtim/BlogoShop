@@ -16,41 +16,22 @@
 		% if (stash 'preview_image') {
     		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
 		% }
-		<script src="https://www.google.com/jsapi?key=ABQIAAAAq40cyT39xbh4SxII4iAAQhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQq6XU15uRy_aHLn2Ie3000LpSbxg" type="text/javascript"></script>
-		<script type='text/javascript'>
-			google.load("jquery", "1.7.1");
-        </script>
-        <script type='text/javascript' src='/j/head.js'></script>
+
+		<script data-main='/j/config' src='/j/require.js'></script>
+		<script>requirejs(['app/global', 'app/fotorama'])</script>
 	</head>
 	
 	<body>
         <div class='wrap clearfloat'>
+
             %= include 'includes/header'
             %= include 'includes/top'
             <%= content %>
             
         </div>
 
-        <script>
-        	head.js(
-        		{carousel : '/j/libs/carousel.js'}, 
-        		{infinitescroll: '/j/libs/infinitescroll.js'},
-        		{cookies: '/j/libs/cookie.js'},
-        		{fotorama: '/j/libs/fotorama.js'},
-        		{selectik: '/j/libs/selectik.js'},
-        		'/j/j.js');
-        </script>
 		%= include 'includes/footer'
 		
-		<style>
-			h3 {
-			    margin-bottom: 16px;
-			    color: #333;
-			    font-size: 14px;
-			   	font-weight: bold;
-			    line-height: 17px;
-		  	}
-		</style>
         <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
         %= include 'includes/google_analytics'
         %= include 'includes/yandex_metrika'

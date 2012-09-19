@@ -10,7 +10,7 @@ body {
   float: right; }
 
 .header__section {
-  margin-bottom: 10px;
+  margin-bottom: 10px!important;
   background: #505050; }
 
 .header__section h2 {

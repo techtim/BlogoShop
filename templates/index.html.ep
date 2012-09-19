@@ -47,6 +47,9 @@
         </ul>
     </div>
     % }
+    <script>
+        requirejs(['app/equalHeight', 'app/carousel']);
+    </script>
 </div>
 
 <div class='clear'></div>

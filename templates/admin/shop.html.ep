@@ -5,7 +5,7 @@
 %= include 'includes/info_message', message => stash 'message'
     
 <script>
-	head.js('/j/admin/shop-items-list.js')
+	requirejs(['app/equalHeight'])
 </script>	
     
     %= include 'includes/shop_admin_categories', categories => stash 'categories'

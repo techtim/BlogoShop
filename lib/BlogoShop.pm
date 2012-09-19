@@ -168,6 +168,7 @@ sub startup {
 	
 	# --BLOG--
 	my  $blog = $r->route->over( headers => {Host => 'blog.'.$self->config('domain_name')} );
+
 		$blog->any('/')->to('controller-article#list');
 		$blog->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
 		my $bind_types = join '|', map {$_->{_id}} @types;
@@ -193,58 +194,59 @@ sub startup {
 	$r->route('/login')->via('post')->to('controller-login#check_login');
 	$r->route('/logout')->to('controller-login#logout');
 
-	my $admin_bridge = $r->bridge('/admin')->to('controller-login#is_admin');
-	# Admins part
-	$admin_bridge->route('/')->to('controller-admin#index');
-	$admin_bridge->route('/add_admin')->via('get')->to('controller-admin#add_admin');
-	$admin_bridge->route('/add_admin')->via('post')->to('controller-admin#create_admin');
-	$admin_bridge->route('/edit_admin')->via('get')->to('controller-admin#edit_admin');
-	$admin_bridge->route('/edit_admin')->via('post')->to('controller-admin#update_admin');
-	# Article part
-	$admin_bridge->route('/article/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add');
-	$admin_bridge->route('/article/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add');
-	
-	$admin_bridge->route('/article/preview/:id', id => qr/[\d\w]+/)->to('controller-Adminarticle#show_article_previews');
-	$admin_bridge->route('/articles')->via('get')->to('controller-Adminarticle#list');
-	$admin_bridge->route('/articles/render')->via('get')->to('controller-Adminarticle#render_all');
-	
-	# Shop part
-	$admin_bridge->route('/shop')->to('controller-Adminshop#show');
-	$admin_bridge->route('/shop/:category', category => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
-	$admin_bridge->route(
-		'/shop/:category/:subcategory',	category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!
-	)->to('controller-Adminshop#show');
-	$admin_bridge->route(
-		'/shop/:category/:subcategory/:id/:act', id => qr/[\d\w]+/, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, act => qr!\w+!
-	)->to('controller-Adminshop#item', id => 'add', act => '');
-	
-	# Orders list
-	$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
-	$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
+	my 	$admin_bridge = $r->bridge('/admin')->to('controller-login#is_admin');
+		# Admins part
+		$admin_bridge->route('/')->to('controller-admin#index');
+		$admin_bridge->route('/add_admin')->via('get')->to('controller-admin#add_admin');
+		$admin_bridge->route('/add_admin')->via('post')->to('controller-admin#create_admin');
+		$admin_bridge->route('/edit_admin')->via('get')->to('controller-admin#edit_admin');
+		$admin_bridge->route('/edit_admin')->via('post')->to('controller-admin#update_admin');
+		# Article part
+		$admin_bridge->route('/article/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add');
+		$admin_bridge->route('/article/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add');
+		
+		$admin_bridge->route('/article/preview/:id', id => qr/[\d\w]+/)->to('controller-Adminarticle#show_article_previews');
+		$admin_bridge->route('/articles')->via('get')->to('controller-Adminarticle#list');
+		$admin_bridge->route('/articles/render')->via('get')->to('controller-Adminarticle#render_all');
+		
+		# Shop part
+		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
+		$admin_bridge->route('/shop/:category', category => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
+		$admin_bridge->route(
+			'/shop/:category/:subcategory',	category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!
+		)->to('controller-Adminshop#show');
+		$admin_bridge->route(
+			'/shop/:category/:subcategory/:id/:act', id => qr/[\d\w]+/, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, act => qr!\w+!
+		)->to('controller-Adminshop#item', id => 'add', act => '');
+		
+		# Orders list
+		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
+		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 
-	# Static pages
-	$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
-	$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'statics');
-	$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'statics');
+		# Static pages
+		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
+		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'statics');
+		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'statics');
+		
+		# Big Games
+		#		$admin_bridge->route('/big_games_news')->via('get')->to('controller-Adminarticle#list_big_games');
+		#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'big_games_news');
+		#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'big_games_news');
+		
+		# Content
+		$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');
+		$admin_bridge->route('/categories/save')->via('post')->to('controller-Admincontent#list_categories', save => 1);
+		$admin_bridge->route('/brands')->via('get')->to('controller-Admincontent#list_brands');
+		$admin_bridge->route('/brands/:do', do => qr/[\w]+/)->to('controller-Admincontent#list_brands');
+		$admin_bridge->route('/brands/:do/:brand', do => qr/[\w]+/, brand => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_brands');
+		$admin_bridge->route('/banners')->via('get')->to('controller-Admincontent#list_banners');
+		$admin_bridge->route('/banners/:do')->via('post')->to('controller-Admincontent#list_banners');
+		$admin_bridge->route('/banners/:do/:banner', do => qr/[\w]+/, banner => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_banners');
+		
+		# Service
+		$admin_bridge->route('/update_articles')->to('controller-Ajax#articles_update');
+		$admin_bridge->route('/update_items')->to('controller-Ajax#items_update');
 	
-	# Big Games
-	#		$admin_bridge->route('/big_games_news')->via('get')->to('controller-Adminarticle#list_big_games');
-	#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'big_games_news');
-	#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'big_games_news');
-	
-	# Content
-	$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');
-	$admin_bridge->route('/categories/save')->via('post')->to('controller-Admincontent#list_categories', save => 1);
-	$admin_bridge->route('/brands')->via('get')->to('controller-Admincontent#list_brands');
-	$admin_bridge->route('/brands/:do', do => qr/[\w]+/)->to('controller-Admincontent#list_brands');
-	$admin_bridge->route('/brands/:do/:brand', do => qr/[\w]+/, brand => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_brands');
-	$admin_bridge->route('/banners')->via('get')->to('controller-Admincontent#list_banners');
-	$admin_bridge->route('/banners/:do')->via('post')->to('controller-Admincontent#list_banners');
-	$admin_bridge->route('/banners/:do/:banner', do => qr/[\w]+/, banner => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_banners');
-	
-	# Service
-	$admin_bridge->route('/update_articles')->to('controller-Ajax#articles_update');
-	$admin_bridge->route('/update_items')->to('controller-Ajax#items_update');
 	$r->any('/*' => sub {shift->redirect_to('/')});
 }
 

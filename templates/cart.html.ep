@@ -200,3 +200,5 @@
 	ПУСТО
 % }
 </div>
+
+<script>requirejs(['app/cart'])</script>

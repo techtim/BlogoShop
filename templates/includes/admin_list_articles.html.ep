@@ -1,6 +1,4 @@
-<script>
-	head.js('/j/admin/items-list.js');
-</script>
+
 
 <!--[<a href="/admin/articles/render">Обновить все статьи</a>]-->
 
@@ -75,3 +73,7 @@
     % }
     
 </ul>
+
+<script>
+    requirejs(['app/admin/blogControls']);
+</script>
