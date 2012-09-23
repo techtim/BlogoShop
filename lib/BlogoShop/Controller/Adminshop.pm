@@ -16,10 +16,34 @@ sub show {
     	if $filter->{category} && !($self->stash('categories_alias'))->{$filter->{category}};
 
     my $item = BlogoShop::Item->new($self);
+
+    if ($self->req->method eq 'POST') {
+        my $vars = {title => $self->req->param('title.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
+                    descr => $self->req->param('descr.'.$filter->{category}.'.'.$filter->{subcategory}) || ''};
+
+        if ($filter->{subcategory} eq '') {
+            $self->app->db->categories->update(
+                    {_id => $filter->{category}}, 
+                    {'$set' => $vars},
+            );
+        } else {
+            my $subcats = $self->stash('categories_info')->{$filter->{category}}->{subcats} || [];
+            $_->{_id} eq $filter->{subcategory} ?
+                $_ = {%$_, %$vars} : ()
+                    foreach @$subcats;
+            # warn $filter->{subcategory}. $self->dumper($subcats);
+            $self->app->db->categories->update(
+                    {_id => $filter->{category}}, 
+                    {'$set' => {subcats => $subcats}},
+            );
+        }
+        return $self->redirect_to("/admin/shop/$filter->{category}/$filter->{subcategory}");
+    }
 #    warn $self->dumper($item->list($filter));
     return $self->render(
         %$filter,
         items => $item->list($filter, 1000),
+        cur_category => $self->stash('categories_info')->{$filter->{subcategory}||$filter->{category}} || {},
         host => $self->req->url->base,
         template => 'admin/shop',
         format => 'html',

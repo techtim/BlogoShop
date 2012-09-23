@@ -6,7 +6,7 @@
 	    	<h2>Каталог</h2>
 	    	
 		    <a class='expand__items' href='#'></a>
-		    
+
 	    	% my $sex = stash 'sex';
 	    	% if (stash('shop') && stash('shop') eq '1') {
 		    <ul class='filters__section'>

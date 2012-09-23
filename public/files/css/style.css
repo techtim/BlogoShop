@@ -499,114 +499,117 @@ body {
       color: #404040;
       text-decoration: underline; }
 
-.post__page h2 {
-  padding-bottom: 14px;
-  color: #4b4b4b;
-  font-size: 21px;
-  text-transform: uppercase; }
-.post__page .blog__img {
-  margin-bottom: 10px;
-  border: 1px solid #b2b2b2; }
-.post__page p {
-  margin-bottom: 16px;
-  color: #333;
-  font-size: 14px;
-  line-height: 17px; }
-  .post__page p .img__description {
-    display: block;
-    margin-top: -4px;
-    color: #8b8b8b;
-    font-size: 10px;
-    font-style: italic;
-    text-align: left; }
-    .post__page p .img__description img {
-      display: block;
-      max-width: 680px;
-      margin-bottom: 0;
-      border: 1px solid #B2B2B2; }
-.post__page h3 {
-  margin-bottom: 16px;
-  color: #333;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 17px; }
-.post__page blockquote {
+.post__page {
   position: relative;
-  margin-bottom: 20px;
-  padding-top: 24px;
-  padding-right: 52px;
-  padding-bottom: 26px;
-  padding-left: 68px;
-  border-top: 1px dotted #a1a1a1;
-  border-bottom: 1px dotted #a1a1a1;
-  color: #434343;
-  font-size: 17px;
-  font-weight: bold;
-  text-align: center; }
-  .post__page blockquote:before {
-    position: absolute;
-    left: 10px;
-    top: -2px;
-    content: '';
-    height: 22px;
-    width: 15px;
-    background: url(../i/flag.png) no-repeat; }
-.post__page .tags__section {
-  float: left;
-  margin-top: 30px;
-  margin-bottom: 16px;
-  padding-left: 24px;
-  background: url(../i/ico-tags.png) no-repeat left bottom;
-  color: #959494;
-  font-size: 12px;
-  font-style: italic; }
-  .post__page .tags__section a {
-    color: #959494;
-    text-decoration: none; }
-    .post__page .tags__section a:hover {
-      color: #e60000;
-      text-decoration: underline; }
-.post__page .socials__section {
-  padding-bottom: 16px; }
-  .post__page .socials__section li {
-    float: left; }
-.post__page .post__navigation {
-  border-top: 1px dotted #a1a1a1; }
-  .post__page .post__navigation li {
-    display: table;
-    float: left;
-    width: 340px;
-    margin: 14px 0; }
-    .post__page .post__navigation li.next {
-      float: right; }
-  .post__page .post__navigation a {
-    display: table-cell;
-    height: 30px;
-    width: 320px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 42px;
-    background: url("../i/post-navigation-left.png") no-repeat;
-    color: #999;
-    font-size: 12px;
+  min-height: 1300px; }
+  .post__page h2 {
+    padding-bottom: 14px;
+    color: #4b4b4b;
+    font-size: 21px;
+    text-transform: uppercase; }
+  .post__page .blog__img {
+    margin-bottom: 10px;
+    border: 1px solid #b2b2b2; }
+  .post__page p {
+    margin-bottom: 16px;
+    color: #333;
+    font-size: 14px;
+    line-height: 17px; }
+    .post__page p .img__description {
+      display: block;
+      margin-top: -4px;
+      color: #8b8b8b;
+      font-size: 10px;
+      font-style: italic;
+      text-align: left; }
+      .post__page p .img__description img {
+        display: block;
+        max-width: 680px;
+        margin-bottom: 0;
+        border: 1px solid #B2B2B2; }
+  .post__page h3 {
+    margin-bottom: 16px;
+    color: #333;
+    font-size: 14px;
     font-weight: bold;
-    line-height: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    vertical-align: middle; }
-    .post__page .post__navigation a:hover {
-      background-position: left -156px;
-      color: #636363; }
-    .post__page .post__navigation a.next {
-      background: url("../i/post-navigation-right.png") no-repeat right top;
-      padding-left: 0;
-      padding-right: 42px;
-      text-align: right; }
-      .post__page .post__navigation a.next:hover {
-        background-position: right -156px; }
-.post__page .blogs__section {
-  padding-top: 20px;
-  border-top: 1px dotted #a1a1a1; }
+    line-height: 17px; }
+  .post__page blockquote {
+    position: relative;
+    margin-bottom: 20px;
+    padding-top: 24px;
+    padding-right: 52px;
+    padding-bottom: 26px;
+    padding-left: 68px;
+    border-top: 1px dotted #a1a1a1;
+    border-bottom: 1px dotted #a1a1a1;
+    color: #434343;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center; }
+    .post__page blockquote:before {
+      position: absolute;
+      left: 10px;
+      top: -2px;
+      content: '';
+      height: 22px;
+      width: 15px;
+      background: url(../i/flag.png) no-repeat; }
+  .post__page .tags__section {
+    float: left;
+    margin-top: 30px;
+    margin-bottom: 16px;
+    padding-left: 24px;
+    background: url(../i/ico-tags.png) no-repeat left bottom;
+    color: #959494;
+    font-size: 12px;
+    font-style: italic; }
+    .post__page .tags__section a {
+      color: #959494;
+      text-decoration: none; }
+      .post__page .tags__section a:hover {
+        color: #e60000;
+        text-decoration: underline; }
+  .post__page .socials__section {
+    padding-bottom: 16px; }
+    .post__page .socials__section li {
+      float: left; }
+  .post__page .post__navigation {
+    border-top: 1px dotted #a1a1a1; }
+    .post__page .post__navigation li {
+      display: table;
+      float: left;
+      width: 340px;
+      margin: 14px 0; }
+      .post__page .post__navigation li.next {
+        float: right; }
+    .post__page .post__navigation a {
+      display: table-cell;
+      height: 30px;
+      width: 320px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 42px;
+      background: url("../i/post-navigation-left.png") no-repeat;
+      color: #999;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      vertical-align: middle; }
+      .post__page .post__navigation a:hover {
+        background-position: left -156px;
+        color: #636363; }
+      .post__page .post__navigation a.next {
+        background: url("../i/post-navigation-right.png") no-repeat right top;
+        padding-left: 0;
+        padding-right: 42px;
+        text-align: right; }
+        .post__page .post__navigation a.next:hover {
+          background-position: right -156px; }
+  .post__page .blogs__section {
+    padding-top: 20px;
+    border-top: 1px dotted #a1a1a1; }
 
 .shop__item__section .gallery {
   position: relative;
@@ -837,6 +840,12 @@ body {
     .shop__items__list .list__section li s {
       color: #E60000; }
 
+.shop__description {
+  position: absolute;
+  bottom: 0;
+  color: #434343;
+  font-size: 10px; }
+
 .cart__items__list__section {
   position: relative;
   overflow: hidden; }
@@ -1066,6 +1075,7 @@ body {
     .cart__items__list__section .submit___section .login li {
       margin-bottom: 8px; }
     .cart__items__list__section .submit___section .login input {
+      height: 20px;
       width: 200px;
       line-height: 20px; }
       .cart__items__list__section .submit___section .login input::-webkit-input-placeholder {
@@ -1080,6 +1090,8 @@ body {
         font-family: "PT Sans";
         font-size: 12px;
         text-transform: uppercase; }
+    .cart__items__list__section .submit___section .login input[type='radio'] {
+      border: none; }
     .cart__items__list__section .submit___section .login .submit__form {
       height: auto;
       width: auto;

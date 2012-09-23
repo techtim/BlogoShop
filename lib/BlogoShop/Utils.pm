@@ -72,27 +72,27 @@ sub get_polls {
 	my @questions;
     return '' if !$article->{article_text};
 	while ($article->{article_text} =~ /<poll="([^"]+)">(.+?)<\/poll>/gs) {
-    my $poll = {};
-    my $orig = $poll->{question} = $1;
-    my $str = $2;
-    $poll->{question} =~ s/ +/ /g;
-    $poll->{question} =~ s/^ | $//g;
-    utf8::encode($poll->{question});
-    $poll->{hash} = md5_hex($poll->{question}); # create uniq id for poll
-    push @questions, {orig => $orig, que => $poll->{question}};
-    while ($str =~ /poll_(item|img)="([^"]+?)"/gs) {
-        my ($img, $answer) = $1 eq 'img' ? split ';', $2 : ('', $2); # if poll_img then split value on img_tag and answer
-        utf8::encode($answer);
-        $poll->{answers}->{md5_hex($answer)} = {text => $answer, hash => md5_hex($answer), count => 0, img => $img};
-    }
-    $polls->{$poll->{hash}} = $poll;
-}
+	    my $poll = {};
+	    my $orig = $poll->{question} = $1;
+	    my $str = $2;
+	    $poll->{question} =~ s/ +/ /g;
+	    $poll->{question} =~ s/^ | $//g;
+	    utf8::encode($poll->{question});
+	    $poll->{hash} = md5_hex($poll->{question}); # create uniq id for poll
+	    push @questions, {orig => $orig, que => $poll->{question}};
+	    while ($str =~ /poll_(item|img)="([^"]+?)"/gs) {
+	        my ($img, $answer) = $1 eq 'img' ? split ';', $2 : ('', $2); # if poll_img then split value on img_tag and answer
+	        utf8::encode($answer);
+	        $poll->{answers}->{md5_hex($answer)} = {text => $answer, hash => md5_hex($answer), count => 0, img => $img};
+	    }
+	    $polls->{$poll->{hash}} = $poll;
+	}
 
-foreach (@questions) {
-    utf8::decode($_->{que});
-    $article->{article_text} =~ s{<poll="\Q$_->{orig}\E">}{<poll="$_->{que}">};
-}
-return $polls;
+	foreach (@questions) {
+	    utf8::decode($_->{que});
+	    $article->{article_text} =~ s{<poll="\Q$_->{orig}\E">}{<poll="$_->{que}">};
+	}
+	return $polls;
 }
 
 sub date_from_mongoid {
@@ -111,7 +111,7 @@ sub date_time_from_mongoid {
 	return strftime("%a, %d %b %Y %H:%M:%S %z", localtime($time)) if defined $for_rss && $for_rss == 1;
 	my @lt = (localtime($time))[1..5];
 	$lt[0] =~ s/^(\d{1})$/0$1/;
-	return (join ('-', $lt[2], $lt[3]+1, $lt[4]+1900), "$lt[1]\:$lt[0]");
+	return (join ('-', $lt[2], $lt[3]+1, $lt[4]+1900). " $lt[1]\:$lt[0]");
 }
 
 sub update_mongoid_with_time {
@@ -134,15 +134,6 @@ sub timestamp_from_date {
 		$time[5] -= 1900 :
 		$time[5] += 100 ;
 	return sprintf("%d",timelocal(@time))
-}
-use POSIX qw(strftime);
-sub date_from_timestamp {
-	my ($self, $timestamp) = @_;
-	my @time = localtime($timestamp);
-	# $time[4]--;
-	$time[5]+= 100;
-	warn printf("%02d/%02d/%04d %02d:%02d:%02d", @time);
-	return strftime "%a %b %e %H:%M:%S %Y", @time;
 }
 
 sub get_images {
@@ -228,6 +219,16 @@ sub get_categories_alias {
         $cat_alias{$_->{_id}} = $_->{name} foreach @{$_->{subcats}};
     }
     return \%cat_alias;
+}
+
+sub get_categories_info {
+    my ($self, $categories) = @_; # categories from defaults->categories
+	my %cat_info;
+    foreach (@$categories) {
+        $cat_info{$_->{_id}} = $_;
+        $cat_info{$_->{_id}} = $_ foreach @{$_->{subcats}};
+    }
+    return \%cat_info;
 }
 
 sub get_active_categories {

@@ -23,18 +23,25 @@ sub show {
     my $item 	= BlogoShop::Item->new($self);
 	my $banners = $self->utils->get_banners($self, $filter->{subcategory}||$filter->{category}||'');
 
-    return $self->render(
-        items 	=> $item->list($filter, $filter->{category} ? 1000 : '', $sort),
-        %{$self->check_cart},
-        %$filter,
-        banners => $banners,
-        type 	=> '',
-        shop 	=> 1,
-        page_name => 'shop',
-        host 	=> $self->req->url->base,
-        template=> 'shop',
-        format 	=> 'html',
-	);
+	if ($self->req->headers->header('X-Requested-With')) {
+		return $self->render(
+	        json => { items => $item->list($filter, $filter->{category} ? 1000 : '', $sort) },
+    	);
+	} else {
+	    return $self->render(
+	        items 	=> $item->list($filter, $filter->{category} ? 1000 : '', $sort),
+	        %{$self->check_cart},
+	        %$filter,
+	        cur_category => $self->stash('categories_info')->{$filter->{subcategory}||$filter->{category}} || {},
+	        banners => $banners,
+	        type 	=> '',
+	        shop 	=> 1,
+	        page_name => 'shop',
+	        host 	=> $self->req->url->base,
+	        template=> 'shop',
+	        format 	=> 'html',
+		);
+	}
 }
 
 sub item {
@@ -48,7 +55,7 @@ sub item {
 	my $filter->{active} = 1;	
 	   $filter->{alias}	 = {'$ne' => $item->{alias}};
 	$item->{$_} ? 
-		push @{$filter->{'$or'}}, {$_ => $item->{$_}} : '' 
+		push @{$filter->{'$or'}}, {$_ => $item->{$_}} : () 
 			foreach qw(brand category subcategory);
 
 	$self->utils->check_item_price($item);
@@ -124,7 +131,7 @@ sub _checkout {
 	my $co_params = {map {$_ => $self->req->param($_)||''} CHECKOUT_FIELDS};
 	$co_params->{items} = [];
 	$co_params->{$_} && $co_params->{$_} ne '' ? 
-		'' : ($all_is_ok = 0)
+		() : ($all_is_ok = 0)
 			foreach qw(name surname phone email);
 
 	my @not_enought_qty;
@@ -152,10 +159,10 @@ sub _checkout {
 sub _proceed_checkout {
 	my ($self, $co_params) = @_;
 
+	$co_params->{status} 	= 'new';
 	my $order_id 			= $self->app->db->orders->save($co_params);
 	$co_params->{order_id} 	= $order_id;
-	$co_params->{status} 	= 'new';
-	$co_params->{time}		= localtime;
+
 	$self->stash(%$co_params);
 	my $mail = $self->mail(
 	    to      => $co_params->{email},
@@ -176,7 +183,7 @@ sub _proceed_checkout {
 		);
 	}
 # warn 'CO CART'.$self->dumper($co_params);
-# die;
+
 	my $session = $self->session();
 	$session->{client}->{items} = {};
 

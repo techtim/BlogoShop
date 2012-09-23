@@ -1,5 +1,5 @@
 % layout 'shop';
-% title 'магазин Хохловка';
+% title 'магазин Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
 
 %= include 'includes/left_bar'
 
@@ -28,13 +28,21 @@
         </ul>
         <ul class='controls'></ul>
     </div>
+    <script>requirejs(['app/carousel']);</script>
     % }
+
 	
 	<div class='shop__items__list'>
 		<ul class='list__section'>
 			%= include 'includes/list_items', items => stash 'items'
 		</ul>  
 	</div>
+
+	% if ($cur_category->{descr}) {
+	<div class='shop__description'>
+		<%= $cur_category->{descr} %>
+	</div>
+	% }
 </div>
 
 <script>require(['app/equalHeight'])</script>

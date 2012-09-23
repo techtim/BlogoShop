@@ -129,6 +129,17 @@ sub items_update_alias {
 		json => {ok => \@check},
 	);
 }
+
+sub orders_update { 
+	my $self = shift;
+	my $filter = {status => {'$exists' => 0}};
+	# my @check = $self->app->db->orders->find($filter)->fields({status => 1})->sort({alias => 1})->all;
+	$self->app->db->orders->update($filter, {'$set' => {status => 'new'}}, {'multiple' => 1});
+	return $self->render(
+		json => {ok => [$self->app->db->orders->find($filter)->fields({status => 1})->all]},
+	);	
+}
+
 sub write_file {
 	my $self= shift;
     

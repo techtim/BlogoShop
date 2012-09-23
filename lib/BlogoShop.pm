@@ -121,15 +121,17 @@ sub startup {
 		list_brands => $utils->get_list_brands($self->app->db),
 		categories  => \@cats,
 		categories_alias => $utils->get_categories_alias(\@cats),
+		categories_info => $utils->get_categories_info(\@cats),
 		active_categories => $utils->get_active_categories($self->app->db),
 	});
 
-	$self->hook(before_dispatch => sub {
-		my $c = shift;
-		$c->app->defaults->{categories} 	  = [$c->app->db->categories->find({})->sort({pos => 1})->all];
-		$c->app->defaults->{categories_alias} = $c->utils->get_categories_alias($c->app->defaults->{categories});
-		$c->app->defaults->{active_categories} = $c->utils->get_active_categories($c->app->db);
-		$c->app->defaults->{list_brands} 	  = $c->utils->get_list_brands($c->app->db);
+	$self->hook(after_build_tx => sub {
+		my ($tx, $app) = @_;
+		$app->defaults->{categories} 	  	= [$app->db->categories->find({})->sort({pos => 1})->all];
+		$app->defaults->{categories_alias} 	= $app->utils->get_categories_alias($app->defaults->{categories});
+		$app->defaults->{categories_info} 	= $app->utils->get_categories_info($app->defaults->{categories});
+		$app->defaults->{active_categories} = $app->utils->get_active_categories($app->db);
+		$app->defaults->{list_brands} 	  	= $app->utils->get_list_brands($app->db);
 	});
 	
 	# Routes
@@ -246,7 +248,7 @@ sub startup {
 		# Service
 		$admin_bridge->route('/update_articles')->to('controller-Ajax#articles_update');
 		$admin_bridge->route('/update_items')->to('controller-Ajax#items_update');
-	
+		$admin_bridge->route('/update_orders')->to('controller-Ajax#orders_update');
 	$r->any('/*' => sub {shift->redirect_to('/')});
 }
 

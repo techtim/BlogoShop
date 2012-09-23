@@ -4,53 +4,143 @@
 %= include 'includes/error_message', error_messages => stash 'error_message'
 %= include 'includes/info_message', message => stash 'message'
 
-%= include 'includes/shop_admin_categories', categories => stash 'categories'
+<div class='orders__list__section left__side__section'>
+	<h2 class='caption'>Заказы</h2>
 
-<div class=''>
-    % foreach my $order (@$orders) {
-        %= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
-        <li>
-        	<b><%= $order->{time} %></b><br>
-        	<b>Список вещей:</b>
-        	% my $sum = 0;
-			% foreach (@{$order->{items}}) {
-			<%= $_->{name} %> x <%= $_->{count} %> = <%= $_->{price}*$_->{count} %> Р
-			<br>
-			% $sum += $_->{price}*$_->{count};
-			% }
-			<br>
-			<b>Способ доставки:</b>
-			% if ($order->{self_delivery} ne '') {
-				Самовывоз
-			% } elsif ($order->{delivery_type} eq "courier") {
-				Курьер + 350 Р
-				% $sum += 350;
-			% } elsif ($order->{delivery_type} eq "russian_post") {
-				Почта России + 430 Р
-				% $sum += 430;
-			% } elsif ($order->{delivery_type} eq "ems") {
-			 	EMS + 620 Р
-			 	% $sum += 620;
-			% }
-			<br><br>
-			<b>Сумма заказа:</b> <%= $sum %> P
-			<br><br>
-			ФИО: <%= $order->{name} %> <%= $order->{surname} %><br>
-			email: <%= $order->{email} %><br>
-			Телефон: <%= $order->{phone} %><br>
-			Адрес: <%= join ' ,' , ($order->{country}, $order->{city}, $order->{zip}, $order->{address}) %> 
-				&nbsp;<%= join ' - ' , ($order->{dom}, $order->{korp}, $order->{flat}) %>
-			<br><br>
-			<b>Статус:</b>
-			<select name="status">
-				<option value="new" 	 <%= 'selected' if !$order->{status} || $order->{status} eq 'new' 	 %>>новый</option>
-				<option value="proceed"  <%= 'selected' if $order->{status} && $order->{status} eq 'proceed' %>>в обработке</option>
-				<option value="finished" <%= 'selected' if $order->{status} && $order->{status} eq 'finished'%>>выполнен</option>
-			<select>
-			<input type="submit" name="save" value="обновить">
-        </li>
-        % end
-        ++++++++++++++++++++++++++++++++++++++++++++++++++++
-        <br><br>
-   % }
+	<ul class='statistic__strip__section clearfloat'>
+		<li class='total'>
+			<a href='/admin/orders'>48</a>
+		</li>
+		<li>
+			новые: <a href='/admin/orders/new'><%= $counter->{new}||0 %></a>
+		</li>
+		<li>
+			в обработке: <a href='/admin/orders/proceed'><%= $counter->{proceed}||0 %></a>
+		</li>
+		<li>
+			выполнен: <a href='/admin/orders/finished'><%= $counter->{finished}||0 %></a>
+		</li>
+		<li>
+			отменен: <a href='/admin/orders/canceled' class='canceled'><%= $counter->{canceled}||0 %></a>
+		</li>
+	</ul>
+
+	<ul class='list'>
+	    % foreach my $order (@$orders) {
+	        <li>
+
+	       		%= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
+		        	<div class='cut'>
+		        		<div class='order__num'>Заказ № <span>50378218dacb2b0319000000</span> от <%== utils->date_time_from_mongoid($order->{_id}) %> </div>
+						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
+
+						<select name="status" >
+							<option value="new" 	 <%= 'selected' if $order->{status} eq 'new' 	 %>>новый</option>
+							<option value="proceed"  <%= 'selected' if $order->{status} eq 'proceed' %>>в обработке</option>
+							<option value="finished" <%= 'selected' if $order->{status} eq 'finished'%>>выполнен</option>
+							<option value="canceled" <%= 'selected' if $order->{status} eq 'canceled'%>>отменен</option>
+						<select>
+						<input type='submit' name='save' value='Сохранить'> 	
+		        	</div>
+
+		        	<div class='full'>
+			        	% my $sum = 0;
+
+			        	<ul class='items__list__section clearfloat'>
+						% foreach (@{$order->{items}}) {
+							<li>
+								<a href="http://shop.<%= config->{domain_name} %>/<%= join '/', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias} %>" target="_blank">
+									<img src="<%== config->{image_url}.join '/', 'item', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias}, $_->{info}->{preview_image} %>">
+								</a>
+								<div class='description__section'>
+									<h3><%= $_->{info}->{brand} %></h3>
+									<h4><%= $_->{info}->{name} %></h4>
+									<h3><%= $_->{info}->{size} %></h3>
+								</div>
+								<div class='meta__section'>
+									<span class='count'><%= $_->{count} %></span>
+									<span class='price'><%= $_->{price}*$_->{count} %></span>
+								</div>
+							</li>
+						
+							% $sum += $_->{price}*$_->{count};
+						% }
+						</ul>
+
+						<dl class='price__section clearfloat'>
+							<dt>СТОИМОСТЬ ЗАКАЗА:</dt>
+							<dd>
+								<%= $sum %>
+							</dd>
+						</dl>
+
+						<dl class='row gray'>
+							<dt>СПОСОБ доставки:</dt>
+							<dd>
+								% if ($order->{self_delivery} ne '') {
+									Самовывоз
+								% } elsif ($order->{delivery_type} eq "courier") {
+									Курьерская доставка по указанному адресу (только Москва).
+									% $sum += 350;
+								% } elsif ($order->{delivery_type} eq "russian_post") {
+									Почта России 
+									% $sum += 430;
+								% } elsif ($order->{delivery_type} eq "ems") {
+								 	EMS
+								 	% $sum += 620;
+								% }
+							</dd>
+						</dl>
+
+						<dl class='adress__section row'>
+							<dt>Адрес Доставки:</dt>
+							<dd>
+								<%= join ' ,' , ($order->{country}, $order->{city}, $order->{zip}, $order->{address}) %> 
+								<%= join ' - ' , ($order->{dom}, $order->{korp}, $order->{flat}) %>
+							</dd>
+						</dl>
+
+						<div class='contacts__section gray__bg clearfloat'>
+							<dl>
+								<dt>получатель:</dt>
+								<dd><%= $order->{name} %> <%= $order->{surname} %></dd>
+							</dl>
+							<dl>
+								<dt>телефон:</dt>
+								<dd><%= $order->{phone} %></dd>
+							</dl>
+							<dl>
+								<dt>e-mail:</dt>
+								<dd><%= $order->{email} %></dd>
+							</dl>
+						</div>
+
+						<dl class='deliver__price__section clearfloat'>
+							<dt>СТОИМОСТЬ доставки:</dt>
+							<dd>
+								% if ($order->{self_delivery} ne '') {
+									
+								% } elsif ($order->{delivery_type} eq "courier") {
+									350
+								% } elsif ($order->{delivery_type} eq "russian_post") {
+									430
+								% } elsif ($order->{delivery_type} eq "ems") {
+								 	620
+								% }
+							</dd>
+						</dl>
+
+						<dl class='price__section clearfloat'>
+							<dt>СУММА:</dt>
+							<dd>
+								<%= $sum %>
+							</dd>
+						</dl>
+					</div>
+	        	% end
+	        </li>
+	   % }
+	</ul>
 </div>
+
+<script>requirejs(['app/admin/orders'])</script>

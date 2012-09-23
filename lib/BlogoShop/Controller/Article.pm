@@ -27,11 +27,11 @@ sub index {
 
 	my $banners = $self->utils->get_banners($self, '');
 
-warn $self->dumper($art);
     return $self->render(
 		items => $items,
     	articles => $art,
         banners => $banners,
+        page_name => '',
         host => $self->req->url->base,
         sex => '',
         template => 'index',

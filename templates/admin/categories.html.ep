@@ -23,7 +23,7 @@
                 % }
             </select>
             <input type="checkbox" name="delete_cat" value="<%= $cat->{_id} %>">удалить<br>
-           
+            <h3><b>подкатегории:</b></h3><br>
             % foreach my $subcat (@{$cat->{subcats}}) {
                 &emsp;&mdash;&emsp;<%= $subcat->{name} %> &emsp;&emsp; 
                 <select name="pos.cat.<%= $cat->{_id} %>.subcat.<%= $subcat->{_id} %>">

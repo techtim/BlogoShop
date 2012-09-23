@@ -34,6 +34,28 @@
 		% }
 	</ul>
 	
+	% if ($category || $subcategory) {
+		<script>requirejs(['app/admin/seoEditor']);</script>
+		<a class='toggle__seo__editor' href='#'>SEO</a>
+		<div class='seo__editor clearfloat'>
+			%= form_for '' => (method => 'post') => begin
+				<dl class='clearfloat'>
+					<dt><label for='seo__title'>Заголовок:</label></dt>
+					<dd>
+						<input type='text' id='seo__title' name="title.<%= $category.'.'.$subcategory||'' %>" value="<%= $cur_category->{title} %>"/>
+					</dd>
+				</dl>
+				<dl class='clearfloat'>
+					<dt><label for='seo__description'>Описание:</label></dt>
+					<dd>
+						<textarea id='seo__description' name="descr.<%= $category.'.'.$subcategory %>"><%= $cur_category->{descr} %></textarea>
+					</dd>
+				</dl>
+				<input type='submit' value='Сохранить' />
+			%= end
+		</div>
+	% }
+
 	% if (@$items>0) {
     <ul class='list__section'>
         % foreach my $item (@$items) {

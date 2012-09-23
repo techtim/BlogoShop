@@ -108,7 +108,8 @@ sub copy {
 
 sub get {
     my ($self, $id, $sub_id) = @_;
-    
+    my $it = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $id)});
+    return merge( $it, $it->{subitems}->[$sub_id] );
 }
 
 sub list {
