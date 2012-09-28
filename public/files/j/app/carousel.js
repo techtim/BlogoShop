@@ -5,6 +5,7 @@ define(['jquery', 'carousel'],function($){
 
 	setTimeout(function(){
 		$('.items',$carousel_section).jcarousel({
+			wrap: 'both',
 			auto: 3,
 			scroll: 1,
 			visible: 1,

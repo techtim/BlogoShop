@@ -1,6 +1,6 @@
 define(['jquery'], function($){
 
-	var set_equal_height = (function(){
+	set_equal_height = function(){ // in global to be able to call it from other scripts ( scroll.js )
 
 		var _height = 150;
 		
@@ -13,5 +13,7 @@ define(['jquery'], function($){
 			height: _height
 		})
 		
-	})();
+	};
+
+	set_equal_height()
 });

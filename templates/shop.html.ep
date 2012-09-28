@@ -14,6 +14,15 @@
 		% }
 	</ul>
 
+
+	% if ($cur_category->{descr}) {
+		<div class='shop__description'>
+			<a class='expand__items' href='#'></a>
+			<h4><%= $cur_category->{descr} %></h4>
+		</div>
+		<script>requirejs(['app/shopDescription']);</script>
+	% }
+
 	% if (@$banners > 0) {
     % my $select_num = 1;
     <div class='carousel'>
@@ -33,16 +42,35 @@
 
 	
 	<div class='shop__items__list'>
-		<ul class='list__section'>
+		<!--
+		<div class='fiters__section clearfloat'>
+			<ul class='price__filter'>
+				<li class='title'>цена:</li>
+				<li><a href='?price=dsc'>&darr;</a></li>
+				<li><a href='?price=asc'>&uarr;</a></li>
+			</ul>
+
+			<ul class='price__slider clearfloat'>
+				<li class='label'>0</li>
+				<li class='slider'></li>
+				<li class='label'>9999</li>
+			</ul>
+
+			<ul class='new__filter'>
+				<li class='title'>новинки:</li>
+				<li><a href='?time=dsc'>&darr;</a></li>
+				<li><a href='?time=asc'>&uarr;</a></li>
+			</ul>
+
+			<script>requirejs(['app/shopFilters']);</script>
+		</div>
+
+			-->
+		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
 		</ul>  
 	</div>
 
-	% if ($cur_category->{descr}) {
-	<div class='shop__description'>
-		<%= $cur_category->{descr} %>
-	</div>
-	% }
 </div>
 
 <script>require(['app/equalHeight'])</script>

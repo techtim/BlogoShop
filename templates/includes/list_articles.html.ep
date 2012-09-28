@@ -8,4 +8,5 @@
 %= include 'includes/preview_article', article => $article, even => $even, count => $count
 
 % }
-<div class='screw screw-replace' rel='<%== @$articles > 0 && $articles->[-1]->{show_fwd} ? $host. '/' . ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . 'next/'.($articles->[-1]->{_id}) : '' %>'></div>
+<div class='scroll__helper' data-href='<%== @$articles > 0 && $articles->[-1]->{show_fwd} ? $host. '/' . ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . 'next/'.($articles->[-1]->{_id}) : '' %>'></div>
+

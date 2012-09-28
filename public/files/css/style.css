@@ -187,6 +187,17 @@ body {
       margin: 0 auto;
       border: 0; }
 
+.expand__items {
+  height: 22px;
+  width: 21px;
+  float: right;
+  margin-left: 6px;
+  margin-top: -4px;
+  background: url("../i/ico-menu-dropdown.png") no-repeat;
+  cursor: pointer; }
+  .expand__items.opened {
+    background-position: left -23px; }
+
 .sidebar__section {
   width: 260px; }
   .sidebar__section .menu__section {
@@ -222,16 +233,6 @@ body {
           text-decoration: none; }
         .sidebar__section .menu__section .filters__section a.current {
           cursor: default; }
-    .sidebar__section .menu__section .expand__items {
-      height: 22px;
-      width: 21px;
-      float: right;
-      margin-left: 6px;
-      margin-top: -4px;
-      background: url("../i/ico-menu-dropdown.png") no-repeat;
-      cursor: pointer; }
-      .sidebar__section .menu__section .expand__items.opened {
-        background-position: left -23px; }
     .sidebar__section .menu__section .item {
       display: block;
       clear: both; }
@@ -775,6 +776,65 @@ body {
   text-decoration: none;
   text-transform: uppercase; }
 
+.fiters__section {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-top: 1px dotted #A1A1A1; }
+  .fiters__section li {
+    float: left; }
+  .fiters__section .title {
+    margin-top: 1px;
+    margin-right: 6px;
+    color: #434343;
+    font-size: 10px;
+    text-transform: uppercase; }
+  .fiters__section .price__filter a, .fiters__section .new__filter a {
+    position: relative;
+    top: -5px;
+    margin-right: 1px;
+    padding: 1px 4px 3px;
+    border: 1px solid #c4c4c4;
+    color: #c4c4c4;
+    font-size: 9px;
+    text-align: center;
+    text-decoration: none; }
+    .fiters__section .price__filter a:hover, .fiters__section .price__filter a.current, .fiters__section .new__filter a:hover, .fiters__section .new__filter a.current {
+      background: #434343;
+      border-color: #434343;
+      color: #fff; }
+  .fiters__section .price__slider {
+    margin-left: 126px;
+    float: left;
+    color: #434343;
+    font-size: 12px; }
+    .fiters__section .price__slider .label {
+      margin-right: 10px;
+      padding-right: 10px;
+      background: url("../i/ico-rub-small.png") no-repeat right 1px; }
+      .fiters__section .price__slider .label:last-child {
+        margin-right: 0; }
+    .fiters__section .price__slider .slider {
+      position: relative;
+      margin-top: 5px;
+      margin-right: 10px;
+      height: 3px;
+      width: 208px;
+      background: #a2a2a2; }
+    .fiters__section .price__slider .ui-slider-range {
+      position: absolute;
+      height: 3px;
+      background: #434343; }
+    .fiters__section .price__slider .ui-slider-handle {
+      position: absolute;
+      top: -2px;
+      height: 7px;
+      width: 7px;
+      display: block;
+      background: #434343;
+      border-radius: 5px; }
+  .fiters__section .new__filter {
+    float: right; }
+
 .shop__items__list {
   width: 680px;
   float: right; }
@@ -841,10 +901,18 @@ body {
       color: #E60000; }
 
 .shop__description {
-  position: absolute;
-  bottom: 0;
-  color: #434343;
-  font-size: 10px; }
+  position: relative; }
+  .shop__description .expand__items {
+    position: absolute;
+    top: -32px;
+    right: 0; }
+  .shop__description.active h4 {
+    display: block; }
+  .shop__description h4 {
+    padding-bottom: 10px;
+    display: none;
+    color: #aeaeae;
+    font-size: 10px; }
 
 .cart__items__list__section {
   position: relative;
@@ -1321,6 +1389,11 @@ body {
       font-weight: bold;
       text-decoration: none;
       text-transform: uppercase; }
+
+.scroll__helper {
+  height: 1px;
+  clear: both;
+  visibility: hidden; }
 
 .custom-select {
   position: relative; }

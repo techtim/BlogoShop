@@ -4,6 +4,13 @@
 %= include 'includes/left_bar'
 
 <div class='content__section<%= ' post__page' if stash('brand') ne '' %>'>
+
+    % if (stash('blog')) {
+    <ul class='breadcrumps__section clearfloat'>
+        <li><a>Блоги</a></li>
+    </ul>
+    %}
+
     % if (stash('brand')) {
         % my $brand = stash('brand');
         <h2><%= $brand->{name} %></h2>
@@ -23,6 +30,9 @@
                 % }
             </ul>
             <ul class='controls'></ul>
+            <script>
+                requirejs(['app/carousel'])
+            </script>
         </div>
     % }
 
@@ -33,6 +43,7 @@
         <ul>
             %= include 'includes/list_articles'
         </ul>
+        <script>requirejs(['app/equalHeight', 'app/scroll']);</script>
     </div>
     % }
 </div>

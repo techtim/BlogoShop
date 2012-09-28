@@ -27,20 +27,25 @@
 
 	<ul class='list'>
 	    % foreach my $order (@$orders) {
-	        <li>
+	        <li class="
+		        <%= 'proceed' if $order->{status} eq 'proceed' %>
+		        <%= 'finished' if $order->{status} eq 'finished'%>
+		        <%= 'canceled' if $order->{status} eq 'canceled'%>
+		        <%= 'new' if $order->{status} eq 'new' %>">
 
 	       		%= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
 		        	<div class='cut'>
 		        		<div class='order__num'>Заказ № <span>50378218dacb2b0319000000</span> от <%== utils->date_time_from_mongoid($order->{_id}) %> </div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
 
+						<button type='submit' class='submit__button'>Сохранить</button>
+						
 						<select name="status" >
 							<option value="new" 	 <%= 'selected' if $order->{status} eq 'new' 	 %>>новый</option>
 							<option value="proceed"  <%= 'selected' if $order->{status} eq 'proceed' %>>в обработке</option>
 							<option value="finished" <%= 'selected' if $order->{status} eq 'finished'%>>выполнен</option>
 							<option value="canceled" <%= 'selected' if $order->{status} eq 'canceled'%>>отменен</option>
 						<select>
-						<input type='submit' name='save' value='Сохранить'> 	
 		        	</div>
 
 		        	<div class='full'>

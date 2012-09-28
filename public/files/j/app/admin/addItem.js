@@ -3,7 +3,8 @@ define([
 		'ui',
 		'tmpl',
 		'customSelect',
-		'datePicker',
+		'ui',
+		'datePickerRu',
 		'mouseWheel'
 ], function($){
 	

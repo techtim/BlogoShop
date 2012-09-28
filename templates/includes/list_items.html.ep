@@ -1,7 +1,13 @@
 % if (ref $items eq 'ARRAY') {
 % foreach my $item (@$items) {
 % next if !$item->{alias};
-	<li class='sale'>
+	<li 
+		% if ($item->{sale}->{sale_active} && 
+		%	$item->{sale}->{sale_start_stamp} <= time() &&
+		%	$item->{sale}->{sale_end_stamp} >= time() ) {
+				class='sale'
+		%}
+	>
         <a href="http://shop.<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>">
             <span class='img__section'>
         		<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>" />

@@ -42,8 +42,8 @@ sub update_article {
 	
 	if ($old_article->{type} ne $article->{type} || $old_article->{alias} ne $article->{alias}) { # check if alias changed , change directory with images
 		
-		my $old = $self->{config}->{image_dir}.($old_article->{type} ? $old_article->{type} : $self->{config}->{default_img_dir}).'/'.$old_article->{alias};
-		my $new = $self->{config}->{image_dir}.($article->{type} ? $article->{type} : $self->{config}->{default_img_dir}).'/'.$article->{alias};
+		my $old = $self->{config}->{image_dir}.($old_article->{type} ? $old_article->{type} : $self->{config}->{default_img_dir}).'/'.($old_article->{alias}||$self->{config}->{default_img_dir});
+		my $new = $self->{config}->{image_dir}.($article->{type} ? $article->{type} : $self->{config}->{default_img_dir}).'/'.($article->{alias}||$self->{config}->{default_img_dir});
 		
 		my $new_dir = $self->{config}->{image_dir}.($article->{type} ? $article->{type} : $self->{config}->{default_img_dir});
 		make_path($new_dir)	or die 'Error on creating article folder:'.$new_dir.' -> '.$! 

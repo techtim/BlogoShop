@@ -185,7 +185,8 @@ sub startup {
 
 	$r->any('/')->to('controller-article#index');
 	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
-	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all; # make from array of hashes array of _ids and join ids to filter cuts in url
+	# make from array of hashes array of _ids and join ids to filter cuts in url
+	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
 	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show');
 
 	$r->route('/rss')->to('controller-article#rss');
@@ -230,10 +231,7 @@ sub startup {
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'statics');
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'statics');
 		
-		# Big Games
-		#		$admin_bridge->route('/big_games_news')->via('get')->to('controller-Adminarticle#list_big_games');
-		#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'big_games_news');
-		#		$admin_bridge->route('/big_games_news/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'big_games_news');
+		
 		
 		# Content
 		$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');

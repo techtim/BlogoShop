@@ -2,13 +2,14 @@ requirejs.config({
 	enforceDefine: true,
 	paths: {
 		jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min',
-		carousel: './libs/carousel',
-		tmpl: './libs/tmpl',
-		fotorama: './libs/fotorama',
-		customSelect: './libs/customSelect',
-		mouseWheel: './libs/mousewheel',
-		ui: './libs/ui',
-		datePicker: './libs/datepicker-ru'
+		carousel: '/j/libs/carousel',
+		tmpl: '/j/libs/tmpl',
+		fotorama: '/j/libs/fotorama',
+		customSelect: '/j/libs/customSelect',
+		mouseWheel: '/j/libs/mousewheel',
+		ui: '/j/libs/ui',
+		datePickerRu: '/j/libs/datepicker-ru',
+		scroll: '/j/libs/scroll',
 	}
 });
 
@@ -21,7 +22,7 @@ requirejs(['jquery'], function($){ }, function(err){
 
 		requirejs.config({
             paths: {
-                jquery: './libs/jquery'
+                jquery: '/j/libs/jquery'
             }
         });
 

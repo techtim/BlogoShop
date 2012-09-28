@@ -1,5 +1,4 @@
-define(['jquery'], function($){}
-	(function(){
+define(['jquery'], function($){
 	 	$.fn.extend({ 
 	 		screw: function(options, callback) {
 				var defaults = {
@@ -85,7 +84,7 @@ define(['jquery'], function($){}
 			                        if($(this).attr('rel')){
 			                          $.get($(this).attr('rel'), function(data) {
 			                             o.replaceWith(data);
-			                             callback.call()
+			                             if(callback) callback.call()
 			                       	 	}, data_type);
 			                        } else if($(this).attr('rev')){
 			                            o.replaceWith($(this).attr('rev'));
@@ -95,12 +94,12 @@ define(['jquery'], function($){}
 		                          $.get($(this).attr('rel'), function(data) {
 		                             o.append('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + data + '</div>');
 		                             showContent(rand);
-		                             callback.call()
+		                             if(callback) callback.call()
 		                        }, data_type);  
 		                        } else if($(this).attr('rev')){
 		                            o.append('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + $(this).attr('rev') + '</div>');
 		                            showContent(rand);
-		                            callback.call()
+		                            if(callback) callback.call()
 		                        } 
 		                        } else if(o.hasClass('screw-prepend')){
 		                        if($(this).attr('rel')){
@@ -112,19 +111,19 @@ define(['jquery'], function($){}
 		                        } else if($(this).attr('rev')){
 		                            o.prepend('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + $(this).attr('rev') + '</div>');
 		                            showContent(rand);
-		                            callback.call()
+		                            if(callback) callback.call()
 		                        } 
 		                        } else if(o.hasClass('screw-before')){
 		                        if($(this).attr('rel')){
 		                          $.get($(this).attr('rel'), function(data) {
 		                             o.before('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + data + '</div>');
 		                             showContent(rand);
-		                             callback.call()
+		                             if(callback) callback.call()
 		                        }, data_type);  
 		                        } else if($(this).attr('rev')){
 		                            o.before('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + $(this).attr('rev') + '</div>');
 		                            showContent(rand);
-		                            callback.call()
+		                            if(callback) callback.call()
 		                        }
 		                        
 		                        if(o.hasClass('screw-repeat') && pos.top < $(window).height() && pos.left < $(window).width()){
@@ -132,12 +131,12 @@ define(['jquery'], function($){}
 		                            $.get($(this).attr('rel'), function(data) {
 		                                    o.before('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + data + '</div>');
 		                                    showContent(rand);
-		                                    callback.call()
+		                                    if(callback) callback.call()
 		                            }, data_type);
 		                            } else if($(this).attr('rev')){
 		                                o.before('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + $(this).attr('rev') + '</div>');
 		                                showContent(rand);
-		                                callback.call()
+		                                if(callback) callback.call()
 		                            }
 		                        }
 		                         
@@ -146,12 +145,12 @@ define(['jquery'], function($){}
 		                          $.get($(this).attr('rel'), function(data) {
 		                             o.after('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + data + '</div>');
 		                             showContent(rand);
-		                             callback.call()
+		                             if(callback) callback.call()
 		                        }, data_type);  
 		                        } else if($(this).attr('rev')){
 		                            o.after('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + $(this).attr('rev') + '</div>');
 		                            showContent(rand);
-		                            callback.call()
+		                            if(callback) callback.call()
 		                        } 
 		                        } else {
 		                        if($(this).attr('rel')){
@@ -163,7 +162,7 @@ define(['jquery'], function($){}
 		                        } else if($(this).attr('rev')){
 		                            o.append('<div style="display:none" id="screw-content-' + rand + '" class="screw-content">' + $(this).attr('rev') + '</div>');
 		                            showContent(rand);
-		                            callback.call()
+		                            if(callback) callback.call()
 		                        } 
 		                        }
 		                        o.removeClass('screw-loading').addClass('screw-loaded');
@@ -202,5 +201,4 @@ define(['jquery'], function($){}
 	    	}
 		});
 		
-	})();
 });
