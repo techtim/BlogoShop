@@ -1,3 +1,4 @@
+<script>requirejs(['app/sidebarMenu']);</script>
 <div class='sidebar__section fl'>
 	
 	<div class='menu__section'>

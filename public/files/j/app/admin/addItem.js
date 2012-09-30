@@ -248,8 +248,9 @@ define([
 	
 	(function bind__visibility(){
 		$('.acive__item__checkbox').each(function(){
-			$this = $(this);
-			$parent = $this.closest('.row');
+			var $this = $(this),
+				$parent = $this.closest('.row');
+
 			if($this.is(':checked')) {
 				$('.row .visible').addClass('checked');
 			}else{
@@ -257,23 +258,21 @@ define([
 			}
 		});
 		
-		$('.fake__checkbox').live('click', function(e){
+		$('.fake__checkbox').on('click', function(e){
 			e.preventDefault();
-			$this = $(this);
-			_with_checkbox = $(this).data('checkbox');
-			$input = $('input', $this);
-			$this.toggleClass('checked');
-			_type = $this.data('type');
-			if($input.is(':checked')){
-				$input.attr('checked', false)
-			}else{
-				$input.attr('checked', true)
-			}
-			if(_type == 'del') {
+			var $this = $(this),
+				$input = $this.find('input'),
+				$parent = $this.closest('li'),
+				_type = $this.data('type');
+
+			$parent.toggleClass('checked');
+
+			if(_type === 'del') {
 				$this.parent().toggleClass('deleted');
-			}else if(_type == 'preview'){
-				$('.images__list li').removeClass('checked');
-				$this.closest('li').addClass('checked');
+			}else if(_type === 'preview'){
+				$('.images__list li').removeClass('checked').find('input').attr('checked', false);
+				$input.attr('checked', true);
+				$parent.addClass('checked');
 			};
 		});
 		

@@ -6,11 +6,11 @@ define(['jquery'], function($){
 
 		$parent.toggleClass('active');
 	}).on('click', '.submit__button', function(e){
-		e.preventDefault();
 		e.stopPropagation();
 		var $this = $(this),
 			$parent = $this.closest('li'),
-			_active = $this.hasClass('active');
+			_active = $parent.hasClass('active');
+			console.log($parent);
 
 		if(_active) $parent.find('form').submit();
 

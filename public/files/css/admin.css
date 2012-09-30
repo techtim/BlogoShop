@@ -1,18 +1,23 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000342}}
 body {
   background: #fff;
   font-family: Arial, sans-serif;
   font-size: 12px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000350}}
 .fl {
   float: left; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000354}}
 .fr {
   float: right; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000358}}
 .header__section {
   margin-bottom: 10px!important;
   background: #505050; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000363}}
 .header__section h2 {
   margin-top: 18px;
   margin-left: 16px;
@@ -21,6 +26,7 @@ body {
   font: 26px "PT Sans";
   text-transform: uppercase; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000372}}
 .user__section {
   float: right;
   margin-top: 18px;
@@ -28,9 +34,11 @@ body {
   color: #fff;
   text-transform: uppercase; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000380}}
 .user__section li {
   margin-bottom: 6px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000384}}
 .user__section a {
   display: inline;
   background: none;
@@ -38,6 +46,7 @@ body {
   font-size: 11px;
   text-transform: none; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\0000392}}
 .user__section a.logout {
   padding: 3px 6px;
   height: auto;
@@ -50,28 +59,35 @@ body {
   text-indent: 0px;
   text-transform: uppercase; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003106}}
 .parts__section {
   margin-bottom: 28px;
   padding-bottom: 12px;
   display: block;
   border-bottom: 1px solid #505050; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003112}}
   .parts__section li {
     float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003116}}
   .parts__section a {
     margin-right: 26px;
     color: #505050;
     font-size: 12px;
     text-decoration: none;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003123}}
     .parts__section a:hover {
       text-decoration: underline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003128}}
   .parts__section .site__link {
     float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003131}}
     .parts__section .site__link a {
       display: block;
       height: 9px;
       width: 13px;
       background: url(/i/admin/ico-corona.png) no-repeat; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003140}}
   .parts__section .home {
     display: block;
     height: 10px;
@@ -79,29 +95,36 @@ body {
     margin-left: 12px;
     background: url(/i/admin/ico-home.png) no-repeat; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003152}}
 .left__side__section {
   width: 620px;
   float: left; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003157}}
 .right__side__section {
   float: right;
   width: 340px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003162}}
 .middle__section {
   width: 500px;
   float: left;
   margin-left: 40px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003168}}
 .right__side__section .banners__section img {
   width: 340px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003174}}
 .sidebar__section.categories {
   width: 262px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003177}}
   .sidebar__section.categories ul {
     display: block;
     clear: both;
     border-top: 1px solid #d3d3d3;
     border-bottom: 1px solid #d3d3d3; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003186}}
   .sidebar__section.categories li {
     height: 32px;
     display: block;
@@ -110,23 +133,30 @@ body {
     border-right: 1px solid #d3d3d3;
     background: #505050;
     line-height: 32px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003197}}
     .sidebar__section.categories li:last-child {
       border-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003201}}
     .sidebar__section.categories li.title {
       background: #fff;
       border-bottom: 1px solid #d3d3d3; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003205}}
       .sidebar__section.categories li.title a {
         color: #505050;
         font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003209}}
         .sidebar__section.categories li.title a.active {
           background: url("/i/admin/ico-visible.png") no-repeat; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003215}}
     .sidebar__section.categories li.current {
       background: url("/i/admin/category-current-bg.png") repeat-x; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003220}}
   .sidebar__section.categories a {
     color: #fff;
     font-size: 12px;
     text-decoration: none;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003228}}
     .sidebar__section.categories a.active {
       position: relative;
       top: 3px;
@@ -141,12 +171,15 @@ body {
       -moz-transition: opacity 0.2s linear;
       -o-transition: opacity 0.2s linear;
       transition: opacity 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003240}}
       .sidebar__section.categories a.active.inactive {
         opacity: .45; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003249}}
 .list__section {
   margin-top: 8px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003254}}
 .caption {
   display: inline-block;
   padding-bottom: 10px;
@@ -154,6 +187,7 @@ body {
   font: 15px "PT Sans Bold";
   text-transform: uppercase; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003262}}
 .add {
   display: inline-block;
   height: 14px;
@@ -164,29 +198,37 @@ body {
   background: url(/i/ico-plus.png) no-repeat;
   text-indent: -9999px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003275}}
 .items__list.with__border__bottom {
   margin-bottom: 20px;
   padding-bottom: 14px;
   border-bottom: 4px solid #cacaca; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003281}}
 .items__list li {
   height: 38px;
   margin-bottom: 1px;
   background: #e5e5e5;
   line-height: 38px;
   overflow: hidden; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003288}}
   .items__list li.not__active {
     background: #ffdad6; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003292}}
   .items__list li.fresh {
     background: #e2f3ad; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003295}}
     .items__list li.fresh .type a {
       background: #2f6e09; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003302}}
 .items__list li:hover .edit, .items__list li:hover .preview {
   display: inline-block; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003306}}
 .items__list li.pager {
   background: none; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003310}}
 .items__list .active__button {
   position: relative;
   top: 2px;
@@ -196,9 +238,11 @@ body {
   margin-left: 8px;
   background: url(/i/admin/ico-visible.png) no-repeat; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003320}}
 .items__list .not__active .active__button {
   background-position: left -40px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003324}}
 .items__list .article__link {
   display: inline-block;
   width: 350px;
@@ -209,16 +253,19 @@ body {
   text-transform: uppercase;
   overflow: hidden; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003335}}
 .items__list .container {
   display: inline-block;
   width: 60px;
   margin: 0 14px;
   text-align: center; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003342}}
 .items__list .container.brand {
   width: 106px;
   margin: 0; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003347}}
 .items__list .container a {
   display: inline-block;
   height: 10px;
@@ -232,6 +279,7 @@ body {
   text-transform: uppercase;
   opacity: .6; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003362}}
 .items__list .edit {
   position: relative;
   top: 2px;
@@ -247,20 +295,24 @@ body {
   -o-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003375}}
 .items__list .edit:hover {
   opacity: 1; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003379}}
 .items__list .preview {
   display: none;
   height: 9px;
   width: 13px;
   background: url(/i/admin/ico-corona.png) no-repeat; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003386}}
 .sort__strip__section {
   height: 28px;
   margin-bottom: 1px;
   background: url("/i/admin/sort-bg.png") repeat-x;
   clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003392}}
   .sort__strip__section h3 {
     float: left;
     height: 20px;
@@ -272,6 +324,7 @@ body {
     font-size: 10px;
     font-style: normal;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003407}}
   .sort__strip__section label {
     float: left;
     margin-top: 8px;
@@ -280,19 +333,23 @@ body {
     color: #fff;
     font-size: 10px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003419}}
   .sort__strip__section .selects__section {
     float: left;
     max-width: 118px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003423}}
     .sort__strip__section .selects__section select {
       height: 18px;
       max-width: 118px;
       margin-top: 5px;
       font-size: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003431}}
   .sort__strip__section input[type='text'] {
     height: 18px;
     width: 104px;
     margin-top: 4px;
     border: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003438}}
   .sort__strip__section button {
     float: right;
     width: 70px;
@@ -312,20 +369,25 @@ body {
     -moz-transition: opacity 0.2s linear;
     -o-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003459}}
     .sort__strip__section button:hover {
       opacity: 1; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003466}}
 .pager__section {
   float: right;
   margin-top: 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003470}}
   .pager__section li {
     float: left;
     padding-right: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003475}}
   .pager__section .title {
     padding-right: 6px;
     color: #4b4b4b;
     font-size: 10px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003482}}
   .pager__section a {
     position: relative;
     top: -2px;
@@ -333,26 +395,34 @@ body {
     font-size: 11px;
     font-weight: bold;
     text-decoration: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003494}}
     .pager__section a.current {
       color: #de1500; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003500}}
 .breadcrumps__section {
   padding-bottom: 6px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003503}}
   .breadcrumps__section li {
     float: left;
     color: #4b4b4b;
     font-family: "PT Sans bold";
     font-size: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003511}}
     .breadcrumps__section li:first-child {
       color: #de1500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003514}}
       .breadcrumps__section li:first-child a {
         margin-left: 0;
         color: #de1500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003520}}
     .breadcrumps__section li:nth-child(2n) {
       color: #de1500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003524}}
     .breadcrumps__section li.category {
       margin-top: -5px;
       margin-left: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003530}}
   .breadcrumps__section a {
     position: relative;
     top: 1px;
@@ -362,10 +432,13 @@ body {
     font-size: 15px;
     text-decoration: none;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003544}}
     .breadcrumps__section a:hover {
       text-decoration: underline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003548}}
     .breadcrumps__section a.gray {
       color: #9e9e9e; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003552}}
     .breadcrumps__section a.add__item {
       top: -2px;
       margin-left: 2px;
@@ -379,20 +452,25 @@ body {
       background: -moz-linear-gradient(top, #8fe42c, #69be06);
       background: -o-linear-gradient(top, #8fe42c, #69be06);
       background: linear-gradient(to bottom, #8fe42c, #69be06); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003564}}
       .breadcrumps__section a.add__item:hover {
         text-decoration: none; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003573}}
 .shop__add__item .caption {
   color: #de1500;
   font-size: 15px;
   font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003583}}
 .shop__add__item form .breadcrumps__section {
   margin-bottom: 12px;
   display: block;
   border-bottom: 1px solid #d9d9d9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003589}}
 .shop__add__item form .row {
   margin-bottom: 12px;
   clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003594}}
 .shop__add__item form .button {
   height: auto!important;
   width: auto!important;
@@ -415,42 +493,52 @@ body {
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003620}}
   .shop__add__item form .button.gray {
     background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
     background: -webkit-linear-gradient(top, silver, #9a9a9a);
     background: -moz-linear-gradient(top, silver, #9a9a9a);
     background: -o-linear-gradient(top, silver, #9a9a9a);
     background: linear-gradient(to bottom, silver, #9a9a9a); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003623}}
     .shop__add__item form .button.gray.light {
       background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#cccccc));
       background: -webkit-linear-gradient(top, #dfdfdf, #cccccc);
       background: -moz-linear-gradient(top, #dfdfdf, #cccccc);
       background: -o-linear-gradient(top, #dfdfdf, #cccccc);
       background: linear-gradient(to bottom, #dfdfdf, #cccccc); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003628}}
   .shop__add__item form .button.green {
     background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
     background: -webkit-linear-gradient(top, #8fe42c, #69be06);
     background: -moz-linear-gradient(top, #8fe42c, #69be06);
     background: -o-linear-gradient(top, #8fe42c, #69be06);
     background: linear-gradient(to bottom, #8fe42c, #69be06); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003632}}
   .shop__add__item form .button.red {
     background: -webkit-gradient(linear, left top, left bottom, from(red), to(#640101));
     background: -webkit-linear-gradient(top, red, #640101);
     background: -moz-linear-gradient(top, red, #640101);
     background: -o-linear-gradient(top, red, #640101);
     background: linear-gradient(to bottom, red, #640101); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003636}}
   .shop__add__item form .button.centered {
     position: relative;
     top: -4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003641}}
   .shop__add__item form .button.with__margin__bottom {
     margin-bottom: 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003645}}
   .shop__add__item form .button.submit__form {
     margin: 40px auto; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003649}}
   .shop__add__item form .button.delete__item {
     float: left;
     margin-top: 40px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003654}}
   .shop__add__item form .button.submit__form {
     float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003659}}
 .shop__add__item form input[type='text'] {
   height: 26px;
   width: 100%;
@@ -468,21 +556,25 @@ body {
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003676}}
   .shop__add__item form input[type='text']:focus {
     background: #fff;
     border-color: #7f7f7f; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003681}}
   .shop__add__item form input[type='text']::-webkit-input-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
     font-family: "PT Sans bold";
     font-size: 12px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003691}}
   .shop__add__item form input[type='text']:-moz-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
     font-family: "PT Sans bold";
     font-size: 12px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003703}}
 .shop__add__item form textarea {
   display: block;
   height: 154px;
@@ -497,32 +589,39 @@ body {
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003715}}
   .shop__add__item form textarea:focus {
     background: #fff;
     border-color: #7f7f7f; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003720}}
   .shop__add__item form textarea::-webkit-input-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
     font-family: "PT Sans bold";
     font-size: 12px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003730}}
   .shop__add__item form textarea:-moz-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
     font-family: "PT Sans bold";
     font-size: 12px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003743}}
 .shop__add__item form .caption__row .active {
   margin-top: 2px;
   margin-left: 18px;
   margin-right: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003750}}
 .shop__add__item form .sex__section {
   padding-top: 2px;
   padding-left: 10px;
   float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003755}}
   .shop__add__item form .sex__section li {
     margin-right: 2px;
     float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003759}}
     .shop__add__item form .sex__section li a {
       padding: 2px 4px;
       display: block;
@@ -531,17 +630,21 @@ body {
       font-size: 10px;
       text-decoration: none;
       text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003770}}
       .shop__add__item form .sex__section li a input {
         display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003774}}
       .shop__add__item form .sex__section li a.current {
         background: #434343;
         border-color: #434343;
         color: #fff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003785}}
 .shop__add__item form .sale__section {
   float: right;
   width: 188px;
   padding-left: 40px;
   background: url("/i/admin/ico-sale.png") no-repeat left 25px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003791}}
   .shop__add__item form .sale__section .bg {
     padding-top: 6px;
     padding-right: 8px;
@@ -549,8 +652,10 @@ body {
     padding-left: 8px;
     background: #d9d9d9;
     border-radius: 6px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003802}}
   .shop__add__item form .sale__section .row {
     margin-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003806}}
   .shop__add__item form .sale__section .sale {
     display: inline-block;
     width: 116px;
@@ -559,16 +664,19 @@ body {
     font-size: 12px;
     font-weight: bold;
     line-height: 24px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003817}}
     .shop__add__item form .sale__section .sale::-webkit-input-placeholder {
       padding-left: 8px;
       color: #de1500;
       font-weight: bold;
       text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003824}}
     .shop__add__item form .sale__section .sale:-moz-placeholder {
       padding-left: 8px;
       color: #de1500;
       font-weight: bold;
       color: #de1500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003832}}
   .shop__add__item form .sale__section .currency {
     position: relative;
     margin-top: 2px;
@@ -581,25 +689,33 @@ body {
     background: -moz-linear-gradient(top, #f6f6f6, #ededed);
     background: -o-linear-gradient(top, #f6f6f6, #ededed);
     background: linear-gradient(to bottom, #f6f6f6, #ededed); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003841}}
     .shop__add__item form .sale__section .currency.active {
       border-radius: 5px 5px 0 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003843}}
       .shop__add__item form .sale__section .currency.active .current__text {
         background-color: #F6F6F6!important;
         border-radius: 5px 5px 0 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003846}}
         .shop__add__item form .sale__section .currency.active .current__text:after {
           background-position: left top; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003850}}
       .shop__add__item form .sale__section .currency.active .dropdown {
         display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003855}}
     .shop__add__item form .sale__section .currency .current__text {
       position: relative;
       height: 26px;
       display: block;
       cursor: pointer;
       line-height: 26px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003862}}
       .shop__add__item form .sale__section .currency .current__text.rub {
         background: url("/i/admin/ico-rub-small.png") no-repeat 9px 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003866}}
       .shop__add__item form .sale__section .currency .current__text.perc {
         background: url("/i/admin/ico-perc.png") no-repeat 6px 5px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003870}}
       .shop__add__item form .sale__section .currency .current__text:after {
         position: absolute;
         right: 7px;
@@ -609,6 +725,7 @@ body {
         display: block;
         background: url("/i/admin/select-arrows-spr.png") no-repeat left bottom;
         content: ''; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003882}}
     .shop__add__item form .sale__section .currency .dropdown {
       position: absolute;
       left: -1px;
@@ -625,6 +742,7 @@ body {
       background: -moz-linear-gradient(top, #f6f6f6, #ededed);
       background: -o-linear-gradient(top, #f6f6f6, #ededed);
       background: linear-gradient(to bottom, #f6f6f6, #ededed); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003895}}
       .shop__add__item form .sale__section .currency .dropdown li {
         display: block;
         margin-bottom: 4px;
@@ -632,16 +750,20 @@ body {
         font-family: "PT Sans bold";
         font-size: 12px;
         cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003905}}
         .shop__add__item form .sale__section .currency .dropdown li.rub {
           height: 24px;
           background: url("/i/admin/ico-rub-small.png") no-repeat 9px top; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003910}}
         .shop__add__item form .sale__section .currency .dropdown li.perc {
           height: 24px;
           background: url("/i/admin/ico-perc.png") no-repeat 9px top; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003918}}
   .shop__add__item form .sale__section .dates__section {
     position: relative;
     padding-top: 4px;
     color: #4b4b4b; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003923}}
     .shop__add__item form .sale__section .dates__section input[type='text'] {
       display: inline-block;
       width: 48px;
@@ -652,29 +774,37 @@ body {
       font-weight: bold;
       line-height: 24px;
       text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003938}}
   .shop__add__item form .sale__section .checkbox {
     position: relative;
     right: -3px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003941}}
     .shop__add__item form .sale__section .checkbox.checked {
       background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
       background: -webkit-linear-gradient(top, #8fe42c, #69be06);
       background: -moz-linear-gradient(top, #8fe42c, #69be06);
       background: -o-linear-gradient(top, #8fe42c, #69be06);
       background: linear-gradient(to bottom, #8fe42c, #69be06); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003945}}
     .shop__add__item form .sale__section .checkbox input {
       display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003951}}
 .shop__add__item form .specials__section {
   margin-top: 13px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003954}}
   .shop__add__item form .specials__section a.active {
     margin-top: 6px;
     float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003959}}
   .shop__add__item form .specials__section .custom-select {
     float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003964}}
 .shop__add__item form .price__section {
   position: relative;
   width: 120px;
   margin-top: 6px;
   padding-bottom: 12px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003971}}
   .shop__add__item form .price__section:after {
     position: absolute;
     top: 8px;
@@ -684,26 +814,33 @@ body {
     width: 11px;
     background: url("/i/admin/ico-rub-small.png") no-repeat;
     content: ''; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003982}}
   .shop__add__item form .price__section input[type='text'] {
     position: relative;
     display: block;
     width: 118px!important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003987}}
     .shop__add__item form .price__section input[type='text']::-webkit-input-placeholder {
       color: #5b9715!important;
       font-weight: bold;
       text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003993}}
     .shop__add__item form .price__section input[type='text']:-moz-placeholder {
       color: #5b9715!important;
       font-weight: bold;
       color: #de1500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\00003999}}
     .shop__add__item form .price__section input[type='text'].price {
       margin-bottom: 12px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031005}}
 .shop__add__item form .tags {
   padding-bottom: 6px;
   background: #f6f6f6;
   border: 1px solid #d0d0d0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031010}}
   .shop__add__item form .tags .caption__strip {
     background: #d0d0d0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031013}}
     .shop__add__item form .tags .caption__strip .caption {
       padding-top: 6px;
       padding-left: 8px;
@@ -711,6 +848,7 @@ body {
       font-family: "PT Sans Bold";
       font-size: 15px;
       font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031028}}
   .shop__add__item form .tags input[type='text'] {
     height: 25px;
     width: 348px;
@@ -718,14 +856,17 @@ body {
     margin-left: 6px;
     background: #fff;
     line-height: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031038}}
 .shop__add__item form .sub__items__section {
   padding-top: 10px;
   border-top: 1px solid #d9d9d9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031042}}
   .shop__add__item form .sub__items__section .caption__strip {
     height: 40px;
     background: #eaeae9;
     border-top: 1px solid #d9d9d9;
     border-bottom: 1px dashed #cacaca; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031048}}
     .shop__add__item form .sub__items__section .caption__strip h3 {
       width: 104px;
       display: inline-block;
@@ -735,21 +876,28 @@ body {
       font-family: "PT Sans bold";
       font-size: 10px;
       text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031061}}
     .shop__add__item form .sub__items__section .caption__strip .button {
       display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031065}}
     .shop__add__item form .sub__items__section .caption__strip input {
       display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031069}}
     .shop__add__item form .sub__items__section .caption__strip .active {
       float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031073}}
     .shop__add__item form .sub__items__section .caption__strip .delete__button {
       margin-top: 10px;
       margin-right: 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031079}}
   .shop__add__item form .sub__items__section dl {
     position: relative;
     height: 46px;
     border-bottom: 1px dashed #cacaca; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031085}}
     .shop__add__item form .sub__items__section dl.added dd {
       color: #ff0000; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031091}}
   .shop__add__item form .sub__items__section dd {
     width: 102px;
     padding-left: 8px;
@@ -763,38 +911,51 @@ body {
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
     transition: all 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031104}}
     .shop__add__item form .sub__items__section dd.added {
       color: red; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031109}}
   .shop__add__item form .sub__items__section dt {
     width: 328px;
     float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031113}}
     .shop__add__item form .sub__items__section dt input {
       display: inline-block;
       width: 62px;
       margin-top: 8px;
       text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031119}}
       .shop__add__item form .sub__items__section dt input::-webkit-input-placeholder {
         padding-left: 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031123}}
       .shop__add__item form .sub__items__section dt input:-moz-placeholder {
         padding-left: 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031127}}
       .shop__add__item form .sub__items__section dt input.price, .shop__add__item form .sub__items__section dt input.qty {
         color: #5b9715;
         font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031131}}
         .shop__add__item form .sub__items__section dt input.price::-webkit-input-placeholder, .shop__add__item form .sub__items__section dt input.qty::-webkit-input-placeholder {
           padding-left: 4px;
           color: #5b9715; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031136}}
         .shop__add__item form .sub__items__section dt input.price:-moz-placeholder, .shop__add__item form .sub__items__section dt input.qty:-moz-placeholder {
           padding-left: 4px;
           color: #5b9715; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031142}}
       .shop__add__item form .sub__items__section dt input.consist {
         width: 240px;
         text-align: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031150}}
   .shop__add__item form .sub__items__section .add__color {
     top: 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031154}}
   .shop__add__item form .sub__items__section .dropdown__section {
     display: inline-block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031158}}
     .shop__add__item form .sub__items__section .dropdown__section.active .dropdown {
       display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031163}}
     .shop__add__item form .sub__items__section .dropdown__section .dropdown {
       position: absolute;
       left: 0;
@@ -804,6 +965,7 @@ body {
       padding: 4px 4px;
       background: #fff;
       z-index: 3; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031175}}
       .shop__add__item form .sub__items__section .dropdown__section .dropdown li {
         float: left;
         height: 16px;
@@ -811,6 +973,7 @@ body {
         margin: 2px;
         border: 1px solid #C9C9C9;
         cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031188}}
   .shop__add__item form .sub__items__section .selected__colors li {
     position: relative;
     float: left;
@@ -819,6 +982,7 @@ body {
     margin-top: 9px;
     margin-right: 4px;
     border: 1px solid #c9c9c9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031198}}
   .shop__add__item form .sub__items__section .selected__colors .delete {
     position: absolute;
     left: -1px;
@@ -832,8 +996,10 @@ body {
     -moz-transition: opacity 0.2s linear;
     -o-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031209}}
     .shop__add__item form .sub__items__section .selected__colors .delete:hover {
       opacity: .8; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031215}}
   .shop__add__item form .sub__items__section .delete__button {
     float: right;
     height: 20px;
@@ -842,14 +1008,17 @@ body {
     margin-right: 6px;
     background: url("/i/admin/ico-delete.png") no-repeat;
     opacity: .8; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031227}}
 .shop__add__item form .params__strip__section {
   padding: 8px 0;
   background: #fefbdd;
   border-bottom: 1px dashed #cacaca; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031233}}
 .shop__add__item form .submit__section {
   margin-top: 10px;
   border-top: 1px solid #d9d9d9;
   text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031239}}
 .shop__add__item form a.active {
   display: inline-block;
   height: 16px;
@@ -863,26 +1032,35 @@ body {
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031250}}
   .shop__add__item form a.active.checked {
     opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031254}}
   .shop__add__item form a.active input {
     display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031262}}
 .shop__add__item form .fake__checkbox input {
   display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031267}}
 .shop__add__item form .loading__section {
   margin-top: 10px;
   padding-top: 14px;
   border-top: 1px solid #d9d9d9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031272}}
   .shop__add__item form .loading__section .add {
     top: 2px;
     cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031277}}
   .shop__add__item form .loading__section .image__description {
     float: left;
     width: 360px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031282}}
   .shop__add__item form .loading__section .row {
     padding: 6px 0 6px 2px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031284}}
     .shop__add__item form .loading__section .row.new {
       background: #fefbdd; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031289}}
   .shop__add__item form .loading__section .upload__button {
     position: relative;
     float: right;
@@ -901,6 +1079,7 @@ body {
     background: -moz-linear-gradient(top, silver, #9a9a9a);
     background: -o-linear-gradient(top, silver, #9a9a9a);
     background: linear-gradient(to bottom, silver, #9a9a9a); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031308}}
     .shop__add__item form .loading__section .upload__button input {
       position: absolute;
       top: 0;
@@ -909,17 +1088,20 @@ body {
       width: 62px;
       opacity: 0;
       filter: alpha(opacity=0); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031319}}
   .shop__add__item form .loading__section .warning {
     color: #de1500;
     font-family: "PT Sans";
     font-size: 10px;
     text-align: center;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031331}}
   .shop__add__item form .loading__section .uploaded__section {
     position: relative;
     margin-top: 10px;
     padding-top: 4px;
     border-top: 1px solid #d9d9d9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031337}}
     .shop__add__item form .loading__section .uploaded__section .images__counter {
       position: absolute;
       right: 0;
@@ -929,25 +1111,32 @@ body {
       color: #7f7f7f;
       font-family: "PT Sans bold";
       font-size: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031349}}
       .shop__add__item form .loading__section .uploaded__section .images__counter span {
         color: #53c520; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031352}}
         .shop__add__item form .loading__section .uploaded__section .images__counter span.full {
           color: #de1500; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031358}}
     .shop__add__item form .loading__section .uploaded__section .images__list {
       padding-top: 14px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031361}}
       .shop__add__item form .loading__section .uploaded__section .images__list li {
         position: relative;
         margin-right: 4px;
         padding-bottom: 4px;
         width: 68px;
         float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031368}}
         .shop__add__item form .loading__section .uploaded__section .images__list li.checked, .shop__add__item form .loading__section .uploaded__section .images__list li:hover {
           margin-top: -1px;
           margin-left: -1px;
           margin-right: 3px;
           border: 1px solid #ccc; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031374}}
           .shop__add__item form .loading__section .uploaded__section .images__list li.checked .preview, .shop__add__item form .loading__section .uploaded__section .images__list li:hover .preview {
             display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031379}}
         .shop__add__item form .loading__section .uploaded__section .images__list li .preview {
           position: absolute;
           left: -1px;
@@ -961,6 +1150,7 @@ body {
           text-align: center;
           text-decoration: none;
           text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031398}}
         .shop__add__item form .loading__section .uploaded__section .images__list li .img__box {
           position: relative;
           height: 82px;
@@ -968,20 +1158,24 @@ body {
           display: block;
           overflow: hidden;
           margin: 0 auto 4px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031406}}
           .shop__add__item form .loading__section .uploaded__section .images__list li .img__box img {
             width: 60px;
             -webkit-transition: all 0.2s linear;
             -moz-transition: all 0.2s linear;
             -o-transition: all 0.2s linear;
             transition: all 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031412}}
           .shop__add__item form .loading__section .uploaded__section .images__list li .img__box.deleted img {
             opacity: .7; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031416}}
           .shop__add__item form .loading__section .uploaded__section .images__list li .img__box .active {
             position: absolute;
             right: 0;
             top: 0;
             margin: 0;
             cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031424}}
           .shop__add__item form .loading__section .uploaded__section .images__list li .img__box .delete {
             position: absolute;
             left: 0;
@@ -990,6 +1184,7 @@ body {
             width: 20px;
             background: url("/i/admin/ico-del-red.png") no-repeat;
             cursor: pointer; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031436}}
         .shop__add__item form .loading__section .uploaded__section .images__list li .item__select label {
           display: block;
           margin-bottom: 4px;
@@ -997,9 +1192,11 @@ body {
           font-family: "PT Sans";
           font-size: 10px;
           text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031449}}
         .shop__add__item form .loading__section .uploaded__section .images__list li .item__select .custom-select {
           margin-left: 12px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031461}}
 .toggle__seo__editor {
   position: relative;
   top: -20px;
@@ -1016,9 +1213,11 @@ body {
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031484}}
   .toggle__seo__editor.opened {
     background-position: left -23px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031489}}
 .seo__editor {
   display: none;
   margin-top: 8px;
@@ -1030,10 +1229,13 @@ body {
   background: #e4e4e4;
   border-top: 1px dashed #bdbdbd;
   border-bottom: 1px dashed #bdbdbd; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031503}}
   .seo__editor.opened {
     display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031507}}
   .seo__editor dl {
     margin-bottom: 8px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031511}}
   .seo__editor dt {
     width: 76px;
     float: left;
@@ -1041,9 +1243,11 @@ body {
     color: #989898;
     font-size: 12px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031524}}
   .seo__editor dd {
     float: right;
     width: 584px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031529}}
   .seo__editor input[type='text'] {
     height: 26px;
     width: 100%;
@@ -1055,6 +1259,7 @@ body {
     text-transform: uppercase;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031546}}
   .seo__editor textarea {
     height: 66px;
     width: 100%;
@@ -1065,6 +1270,7 @@ body {
     resize: vertical;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031560}}
   .seo__editor input[type='submit'] {
     float: right;
     padding-top: 10px;
@@ -1087,8 +1293,10 @@ body {
     background: -o-linear-gradient(top, #696969, #444444);
     background: linear-gradient(to bottom, #696969, #444444); }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031589}}
 .orders__list__section h2 {
   color: #e60000; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031593}}
 .orders__list__section .statistic__strip__section {
   height: 28px;
   display: block;
@@ -1097,6 +1305,7 @@ body {
   background: -moz-linear-gradient(top, #3b3b3b, #292929);
   background: -o-linear-gradient(top, #3b3b3b, #292929);
   background: linear-gradient(to bottom, #3b3b3b, #292929); }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031598}}
   .orders__list__section .statistic__strip__section li {
     margin-right: 26px;
     float: left;
@@ -1105,6 +1314,7 @@ body {
     font-wight: bold;
     line-height: 28px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031612}}
     .orders__list__section .statistic__strip__section li.total {
       position: relative;
       padding-left: 10px;
@@ -1114,6 +1324,7 @@ body {
       font-family: Arial;
       font-size: 15px;
       font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031624}}
       .orders__list__section .statistic__strip__section li.total:after {
         position: absolute;
         right: -15px;
@@ -1123,52 +1334,70 @@ body {
         display: block;
         background: url("/i/admin/total-corner.png") no-repeat;
         content: ''; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031635}}
       .orders__list__section .statistic__strip__section li.total a {
         color: #fff;
         text-decoration: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031641}}
     .orders__list__section .statistic__strip__section li a {
       color: #fff200; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031644}}
       .orders__list__section .statistic__strip__section li a:hover {
         text-decoration: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031648}}
       .orders__list__section .statistic__strip__section li a.canceled {
         color: #ec008c; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031658}}
 .orders__list__section .list li {
   margin-bottom: 1px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031669}}
   .orders__list__section .list li.finished .cut {
     background: #f0f9d6; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031675}}
   .orders__list__section .list li.canceled .cut {
     background: #FFDAD6; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031681}}
   .orders__list__section .list li.proceed .cut {
     background: #fffcbf; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031686}}
   .orders__list__section .list li.active {
     border-top: 2px solid #aeaeae; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031689}}
     .orders__list__section .list li.active .cut {
       background: #cfcfcf; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031693}}
     .orders__list__section .list li.active .submit__button {
       cursor: pointer;
       opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031698}}
     .orders__list__section .list li.active .full {
       display: block; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031705}}
   .orders__list__section .list li .cut {
     height: 38px;
     padding: 0 12px;
     background: #f2f2f2;
     cursor: pointer;
     line-height: 38px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031713}}
   .orders__list__section .list li .full {
     margin-bottom: -1px;
     display: none;
     border-bottom: 2px solid #aeaeae; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031719}}
   .orders__list__section .list li .order__num {
     display: inline-block;
     color: #272727;
     font-size: 13px;
     text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031729}}
     .orders__list__section .list li .order__num span {
       color: #6bb200; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031734}}
   .orders__list__section .list li select {
     margin-top: 10px;
     float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031739}}
   .orders__list__section .list li .submit__button {
     margin-top: 5px;
     margin-left: 10px;
@@ -1193,8 +1422,10 @@ body {
     -moz-transition: opacity 0.2s linear;
     -o-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031762}}
   .orders__list__section .list li .items__list__section {
     margin-top: 12px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031765}}
     .orders__list__section .list li .items__list__section li {
       margin-right: 8px;
       margin-bottom: 8px;
@@ -1204,27 +1435,34 @@ body {
       float: left;
       background: #f0f0f0;
       border: 1px solid #cbcbcb; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031775}}
       .orders__list__section .list li .items__list__section li:nth-child(2n+2) {
         margin-right: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031779}}
       .orders__list__section .list li .items__list__section li img {
         height: 68px;
         width: 50px;
         float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031785}}
       .orders__list__section .list li .items__list__section li .description__section {
         margin-left: 10px;
         width: 144px;
         float: left;
         text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031791}}
         .orders__list__section .list li .items__list__section li .description__section h3 {
           color: #666;
           font-size: 12px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031798}}
         .orders__list__section .list li .items__list__section li .description__section h4 {
           color: #464646;
           font-size: 12px;
           font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031807}}
       .orders__list__section .list li .items__list__section li .meta__section {
         width: 64px;
         float: left; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031811}}
         .orders__list__section .list li .items__list__section li .meta__section .count {
           margin-bottom: 28px;
           height: 20px;
@@ -1236,54 +1474,68 @@ body {
           font-weight: bold;
           line-height: 20px;
           text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031826}}
         .orders__list__section .list li .items__list__section li .meta__section .price {
           padding-right: 20px;
           background: url(../i/ico-rub.png) no-repeat right 4px;
           color: #434343;
           clear: both;
           font-size: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031837}}
   .orders__list__section .list li .gray__bg {
     background: #e5e5e5; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031841}}
   .orders__list__section .list li dl {
     padding: 6px 10px 8px;
     border-bottom: 1px dashed #c9c9c9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031845}}
     .orders__list__section .list li dl dt {
       color: #6bb200;
       font-size: 15px;
       font-weight: bold;
       text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031854}}
     .orders__list__section .list li dl dd {
       padding-top: 6px;
       color: #595959;
       font-size: 13px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031863}}
   .orders__list__section .list li .price__section {
     background: #6bb200; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031866}}
     .orders__list__section .list li .price__section dt {
       margin-top: 7px;
       float: left;
       color: #fff; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031872}}
     .orders__list__section .list li .price__section dd {
       padding-right: 20px;
       float: right;
       background: url(../i/ico-rub-white.png) no-repeat right 8px;
       color: #fff;
       font-size: 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031882}}
   .orders__list__section .list li .contacts__section {
     padding: 0 10px;
     border-bottom: 1px dashed #c9c9c9; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031886}}
     .orders__list__section .list li .contacts__section dl {
       padding: 6px 0 8px;
       width: 33%;
       float: left;
       border-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031893}}
     .orders__list__section .list li .contacts__section dd {
       font-weight: bold; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031898}}
   .orders__list__section .list li .deliver__price__section {
     border-bottom: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031901}}
     .orders__list__section .list li .deliver__price__section dt {
       margin-top: 9px;
       float: left;
       color: #646464; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/admin\.scss}line{font-family:\000031908}}
     .orders__list__section .list li .deliver__price__section dd {
       padding-right: 20px;
       float: right;
