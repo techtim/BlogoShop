@@ -8,12 +8,9 @@
 		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
-        <link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
-        <script src="https://www.google.com/jsapi?key=ABQIAAAAq40cyT39xbh4SxII4iAAQhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQq6XU15uRy_aHLn2Ie3000LpSbxg" type="text/javascript"></script>
-        <script type='text/javascript'>
-            google.load("jquery", "1.7.1");
-        </script>
-        <script type='text/javascript' src='/j/head.js'></script>
+        
+        <script data-main='/j/config' src='/j/require.js'></script>
+        <script>requirejs(['app/global'])</script>
     </head>
 	<body>
         <div class='wrap clearfloat'>
@@ -23,15 +20,6 @@
             
         </div>
         
-        <script>
-            head.js(
-                {carousel : '/j/libs/carousel.js'}, 
-                {infinitescroll: '/j/libs/infinitescroll.js'},
-                {cookies: '/j/libs/cookie.js'},
-                {fotorama: '/j/libs/fotorama.js'},
-                {selectik: '/j/libs/selectik.js'},
-                '/j/j.js');
-        </script>
         %= include 'includes/footer'
         
         %= include 'includes/google_analytics'
