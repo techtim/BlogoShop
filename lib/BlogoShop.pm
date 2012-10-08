@@ -12,8 +12,6 @@ use BlogoShop::Admins;
 use BlogoShop::Utils;
 use BlogoShop::Item;
 
-use constant STATIC_PAGES => qw(map about pay delivery);
-
 # This method will run once at server start
 sub startup {
 	my $self = shift;
@@ -141,33 +139,17 @@ sub startup {
 	$r->route('/admin/article/:id/active/:bool', id => qr/[\d\w]+/, bool => qr/1|0/)->via('post')->to('controller-Ajax#activate_post', id => 'add');
 	$r->route('/import_cities')->to('controller-Ajax#import_cities');
 	$r->route('/update')->to('controller-Ajax#items_update_alias');
-	# --SHOP--
-	my  $shop = $r->route->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
-	
-		$shop->route('/cart')->via('get')->to('controller-shop#cart', act => '');
-		$shop->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
-		$shop->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
-		# list items 
-		$shop->route('/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-article#list');
 
-		$shop->route('/:sex/:category/:subcategory/:move/:id',
-			sex => qr!m|w!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!, 
-			move => qr/next|prev/, id => qr/[\d\w]+/)
-				->to('controller-shop#show', sex => '', category => '', subcategory => '', move => '', id => '');
-		$shop->route('/:category/:subcategory/:move/:id',
-			category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!, 
-			move => qr/next|prev/, id => qr/[\d\w]+/)
-				->to('controller-shop#show', sex => '', category => '', subcategory => '', move => '', id => '');
-		# show item
-		$shop->route('/:sex/:category/:subcategory/:alias/:act/:subitem',
-			sex => qr!m|w!, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, alias => qr![^\{\}\[\]/]+!, act => qr!\w+!)
-				->to('controller-shop#item', act => '', subitem => 0);
-		$shop->route('/:category/:subcategory/:alias/:act/:subitem',
-			category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, alias => qr![^\{\}\[\]/]+!, act => qr!\w+!, subitem => qr!\d+!)
-				->to('controller-shop#item', act => '', subitem => 0);
-	
-#    $self->routes->get('controller-shop#show')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
-	
+	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
+	# make from array of hashes array of _ids and join ids to filter cuts in url
+	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
+	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show');
+
+	$r->route('/rss')->to('controller-article#rss');
+	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
+
+#    $self->routes->get('controller-shop#list')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
+
 	# --BLOG--
 	my  $blog = $r->route->over( headers => {Host => 'blog.'.$self->config('domain_name')} );
 
@@ -175,6 +157,7 @@ sub startup {
 		$blog->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
 		my $bind_types = join '|', map {$_->{_id}} @types;
 		$blog->route('/:type', type => qr/$bind_types/)->to('controller-article#list');
+		$blog->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 		$blog->route('/tag/:tag', tag => qr/[а-яА-Я\w]+/i)->to('controller-article#list');
 		$blog->route('/brand/:brand', brand => qr/[^\{\}\[\]]+/)->to('controller-article#list');
 
@@ -183,15 +166,8 @@ sub startup {
 		$blog->route('/:type/:tag/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
 		$blog->route('/:type/:brand/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
 
-	$r->any('/')->to('controller-article#index');
-	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
-	# make from array of hashes array of _ids and join ids to filter cuts in url
-	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
-	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show');
+	$r->any('/')->to('controller-shop#index');
 
-	$r->route('/rss')->to('controller-article#rss');
-	$r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
-	
 	# --ADMIN--
 	$r->route('/login')->via('get')->to('controller-login#login');
 	$r->route('/login')->via('post')->to('controller-login#check_login');
@@ -247,6 +223,29 @@ sub startup {
 		$admin_bridge->route('/update_articles')->to('controller-Ajax#articles_update');
 		$admin_bridge->route('/update_items')->to('controller-Ajax#items_update');
 		$admin_bridge->route('/update_orders')->to('controller-Ajax#orders_update');
+	
+	# --SHOP--
+	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
+	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
+	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
+	# list items 
+	$r->route('/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-shop#brand');
+	$r->route('/tag/:tags', tag => qr![^\{\}\[\]/]+!)->to('controller-shop#list');
+
+	$r->route('/:sex/:category/:subcategory',
+		sex => qr!m|w!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)
+			->to('controller-shop#list', sex => '', category => '', subcategory => '', move => '', id => '');
+	$r->route('/:category/:subcategory',
+		category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)
+			->to('controller-shop#list', sex => '', category => '', subcategory => '', move => '', id => '');
+	# show item
+	$r->route('/:sex/:category/:subcategory/:alias/:act/:subitem',
+		sex => qr!m|w!, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, alias => qr![^\{\}\[\]/]+!, act => qr!\w+!)
+			->to('controller-shop#item', act => '', subitem => 0);
+	$r->route('/:category/:subcategory/:alias/:act/:subitem',
+		category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, alias => qr![^\{\}\[\]/]+!, act => qr!\w+!, subitem => qr!\d+!)
+			->to('controller-shop#item', act => '', subitem => 0);
+
 	$r->any('/*' => sub {shift->redirect_to('/')});
 }
 

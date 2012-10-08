@@ -163,7 +163,7 @@ sub get_related_articles {
 	}
 	
 	$filter->{_id} = {'$ne' => $id}; # uncomment when we'll have enought articles
-	$filter->{active} = "1";
+	$filter->{active} = 1;
 	
 	#	my $cursor = $self->{db}->get_collection(ARTICLES_COLLECTION)->find($filter)->limit($limit)->sort({'_id' => -1});
 	#	$cursor->fields(LIST_FIELDS);

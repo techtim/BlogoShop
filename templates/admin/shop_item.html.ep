@@ -128,7 +128,7 @@
 						&mdash;
 						<input type="text" name="sale_end" value="<%= $sale->{sale_end} %>" />
 
-						<a class='fake__checkbox checkbox button gray <%== $sale->{sale_active} ne '' ? 'checked' : '' %>' href='#'>
+						<a class='fake__checkbox button gray <%== $sale->{sale_active} ne '' ? 'checked' : '' %>' href='#'>
 							Старт
 							<input type="checkbox" name='sale_active' value='1' <%== $sale->{sale_active} ne '' ? 'checked="checked"' : '' %> />
 						</a>

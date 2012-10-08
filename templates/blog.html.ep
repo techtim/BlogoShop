@@ -40,6 +40,7 @@
         <div class='caption__section'>
             <h2>Блоги</h2>
         </div>
+
         <ul>
             %= include 'includes/list_articles'
         </ul>

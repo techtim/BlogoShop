@@ -10,7 +10,8 @@ domain_name: 'dev.xoxloveka.ru'
 
 hypnotoad:
   workers: 4
-  listen: http://*:8080
+  listen: 
+  - http://*:8080
   lock_file: /var/lock/blogoshop.lock 
   pid_file: /var/run/blogoshop.pid 
   user: techtim 
@@ -32,7 +33,7 @@ cookie_secret: '$w3Etx0X|_o\/eKa'
 block_voter_ip_time: 180 # 3 min
 
 articles_on_page: 9
-articles_on_startpage: 6
+articles_on_startpage: 3
 related_articles_count: 3
 
 items_on_page: 16

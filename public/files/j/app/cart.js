@@ -190,6 +190,7 @@ define(['jquery'], function($){
 					}
 				});
 				
+
 			});
 			
 			
@@ -199,11 +200,11 @@ define(['jquery'], function($){
 			})
 			
 			$('.pickup__checkbox').on('click', function(){
+
 				var $this = $(this);
 					$block = $this.closest(config.item_block),
-					$next_block = $block.nextUntil('.not(.item__block)'),
+					$next_block = $block.nextAll('.item__block'),
 					$next_block_inputs = $next_block.find('input'),
-					_map_exist = $block.find('.map').children().length,
 					$prev_block_input = $block.prev().find('input');
 				
 				if($prev_block_input.is(':disabled')){
@@ -219,9 +220,23 @@ define(['jquery'], function($){
 				}
 
 				$('.address').toggleClass('hidden');
-				$this.toggleClass('checked');
 				$block.toggleClass('active');
 				$next_block.toggleClass('hidden');
+
+				(function deliver_type(){ // проверим если был уже выбран способ доставки из списка и если да, то вычтем стоимость доставки
+					var _checked = $(config.deliver_section).find('input:checked'),
+						_disabled = _checked.is(':disabled');
+
+					if(_checked){
+						var _total_price = $('.price__section:first '+config.summ).text(); // берем первую цену
+						$('.total '+config.summ).text(_total_price);
+
+						_checked.removeAttr('checked') // и сбрасываем выделенный тип доставки
+							.closest('li').removeClass('selected'); // и убираем класс к родителя для красоты
+					};
+
+				})();
+
 			}).one('click', function(){
 
 				var map = new ymaps.Map("ymaps-map-id_134607452184377852671", {center: [37.64300400000002, 55.75657763506392], zoom: 16, type: "yandex#map"});

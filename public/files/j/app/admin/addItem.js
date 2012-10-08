@@ -8,15 +8,6 @@ define([
 		'mouseWheel'
 ], function($){
 	
-	$('.checkbox').toggle(function(e){
-		e.preventDefault();
-		$(this).addClass('checked');
-		$('input[type="checkbox"]',this).attr('checked', false);
-	},function(){
-		$(this).removeClass('checked');
-		$('input[type="checkbox"]',this).attr('checked', true);
-	});
-	
 	$('.dates__section input[type="text"]').datepicker({
 		dateFormat: 'dd.mm.y'
 	});

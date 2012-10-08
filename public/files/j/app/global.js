@@ -32,12 +32,19 @@ define(['jquery'], function($){
 
 		})();
 		
-		$('.fake__checkbox').toggle(function(){
-			$(this).addClass('checked');
-			$('input', this).attr('checked', true);
-		}, function(){
-			$(this).removeClass('checked');
-			$('input', this).attr('checked', false);
+		$('.fake__checkbox').on('click', function(){
+			var $this = $(this),
+				_checked = $this.hasClass('checked');
+
+			if(_checked){
+				$this.removeClass('checked');
+				$('input', $this).attr('checked', false);
+
+			}else{
+				$this.addClass('checked');
+				$('input', $this).attr('checked', true);
+			}
+
 		});
 
 		$(document).ajaxSend(function(e, xhr, options) {

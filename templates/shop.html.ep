@@ -42,19 +42,18 @@
 
 	
 	<div class='shop__items__list'>
-		<!--
 		<div class='fiters__section clearfloat'>
 			<ul class='price__filter'>
 				<li class='title'>цена:</li>
-				<li><a href='?price=dsc'>&darr;</a></li>
+				<li><a href='?price=dsc' class='current'>&darr;</a></li>
 				<li><a href='?price=asc'>&uarr;</a></li>
 			</ul>
 
-			<ul class='price__slider clearfloat'>
-				<li class='label'>0</li>
+			<!-- <ul class='price__slider clearfloat'>
+				<li class='label min__price'><span>0</span></li>
 				<li class='slider'></li>
-				<li class='label'>9999</li>
-			</ul>
+				<li class='label max__price'><span>9999</span></li>
+			</ul> -->
 
 			<ul class='new__filter'>
 				<li class='title'>новинки:</li>
@@ -65,10 +64,10 @@
 			<script>requirejs(['app/shopFilters']);</script>
 		</div>
 
-			-->
 		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
 		</ul>  
+		<script>requirejs(['app/scroll']);</script>
 	</div>
 
 </div>

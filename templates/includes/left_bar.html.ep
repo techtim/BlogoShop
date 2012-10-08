@@ -9,13 +9,11 @@
 		    <a class='expand__items' href='#'></a>
 
 	    	% my $sex = stash 'sex';
-	    	% if (stash('shop') && stash('shop') eq '1') {
 		    <ul class='filters__section'>
-		    	<li><a href='http://shop.<%= config->{domain_name} 		.(stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') %>' data-type='all' <%== "class='current'" if !$sex %>>все</a></li>
-		    	<li><a href='http://shop.<%= config->{domain_name} .'/w'.(stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') %>' data-type='female' <%== "class='current'" if $sex eq 'w' %>>женское</a></li>
-		    	<li><a href='http://shop.<%= config->{domain_name} .'/m'.(stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') %>' data-type='male' <%== "class='current'" if $sex eq 'm' %>>мужское</a></li>
+		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='all' <%== "class='current'" if !$sex %>>все</a></li>
+		    	<li><a href='http://<%= config->{domain_name} .'/w' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='female' <%== "class='current'" if $sex eq 'w' %>>женское</a></li>
+		    	<li><a href='http://<%= config->{domain_name} .'/m' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='male' <%== "class='current'" if $sex eq 'm' %>>мужское</a></li>
 		    </ul>
-		    % }
 
 		</div>
 

@@ -19,6 +19,8 @@ use constant ITEM_FIELDS => qw(id name alias descr active
 								sale_start sale_end sale_value sale_active
 								sex preview_image images
 								);
+use constant LIST_FIELDS => map {$_ => 1} qw(name alias brand brand_name category subcategory 
+											preview_image price sale_start sale_end sale_value sale_active);
 
 use constant SALE_PARAMS => qw(sale_start sale_end sale_value sale_active);
 
@@ -113,7 +115,7 @@ sub get {
 }
 
 sub list {
-    my ($self, $filt, $limit, $sort) = @_;
+    my ($self, $filt, $sort, $skip, $limit) = @_;
     my %filter = ref $filt eq ref {} ? %$filt : ();
 	$limit ||= $self->{app}->config->{items_on_page}; 
     foreach (keys %filter) {
@@ -121,10 +123,12 @@ sub list {
     }
     $filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
     # warn 'FLTR'. $self->{app}->dumper(\%filter);
-#    warn $self->{app}->dumper([$self->{app}->db->items->find(\%filter)->all]);
-	$sort = {_id => -1} if !$sort || ref $sort ne ref {};
 
-	my @all = $self->{app}->db->items->find(\%filter)->limit($limit)->sort($sort)->all;
+	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
+	$skip = $skip =~ m/(\d+)/ ? $1 : 0;
+# warn $filter->{tag};
+# warn $self->{app}->dumper($filter);	
+	my @all = $self->{app}->db->items->find(\%filter)->sort($sort)->fields({LIST_FIELDS})->skip($skip)->limit($limit)->all;
     return \@all;
 }
 
@@ -153,7 +157,7 @@ sub _parse_data {
 		
 	$self->{alias}  = lc($ctrl->utils->translit($self->{name}, 1));
 	$self->{alias} .= $self->check_existing_alias();
-warn 'END:'.$self->{alias};
+# warn 'END:'.$self->{alias};
 	my @colors 	= $self->{color} ? split (',', $self->{color}) : ();
 	$self->{color} 	= \@colors; 
 

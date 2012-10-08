@@ -1,5 +1,5 @@
 <li>
-    <a href='/<%== join '/', $article->{type}, $article->{alias} %>'>
+    <a href='http://blog.<%= config->{domain_name} %>/<%== join '/', $article->{type}, $article->{alias} %>'>
     	<span class='img__box' style='background-image: url(<%== config->{nginx_res_post_prev} . config->{image_url} .
             join ('/', $article->{type}, $article->{alias}, $article->{preview_image}) %>)'>
 		</span>

@@ -201,4 +201,5 @@
 % }
 </div>
 
+<script async type="text/javascript" src="http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&coordorder=longlat&load=package.full&wizard=constructor&onload=fid_134945918937914001744"></script>
 <script>requirejs(['app/cart'])</script>

@@ -9,7 +9,7 @@ requirejs.config({
 		mouseWheel: '/j/libs/mousewheel',
 		ui: '/j/libs/ui',
 		datePickerRu: '/j/libs/datepicker-ru',
-		scroll: '/j/libs/scroll',
+		scroll: '/j/libs/scroll'
 	}
 });
 

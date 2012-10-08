@@ -8,37 +8,6 @@ use utf8;
 use constant ARTICLE_FILTER => qw(tag alias brand type);
 use constant RSS_FIELDS => {map {$_ => 1} qw( name alias type preview_text preview_image date article_text_rendered ) };
 
-
-sub index {
-	my $self = shift;
-
-	my $art = $self->articles->get_filtered_articles({active => 1}, $self->config('articles_on_startpage'));
-
-	my  $filter->{active} 		= 1;
-		$filter->{'subitems.qty'}= {'$gt' => 0};
-		$filter->{sale}->{sale_active} = 1;
-		$filter->{sale}->{sale_start_stamp} = {'$lt' => time()};
-		$filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
-
-    my $item 	= BlogoShop::Item->new($self);
-	my $items 	= $item->list($filter, int($self->config('items_on_startpage')/2));
-	delete $filter->{sale};
-	@$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
-
-	my $banners = $self->utils->get_banners($self, '');
-
-    return $self->render(
-		items => $items,
-    	articles => $art,
-        banners => $banners,
-        page_name => '',
-        host => $self->req->url->base,
-        sex => '',
-        template => 'index',
-		format => 'html',
-    );
-}
-
 sub show {
 	my $self = shift;
 
@@ -52,20 +21,18 @@ sub show {
 	return $self->redirect_to(($self->req->url =~ m/([\d\w\/]+?)\/[\d\w]+$/)[0]) if !$article;
 
 	$article->{article_text} = $article->{article_text_rendered};
-    
+
     $filter = {};
     $filter->{tags}->{'$in'} = $article->{tags} if $article->{tags};
     $filter->{brand} = $article->{brand} if $article->{brand};
-	$filter->{active} = 1;
 	$self->stash(related_articles => $self->articles->get_related_articles(
 		$filter, $self->config('related_articles_count'), $article->{'_id'})
 	);
+
     $self->stash(next_article =>
         ($self->app->db->articles->find({_id => {'$lt' => $article->{'_id'}}, active => 1})->sort({_id => -1})->limit(1)->all)[0] || {});
     $self->stash(prev_article =>
         ($self->app->db->articles->find({_id => {'$gt' => $article->{'_id'}}, active => 1})->sort({_id => 1})->limit(1)->all)[0] || {});
-
-#	my %images = map { $_->{tag} => {descr => $_->{descr}} } @{$article->{images}} if ref $article->{images} eq 'ARRAY';
 
 	my $img_url = $self->config('image_url').($article->{type} || $self->config('default_img_dir')).'/'.$article->{alias}.'/';
 	# Polls check

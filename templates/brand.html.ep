@@ -1,0 +1,41 @@
+% layout 'default';
+% title 'магазин Хохловка';
+
+%= include 'includes/left_bar'
+
+<div class='content__section post__page'>
+	 % my $brand = stash('brand');
+	<h2><%= $brand->{name} %></h2>
+	<p><img src="<%= $brand->{logo} %>"><p>
+	<p><%== $brand->{descr} %></p>
+
+	<div class='shop__items__list'>
+
+		<div class='fiters__section clearfloat'>
+			<ul class='price__filter'>
+				<li class='title'>цена:</li>
+				<li><a href='?price=dsc'>&darr;</a></li>
+				<li><a href='?price=asc'>&uarr;</a></li>
+			</ul>
+
+			<!-- <ul class='price__slider clearfloat'>
+				<li class='label min__price'><span>0</span></li>
+				<li class='slider'></li>
+				<li class='label max__price'><span>9999</span></li>
+			</ul> -->
+
+			<ul class='new__filter'>
+				<li class='title'>новинки:</li>
+				<li><a href='?time=dsc'>&darr;</a></li>
+				<li><a href='?time=asc'>&uarr;</a></li>
+			</ul>
+
+			<script>requirejs(['app/shopFilters']);</script>
+		</div>
+		
+		<ul class='list__section clearfloat'>
+			%= include 'includes/list_items', items => stash 'items'
+		</ul> 
+	</div>
+</div>
+<div class='clear'></div>

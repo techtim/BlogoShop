@@ -3,18 +3,13 @@
 
 %= include 'includes/left_bar'
 
-<div class='content__section<%= ' post__page' if stash('brand') ne '' %>'>
-    % if (stash('brand')) {
-        % my $brand = stash('brand');
-        <h2><%= $brand->{name} %></h2>
-        <p><img src="<%= $brand->{logo} %>"><p>
-        <p><%== $brand->{descr} %></p>
-    % } else {
-    % if (@$banners > 0) {
+<div class='content__section'>
+     % if (@$banners > 0) {
         % my $select_num = 1;
         <div class='carousel'>
             <ul class='items'>
                 % foreach (@$banners) {
+                % next if !$_->{link};
                 <li>
                     <a href='<%= $_->{link} %>'>
                     	<img src='<%= $_->{image} %>' alt='' />
@@ -26,17 +21,6 @@
         </div>
     % }
 
-    % if (stash('items')) {
-    <div class='shop__items__list'>
-         <h2 class='dotted__caption'>
-            <span>последние поступления</span>
-        </h2>
-        <ul class='list__section'>
-            %= include 'includes/list_items', items => stash 'items'
-        </ul>  
-    </div>
-    % }
-
     <div class='blogs__section clearfloat'>
         
         <h2 class='dotted__caption'>
@@ -46,7 +30,19 @@
             %= include 'includes/list_articles'
         </ul>
     </div>
+
+    % if (stash('items')) {
+    <div class='shop__items__list'>
+         <h2 class='dotted__caption'>
+            <span>последние поступления</span>
+        </h2>
+
+        <ul class='list__section'>
+            %= include 'includes/list_items', items => stash 'items'
+        </ul>  
+    </div>
     % }
+
     <script>
         requirejs(['app/equalHeight', 'app/carousel']);
     </script>

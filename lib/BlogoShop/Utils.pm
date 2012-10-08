@@ -247,7 +247,7 @@ sub get_active_categories {
 			initial	=> {s => []},
 		}}
 	);
-	
+	# warn Dumper($res->{retval});	
 	foreach my $fetch (@{$res->{retval}}) {
 		foreach my $sex ( @{$fetch->{'s'}} ) {
 			if ($sex eq '') {
@@ -260,8 +260,26 @@ sub get_active_categories {
 	}
 
 	$hash->{time} = time();
-	warn '!!!!!!!!!!save_active_categories=>'.$db->stuff->save($hash);
+	# warn '!!!!!!!!!!save_active_categories=>'.$db->stuff->save($hash);
 	return $hash;
+}
+
+sub get_items_from_catalog {
+	my ($self, $ctrlr) = @_;
+
+	my $res = $ctrlr->db->run_command({
+		group => {
+			ns 		=> 'items',
+			key 	=> {subcategory=>1}, 
+			cond	=> { active => 1, 'subitems.qty' => {'$gt' => 0} },
+			'$reduce'	=> 'function(obj,prev) { prev.item = (prev._id > obj._id ? prev : obj) }',
+			# '$finalize' => 'function(out) { out = out.item }' ,
+			initial	=> {},
+		}}
+	);
+	# warn Dumper($res->{retval});
+	$_ = $_->{item} foreach (@{$res->{retval}});
+	return $res->{retval};
 }
 
 sub check_item_price {
@@ -325,12 +343,6 @@ sub render_article {
 	while ($text =~ s/<bq>(.+?)<\/bq>/$controller->render("includes\/blockquote", partial => 1, quote_text => $1)/sge) {;} 
     
 	return $text;
-}
-
-sub update_active_rubrics {
-    my ($self, $controller) = @_;
-    $controller->app->defaults->{active_rubrics_in_cuts} = $controller->articles->get_active_rubrics_in_cuts();
-    return 1;
 }
 
 # pop controller
