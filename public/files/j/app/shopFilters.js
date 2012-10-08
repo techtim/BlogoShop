@@ -40,7 +40,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		        	'</span>'+
 		        '</a>'+
 		    '</li>',
-		scroll_helper: '<div class="'+config.scroll_helper+'" data-href="${href}" data-next="${next}"></div>'
+		scroll_helper: '<div class="'+config.scroll_helper.replace('.','')+'" data-href="${href}" data-next="${next}"></div>'
 	};
 
 
@@ -69,21 +69,25 @@ define(['jquery', 'ui', 'tmpl'], function($){
 	var draw_list = function(args){
 
 		var $section = $('.list__section'),
-			$items_tpl = $.tmpl(templates.items, args.data.items);
+			$items_tpl = $.tmpl(templates.items, args.data.items),
+			$helper_tpl = $.tmpl(templates.scroll_helper, {
+				'href': args.params,
+				'next': 16
+			});
 
 
 		if(args.ele){ // если был передан эелемент по которомы кликнули - чистим секцию
+
 			eles.section.find('a').removeClass('current');
 			args.ele.addClass('current'); 
 			$section.empty();
 			$items_tpl.appendTo($section);
+			$helper_tpl.appendTo($section);
 
-			$.tmpl(templates.scroll_helper, {
-				'href': args.params,
-				'next': 16
-			}).appendTo($section);
 		}else{
+
 			$items_tpl.insertBefore($section.find(config.scroll_helper));
+
 		}
 
 
