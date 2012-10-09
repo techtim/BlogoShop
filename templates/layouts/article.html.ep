@@ -11,7 +11,7 @@
 		<meta property="og:site_name" content="магазин Хохловка" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="<%= $title %>" />
-		<meta property="og:url" content="<%== $host . '/' . $type . '/' . $alias %>" />
+		<meta property="og:url" content="<%== stash('host') . '/' . stash('type') . '/' . $alias %>" />
 		<meta property="og:description" content="<%= stash 'preview_text' %>" />
 		% if (stash 'preview_image') {
     		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />

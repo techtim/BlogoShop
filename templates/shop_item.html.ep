@@ -89,7 +89,7 @@
 		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
 	</dl>
 	% if (@$tags > 0) {
-	<dl class='clearfloat row '>
+	<dl class='clearfloat row tags'>
 		<dt>Таги:</dt>
 		<dd>
 		% foreach (@$tags) {

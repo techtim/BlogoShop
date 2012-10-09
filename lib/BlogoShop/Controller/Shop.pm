@@ -111,6 +111,7 @@ sub item {
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
 		host 	=> $self->req->url->base,
 		url 	=> $self->req->url,
+		page_name => 'shop',
 		template=> 'shop_item',
 		format 	=> 'html',
 	);
@@ -147,8 +148,9 @@ sub brand {
 		return $self->render(
 			host 	=> $self->req->url->base,
 	        items 	=> $items,
+	        %{$self->check_cart},
 	        sex		=> '',
-	        page_name => 'brand',
+	        page_name => 'shop',
 	        template=> 'brand', # return only
 			format 	=> 'html', 
 		);
@@ -180,7 +182,7 @@ sub cart {
 		$it->{count} = $it->{qty} if $it->{count} > $it->{qty};
 		$cnt++;
 	}
-	
+
 	$self->session(expires => 1), $cart->{cart_count} = 0 if @{$cart->{cart_items}} == 0;
 
 	$self->stash('checkout_ok' => $self->_checkout($cart)) if $self->stash('act') eq 'checkout';

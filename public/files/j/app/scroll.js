@@ -97,7 +97,7 @@ define(['jquery', 'app/shopFilters'], function($, draw_list){
 				CONFIG.timeout = null;
 			}
 
-			CONFIG.timeout = setTimeout(scrollHandler, 100);
+			CONFIG.timeout = setTimeout(scrollHandler, 500);
 		});
 
 		var scrollHandler = function(){
@@ -116,7 +116,7 @@ define(['jquery', 'app/shopFilters'], function($, draw_list){
 						if ( _step ) { // если есть шаг - значит мы в магазине и нам надо сохранить хелпер для сролла
 
 							if(data.items.length > 0){
-								draw_list({data: data});
+								draw_list({ data: data 	});
 								$this.data('next', _step + 16); // плюсуем шаг к предыдущему
 							}else{ 
 								$this.remove();
