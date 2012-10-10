@@ -1,5 +1,5 @@
 % layout 'shop';
-% title 'магазин Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
+% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
 
 %= include 'includes/left_bar'
 
@@ -45,7 +45,7 @@
 		<div class='fiters__section clearfloat'>
 			<ul class='price__filter'>
 				<li class='title'>цена:</li>
-				<li><a href='?price=dsc' class='current'>&darr;</a></li>
+				<li><a href='?price=dsc'>&darr;</a></li>
 				<li><a href='?price=asc'>&uarr;</a></li>
 			</ul>
 
@@ -66,9 +66,7 @@
 
 		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
-			<li class='scroll__helper shop' data-href='?price=dsc' data-next='16'></li>
-			<script>requirejs(['app/scroll']);</script>
-		</ul>
+		</ul>  
 	</div>
 
 </div>

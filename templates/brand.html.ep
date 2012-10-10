@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'магазин Хохловка';
+% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '.$brand->{name};
 
 %= include 'includes/left_bar'
 
@@ -35,9 +35,4 @@
 		
 		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
-			<li class='scroll__helper shop' data-href='?price=dsc' data-next='16'></li>
-			<script>requirejs(['app/scroll']);</script>
-		</ul> 
-	</div>
-</div>
-<div class='clear'></div>
+			<li class='scroll__helper s

@@ -35,7 +35,7 @@
 
 	       		%= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
 		        	<div class='cut'>
-		        		<div class='order__num'>Заказ № <span>50378218dacb2b0319000000</span> от <%== utils->date_time_from_mongoid($order->{_id}) %> </div>
+		        		<div class='order__num'>Заказ № <span><%= $order->{order_id} %></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> </div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
 
 						<button type='submit' class='submit__button'>Сохранить</button>

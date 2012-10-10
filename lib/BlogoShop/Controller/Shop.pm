@@ -241,7 +241,7 @@ sub _proceed_checkout {
 
 	$co_params->{status} 	= 'new';
 	my $order_id 			= $self->app->db->orders->save($co_params);
-	$co_params->{order_id} 	= $order_id;
+	$co_params->{order_id} 	= ($order_id=~/^(.{8})/)[0];
 
 	$self->stash(%$co_params);
 	my $mail = $self->mail(

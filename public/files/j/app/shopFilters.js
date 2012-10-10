@@ -40,7 +40,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		        	'</span>'+
 		        '</a>'+
 		    '</li>',
-		scroll_helper: '<div class="'+config.scroll_helper.replace('.','')+'" data-href="${href}" data-next="${next}"></div>'
+		scroll_helper: '<li class="'+config.scroll_helper.replace('.','')+'" data-href="${href}" data-next="${next}"></li>'
 	};
 
 
@@ -74,7 +74,6 @@ define(['jquery', 'ui', 'tmpl'], function($){
 				'href': args.params,
 				'next': 16
 			});
-
 
 		if(args.ele){ // если был передан эелемент по которомы кликнули - чистим секцию
 

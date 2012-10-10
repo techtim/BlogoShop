@@ -1057,92 +1057,95 @@ body {
       margin-right: 0; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031392}}
     .shop__items__list .list__section li.scroll__helper {
+      margin-bottom: 0;
+      padding-bottom: 24px;
       width: 100%;
       display: block;
+      background: url("../i/spinner.gif") no-repeat center center;
       clear: both; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031401}}
     .shop__items__list .list__section li a {
       color: #666;
       font-size: 12px;
       text-decoration: none;
       text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031408}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031411}}
       .shop__items__list .list__section li a span {
         display: block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031411}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031414}}
         .shop__items__list .list__section li a span.articol {
           color: #DE1500;
           clear: both; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031416}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031419}}
         .shop__items__list .list__section li a span.brand {
           clear: both; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031420}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031423}}
         .shop__items__list .list__section li a span.item__caption {
           padding: 2px 0;
           clear: both;
           font-weight: bold; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031426}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031429}}
         .shop__items__list .list__section li a span.price {
           padding-right: 10px;
           display: inline-block;
           background: url("../i/ico-rub-small.png") no-repeat right center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031434}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031437}}
     .shop__items__list .list__section li .controls {
       position: relative;
       margin-bottom: 4px;
       cursor: pointer;
       z-index: 2; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031440}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031443}}
       .shop__items__list .list__section li .controls.active {
         float: left;
         height: 16px;
         width: 24px;
         margin-top: 2px;
         background: url("../i/ico-visible.png") no-repeat; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031448}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031451}}
       .shop__items__list .list__section li .controls.delete {
         float: right;
         height: 20px;
         width: 20px;
         background: url("../i/ico-delete.png") no-repeat; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031456}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031459}}
     .shop__items__list .list__section li .img__section {
       position: relative;
       height: 206px;
       width: 154px;
       margin-bottom: 4px;
       overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031463}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031466}}
       .shop__items__list .list__section li .img__section img {
         max-width: 100%;
         border: 1px solid #b2b2b2; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031469}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031472}}
     .shop__items__list .list__section li s {
       color: #E60000; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031477}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031480}}
 .shop__description {
   position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031480}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031483}}
   .shop__description .expand__items {
     position: absolute;
     top: -32px;
     right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031487}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031490}}
   .shop__description.active h4 {
     display: block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031492}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031495}}
   .shop__description h4 {
     padding-bottom: 10px;
     display: none;
     color: #aeaeae;
     font-size: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031503}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031506}}
 .cart__items__list__section {
   position: relative;
   overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031507}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031510}}
   .cart__items__list__section .caption {
     margin-bottom: 20px;
     color: #868686;
@@ -1154,16 +1157,16 @@ body {
     -moz-transition: color 0.4s linear;
     -o-transition: color 0.4s linear;
     transition: color 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031518}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031521}}
     .cart__items__list__section .caption.light__gray {
       color: #c8c8c8; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031522}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031525}}
     .cart__items__list__section .caption.dark__gray {
       color: #434343; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031529}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031532}}
   .cart__items__list__section .items__list.hidden {
     display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031533}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031536}}
   .cart__items__list__section .items__list li {
     height: 90px;
     width: 330px;
@@ -1172,10 +1175,10 @@ body {
     margin-bottom: 20px;
     border: 1px solid #cbcbcb;
     background: #f0f0f0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031542}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031545}}
     .cart__items__list__section .items__list li:nth-child(2n) {
       margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031547}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031550}}
     .cart__items__list__section .items__list li .img__section {
       position: relative;
       height: 68px;
@@ -1183,56 +1186,56 @@ body {
       float: left;
       margin-top: 10px;
       margin-left: 12px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031555}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031558}}
       .cart__items__list__section .items__list li .img__section img {
         height: auto;
         max-width: 100%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031561}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031564}}
     .cart__items__list__section .items__list li .description__section {
       width: 126px;
       float: left;
       margin-left: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031566}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031569}}
       .cart__items__list__section .items__list li .description__section h3 {
         padding-top: 9px;
         padding-bottom: 2px;
         color: #666;
         font-size: 12px;
         text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031575}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031578}}
         .cart__items__list__section .items__list li .description__section h3 a {
           color: #666;
           text-decoration: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031581}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031584}}
       .cart__items__list__section .items__list li .description__section h4 {
         padding-bottom: 6px;
         color: #464646;
         font-size: 12px;
         font-weight: bold; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031590}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031593}}
       .cart__items__list__section .items__list li .description__section .size {
         color: #666;
         font-size: 12px;
         text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031597}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031600}}
         .cart__items__list__section .items__list li .description__section .size .color {
           height: 14px;
           width: 14px;
           margin: -3px 0 -3px 4px;
           display: inline-block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031606}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031609}}
     .cart__items__list__section .items__list li .info__section {
       width: 122px;
       float: right;
       margin-top: 10px;
       margin-right: 10px;
       text-align: right; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031613}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031616}}
       .cart__items__list__section .items__list li .info__section .delete {
         position: relative;
         top: 6px;
         margin-right: 4px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031619}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031622}}
       .cart__items__list__section .items__list li .info__section input[type='number'] {
         height: 20px;
         width: 44px;
@@ -1242,7 +1245,7 @@ body {
         font-size: 15px;
         font-weight: bold;
         text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031634}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031637}}
       .cart__items__list__section .items__list li .info__section .price {
         margin-top: 12px;
         padding-right: 16px;
@@ -1251,24 +1254,24 @@ body {
         clear: both;
         font-size: 20px;
         text-align: right; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031645}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031648}}
         .cart__items__list__section .items__list li .info__section .price s {
           color: #e60000; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031653}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031656}}
   .cart__items__list__section .price__section {
     clear: both;
     background: #f2ffea;
     border-top: 1px dotted #a1a1a1;
     border-bottom: 1px dotted #a1a1a1;
     line-height: 52px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031660}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031663}}
     .cart__items__list__section .price__section.hidden {
       display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031664}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031667}}
     .cart__items__list__section .price__section.total {
       border-top: 1px solid #d9d9d9;
       border-bottom: 1px solid #d9d9d9; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031669}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031672}}
     .cart__items__list__section .price__section h3 {
       float: left;
       margin-left: 4px;
@@ -1276,7 +1279,7 @@ body {
       font-size: 15px;
       font-weight: bold;
       text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031680}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031683}}
     .cart__items__list__section .price__section .summ__section {
       float: right;
       margin-right: 4px;
@@ -1285,23 +1288,23 @@ body {
       color: #7bd03c;
       font-size: 32px;
       font-weight: bold; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031693}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031696}}
   .cart__items__list__section .checkout__button {
     margin-top: 18px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031699}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031702}}
   .cart__items__list__section .submit___section.hidden {
     display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031703}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031706}}
   .cart__items__list__section .submit___section .caption {
     margin-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031707}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031710}}
   .cart__items__list__section .submit___section .item__block {
     padding-top: 22px;
     padding-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031711}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031714}}
     .cart__items__list__section .submit___section .item__block:last-child {
       border-bottom: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031716}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031719}}
   .cart__items__list__section .submit___section .item__block {
     position: relative;
     opacity: 1;
@@ -1309,37 +1312,37 @@ body {
     -moz-transition: all 0.4s linear;
     -o-transition: all 0.4s linear;
     transition: all 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031721}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031724}}
     .cart__items__list__section .submit___section .item__block .caption {
       color: #434343; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031725}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031728}}
     .cart__items__list__section .submit___section .item__block.hidden {
       display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031729}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031732}}
     .cart__items__list__section .submit___section .item__block.disabled {
       opacity: .5; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031732}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031735}}
       .cart__items__list__section .submit___section .item__block.disabled .custom-select, .cart__items__list__section .submit___section .item__block.disabled .custom-text, .cart__items__list__section .submit___section .item__block.disabled .pickup__checkbox, .cart__items__list__section .submit___section .item__block.disabled label, .cart__items__list__section .submit___section .item__block.disabled .types__list li {
         cursor: default;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031737}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031740}}
     .cart__items__list__section .submit___section .item__block input {
       border: 1px solid #c1c1c1;
       -webkit-transition: all 0.4s linear;
       -moz-transition: all 0.4s linear;
       -o-transition: all 0.4s linear;
       transition: all 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031740}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031743}}
       .cart__items__list__section .submit___section .item__block input.error {
         border-color: #e60000; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031746}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031749}}
   .cart__items__list__section .submit___section .clear {
     height: 1px;
     background: #d9d9d9; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031751}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031754}}
   .cart__items__list__section .submit___section .message {
     color: #e60000;
     font-family: "PT Sans";
@@ -1352,28 +1355,28 @@ body {
     -moz-transition: opacity 0.4s linear;
     -o-transition: opacity 0.4s linear;
     transition: opacity 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031765}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031768}}
     .cart__items__list__section .submit___section .message.active {
       opacity: 1;
       visibility: visible; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031771}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031774}}
   .cart__items__list__section .submit___section .left__section {
     width: 452px;
     float: left;
     background: url("../i/gray-delimiter.png") no-repeat right center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031777}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031780}}
   .cart__items__list__section .submit___section .right__section {
     width: 204px;
     float: left;
     margin-left: 24px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031784}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031787}}
   .cart__items__list__section .submit___section .register ul {
     float: left;
     margin-right: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031789}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031792}}
   .cart__items__list__section .submit___section .register li {
     margin-bottom: 8px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031793}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031796}}
   .cart__items__list__section .submit___section .register input {
     width: 200px;
     line-height: 20px; }
@@ -1391,18 +1394,18 @@ body {
       font-family: "PT Sans";
       font-size: 12px;
       text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031799}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031802}}
   .cart__items__list__section .submit___section .register .message {
     width: 410px;
     clear: both; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031805}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031808}}
   .cart__items__list__section .submit___section .login {
     float: right;
     text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031809}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031812}}
     .cart__items__list__section .submit___section .login .caption {
       float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031813}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031816}}
     .cart__items__list__section .submit___section .login .forgot {
       float: right;
       margin-top: 4px;
@@ -1410,17 +1413,17 @@ body {
       font-family: "PT Sans";
       font-size: 10px;
       text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031825}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031828}}
       .cart__items__list__section .submit___section .login .forgot:hover {
         text-decoration: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031830}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031833}}
     .cart__items__list__section .submit___section .login ul {
       display: block;
       clear: both; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031835}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031838}}
     .cart__items__list__section .submit___section .login li {
       margin-bottom: 8px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031839}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031842}}
     .cart__items__list__section .submit___section .login input {
       height: 20px;
       width: 200px;
@@ -1439,10 +1442,10 @@ body {
         font-family: "PT Sans";
         font-size: 12px;
         text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031847}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031850}}
     .cart__items__list__section .submit___section .login input[type='radio'] {
       border: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031851}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031854}}
     .cart__items__list__section .submit___section .login .submit__form {
       height: auto;
       width: auto;
@@ -1461,32 +1464,32 @@ body {
       -moz-transition: background 0.4s linear;
       -o-transition: background 0.4s linear;
       transition: background 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031869}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031872}}
       .cart__items__list__section .submit___section .login .submit__form:hover {
         background: #444; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031876}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031879}}
   .cart__items__list__section .submit___section .address {
     height: 146px;
     -webkit-transition: all 0.4s linear;
     -moz-transition: all 0.4s linear;
     -o-transition: all 0.4s linear;
     transition: all 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031880}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031883}}
     .cart__items__list__section .submit___section .address.hidden {
       margin-left: -458px;
       display: block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031885}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031888}}
     .cart__items__list__section .submit___section .address li {
       margin-bottom: 12px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031889}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031892}}
     .cart__items__list__section .submit___section .address .custom-select {
       max-width: 140px;
       float: left;
       margin-left: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031894}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031897}}
       .cart__items__list__section .submit___section .address .custom-select:first-child {
         margin-left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031899}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031902}}
     .cart__items__list__section .submit___section .address input[type='text'] {
       line-height: 20px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\0000334}}
@@ -1503,7 +1506,7 @@ body {
         font-family: "PT Sans";
         font-size: 12px;
         text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031903}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031906}}
       .cart__items__list__section .submit___section .address input[type='text'].light__gray {
         text-align: center; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\0000334}}
@@ -1520,68 +1523,68 @@ body {
           font-family: "PT Sans";
           font-size: 12px;
           text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031908}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031911}}
       .cart__items__list__section .submit___section .address input[type='text'].country {
         margin-right: 10px;
         width: 130px;
         float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031914}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031917}}
       .cart__items__list__section .submit___section .address input[type='text'].city {
         width: 126px;
         float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031919}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031922}}
       .cart__items__list__section .submit___section .address input[type='text'].index {
         width: 110px;
         float: left;
         margin-left: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031925}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031928}}
       .cart__items__list__section .submit___section .address input[type='text'].addr {
         width: 198px;
         float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031930}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031933}}
       .cart__items__list__section .submit___section .address input[type='text'].house, .cart__items__list__section .submit___section .address input[type='text'].building, .cart__items__list__section .submit___section .address input[type='text'].flat {
         width: 58px;
         float: left;
         margin-left: 10px;
         text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031936}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031939}}
         .cart__items__list__section .submit___section .address input[type='text'].house::-webkit-input-placeholder, .cart__items__list__section .submit___section .address input[type='text'].building::-webkit-input-placeholder, .cart__items__list__section .submit___section .address input[type='text'].flat::-webkit-input-placeholder {
           padding-left: 0;
           text-align: center;
           text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031944}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031947}}
         .cart__items__list__section .submit___section .address input[type='text'].house:-moz-placeholder, .cart__items__list__section .submit___section .address input[type='text'].building:-moz-placeholder, .cart__items__list__section .submit___section .address input[type='text'].flat:-moz-placeholder {
           padding-left: 0;
           text-align: center;
           text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031953}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031956}}
       .cart__items__list__section .submit___section .address input[type='text'].receiver {
         width: 198px;
         float: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031959}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031962}}
     .cart__items__list__section .submit___section .address .message {
       width: 200px;
       float: left;
       margin-left: 10px;
       padding-top: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031967}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031970}}
   .cart__items__list__section .submit___section .pickup {
     height: 146px;
     -webkit-transition: all 0.4s linear;
     -moz-transition: all 0.4s linear;
     -o-transition: all 0.4s linear;
     transition: all 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031971}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031974}}
     .cart__items__list__section .submit___section .pickup.active {
       margin-left: 0;
       width: 680px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031975}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031978}}
       .cart__items__list__section .submit___section .pickup.active .map {
         right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031980}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031983}}
     .cart__items__list__section .submit___section .pickup .caption {
       display: inline-block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031984}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031987}}
     .cart__items__list__section .submit___section .pickup .pickup__checkbox {
       position: relative;
       top: 2px;
@@ -1591,20 +1594,20 @@ body {
       margin-left: 10px;
       background: url("../i/ico-checkbox.png") no-repeat 1px top;
       cursor: pointer; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031994}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031997}}
       .cart__items__list__section .submit___section .pickup .pickup__checkbox.checked {
         background-position: right top; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000031999}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032002}}
     .cart__items__list__section .submit___section .pickup p {
       color: #868686;
       font-family: "PT Sans bold";
       font-size: 12px;
       line-height: 19px;
       text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032008}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032011}}
       .cart__items__list__section .submit___section .pickup p span {
         color: #e60000; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032013}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032016}}
     .cart__items__list__section .submit___section .pickup .map {
       position: absolute;
       right: -460px;
@@ -1614,17 +1617,17 @@ body {
       -moz-transition: all 0.4s linear;
       -o-transition: all 0.4s linear;
       transition: all 0.4s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032023}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032026}}
   .cart__items__list__section .submit___section .types__list {
     margin-bottom: -10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032027}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032030}}
     .cart__items__list__section .submit___section .types__list li {
       border-top: 1px dotted #a1a1a1;
       cursor: pointer; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032033}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032036}}
       .cart__items__list__section .submit___section .types__list li.selected .price {
         color: #434343; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032039}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032042}}
     .cart__items__list__section .submit___section .types__list label {
       color: #4b4b4b;
       cursor: pointer;
@@ -1633,15 +1636,15 @@ body {
       font-weight: bold;
       line-height: 40px;
       text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032050}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032053}}
       .cart__items__list__section .submit___section .types__list label span {
         margin-left: 8px;
         color: #c8c8c8;
         font-weight: 400; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032059}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032062}}
     .cart__items__list__section .submit___section .types__list img {
       vertical-align: middle; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032063}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032066}}
     .cart__items__list__section .submit___section .types__list .price {
       padding-right: 20px;
       float: right;
@@ -1653,13 +1656,13 @@ body {
       -moz-transition: color 0.2s linear;
       -o-transition: color 0.2s linear;
       transition: color 0.2s linear; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032077}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032080}}
   .cart__items__list__section .submit___section .pay__type.disabled {
     display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032081}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032084}}
   .cart__items__list__section .submit___section .pay__type li {
     display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032088}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032091}}
   .cart__items__list__section .finish__cart {
     display: block;
     margin: 10px auto;
@@ -1669,39 +1672,39 @@ body {
     background: url("../i/finish-cart.png") no-repeat;
     cursor: pointer;
     text-indent: -9999px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032098}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032101}}
     .cart__items__list__section .finish__cart.disabled {
       background-position: left bottom;
       cursor: default; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032106}}
     .cart__items__list__section .finish__cart.hidden {
       display: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032109}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032112}}
 .footer__section {
   background: #444;
   overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032113}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032116}}
   .footer__section .wrap {
     height: 94px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032117}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032120}}
   .footer__section .copyright {
     float: left;
     padding-top: 12px;
     color: #fff;
     font-size: 11px;
     text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032125}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032128}}
   .footer__section .contacts {
     float: right;
     padding-top: 12px;
     color: #fff;
     font-size: 11px;
     font-weight: bold; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032137}}
     .footer__section .contacts span {
       color: #adec3f; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032139}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032142}}
   .footer__section li {
     margin-top: 14px;
     margin-right: 14px;
@@ -1710,13 +1713,13 @@ body {
     padding-left: 18px;
     float: left;
     background: url("../i/footer-social-spr.png") no-repeat; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032151}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032154}}
     .footer__section li.vk {
       background-position: left -14px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032155}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032158}}
     .footer__section li.lj {
       background-position: left bottom; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032160}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032163}}
     .footer__section li a {
       color: #fff;
       font-size: 11px;
@@ -1724,39 +1727,39 @@ body {
       text-decoration: none;
       text-transform: uppercase; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032175}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032178}}
 .scroll__helper {
   height: 1px;
   clear: both;
   visibility: hidden; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032181}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032184}}
 .custom-select {
   position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032185}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032188}}
   .custom-select.open_list .custom-text {
     margin-bottom: 1px;
     background: #f6f6f6;
     border-bottom: 0;
     border-radius: 5px 5px 0 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032191}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032194}}
     .custom-select.open_list .custom-text:after {
       background-position: left top; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032198}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032201}}
   .custom-select.above .select-list {
     padding-top: 4px;
     border: 1px solid #c9c9c9;
     border-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032204}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032207}}
   .custom-select.above .custom-text {
     border-radius: 5px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032209}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032212}}
   .custom-select select {
     display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032213}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032216}}
   .custom-select ul {
     position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032217}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032220}}
   .custom-select .custom-text {
     position: relative;
     height: 26px;
@@ -1776,7 +1779,7 @@ body {
     background: -moz-linear-gradient(top, #f6f6f6, #ededed);
     background: -o-linear-gradient(top, #f6f6f6, #ededed);
     background: linear-gradient(to bottom, #f6f6f6, #ededed); }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032235}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032238}}
     .custom-select .custom-text:after {
       position: absolute;
       top: 9px;
@@ -1786,10 +1789,10 @@ body {
       width: 9px;
       background: url("../i/select-arrows-spr.png") no-repeat right bottom;
       content: ''; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032247}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032250}}
   .custom-select .custom-scroll {
     overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032251}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032254}}
   .custom-select .select-list {
     position: absolute;
     top: 26px;
@@ -1804,7 +1807,7 @@ body {
     background: -moz-linear-gradient(top, #f6f6f6, #ededed);
     background: -o-linear-gradient(top, #f6f6f6, #ededed);
     background: linear-gradient(to bottom, #f6f6f6, #ededed); }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032263}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032266}}
     .custom-select .select-list li {
       float: none;
       display: block;
@@ -1815,13 +1818,13 @@ body {
       font-size: 12px;
       text-decoration: none;
       text-transform: uppercase; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032278}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032281}}
       .custom-select .select-list li.current {
         display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032282}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032285}}
       .custom-select .select-list li:hover {
         text-decoration: underline; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032288}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032291}}
   .custom-select .select-scroll {
     position: absolute;
     top: 0;
@@ -1829,14 +1832,14 @@ body {
     width: 9px;
     background: #f0f0f0;
     z-index: 2; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032296}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032299}}
     .custom-select .select-scroll .scroll-drag {
       position: absolute;
       left: 2px;
       display: block;
       border-radius: 2px;
       cursor: pointer; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032303}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032306}}
       .custom-select .select-scroll .scroll-drag:after {
         position: relative;
         left: 50%;
@@ -1847,6 +1850,6 @@ body {
         content: '≡';
         font-size: 14px;
         font-weight: bold; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032319}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/rsboarder\/Documents\/workspace\/xoxlovka\/public\/files\/css\/style\.scss}line{font-family:\000032322}}
       .custom-select .select-scroll .scroll-drag * {
         user-select: none; }

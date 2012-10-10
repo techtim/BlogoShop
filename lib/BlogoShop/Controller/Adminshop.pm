@@ -12,7 +12,7 @@ sub show {
 	$self->add_vars;
     my $filter = {};
     $filter->{$_} = $self->stash($_)||'' foreach ITEM_FIELDS;
-    return $self->redirect_to('/admin/shop/') 
+    return $self->redirect_to('/admin/shop/')
     	if $filter->{category} && !($self->stash('categories_alias'))->{$filter->{category}};
 
     my $item = BlogoShop::Item->new($self);
@@ -39,10 +39,11 @@ sub show {
         }
         return $self->redirect_to("/admin/shop/$filter->{category}/$filter->{subcategory}");
     }
+
 #    warn $self->dumper($item->list($filter));
     return $self->render(
         %$filter,
-        items => $item->list($filter, 1000),
+        items => $item->list($filter, {}, 0, 1000),
         cur_category => $self->stash('categories_info')->{$filter->{subcategory}||$filter->{category}} || {},
         host => $self->req->url->base,
         template => 'admin/shop',

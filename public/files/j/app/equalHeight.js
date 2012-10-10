@@ -9,7 +9,7 @@ define(['jquery'], function($){
 			_height = _h > _height ? _h : _height;
 		});
 
-		$('.blogs__section li, .list__section li').css({
+		$('.blogs__section li, .list__section li:not(".scroll__helper")').css({
 			height: _height
 		})
 		

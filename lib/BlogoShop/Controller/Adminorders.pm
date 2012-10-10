@@ -22,6 +22,7 @@ sub list {
 		foreach (@{$_->{items}}) {
 			$_->{info} = $item->get($_->{_id}, $_->{sub_id});
 		}
+		$_->{order_id} 	= ($_->{_id}->{value}=~/^(.{8})/)[0];
 		$counter->{$_->{status}}++ if $_->{status};
 		# $item->get();
 	}

@@ -52,6 +52,7 @@ sub show {
 		host => $self->req->url->base,
 		cut => $self->stash('cut') || '',
 		img_url => $img_url,
+		sex => '',
 		page_name => 'blog',
 		template => 'article',
 		format => 'html',

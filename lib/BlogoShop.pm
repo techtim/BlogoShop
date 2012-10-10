@@ -131,7 +131,7 @@ sub startup {
 		$app->defaults->{active_categories} = $app->utils->get_active_categories($app->db);
 		$app->defaults->{list_brands} 	  	= $app->utils->get_list_brands($app->db);
 	});
-	
+
 	# Routes
 	my $r = $self->routes;
 	

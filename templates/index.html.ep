@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'магазин Хохловка';
+% title 'магазин дизайнерской одежды и аксессуаров Хохловка';
 
 %= include 'includes/left_bar'
 
