@@ -117,8 +117,8 @@ sub list_brands {
         delete $brand->{images};
         push @$error_message, 'no_name' if !$brand->{name} || $brand->{name} =~ m/([\{\}\[\]]+)$/i;
         push @$error_message, 'no_descr' if !$brand->{descr};
-        $brand->{category} = $self->app->db->categories->find_one({_id => $brand->{category}}) if $brand->{category};
-        push @$error_message, 'no_category' if !$brand->{category};
+        # $brand->{category} = $self->app->db->categories->find_one({_id => $brand->{category}}) if $brand->{category};
+        # push @$error_message, 'no_category' if !$brand->{category};
         
         my $file = $self->req->upload('logo');
         push @$error_message, 'no_logo'
