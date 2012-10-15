@@ -120,7 +120,7 @@ sub item {
 sub brand {
 	my $self = shift;
 	my $filter = {active => 1};
-
+	$filter->{'subitems.qty'} = {'$gt' => 0};
 	my $brand = $self->app->db->brands->find_one({_id => $self->stash('brand')});
 	return $self->redirect_to('/') if !$brand;
 	$self->stash(brand => $brand);
