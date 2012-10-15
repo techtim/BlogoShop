@@ -119,11 +119,12 @@ sub item {
 
 sub brand {
 	my $self = shift;
-	my $filter = {};
+	my $filter = {active => 1};
 
 	my $brand = $self->app->db->brands->find_one({_id => $self->stash('brand')});
 	return $self->redirect_to('/') if !$brand;
 	$self->stash(brand => $brand);
+	$filter->{brand} = $brand->{_id};
 	my $item 	= BlogoShop::Item->new($self);
 	my $sort 	= {};
 	$sort->{price} 	= $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
@@ -131,7 +132,7 @@ sub brand {
 
 	# $item->list()
 	# warn $self->dumper([$self->app->db->items->find({brand => $brand->{_id}})->all]);
-	my $items = $item->list({brand => $brand->{_id}}, $sort, ($self->req->param('next')=~/(\d+)/)[0]||0);
+	my $items = $item->list($filter, $sort, ($self->req->param('next')=~/(\d+)/)[0]||0);
 
 	if ($self->req->headers->header('X-Requested-With')) {
 		foreach (@$items) {
