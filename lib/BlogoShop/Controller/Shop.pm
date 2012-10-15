@@ -280,6 +280,7 @@ sub buy {
 	my $session = $self->session();
 
 	for ($session->{client}->{items}->{$item->{_id}.':'.$self->stash('subitem')}) {
+		$_->{count} = 0 if !$_->{count};
 		$_->{count} += 1
 			unless ($_->{count} + 1) > $item->{subitems}->[$self->stash('subitem')]->{qty};
 		
