@@ -20,10 +20,6 @@
                 <%= $brand->{name} %>
             </a>
 
-        <!-- <%= $brand->{category}->{name} if $brand->{category} %>-->
-
-        
-
             <a href="/admin/brands/edit/<%= $brand->{_id} %>">
                 <button type="button" ><%= $brand->{name} %></button>
             </a>

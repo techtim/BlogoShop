@@ -47,7 +47,7 @@
 <ul class='breadcrumps__section clearfloat'>
 	<li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
 	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
-	<li>/ <%= stash 'name' %></li>
+	<li>/ <h2><%= stash 'name' %></h2></li>
 </ul>
 
 % if (ref $images eq 'ARRAY') {
@@ -89,7 +89,7 @@
 		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
 	</dl>
 	% if (@$tags > 0) {
-	<dl class='clearfloat row '>
+	<dl class='clearfloat row tags'>
 		<dt>Таги:</dt>
 		<dd>
 		% foreach (@$tags) {

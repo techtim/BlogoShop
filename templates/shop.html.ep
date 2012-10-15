@@ -40,7 +40,6 @@
     <script>requirejs(['app/carousel']);</script>
     % }
 
-	
 	<div class='shop__items__list'>
 		<div class='fiters__section clearfloat'>
 			<ul class='price__filter'>

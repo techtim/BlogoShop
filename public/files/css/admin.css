@@ -146,6 +146,8 @@ body {
 
 .list__section {
   margin-top: 8px; }
+  .list__section .disabled {
+    opacity: .5; }
 
 .caption {
   display: inline-block;

@@ -16,7 +16,6 @@ requirejs.config({
 requirejs(['jquery'], function($){ }, function(err){
 	var failedId = err.requireModules && err.requireModules[0];
  
-	console.log('failed ' + failedId)
 	if(failedId === 'jquery'){
 		requirejs.undef(failedId);
 

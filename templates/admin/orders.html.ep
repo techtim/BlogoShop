@@ -60,7 +60,8 @@
 								<div class='description__section'>
 									<h3><%= $_->{info}->{brand} %></h3>
 									<h4><%= $_->{info}->{name} %></h4>
-									<h3><%= $_->{info}->{size} %></h3>
+									<p>Размер: <%= $_->{info}->{size} %></p>
+									<p>Артикул: <%= $_->{info}->{articol} %></p>
 								</div>
 								<div class='meta__section'>
 									<span class='count'><%= $_->{count} %></span>
