@@ -99,7 +99,7 @@ sub rss {
 
 	return $self->render(
 		articles => \@articles,
-		domain => $self->req->url->base,
+		domain => 'http://blog.'.$self->config->{domain_name},
 		template => 'rss', 
 		format => 'xml',
 	);
