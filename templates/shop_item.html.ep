@@ -54,8 +54,7 @@
 	%= include  'includes/shop_gallery', gallery => $images  
 % }
 
-<div class='information__section'>
-	
+<div class='shop__information__section'>
 	
 	<div class='description__section row'>
 		<%== stash 'descr' %>

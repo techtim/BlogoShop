@@ -111,6 +111,7 @@ sub item {
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
 		host 	=> $self->req->url->base,
 		url 	=> $self->req->url,
+		is_item => 1,
 		page_name => 'shop',
 		template=> 'shop_item',
 		format 	=> 'html',

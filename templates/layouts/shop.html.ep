@@ -3,8 +3,8 @@
 <html xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
 		<meta charset='utf-8' />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-		% if (stash('template') && stash('template') eq 'shop_item') {
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		% if (stash('is_item')) {
 		<meta property="og:title" content="<%= stash('name') %>" />
 		<meta property="og:type" content="article" />
 		<meta property="og:description" content="<%= stash('descr') %>" />
@@ -16,8 +16,6 @@
 		<meta property="fb:admins" content="100000785354670" />
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
-		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
 		
         <script data-main='/j/config' src='/j/require.js'></script>
