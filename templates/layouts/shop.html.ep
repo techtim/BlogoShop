@@ -17,7 +17,6 @@
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
-		
         <script data-main='/j/config' src='/j/require.js'></script>
         <script>requirejs(['app/global'])</script>
     </head>

@@ -1,10 +1,10 @@
 define(['jquery'], function(){
-	var $section = $('.shop__items__list'),
+	var $section = $('.shop__items__list, .list__section'),
 		$item = $section.find('li'),
 		$overlay = $('#overlay'),
 		_window_width = $(window).width();
 
-	$item.on('click', '.preview__ico', function(e){
+	$item.find('.preview__ico').live('click', function(e){
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -30,7 +30,7 @@ define(['jquery'], function(){
 		$('body').addClass('overlayed');
 	});
 
-	$section.on('click', '.shop__information__section', function( e ){
+	$section.find('.shop__information__section').live('click', function( e ){
 		e.stopPropagation();
 	});
 
@@ -45,7 +45,7 @@ define(['jquery'], function(){
 	});
 
 	var clean = function() {
-		$item.removeClass('active');
+		$('.shop__items__list').find('li').removeClass('active');
 		$('body').removeClass('overlayed');
 	};
 

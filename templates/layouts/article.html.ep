@@ -3,20 +3,19 @@
 	<head>
 		<meta charset='utf-8' />
 		<title><%= title %></title>
-		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta property="og:site_name" content="магазин Хохловка" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="<%= $title %>" />
-		<meta property="og:url" content="<%== stash('host') . '/' . stash('type') . '/' . $alias %>" />
+		<meta property="og:url" content="http://blog.<%= config->{domain_name} %>/<%== stash('type') . '/' . $alias %>" />
 		<meta property="og:description" content="<%= stash 'preview_text' %>" />
 		% if (stash 'preview_image') {
     		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
 		% }
 
+		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
+		
 		<script data-main='/j/config' src='/j/require.js'></script>
 		<script>requirejs(['app/global', 'app/fotorama'])</script>
 	</head>

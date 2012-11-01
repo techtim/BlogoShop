@@ -12,7 +12,7 @@
 	 	% foreach my $img (@$gallery) {
 	 		<li>
 	 			<a href="<%= $img_url.$img->{tag} %>">
-		 			<img src="<%= config->{nginx_img_resize}.$img_url.$img->{tag} %>" alt="<%= $img->{descr} %>">
+		 			<img src="<%= config->{nginx_img_resize}.$img_url.$img->{tag} %>" alt="<%= $img->{descr} %>" title="<%= $img->{descr} %>" />
 	 			</a>
 	 		</li>
 	 	% }

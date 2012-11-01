@@ -30,7 +30,7 @@
 				<li><a href='?time=asc'>&uarr;</a></li>
 			</ul>
 
-			<script>requirejs(['app/shopFilters', 'app/equalHeight']);</script>
+			<script>requirejs(['app/shopFilters', 'app/equalHeight', 'app/itemsDescr']);</script>
 		</div>
 		
 		<ul class='list__section clearfloat'>

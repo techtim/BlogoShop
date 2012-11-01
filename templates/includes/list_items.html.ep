@@ -10,12 +10,13 @@
 	>
         <a href="http://<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>">
             <span class='img__section'>
-        		<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>" />
+        		<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>" alt='<%= $item->{name} %>' title='<%= $item->{name} %>' />
             	% if ($item->{sale}->{sale_active} && 
 				%	$item->{sale}->{sale_start_stamp} <= time() &&
 				%	$item->{sale}->{sale_end_stamp} >= time()) {
             	<span class='ico__sale'></span>
             	% }
+            	<span class='controls active preview__ico'></span>
             </span>
             <span class='brand'><%= $item->{brand_name} %></span>
             <span class='item__caption'><%= $item->{name} %></span>
@@ -34,6 +35,74 @@
 				% }
         	</span>
         </a>
+        
+        <div class="shop__information__section right">
+        	<div class="helper">
+	        	<div class="description__section row">
+	        		<%== $item->{descr} %>
+	        	</div>
+	        	
+	        	<dl class='clearfloat row'>
+					<dt>
+			            Бренд:
+			        </dt>
+			        <dd>
+			        	<%= $item->{brand_name} %>
+			        </dd>
+			    </dl>
+	    		% if ($item->{size}) {
+	    		<dl class='clearfloat row'>
+					<dt>
+			            Размер:
+			        </dt>
+			        <dd>
+			        	<%= $item->{size} %>
+			        </dd>
+			    </dl>
+			    % }
+			    % if ($item->{consist}) {
+			    <dl class='clearfloat row'>
+					<dt>
+			            Состав:
+			        </dt>
+			        <dd>
+			        	<%= $item->{consist} %>
+			        </dd>
+			    </dl>
+			    % }
+			    <dl class='clearfloat row'>
+					<dt>
+			            Цена:
+			        </dt>
+			        <dd>
+			        	<span class='price'>
+				        	% if ($item->{sale}->{sale_active} && 
+							%	$item->{sale}->{sale_start_stamp} <= time() &&
+							%	$item->{sale}->{sale_end_stamp} >= time() ) {
+							  	<s><%= $item->{price} %></s>
+							  	<%= $item->{price} - (
+						  				$item->{sale}->{sale_value} =~ m/(%+)/ ?
+											$item->{price} * (($item->{sale}->{sale_value}=~/(\d+)/)[0]/100) :
+											$item->{sale}->{sale_value}) %> 
+							% } else {
+								<%= $item->{price} %>
+							% }
+			        	</span>
+			        </dd>
+			    </dl>
+
+			    % if (@{$item->{tags}} > 0) {
+			    <dl class='clearfloat row tags'>
+					<dt>Таги:</dt>
+					<dd>
+						% foreach (@{$item->{tags}}) {
+						<a href="<%= '/tag/'.$_ %>" ><%= $_ %></a>&nbsp;
+						% }
+					</dd>
+				</dl>
+				% }
+			</div>
+        </div>
     </li>
 	
 % }

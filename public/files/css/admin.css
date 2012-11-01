@@ -140,6 +140,7 @@ body {
       -webkit-transition: opacity 0.2s linear;
       -moz-transition: opacity 0.2s linear;
       -o-transition: opacity 0.2s linear;
+      -ms-transition: opacity 0.2s linear;
       transition: opacity 0.2s linear; }
       .sidebar__section.categories a.active.inactive {
         opacity: .45; }
@@ -153,7 +154,8 @@ body {
   display: inline-block;
   padding-bottom: 10px;
   color: #4b4b4b;
-  font: 15px "PT Sans Bold";
+  font: 15px "PT Sans";
+  font-weight: bold;
   text-transform: uppercase; }
 
 .add {
@@ -247,6 +249,7 @@ body {
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear; }
 
 .items__list .edit:hover {
@@ -313,6 +316,7 @@ body {
     -webkit-transition: opacity 0.2s linear;
     -moz-transition: opacity 0.2s linear;
     -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear; }
     .sort__strip__section button:hover {
       opacity: 1; }
@@ -343,8 +347,9 @@ body {
   .breadcrumps__section li {
     float: left;
     color: #4b4b4b;
-    font-family: "PT Sans bold";
-    font-size: 15px; }
+    font-family: "PT Sans";
+    font-size: 15px;
+    font-weight: bold; }
     .breadcrumps__section li:first-child {
       color: #de1500; }
       .breadcrumps__section li:first-child a {
@@ -360,8 +365,9 @@ body {
     top: 1px;
     margin: 0 4px;
     color: #4b4b4b;
-    font-family: "PT Sans bold";
+    font-family: "PT Sans";
     font-size: 15px;
+    font-weight: bold;
     text-decoration: none;
     text-transform: uppercase; }
     .breadcrumps__section a:hover {
@@ -416,6 +422,7 @@ body {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
   transition: all 0.2s linear; }
   .shop__add__item form .button.gray {
     background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
@@ -461,14 +468,16 @@ body {
   border: 1px solid #c9c9c9;
   box-sizing: border-box;
   color: #4b4b4b;
-  font-family: "PT Sans bold";
+  font-family: "PT Sans";
   font-size: 12px;
+  font-weight: bold;
   line-height: 26px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
   transition: all 0.2s linear; }
   .shop__add__item form input[type='text']:focus {
     background: #fff;
@@ -476,14 +485,16 @@ body {
   .shop__add__item form input[type='text']::-webkit-input-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
-    font-family: "PT Sans bold";
+    font-family: "PT Sans";
     font-size: 12px;
+    font-weight: bold;
     text-transform: uppercase; }
   .shop__add__item form input[type='text']:-moz-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
-    font-family: "PT Sans bold";
+    font-family: "PT Sans";
     font-size: 12px;
+    font-weight: bold;
     text-transform: uppercase; }
 .shop__add__item form textarea {
   display: block;
@@ -498,6 +509,7 @@ body {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
   transition: all 0.2s linear; }
   .shop__add__item form textarea:focus {
     background: #fff;
@@ -505,14 +517,16 @@ body {
   .shop__add__item form textarea::-webkit-input-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
-    font-family: "PT Sans bold";
+    font-family: "PT Sans";
     font-size: 12px;
+    font-weight: bold;
     text-transform: uppercase; }
   .shop__add__item form textarea:-moz-placeholder {
     padding-left: 8px;
     color: #4b4b4b;
-    font-family: "PT Sans bold";
+    font-family: "PT Sans";
     font-size: 12px;
+    font-weight: bold;
     text-transform: uppercase; }
 .shop__add__item form .caption__row .active {
   margin-top: 2px;
@@ -631,8 +645,9 @@ body {
         display: block;
         margin-bottom: 4px;
         color: #4B4B4B;
-        font-family: "PT Sans bold";
+        font-family: "PT Sans";
         font-size: 12px;
+        font-weight: bold;
         cursor: pointer; }
         .shop__add__item form .sale__section .currency .dropdown li.rub {
           height: 24px;
@@ -709,7 +724,7 @@ body {
       padding-top: 6px;
       padding-left: 8px;
       color: #4b4b4b;
-      font-family: "PT Sans Bold";
+      font-family: "PT Sans";
       font-size: 15px;
       font-weight: bold; }
   .shop__add__item form .tags input[type='text'] {
@@ -733,8 +748,9 @@ body {
       padding-top: 14px;
       padding-left: 6px;
       color: #939393;
-      font-family: "PT Sans bold";
+      font-family: "PT Sans";
       font-size: 10px;
+      font-weight: bold;
       text-transform: uppercase; }
     .shop__add__item form .sub__items__section .caption__strip .button {
       display: inline-block; }
@@ -756,13 +772,15 @@ body {
     padding-left: 8px;
     float: left;
     color: #4b4b4b;
-    font-family: "PT Sans bold";
+    font-family: "PT Sans";
     font-size: 12px;
+    font-weight: bold;
     line-height: 46px;
     text-transform: uppercase;
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
     transition: all 0.2s linear; }
     .shop__add__item form .sub__items__section dd.added {
       color: red; }
@@ -832,6 +850,7 @@ body {
     -webkit-transition: opacity 0.2s linear;
     -moz-transition: opacity 0.2s linear;
     -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear; }
     .shop__add__item form .sub__items__section .selected__colors .delete:hover {
       opacity: .8; }
@@ -863,6 +882,7 @@ body {
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear; }
   .shop__add__item form a.active.checked {
     opacity: 1; }
@@ -928,8 +948,9 @@ body {
       padding-left: 4px;
       background: #fff;
       color: #7f7f7f;
-      font-family: "PT Sans bold";
-      font-size: 15px; }
+      font-family: "PT Sans";
+      font-size: 15px;
+      font-weight: bold; }
       .shop__add__item form .loading__section .uploaded__section .images__counter span {
         color: #53c520; }
         .shop__add__item form .loading__section .uploaded__section .images__counter span.full {
@@ -974,6 +995,7 @@ body {
             -webkit-transition: all 0.2s linear;
             -moz-transition: all 0.2s linear;
             -o-transition: all 0.2s linear;
+            -ms-transition: all 0.2s linear;
             transition: all 0.2s linear; }
           .shop__add__item form .loading__section .uploaded__section .images__list li .img__box.deleted img {
             opacity: .7; }
@@ -1104,6 +1126,7 @@ body {
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear; }
   .brands__list__section .list__section .active.inactive {
     opacity: .45; }
@@ -1234,6 +1257,7 @@ body {
     -webkit-transition: opacity 0.2s linear;
     -moz-transition: opacity 0.2s linear;
     -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear; }
   .orders__list__section .list li .items__list__section {
     margin-top: 12px; }

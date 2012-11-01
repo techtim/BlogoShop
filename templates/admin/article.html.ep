@@ -28,7 +28,7 @@
 
 				<span>Правка поста
 					% if (stash 'alias') {
-						<a href="/<%== join '/', $type, $alias %>" TARGET='_blank'><%== stash 'name' %></a>
+						<a href="http://blog.<%= config->{domain_name} %>/<%== join '/', $type, $alias %>" TARGET='_blank'><%== stash 'name' %></a>
 					% } else {
 						"<%== stash 'name' %>"
 					% }

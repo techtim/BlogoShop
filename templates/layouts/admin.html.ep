@@ -2,11 +2,9 @@
 <html>
 	<head>
 		<meta charset='utf-8' />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<%= jquery_ajax_csrf_protection %>
 		<title><%= title %></title>
-		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
     	<link rel='stylesheet' type='text/css' href='/css/admin.css' media='all' />
     	

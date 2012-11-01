@@ -24,11 +24,12 @@ define(['jquery', 'ui', 'tmpl'], function($){
 	var templates = {
 		items: '<li {{if sale}}class="sale"{{/if}}>'+
 				'<a href="${link}"><span class="img__section">'+
-	        		'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
-	            	'{{if sale}}'+
-	            	'<span class="ico__sale"></span>'+
+	        			'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
+            			'{{if sale}}'+
+	            			'<span class="ico__sale"></span>'+
 	            		'{{/if}}'+
-		            '</span>'+
+	            		'<span class="controls active preview__ico"></span>'+
+		            	'</span>'+
 		            '<span class="brand">${brand_name}</span>'+
 		            '<span class="item__caption">${name}</span>'+
 		        	'<span class="price">'+
@@ -39,6 +40,57 @@ define(['jquery', 'ui', 'tmpl'], function($){
 						'{{/if}}'+
 		        	'</span>'+
 		        '</a>'+
+		        '<div class="shop__information__section right">'+
+	        		'<div class="helper">'+
+	        			'<div class="description__section row">'+
+	        				'${descr}'+
+	        			'</div>'+
+	        			'<dl class="clearfloat row">'+
+							'<dt>Бренд:</dt>'+
+					        '<dd>'+
+					        	'${brand_name}'+
+					        '</dd>'+
+					    '</dl>'+
+					    '{{if size}}'+
+							'<dl class="clearfloat row">'+
+								'<dt>Размер:</dt>'+
+								'<dd>'+
+									'${size}'+
+								'</dd>'+
+							'</dl>'+
+						'{{/if}}'+
+						'{{if consist}}'+
+							'<dl class="clearfloat row">'+
+								'<dt>Размер:</dt>'+
+								'<dd>'+
+									'${consist}'+
+								'</dd>'+
+							'</dl>'+
+						'{{/if}}'+
+						'<dl class="clearfloat row">'+
+							'<dt>Цена:</dt>'+
+							'<dd>'+
+								'<span class="price">'+
+									'{{if sale}}'+
+									  	'<s>${price}</s>'+
+									'{{else}}'+
+										'${price}'+
+									'{{/if}}'+
+								'</span>'+
+							'</dd>'+
+						'</dl>'+
+						'{{if tags}}'+
+							'<dl class="clearfloat row tags">'+
+								'<dt>Таги:</dt>'+
+								'<dd>'+
+									'{{each tags}}'+
+										'<a href="/tag/${$value}" >${$value}</a>&nbsp;'+
+									'{{/each}}'+
+								'</dd>'+
+							'</dl>'+
+						'{{/if}}'+
+	        		'</div>'+
+        		'</div>'+
 		    '</li>',
 		scroll_helper: '<li class="'+config.scroll_helper.replace('.','')+'" data-href="${href}" data-next="${next}"></li>'
 	};

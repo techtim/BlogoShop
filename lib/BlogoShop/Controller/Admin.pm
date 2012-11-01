@@ -7,6 +7,7 @@ use Digest::SHA qw(sha256_hex);
 use constant COLLECTION => 'admins';
 use constant NEW_ADMIN_PARAMS => qw(login name email type);
 use constant EDIT_ADMIN_PARAMS => (NEW_ADMIN_PARAMS, qw(old_pass new_pass new_pass_ctrl id));
+use constant ARTICLE_PARAMS => qw(brand sale type tag active);
 
 my @rndm_array = (0..9,'A'..'Z','a'..'z');
 
@@ -31,9 +32,8 @@ sub index {
     
     my $page = $self->req->param('page') ? $self->req->param('page') : 1;
 	my $filter = {};
-	$filter->{tags} = $self->req->param('tag') if $self->req->param('tag');
-	$filter->{brand} = $self->req->param('brand') if $self->req->param('brand'); 
-    $filter->{type} = $self->req->param('type') if $self->req->param('type'); 
+	$self->req->param($_) ? $filter->{$_} = $self->req->param($_) : () foreach ARTICLE_PARAMS;
+
     $self->stash(brands => [$self->app->db->brands->find()->all] || []);
     $self->stash(brands_alias => {map {$_->{_id} => $_->{name}} @{$self->stash('brands')}});
 

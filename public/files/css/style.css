@@ -1,3 +1,5 @@
+@import url('reset.css');
+@import url('http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic');
 .clearfloat {
   display: inline-block; }
 
@@ -30,6 +32,8 @@ body {
   padding-top: 1px;
   background: url("../i/body-bg.png") repeat-x left top;
   font-family: Arial, sans-serif; }
+  body.overlayed #overlay {
+    display: block; }
 
 .wrap {
   width: 980px;
@@ -132,10 +136,10 @@ body {
           border-radius: 2px;
           color: #fff;
           line-height: 16px;
-          background: -webkit-linear-gradient(to bottom, #373737, #363636);
-          background: -moz-linear-gradient(to bottom, #373737, #363636);
-          background: -o-linear-gradient(to bottom, #373737, #363636);
-          background: -ms-linear-gradient(to bottom, #373737, #363636);
+          background: -webkit-gradient(linear, left top, left bottom, from(#373737), to(#363636));
+          background: -webkit-linear-gradient(top, #373737, #363636);
+          background: -moz-linear-gradient(top, #373737, #363636);
+          background: -o-linear-gradient(top, #373737, #363636);
           background: linear-gradient(to bottom, #373737, #363636); }
         .fixed__navigation__helper .navigation__section .sub__nav__strip .search__form__section input[type='submit'] {
           height: 18px;
@@ -148,10 +152,10 @@ body {
           font-size: 11px;
           font-style: italic;
           line-height: 18px;
-          background: -webkit-linear-gradient(to bottom, #646464, #434343);
-          background: -moz-linear-gradient(to bottom, #646464, #434343);
-          background: -o-linear-gradient(to bottom, #646464, #434343);
-          background: -ms-linear-gradient(to bottom, #646464, #434343);
+          background: -webkit-gradient(linear, left top, left bottom, from(#646464), to(#434343));
+          background: -webkit-linear-gradient(top, #646464, #434343);
+          background: -moz-linear-gradient(top, #646464, #434343);
+          background: -o-linear-gradient(top, #646464, #434343);
           background: linear-gradient(to bottom, #646464, #434343); }
     .fixed__navigation__helper .navigation__section .shopping__cart__section {
       height: 32px;
@@ -578,6 +582,8 @@ body {
     padding-bottom: 16px; }
     .post__page .socials__section li {
       float: left; }
+      .post__page .socials__section li.fb {
+        margin-right: 20px; }
   .post__page .post__navigation {
     border-top: 1px dotted #a1a1a1; }
     .post__page .post__navigation li {
@@ -678,16 +684,17 @@ body {
       position: absolute;
       top: 0;
       left: 0; }
-.shop__item__section .information__section {
+.shop__item__section .shop__information__section {
   width: 240px;
   float: left; }
-.shop__item__section .row {
+
+.shop__information__section .row {
   padding: 16px 0;
   border-bottom: 1px dotted #a1a1a1;
   clear: both; }
-  .shop__item__section .row.color {
+  .shop__information__section .row.color {
     padding-bottom: 10px; }
-  .shop__item__section .row dt {
+  .shop__information__section .row dt {
     float: left;
     width: 80px;
     color: #222;
@@ -695,37 +702,37 @@ body {
     font-weight: bold;
     text-align: left;
     text-transform: uppercase; }
-  .shop__item__section .row dd {
+  .shop__information__section .row dd {
     width: 160px;
     float: left;
     color: #555;
     font-size: 12px;
     line-height: 14px; }
-    .shop__item__section .row dd.consist {
+    .shop__information__section .row dd.consist {
       text-transform: uppercase; }
-  .shop__item__section .row.tags a {
+  .shop__information__section .row.tags a {
     color: #959494;
     text-decoration: none; }
-    .shop__item__section .row.tags a:hover {
+    .shop__information__section .row.tags a:hover {
       color: #E60000;
       text-decoration: underline; }
-  .shop__item__section .row.description__section {
+  .shop__information__section .row.description__section {
     padding-top: 0;
     color: #555;
     font-size: 13px;
     line-height: 19px; }
-    .shop__item__section .row.description__section p {
+    .shop__information__section .row.description__section p {
       margin-bottom: 20px; }
-    .shop__item__section .row.description__section a {
+    .shop__information__section .row.description__section a {
       color: #555;
       font-weight: bold; }
-  .shop__item__section .row.size {
+  .shop__information__section .row.size {
     padding: 0; }
-    .shop__item__section .row.size dt {
+    .shop__information__section .row.size dt {
       padding: 16px 0; }
-  .shop__item__section .row .sizes__section {
+  .shop__information__section .row .sizes__section {
     padding-top: 10px; }
-    .shop__item__section .row .sizes__section li {
+    .shop__information__section .row .sizes__section li {
       margin-left: 4px;
       margin-bottom: 4px;
       padding: 0 7px;
@@ -739,42 +746,44 @@ body {
       -o-transition: all 0.4s linear;
       -ms-transition: all 0.4s linear;
       transition: all 0.4s linear; }
-      .shop__item__section .row .sizes__section li:first-child {
+      .shop__information__section .row .sizes__section li:first-child {
         margin-left: 0; }
-      .shop__item__section .row .sizes__section li:hover, .shop__item__section .row .sizes__section li.current {
+      .shop__information__section .row .sizes__section li:hover, .shop__information__section .row .sizes__section li.current {
         border-color: #323232;
         color: #323232; }
-      .shop__item__section .row .sizes__section li.current {
+      .shop__information__section .row .sizes__section li.current {
         cursor: default; }
-  .shop__item__section .row .color {
+  .shop__information__section .row .color {
     margin: -9px 0; }
-    .shop__item__section .row .color li {
+    .shop__information__section .row .color li {
       height: 26px;
       width: 26px;
       margin-right: 4px;
       float: left;
       border: 1px solid #dadada;
       cursor: pointer; }
-      .shop__item__section .row .color li.selected {
+      .shop__information__section .row .color li.selected {
         border-color: #E60000; }
-      .shop__item__section .row .color li input {
+      .shop__information__section .row .color li input {
         display: none; }
-  .shop__item__section .row .price {
+  .shop__information__section .row .price {
     padding-right: 16px;
     float: left;
     background: url("../i/ico-rub.png") no-repeat right top;
     color: #434343;
     font-size: 20px; }
-    .shop__item__section .row .price s {
+    .shop__information__section .row .price s {
       margin-right: 6px;
       color: #E60000;
       font-size: 18px; }
-.shop__item__section .socials__section {
+
+.socials__section {
   clear: both; }
-  .shop__item__section .socials__section li {
+  .socials__section li {
     margin-right: 8px;
     float: left; }
-.shop__item__section .submit__form {
+
+.submit__form {
   cursor: pointer; }
 
 .submit__form, .checkout__button {
@@ -861,11 +870,14 @@ body {
     right: 3px;
     top: 3px; }
   .shop__items__list .list__section li {
+    position: relative;
     margin-right: 22px;
     margin-bottom: 24px;
     width: 153px;
     float: left;
     color: #666; }
+    .shop__items__list .list__section li.active .shop__information__section {
+      display: block; }
     .shop__items__list .list__section li.not__active {
       opacity: .5; }
     .shop__items__list .list__section li:nth-child(4n) {
@@ -922,8 +934,63 @@ body {
       .shop__items__list .list__section li .img__section img {
         max-width: 100%;
         border: 1px solid #b2b2b2; }
+      .shop__items__list .list__section li .img__section .preview__ico {
+        position: absolute;
+        right: 6px;
+        bottom: 3px; }
     .shop__items__list .list__section li s {
       color: #E60000; }
+  .shop__items__list .list__section .shop__information__section {
+    position: absolute;
+    top: -29px;
+    width: 264px;
+    display: none;
+    background: #fff;
+    box-shadow: 1px 1px 22px #000;
+    border: 1px solid #818181;
+    z-index: 3; }
+    .shop__items__list .list__section .shop__information__section.right {
+      left: 183px; }
+      .shop__items__list .list__section .shop__information__section.right:after {
+        left: -22px; }
+    .shop__items__list .list__section .shop__information__section.left {
+      left: -182px; }
+      .shop__items__list .list__section .shop__information__section.left:after {
+        right: -22px; }
+    .shop__items__list .list__section .shop__information__section .helper {
+      padding: 14px 8px 14px;
+      overflow: hidden; }
+      .shop__items__list .list__section .shop__information__section .helper:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 270px;
+        width: 264px;
+        background: #fff;
+        content: '';
+        z-index: 2; }
+    .shop__items__list .list__section .shop__information__section:after {
+      position: absolute;
+      top: 196px;
+      height: 44px;
+      width: 44px;
+      background: #fff;
+      border: 1px solid #9a9a9a;
+      box-shadow: 1px 1px 22px #000;
+      content: '';
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      z-index: 1; }
+    .shop__items__list .list__section .shop__information__section .row {
+      position: relative;
+      z-index: 2; }
+    .shop__items__list .list__section .shop__information__section dt {
+      width: 58px; }
+    .shop__items__list .list__section .shop__information__section dd {
+      width: 158px; }
 
 .shop__description {
   position: relative; }
@@ -1462,10 +1529,10 @@ body {
     line-height: 26px;
     text-transform: uppercase;
     overflow: hidden;
-    background: -webkit-linear-gradient(to bottom, #f6f6f6, #ededed);
-    background: -moz-linear-gradient(to bottom, #f6f6f6, #ededed);
-    background: -o-linear-gradient(to bottom, #f6f6f6, #ededed);
-    background: -ms-linear-gradient(to bottom, #f6f6f6, #ededed);
+    background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#ededed));
+    background: -webkit-linear-gradient(top, #f6f6f6, #ededed);
+    background: -moz-linear-gradient(top, #f6f6f6, #ededed);
+    background: -o-linear-gradient(top, #f6f6f6, #ededed);
     background: linear-gradient(to bottom, #f6f6f6, #ededed); }
     .custom-select .custom-text:after {
       position: absolute;
@@ -1487,10 +1554,10 @@ body {
     border-top: 0;
     border-radius: 0 0 5px 5px;
     z-index: 2;
-    background: -webkit-linear-gradient(to bottom, #f6f6f6, #ededed);
-    background: -moz-linear-gradient(to bottom, #f6f6f6, #ededed);
-    background: -o-linear-gradient(to bottom, #f6f6f6, #ededed);
-    background: -ms-linear-gradient(to bottom, #f6f6f6, #ededed);
+    background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#ededed));
+    background: -webkit-linear-gradient(top, #f6f6f6, #ededed);
+    background: -moz-linear-gradient(top, #f6f6f6, #ededed);
+    background: -o-linear-gradient(top, #f6f6f6, #ededed);
     background: linear-gradient(to bottom, #f6f6f6, #ededed); }
     .custom-select .select-list li {
       float: none;
@@ -1531,3 +1598,14 @@ body {
         font-weight: bold; }
       .custom-select .select-scroll .scroll-drag * {
         user-select: none; }
+
+#overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 9999px;
+  width: 100%;
+  display: none;
+  background: #434343;
+  opacity: .5;
+  z-index: 2; }

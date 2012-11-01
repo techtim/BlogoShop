@@ -73,7 +73,7 @@
                 <span class='brand'><%= $item->{brand} %></span>
                 <span class='item__caption'><%= $item->{name} %></span>
                 <span class='price'><%= $item->{price} %></span>
-                % if ($item->{total_qty}>0) {
+                % if ($item->{total_qty} && $item->{total_qty} <= 0) {
                 	<span class='item__caption'>нет в наличии</span>
                 % }
             </a>

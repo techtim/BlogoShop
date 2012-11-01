@@ -12,6 +12,7 @@ sub show {
 	$self->add_vars;
     my $filter = {};
     $filter->{$_} = $self->stash($_)||'' foreach ITEM_FIELDS;
+    $filter->{active} = 0+$self->req->param('active') if $self->req->param('active'); 
     return $self->redirect_to('/admin/shop/')
     	if $filter->{category} && !($self->stash('categories_alias'))->{$filter->{category}};
 
@@ -40,7 +41,7 @@ sub show {
         return $self->redirect_to("/admin/shop/$filter->{category}/$filter->{subcategory}");
     }
 
-#    warn $self->dumper($item->list($filter));
+    # warn $self->dumper($filter);
     return $self->render(
         %$filter,
         items => $item->list($filter, {}, 0, 1000),
