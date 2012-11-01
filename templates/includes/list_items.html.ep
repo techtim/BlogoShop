@@ -8,6 +8,8 @@
 				class='sale'
 		%}
 	>
+		
+    	<span class='controls active preview__ico'></span>
         <a href="http://<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>">
             <span class='img__section'>
         		<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>" alt='<%= $item->{name} %>' title='<%= $item->{name} %>' />
@@ -16,7 +18,6 @@
 				%	$item->{sale}->{sale_end_stamp} >= time()) {
             	<span class='ico__sale'></span>
             	% }
-            	<span class='controls active preview__ico'></span>
             </span>
             <span class='brand'><%= $item->{brand_name} %></span>
             <span class='item__caption'><%= $item->{name} %></span>
@@ -39,7 +40,7 @@
         <div class="shop__information__section right">
         	<div class="helper">
 	        	<div class="description__section row">
-	        		<%== $item->{descr} %>
+	        		<%== substr($item->{descr}, 0, 500).'...' %>
 	        	</div>
 	        	
 	        	<dl class='clearfloat row'>

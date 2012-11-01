@@ -5,7 +5,6 @@ define(['jquery'], function(){
 		_window_width = $(window).width();
 
 	$item.find('.preview__ico').live('click', function(e){
-		e.preventDefault();
 		e.stopPropagation();
 
 		var $this = $(this),

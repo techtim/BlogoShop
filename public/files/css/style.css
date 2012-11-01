@@ -889,6 +889,10 @@ body {
       display: block;
       background: url("../i/spinner.gif") no-repeat center center;
       clear: both; }
+    .shop__items__list .list__section li .preview__ico {
+      position: absolute!important;
+      top: 181px;
+      right: 6px; }
     .shop__items__list .list__section li a {
       color: #666;
       font-size: 12px;
@@ -934,10 +938,6 @@ body {
       .shop__items__list .list__section li .img__section img {
         max-width: 100%;
         border: 1px solid #b2b2b2; }
-      .shop__items__list .list__section li .img__section .preview__ico {
-        position: absolute;
-        right: 6px;
-        bottom: 3px; }
     .shop__items__list .list__section li s {
       color: #E60000; }
   .shop__items__list .list__section .shop__information__section {
