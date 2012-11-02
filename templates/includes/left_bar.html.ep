@@ -1,4 +1,4 @@
-
+% my $sex = stash('sex') || '';
 <div class='sidebar__section fl'>
 	
 	<div class='menu__section'>
@@ -8,7 +8,6 @@
 	    	
 		    <a class='expand__items' href='#'></a>
 
-	    	% my $sex = stash 'sex';
 		    <ul class='filters__section'>
 		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='all' <%== "class='current'" if !$sex %>>все</a></li>
 		    	<li><a href='http://<%= config->{domain_name} .'/w' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='female' <%== "class='current'" if $sex eq 'w' %>>женское</a></li>
@@ -18,7 +17,7 @@
 		</div>
 
 	    % foreach my $cat (@$categories) {
-	    % next unless $active_categories->{stash('sex') eq '' ? 'u' : stash('sex')}->{$cat->{_id}};
+	    % next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$cat->{_id}};
 	    <ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %>'>
         	<li class='title'>
         		<a href='http://<%= config->{domain_name} %>/<%== $sex ne '' ? "$sex/" : '' %><%= $cat->{_id} %>'><%= $cat->{name} %></a>
@@ -26,7 +25,7 @@
         	 <ul class='submenu'>
         	
         	% foreach my $sub (@{$cat->{subcats}}) {
-        		% next unless $active_categories->{stash('sex') eq '' ? 'u' : stash('sex')}->{$sub->{_id}};
+        		% next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$sub->{_id}};
     			<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='<%= '/'.$sex if $sex %>/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
     		% }
 

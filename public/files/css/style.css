@@ -1522,7 +1522,7 @@ body {
     padding-left: 8px;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
-    color: #4b4b4b;
+    color: #4b4b4b!important;
     cursor: pointer;
     font-family: "PT Sans bold";
     font-size: 12px;
@@ -1563,7 +1563,7 @@ body {
       float: none;
       display: block;
       margin-bottom: 4px;
-      color: #4b4b4b;
+      color: #4b4b4b!important;
       cursor: pointer;
       font-family: "PT Sans bold";
       font-size: 12px;
