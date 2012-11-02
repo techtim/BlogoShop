@@ -37,13 +37,17 @@ define(['jquery'], function($){
 			});
 			
 			$submit.on('click', function(){
-				$this = $(this)
-				_href = $this.attr('href');
-				_follow_the_link = (_href != '#') ? true : false;
-				if(_follow_the_link){
-					return;
-				}else{
-					$this.closest('form').submit();
+				var $this = $(this);
+				var _disabled = $this.data('disabled');
+				if(!_disabled){
+					var _href = $this.attr('href');
+					var _follow_the_link = (_href != '#') ? true : false;
+					$this.data('disabled', true);
+					if( _follow_the_link ){
+						return;
+					}else{
+						$this.closest('form').submit();
+					}
 				}
 			})
 			

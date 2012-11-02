@@ -312,12 +312,12 @@ sub check_existing_alias {
 
 	if ($self->{id} && 0+@full_match == 0) {
 		my $old_item = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => ''.$self->{id})});
-		warn 'RET OLD' if ($old_item->{alias} =~ /^(.+?)\d*$/)[0] eq ($self->{alias} =~ /^(.+?)\d*$/)[0];
+		# warn 'RET OLD' if ($old_item->{alias} =~ /^(.+?)\d*$/)[0] eq ($self->{alias} =~ /^(.+?)\d*$/)[0];
 		return ($old_item->{alias} =~ /(\d*)$/)[0] if ($old_item->{alias} =~ /^(.+?)\d*$/)[0] eq ($self->{alias} =~ /^(.+?)\d*$/)[0];
 	}
 
 	return '' if ($self->{alias} =~ /(\d*)$/)[0] && ($self->{alias} =~ /(\d*)$/)[0] != ($check[0]->{alias} =~ /(\d*)$/)[0];
-	warn 'prev num:'.(0+int(($check[0]->{alias} =~ /(\d+)$/)[0])+1);
+	# warn 'prev num:'.(0+int(($check[0]->{alias} =~ /(\d+)$/)[0])+1);
 	return ($#check > -1 ? int(($check[0]->{alias} =~ /(\d+)$/)[0]) + 1 : '');
 }
 

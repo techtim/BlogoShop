@@ -21,7 +21,6 @@ sub show {
     if ($self->req->method eq 'POST') {
         my $vars = {title => $self->req->param('title.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
                     descr => $self->req->param('descr.'.$filter->{category}.'.'.$filter->{subcategory}) || ''};
-
         if ($filter->{subcategory} eq '') {
             $self->app->db->categories->update(
                     {_id => $filter->{category}}, 
@@ -45,7 +44,7 @@ sub show {
     return $self->render(
         %$filter,
         items => $item->list($filter, {}, 0, 1000),
-        cur_category => $self->stash('categories_info')->{$filter->{subcategory}||$filter->{category}} || {},
+        cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
         host => $self->req->url->base,
         template => 'admin/shop',
         format => 'html',

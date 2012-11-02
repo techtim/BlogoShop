@@ -79,18 +79,16 @@ sub list_categories {
 	        );
 		}
 		foreach (@{$cat->{subcats}}) {
-			$_->{pos} = 0+$self->req->param("pos.cat.$cat->{_id}.subcat.$_->{_id}");
+			$_->{pos} = 0+$self->req->param("pos.cat.$cat->{_id}.subcat.$_->{_id}")||@{$cat->{subcats}};
 		}
 		@{$cat->{subcats}} = sort {$a->{pos} <=> $b->{pos}} @{$cat->{subcats}}; 
 		$self->app->db->categories->update(
             {_id => $cat->{_id}}, 
             {'$set' => {subcats => $cat->{subcats}}}
         );
-		
-		$self->dumper( $self->app->db->categories->find()->fields({pos=>1, subcats=>1})->sort({pos=>1})->all);
+		# $self->dumper( $self->app->db->categories->find()->fields({pos=>1, subcats=>1})->sort({pos=>1})->all);
 	}
-
-#warn $self->dumper(\@cats);
+    $self->app->db->stuff->remove({_id => 'active_categories'}) if $self->req->method eq 'POST';
     $self->redirect_to('admin/categories');
 }
 

@@ -222,13 +222,13 @@ sub get_categories_alias {
 }
 
 sub get_categories_info {
-    my ($self, $categories) = @_; # categories from defaults->categories
-	my %cat_info;
-    foreach (@$categories) {
-        $cat_info{$_->{_id}} = $_;
-        $cat_info{$_->{_id}} = $_ foreach @{$_->{subcats}};
+    my ($self, @categories) = @_; # categories from defaults->categories
+	my $cat_info;
+    foreach my $cat (@categories) {
+        $cat_info->{$cat->{_id}} = $cat;
+        $cat_info->{$cat->{_id}.'.'.$_->{_id}} = {%$_} foreach @{$cat->{subcats}};
     }
-    return \%cat_info;
+    return $cat_info;
 }
 
 sub get_active_categories {
@@ -260,7 +260,8 @@ sub get_active_categories {
 	}
 
 	$hash->{time} = time();
-	# warn '!!!!!!!!!!save_active_categories=>'.$db->stuff->save($hash);
+	# warn '!!!!!!!!!!save_active_categories=>';
+	$db->stuff->save($hash);
 	return $hash;
 }
 

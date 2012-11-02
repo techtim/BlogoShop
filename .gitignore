@@ -1,0 +1,10 @@
+*.log
+/log/
+BlogoShop.yml
+/.settings/
+.project
+/public/files/i/item/
+/public/files/i/post/
+/public/files/i/special/
+/public/files/i/brands/
+/public/files/i/banners/
