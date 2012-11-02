@@ -40,7 +40,7 @@
         <div class="shop__information__section right">
         	<div class="helper">
 	        	<div class="description__section row">
-	        		<%== substr($item->{descr}, 0, 500).'...' %>
+	        		<%== length $item->{descr} > 500 ? substr($item->{descr}, 0, 500).'...' : $item->{descr} %>
 	        	</div>
 	        	
 	        	<dl class='clearfloat row'>
