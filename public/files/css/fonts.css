@@ -1,86 +1,24 @@
 @font-face {
-	font-family: 'PT Sans'; 
-	src: url('/fonts/PTS55F_W.eot#'); 
-	src: local('PT Sans'),
-		url('/fonts/PTS55F_W.woff') format('woff'),
-		url('/fonts/PTS55F_W.ttf') format('truetype'),
-		url('/fonts/PTS55F_W.svg#PTSans-Regular') format('svg');
-	}
-
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('PT Sans Italic'), local('PTSans-Italic'), url(http://themes.googleusercontent.com/static/fonts/ptsans/v4/7dSh6BcuqDLzS2qAASIeurO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
 @font-face {
-	font-family: 'PT Sans Italic'; 
-	font-style: italic;
-	src: url('/fonts/PTS56F_W.eot#'); 
-	src: local('PT Sans Italic'),
-		url('/fonts/PTS56F_W.woff') format('woff'),
-		url('/fonts/PTS56F_W.ttf') format('truetype'),
-		url('/fonts/PTS56F_W.svg#PTSans-Italic') format('svg');
-	}
-
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url(http://themes.googleusercontent.com/static/fonts/ptsans/v4/oOt0DNfso2UXZt7DYCiN2gLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
 @font-face {
-	font-family: 'PT Sans bold';
-	src: url('/fonts/PTS75F_W.eot#');
-	font-style: normal;
-	font-weight: bold; 
-	src: local('PT Sans Bold'),
-		url('/fonts/PTS75F_W.woff') format('woff'),
-		url('/fonts/PTS75F_W.ttf') format('truetype'),
-		url('/fonts/PTS75F_W.svg#PTSans-Bold') format('svg');
-	}
-
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/ptsans/v4/g46X4VH_KHOWAAa-HpnGPr3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
+}
 @font-face {
-	font-family: 'PT Sans';
-	font-style: italic;
-	font-weight: bold; 
-	src: url('/fonts/PTS76F_W.eot#'); 
-	src: local('PT Sans Bold Italic'),
-		url('/fonts/PTS76F_W.woff') format('woff'),
-		url('/fonts/PTS76F_W.ttf') format('truetype'),
-		url('/fonts/PTS76F_W.svg#PTSans-BoldItalic') format('svg');
-	}
-
-@font-face {
-	font-family: 'PT Sans Caption'; 
-	src: url('/fonts/PTS55F_W.eot#');
-	src: local('PT Sans Caption'),
-		url('/fonts/PTC55F_W.woff') format('woff'),
-		url('/fonts/PTC55F_W.ttf') format('truetype'),
-		url('/fonts/PTC55F_W.svg#PTSans-Caption') format('svg');
-	}
-
-@font-face {
-	font-family: 'PT Sans Caption';
-	font-weight: bold; 
-	src: url('/fonts/PTS75F_W.eot#');
-	src: local('PT Sans Caption Bold'),
-		url('/fonts/PTC75F_W.woff') format('woff'),
-		url('/fonts/PTC75F_W.ttf') format('truetype'),
-		url('/fonts/PTC75F_W.svg#PTSans-CaptionBold') format('svg');
-	}
-
-@font-face {
-	font-family: 'PT Sans Narrow';
-	src: url('/fonts/PTN57F_W.eot#');
-	src: local('PT Sans Narrow'),
-		url('/fonts/PTN57F_W.woff') format('woff'),
-		url('/fonts/PTN57F_W.ttf') format('truetype'),
-		url('/fonts/PTN57F_W.svg#PTSans-Narrow') format('svg');
-	}
-
-@font-face {
-	font-family: 'PT Sans Narrow';
-	font-weight: bold; 
-	src: url('/fonts/PTN77F_W.eot#');
-	src: local('PT Sans Narrow Bold'),
-		url('/fonts/PTN77F_W.woff') format('woff'),
-		url('/fonts/PTN77F_W.ttf') format('truetype'),
-		url('/fonts/PTN77F_W.svg#PTSans-NarrowBold') format('svg');
-	}
-	
-
-
-
-
-
-
-
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: local('PT Sans Bold Italic'), local('PTSans-BoldItalic'), url(http://themes.googleusercontent.com/static/fonts/ptsans/v4/lILlYDvubYemzYzN7GbLkAcuEIXEaFWBWXA4NoGd_Oo.woff) format('woff');
+}
