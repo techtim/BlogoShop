@@ -133,7 +133,7 @@ sub brand {
 
 	# $item->list()
 	# warn $self->dumper([$self->app->db->items->find({brand => $brand->{_id}})->all]);
-	my $items = $item->list($filter, $sort, ($self->req->param('next')=~/(\d+)/)[0]||0);
+	my $items = $item->list($filter, $sort, $self->req->param('next')?($self->req->param('next')=~/(\d+)/)[0]:0);
 
 	if ($self->req->headers->header('X-Requested-With')) {
 		foreach (@$items) {
