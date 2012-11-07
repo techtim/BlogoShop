@@ -38,7 +38,7 @@
 	</div>
 	
 	<div class='menu__section 
-	% if (stash('brand') && stash('brand') eq '') {
+	% if (stash('brand_id') && stash('brand_id') eq '') {
 		hidden
 	% }
 	'>

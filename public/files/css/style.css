@@ -117,6 +117,9 @@ body {
     font-size: 13px;
     text-decoration: none;
     text-transform: uppercase; }
+    .top__gray__strip .address:hover {
+      border-bottom: 1px dashed;
+      color: #fff; }
   .top__gray__strip .phone {
     margin-left: 18px;
     margin-top: 10px;
