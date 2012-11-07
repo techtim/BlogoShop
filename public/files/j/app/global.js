@@ -2,32 +2,39 @@
 define(['jquery'], function($){
 
 	$(function(){
-		$(window).scroll(function(){
-			var _scrolled = $(window).scrollTop(),
-				$section = $('.fixed__navigation__helper'),
-				_section_height = $('.navigation__section', $section).outerHeight(true);
-			
-			if(_scrolled > 81 ){
-				$('.header__section').css({
-					marginBottom: _section_height
-				});
-				$section.addClass('active');	
-			}else{
-				$('.header__section').css({
-					marginBottom: 0
-				});
-				$section.removeClass('active');
-			}
-		});
+
+		(function stiky_strip(){
+			var $gray_strip = $('.top__gray__strip');
+			var _header_height = $('.header__section').height();
+			var _nav__height = $('.navigation__section').height();
+			var _total = _header_height + _nav__height;
+
+			$(window).on('scroll', function(){
+				var _scrolled = $(window).scrollTop();
+
+				if(_scrolled >= _total){
+					$gray_strip.addClass('active');
+				}else{
+					$gray_strip.removeClass('active');
+				}
+			});	
+		})();
 
 		(function bind_sidebar_menu(){
 			var $section = $('.sidebar__section .menu__section');
 
-			$section.on('click.expand_items', '.expand__items', function(e){
+			$section.on('click.expand__items', '.expand__items', function(e){
 				e.preventDefault();
 				var $this = $(this);
+				var _type = $this.data('role');
+
 				$this.toggleClass('opened');
-				$('.item', $section).toggleClass('toggled');
+				if( _type === 'brands'){
+					var $parent = $this.closest('.menu__section');
+					$parent.toggleClass('hidden');
+				}else{
+					$('.item', $section).toggleClass('toggled');
+				}
 			});
 
 		})();

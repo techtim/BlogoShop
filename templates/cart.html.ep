@@ -24,10 +24,10 @@
 				<h3><a href=''><%= $item->{brand} %></a></h3>
 				<h4><%= $item->{name} %></h4>
 				% if ($item->{size}) {
-				<p class='size'>РАЗМЕР: <strong><%= $item->{size} %></strong> 
+					<p class='size'>РАЗМЕР: <strong><%= $item->{size} %></strong></p>
 				% }
 				% foreach (@{$item->{color}}) { 
-					<span class='color' style='background-color: #<%= $_ %>;'></span></p>
+					<span class='color' style='background-color: #<%= $_ %>;'></span>
 				% }
 				% if ($item->{not_enought}) {
 					<p class='error'>осталось только <%= $item->{qty} %> шт.</p>

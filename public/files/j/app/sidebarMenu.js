@@ -9,8 +9,14 @@ define(['jquery'], function($){
 		$section.on('click', '.expand__items', function(e){
 			e.preventDefault();
 			var $this = $(this);
-			$this.toggleClass('opened');
-			$('.item', $section).toggleClass('toggled');
+			var _type = $this.data('role');
+			console.log(_type)
+			if( _type === 'brands'){
+
+			}else{
+				$this.toggleClass('opened');
+				$('.item', $section).toggleClass('toggled');
+			}
 		});
 	});
 	

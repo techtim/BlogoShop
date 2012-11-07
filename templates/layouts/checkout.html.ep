@@ -2,13 +2,14 @@
 <html xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
 		<meta charset='utf-8' />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
-		<link rel='stylesheet' type='text/css' href='/css/reset.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/fonts.css' media='all' />
-		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
-        
+		 % if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {      
+        <link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
+        % } else {
+        <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
+        % }
         <script data-main='/j/config' src='/j/require.js'></script>
         <script>requirejs(['app/global'])</script>
     </head>

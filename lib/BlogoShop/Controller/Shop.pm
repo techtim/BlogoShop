@@ -152,6 +152,7 @@ sub brand {
 	        items 	=> $items,
 	        %{$self->check_cart},
 	        sex		=> '',
+		brand_id => $brand->{_id},
 	        page_name => 'shop',
 	        template=> 'brand', # return only
 			format 	=> 'html', 
