@@ -109,6 +109,26 @@ body {
     width: 174px;
     background: url("../i/small-logo.png") no-repeat;
     text-indent: -9999px; }
+  .top__gray__strip .time {
+    margin-top: 3px;
+    margin-left: 24px;
+    margin-right: 12px;
+    padding-top: 2px;
+    float: left;
+    height: 26px;
+    width: 80px;
+    background: url("../i/time-bg.png") no-repeat;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase; }
+    .top__gray__strip .time span {
+      display: block;
+      color: #b9b8b8;
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: lowercase; }
   .top__gray__strip .address {
     margin-left: 10px;
     margin-top: 10px;
@@ -1522,8 +1542,12 @@ body {
     font-weight: bold; }
     .footer__section .contacts span {
       color: #adec3f; }
+  .footer__section p {
+    padding-bottom: 14px; }
+    .footer__section p a {
+      color: #fff;
+      text-decoration: none; }
   .footer__section li {
-    margin-top: 14px;
     margin-right: 14px;
     padding-top: 3px;
     padding-bottom: 1px;

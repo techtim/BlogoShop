@@ -37,6 +37,12 @@
 <div class="top__gray__strip">
 	<div class="wrap">
 		<a href="/" class="logo" title='магазин Хохловка'></a>
+		
+		<p class="time">
+			<span>ежедневно</span>
+			с 12 до 22
+		</p>
+		
 		<a href="/map" class="address">МОСКВА, ХОХЛОВСКИЙ ПЕРЕУЛОК, 7</a>
 		<p class="phone">+7 (926) 930 90-05</p>
 		
