@@ -111,7 +111,7 @@ sub copy {
 sub get {
     my ($self, $id, $sub_id) = @_;
     my $it = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $id)});
-    return merge( $it, $it->{subitems}->[$sub_id] );
+    return $it ? merge( $it, $it->{subitems}->[$sub_id] ) : {};
 }
 
 sub list {
@@ -187,7 +187,7 @@ sub _parse_data {
 	push @$error_message, 'no_name' if !$self->{name};
 
 	$self->{images} = $self->_get_images($ctrl, 'image') if @$error_message==0;
-
+	$self->{preview_image} = $self->{images}->[0]->{tag} if !$self->{preview_image} && @{$self->{images}} > 0;
 	push @$error_message, 'no_price' if !$self->{price};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
 

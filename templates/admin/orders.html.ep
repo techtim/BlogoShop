@@ -9,7 +9,7 @@
 
 	<ul class='statistic__strip__section clearfloat'>
 		<li class='total'>
-			<a href='/admin/orders'>48</a>
+			<a href='/admin/orders'><%= <%= $counter->{new}+$counter->{proceed}+$counter->{finished}+$counter->{canceled} %></a>
 		</li>
 		<li>
 			новые: <a href='/admin/orders/new'><%= $counter->{new}||0 %></a>
@@ -23,6 +23,9 @@
 		<li>
 			отменен: <a href='/admin/orders/canceled' class='canceled'><%= $counter->{canceled}||0 %></a>
 		</li>
+		<li>
+			cумма заказов: <strong><%= $orders_sum %></strong> P
+		</li>
 	</ul>
 
 	<ul class='list'>
@@ -35,7 +38,7 @@
 
 	       		%= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
 		        	<div class='cut'>
-		        		<div class='order__num'>Заказ № <span><%= $order->{order_id} %></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> </div>
+		        		<div class='order__num'>Заказ № <span><%= $order->{order_id} %></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong></div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
 
 						<button type='submit' class='submit__button'>Сохранить</button>
@@ -45,6 +48,9 @@
 							<option value="proceed"  <%= 'selected' if $order->{status} eq 'proceed' %>>в обработке</option>
 							<option value="finished" <%= 'selected' if $order->{status} eq 'finished'%>>выполнен</option>
 							<option value="canceled" <%= 'selected' if $order->{status} eq 'canceled'%>>отменен</option>
+							% if ($admin->{login} eq $config->{order_delete_power}) { 
+							<option value="delete">удалить</option>
+							%}
 						<select>
 		        	</div>
 
@@ -54,6 +60,7 @@
 			        	<ul class='items__list__section clearfloat'>
 						% foreach (@{$order->{items}}) {
 							<li>
+								% if ($_->{info}->{alias}) {
 								<a href="http://shop.<%= config->{domain_name} %>/<%= join '/', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias} %>" target="_blank">
 									<img src="<%== config->{image_url}.join '/', 'item', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias}, $_->{info}->{preview_image} %>">
 								</a>
@@ -67,6 +74,11 @@
 									<span class='count'><%= $_->{count} %></span>
 									<span class='price'><%= $_->{price}*$_->{count} %></span>
 								</div>
+								% } else {
+									<div class='description__section'>
+										<h3>Товара удалён из магазина</h3>
+									</div>
+								% }
 							</li>
 						
 							% $sum += $_->{price}*$_->{count};

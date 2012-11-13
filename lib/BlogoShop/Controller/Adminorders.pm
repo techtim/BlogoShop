@@ -13,18 +13,29 @@ sub list {
 	my $self = shift;
 	
 	my $filter = {};
-	my $counter = {};
+	my $counter = 
+		$self->app->db->run_command({
+		group => {
+			ns 		=> 'orders',
+			key 	=> {status => 1}, 
+			cond	=> {},
+			'$reduce'	=> 'function(obj,prev) { prev.count++ }',
+			initial	=> {count => 0},
+		}}
+	);
+	$counter = {map {$_->{status} => $_->{count} } @{$counter->{retval}}};
+
 	$self->stash($_) ? $filter->{$_} = $self->stash($_) : () foreach ORDER_FILTERS;
 	my $orders = [$self->app->db->orders->find($filter)->sort({_id => -1})->all];
-	my $item 	  = BlogoShop::Item->new($self);
+	my $item   = BlogoShop::Item->new($self);
 
-	foreach (@$orders) {
-		foreach (@{$_->{items}}) {
+	foreach my $order (@$orders) {
+		foreach (@{$order->{items}}) {
 			$_->{info} = $item->get($_->{_id}, $_->{sub_id});
+			$order->{sum} += $_->{price}*$_->{count};
 		}
-		$_->{order_id} 	= ($_->{_id}->{value}=~/^(.{8})/)[0];
-		$counter->{$_->{status}}++ if $_->{status};
-		# $item->get();
+		$order->{order_id} 	= ($order->{_id}->{value}=~/^(.{8})/)[0];
+		$filter->{orders_sum} += $order->{sum};
 	}
 
 	return $self->render( 
@@ -42,7 +53,9 @@ sub update {
 
 	for ($self->req->param('status')) { 
 		$self->app->db->orders->update({_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {status => $_}})
-			if $_ && $_ =~ /($status_regex)/;
+			if $_ && $_ =~ /($status_regex)/ && $self->stash('admin')->{type} eq 'super';
+		$self->app->db->orders->remove({_id => MongoDB::OID->new(value => $self->stash('id'))}) 
+			if $_ && $_ eq 'delete' && $self->stash('admin')->{login} eq $self->config('order_delete_power');
 	}
 	return $self->redirect_to('/admin/orders');
 }
