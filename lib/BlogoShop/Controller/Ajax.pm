@@ -52,7 +52,9 @@ sub get_banner_xml {
 	my $self = shift;
 
 	my $filter = {};
-	my $items = [$self->app->db->items->find({tags=>"fall_winter12-13"})->limit(5)->sort({price=>-1})->all];
+	my $items = [];
+	my @arr = $self->app->db->items->find({tags=>"fall_winter12-13"})->all;
+	push @$items, splice(@arr, int(rand($#arr)),1) for (0..4);
 	return $self->render(
 		items => $items,
 		template => 'banner', 
