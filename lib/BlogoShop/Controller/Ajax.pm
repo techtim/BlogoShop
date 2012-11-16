@@ -48,6 +48,17 @@ sub subscribe {
     return $self->redirect_to($self->req->url);
 }
 
+sub get_banner_xml {
+	my $self = shift;
+
+	my $filter = {};
+	my $items = [$self->app->db->items->find({tags=>"fall_winter12-13"})->limit(5)->sort({price=>-1})->all];
+	return $self->render(
+		items => $items,
+		template => 'banner', 
+		format => 'xml',
+	);
+}
 # SERVICE STUFF
 sub import_sources {
 	my $self = shift;
