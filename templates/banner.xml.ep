@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>   
+
+<events>
+	% foreach my $item (@$items) {
+		<event>
+			<name><%= $item->{name} %></name>
+			<price><%= $item->{price} %></price>
+			<picts>http://<%= config->{domain_name} %><%== config->{nginx_res_banner}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %></picts>
+		</event>
+	% }
+</events>
