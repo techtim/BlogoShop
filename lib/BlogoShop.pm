@@ -132,7 +132,7 @@ sub startup {
 
 	# Routes
 	my $r = $self->routes;
-	
+
 	# --AJAX--
 	$r->route('/admin/article/:id/active/:bool', id => qr/[\d\w]+/, bool => qr/1|0/)->via('post')->to('controller-Ajax#activate_post', id => 'add');
 	$r->route('/import_cities')->to('controller-Ajax#import_cities');
@@ -144,6 +144,7 @@ sub startup {
 	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show');
 
 	$r->route('/rss')->to('controller-article#rss');
+	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
 	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 
 #    $self->routes->get('controller-shop#list')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );

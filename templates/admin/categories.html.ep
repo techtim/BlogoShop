@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="section new-user-form-container">
-asd
+
 		%= form_for '/admin/categories/save' => (method => 'post') => begin
         % my $cntr=0;
         % foreach my $cat (@$categories) {

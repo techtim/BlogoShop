@@ -97,53 +97,39 @@ body {
 
 .sidebar__section.categories {
   width: 262px; }
-  .sidebar__section.categories ul {
-    display: block;
-    clear: both;
-    border-top: 1px solid #d3d3d3;
-    border-bottom: 1px solid #d3d3d3; }
+  .sidebar__section.categories .categories__list__section {
+    border: 1px solid #d6d6d6; }
   .sidebar__section.categories li {
-    height: 32px;
+    padding: 11px 0 10px 36px;
     display: block;
-    border-bottom: 1px solid #d3d3d3;
-    border-left: 1px solid #d3d3d3;
-    border-right: 1px solid #d3d3d3;
-    background: #505050;
-    line-height: 32px; }
+    border-bottom: 1px solid #ced4c7; }
     .sidebar__section.categories li:last-child {
       border-bottom: 0; }
-    .sidebar__section.categories li.title {
-      background: #fff;
-      border-bottom: 1px solid #d3d3d3; }
-      .sidebar__section.categories li.title a {
-        color: #505050;
-        font-weight: bold; }
-        .sidebar__section.categories li.title a.active {
-          background: url("/i/admin/ico-visible.png") no-repeat; }
-    .sidebar__section.categories li.current {
-      background: url("/i/admin/category-current-bg.png") repeat-x; }
   .sidebar__section.categories a {
-    color: #fff;
+    color: #505050;
     font-size: 12px;
     text-decoration: none;
     text-transform: uppercase; }
-    .sidebar__section.categories a.active {
-      position: relative;
-      top: 3px;
-      display: inline-block;
-      height: 16px;
-      width: 24px;
-      margin-left: 6px;
-      margin-right: 12px;
-      background: url("/i/admin/ico-visible-white.png") no-repeat;
-      opacity: 1;
-      -webkit-transition: opacity 0.2s linear;
-      -moz-transition: opacity 0.2s linear;
-      -o-transition: opacity 0.2s linear;
-      -ms-transition: opacity 0.2s linear;
-      transition: opacity 0.2s linear; }
-      .sidebar__section.categories a.active.inactive {
-        opacity: .45; }
+    .sidebar__section.categories a:hover {
+      text-decoration: underline; }
+    .sidebar__section.categories a.plus {
+      margin-right: 10px;
+      height: 14px;
+      width: 14px;
+      float: right;
+      background: url(../i/ico-plus.png) no-repeat; }
+  .sidebar__section.categories .second__lvl {
+    margin-top: 10px;
+    margin-bottom: -10px;
+    margin-left: -36px;
+    display: none; }
+    .sidebar__section.categories .second__lvl.active {
+      display: block; }
+    .sidebar__section.categories .second__lvl li {
+      padding-bottom: 10px;
+      background: #505050; }
+    .sidebar__section.categories .second__lvl a {
+      color: #fff; }
 
 .list__section {
   margin-top: 8px; }
