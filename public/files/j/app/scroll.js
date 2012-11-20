@@ -29,7 +29,7 @@ define(['jquery', 'app/shopFilters'], function($, draw_list){
 				CONFIG.timeout = null;
 			}
 
-			timeout = setTimeout(scrollHandler, 100);
+			timeout = setTimeout(scrollHandler, 1);
 		});
 
 		var scrollHandler = function(){
