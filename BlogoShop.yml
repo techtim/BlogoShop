@@ -25,6 +25,7 @@ nginx_img_resize: '/res/64'
 nginx_res_post_prev: '/res/212'
 nginx_res_item_prev: '/res/152'
 nginx_res_item_main: '/res/338'
+nginx_res_banner: '/res/400'
 
 cookie_name: 'BlogoShop'
 cookie_expiration: 604800 # week
@@ -42,6 +43,7 @@ items_on_startpage: 8
 articles_on_admin_page: 30
 
 superadmin_mail: 'timmy88@gmail.com'
+order_delete_power: 'techtim' #'vladimir'
 
 recaptcha_public_key: '6Lc9jtISAAAAABMneliM7sxkpvWGa6yT7iuk_Nd6'
 recaptcha_private_key: '6Lc9jtISAAAAAM6wAcAjkq5D3v4E2-sJoOnRsMjk'

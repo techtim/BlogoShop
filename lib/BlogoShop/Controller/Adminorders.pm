@@ -57,6 +57,13 @@ sub update {
 		$self->app->db->orders->remove({_id => MongoDB::OID->new(value => $self->stash('id'))}) 
 			if $_ && $_ eq 'delete' && $self->stash('admin')->{login} eq $self->config('order_delete_power');
 	}
+	$self->app->db->orders->update(
+		{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
+			{ '$push' => { comments => 
+				{ login => $self->stash('admin')->{login}, title => $self->req->param('comment.title'), text => $self->req->param('comment.text')} 
+			} }
+	) if $self->req->param('comment.title') || $self->req->param('comment.text');
+
 	return $self->redirect_to('/admin/orders');
 }
 1;

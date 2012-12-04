@@ -19,7 +19,7 @@
             	<span class='ico__sale'></span>
             	% }
             </span>
-            <span class='brand'><%= $item->{brand_name} %></span>
+            <span class='brand'><%= $name_brands->{$item->{brand}} %></span>
             <span class='item__caption'><%= $item->{name} %></span>
             <!--<span class='subcategory'><%= $item->{subcategory} %></span>-->
         	<span class='price'>

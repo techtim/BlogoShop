@@ -127,6 +127,7 @@ sub startup {
 		$c->stash->{categories_info} 	= $c->app->utils->get_categories_info(@cats);
 		$c->stash->{active_categories} = $c->app->utils->get_active_categories($c->app->db);
 		$c->stash->{list_brands} 	  	= $c->app->utils->get_list_brands($c->app->db);
+		$c->stash->{name_brands} 	  	= {map {$_->{_id} => $_->{name}} @{$c->stash->{list_brands}}};
 		$next->();
 	});
 

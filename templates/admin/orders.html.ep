@@ -154,6 +154,20 @@
 								<%= $sum %>
 							</dd>
 						</dl>
+
+						<dl class='adress__section row'>
+							% foreach (@{$order->{comments}||[]}) {
+							<dd>
+								<%= $_->{login} %>:<b><%= $_->{title} %></b><br/>
+								<%= $_->{text} %>
+							</dd>
+							% }
+							<dd>
+								<input type="text" name="comment.title" value="" placeholder="Заголовок"><br/>
+								<textarea type="text" name="comment.text" placeholder="Описание"></textarea>
+								<button type='submit' class='submit__button'>Сохранить</button>
+							</dd>
+						</dl>
 					</div>
 	        	% end
 	        </li>
