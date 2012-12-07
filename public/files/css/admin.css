@@ -1342,3 +1342,57 @@ body {
       background: url(../i/ico-rub.png) no-repeat right 8px;
       color: #6e6e6e;
       font-size: 20px; }
+  .orders__list__section .list li .comments__section li {
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    background: #fff9d5;
+    border-top: 1px solid #c1c1c1; }
+    .orders__list__section .list li .comments__section li:first-child {
+      border-top: 0; }
+    .orders__list__section .list li .comments__section li:nth-child(2n+2) {
+      background: #fef1bc; }
+  .orders__list__section .list li .comments__section h3 {
+    float: left;
+    color: #595959;
+    font-size: 13px;
+    font-weight: bold; }
+  .orders__list__section .list li .comments__section .login {
+    float: right;
+    color: #1975b6;
+    font-size: 12px;
+    font-weight: bold; }
+  .orders__list__section .list li .comments__section p {
+    padding-top: 8px;
+    color: #87847d;
+    clear: both; }
+  .orders__list__section .list li .comments__section .add__comment {
+    padding-top: 6px;
+    background: #e4e4e4;
+    border-top: 1px dashed #bdbdbd;
+    border-bottom: 1px dashed #bdbdbd; }
+    .orders__list__section .list li .comments__section .add__comment button {
+      margin-right: 14px;
+      margin-bottom: 10px; }
+  .orders__list__section .list li .comments__section label {
+    margin-top: 8px;
+    margin-right: 6px;
+    float: left;
+    width: 82px;
+    color: #98989a;
+    font-size: 11px;
+    text-align: right;
+    text-transform: uppercase; }
+  .orders__list__section .list li .comments__section textarea {
+    float: left;
+    width: 520px;
+    border: 1px solid #c9c9c9;
+    box-sizing: border-box; }
+  .orders__list__section .list li .comments__section input[type='text'] {
+    margin-bottom: 4px;
+    float: left;
+    width: 520px;
+    border: 1px solid #c9c9c9;
+    box-sizing: border-box;
+    line-height: 24px; }
