@@ -8,7 +8,7 @@
 	    	
 		    <a class='expand__items' href='#' data-role='categories'></a>
 
-	    	% my $sex = stash 'sex';
+	    	% my $sex = stash('sex')||'';
 		    <ul class='filters__section'>
 		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='all' <%== "class='current'" if !$sex %>>все</a></li>
 		    	<li><a href='http://<%= config->{domain_name} .'/w' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='female' <%== "class='current'" if $sex eq 'w' %>>женское</a></li>
