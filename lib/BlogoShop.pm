@@ -223,7 +223,9 @@ sub startup {
 		$admin_bridge->route('/update_articles')->to('controller-Ajax#articles_update');
 		$admin_bridge->route('/update_items')->to('controller-Ajax#items_update');
 		$admin_bridge->route('/update_orders')->to('controller-Ajax#orders_update');
-	
+		$admin_bridge->route('/logout')->to('controller-login#logout');
+		$admin_bridge->route('/*' => sub {shift->redirect_to('/')});
+
 	# --SHOP--
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
