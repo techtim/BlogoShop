@@ -16,5 +16,11 @@ define(['jquery'], function($){
 
 	});
 
+	$('.statistic__strip__section').on('click', '.filter__toggle', function(e){
+		e.preventDefault();
+
+		$(this).toggleClass('active');
+		$('.filters__section').toggleClass('hidden');
+	})
 
 });

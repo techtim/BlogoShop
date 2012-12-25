@@ -9,7 +9,7 @@ use constant ITEM_FIELDS => qw( brand discount category subcategory tag sex );
 
 sub show {
     my $self = shift;
-	$self->add_vars;
+
     my $filter = {};
     $filter->{$_} = $self->stash($_)||'' foreach ITEM_FIELDS;
     $filter->{active} = 0+$self->req->param('active') if $self->req->param('active'); 
@@ -40,6 +40,14 @@ sub show {
         return $self->redirect_to("/admin/shop/$filter->{category}/$filter->{subcategory}");
     }
 
+    # Search Part  
+    if ($self->stash('search')) {
+        my ($value, $type) = ($self->req->param('search'),$self->req->param('type'));
+        $filter->{name} = qr!$value! if $type eq 'name';
+        $filter->{"subitems.articol"} = $value if $type eq 'articol';
+        $filter->{brand} = qr!$value! if $type eq 'brand';
+    }
+
     # warn $self->dumper($filter);
     return $self->render(
         %$filter,
@@ -54,8 +62,6 @@ sub show {
 
 sub item {
     my $self = shift;
-	
-	$self->add_vars;
 
     my $item = BlogoShop::Item->new($self);
 
@@ -95,11 +101,4 @@ sub item {
 	);
 }
 
-sub add_vars {
-	my $self = shift;
-
-#	$self->stash( categories_alias => $self->utils->get_categories_alias($self->app->defaults->{categories}));
-	return 0;
-}
-	
 1;

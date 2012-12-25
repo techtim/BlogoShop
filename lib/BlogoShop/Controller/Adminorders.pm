@@ -6,7 +6,7 @@ use BlogoShop::Item;
 use utf8;
 
 use constant ORDER_FILTERS => qw (status);
-use constant ORDER_STATUS => qw (new proceed finished canceled);
+use constant ORDER_STATUS => qw (new proceed assembled finished canceled changed wait_delivery wait_courier self_delivery sent_courier sent_post sent_ems);
 my $status_regex = join '|', ORDER_STATUS;
 
 sub list {
@@ -16,10 +16,10 @@ sub list {
 	my $counter = 
 		$self->app->db->run_command({
 		group => {
-			ns 		=> 'orders',
-			key 	=> {status => 1}, 
+			ns		=> 'orders',
+			key		=> {status => 1}, 
 			cond	=> {},
-			'$reduce'	=> 'function(obj,prev) { prev.count++ }',
+			'$reduce' => 'function(obj,prev) { prev.count++ }',
 			initial	=> {count => 0},
 		}}
 	);
@@ -53,7 +53,7 @@ sub update {
 
 	for ($self->req->param('status')) { 
 		$self->app->db->orders->update({_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {status => $_}})
-			if $_ && $_ =~ /($status_regex)/ && $self->stash('admin')->{type} eq 'super';
+			if $_ && $_ =~ /($status_regex)/;
 		$self->app->db->orders->remove({_id => MongoDB::OID->new(value => $self->stash('id'))}) 
 			if $_ && $_ eq 'delete' && $self->stash('admin')->{login} eq $self->config('order_delete_power');
 	}

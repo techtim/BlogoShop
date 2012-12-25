@@ -12,22 +12,34 @@
 			<a href='/admin/orders'><%= <%= $counter->{new}+$counter->{proceed}+$counter->{finished}+$counter->{canceled} %></a>
 		</li>
 		<li>
-			новые: <a href='/admin/orders/new'><%= $counter->{new}||0 %></a>
-		</li>
-		<li>
-			в обработке: <a href='/admin/orders/proceed'><%= $counter->{proceed}||0 %></a>
-		</li>
-		<li>
-			выполнен: <a href='/admin/orders/finished'><%= $counter->{finished}||0 %></a>
-		</li>
-		<li>
-			отменен: <a href='/admin/orders/canceled' class='canceled'><%= $counter->{canceled}||0 %></a>
-		</li>
-		<li>
 			cумма заказов: <strong><%= $orders_sum %></strong> P
 		</li>
+		<li class="fr"><a href="#" class="filter__toggle">фильтры</a></li>
 	</ul>
 
+	<div class="filters__section clearfloat <%= 'hidden' if stash('status') eq '' %>">
+		<ul class='clearfloat'>
+			<li<%== " class='current'" if stash('status') eq 'new' %>>Новые:<a href="/admin/orders/new"><%= $counter->{new}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'proceed' %>>В ОБРАБОТКЕ:<a href="/admin/orders/proceed"><%= $counter->{proceed}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'assembled' %>>собрано:<a href="/admin/orders/assembled"><%= $counter->{assembled}||0 %></a></li>
+		</ul>
+		<ul class='clearfloat'>
+			<li<%== " class='current'" if stash('status') eq 'wait_delivery' %>>ожидает отправки:<a href="/admin/orders/wait_delivery"><%= $counter->{wait_delivery}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'wait_courier' %>>ожидает курьера:<a href="/admin/orders/wait_courier"><%= $counter->{wait_courier}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'self_delivery' %>>отложен/самовывоз:<a href="/admin/orders/self_delivery"><%= $counter->{self_delivery}||0 %></a></li>
+		</ul>
+		<ul class='clearfloat'>
+			<li<%== " class='current'" if stash('status') eq 'sent_courier' %>>отправлен/курьером:<a href="/admin/orders/sent_courier"><%= $counter->{sent_courier}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'sent_post' %>>отправлен/почта:<a href="/admin/orders/sent_post"><%= $counter->{sent_post}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'sent_ems' %>>отправлен/EMS:<a href="/admin/orders/sent_ems"><%= $counter->{sent_ems}||0 %></a></li>
+		</ul>
+		<ul class='clearfloat'>
+			<li<%== " class='current'" if stash('status') eq 'finished' %>>завершен:<a href="/admin/orders/finished" class='finished'><%= $counter->{finished}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'changed' %>>изменен:<a href="/admin/orders/changed"><%= $counter->{changed}||0 %></a></li>
+			<li<%== " class='current'" if stash('status') eq 'canceled' %>>отменен:<a href="/admin/orders/canceled" class='canceled'><%= $counter->{canceled}||0 %></a></li>
+		</ul>
+	</div>
+	
 	<ul class='list'>
 	    % foreach my $order (@$orders) {
 	        <li class="
@@ -41,13 +53,22 @@
 		        		<div class='order__num'>Заказ № <span><%= $order->{order_id} %></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong></div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
 
-						<button type='submit' class='submit__button'>Сохранить</button>
+						<button type='submit' class='submit__button active'>Сохранить</button>
 						
 						<select name="status" >
 							<option value="new" 	 <%= 'selected' if $order->{status} eq 'new' 	 %>>новый</option>
 							<option value="proceed"  <%= 'selected' if $order->{status} eq 'proceed' %>>в обработке</option>
+							<option value="assembled" <%= 'selected' if $order->{status} eq 'assembled' %>>собран</option>
+							<option value="wait_delivery" <%= 'selected' if $order->{status} eq 'wait_delivery' %>>ожидает отправки</option>
+							<option value="wait_courier" <%= 'selected' if $order->{status} eq 'wait_courier' %>>ожидает курьера</option>
+							<option value="self_delivery" <%= 'selected' if $order->{status} eq 'self_delivery' %>>отложен/самовывоз</option>
+							<option value="sent_courier" <%= 'selected' if $order->{status} eq 'sent_courier' %>>отправлен/курьером </option>
+							<option value="sent_post" <%= 'selected' if $order->{status} eq 'sent_post' %>>отправлен/почта</option>
+							<option value="sent_ems" <%= 'selected' if $order->{status} eq 'sent_ems' %>>отправлен/EMS</option>
 							<option value="finished" <%= 'selected' if $order->{status} eq 'finished'%>>выполнен</option>
 							<option value="canceled" <%= 'selected' if $order->{status} eq 'canceled'%>>отменен</option>
+							<option value="changed" <%= 'selected' if $order->{status} eq 'changed' %>>изменен</option>
+
 							% if ($admin->{login} eq $config->{order_delete_power}) { 
 							<option value="delete">удалить</option>
 							%}

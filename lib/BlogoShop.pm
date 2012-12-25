@@ -190,6 +190,7 @@ sub startup {
 		
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
+		$admin_bridge->route('/shop/search')->to('controller-Adminshop#show', search => 1);
 		$admin_bridge->route('/shop/:category', category => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route(
 			'/shop/:category/:subcategory',	category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!

@@ -11,7 +11,25 @@
     %= include 'includes/shop_admin_categories', categories => stash 'categories'
 
 <div class="shop__items__list">
-	
+
+	<ul class='breadcrumps__section clearfloat'>
+		%= form_for '/admin/shop/search' => (method => 'get') => begin
+			<li>
+				<input type='text' name='search' size=30>
+			</li>
+			<li>
+				<select name="type" >
+					<option value="name">название</option>
+					<option value="articol">артикул</option>
+					<option value="brand">бренд</option>
+				</select>
+			</li>
+			<li>
+				<input type='submit' value='go' name='go'>
+			</li>
+		%= end
+	</ul>
+
 	<ul class='breadcrumps__section clearfloat'>
 		<li><a href="/admin/shop">Шоп</a></li>
 		% if ($category) {
@@ -65,8 +83,8 @@
             		<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>">
             	</span>
             </a>            
-        	<a class='active controls' href=''></a>
-        	<a class='delete controls' href=''></a>
+        	<!--- <a class='active controls' href=''></a>
+        	<a class='delete controls' href=''></a> --->
         	
         	<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
         		<span class='articol'><%= $item->{articol} %></span>
