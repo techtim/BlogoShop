@@ -1,43 +1,60 @@
+/* line 45, admin.scss */
 body {
   background: #fff;
   font-family: Arial, sans-serif;
-  font-size: 12px; }
+  font-size: 12px;
+}
 
+/* line 53, admin.scss */
 .fl {
-  float: left; }
+  float: left;
+}
 
+/* line 57, admin.scss */
 .fr {
-  float: right; }
+  float: right;
+}
 
+/* line 61, admin.scss */
 .header__section {
   margin-bottom: 10px!important;
-  background: #505050; }
+  background: #505050;
+}
 
+/* line 66, admin.scss */
 .header__section h2 {
   margin-top: 18px;
   margin-left: 16px;
   float: left;
   color: #fff;
   font: 26px "PT Sans";
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
+/* line 75, admin.scss */
 .user__section {
   float: right;
   margin-top: 18px;
   padding-right: 20px;
   color: #fff;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
+/* line 83, admin.scss */
 .user__section li {
-  margin-bottom: 6px; }
+  margin-bottom: 6px;
+}
 
+/* line 87, admin.scss */
 .user__section a {
   display: inline;
   background: none;
   color: #afafaf;
   font-size: 11px;
-  text-transform: none; }
+  text-transform: none;
+}
 
+/* line 95, admin.scss */
 .user__section a.logout {
   padding: 3px 6px;
   height: auto;
@@ -48,102 +65,154 @@ body {
   font-size: 10px;
   text-decoration: none;
   text-indent: 0px;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
+/* line 109, admin.scss */
 .parts__section {
   margin-bottom: 28px;
   padding-bottom: 12px;
   display: block;
-  border-bottom: 1px solid #505050; }
-  .parts__section li {
-    float: left; }
-  .parts__section a {
-    margin-right: 26px;
-    color: #505050;
-    font-size: 12px;
-    text-decoration: none;
-    text-transform: uppercase; }
-    .parts__section a:hover {
-      text-decoration: underline; }
-  .parts__section .site__link {
-    float: right; }
-    .parts__section .site__link a {
-      display: block;
-      height: 9px;
-      width: 13px;
-      background: url(/i/admin/ico-corona.png) no-repeat; }
-  .parts__section .home {
-    display: block;
-    height: 10px;
-    width: 11px;
-    margin-left: 12px;
-    background: url(/i/admin/ico-home.png) no-repeat; }
+  border-bottom: 1px solid #505050;
+}
+/* line 115, admin.scss */
+.parts__section li {
+  float: left;
+}
+/* line 119, admin.scss */
+.parts__section a {
+  margin-right: 26px;
+  color: #505050;
+  font-size: 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/* line 126, admin.scss */
+.parts__section a:hover {
+  text-decoration: underline;
+}
+/* line 131, admin.scss */
+.parts__section .site__link {
+  float: right;
+}
+/* line 134, admin.scss */
+.parts__section .site__link a {
+  display: block;
+  height: 9px;
+  width: 13px;
+  background: url(/i/admin/ico-corona.png) no-repeat;
+}
+/* line 143, admin.scss */
+.parts__section .home {
+  display: block;
+  height: 10px;
+  width: 11px;
+  margin-left: 12px;
+  background: url(/i/admin/ico-home.png) no-repeat;
+}
 
+/* line 155, admin.scss */
 .left__side__section {
   width: 620px;
-  float: left; }
+  float: left;
+}
 
+/* line 160, admin.scss */
 .right__side__section {
   float: right;
-  width: 340px; }
+  width: 340px;
+}
 
+/* line 165, admin.scss */
 .middle__section {
   width: 500px;
   float: left;
-  margin-left: 40px; }
+  margin-left: 40px;
+}
 
+/* line 171, admin.scss */
 .right__side__section .banners__section img {
-  width: 340px; }
+  width: 340px;
+}
 
+/* line 177, admin.scss */
 .sidebar__section.categories {
-  width: 262px; }
-  .sidebar__section.categories .categories__list__section {
-    border: 1px solid #d6d6d6; }
-  .sidebar__section.categories li {
-    padding: 11px 0 10px 36px;
-    display: block;
-    border-bottom: 1px solid #ced4c7; }
-    .sidebar__section.categories li:last-child {
-      border-bottom: 0; }
-  .sidebar__section.categories a {
-    color: #505050;
-    font-size: 12px;
-    text-decoration: none;
-    text-transform: uppercase; }
-    .sidebar__section.categories a:hover {
-      text-decoration: underline; }
-    .sidebar__section.categories a.plus {
-      margin-right: 10px;
-      height: 14px;
-      width: 14px;
-      float: right;
-      background: url(../i/ico-plus.png) no-repeat; }
-  .sidebar__section.categories .second__lvl {
-    margin-top: 10px;
-    margin-bottom: -10px;
-    margin-left: -36px;
-    display: none; }
-    .sidebar__section.categories .second__lvl.active {
-      display: block; }
-    .sidebar__section.categories .second__lvl li {
-      padding-bottom: 10px;
-      background: #505050; }
-    .sidebar__section.categories .second__lvl a {
-      color: #fff; }
+  width: 262px;
+}
+/* line 180, admin.scss */
+.sidebar__section.categories .categories__list__section {
+  border: 1px solid #d6d6d6;
+}
+/* line 184, admin.scss */
+.sidebar__section.categories li {
+  padding: 11px 0 10px 36px;
+  display: block;
+  border-bottom: 1px solid #ced4c7;
+}
+/* line 189, admin.scss */
+.sidebar__section.categories li:last-child {
+  border-bottom: 0;
+}
+/* line 194, admin.scss */
+.sidebar__section.categories a {
+  color: #505050;
+  font-size: 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/* line 202, admin.scss */
+.sidebar__section.categories a:hover {
+  text-decoration: underline;
+}
+/* line 206, admin.scss */
+.sidebar__section.categories a.plus {
+  margin-right: 10px;
+  height: 14px;
+  width: 14px;
+  float: right;
+  background: url(../i/ico-plus.png) no-repeat;
+}
+/* line 215, admin.scss */
+.sidebar__section.categories .second__lvl {
+  margin-top: 10px;
+  margin-bottom: -10px;
+  margin-left: -36px;
+  display: none;
+}
+/* line 221, admin.scss */
+.sidebar__section.categories .second__lvl.active {
+  display: block;
+}
+/* line 225, admin.scss */
+.sidebar__section.categories .second__lvl li {
+  padding-bottom: 10px;
+  background: #505050;
+}
+/* line 230, admin.scss */
+.sidebar__section.categories .second__lvl a {
+  color: #fff;
+}
 
+/* line 237, admin.scss */
 .list__section {
-  margin-top: 8px; }
-  .list__section .disabled {
-    opacity: .5; }
+  margin-top: 8px;
+}
+/* line 240, admin.scss */
+.list__section .disabled {
+  opacity: .5;
+}
 
+/* line 245, admin.scss */
 .caption {
   display: inline-block;
   padding-bottom: 10px;
   color: #4b4b4b;
   font: 15px "PT Sans";
   font-weight: bold;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
+/* line 254, admin.scss */
 .add {
   display: inline-block;
   height: 14px;
@@ -152,31 +221,47 @@ body {
   top: -2px;
   margin-left: 8px;
   background: url(/i/ico-plus.png) no-repeat;
-  text-indent: -9999px; }
+  text-indent: -9999px;
+}
 
+/* line 267, admin.scss */
 .items__list.with__border__bottom {
   margin-bottom: 20px;
   padding-bottom: 14px;
-  border-bottom: 4px solid #cacaca; }
+  border-bottom: 4px solid #cacaca;
+}
+/* line 273, admin.scss */
 .items__list li {
   height: 38px;
   margin-bottom: 1px;
   background: #e5e5e5;
   line-height: 38px;
-  overflow: hidden; }
-  .items__list li.not__active {
-    background: #ffdad6; }
-  .items__list li.fresh {
-    background: #e2f3ad; }
-    .items__list li.fresh .type a {
-      background: #2f6e09; }
+  overflow: hidden;
+}
+/* line 280, admin.scss */
+.items__list li.not__active {
+  background: #ffdad6;
+}
+/* line 284, admin.scss */
+.items__list li.fresh {
+  background: #e2f3ad;
+}
+/* line 287, admin.scss */
+.items__list li.fresh .type a {
+  background: #2f6e09;
+}
 
+/* line 294, admin.scss */
 .items__list li:hover .edit, .items__list li:hover .preview {
-  display: inline-block; }
+  display: inline-block;
+}
 
+/* line 298, admin.scss */
 .items__list li.pager {
-  background: none; }
+  background: none;
+}
 
+/* line 302, admin.scss */
 .items__list .active__button {
   position: relative;
   top: 2px;
@@ -184,11 +269,15 @@ body {
   height: 16px;
   width: 24px;
   margin-left: 8px;
-  background: url(/i/admin/ico-visible.png) no-repeat; }
+  background: url(/i/admin/ico-visible.png) no-repeat;
+}
 
+/* line 312, admin.scss */
 .items__list .not__active .active__button {
-  background-position: left -40px; }
+  background-position: left -40px;
+}
 
+/* line 316, admin.scss */
 .items__list .article__link {
   display: inline-block;
   width: 350px;
@@ -197,18 +286,24 @@ body {
   font-size: 13px;
   text-decoration: none;
   text-transform: uppercase;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
+/* line 327, admin.scss */
 .items__list .container {
   display: inline-block;
   width: 60px;
   margin: 0 14px;
-  text-align: center; }
+  text-align: center;
+}
 
+/* line 334, admin.scss */
 .items__list .container.brand {
   width: 106px;
-  margin: 0; }
+  margin: 0;
+}
 
+/* line 339, admin.scss */
 .items__list .container a {
   display: inline-block;
   height: 10px;
@@ -220,8 +315,10 @@ body {
   line-height: 10px;
   text-decoration: none;
   text-transform: uppercase;
-  opacity: .6; }
+  opacity: .6;
+}
 
+/* line 354, admin.scss */
 .items__list .edit {
   position: relative;
   top: 2px;
@@ -236,157 +333,217 @@ body {
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
   -ms-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear; }
+  transition: opacity 0.2s linear;
+}
 
+/* line 367, admin.scss */
 .items__list .edit:hover {
-  opacity: 1; }
+  opacity: 1;
+}
 
+/* line 371, admin.scss */
 .items__list .preview {
   display: none;
   height: 9px;
   width: 13px;
-  background: url(/i/admin/ico-corona.png) no-repeat; }
+  background: url(/i/admin/ico-corona.png) no-repeat;
+}
 
+/* line 378, admin.scss */
 .sort__strip__section {
   height: 28px;
   margin-bottom: 1px;
   background: url("/i/admin/sort-bg.png") repeat-x;
-  clear: both; }
-  .sort__strip__section h3 {
-    float: left;
-    height: 20px;
-    width: 95px;
-    padding-top: 8px;
-    padding-left: 6px;
-    background: url("/i/admin/sort-caption-bg.png") no-repeat;
-    color: #fff;
-    font-size: 10px;
-    font-style: normal;
-    text-transform: uppercase; }
-  .sort__strip__section label {
-    float: left;
-    margin-top: 8px;
-    margin-right: 4px;
-    margin-left: 8px;
-    color: #fff;
-    font-size: 10px;
-    text-transform: uppercase; }
-  .sort__strip__section .selects__section {
-    float: left;
-    max-width: 118px; }
-    .sort__strip__section .selects__section select {
-      height: 18px;
-      max-width: 118px;
-      margin-top: 5px;
-      font-size: 10px; }
-  .sort__strip__section input[type='text'] {
-    height: 18px;
-    width: 104px;
-    margin-top: 4px;
-    border: 0; }
-  .sort__strip__section button {
-    float: right;
-    width: 70px;
-    margin-top: 3px;
-    margin-right: 12px;
-    background: #444444;
-    border: 1px solid #757575;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 10px;
-    line-height: 16px;
-    text-align: center;
-    text-transform: lowercase;
-    opacity: .5;
-    -webkit-transition: opacity 0.2s linear;
-    -moz-transition: opacity 0.2s linear;
-    -o-transition: opacity 0.2s linear;
-    -ms-transition: opacity 0.2s linear;
-    transition: opacity 0.2s linear; }
-    .sort__strip__section button:hover {
-      opacity: 1; }
+  clear: both;
+}
+/* line 384, admin.scss */
+.sort__strip__section h3 {
+  float: left;
+  height: 20px;
+  width: 95px;
+  padding-top: 8px;
+  padding-left: 6px;
+  background: url("/i/admin/sort-caption-bg.png") no-repeat;
+  color: #fff;
+  font-size: 10px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+/* line 399, admin.scss */
+.sort__strip__section label {
+  float: left;
+  margin-top: 8px;
+  margin-right: 4px;
+  margin-left: 8px;
+  color: #fff;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+/* line 411, admin.scss */
+.sort__strip__section .selects__section {
+  float: left;
+  max-width: 118px;
+}
+/* line 415, admin.scss */
+.sort__strip__section .selects__section select {
+  height: 18px;
+  max-width: 118px;
+  margin-top: 5px;
+  font-size: 10px;
+}
+/* line 423, admin.scss */
+.sort__strip__section input[type='text'] {
+  height: 18px;
+  width: 104px;
+  margin-top: 4px;
+  border: 0;
+}
+/* line 430, admin.scss */
+.sort__strip__section button {
+  float: right;
+  width: 70px;
+  margin-top: 3px;
+  margin-right: 12px;
+  background: #444444;
+  border: 1px solid #757575;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: lowercase;
+  opacity: .5;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+/* line 451, admin.scss */
+.sort__strip__section button:hover {
+  opacity: 1;
+}
 
+/* line 458, admin.scss */
 .pager__section {
   float: right;
-  margin-top: 4px; }
-  .pager__section li {
-    float: left;
-    padding-right: 10px; }
-  .pager__section .title {
-    padding-right: 6px;
-    color: #4b4b4b;
-    font-size: 10px;
-    text-transform: uppercase; }
-  .pager__section a {
-    position: relative;
-    top: -2px;
-    color: #565656;
-    font-size: 11px;
-    font-weight: bold;
-    text-decoration: none; }
-    .pager__section a.current {
-      color: #de1500; }
+  margin-top: 4px;
+}
+/* line 462, admin.scss */
+.pager__section li {
+  float: left;
+  padding-right: 10px;
+}
+/* line 467, admin.scss */
+.pager__section .title {
+  padding-right: 6px;
+  color: #4b4b4b;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+/* line 474, admin.scss */
+.pager__section a {
+  position: relative;
+  top: -2px;
+  color: #565656;
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: none;
+}
+/* line 486, admin.scss */
+.pager__section a.current {
+  color: #de1500;
+}
 
+/* line 492, admin.scss */
 .breadcrumps__section {
-  padding-bottom: 6px; }
-  .breadcrumps__section li {
-    float: left;
-    color: #4b4b4b;
-    font-family: "PT Sans";
-    font-size: 15px;
-    font-weight: bold; }
-    .breadcrumps__section li:first-child {
-      color: #de1500; }
-      .breadcrumps__section li:first-child a {
-        margin-left: 0;
-        color: #de1500; }
-    .breadcrumps__section li:nth-child(2n) {
-      color: #de1500; }
-    .breadcrumps__section li.category {
-      margin-top: -5px;
-      margin-left: 10px; }
-  .breadcrumps__section a {
-    position: relative;
-    top: 1px;
-    margin: 0 4px;
-    color: #4b4b4b;
-    font-family: "PT Sans";
-    font-size: 15px;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: uppercase; }
-    .breadcrumps__section a:hover {
-      text-decoration: underline; }
-    .breadcrumps__section a.gray {
-      color: #9e9e9e; }
-    .breadcrumps__section a.add__item {
-      top: -2px;
-      margin-left: 2px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: #fff;
-      font-family: "PT Sans";
-      font-size: 10px;
-      background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
-      background: -webkit-linear-gradient(top, #8fe42c, #69be06);
-      background: -moz-linear-gradient(top, #8fe42c, #69be06);
-      background: -o-linear-gradient(top, #8fe42c, #69be06);
-      background: linear-gradient(to bottom, #8fe42c, #69be06); }
-      .breadcrumps__section a.add__item:hover {
-        text-decoration: none; }
+  padding-bottom: 6px;
+}
+/* line 495, admin.scss */
+.breadcrumps__section li {
+  float: left;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 15px;
+  font-weight: bold;
+}
+/* line 504, admin.scss */
+.breadcrumps__section li:first-child {
+  color: #de1500;
+}
+/* line 507, admin.scss */
+.breadcrumps__section li:first-child a {
+  margin-left: 0;
+  color: #de1500;
+}
+/* line 513, admin.scss */
+.breadcrumps__section li:nth-child(2n) {
+  color: #de1500;
+}
+/* line 517, admin.scss */
+.breadcrumps__section li.category {
+  margin-top: -5px;
+  margin-left: 10px;
+}
+/* line 523, admin.scss */
+.breadcrumps__section a {
+  position: relative;
+  top: 1px;
+  margin: 0 4px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/* line 538, admin.scss */
+.breadcrumps__section a:hover {
+  text-decoration: underline;
+}
+/* line 542, admin.scss */
+.breadcrumps__section a.gray {
+  color: #9e9e9e;
+}
+/* line 546, admin.scss */
+.breadcrumps__section a.add__item {
+  top: -2px;
+  margin-left: 2px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  font-family: "PT Sans";
+  font-size: 10px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
+  background: -webkit-linear-gradient(top, #8fe42c, #69be06);
+  background: -moz-linear-gradient(top, #8fe42c, #69be06);
+  background: -o-linear-gradient(top, #8fe42c, #69be06);
+  background: linear-gradient(to bottom, #8fe42c, #69be06);
+}
+/* line 558, admin.scss */
+.breadcrumps__section a.add__item:hover {
+  text-decoration: none;
+}
 
+/* line 567, admin.scss */
 .shop__add__item .caption {
   color: #de1500;
   font-size: 15px;
-  font-weight: bold; }
+  font-weight: bold;
+}
+/* line 577, admin.scss */
 .shop__add__item form .breadcrumps__section {
   margin-bottom: 12px;
   display: block;
-  border-bottom: 1px solid #d9d9d9; }
+  border-bottom: 1px solid #d9d9d9;
+}
+/* line 583, admin.scss */
 .shop__add__item form .row {
   margin-bottom: 12px;
-  clear: both; }
+  clear: both;
+}
+/* line 588, admin.scss */
 .shop__add__item form .button {
   height: auto!important;
   width: auto!important;
@@ -409,43 +566,63 @@ body {
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   -ms-transition: all 0.2s linear;
-  transition: all 0.2s linear; }
-  .shop__add__item form .button.gray {
-    background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
-    background: -webkit-linear-gradient(top, silver, #9a9a9a);
-    background: -moz-linear-gradient(top, silver, #9a9a9a);
-    background: -o-linear-gradient(top, silver, #9a9a9a);
-    background: linear-gradient(to bottom, silver, #9a9a9a); }
-    .shop__add__item form .button.gray.light {
-      background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#cccccc));
-      background: -webkit-linear-gradient(top, #dfdfdf, #cccccc);
-      background: -moz-linear-gradient(top, #dfdfdf, #cccccc);
-      background: -o-linear-gradient(top, #dfdfdf, #cccccc);
-      background: linear-gradient(to bottom, #dfdfdf, #cccccc); }
-  .shop__add__item form .button.green {
-    background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
-    background: -webkit-linear-gradient(top, #8fe42c, #69be06);
-    background: -moz-linear-gradient(top, #8fe42c, #69be06);
-    background: -o-linear-gradient(top, #8fe42c, #69be06);
-    background: linear-gradient(to bottom, #8fe42c, #69be06); }
-  .shop__add__item form .button.red {
-    background: -webkit-gradient(linear, left top, left bottom, from(red), to(#640101));
-    background: -webkit-linear-gradient(top, red, #640101);
-    background: -moz-linear-gradient(top, red, #640101);
-    background: -o-linear-gradient(top, red, #640101);
-    background: linear-gradient(to bottom, red, #640101); }
-  .shop__add__item form .button.centered {
-    position: relative;
-    top: -4px; }
-  .shop__add__item form .button.with__margin__bottom {
-    margin-bottom: 4px; }
-  .shop__add__item form .button.submit__form {
-    margin: 40px auto; }
-  .shop__add__item form .button.delete__item {
-    float: left;
-    margin-top: 40px; }
-  .shop__add__item form .button.submit__form {
-    float: right; }
+  transition: all 0.2s linear;
+}
+/* line 614, admin.scss */
+.shop__add__item form .button.gray {
+  background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
+  background: -webkit-linear-gradient(top, silver, #9a9a9a);
+  background: -moz-linear-gradient(top, silver, #9a9a9a);
+  background: -o-linear-gradient(top, silver, #9a9a9a);
+  background: linear-gradient(to bottom, #c0c0c0, #9a9a9a);
+}
+/* line 617, admin.scss */
+.shop__add__item form .button.gray.light {
+  background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#cccccc));
+  background: -webkit-linear-gradient(top, #dfdfdf, #cccccc);
+  background: -moz-linear-gradient(top, #dfdfdf, #cccccc);
+  background: -o-linear-gradient(top, #dfdfdf, #cccccc);
+  background: linear-gradient(to bottom, #dfdfdf, #cccccc);
+}
+/* line 622, admin.scss */
+.shop__add__item form .button.green {
+  background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
+  background: -webkit-linear-gradient(top, #8fe42c, #69be06);
+  background: -moz-linear-gradient(top, #8fe42c, #69be06);
+  background: -o-linear-gradient(top, #8fe42c, #69be06);
+  background: linear-gradient(to bottom, #8fe42c, #69be06);
+}
+/* line 626, admin.scss */
+.shop__add__item form .button.red {
+  background: -webkit-gradient(linear, left top, left bottom, from(red), to(#640101));
+  background: -webkit-linear-gradient(top, red, #640101);
+  background: -moz-linear-gradient(top, red, #640101);
+  background: -o-linear-gradient(top, red, #640101);
+  background: linear-gradient(to bottom, #ff0000, #640101);
+}
+/* line 630, admin.scss */
+.shop__add__item form .button.centered {
+  position: relative;
+  top: -4px;
+}
+/* line 635, admin.scss */
+.shop__add__item form .button.with__margin__bottom {
+  margin-bottom: 4px;
+}
+/* line 639, admin.scss */
+.shop__add__item form .button.submit__form {
+  margin: 40px auto;
+}
+/* line 643, admin.scss */
+.shop__add__item form .button.delete__item {
+  float: left;
+  margin-top: 40px;
+}
+/* line 648, admin.scss */
+.shop__add__item form .button.submit__form {
+  float: right;
+}
+/* line 653, admin.scss */
 .shop__add__item form input[type='text'] {
   height: 26px;
   width: 100%;
@@ -464,24 +641,32 @@ body {
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   -ms-transition: all 0.2s linear;
-  transition: all 0.2s linear; }
-  .shop__add__item form input[type='text']:focus {
-    background: #fff;
-    border-color: #7f7f7f; }
-  .shop__add__item form input[type='text']::-webkit-input-placeholder {
-    padding-left: 8px;
-    color: #4b4b4b;
-    font-family: "PT Sans";
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase; }
-  .shop__add__item form input[type='text']:-moz-placeholder {
-    padding-left: 8px;
-    color: #4b4b4b;
-    font-family: "PT Sans";
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase; }
+  transition: all 0.2s linear;
+}
+/* line 671, admin.scss */
+.shop__add__item form input[type='text']:focus {
+  background: #fff;
+  border-color: #7f7f7f;
+}
+/* line 676, admin.scss */
+.shop__add__item form input[type='text']::-webkit-input-placeholder {
+  padding-left: 8px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 687, admin.scss */
+.shop__add__item form input[type='text']:-moz-placeholder {
+  padding-left: 8px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 700, admin.scss */
 .shop__add__item form textarea {
   display: block;
   height: 154px;
@@ -496,366 +681,518 @@ body {
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   -ms-transition: all 0.2s linear;
-  transition: all 0.2s linear; }
-  .shop__add__item form textarea:focus {
-    background: #fff;
-    border-color: #7f7f7f; }
-  .shop__add__item form textarea::-webkit-input-placeholder {
-    padding-left: 8px;
-    color: #4b4b4b;
-    font-family: "PT Sans";
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase; }
-  .shop__add__item form textarea:-moz-placeholder {
-    padding-left: 8px;
-    color: #4b4b4b;
-    font-family: "PT Sans";
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase; }
+  transition: all 0.2s linear;
+}
+/* line 712, admin.scss */
+.shop__add__item form textarea:focus {
+  background: #fff;
+  border-color: #7f7f7f;
+}
+/* line 717, admin.scss */
+.shop__add__item form textarea::-webkit-input-placeholder {
+  padding-left: 8px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 728, admin.scss */
+.shop__add__item form textarea:-moz-placeholder {
+  padding-left: 8px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 742, admin.scss */
 .shop__add__item form .caption__row .active {
   margin-top: 2px;
   margin-left: 18px;
-  margin-right: 0; }
+  margin-right: 0;
+}
+/* line 749, admin.scss */
 .shop__add__item form .sex__section {
   padding-top: 2px;
   padding-left: 10px;
-  float: left; }
-  .shop__add__item form .sex__section li {
-    margin-right: 2px;
-    float: left; }
-    .shop__add__item form .sex__section li a {
-      padding: 2px 4px;
-      display: block;
-      border: 1px solid #c4c4c4;
-      color: #434343;
-      font-size: 10px;
-      text-decoration: none;
-      text-transform: uppercase; }
-      .shop__add__item form .sex__section li a input {
-        display: none; }
-      .shop__add__item form .sex__section li a.current {
-        background: #434343;
-        border-color: #434343;
-        color: #fff; }
+  float: left;
+}
+/* line 754, admin.scss */
+.shop__add__item form .sex__section li {
+  margin-right: 2px;
+  float: left;
+}
+/* line 758, admin.scss */
+.shop__add__item form .sex__section li a {
+  padding: 2px 4px;
+  display: block;
+  border: 1px solid #c4c4c4;
+  color: #434343;
+  font-size: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/* line 769, admin.scss */
+.shop__add__item form .sex__section li a input {
+  display: none;
+}
+/* line 773, admin.scss */
+.shop__add__item form .sex__section li a.current {
+  background: #434343;
+  border-color: #434343;
+  color: #fff;
+}
+/* line 784, admin.scss */
 .shop__add__item form .sale__section {
   float: right;
   width: 188px;
   padding-left: 40px;
-  background: url("/i/admin/ico-sale.png") no-repeat left 25px; }
-  .shop__add__item form .sale__section .bg {
-    padding-top: 6px;
-    padding-right: 8px;
-    padding-bottom: 6px;
-    padding-left: 8px;
-    background: #d9d9d9;
-    border-radius: 6px; }
-  .shop__add__item form .sale__section .row {
-    margin-bottom: 0; }
-  .shop__add__item form .sale__section .sale {
-    display: inline-block;
-    width: 116px;
-    color: #de1500;
-    font-family: "PT Sans";
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 24px; }
-    .shop__add__item form .sale__section .sale::-webkit-input-placeholder {
-      padding-left: 8px;
-      color: #de1500;
-      font-weight: bold;
-      text-transform: uppercase; }
-    .shop__add__item form .sale__section .sale:-moz-placeholder {
-      padding-left: 8px;
-      color: #de1500;
-      font-weight: bold;
-      color: #de1500; }
-  .shop__add__item form .sale__section .currency {
-    position: relative;
-    margin-top: 2px;
-    float: right;
-    width: 42px;
-    border: 1px solid #c9c9c9;
-    border-radius: 5px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#ededed));
-    background: -webkit-linear-gradient(top, #f6f6f6, #ededed);
-    background: -moz-linear-gradient(top, #f6f6f6, #ededed);
-    background: -o-linear-gradient(top, #f6f6f6, #ededed);
-    background: linear-gradient(to bottom, #f6f6f6, #ededed); }
-    .shop__add__item form .sale__section .currency.active {
-      border-radius: 5px 5px 0 0; }
-      .shop__add__item form .sale__section .currency.active .current__text {
-        background-color: #F6F6F6!important;
-        border-radius: 5px 5px 0 0; }
-        .shop__add__item form .sale__section .currency.active .current__text:after {
-          background-position: left top; }
-      .shop__add__item form .sale__section .currency.active .dropdown {
-        display: block; }
-    .shop__add__item form .sale__section .currency .current__text {
-      position: relative;
-      height: 26px;
-      display: block;
-      cursor: pointer;
-      line-height: 26px; }
-      .shop__add__item form .sale__section .currency .current__text.rub {
-        background: url("/i/admin/ico-rub-small.png") no-repeat 9px 5px; }
-      .shop__add__item form .sale__section .currency .current__text.perc {
-        background: url("/i/admin/ico-perc.png") no-repeat 6px 5px; }
-      .shop__add__item form .sale__section .currency .current__text:after {
-        position: absolute;
-        right: 7px;
-        top: 9px;
-        height: 8px;
-        width: 9px;
-        display: block;
-        background: url("/i/admin/select-arrows-spr.png") no-repeat left bottom;
-        content: ''; }
-    .shop__add__item form .sale__section .currency .dropdown {
-      position: absolute;
-      left: -1px;
-      top: 26px;
-      width: 42px;
-      padding-top: 6px;
-      display: none;
-      border: 1px solid #c9c9c9;
-      border-top: 0;
-      border-radius: 0 0 5px 5px;
-      z-index: 2;
-      background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#ededed));
-      background: -webkit-linear-gradient(top, #f6f6f6, #ededed);
-      background: -moz-linear-gradient(top, #f6f6f6, #ededed);
-      background: -o-linear-gradient(top, #f6f6f6, #ededed);
-      background: linear-gradient(to bottom, #f6f6f6, #ededed); }
-      .shop__add__item form .sale__section .currency .dropdown li {
-        display: block;
-        margin-bottom: 4px;
-        color: #4B4B4B;
-        font-family: "PT Sans";
-        font-size: 12px;
-        font-weight: bold;
-        cursor: pointer; }
-        .shop__add__item form .sale__section .currency .dropdown li.rub {
-          height: 24px;
-          background: url("/i/admin/ico-rub-small.png") no-repeat 9px top; }
-        .shop__add__item form .sale__section .currency .dropdown li.perc {
-          height: 24px;
-          background: url("/i/admin/ico-perc.png") no-repeat 9px top; }
-  .shop__add__item form .sale__section .dates__section {
-    position: relative;
-    padding-top: 4px;
-    color: #4b4b4b; }
-    .shop__add__item form .sale__section .dates__section input[type='text'] {
-      display: inline-block;
-      width: 48px;
-      border: 1px solid #c9c9c9;
-      color: #a8a8a8;
-      font-family: "PT Sans";
-      font-size: 11px;
-      font-weight: bold;
-      line-height: 24px;
-      text-align: center; }
-  .shop__add__item form .sale__section .fake__checkbox {
-    position: relative;
-    right: -3px;
-    float: right; }
-    .shop__add__item form .sale__section .fake__checkbox.checked {
-      background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
-      background: -webkit-linear-gradient(top, #8fe42c, #69be06);
-      background: -moz-linear-gradient(top, #8fe42c, #69be06);
-      background: -o-linear-gradient(top, #8fe42c, #69be06);
-      background: linear-gradient(to bottom, #8fe42c, #69be06); }
+  background: url("/i/admin/ico-sale.png") no-repeat left 25px;
+}
+/* line 790, admin.scss */
+.shop__add__item form .sale__section .bg {
+  padding-top: 6px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+  padding-left: 8px;
+  background: #d9d9d9;
+  border-radius: 6px;
+}
+/* line 801, admin.scss */
+.shop__add__item form .sale__section .row {
+  margin-bottom: 0;
+}
+/* line 805, admin.scss */
+.shop__add__item form .sale__section .sale {
+  display: inline-block;
+  width: 116px;
+  color: #de1500;
+  font-family: "PT Sans";
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 24px;
+}
+/* line 816, admin.scss */
+.shop__add__item form .sale__section .sale::-webkit-input-placeholder {
+  padding-left: 8px;
+  color: #de1500;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 823, admin.scss */
+.shop__add__item form .sale__section .sale:-moz-placeholder {
+  padding-left: 8px;
+  color: #de1500;
+  font-weight: bold;
+  color: #de1500;
+}
+/* line 831, admin.scss */
+.shop__add__item form .sale__section .currency {
+  position: relative;
+  margin-top: 2px;
+  float: right;
+  width: 42px;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#ededed));
+  background: -webkit-linear-gradient(top, #f6f6f6, #ededed);
+  background: -moz-linear-gradient(top, #f6f6f6, #ededed);
+  background: -o-linear-gradient(top, #f6f6f6, #ededed);
+  background: linear-gradient(to bottom, #f6f6f6, #ededed);
+}
+/* line 840, admin.scss */
+.shop__add__item form .sale__section .currency.active {
+  border-radius: 5px 5px 0 0;
+}
+/* line 842, admin.scss */
+.shop__add__item form .sale__section .currency.active .current__text {
+  background-color: #F6F6F6!important;
+  border-radius: 5px 5px 0 0;
+}
+/* line 845, admin.scss */
+.shop__add__item form .sale__section .currency.active .current__text:after {
+  background-position: left top;
+}
+/* line 849, admin.scss */
+.shop__add__item form .sale__section .currency.active .dropdown {
+  display: block;
+}
+/* line 854, admin.scss */
+.shop__add__item form .sale__section .currency .current__text {
+  position: relative;
+  height: 26px;
+  display: block;
+  cursor: pointer;
+  line-height: 26px;
+}
+/* line 861, admin.scss */
+.shop__add__item form .sale__section .currency .current__text.rub {
+  background: url("/i/admin/ico-rub-small.png") no-repeat 9px 5px;
+}
+/* line 865, admin.scss */
+.shop__add__item form .sale__section .currency .current__text.perc {
+  background: url("/i/admin/ico-perc.png") no-repeat 6px 5px;
+}
+/* line 869, admin.scss */
+.shop__add__item form .sale__section .currency .current__text:after {
+  position: absolute;
+  right: 7px;
+  top: 9px;
+  height: 8px;
+  width: 9px;
+  display: block;
+  background: url("/i/admin/select-arrows-spr.png") no-repeat left bottom;
+  content: '';
+}
+/* line 881, admin.scss */
+.shop__add__item form .sale__section .currency .dropdown {
+  position: absolute;
+  left: -1px;
+  top: 26px;
+  width: 42px;
+  padding-top: 6px;
+  display: none;
+  border: 1px solid #c9c9c9;
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+  z-index: 2;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#ededed));
+  background: -webkit-linear-gradient(top, #f6f6f6, #ededed);
+  background: -moz-linear-gradient(top, #f6f6f6, #ededed);
+  background: -o-linear-gradient(top, #f6f6f6, #ededed);
+  background: linear-gradient(to bottom, #f6f6f6, #ededed);
+}
+/* line 894, admin.scss */
+.shop__add__item form .sale__section .currency .dropdown li {
+  display: block;
+  margin-bottom: 4px;
+  color: #4B4B4B;
+  font-family: "PT Sans";
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* line 905, admin.scss */
+.shop__add__item form .sale__section .currency .dropdown li.rub {
+  height: 24px;
+  background: url("/i/admin/ico-rub-small.png") no-repeat 9px top;
+}
+/* line 910, admin.scss */
+.shop__add__item form .sale__section .currency .dropdown li.perc {
+  height: 24px;
+  background: url("/i/admin/ico-perc.png") no-repeat 9px top;
+}
+/* line 918, admin.scss */
+.shop__add__item form .sale__section .dates__section {
+  position: relative;
+  padding-top: 4px;
+  color: #4b4b4b;
+}
+/* line 923, admin.scss */
+.shop__add__item form .sale__section .dates__section input[type='text'] {
+  display: inline-block;
+  width: 48px;
+  border: 1px solid #c9c9c9;
+  color: #a8a8a8;
+  font-family: "PT Sans";
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 24px;
+  text-align: center;
+}
+/* line 938, admin.scss */
+.shop__add__item form .sale__section .fake__checkbox {
+  position: relative;
+  right: -3px;
+  float: right;
+}
+/* line 942, admin.scss */
+.shop__add__item form .sale__section .fake__checkbox.checked {
+  background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
+  background: -webkit-linear-gradient(top, #8fe42c, #69be06);
+  background: -moz-linear-gradient(top, #8fe42c, #69be06);
+  background: -o-linear-gradient(top, #8fe42c, #69be06);
+  background: linear-gradient(to bottom, #8fe42c, #69be06);
+}
+/* line 949, admin.scss */
 .shop__add__item form .specials__section {
-  margin-top: 13px; }
-  .shop__add__item form .specials__section a.active {
-    margin-top: 6px;
-    float: left; }
-  .shop__add__item form .specials__section .custom-select {
-    float: left; }
+  margin-top: 13px;
+}
+/* line 952, admin.scss */
+.shop__add__item form .specials__section a.active {
+  margin-top: 6px;
+  float: left;
+}
+/* line 957, admin.scss */
+.shop__add__item form .specials__section .custom-select {
+  float: left;
+}
+/* line 962, admin.scss */
 .shop__add__item form .price__section {
   position: relative;
   width: 120px;
   margin-top: 6px;
-  padding-bottom: 12px; }
-  .shop__add__item form .price__section:after {
-    position: absolute;
-    top: 8px;
-    right: -25px;
-    display: block;
-    height: 15px;
-    width: 11px;
-    background: url("/i/admin/ico-rub-small.png") no-repeat;
-    content: ''; }
-  .shop__add__item form .price__section input[type='text'] {
-    position: relative;
-    display: block;
-    width: 118px!important; }
-    .shop__add__item form .price__section input[type='text']::-webkit-input-placeholder {
-      color: #5b9715!important;
-      font-weight: bold;
-      text-transform: uppercase; }
-    .shop__add__item form .price__section input[type='text']:-moz-placeholder {
-      color: #5b9715!important;
-      font-weight: bold;
-      color: #de1500; }
-    .shop__add__item form .price__section input[type='text'].price {
-      margin-bottom: 12px; }
+  padding-bottom: 12px;
+}
+/* line 969, admin.scss */
+.shop__add__item form .price__section:after {
+  position: absolute;
+  top: 8px;
+  right: -25px;
+  display: block;
+  height: 15px;
+  width: 11px;
+  background: url("/i/admin/ico-rub-small.png") no-repeat;
+  content: '';
+}
+/* line 980, admin.scss */
+.shop__add__item form .price__section input[type='text'] {
+  position: relative;
+  display: block;
+  width: 118px!important;
+}
+/* line 985, admin.scss */
+.shop__add__item form .price__section input[type='text']::-webkit-input-placeholder {
+  color: #5b9715!important;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 991, admin.scss */
+.shop__add__item form .price__section input[type='text']:-moz-placeholder {
+  color: #5b9715!important;
+  font-weight: bold;
+  color: #de1500;
+}
+/* line 997, admin.scss */
+.shop__add__item form .price__section input[type='text'].price {
+  margin-bottom: 12px;
+}
+/* line 1003, admin.scss */
 .shop__add__item form .tags {
   padding-bottom: 6px;
   background: #f6f6f6;
-  border: 1px solid #d0d0d0; }
-  .shop__add__item form .tags .caption__strip {
-    background: #d0d0d0; }
-    .shop__add__item form .tags .caption__strip .caption {
-      padding-top: 6px;
-      padding-left: 8px;
-      color: #4b4b4b;
-      font-family: "PT Sans";
-      font-size: 15px;
-      font-weight: bold; }
-  .shop__add__item form .tags input[type='text'] {
-    height: 25px;
-    width: 348px;
-    margin-top: 6px;
-    margin-left: 6px;
-    background: #fff;
-    line-height: 20px; }
+  border: 1px solid #d0d0d0;
+}
+/* line 1008, admin.scss */
+.shop__add__item form .tags .caption__strip {
+  background: #d0d0d0;
+}
+/* line 1011, admin.scss */
+.shop__add__item form .tags .caption__strip .caption {
+  padding-top: 6px;
+  padding-left: 8px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 15px;
+  font-weight: bold;
+}
+/* line 1026, admin.scss */
+.shop__add__item form .tags input[type='text'] {
+  height: 25px;
+  width: 348px;
+  margin-top: 6px;
+  margin-left: 6px;
+  background: #fff;
+  line-height: 20px;
+}
+/* line 1036, admin.scss */
 .shop__add__item form .sub__items__section {
   padding-top: 10px;
-  border-top: 1px solid #d9d9d9; }
-  .shop__add__item form .sub__items__section .caption__strip {
-    height: 40px;
-    background: #eaeae9;
-    border-top: 1px solid #d9d9d9;
-    border-bottom: 1px dashed #cacaca; }
-    .shop__add__item form .sub__items__section .caption__strip h3 {
-      width: 104px;
-      display: inline-block;
-      padding-top: 14px;
-      padding-left: 6px;
-      color: #939393;
-      font-family: "PT Sans";
-      font-size: 10px;
-      font-weight: bold;
-      text-transform: uppercase; }
-    .shop__add__item form .sub__items__section .caption__strip .button {
-      display: inline-block; }
-    .shop__add__item form .sub__items__section .caption__strip input {
-      display: none; }
-    .shop__add__item form .sub__items__section .caption__strip .active {
-      float: right; }
-    .shop__add__item form .sub__items__section .caption__strip .delete__button {
-      margin-top: 10px;
-      margin-right: 10px; }
-  .shop__add__item form .sub__items__section dl {
-    position: relative;
-    height: 46px;
-    border-bottom: 1px dashed #cacaca; }
-    .shop__add__item form .sub__items__section dl.added dd {
-      color: #ff0000; }
-  .shop__add__item form .sub__items__section dd {
-    width: 102px;
-    padding-left: 8px;
-    float: left;
-    color: #4b4b4b;
-    font-family: "PT Sans";
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 46px;
-    text-transform: uppercase;
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    -ms-transition: all 0.2s linear;
-    transition: all 0.2s linear; }
-    .shop__add__item form .sub__items__section dd.added {
-      color: red; }
-  .shop__add__item form .sub__items__section dt {
-    width: 328px;
-    float: left; }
-    .shop__add__item form .sub__items__section dt input {
-      display: inline-block;
-      width: 62px;
-      margin-top: 8px;
-      text-align: center; }
-      .shop__add__item form .sub__items__section dt input::-webkit-input-placeholder {
-        padding-left: 4px; }
-      .shop__add__item form .sub__items__section dt input:-moz-placeholder {
-        padding-left: 4px; }
-      .shop__add__item form .sub__items__section dt input.price, .shop__add__item form .sub__items__section dt input.qty {
-        color: #5b9715;
-        font-weight: bold; }
-        .shop__add__item form .sub__items__section dt input.price::-webkit-input-placeholder, .shop__add__item form .sub__items__section dt input.qty::-webkit-input-placeholder {
-          padding-left: 4px;
-          color: #5b9715; }
-        .shop__add__item form .sub__items__section dt input.price:-moz-placeholder, .shop__add__item form .sub__items__section dt input.qty:-moz-placeholder {
-          padding-left: 4px;
-          color: #5b9715; }
-      .shop__add__item form .sub__items__section dt input.consist {
-        width: 240px;
-        text-align: left; }
-  .shop__add__item form .sub__items__section .add__color {
-    top: 4px; }
-  .shop__add__item form .sub__items__section .dropdown__section {
-    display: inline-block; }
-    .shop__add__item form .sub__items__section .dropdown__section.active .dropdown {
-      display: block; }
-    .shop__add__item form .sub__items__section .dropdown__section .dropdown {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 70px;
-      display: none;
-      padding: 4px 4px;
-      background: #fff;
-      z-index: 3; }
-      .shop__add__item form .sub__items__section .dropdown__section .dropdown li {
-        float: left;
-        height: 16px;
-        width: 16px;
-        margin: 2px;
-        border: 1px solid #C9C9C9;
-        cursor: pointer; }
-  .shop__add__item form .sub__items__section .selected__colors li {
-    position: relative;
-    float: left;
-    height: 26px;
-    width: 21px;
-    margin-top: 9px;
-    margin-right: 4px;
-    border: 1px solid #c9c9c9; }
-  .shop__add__item form .sub__items__section .selected__colors .delete {
-    position: absolute;
-    left: -1px;
-    top: -1px;
-    height: 27px;
-    width: 22px;
-    display: block;
-    background: #cccccc url("/i/admin/ico-delete.png") no-repeat center center;
-    opacity: 0;
-    -webkit-transition: opacity 0.2s linear;
-    -moz-transition: opacity 0.2s linear;
-    -o-transition: opacity 0.2s linear;
-    -ms-transition: opacity 0.2s linear;
-    transition: opacity 0.2s linear; }
-    .shop__add__item form .sub__items__section .selected__colors .delete:hover {
-      opacity: .8; }
-  .shop__add__item form .sub__items__section .delete__button {
-    float: right;
-    height: 20px;
-    width: 20px;
-    margin-top: 14px;
-    margin-right: 6px;
-    background: url("/i/admin/ico-delete.png") no-repeat;
-    opacity: .8; }
+  border-top: 1px solid #d9d9d9;
+}
+/* line 1040, admin.scss */
+.shop__add__item form .sub__items__section .caption__strip {
+  height: 40px;
+  background: #eaeae9;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px dashed #cacaca;
+}
+/* line 1046, admin.scss */
+.shop__add__item form .sub__items__section .caption__strip h3 {
+  width: 104px;
+  display: inline-block;
+  padding-top: 14px;
+  padding-left: 6px;
+  color: #939393;
+  font-family: "PT Sans";
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 1060, admin.scss */
+.shop__add__item form .sub__items__section .caption__strip .button {
+  display: inline-block;
+}
+/* line 1064, admin.scss */
+.shop__add__item form .sub__items__section .caption__strip input {
+  display: none;
+}
+/* line 1068, admin.scss */
+.shop__add__item form .sub__items__section .caption__strip .active {
+  float: right;
+}
+/* line 1072, admin.scss */
+.shop__add__item form .sub__items__section .caption__strip .delete__button {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+/* line 1078, admin.scss */
+.shop__add__item form .sub__items__section dl {
+  position: relative;
+  height: 46px;
+  border-bottom: 1px dashed #cacaca;
+}
+/* line 1084, admin.scss */
+.shop__add__item form .sub__items__section dl.added dd {
+  color: #ff0000;
+}
+/* line 1090, admin.scss */
+.shop__add__item form .sub__items__section dd {
+  width: 102px;
+  padding-left: 8px;
+  float: left;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 46px;
+  text-transform: uppercase;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+/* line 1104, admin.scss */
+.shop__add__item form .sub__items__section dd.added {
+  color: red;
+}
+/* line 1109, admin.scss */
+.shop__add__item form .sub__items__section dt {
+  width: 328px;
+  float: left;
+}
+/* line 1113, admin.scss */
+.shop__add__item form .sub__items__section dt input {
+  display: inline-block;
+  width: 62px;
+  margin-top: 8px;
+  text-align: center;
+}
+/* line 1119, admin.scss */
+.shop__add__item form .sub__items__section dt input::-webkit-input-placeholder {
+  padding-left: 4px;
+}
+/* line 1123, admin.scss */
+.shop__add__item form .sub__items__section dt input:-moz-placeholder {
+  padding-left: 4px;
+}
+/* line 1127, admin.scss */
+.shop__add__item form .sub__items__section dt input.price, .shop__add__item form .sub__items__section dt input.qty {
+  color: #5b9715;
+  font-weight: bold;
+}
+/* line 1131, admin.scss */
+.shop__add__item form .sub__items__section dt input.price::-webkit-input-placeholder, .shop__add__item form .sub__items__section dt input.qty::-webkit-input-placeholder {
+  padding-left: 4px;
+  color: #5b9715;
+}
+/* line 1136, admin.scss */
+.shop__add__item form .sub__items__section dt input.price:-moz-placeholder, .shop__add__item form .sub__items__section dt input.qty:-moz-placeholder {
+  padding-left: 4px;
+  color: #5b9715;
+}
+/* line 1142, admin.scss */
+.shop__add__item form .sub__items__section dt input.consist {
+  width: 240px;
+  text-align: left;
+}
+/* line 1150, admin.scss */
+.shop__add__item form .sub__items__section .add__color {
+  top: 4px;
+}
+/* line 1154, admin.scss */
+.shop__add__item form .sub__items__section .dropdown__section {
+  display: inline-block;
+}
+/* line 1158, admin.scss */
+.shop__add__item form .sub__items__section .dropdown__section.active .dropdown {
+  display: block;
+}
+/* line 1163, admin.scss */
+.shop__add__item form .sub__items__section .dropdown__section .dropdown {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 70px;
+  display: none;
+  padding: 4px 4px;
+  background: #fff;
+  z-index: 3;
+}
+/* line 1175, admin.scss */
+.shop__add__item form .sub__items__section .dropdown__section .dropdown li {
+  float: left;
+  height: 16px;
+  width: 16px;
+  margin: 2px;
+  border: 1px solid #C9C9C9;
+  cursor: pointer;
+}
+/* line 1188, admin.scss */
+.shop__add__item form .sub__items__section .selected__colors li {
+  position: relative;
+  float: left;
+  height: 26px;
+  width: 21px;
+  margin-top: 9px;
+  margin-right: 4px;
+  border: 1px solid #c9c9c9;
+}
+/* line 1198, admin.scss */
+.shop__add__item form .sub__items__section .selected__colors .delete {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  height: 27px;
+  width: 22px;
+  display: block;
+  background: #cccccc url("/i/admin/ico-delete.png") no-repeat center center;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+/* line 1209, admin.scss */
+.shop__add__item form .sub__items__section .selected__colors .delete:hover {
+  opacity: .8;
+}
+/* line 1215, admin.scss */
+.shop__add__item form .sub__items__section .delete__button {
+  float: right;
+  height: 20px;
+  width: 20px;
+  margin-top: 14px;
+  margin-right: 6px;
+  background: url("/i/admin/ico-delete.png") no-repeat;
+  opacity: .8;
+}
+/* line 1227, admin.scss */
 .shop__add__item form .params__strip__section {
   padding: 8px 0;
   background: #fefbdd;
-  border-bottom: 1px dashed #cacaca; }
+  border-bottom: 1px dashed #cacaca;
+}
+/* line 1233, admin.scss */
 .shop__add__item form .submit__section {
   margin-top: 10px;
   border-top: 1px solid #d9d9d9;
-  text-align: center; }
+  text-align: center;
+}
+/* line 1239, admin.scss */
 .shop__add__item form a.active {
   display: inline-block;
   height: 16px;
@@ -869,146 +1206,202 @@ body {
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
   -ms-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear; }
-  .shop__add__item form a.active.checked {
-    opacity: 1; }
-  .shop__add__item form a.active input {
-    display: none; }
+  transition: opacity 0.2s linear;
+}
+/* line 1250, admin.scss */
+.shop__add__item form a.active.checked {
+  opacity: 1;
+}
+/* line 1254, admin.scss */
+.shop__add__item form a.active input {
+  display: none;
+}
+/* line 1262, admin.scss */
 .shop__add__item form .fake__checkbox input {
-  display: none; }
+  display: none;
+}
+/* line 1267, admin.scss */
 .shop__add__item form .loading__section {
   margin-top: 10px;
   padding-top: 14px;
-  border-top: 1px solid #d9d9d9; }
-  .shop__add__item form .loading__section .add {
-    top: 2px;
-    cursor: pointer; }
-  .shop__add__item form .loading__section .image__description {
-    float: left;
-    width: 360px; }
-  .shop__add__item form .loading__section .row {
-    padding: 6px 0 6px 2px; }
-    .shop__add__item form .loading__section .row.new {
-      background: #fefbdd; }
-  .shop__add__item form .loading__section .upload__button {
-    position: relative;
-    float: right;
-    width: 62px;
-    margin-top: 2px;
-    padding: 8px 0;
-    border-radius: 6px;
-    color: #fff;
-    font-family: "PT Sans";
-    font-size: 10px;
-    overflow: hidden;
-    text-align: center;
-    text-transform: uppercase;
-    background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
-    background: -webkit-linear-gradient(top, silver, #9a9a9a);
-    background: -moz-linear-gradient(top, silver, #9a9a9a);
-    background: -o-linear-gradient(top, silver, #9a9a9a);
-    background: linear-gradient(to bottom, silver, #9a9a9a); }
-    .shop__add__item form .loading__section .upload__button input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 28px;
-      width: 62px;
-      opacity: 0;
-      filter: alpha(opacity=0); }
-  .shop__add__item form .loading__section .warning {
-    color: #de1500;
-    font-family: "PT Sans";
-    font-size: 10px;
-    text-align: center;
-    text-transform: uppercase; }
-  .shop__add__item form .loading__section .uploaded__section {
-    position: relative;
-    margin-top: 10px;
-    padding-top: 4px;
-    border-top: 1px solid #d9d9d9; }
-    .shop__add__item form .loading__section .uploaded__section .images__counter {
-      position: absolute;
-      right: 0;
-      top: -8px;
-      padding-left: 4px;
-      background: #fff;
-      color: #7f7f7f;
-      font-family: "PT Sans";
-      font-size: 15px;
-      font-weight: bold; }
-      .shop__add__item form .loading__section .uploaded__section .images__counter span {
-        color: #53c520; }
-        .shop__add__item form .loading__section .uploaded__section .images__counter span.full {
-          color: #de1500; }
-    .shop__add__item form .loading__section .uploaded__section .images__list {
-      padding-top: 14px; }
-      .shop__add__item form .loading__section .uploaded__section .images__list li {
-        position: relative;
-        margin-right: 4px;
-        padding-bottom: 4px;
-        width: 68px;
-        float: left; }
-        .shop__add__item form .loading__section .uploaded__section .images__list li.checked, .shop__add__item form .loading__section .uploaded__section .images__list li:hover {
-          margin-top: -1px;
-          margin-left: -1px;
-          margin-right: 3px;
-          border: 1px solid #ccc; }
-          .shop__add__item form .loading__section .uploaded__section .images__list li.checked .preview, .shop__add__item form .loading__section .uploaded__section .images__list li:hover .preview {
-            display: block; }
-        .shop__add__item form .loading__section .uploaded__section .images__list li .preview {
-          position: absolute;
-          left: -1px;
-          top: -15px;
-          padding: 2px 0;
-          width: 70px;
-          display: none;
-          background: #434343;
-          color: #fff;
-          font-size: 10px;
-          text-align: center;
-          text-decoration: none;
-          text-transform: uppercase; }
-        .shop__add__item form .loading__section .uploaded__section .images__list li .img__box {
-          position: relative;
-          height: 82px;
-          width: 60px;
-          display: block;
-          overflow: hidden;
-          margin: 0 auto 4px; }
-          .shop__add__item form .loading__section .uploaded__section .images__list li .img__box img {
-            width: 60px;
-            -webkit-transition: all 0.2s linear;
-            -moz-transition: all 0.2s linear;
-            -o-transition: all 0.2s linear;
-            -ms-transition: all 0.2s linear;
-            transition: all 0.2s linear; }
-          .shop__add__item form .loading__section .uploaded__section .images__list li .img__box.deleted img {
-            opacity: .7; }
-          .shop__add__item form .loading__section .uploaded__section .images__list li .img__box .active {
-            position: absolute;
-            right: 0;
-            top: 0;
-            margin: 0;
-            cursor: pointer; }
-          .shop__add__item form .loading__section .uploaded__section .images__list li .img__box .delete {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 20px;
-            width: 20px;
-            background: url("/i/admin/ico-del-red.png") no-repeat;
-            cursor: pointer; }
-        .shop__add__item form .loading__section .uploaded__section .images__list li .item__select label {
-          display: block;
-          margin-bottom: 4px;
-          color: #4b4b4b;
-          font-family: "PT Sans";
-          font-size: 10px;
-          text-align: center; }
-        .shop__add__item form .loading__section .uploaded__section .images__list li .item__select .custom-select {
-          margin-left: 12px; }
+  border-top: 1px solid #d9d9d9;
+}
+/* line 1272, admin.scss */
+.shop__add__item form .loading__section .add {
+  top: 2px;
+  cursor: pointer;
+}
+/* line 1277, admin.scss */
+.shop__add__item form .loading__section .image__description {
+  float: left;
+  width: 360px;
+}
+/* line 1282, admin.scss */
+.shop__add__item form .loading__section .row {
+  padding: 6px 0 6px 2px;
+}
+/* line 1284, admin.scss */
+.shop__add__item form .loading__section .row.new {
+  background: #fefbdd;
+}
+/* line 1289, admin.scss */
+.shop__add__item form .loading__section .upload__button {
+  position: relative;
+  float: right;
+  width: 62px;
+  margin-top: 2px;
+  padding: 8px 0;
+  border-radius: 6px;
+  color: #fff;
+  font-family: "PT Sans";
+  font-size: 10px;
+  overflow: hidden;
+  text-align: center;
+  text-transform: uppercase;
+  background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
+  background: -webkit-linear-gradient(top, silver, #9a9a9a);
+  background: -moz-linear-gradient(top, silver, #9a9a9a);
+  background: -o-linear-gradient(top, silver, #9a9a9a);
+  background: linear-gradient(to bottom, #c0c0c0, #9a9a9a);
+}
+/* line 1308, admin.scss */
+.shop__add__item form .loading__section .upload__button input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 28px;
+  width: 62px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+/* line 1319, admin.scss */
+.shop__add__item form .loading__section .warning {
+  color: #de1500;
+  font-family: "PT Sans";
+  font-size: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+/* line 1331, admin.scss */
+.shop__add__item form .loading__section .uploaded__section {
+  position: relative;
+  margin-top: 10px;
+  padding-top: 4px;
+  border-top: 1px solid #d9d9d9;
+}
+/* line 1337, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__counter {
+  position: absolute;
+  right: 0;
+  top: -8px;
+  padding-left: 4px;
+  background: #fff;
+  color: #7f7f7f;
+  font-family: "PT Sans";
+  font-size: 15px;
+  font-weight: bold;
+}
+/* line 1350, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__counter span {
+  color: #53c520;
+}
+/* line 1353, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__counter span.full {
+  color: #de1500;
+}
+/* line 1359, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list {
+  padding-top: 14px;
+}
+/* line 1362, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li {
+  position: relative;
+  margin-right: 4px;
+  padding-bottom: 4px;
+  width: 68px;
+  float: left;
+}
+/* line 1369, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li.checked, .shop__add__item form .loading__section .uploaded__section .images__list li:hover {
+  margin-top: -1px;
+  margin-left: -1px;
+  margin-right: 3px;
+  border: 1px solid #ccc;
+}
+/* line 1375, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li.checked .preview, .shop__add__item form .loading__section .uploaded__section .images__list li:hover .preview {
+  display: block;
+}
+/* line 1380, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .preview {
+  position: absolute;
+  left: -1px;
+  top: -15px;
+  padding: 2px 0;
+  width: 70px;
+  display: none;
+  background: #434343;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/* line 1399, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .img__box {
+  position: relative;
+  height: 82px;
+  width: 60px;
+  display: block;
+  overflow: hidden;
+  margin: 0 auto 4px;
+}
+/* line 1407, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .img__box img {
+  width: 60px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+/* line 1413, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .img__box.deleted img {
+  opacity: .7;
+}
+/* line 1417, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .img__box .active {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  cursor: pointer;
+}
+/* line 1425, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .img__box .delete {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 20px;
+  width: 20px;
+  background: url("/i/admin/ico-del-red.png") no-repeat;
+  cursor: pointer;
+}
+/* line 1437, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .item__select label {
+  display: block;
+  margin-bottom: 4px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 10px;
+  text-align: center;
+}
+/* line 1450, admin.scss */
+.shop__add__item form .loading__section .uploaded__section .images__list li .item__select .custom-select {
+  margin-left: 12px;
+}
 
+/* line 1462, admin.scss */
 .toggle__seo__editor {
   position: relative;
   top: -20px;
@@ -1024,10 +1417,14 @@ body {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
-  text-transform: uppercase; }
-  .toggle__seo__editor.opened {
-    background-position: left -23px; }
+  text-transform: uppercase;
+}
+/* line 1485, admin.scss */
+.toggle__seo__editor.opened {
+  background-position: left -23px;
+}
 
+/* line 1490, admin.scss */
 .seo__editor {
   display: none;
   margin-top: 8px;
@@ -1038,69 +1435,87 @@ body {
   padding-left: 8px;
   background: #e4e4e4;
   border-top: 1px dashed #bdbdbd;
-  border-bottom: 1px dashed #bdbdbd; }
-  .seo__editor.opened {
-    display: block; }
-  .seo__editor dl {
-    margin-bottom: 8px; }
-  .seo__editor dt {
-    width: 76px;
-    float: left;
-    padding-top: 6px;
-    color: #989898;
-    font-size: 12px;
-    text-transform: uppercase; }
-  .seo__editor dd {
-    float: right;
-    width: 584px; }
-  .seo__editor input[type='text'] {
-    height: 26px;
-    width: 100%;
-    padding-left: 10px;
-    border: 1px solid #c9c9c9;
-    box-sizing: border-box;
-    color: #666;
-    font-size: 12px;
-    text-transform: uppercase;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; }
-  .seo__editor textarea {
-    height: 66px;
-    width: 100%;
-    border: 1px solid #c9c9c9;
-    box-sizing: border-box;
-    color: #666;
-    font-size: 12px;
-    resize: vertical;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; }
-  .seo__editor input[type='submit'] {
-    float: right;
-    padding-top: 10px;
-    padding-right: 7px;
-    padding-bottom: 10px;
-    padding-left: 7px;
-    border: 0;
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    font-family: "PT Sans";
-    font-size: 10px;
-    line-height: 1!important;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    background: -webkit-gradient(linear, left top, left bottom, from(#696969), to(#444444));
-    background: -webkit-linear-gradient(top, #696969, #444444);
-    background: -moz-linear-gradient(top, #696969, #444444);
-    background: -o-linear-gradient(top, #696969, #444444);
-    background: linear-gradient(to bottom, #696969, #444444); }
+  border-bottom: 1px dashed #bdbdbd;
+}
+/* line 1504, admin.scss */
+.seo__editor.opened {
+  display: block;
+}
+/* line 1508, admin.scss */
+.seo__editor dl {
+  margin-bottom: 8px;
+}
+/* line 1512, admin.scss */
+.seo__editor dt {
+  width: 76px;
+  float: left;
+  padding-top: 6px;
+  color: #989898;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+/* line 1525, admin.scss */
+.seo__editor dd {
+  float: right;
+  width: 584px;
+}
+/* line 1530, admin.scss */
+.seo__editor input[type='text'] {
+  height: 26px;
+  width: 100%;
+  padding-left: 10px;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 12px;
+  text-transform: uppercase;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+/* line 1547, admin.scss */
+.seo__editor textarea {
+  height: 66px;
+  width: 100%;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 12px;
+  resize: vertical;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+/* line 1561, admin.scss */
+.seo__editor input[type='submit'] {
+  float: right;
+  padding-top: 10px;
+  padding-right: 7px;
+  padding-bottom: 10px;
+  padding-left: 7px;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "PT Sans";
+  font-size: 10px;
+  line-height: 1!important;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: -webkit-gradient(linear, left top, left bottom, from(#696969), to(#444444));
+  background: -webkit-linear-gradient(top, #696969, #444444);
+  background: -moz-linear-gradient(top, #696969, #444444);
+  background: -o-linear-gradient(top, #696969, #444444);
+  background: linear-gradient(to bottom, #696969, #444444);
+}
 
+/* line 1590, admin.scss */
 .brands__list__section .list__section li {
   margin-bottom: 1px;
   height: 88px;
   width: 459px;
-  background: #e5e5e5; }
+  background: #e5e5e5;
+}
+/* line 1597, admin.scss */
 .brands__list__section .list__section .active {
   margin-left: 6px;
   margin-top: 36px;
@@ -1113,9 +1528,13 @@ body {
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
   -ms-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear; }
-  .brands__list__section .list__section .active.inactive {
-    opacity: .45; }
+  transition: opacity 0.2s linear;
+}
+/* line 1607, admin.scss */
+.brands__list__section .list__section .active.inactive {
+  opacity: .45;
+}
+/* line 1612, admin.scss */
 .brands__list__section .list__section .logo__section {
   float: left;
   margin-top: 6px;
@@ -1123,10 +1542,14 @@ body {
   height: 75px;
   width: 100px;
   background: #ccc;
-  overflow: hidden; }
-  .brands__list__section .list__section .logo__section img {
-    max-width: 100%;
-    max-height: 100%; }
+  overflow: hidden;
+}
+/* line 1621, admin.scss */
+.brands__list__section .list__section .logo__section img {
+  max-width: 100%;
+  max-height: 100%;
+}
+/* line 1627, admin.scss */
 .brands__list__section .list__section .brand__name {
   position: relative;
   top: 35px;
@@ -1136,10 +1559,14 @@ body {
   font-size: 12px;
   font-weight: bold;
   text-decoration: none;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
+/* line 1647, admin.scss */
 .orders__list__section h2 {
-  color: #e60000; }
+  color: #e60000;
+}
+/* line 1651, admin.scss */
 .orders__list__section .statistic__strip__section {
   height: 28px;
   display: block;
@@ -1147,252 +1574,452 @@ body {
   background: -webkit-linear-gradient(top, #3b3b3b, #292929);
   background: -moz-linear-gradient(top, #3b3b3b, #292929);
   background: -o-linear-gradient(top, #3b3b3b, #292929);
-  background: linear-gradient(to bottom, #3b3b3b, #292929); }
-  .orders__list__section .statistic__strip__section li {
-    margin-right: 26px;
-    float: left;
-    color: #fff;
-    font-size: 10px;
-    font-wight: bold;
-    line-height: 28px;
-    text-transform: uppercase; }
-    .orders__list__section .statistic__strip__section li.total {
-      position: relative;
-      padding-left: 10px;
-      padding-right: 2px;
-      background: #000;
-      color: #fff;
-      font-family: Arial;
-      font-size: 15px;
-      font-weight: bold; }
-      .orders__list__section .statistic__strip__section li.total:after {
-        position: absolute;
-        right: -15px;
-        top: 0;
-        height: 28px;
-        width: 15px;
-        display: block;
-        background: url("/i/admin/total-corner.png") no-repeat;
-        content: ''; }
-      .orders__list__section .statistic__strip__section li.total a {
-        color: #fff;
-        text-decoration: none; }
-    .orders__list__section .statistic__strip__section li a {
-      color: #fff200; }
-      .orders__list__section .statistic__strip__section li a:hover {
-        text-decoration: none; }
-      .orders__list__section .statistic__strip__section li a.canceled {
-        color: #ec008c; }
+  background: linear-gradient(to bottom, #3b3b3b, #292929);
+  overflow: hidden;
+}
+/* line 1657, admin.scss */
+.orders__list__section .statistic__strip__section li {
+  margin-right: 26px;
+  float: left;
+  color: #fff;
+  font-size: 10px;
+  font-wight: bold;
+  line-height: 28px;
+  text-transform: uppercase;
+}
+/* line 1671, admin.scss */
+.orders__list__section .statistic__strip__section li.total {
+  position: relative;
+  padding-left: 10px;
+  padding-right: 2px;
+  background: #000;
+  color: #fff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+}
+/* line 1683, admin.scss */
+.orders__list__section .statistic__strip__section li.total:after {
+  position: absolute;
+  right: -15px;
+  top: 0;
+  height: 28px;
+  width: 15px;
+  display: block;
+  background: url("/i/admin/total-corner.png") no-repeat;
+  content: '';
+}
+/* line 1694, admin.scss */
+.orders__list__section .statistic__strip__section li.total a {
+  color: #fff;
+  text-decoration: none;
+}
+/* line 1700, admin.scss */
+.orders__list__section .statistic__strip__section li a {
+  color: #fff200;
+}
+/* line 1703, admin.scss */
+.orders__list__section .statistic__strip__section li a:hover {
+  text-decoration: none;
+}
+/* line 1707, admin.scss */
+.orders__list__section .statistic__strip__section li a.canceled {
+  color: #ec008c;
+}
+/* line 1714, admin.scss */
+.orders__list__section .statistic__strip__section .fr {
+  float: right;
+  margin-right: 0;
+}
+/* line 1719, admin.scss */
+.orders__list__section .statistic__strip__section .filter__toggle {
+  padding-left: 12px;
+  padding-right: 40px;
+  display: block;
+  background-color: #792732;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAlCAYAAABLRGl/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOpJREFUeNrs1T0KwjAYxvG2Orl0dFRQKIInEAeHDgUdvIODd3LyAp5AcHESN2cH8Qal6OAH9R+wgzVvEz/GBn6UhjxPAymtm6apUzAa8LETV6gCQYAjToikdZ7QG2CJC7ZYILLdQfbkPZqoYSXtxBTO5sUSm3BhiW1YLFGTbcuwriRUp9BDghAHxzzOGGGNoWt4kYzDc34cZUFZUBaUBX8tqGPwRbaLjvrKTnF9Xh1LfcSYqZsK5h+UZOEN/GzStuQlnP+1mUrewrqfq1SiDesKdCViWCrIlyRSWKkKZ3zHBDe0MEasW/gQYABSCLMeTUmlXAAAAABJRU5ErkJggg==');
+  background-repeat: no-repeat;
+  background-position: 71px -18px;
+  color: #fff;
+  font-family: "PT Sans", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 31px;
+  text-decoration: none;
+}
+/* line 1740, admin.scss */
+.orders__list__section .statistic__strip__section .filter__toggle:hover {
+  text-decoration: underline;
+}
+/* line 1744, admin.scss */
+.orders__list__section .statistic__strip__section .filter__toggle.active {
+  background-position: 71px 9px;
+}
+/* line 1752, admin.scss */
+.orders__list__section .filters__section.hidden {
+  display: none;
+}
+/* line 1756, admin.scss */
+.orders__list__section .filters__section ul {
+  background-color: #4b4b4b;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF4B4B4B', endColorstr='#FF636363');
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRiNGI0YiIvPjxzdG9wIG9mZnNldD0iMTYlIiBzdG9wLWNvbG9yPSIjNTg1ODU4Ii8+PHN0b3Agb2Zmc2V0PSIzNiUiIHN0b3AtY29sb3I9IiM2MTYxNjEiLz48c3RvcCBvZmZzZXQ9IjUyJSIgc3RvcC1jb2xvcj0iIzYzNjM2MyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzYzNjM2MyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4b4b4b), color-stop(16%, #585858), color-stop(36%, #616161), color-stop(52%, #636363), color-stop(100%, #636363));
+  background-image: -webkit-linear-gradient(top, #4b4b4b 0%, #585858 16%, #616161 36%, #636363 52%, #636363 100%);
+  background-image: -moz-linear-gradient(top, #4b4b4b 0%, #585858 16%, #616161 36%, #636363 52%, #636363 100%);
+  background-image: -o-linear-gradient(top, #4b4b4b 0%, #585858 16%, #616161 36%, #636363 52%, #636363 100%);
+  background-image: -ms-linear-gradient(top, #4b4b4b 0%, #585858 16%, #616161 36%, #636363 52%, #636363 100%);
+  background-image: linear-gradient(top, #4b4b4b 0%, #585858 16%, #616161 36%, #636363 52%, #636363 100%);
+  border-top: 1px solid #929292;
+  color: #fff;
+  font-family: "PT Sans", Arial, sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+/* line 1772, admin.scss */
+.orders__list__section .filters__section li {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  margin-left: 12px;
+  float: left;
+}
+/* line 1778, admin.scss */
+.orders__list__section .filters__section li.current {
+  margin-top: 6px;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  padding: 4px 8px;
+  background: #000;
+  border-radius: 5px;
+}
+/* line 1788, admin.scss */
+.orders__list__section .filters__section a {
+  margin-left: 4px;
+  color: #fff14b;
+  font-family: "PT Sans", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+}
+/* line 1797, admin.scss */
+.orders__list__section .filters__section a:hover {
+  text-decoration: none;
+}
+/* line 1801, admin.scss */
+.orders__list__section .filters__section a.finished {
+  color: #00ff0c;
+}
+/* line 1805, admin.scss */
+.orders__list__section .filters__section a.canceled {
+  color: #ff00ff;
+}
+/* line 1814, admin.scss */
 .orders__list__section .list li {
-  margin-bottom: 1px; }
-  .orders__list__section .list li.finished .cut {
-    background: #f0f9d6; }
-  .orders__list__section .list li.canceled .cut {
-    background: #FFDAD6; }
-  .orders__list__section .list li.proceed .cut {
-    background: #fffcbf; }
-  .orders__list__section .list li.active {
-    border-top: 2px solid #aeaeae; }
-    .orders__list__section .list li.active .cut {
-      background: #cfcfcf; }
-    .orders__list__section .list li.active .submit__button {
-      cursor: pointer;
-      opacity: 1; }
-    .orders__list__section .list li.active .full {
-      display: block; }
-  .orders__list__section .list li .cut {
-    height: 38px;
-    padding: 0 12px;
-    background: #f2f2f2;
-    cursor: pointer;
-    line-height: 38px; }
-  .orders__list__section .list li .full {
-    margin-bottom: -1px;
-    display: none;
-    border-bottom: 2px solid #aeaeae; }
-  .orders__list__section .list li .order__num {
-    display: inline-block;
-    color: #272727;
-    font-size: 13px;
-    text-transform: uppercase; }
-    .orders__list__section .list li .order__num span {
-      color: #6bb200; }
-  .orders__list__section .list li select {
-    margin-top: 10px;
-    float: right; }
-  .orders__list__section .list li .submit__button {
-    margin-top: 5px;
-    margin-left: 10px;
-    padding: 8px 10px;
-    float: right;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    cursor: default;
-    font-family: "PT Sans";
-    font-size: 10px;
-    line-height: 1;
-    text-decoration: none;
-    text-transform: uppercase;
-    opacity: .3;
-    background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9e9e9e));
-    background: -webkit-linear-gradient(top, silver, #9e9e9e);
-    background: -moz-linear-gradient(top, silver, #9e9e9e);
-    background: -o-linear-gradient(top, silver, #9e9e9e);
-    background: linear-gradient(to bottom, silver, #9e9e9e);
-    -webkit-transition: opacity 0.2s linear;
-    -moz-transition: opacity 0.2s linear;
-    -o-transition: opacity 0.2s linear;
-    -ms-transition: opacity 0.2s linear;
-    transition: opacity 0.2s linear; }
-  .orders__list__section .list li .items__list__section {
-    margin-top: 12px; }
-    .orders__list__section .list li .items__list__section li {
-      margin-right: 8px;
-      margin-bottom: 8px;
-      height: 70px;
-      width: 284px;
-      padding: 10px;
-      float: left;
-      background: #f0f0f0;
-      border: 1px solid #cbcbcb; }
-      .orders__list__section .list li .items__list__section li:nth-child(2n+2) {
-        margin-right: 0; }
-      .orders__list__section .list li .items__list__section li img {
-        height: 68px;
-        width: 50px;
-        float: left; }
-      .orders__list__section .list li .items__list__section li .description__section {
-        margin-left: 10px;
-        width: 144px;
-        float: left;
-        text-transform: uppercase; }
-        .orders__list__section .list li .items__list__section li .description__section h3 {
-          color: #666;
-          font-size: 12px; }
-        .orders__list__section .list li .items__list__section li .description__section h4 {
-          color: #464646;
-          font-size: 12px;
-          font-weight: bold; }
-      .orders__list__section .list li .items__list__section li .meta__section {
-        width: 64px;
-        float: left; }
-        .orders__list__section .list li .items__list__section li .meta__section .count {
-          margin-bottom: 28px;
-          height: 20px;
-          width: 44px;
-          float: right;
-          background: #fff;
-          border: 1px solid #c1c1c1;
-          font-size: 15px;
-          font-weight: bold;
-          line-height: 20px;
-          text-align: center; }
-        .orders__list__section .list li .items__list__section li .meta__section .price {
-          padding-right: 20px;
-          background: url(../i/ico-rub.png) no-repeat right 4px;
-          color: #434343;
-          clear: both;
-          font-size: 20px; }
-  .orders__list__section .list li .gray__bg {
-    background: #e5e5e5; }
-  .orders__list__section .list li dl {
-    padding: 6px 10px 8px;
-    border-bottom: 1px dashed #c9c9c9; }
-    .orders__list__section .list li dl dt {
-      color: #6bb200;
-      font-size: 15px;
-      font-weight: bold;
-      text-transform: uppercase; }
-    .orders__list__section .list li dl dd {
-      padding-top: 6px;
-      color: #595959;
-      font-size: 13px; }
-  .orders__list__section .list li .price__section {
-    background: #6bb200; }
-    .orders__list__section .list li .price__section dt {
-      margin-top: 7px;
-      float: left;
-      color: #fff; }
-    .orders__list__section .list li .price__section dd {
-      padding-right: 20px;
-      float: right;
-      background: url(../i/ico-rub-white.png) no-repeat right 8px;
-      color: #fff;
-      font-size: 20px; }
-  .orders__list__section .list li .contacts__section {
-    padding: 0 10px;
-    border-bottom: 1px dashed #c9c9c9; }
-    .orders__list__section .list li .contacts__section dl {
-      padding: 6px 0 8px;
-      width: 33%;
-      float: left;
-      border-bottom: 0; }
-    .orders__list__section .list li .contacts__section dd {
-      font-weight: bold; }
-  .orders__list__section .list li .deliver__price__section {
-    border-bottom: 0; }
-    .orders__list__section .list li .deliver__price__section dt {
-      margin-top: 9px;
-      float: left;
-      color: #646464; }
-    .orders__list__section .list li .deliver__price__section dd {
-      padding-right: 20px;
-      float: right;
-      background: url(../i/ico-rub.png) no-repeat right 8px;
-      color: #6e6e6e;
-      font-size: 20px; }
-  .orders__list__section .list li .comments__section li {
-    padding-top: 8px;
-    padding-right: 10px;
-    padding-bottom: 8px;
-    padding-left: 10px;
-    background: #fff9d5;
-    border-top: 1px solid #c1c1c1; }
-    .orders__list__section .list li .comments__section li:first-child {
-      border-top: 0; }
-    .orders__list__section .list li .comments__section li:nth-child(2n+2) {
-      background: #fef1bc; }
-  .orders__list__section .list li .comments__section h3 {
-    float: left;
-    color: #595959;
-    font-size: 13px;
-    font-weight: bold; }
-  .orders__list__section .list li .comments__section .login {
-    float: right;
-    color: #1975b6;
-    font-size: 12px;
-    font-weight: bold; }
-  .orders__list__section .list li .comments__section p {
-    padding-top: 8px;
-    color: #87847d;
-    clear: both; }
-  .orders__list__section .list li .comments__section .add__comment {
-    padding-top: 6px;
-    background: #e4e4e4;
-    border-top: 1px dashed #bdbdbd;
-    border-bottom: 1px dashed #bdbdbd; }
-    .orders__list__section .list li .comments__section .add__comment button {
-      margin-right: 14px;
-      margin-bottom: 10px; }
-  .orders__list__section .list li .comments__section label {
-    margin-top: 8px;
-    margin-right: 6px;
-    float: left;
-    width: 82px;
-    color: #98989a;
-    font-size: 11px;
-    text-align: right;
-    text-transform: uppercase; }
-  .orders__list__section .list li .comments__section textarea {
-    float: left;
-    width: 520px;
-    border: 1px solid #c9c9c9;
-    box-sizing: border-box; }
-  .orders__list__section .list li .comments__section input[type='text'] {
-    margin-bottom: 4px;
-    float: left;
-    width: 520px;
-    border: 1px solid #c9c9c9;
-    box-sizing: border-box;
-    line-height: 24px; }
+  margin-bottom: 1px;
+}
+/* line 1825, admin.scss */
+.orders__list__section .list li.finished .cut {
+  background: #f0f9d6;
+}
+/* line 1831, admin.scss */
+.orders__list__section .list li.canceled .cut {
+  background: #FFDAD6;
+}
+/* line 1837, admin.scss */
+.orders__list__section .list li.proceed .cut {
+  background: #fffcbf;
+}
+/* line 1842, admin.scss */
+.orders__list__section .list li.active {
+  border-top: 2px solid #aeaeae;
+}
+/* line 1845, admin.scss */
+.orders__list__section .list li.active .cut {
+  background: #cfcfcf;
+}
+/* line 1849, admin.scss */
+.orders__list__section .list li.active .submit__button {
+  cursor: pointer;
+  opacity: 1;
+}
+/* line 1854, admin.scss */
+.orders__list__section .list li.active .full {
+  display: block;
+}
+/* line 1861, admin.scss */
+.orders__list__section .list li .cut {
+  height: 38px;
+  padding: 0 12px;
+  background: #f2f2f2;
+  cursor: pointer;
+  line-height: 38px;
+}
+/* line 1869, admin.scss */
+.orders__list__section .list li .full {
+  margin-bottom: -1px;
+  display: none;
+  border-bottom: 2px solid #aeaeae;
+}
+/* line 1875, admin.scss */
+.orders__list__section .list li .order__num {
+  display: inline-block;
+  color: #272727;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+/* line 1885, admin.scss */
+.orders__list__section .list li .order__num span {
+  color: #6bb200;
+}
+/* line 1890, admin.scss */
+.orders__list__section .list li select {
+  margin-top: 10px;
+  float: right;
+}
+/* line 1895, admin.scss */
+.orders__list__section .list li .submit__button {
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 8px 10px;
+  float: right;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: default;
+  font-family: "PT Sans";
+  font-size: 10px;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  opacity: .3;
+  background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9e9e9e));
+  background: -webkit-linear-gradient(top, silver, #9e9e9e);
+  background: -moz-linear-gradient(top, silver, #9e9e9e);
+  background: -o-linear-gradient(top, silver, #9e9e9e);
+  background: linear-gradient(to bottom, #c0c0c0, #9e9e9e);
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+/* line 1918, admin.scss */
+.orders__list__section .list li .items__list__section {
+  margin-top: 12px;
+}
+/* line 1921, admin.scss */
+.orders__list__section .list li .items__list__section li {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  height: 70px;
+  width: 284px;
+  padding: 10px;
+  float: left;
+  background: #f0f0f0;
+  border: 1px solid #cbcbcb;
+}
+/* line 1931, admin.scss */
+.orders__list__section .list li .items__list__section li:nth-child(2n+2) {
+  margin-right: 0;
+}
+/* line 1935, admin.scss */
+.orders__list__section .list li .items__list__section li img {
+  height: 68px;
+  width: 50px;
+  float: left;
+}
+/* line 1941, admin.scss */
+.orders__list__section .list li .items__list__section li .description__section {
+  margin-left: 10px;
+  width: 144px;
+  float: left;
+  text-transform: uppercase;
+}
+/* line 1947, admin.scss */
+.orders__list__section .list li .items__list__section li .description__section h3 {
+  color: #666;
+  font-size: 12px;
+}
+/* line 1954, admin.scss */
+.orders__list__section .list li .items__list__section li .description__section h4 {
+  color: #464646;
+  font-size: 12px;
+  font-weight: bold;
+}
+/* line 1963, admin.scss */
+.orders__list__section .list li .items__list__section li .meta__section {
+  width: 64px;
+  float: left;
+}
+/* line 1967, admin.scss */
+.orders__list__section .list li .items__list__section li .meta__section .count {
+  margin-bottom: 28px;
+  height: 20px;
+  width: 44px;
+  float: right;
+  background: #fff;
+  border: 1px solid #c1c1c1;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: center;
+}
+/* line 1982, admin.scss */
+.orders__list__section .list li .items__list__section li .meta__section .price {
+  padding-right: 20px;
+  background: url(../i/ico-rub.png) no-repeat right 4px;
+  color: #434343;
+  clear: both;
+  font-size: 20px;
+}
+/* line 1993, admin.scss */
+.orders__list__section .list li .gray__bg {
+  background: #e5e5e5;
+}
+/* line 1997, admin.scss */
+.orders__list__section .list li dl {
+  padding: 6px 10px 8px;
+  border-bottom: 1px dashed #c9c9c9;
+}
+/* line 2001, admin.scss */
+.orders__list__section .list li dl dt {
+  color: #6bb200;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 2010, admin.scss */
+.orders__list__section .list li dl dd {
+  padding-top: 6px;
+  color: #595959;
+  font-size: 13px;
+}
+/* line 2019, admin.scss */
+.orders__list__section .list li .price__section {
+  background: #6bb200;
+}
+/* line 2022, admin.scss */
+.orders__list__section .list li .price__section dt {
+  margin-top: 7px;
+  float: left;
+  color: #fff;
+}
+/* line 2028, admin.scss */
+.orders__list__section .list li .price__section dd {
+  padding-right: 20px;
+  float: right;
+  background: url(../i/ico-rub-white.png) no-repeat right 8px;
+  color: #fff;
+  font-size: 20px;
+}
+/* line 2038, admin.scss */
+.orders__list__section .list li .contacts__section {
+  padding: 0 10px;
+  border-bottom: 1px dashed #c9c9c9;
+}
+/* line 2042, admin.scss */
+.orders__list__section .list li .contacts__section dl {
+  padding: 6px 0 8px;
+  width: 33%;
+  float: left;
+  border-bottom: 0;
+}
+/* line 2049, admin.scss */
+.orders__list__section .list li .contacts__section dd {
+  font-weight: bold;
+}
+/* line 2054, admin.scss */
+.orders__list__section .list li .deliver__price__section {
+  border-bottom: 0;
+}
+/* line 2057, admin.scss */
+.orders__list__section .list li .deliver__price__section dt {
+  margin-top: 9px;
+  float: left;
+  color: #646464;
+}
+/* line 2064, admin.scss */
+.orders__list__section .list li .deliver__price__section dd {
+  padding-right: 20px;
+  float: right;
+  background: url(../i/ico-rub.png) no-repeat right 8px;
+  color: #6e6e6e;
+  font-size: 20px;
+}
+/* line 2075, admin.scss */
+.orders__list__section .list li .comments__section li {
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-bottom: 8px;
+  padding-left: 10px;
+  background: #fff9d5;
+  border-top: 1px solid #c1c1c1;
+}
+/* line 2085, admin.scss */
+.orders__list__section .list li .comments__section li:first-child {
+  border-top: 0;
+}
+/* line 2089, admin.scss */
+.orders__list__section .list li .comments__section li:nth-child(2n+2) {
+  background: #fef1bc;
+}
+/* line 2094, admin.scss */
+.orders__list__section .list li .comments__section h3 {
+  float: left;
+  color: #595959;
+  font-size: 13px;
+  font-weight: bold;
+}
+/* line 2103, admin.scss */
+.orders__list__section .list li .comments__section .login {
+  float: right;
+  color: #1975b6;
+  font-size: 12px;
+  font-weight: bold;
+}
+/* line 2112, admin.scss */
+.orders__list__section .list li .comments__section p {
+  padding-top: 8px;
+  color: #87847d;
+  clear: both;
+}
+/* line 2118, admin.scss */
+.orders__list__section .list li .comments__section .add__comment {
+  padding-top: 6px;
+  background: #e4e4e4;
+  border-top: 1px dashed #bdbdbd;
+  border-bottom: 1px dashed #bdbdbd;
+}
+/* line 2126, admin.scss */
+.orders__list__section .list li .comments__section .add__comment button {
+  margin-right: 14px;
+  margin-bottom: 10px;
+}
+/* line 2132, admin.scss */
+.orders__list__section .list li .comments__section label {
+  margin-top: 8px;
+  margin-right: 6px;
+  float: left;
+  width: 82px;
+  color: #98989a;
+  font-size: 11px;
+  text-align: right;
+  text-transform: uppercase;
+}
+/* line 2143, admin.scss */
+.orders__list__section .list li .comments__section textarea {
+  float: left;
+  width: 520px;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+}
+/* line 2150, admin.scss */
+.orders__list__section .list li .comments__section input[type='text'] {
+  margin-bottom: 4px;
+  float: left;
+  width: 520px;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+  line-height: 24px;
+}
