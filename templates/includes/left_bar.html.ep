@@ -37,15 +37,11 @@
 	    
 	</div>
 	
-	<div class='menu__section 
-	% if (!stash('brand_id') || stash('brand_id') eq '') {
-		hidden
-	% }
-	'>
+	<div class='menu__section'>
 		
 		<div class='caption__section clearfloat'>
 			<h2>бренды и корнеры</h2>
-			<a class='expand__items' href='#' data-role='brands'></a>
+			<a class='expand__items inverted' href='#' data-role='brands'></a>
 		</div>
 
 	    <ul class='item'>
