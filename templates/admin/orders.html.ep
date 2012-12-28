@@ -9,7 +9,7 @@
 
 	<ul class='statistic__strip__section clearfloat'>
 		<li class='total'>
-			<a href='/admin/orders'><%= <%= $counter->{new}+$counter->{proceed}+$counter->{finished}+$counter->{canceled} %></a>
+			<a href='/admin/orders'><%= <%= $orders_count %></a>
 		</li>
 		<li>
 			cумма заказов: <strong><%= $orders_sum %></strong> P
@@ -41,12 +41,23 @@
 	</div>
 	
 	<ul class='list'>
-	    % foreach my $order (@$orders) {
-	        <li class="
-		        <%= 'proceed' if $order->{status} eq 'proceed' %>
-		        <%= 'finished' if $order->{status} eq 'finished'%>
-		        <%= 'canceled' if $order->{status} eq 'canceled'%>
-		        <%= 'new' if $order->{status} eq 'new' %>">
+		% foreach my $order (@$orders) {
+			<li class="
+				<%= 'proceed' if $order->{status} eq 'proceed' %>
+				<%= 'proceed' if $order->{status} eq 'assembled' %>
+				<%= 'proceed' if $order->{status} eq 'wait_courier' %>
+				<%= 'proceed' if $order->{status} eq 'wait_delivery' %>
+				<%= 'proceed' if $order->{status} eq 'self_delivery' %>
+				<%= 'proceed' if $order->{status} eq 'sent_courier' %>
+				<%= 'proceed' if $order->{status} eq 'sent_ems' %>
+				<%= 'proceed' if $order->{status} eq 'sent_post' %>
+
+				<%= 'proceed' if $order->{status} eq 'proceed' %>
+				<%= 'finished' if $order->{status} eq 'finished'%>
+				<%= 'canceled' if $order->{status} eq 'canceled'%>
+				<%= 'canceled' if $order->{status} eq 'canceled' %>
+				<%= 'canceled' if $order->{status} eq 'changed' %>
+				<%= 'new' if $order->{status} eq 'new' %>">
 
 	       		%= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
 		        	<div class='cut'>
@@ -205,5 +216,3 @@
 	   % }
 	</ul>
 </div>
-
-<script>requirejs(['app/admin/orders'])</script>
