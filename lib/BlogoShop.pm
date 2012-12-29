@@ -202,6 +202,7 @@ sub startup {
 		# Orders list
 		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
+		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');

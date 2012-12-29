@@ -59,7 +59,7 @@
 				<%= 'canceled' if $order->{status} eq 'changed' %>
 				<%= 'new' if $order->{status} eq 'new' %>">
 
-	       		%= form_for '/admin/orders/'.$order->{_id} => (method => 'post') => begin
+	       		%= form_for '/admin/orders/'.(stash('status') ? stash('status').'/' : '').$order->{_id} => (method => 'post') => begin
 		        	<div class='cut'>
 		        		<div class='order__num'>Заказ № <span><%= $order->{order_id} %></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong></div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
