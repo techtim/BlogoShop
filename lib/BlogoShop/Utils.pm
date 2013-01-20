@@ -214,7 +214,7 @@ sub get_banners {
 
 sub get_categories_alias {
     my ($self, $categories) = @_; # categories from defaults->categories
-	my %cat_alias;
+	my %cat_alias = ();
     foreach (@$categories) {
         $cat_alias{$_->{_id}} = $_->{name};
         $cat_alias{$_->{_id}} = $_->{name} foreach @{$_->{subcats}};
@@ -224,7 +224,7 @@ sub get_categories_alias {
 
 sub get_categories_info {
     my ($self, @categories) = @_; # categories from defaults->categories
-	my $cat_info;
+	my $cat_info = {};
     foreach my $cat (@categories) {
         $cat_info->{$cat->{_id}} = $cat;
         $cat_info->{$cat->{_id}.'.'.$_->{_id}} = {%$_} foreach @{$cat->{subcats}};

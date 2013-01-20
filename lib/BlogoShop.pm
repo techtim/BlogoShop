@@ -142,7 +142,7 @@ sub startup {
 	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
 	# make from array of hashes array of _ids and join ids to filter cuts in url
 	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
-	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show');
+	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show') if $bind_static;
 
 	$r->route('/rss')->to('controller-article#rss');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
