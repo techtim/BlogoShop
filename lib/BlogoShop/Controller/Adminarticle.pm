@@ -138,7 +138,7 @@ sub get_images {
 	}
 	
 	return $images if @$images>0;
-	return 0;
+	return [];
 }
 
 # Handlers
