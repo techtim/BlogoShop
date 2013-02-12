@@ -42,7 +42,6 @@ sub startup {
 
 	# Make signed cookies secure
 	$self->secret($self->config('cookie_secret'));
-	#	$self->sessions->cookie_domain($self->config('cookie_domain'));
 	$self->sessions->cookie_name($self->config('cookie_name'));
 	$self->sessions->default_expiration($self->config('cookie_expiration'));
 
@@ -202,7 +201,6 @@ sub startup {
 		# Orders list
 		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
-		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
@@ -265,4 +263,4 @@ sub startup {
 #	    mojo             => $self,
 #	    template_options => { },
 #    );
-#    $self->renderer->add_handler(tx => $xslate);
+#    $self->renderer->add_handler(tx => $xslate);                                                                                                                    

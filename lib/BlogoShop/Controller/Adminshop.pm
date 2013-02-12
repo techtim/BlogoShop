@@ -13,6 +13,8 @@ sub show {
     my $filter = {};
     $filter->{$_} = $self->stash($_)||'' foreach ITEM_FIELDS;
     $filter->{active} = 0+$self->req->param('active') if $self->req->param('active'); 
+    $filter->{sale} = { sale_active => 0+$self->req->param('sale') } if $self->req->param('sale');
+
     return $self->redirect_to('/admin/shop/')
     	if $filter->{category} && !($self->stash('categories_alias'))->{$filter->{category}};
 

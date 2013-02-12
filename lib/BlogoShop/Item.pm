@@ -20,7 +20,7 @@ use constant ITEM_FIELDS => qw(id name alias descr active
 								sex preview_image images
 								);
 use constant LIST_FIELDS => map {$_ => 1} qw(name alias brand brand_name category subcategory subitems total_qty articol
-											tags descr preview_image price sale_start sale_end sale_value sale_active);
+											tags descr preview_image price sale);
 
 use constant SALE_PARAMS => qw(sale_start sale_end sale_value sale_active);
 
@@ -123,11 +123,11 @@ sub list {
     }
     $filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
     # warn 'FLTR'. $self->{app}->dumper(\%filter);
-
+	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 	$skip = $skip =~ m/(\d+)/ ? $1 : 0;
 # warn $filter->{tag};
-# warn $self->{app}->dumper($filter);	
+# warn Dumper(\%filter);
 	my @all = $self->{app}->db->items->find(\%filter)->sort($sort)->fields({LIST_FIELDS})->skip($skip)->limit($limit)->all;
     return \@all;
 }

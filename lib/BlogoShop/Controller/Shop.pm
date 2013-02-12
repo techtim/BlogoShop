@@ -94,8 +94,9 @@ sub item {
 
 	return $self->buy($item) if $self->stash('act') eq 'buy';
 
-	my $filter->{active} = 1;	
-	   $filter->{alias}	 = {'$ne' => $item->{alias}};
+	my  $filter->{active} = 1;
+		$filter->{'subitems.qty'} = {'$gt' => 0};
+		$filter->{alias} = {'$ne' => $item->{alias}};
 	$item->{$_} ? 
 		push @{$filter->{'$or'}}, {$_ => $item->{$_}} : () 
 			foreach qw(brand category subcategory);
@@ -320,7 +321,7 @@ sub check_cart {
 	my $need_full = shift || 0;
 
 	my $session = $self->session();
-	# warn 'SESSion '. $self->dumper($session);
+#	warn 'SESSion '. $self->dumper($session);
 	return {cart_count => 0} if !$session || !$session->{client} || ref $session->{client} ne ref {};
 	
 	my ($ct, $sum) = (0,0);
