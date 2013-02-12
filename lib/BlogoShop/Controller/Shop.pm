@@ -108,7 +108,7 @@ sub item {
 		%{$self->check_cart},
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
-		items 	=> $item->list($filter, {}, 0, 4),
+		items 	=> $item->list($filter, {}, 0, 8),
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
 		host 	=> $self->req->url->base,
 		url 	=> $self->req->url,
