@@ -22,10 +22,10 @@ define(['jquery', 'ui', 'tmpl'], function($){
 	};
 
 	var templates = {
-		items: '<li {{if sale}}class="sale"{{/if}}>'+
+		items: '<li {{if sale.sale_active}}class="sale"{{/if}}>'+
 				'<a href="${link}"><span class="img__section">'+
 	        			'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
-            			'{{if sale}}'+
+            			'{{if sale.sale_active}}'+
 	            			'<span class="ico__sale"></span>'+
 	            		'{{/if}}'+
 	            		'<span class="controls active preview__ico"></span>'+
@@ -33,7 +33,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		            '<span class="brand">${brand_name}</span>'+
 		            '<span class="item__caption">${name}</span>'+
 		        	'<span class="price">'+
-			        	'{{if sale}}'+
+			        	'{{if sale.sale_active}}'+
 						  	'<s>${price}</s>'+
 						'{{else}}'+
 							'${price}'+
@@ -71,7 +71,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 							'<dt>Цена:</dt>'+
 							'<dd>'+
 								'<span class="price">'+
-									'{{if sale}}'+
+									'{{if sale.sale_active}}'+
 									  	'<s>${price}</s>'+
 									'{{else}}'+
 										'${price}'+
