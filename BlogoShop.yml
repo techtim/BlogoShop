@@ -28,6 +28,7 @@ nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
 cookie_name: 'BlogoShop'
+cookie_domain: '.dev.xoxloveka.ru'
 cookie_expiration: 604800 # week
 cookie_secret: '$w3Etx0X|_o\/eKa'
 

@@ -153,18 +153,22 @@ body {
 .sidebar__section.categories li:last-child {
   border-bottom: 0;
 }
-/* line 194, admin.scss */
+/* line 195, admin.scss */
+.sidebar__section.categories li.current .second__lvl {
+  display: block;
+}
+/* line 201, admin.scss */
 .sidebar__section.categories a {
   color: #505050;
   font-size: 12px;
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 202, admin.scss */
+/* line 209, admin.scss */
 .sidebar__section.categories a:hover {
   text-decoration: underline;
 }
-/* line 206, admin.scss */
+/* line 213, admin.scss */
 .sidebar__section.categories a.plus {
   margin-right: 10px;
   height: 14px;
@@ -172,37 +176,41 @@ body {
   float: right;
   background: url(../i/ico-plus.png) no-repeat;
 }
-/* line 215, admin.scss */
+/* line 222, admin.scss */
 .sidebar__section.categories .second__lvl {
   margin-top: 10px;
   margin-bottom: -10px;
   margin-left: -36px;
   display: none;
 }
-/* line 221, admin.scss */
+/* line 228, admin.scss */
 .sidebar__section.categories .second__lvl.active {
   display: block;
 }
-/* line 225, admin.scss */
+/* line 232, admin.scss */
 .sidebar__section.categories .second__lvl li {
   padding-bottom: 10px;
   background: #505050;
 }
-/* line 230, admin.scss */
+/* line 236, admin.scss */
+.sidebar__section.categories .second__lvl li.current {
+  background: #598527;
+}
+/* line 241, admin.scss */
 .sidebar__section.categories .second__lvl a {
   color: #fff;
 }
 
-/* line 237, admin.scss */
+/* line 248, admin.scss */
 .list__section {
   margin-top: 8px;
 }
-/* line 240, admin.scss */
+/* line 251, admin.scss */
 .list__section .disabled {
   opacity: .5;
 }
 
-/* line 245, admin.scss */
+/* line 256, admin.scss */
 .caption {
   display: inline-block;
   padding-bottom: 10px;
@@ -212,7 +220,7 @@ body {
   text-transform: uppercase;
 }
 
-/* line 254, admin.scss */
+/* line 265, admin.scss */
 .add {
   display: inline-block;
   height: 14px;
@@ -224,13 +232,13 @@ body {
   text-indent: -9999px;
 }
 
-/* line 267, admin.scss */
+/* line 278, admin.scss */
 .items__list.with__border__bottom {
   margin-bottom: 20px;
   padding-bottom: 14px;
   border-bottom: 4px solid #cacaca;
 }
-/* line 273, admin.scss */
+/* line 284, admin.scss */
 .items__list li {
   height: 38px;
   margin-bottom: 1px;
@@ -238,30 +246,30 @@ body {
   line-height: 38px;
   overflow: hidden;
 }
-/* line 280, admin.scss */
+/* line 291, admin.scss */
 .items__list li.not__active {
   background: #ffdad6;
 }
-/* line 284, admin.scss */
+/* line 295, admin.scss */
 .items__list li.fresh {
   background: #e2f3ad;
 }
-/* line 287, admin.scss */
+/* line 298, admin.scss */
 .items__list li.fresh .type a {
   background: #2f6e09;
 }
 
-/* line 294, admin.scss */
+/* line 305, admin.scss */
 .items__list li:hover .edit, .items__list li:hover .preview {
   display: inline-block;
 }
 
-/* line 298, admin.scss */
+/* line 309, admin.scss */
 .items__list li.pager {
   background: none;
 }
 
-/* line 302, admin.scss */
+/* line 313, admin.scss */
 .items__list .active__button {
   position: relative;
   top: 2px;
@@ -272,12 +280,12 @@ body {
   background: url(/i/admin/ico-visible.png) no-repeat;
 }
 
-/* line 312, admin.scss */
+/* line 323, admin.scss */
 .items__list .not__active .active__button {
   background-position: left -40px;
 }
 
-/* line 316, admin.scss */
+/* line 327, admin.scss */
 .items__list .article__link {
   display: inline-block;
   width: 350px;
@@ -289,7 +297,7 @@ body {
   overflow: hidden;
 }
 
-/* line 327, admin.scss */
+/* line 338, admin.scss */
 .items__list .container {
   display: inline-block;
   width: 60px;
@@ -297,13 +305,13 @@ body {
   text-align: center;
 }
 
-/* line 334, admin.scss */
+/* line 345, admin.scss */
 .items__list .container.brand {
   width: 106px;
   margin: 0;
 }
 
-/* line 339, admin.scss */
+/* line 350, admin.scss */
 .items__list .container a {
   display: inline-block;
   height: 10px;
@@ -318,7 +326,7 @@ body {
   opacity: .6;
 }
 
-/* line 354, admin.scss */
+/* line 365, admin.scss */
 .items__list .edit {
   position: relative;
   top: 2px;
@@ -336,12 +344,12 @@ body {
   transition: opacity 0.2s linear;
 }
 
-/* line 367, admin.scss */
+/* line 378, admin.scss */
 .items__list .edit:hover {
   opacity: 1;
 }
 
-/* line 371, admin.scss */
+/* line 382, admin.scss */
 .items__list .preview {
   display: none;
   height: 9px;
@@ -349,14 +357,14 @@ body {
   background: url(/i/admin/ico-corona.png) no-repeat;
 }
 
-/* line 378, admin.scss */
+/* line 389, admin.scss */
 .sort__strip__section {
   height: 28px;
   margin-bottom: 1px;
   background: url("/i/admin/sort-bg.png") repeat-x;
   clear: both;
 }
-/* line 384, admin.scss */
+/* line 395, admin.scss */
 .sort__strip__section h3 {
   float: left;
   height: 20px;
@@ -369,7 +377,7 @@ body {
   font-style: normal;
   text-transform: uppercase;
 }
-/* line 399, admin.scss */
+/* line 410, admin.scss */
 .sort__strip__section label {
   float: left;
   margin-top: 8px;
@@ -379,26 +387,26 @@ body {
   font-size: 10px;
   text-transform: uppercase;
 }
-/* line 411, admin.scss */
+/* line 422, admin.scss */
 .sort__strip__section .selects__section {
   float: left;
   max-width: 118px;
 }
-/* line 415, admin.scss */
+/* line 426, admin.scss */
 .sort__strip__section .selects__section select {
   height: 18px;
   max-width: 118px;
   margin-top: 5px;
   font-size: 10px;
 }
-/* line 423, admin.scss */
+/* line 434, admin.scss */
 .sort__strip__section input[type='text'] {
   height: 18px;
   width: 104px;
   margin-top: 4px;
   border: 0;
 }
-/* line 430, admin.scss */
+/* line 441, admin.scss */
 .sort__strip__section button {
   float: right;
   width: 70px;
@@ -420,29 +428,29 @@ body {
   -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
-/* line 451, admin.scss */
+/* line 462, admin.scss */
 .sort__strip__section button:hover {
   opacity: 1;
 }
 
-/* line 458, admin.scss */
+/* line 469, admin.scss */
 .pager__section {
   float: right;
   margin-top: 4px;
 }
-/* line 462, admin.scss */
+/* line 473, admin.scss */
 .pager__section li {
   float: left;
   padding-right: 10px;
 }
-/* line 467, admin.scss */
+/* line 478, admin.scss */
 .pager__section .title {
   padding-right: 6px;
   color: #4b4b4b;
   font-size: 10px;
   text-transform: uppercase;
 }
-/* line 474, admin.scss */
+/* line 485, admin.scss */
 .pager__section a {
   position: relative;
   top: -2px;
@@ -451,16 +459,16 @@ body {
   font-weight: bold;
   text-decoration: none;
 }
-/* line 486, admin.scss */
+/* line 497, admin.scss */
 .pager__section a.current {
   color: #de1500;
 }
 
-/* line 492, admin.scss */
+/* line 503, admin.scss */
 .breadcrumps__section {
   padding-bottom: 6px;
 }
-/* line 495, admin.scss */
+/* line 506, admin.scss */
 .breadcrumps__section li {
   float: left;
   color: #4b4b4b;
@@ -468,25 +476,25 @@ body {
   font-size: 15px;
   font-weight: bold;
 }
-/* line 504, admin.scss */
+/* line 515, admin.scss */
 .breadcrumps__section li:first-child {
   color: #de1500;
 }
-/* line 507, admin.scss */
+/* line 518, admin.scss */
 .breadcrumps__section li:first-child a {
   margin-left: 0;
   color: #de1500;
 }
-/* line 513, admin.scss */
+/* line 524, admin.scss */
 .breadcrumps__section li:nth-child(2n) {
   color: #de1500;
 }
-/* line 517, admin.scss */
+/* line 528, admin.scss */
 .breadcrumps__section li.category {
   margin-top: -5px;
   margin-left: 10px;
 }
-/* line 523, admin.scss */
+/* line 534, admin.scss */
 .breadcrumps__section a {
   position: relative;
   top: 1px;
@@ -498,15 +506,15 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 538, admin.scss */
+/* line 549, admin.scss */
 .breadcrumps__section a:hover {
   text-decoration: underline;
 }
-/* line 542, admin.scss */
+/* line 553, admin.scss */
 .breadcrumps__section a.gray {
   color: #9e9e9e;
 }
-/* line 546, admin.scss */
+/* line 557, admin.scss */
 .breadcrumps__section a.add__item {
   top: -2px;
   margin-left: 2px;
@@ -521,29 +529,29 @@ body {
   background: -o-linear-gradient(top, #8fe42c, #69be06);
   background: linear-gradient(to bottom, #8fe42c, #69be06);
 }
-/* line 558, admin.scss */
+/* line 569, admin.scss */
 .breadcrumps__section a.add__item:hover {
   text-decoration: none;
 }
 
-/* line 567, admin.scss */
+/* line 578, admin.scss */
 .shop__add__item .caption {
   color: #de1500;
   font-size: 15px;
   font-weight: bold;
 }
-/* line 577, admin.scss */
+/* line 588, admin.scss */
 .shop__add__item form .breadcrumps__section {
   margin-bottom: 12px;
   display: block;
   border-bottom: 1px solid #d9d9d9;
 }
-/* line 583, admin.scss */
+/* line 594, admin.scss */
 .shop__add__item form .row {
   margin-bottom: 12px;
   clear: both;
 }
-/* line 588, admin.scss */
+/* line 599, admin.scss */
 .shop__add__item form .button {
   height: auto!important;
   width: auto!important;
@@ -568,7 +576,7 @@ body {
   -ms-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 614, admin.scss */
+/* line 625, admin.scss */
 .shop__add__item form .button.gray {
   background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
   background: -webkit-linear-gradient(top, silver, #9a9a9a);
@@ -576,7 +584,7 @@ body {
   background: -o-linear-gradient(top, silver, #9a9a9a);
   background: linear-gradient(to bottom, #c0c0c0, #9a9a9a);
 }
-/* line 617, admin.scss */
+/* line 628, admin.scss */
 .shop__add__item form .button.gray.light {
   background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#cccccc));
   background: -webkit-linear-gradient(top, #dfdfdf, #cccccc);
@@ -584,7 +592,7 @@ body {
   background: -o-linear-gradient(top, #dfdfdf, #cccccc);
   background: linear-gradient(to bottom, #dfdfdf, #cccccc);
 }
-/* line 622, admin.scss */
+/* line 633, admin.scss */
 .shop__add__item form .button.green {
   background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
   background: -webkit-linear-gradient(top, #8fe42c, #69be06);
@@ -592,7 +600,7 @@ body {
   background: -o-linear-gradient(top, #8fe42c, #69be06);
   background: linear-gradient(to bottom, #8fe42c, #69be06);
 }
-/* line 626, admin.scss */
+/* line 637, admin.scss */
 .shop__add__item form .button.red {
   background: -webkit-gradient(linear, left top, left bottom, from(red), to(#640101));
   background: -webkit-linear-gradient(top, red, #640101);
@@ -600,29 +608,29 @@ body {
   background: -o-linear-gradient(top, red, #640101);
   background: linear-gradient(to bottom, #ff0000, #640101);
 }
-/* line 630, admin.scss */
+/* line 641, admin.scss */
 .shop__add__item form .button.centered {
   position: relative;
   top: -4px;
 }
-/* line 635, admin.scss */
+/* line 646, admin.scss */
 .shop__add__item form .button.with__margin__bottom {
   margin-bottom: 4px;
 }
-/* line 639, admin.scss */
+/* line 650, admin.scss */
 .shop__add__item form .button.submit__form {
   margin: 40px auto;
 }
-/* line 643, admin.scss */
+/* line 654, admin.scss */
 .shop__add__item form .button.delete__item {
   float: left;
   margin-top: 40px;
 }
-/* line 648, admin.scss */
+/* line 659, admin.scss */
 .shop__add__item form .button.submit__form {
   float: right;
 }
-/* line 653, admin.scss */
+/* line 664, admin.scss */
 .shop__add__item form input[type='text'] {
   height: 26px;
   width: 100%;
@@ -643,12 +651,12 @@ body {
   -ms-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 671, admin.scss */
+/* line 682, admin.scss */
 .shop__add__item form input[type='text']:focus {
   background: #fff;
   border-color: #7f7f7f;
 }
-/* line 676, admin.scss */
+/* line 687, admin.scss */
 .shop__add__item form input[type='text']::-webkit-input-placeholder {
   padding-left: 8px;
   color: #4b4b4b;
@@ -657,7 +665,7 @@ body {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 687, admin.scss */
+/* line 698, admin.scss */
 .shop__add__item form input[type='text']:-moz-placeholder {
   padding-left: 8px;
   color: #4b4b4b;
@@ -666,7 +674,7 @@ body {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 700, admin.scss */
+/* line 711, admin.scss */
 .shop__add__item form textarea {
   display: block;
   height: 154px;
@@ -683,12 +691,12 @@ body {
   -ms-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 712, admin.scss */
+/* line 723, admin.scss */
 .shop__add__item form textarea:focus {
   background: #fff;
   border-color: #7f7f7f;
 }
-/* line 717, admin.scss */
+/* line 728, admin.scss */
 .shop__add__item form textarea::-webkit-input-placeholder {
   padding-left: 8px;
   color: #4b4b4b;
@@ -697,7 +705,7 @@ body {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 728, admin.scss */
+/* line 739, admin.scss */
 .shop__add__item form textarea:-moz-placeholder {
   padding-left: 8px;
   color: #4b4b4b;
@@ -706,24 +714,24 @@ body {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 742, admin.scss */
+/* line 753, admin.scss */
 .shop__add__item form .caption__row .active {
   margin-top: 2px;
   margin-left: 18px;
   margin-right: 0;
 }
-/* line 749, admin.scss */
+/* line 760, admin.scss */
 .shop__add__item form .sex__section {
   padding-top: 2px;
   padding-left: 10px;
   float: left;
 }
-/* line 754, admin.scss */
+/* line 765, admin.scss */
 .shop__add__item form .sex__section li {
   margin-right: 2px;
   float: left;
 }
-/* line 758, admin.scss */
+/* line 769, admin.scss */
 .shop__add__item form .sex__section li a {
   padding: 2px 4px;
   display: block;
@@ -733,24 +741,24 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 769, admin.scss */
+/* line 780, admin.scss */
 .shop__add__item form .sex__section li a input {
   display: none;
 }
-/* line 773, admin.scss */
+/* line 784, admin.scss */
 .shop__add__item form .sex__section li a.current {
   background: #434343;
   border-color: #434343;
   color: #fff;
 }
-/* line 784, admin.scss */
+/* line 795, admin.scss */
 .shop__add__item form .sale__section {
   float: right;
   width: 188px;
   padding-left: 40px;
   background: url("/i/admin/ico-sale.png") no-repeat left 25px;
 }
-/* line 790, admin.scss */
+/* line 801, admin.scss */
 .shop__add__item form .sale__section .bg {
   padding-top: 6px;
   padding-right: 8px;
@@ -759,11 +767,11 @@ body {
   background: #d9d9d9;
   border-radius: 6px;
 }
-/* line 801, admin.scss */
+/* line 812, admin.scss */
 .shop__add__item form .sale__section .row {
   margin-bottom: 0;
 }
-/* line 805, admin.scss */
+/* line 816, admin.scss */
 .shop__add__item form .sale__section .sale {
   display: inline-block;
   width: 116px;
@@ -773,21 +781,21 @@ body {
   font-weight: bold;
   line-height: 24px;
 }
-/* line 816, admin.scss */
+/* line 827, admin.scss */
 .shop__add__item form .sale__section .sale::-webkit-input-placeholder {
   padding-left: 8px;
   color: #de1500;
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 823, admin.scss */
+/* line 834, admin.scss */
 .shop__add__item form .sale__section .sale:-moz-placeholder {
   padding-left: 8px;
   color: #de1500;
   font-weight: bold;
   color: #de1500;
 }
-/* line 831, admin.scss */
+/* line 842, admin.scss */
 .shop__add__item form .sale__section .currency {
   position: relative;
   margin-top: 2px;
@@ -801,24 +809,24 @@ body {
   background: -o-linear-gradient(top, #f6f6f6, #ededed);
   background: linear-gradient(to bottom, #f6f6f6, #ededed);
 }
-/* line 840, admin.scss */
+/* line 851, admin.scss */
 .shop__add__item form .sale__section .currency.active {
   border-radius: 5px 5px 0 0;
 }
-/* line 842, admin.scss */
+/* line 853, admin.scss */
 .shop__add__item form .sale__section .currency.active .current__text {
   background-color: #F6F6F6!important;
   border-radius: 5px 5px 0 0;
 }
-/* line 845, admin.scss */
+/* line 856, admin.scss */
 .shop__add__item form .sale__section .currency.active .current__text:after {
   background-position: left top;
 }
-/* line 849, admin.scss */
+/* line 860, admin.scss */
 .shop__add__item form .sale__section .currency.active .dropdown {
   display: block;
 }
-/* line 854, admin.scss */
+/* line 865, admin.scss */
 .shop__add__item form .sale__section .currency .current__text {
   position: relative;
   height: 26px;
@@ -826,15 +834,15 @@ body {
   cursor: pointer;
   line-height: 26px;
 }
-/* line 861, admin.scss */
+/* line 872, admin.scss */
 .shop__add__item form .sale__section .currency .current__text.rub {
   background: url("/i/admin/ico-rub-small.png") no-repeat 9px 5px;
 }
-/* line 865, admin.scss */
+/* line 876, admin.scss */
 .shop__add__item form .sale__section .currency .current__text.perc {
   background: url("/i/admin/ico-perc.png") no-repeat 6px 5px;
 }
-/* line 869, admin.scss */
+/* line 880, admin.scss */
 .shop__add__item form .sale__section .currency .current__text:after {
   position: absolute;
   right: 7px;
@@ -845,7 +853,7 @@ body {
   background: url("/i/admin/select-arrows-spr.png") no-repeat left bottom;
   content: '';
 }
-/* line 881, admin.scss */
+/* line 892, admin.scss */
 .shop__add__item form .sale__section .currency .dropdown {
   position: absolute;
   left: -1px;
@@ -863,7 +871,7 @@ body {
   background: -o-linear-gradient(top, #f6f6f6, #ededed);
   background: linear-gradient(to bottom, #f6f6f6, #ededed);
 }
-/* line 894, admin.scss */
+/* line 905, admin.scss */
 .shop__add__item form .sale__section .currency .dropdown li {
   display: block;
   margin-bottom: 4px;
@@ -873,23 +881,23 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
-/* line 905, admin.scss */
+/* line 916, admin.scss */
 .shop__add__item form .sale__section .currency .dropdown li.rub {
   height: 24px;
   background: url("/i/admin/ico-rub-small.png") no-repeat 9px top;
 }
-/* line 910, admin.scss */
+/* line 921, admin.scss */
 .shop__add__item form .sale__section .currency .dropdown li.perc {
   height: 24px;
   background: url("/i/admin/ico-perc.png") no-repeat 9px top;
 }
-/* line 918, admin.scss */
+/* line 929, admin.scss */
 .shop__add__item form .sale__section .dates__section {
   position: relative;
   padding-top: 4px;
   color: #4b4b4b;
 }
-/* line 923, admin.scss */
+/* line 934, admin.scss */
 .shop__add__item form .sale__section .dates__section input[type='text'] {
   display: inline-block;
   width: 48px;
@@ -901,13 +909,13 @@ body {
   line-height: 24px;
   text-align: center;
 }
-/* line 938, admin.scss */
+/* line 949, admin.scss */
 .shop__add__item form .sale__section .fake__checkbox {
   position: relative;
   right: -3px;
   float: right;
 }
-/* line 942, admin.scss */
+/* line 953, admin.scss */
 .shop__add__item form .sale__section .fake__checkbox.checked {
   background: -webkit-gradient(linear, left top, left bottom, from(#8fe42c), to(#69be06));
   background: -webkit-linear-gradient(top, #8fe42c, #69be06);
@@ -915,27 +923,27 @@ body {
   background: -o-linear-gradient(top, #8fe42c, #69be06);
   background: linear-gradient(to bottom, #8fe42c, #69be06);
 }
-/* line 949, admin.scss */
+/* line 960, admin.scss */
 .shop__add__item form .specials__section {
   margin-top: 13px;
 }
-/* line 952, admin.scss */
+/* line 963, admin.scss */
 .shop__add__item form .specials__section a.active {
   margin-top: 6px;
   float: left;
 }
-/* line 957, admin.scss */
+/* line 968, admin.scss */
 .shop__add__item form .specials__section .custom-select {
   float: left;
 }
-/* line 962, admin.scss */
+/* line 973, admin.scss */
 .shop__add__item form .price__section {
   position: relative;
   width: 120px;
   margin-top: 6px;
   padding-bottom: 12px;
 }
-/* line 969, admin.scss */
+/* line 980, admin.scss */
 .shop__add__item form .price__section:after {
   position: absolute;
   top: 8px;
@@ -946,39 +954,39 @@ body {
   background: url("/i/admin/ico-rub-small.png") no-repeat;
   content: '';
 }
-/* line 980, admin.scss */
+/* line 991, admin.scss */
 .shop__add__item form .price__section input[type='text'] {
   position: relative;
   display: block;
   width: 118px!important;
 }
-/* line 985, admin.scss */
+/* line 996, admin.scss */
 .shop__add__item form .price__section input[type='text']::-webkit-input-placeholder {
   color: #5b9715!important;
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 991, admin.scss */
+/* line 1002, admin.scss */
 .shop__add__item form .price__section input[type='text']:-moz-placeholder {
   color: #5b9715!important;
   font-weight: bold;
   color: #de1500;
 }
-/* line 997, admin.scss */
+/* line 1008, admin.scss */
 .shop__add__item form .price__section input[type='text'].price {
   margin-bottom: 12px;
 }
-/* line 1003, admin.scss */
+/* line 1014, admin.scss */
 .shop__add__item form .tags {
   padding-bottom: 6px;
   background: #f6f6f6;
   border: 1px solid #d0d0d0;
 }
-/* line 1008, admin.scss */
+/* line 1019, admin.scss */
 .shop__add__item form .tags .caption__strip {
   background: #d0d0d0;
 }
-/* line 1011, admin.scss */
+/* line 1022, admin.scss */
 .shop__add__item form .tags .caption__strip .caption {
   padding-top: 6px;
   padding-left: 8px;
@@ -987,7 +995,7 @@ body {
   font-size: 15px;
   font-weight: bold;
 }
-/* line 1026, admin.scss */
+/* line 1037, admin.scss */
 .shop__add__item form .tags input[type='text'] {
   height: 25px;
   width: 348px;
@@ -996,19 +1004,19 @@ body {
   background: #fff;
   line-height: 20px;
 }
-/* line 1036, admin.scss */
+/* line 1047, admin.scss */
 .shop__add__item form .sub__items__section {
   padding-top: 10px;
   border-top: 1px solid #d9d9d9;
 }
-/* line 1040, admin.scss */
+/* line 1051, admin.scss */
 .shop__add__item form .sub__items__section .caption__strip {
   height: 40px;
   background: #eaeae9;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px dashed #cacaca;
 }
-/* line 1046, admin.scss */
+/* line 1057, admin.scss */
 .shop__add__item form .sub__items__section .caption__strip h3 {
   width: 104px;
   display: inline-block;
@@ -1020,34 +1028,34 @@ body {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 1060, admin.scss */
+/* line 1071, admin.scss */
 .shop__add__item form .sub__items__section .caption__strip .button {
   display: inline-block;
 }
-/* line 1064, admin.scss */
+/* line 1075, admin.scss */
 .shop__add__item form .sub__items__section .caption__strip input {
   display: none;
 }
-/* line 1068, admin.scss */
+/* line 1079, admin.scss */
 .shop__add__item form .sub__items__section .caption__strip .active {
   float: right;
 }
-/* line 1072, admin.scss */
+/* line 1083, admin.scss */
 .shop__add__item form .sub__items__section .caption__strip .delete__button {
   margin-top: 10px;
   margin-right: 10px;
 }
-/* line 1078, admin.scss */
+/* line 1089, admin.scss */
 .shop__add__item form .sub__items__section dl {
   position: relative;
   height: 46px;
   border-bottom: 1px dashed #cacaca;
 }
-/* line 1084, admin.scss */
+/* line 1095, admin.scss */
 .shop__add__item form .sub__items__section dl.added dd {
   color: #ff0000;
 }
-/* line 1090, admin.scss */
+/* line 1101, admin.scss */
 .shop__add__item form .sub__items__section dd {
   width: 102px;
   padding-left: 8px;
@@ -1064,63 +1072,63 @@ body {
   -ms-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 1104, admin.scss */
+/* line 1115, admin.scss */
 .shop__add__item form .sub__items__section dd.added {
   color: red;
 }
-/* line 1109, admin.scss */
+/* line 1120, admin.scss */
 .shop__add__item form .sub__items__section dt {
   width: 328px;
   float: left;
 }
-/* line 1113, admin.scss */
+/* line 1124, admin.scss */
 .shop__add__item form .sub__items__section dt input {
   display: inline-block;
   width: 62px;
   margin-top: 8px;
   text-align: center;
 }
-/* line 1119, admin.scss */
+/* line 1130, admin.scss */
 .shop__add__item form .sub__items__section dt input::-webkit-input-placeholder {
   padding-left: 4px;
 }
-/* line 1123, admin.scss */
+/* line 1134, admin.scss */
 .shop__add__item form .sub__items__section dt input:-moz-placeholder {
   padding-left: 4px;
 }
-/* line 1127, admin.scss */
+/* line 1138, admin.scss */
 .shop__add__item form .sub__items__section dt input.price, .shop__add__item form .sub__items__section dt input.qty {
   color: #5b9715;
   font-weight: bold;
 }
-/* line 1131, admin.scss */
+/* line 1142, admin.scss */
 .shop__add__item form .sub__items__section dt input.price::-webkit-input-placeholder, .shop__add__item form .sub__items__section dt input.qty::-webkit-input-placeholder {
   padding-left: 4px;
   color: #5b9715;
 }
-/* line 1136, admin.scss */
+/* line 1147, admin.scss */
 .shop__add__item form .sub__items__section dt input.price:-moz-placeholder, .shop__add__item form .sub__items__section dt input.qty:-moz-placeholder {
   padding-left: 4px;
   color: #5b9715;
 }
-/* line 1142, admin.scss */
+/* line 1153, admin.scss */
 .shop__add__item form .sub__items__section dt input.consist {
   width: 240px;
   text-align: left;
 }
-/* line 1150, admin.scss */
+/* line 1161, admin.scss */
 .shop__add__item form .sub__items__section .add__color {
   top: 4px;
 }
-/* line 1154, admin.scss */
+/* line 1165, admin.scss */
 .shop__add__item form .sub__items__section .dropdown__section {
   display: inline-block;
 }
-/* line 1158, admin.scss */
+/* line 1169, admin.scss */
 .shop__add__item form .sub__items__section .dropdown__section.active .dropdown {
   display: block;
 }
-/* line 1163, admin.scss */
+/* line 1174, admin.scss */
 .shop__add__item form .sub__items__section .dropdown__section .dropdown {
   position: absolute;
   left: 0;
@@ -1131,7 +1139,7 @@ body {
   background: #fff;
   z-index: 3;
 }
-/* line 1175, admin.scss */
+/* line 1186, admin.scss */
 .shop__add__item form .sub__items__section .dropdown__section .dropdown li {
   float: left;
   height: 16px;
@@ -1140,7 +1148,7 @@ body {
   border: 1px solid #C9C9C9;
   cursor: pointer;
 }
-/* line 1188, admin.scss */
+/* line 1199, admin.scss */
 .shop__add__item form .sub__items__section .selected__colors li {
   position: relative;
   float: left;
@@ -1150,7 +1158,7 @@ body {
   margin-right: 4px;
   border: 1px solid #c9c9c9;
 }
-/* line 1198, admin.scss */
+/* line 1209, admin.scss */
 .shop__add__item form .sub__items__section .selected__colors .delete {
   position: absolute;
   left: -1px;
@@ -1166,11 +1174,11 @@ body {
   -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
-/* line 1209, admin.scss */
+/* line 1220, admin.scss */
 .shop__add__item form .sub__items__section .selected__colors .delete:hover {
   opacity: .8;
 }
-/* line 1215, admin.scss */
+/* line 1226, admin.scss */
 .shop__add__item form .sub__items__section .delete__button {
   float: right;
   height: 20px;
@@ -1180,19 +1188,19 @@ body {
   background: url("/i/admin/ico-delete.png") no-repeat;
   opacity: .8;
 }
-/* line 1227, admin.scss */
+/* line 1238, admin.scss */
 .shop__add__item form .params__strip__section {
   padding: 8px 0;
   background: #fefbdd;
   border-bottom: 1px dashed #cacaca;
 }
-/* line 1233, admin.scss */
+/* line 1244, admin.scss */
 .shop__add__item form .submit__section {
   margin-top: 10px;
   border-top: 1px solid #d9d9d9;
   text-align: center;
 }
-/* line 1239, admin.scss */
+/* line 1250, admin.scss */
 .shop__add__item form a.active {
   display: inline-block;
   height: 16px;
@@ -1208,43 +1216,43 @@ body {
   -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
-/* line 1250, admin.scss */
+/* line 1261, admin.scss */
 .shop__add__item form a.active.checked {
   opacity: 1;
 }
-/* line 1254, admin.scss */
+/* line 1265, admin.scss */
 .shop__add__item form a.active input {
   display: none;
 }
-/* line 1262, admin.scss */
+/* line 1273, admin.scss */
 .shop__add__item form .fake__checkbox input {
   display: none;
 }
-/* line 1267, admin.scss */
+/* line 1278, admin.scss */
 .shop__add__item form .loading__section {
   margin-top: 10px;
   padding-top: 14px;
   border-top: 1px solid #d9d9d9;
 }
-/* line 1272, admin.scss */
+/* line 1283, admin.scss */
 .shop__add__item form .loading__section .add {
   top: 2px;
   cursor: pointer;
 }
-/* line 1277, admin.scss */
+/* line 1288, admin.scss */
 .shop__add__item form .loading__section .image__description {
   float: left;
   width: 360px;
 }
-/* line 1282, admin.scss */
+/* line 1293, admin.scss */
 .shop__add__item form .loading__section .row {
   padding: 6px 0 6px 2px;
 }
-/* line 1284, admin.scss */
+/* line 1295, admin.scss */
 .shop__add__item form .loading__section .row.new {
   background: #fefbdd;
 }
-/* line 1289, admin.scss */
+/* line 1300, admin.scss */
 .shop__add__item form .loading__section .upload__button {
   position: relative;
   float: right;
@@ -1264,7 +1272,7 @@ body {
   background: -o-linear-gradient(top, silver, #9a9a9a);
   background: linear-gradient(to bottom, #c0c0c0, #9a9a9a);
 }
-/* line 1308, admin.scss */
+/* line 1319, admin.scss */
 .shop__add__item form .loading__section .upload__button input {
   position: absolute;
   top: 0;
@@ -1274,7 +1282,7 @@ body {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-/* line 1319, admin.scss */
+/* line 1330, admin.scss */
 .shop__add__item form .loading__section .warning {
   color: #de1500;
   font-family: "PT Sans";
@@ -1282,14 +1290,14 @@ body {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 1331, admin.scss */
+/* line 1342, admin.scss */
 .shop__add__item form .loading__section .uploaded__section {
   position: relative;
   margin-top: 10px;
   padding-top: 4px;
   border-top: 1px solid #d9d9d9;
 }
-/* line 1337, admin.scss */
+/* line 1348, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__counter {
   position: absolute;
   right: 0;
@@ -1301,19 +1309,19 @@ body {
   font-size: 15px;
   font-weight: bold;
 }
-/* line 1350, admin.scss */
+/* line 1361, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__counter span {
   color: #53c520;
 }
-/* line 1353, admin.scss */
+/* line 1364, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__counter span.full {
   color: #de1500;
 }
-/* line 1359, admin.scss */
+/* line 1370, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list {
   padding-top: 14px;
 }
-/* line 1362, admin.scss */
+/* line 1373, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li {
   position: relative;
   margin-right: 4px;
@@ -1321,18 +1329,18 @@ body {
   width: 68px;
   float: left;
 }
-/* line 1369, admin.scss */
+/* line 1380, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li.checked, .shop__add__item form .loading__section .uploaded__section .images__list li:hover {
   margin-top: -1px;
   margin-left: -1px;
   margin-right: 3px;
   border: 1px solid #ccc;
 }
-/* line 1375, admin.scss */
+/* line 1386, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li.checked .preview, .shop__add__item form .loading__section .uploaded__section .images__list li:hover .preview {
   display: block;
 }
-/* line 1380, admin.scss */
+/* line 1391, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .preview {
   position: absolute;
   left: -1px;
@@ -1347,7 +1355,7 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 1399, admin.scss */
+/* line 1410, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .img__box {
   position: relative;
   height: 82px;
@@ -1356,7 +1364,7 @@ body {
   overflow: hidden;
   margin: 0 auto 4px;
 }
-/* line 1407, admin.scss */
+/* line 1418, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .img__box img {
   width: 60px;
   -webkit-transition: all 0.2s linear;
@@ -1365,11 +1373,11 @@ body {
   -ms-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 1413, admin.scss */
+/* line 1424, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .img__box.deleted img {
   opacity: .7;
 }
-/* line 1417, admin.scss */
+/* line 1428, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .img__box .active {
   position: absolute;
   right: 0;
@@ -1377,7 +1385,7 @@ body {
   margin: 0;
   cursor: pointer;
 }
-/* line 1425, admin.scss */
+/* line 1436, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .img__box .delete {
   position: absolute;
   left: 0;
@@ -1387,7 +1395,7 @@ body {
   background: url("/i/admin/ico-del-red.png") no-repeat;
   cursor: pointer;
 }
-/* line 1437, admin.scss */
+/* line 1448, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .item__select label {
   display: block;
   margin-bottom: 4px;
@@ -1396,12 +1404,12 @@ body {
   font-size: 10px;
   text-align: center;
 }
-/* line 1450, admin.scss */
+/* line 1461, admin.scss */
 .shop__add__item form .loading__section .uploaded__section .images__list li .item__select .custom-select {
   margin-left: 12px;
 }
 
-/* line 1462, admin.scss */
+/* line 1473, admin.scss */
 .toggle__seo__editor {
   position: relative;
   top: -20px;
@@ -1419,12 +1427,12 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 1485, admin.scss */
+/* line 1496, admin.scss */
 .toggle__seo__editor.opened {
   background-position: left -23px;
 }
 
-/* line 1490, admin.scss */
+/* line 1501, admin.scss */
 .seo__editor {
   display: none;
   margin-top: 8px;
@@ -1437,15 +1445,15 @@ body {
   border-top: 1px dashed #bdbdbd;
   border-bottom: 1px dashed #bdbdbd;
 }
-/* line 1504, admin.scss */
+/* line 1515, admin.scss */
 .seo__editor.opened {
   display: block;
 }
-/* line 1508, admin.scss */
+/* line 1519, admin.scss */
 .seo__editor dl {
   margin-bottom: 8px;
 }
-/* line 1512, admin.scss */
+/* line 1523, admin.scss */
 .seo__editor dt {
   width: 76px;
   float: left;
@@ -1454,12 +1462,12 @@ body {
   font-size: 12px;
   text-transform: uppercase;
 }
-/* line 1525, admin.scss */
+/* line 1536, admin.scss */
 .seo__editor dd {
   float: right;
   width: 584px;
 }
-/* line 1530, admin.scss */
+/* line 1541, admin.scss */
 .seo__editor input[type='text'] {
   height: 26px;
   width: 100%;
@@ -1472,7 +1480,7 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-/* line 1547, admin.scss */
+/* line 1558, admin.scss */
 .seo__editor textarea {
   height: 66px;
   width: 100%;
@@ -1484,7 +1492,7 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-/* line 1561, admin.scss */
+/* line 1572, admin.scss */
 .seo__editor input[type='submit'] {
   float: right;
   padding-top: 10px;
@@ -1508,14 +1516,14 @@ body {
   background: linear-gradient(to bottom, #696969, #444444);
 }
 
-/* line 1590, admin.scss */
+/* line 1601, admin.scss */
 .brands__list__section .list__section li {
   margin-bottom: 1px;
   height: 88px;
   width: 459px;
   background: #e5e5e5;
 }
-/* line 1597, admin.scss */
+/* line 1608, admin.scss */
 .brands__list__section .list__section .active {
   margin-left: 6px;
   margin-top: 36px;
@@ -1530,11 +1538,11 @@ body {
   -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
-/* line 1607, admin.scss */
+/* line 1618, admin.scss */
 .brands__list__section .list__section .active.inactive {
   opacity: .45;
 }
-/* line 1612, admin.scss */
+/* line 1623, admin.scss */
 .brands__list__section .list__section .logo__section {
   float: left;
   margin-top: 6px;
@@ -1544,12 +1552,12 @@ body {
   background: #ccc;
   overflow: hidden;
 }
-/* line 1621, admin.scss */
+/* line 1632, admin.scss */
 .brands__list__section .list__section .logo__section img {
   max-width: 100%;
   max-height: 100%;
 }
-/* line 1627, admin.scss */
+/* line 1638, admin.scss */
 .brands__list__section .list__section .brand__name {
   position: relative;
   top: 35px;
@@ -1562,11 +1570,11 @@ body {
   text-transform: uppercase;
 }
 
-/* line 1647, admin.scss */
+/* line 1658, admin.scss */
 .orders__list__section h2 {
   color: #e60000;
 }
-/* line 1651, admin.scss */
+/* line 1662, admin.scss */
 .orders__list__section .statistic__strip__section {
   height: 28px;
   display: block;
@@ -1577,7 +1585,7 @@ body {
   background: linear-gradient(to bottom, #3b3b3b, #292929);
   overflow: hidden;
 }
-/* line 1657, admin.scss */
+/* line 1668, admin.scss */
 .orders__list__section .statistic__strip__section li {
   margin-right: 26px;
   float: left;
@@ -1587,7 +1595,7 @@ body {
   line-height: 28px;
   text-transform: uppercase;
 }
-/* line 1671, admin.scss */
+/* line 1682, admin.scss */
 .orders__list__section .statistic__strip__section li.total {
   position: relative;
   padding-left: 10px;
@@ -1598,7 +1606,7 @@ body {
   font-size: 15px;
   font-weight: bold;
 }
-/* line 1683, admin.scss */
+/* line 1694, admin.scss */
 .orders__list__section .statistic__strip__section li.total:after {
   position: absolute;
   right: -15px;
@@ -1609,29 +1617,29 @@ body {
   background: url("/i/admin/total-corner.png") no-repeat;
   content: '';
 }
-/* line 1694, admin.scss */
+/* line 1705, admin.scss */
 .orders__list__section .statistic__strip__section li.total a {
   color: #fff;
   text-decoration: none;
 }
-/* line 1700, admin.scss */
+/* line 1711, admin.scss */
 .orders__list__section .statistic__strip__section li a {
   color: #fff200;
 }
-/* line 1703, admin.scss */
+/* line 1714, admin.scss */
 .orders__list__section .statistic__strip__section li a:hover {
   text-decoration: none;
 }
-/* line 1707, admin.scss */
+/* line 1718, admin.scss */
 .orders__list__section .statistic__strip__section li a.canceled {
   color: #ec008c;
 }
-/* line 1714, admin.scss */
+/* line 1725, admin.scss */
 .orders__list__section .statistic__strip__section .fr {
   float: right;
   margin-right: 0;
 }
-/* line 1719, admin.scss */
+/* line 1730, admin.scss */
 .orders__list__section .statistic__strip__section .filter__toggle {
   padding-left: 12px;
   padding-right: 40px;
@@ -1647,19 +1655,19 @@ body {
   line-height: 31px;
   text-decoration: none;
 }
-/* line 1740, admin.scss */
+/* line 1751, admin.scss */
 .orders__list__section .statistic__strip__section .filter__toggle:hover {
   text-decoration: underline;
 }
-/* line 1744, admin.scss */
+/* line 1755, admin.scss */
 .orders__list__section .statistic__strip__section .filter__toggle.active {
   background-position: 71px 9px;
 }
-/* line 1752, admin.scss */
+/* line 1763, admin.scss */
 .orders__list__section .filters__section.hidden {
   display: none;
 }
-/* line 1756, admin.scss */
+/* line 1767, admin.scss */
 .orders__list__section .filters__section ul {
   background-color: #4b4b4b;
   *zoom: 1;
@@ -1678,14 +1686,14 @@ body {
   font-size: 10px;
   text-transform: uppercase;
 }
-/* line 1772, admin.scss */
+/* line 1783, admin.scss */
 .orders__list__section .filters__section li {
   margin-top: 10px;
   margin-bottom: 8px;
   margin-left: 12px;
   float: left;
 }
-/* line 1778, admin.scss */
+/* line 1789, admin.scss */
 .orders__list__section .filters__section li.current {
   margin-top: 6px;
   margin-bottom: 4px;
@@ -1694,7 +1702,7 @@ body {
   background: #000;
   border-radius: 5px;
 }
-/* line 1788, admin.scss */
+/* line 1799, admin.scss */
 .orders__list__section .filters__section a {
   margin-left: 4px;
   color: #fff14b;
@@ -1702,52 +1710,52 @@ body {
   font-size: 10px;
   font-weight: bold;
 }
-/* line 1797, admin.scss */
+/* line 1808, admin.scss */
 .orders__list__section .filters__section a:hover {
   text-decoration: none;
 }
-/* line 1801, admin.scss */
+/* line 1812, admin.scss */
 .orders__list__section .filters__section a.finished {
   color: #00ff0c;
 }
-/* line 1805, admin.scss */
+/* line 1816, admin.scss */
 .orders__list__section .filters__section a.canceled {
   color: #ff00ff;
 }
-/* line 1814, admin.scss */
+/* line 1825, admin.scss */
 .orders__list__section .list li {
   margin-bottom: 1px;
 }
-/* line 1825, admin.scss */
+/* line 1836, admin.scss */
 .orders__list__section .list li.finished .cut {
   background: #f0f9d6;
 }
-/* line 1831, admin.scss */
+/* line 1842, admin.scss */
 .orders__list__section .list li.canceled .cut {
   background: #FFDAD6;
 }
-/* line 1837, admin.scss */
+/* line 1848, admin.scss */
 .orders__list__section .list li.proceed .cut {
   background: #fffcbf;
 }
-/* line 1842, admin.scss */
+/* line 1853, admin.scss */
 .orders__list__section .list li.active {
   border-top: 2px solid #aeaeae;
 }
-/* line 1845, admin.scss */
+/* line 1856, admin.scss */
 .orders__list__section .list li.active .cut {
   background: #cfcfcf;
 }
-/* line 1849, admin.scss */
+/* line 1860, admin.scss */
 .orders__list__section .list li.active .submit__button {
   cursor: pointer;
   opacity: 1;
 }
-/* line 1854, admin.scss */
+/* line 1865, admin.scss */
 .orders__list__section .list li.active .full {
   display: block;
 }
-/* line 1861, admin.scss */
+/* line 1872, admin.scss */
 .orders__list__section .list li .cut {
   height: 38px;
   padding: 0 12px;
@@ -1755,29 +1763,29 @@ body {
   cursor: pointer;
   line-height: 38px;
 }
-/* line 1869, admin.scss */
+/* line 1880, admin.scss */
 .orders__list__section .list li .full {
   margin-bottom: -1px;
   display: none;
   border-bottom: 2px solid #aeaeae;
 }
-/* line 1875, admin.scss */
+/* line 1886, admin.scss */
 .orders__list__section .list li .order__num {
   display: inline-block;
   color: #272727;
   font-size: 13px;
   text-transform: uppercase;
 }
-/* line 1885, admin.scss */
+/* line 1896, admin.scss */
 .orders__list__section .list li .order__num span {
   color: #6bb200;
 }
-/* line 1890, admin.scss */
+/* line 1901, admin.scss */
 .orders__list__section .list li select {
   margin-top: 10px;
   float: right;
 }
-/* line 1895, admin.scss */
+/* line 1906, admin.scss */
 .orders__list__section .list li .submit__button {
   margin-top: 5px;
   margin-left: 10px;
@@ -1804,11 +1812,11 @@ body {
   -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
-/* line 1918, admin.scss */
+/* line 1929, admin.scss */
 .orders__list__section .list li .items__list__section {
   margin-top: 12px;
 }
-/* line 1921, admin.scss */
+/* line 1932, admin.scss */
 .orders__list__section .list li .items__list__section li {
   margin-right: 8px;
   margin-bottom: 8px;
@@ -1819,40 +1827,40 @@ body {
   background: #f0f0f0;
   border: 1px solid #cbcbcb;
 }
-/* line 1931, admin.scss */
+/* line 1942, admin.scss */
 .orders__list__section .list li .items__list__section li:nth-child(2n+2) {
   margin-right: 0;
 }
-/* line 1935, admin.scss */
+/* line 1946, admin.scss */
 .orders__list__section .list li .items__list__section li img {
   height: 68px;
   width: 50px;
   float: left;
 }
-/* line 1941, admin.scss */
+/* line 1952, admin.scss */
 .orders__list__section .list li .items__list__section li .description__section {
   margin-left: 10px;
   width: 144px;
   float: left;
   text-transform: uppercase;
 }
-/* line 1947, admin.scss */
+/* line 1958, admin.scss */
 .orders__list__section .list li .items__list__section li .description__section h3 {
   color: #666;
   font-size: 12px;
 }
-/* line 1954, admin.scss */
+/* line 1965, admin.scss */
 .orders__list__section .list li .items__list__section li .description__section h4 {
   color: #464646;
   font-size: 12px;
   font-weight: bold;
 }
-/* line 1963, admin.scss */
+/* line 1974, admin.scss */
 .orders__list__section .list li .items__list__section li .meta__section {
   width: 64px;
   float: left;
 }
-/* line 1967, admin.scss */
+/* line 1978, admin.scss */
 .orders__list__section .list li .items__list__section li .meta__section .count {
   margin-bottom: 28px;
   height: 20px;
@@ -1865,7 +1873,7 @@ body {
   line-height: 20px;
   text-align: center;
 }
-/* line 1982, admin.scss */
+/* line 1993, admin.scss */
 .orders__list__section .list li .items__list__section li .meta__section .price {
   padding-right: 20px;
   background: url(../i/ico-rub.png) no-repeat right 4px;
@@ -1873,39 +1881,39 @@ body {
   clear: both;
   font-size: 20px;
 }
-/* line 1993, admin.scss */
+/* line 2004, admin.scss */
 .orders__list__section .list li .gray__bg {
   background: #e5e5e5;
 }
-/* line 1997, admin.scss */
+/* line 2008, admin.scss */
 .orders__list__section .list li dl {
   padding: 6px 10px 8px;
   border-bottom: 1px dashed #c9c9c9;
 }
-/* line 2001, admin.scss */
+/* line 2012, admin.scss */
 .orders__list__section .list li dl dt {
   color: #6bb200;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2010, admin.scss */
+/* line 2021, admin.scss */
 .orders__list__section .list li dl dd {
   padding-top: 6px;
   color: #595959;
   font-size: 13px;
 }
-/* line 2019, admin.scss */
+/* line 2030, admin.scss */
 .orders__list__section .list li .price__section {
   background: #6bb200;
 }
-/* line 2022, admin.scss */
+/* line 2033, admin.scss */
 .orders__list__section .list li .price__section dt {
   margin-top: 7px;
   float: left;
   color: #fff;
 }
-/* line 2028, admin.scss */
+/* line 2039, admin.scss */
 .orders__list__section .list li .price__section dd {
   padding-right: 20px;
   float: right;
@@ -1913,33 +1921,33 @@ body {
   color: #fff;
   font-size: 20px;
 }
-/* line 2038, admin.scss */
+/* line 2049, admin.scss */
 .orders__list__section .list li .contacts__section {
   padding: 0 10px;
   border-bottom: 1px dashed #c9c9c9;
 }
-/* line 2042, admin.scss */
+/* line 2053, admin.scss */
 .orders__list__section .list li .contacts__section dl {
   padding: 6px 0 8px;
   width: 33%;
   float: left;
   border-bottom: 0;
 }
-/* line 2049, admin.scss */
+/* line 2060, admin.scss */
 .orders__list__section .list li .contacts__section dd {
   font-weight: bold;
 }
-/* line 2054, admin.scss */
+/* line 2065, admin.scss */
 .orders__list__section .list li .deliver__price__section {
   border-bottom: 0;
 }
-/* line 2057, admin.scss */
+/* line 2068, admin.scss */
 .orders__list__section .list li .deliver__price__section dt {
   margin-top: 9px;
   float: left;
   color: #646464;
 }
-/* line 2064, admin.scss */
+/* line 2075, admin.scss */
 .orders__list__section .list li .deliver__price__section dd {
   padding-right: 20px;
   float: right;
@@ -1947,7 +1955,7 @@ body {
   color: #6e6e6e;
   font-size: 20px;
 }
-/* line 2075, admin.scss */
+/* line 2086, admin.scss */
 .orders__list__section .list li .comments__section li {
   padding-top: 8px;
   padding-right: 10px;
@@ -1956,47 +1964,47 @@ body {
   background: #fff9d5;
   border-top: 1px solid #c1c1c1;
 }
-/* line 2085, admin.scss */
+/* line 2096, admin.scss */
 .orders__list__section .list li .comments__section li:first-child {
   border-top: 0;
 }
-/* line 2089, admin.scss */
+/* line 2100, admin.scss */
 .orders__list__section .list li .comments__section li:nth-child(2n+2) {
   background: #fef1bc;
 }
-/* line 2094, admin.scss */
+/* line 2105, admin.scss */
 .orders__list__section .list li .comments__section h3 {
   float: left;
   color: #595959;
   font-size: 13px;
   font-weight: bold;
 }
-/* line 2103, admin.scss */
+/* line 2114, admin.scss */
 .orders__list__section .list li .comments__section .login {
   float: right;
   color: #1975b6;
   font-size: 12px;
   font-weight: bold;
 }
-/* line 2112, admin.scss */
+/* line 2123, admin.scss */
 .orders__list__section .list li .comments__section p {
   padding-top: 8px;
   color: #87847d;
   clear: both;
 }
-/* line 2118, admin.scss */
+/* line 2129, admin.scss */
 .orders__list__section .list li .comments__section .add__comment {
   padding-top: 6px;
   background: #e4e4e4;
   border-top: 1px dashed #bdbdbd;
   border-bottom: 1px dashed #bdbdbd;
 }
-/* line 2126, admin.scss */
+/* line 2137, admin.scss */
 .orders__list__section .list li .comments__section .add__comment button {
   margin-right: 14px;
   margin-bottom: 10px;
 }
-/* line 2132, admin.scss */
+/* line 2143, admin.scss */
 .orders__list__section .list li .comments__section label {
   margin-top: 8px;
   margin-right: 6px;
@@ -2007,14 +2015,14 @@ body {
   text-align: right;
   text-transform: uppercase;
 }
-/* line 2143, admin.scss */
+/* line 2154, admin.scss */
 .orders__list__section .list li .comments__section textarea {
   float: left;
   width: 520px;
   border: 1px solid #c9c9c9;
   box-sizing: border-box;
 }
-/* line 2150, admin.scss */
+/* line 2161, admin.scss */
 .orders__list__section .list li .comments__section input[type='text'] {
   margin-bottom: 4px;
   float: left;
@@ -2022,4 +2030,48 @@ body {
   border: 1px solid #c9c9c9;
   box-sizing: border-box;
   line-height: 24px;
+}
+
+/* line 2176, admin.scss */
+.shop__search {
+  padding: 12px 8px;
+  background: #505050;
+}
+/* line 2180, admin.scss */
+.shop__search input[type='text'] {
+  width: 470px;
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid #6f6f6f;
+  line-height: 17px;
+}
+/* line 2188, admin.scss */
+.shop__search button {
+  height: auto!important;
+  width: auto!important;
+  display: inline-block;
+  padding-top: 8px;
+  padding-right: 5px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "PT Sans";
+  font-size: 10px;
+  line-height: 1!important;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#9a9a9a));
+  background: -webkit-linear-gradient(top, silver, #9a9a9a);
+  background: -moz-linear-gradient(top, silver, #9a9a9a);
+  background: -o-linear-gradient(top, silver, #9a9a9a);
+  background: linear-gradient(to bottom, #c0c0c0, #9a9a9a);
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }

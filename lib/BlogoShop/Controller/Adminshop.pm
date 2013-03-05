@@ -53,7 +53,7 @@ sub show {
     # warn $self->dumper($filter);
     return $self->render(
         %$filter,
-        items => $item->list($filter, {}, 0, 1000),
+        items => $item->list($filter, {brand => 1}, 0, 1000),
         cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
         host => $self->req->url->base,
         template => 'admin/shop',

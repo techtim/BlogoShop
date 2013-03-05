@@ -1,24 +1,24 @@
 <div class='sidebar__section categories fl'>
 	<h3 class='caption'>Категории</h3>
 	<a class='add' href='#'></a>
-	
+
     <ul class='categories__list__section'>
         % foreach my $cat (@$categories) {
-        <li>
-        	<a class='categorie__title' href="/admin/shop/<%= $cat->{_id} %>"><%= $cat->{name} %></a> 
-            <a href="#" class="plus"></a>  
-        
+        <li  <%== 'class=\'current\'' if stash('category') eq $cat->{_id} %> >
+        	<a class='categorie__title' href="/admin/shop/<%= $cat->{_id} %>"><%= $cat->{name} %></a>
+            <a href="#" class="plus"></a>
+
             <!--<select name="pos">
                 % foreach (0..@$categories) {
                 <option value="<%= $_ %>" <%= 'selected' if $cat->{pos} == $_ %>><%= $_ %></option>
                 % }
             </select>
             -->
-            
+
             <ul class='second__lvl'>
                 % foreach my $subcat (@{$cat->{subcats}}) {
-                <li>
-                    <a href="/admin/shop/<%== $cat->{_id} %>/<%= $subcat->{_id} %>"><%= $subcat->{name} %></a>
+                <li <%== 'class=\'current\'' if stash('subcategory') eq $subcat->{_id} %>>
+                    <a  href="/admin/shop/<%== $cat->{_id} %>/<%= $subcat->{_id} %>"><%= $subcat->{name} %></a>
                 </li>
                 % }
             </ul>

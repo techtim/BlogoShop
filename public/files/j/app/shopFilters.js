@@ -1,5 +1,5 @@
 define(['jquery', 'ui', 'tmpl'], function($){
-	
+
 	var config = {
 		section: '.fiters__section',
 		price_filter: '.price__filter',
@@ -25,7 +25,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		items: '<li {{if sale.sale_active}}class="sale"{{/if}}>'+
 				'<a href="${link}"><span class="img__section">'+
 	        			'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
-            			'{{if sale.sale_active}}'+
+            			'{{if $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
 	            			'<span class="ico__sale"></span>'+
 	            		'{{/if}}'+
 	            		'<span class="controls active preview__ico"></span>'+
@@ -33,7 +33,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		            '<span class="brand">${brand_name}</span>'+
 		            '<span class="item__caption">${name}</span>'+
 		        	'<span class="price">'+
-			        	'{{if sale.sale_active}}'+
+			        	'{{if $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
 						  	'<s>${price}</s>'+
 						'{{else}}'+
 							'${price}'+
@@ -106,7 +106,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 			var _values = args.params;
 			_url = '?price_from='+_values[0]+'&amp;price_to='+_values[1];
 		}
-		
+
 		$.ajax({
 			url: _url,
 			type: 'GET',
@@ -121,7 +121,13 @@ define(['jquery', 'ui', 'tmpl'], function($){
 	var draw_list = function(args){
 
 		var $section = $('.list__section'),
-			$items_tpl = $.tmpl(templates.items, args.data.items),
+			$items_tpl = $.tmpl(templates.items, args.data.items, {
+				sale_active: function(active, start, end){
+					var d = Math.floor( new Date().getTime() / 1000 );
+					if( active && start <= d && end >= d ) return true;
+					return false;
+				}
+			}),
 			$helper_tpl = $.tmpl(templates.scroll_helper, {
 				'href': args.params,
 				'next': 16
@@ -130,7 +136,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		if(args.ele){ // если был передан эелемент по которомы кликнули - чистим секцию
 
 			eles.section.find('a').removeClass('current');
-			args.ele.addClass('current'); 
+			args.ele.addClass('current');
 			$section.empty();
 			$items_tpl.appendTo($section);
 			$helper_tpl.appendTo($section);
@@ -163,7 +169,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		}
 
 	});
-	
+
 	$('.price__slider').find('.slider').slider({
 		range: true,
 		min: slider_config.min,

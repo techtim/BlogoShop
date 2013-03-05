@@ -197,7 +197,7 @@
 
 	%= end
 % } elsif (stash('checkout_ok')) {
-	Ваш заказ принят. Номер заказа: <%= stash('checkout_ok') %> <br>
+	Ваш заказ принят. Номер заказа: <%= stash('checkout_ok') %>
 % } else {
 	ПУСТО
 % }

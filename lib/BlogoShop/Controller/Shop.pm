@@ -51,7 +51,7 @@ sub list {
        	$filter->{'subitems.qty'}= {'$gt' => 0};
        	$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
 
-    my $sort 	= {};
+    my $sort 	= { brand => 1 };
     $sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
     $sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
 

@@ -12,10 +12,12 @@ sub show {
 	my $self = shift;
 
 	my $filter;
-	$filter->{active} = 1 unless $self->session('admin'); # show inactive articles to admin
+	$filter->{active} = 1 unless $self->session('admin'); # show inactive articles to admin, don't work on subdomain blog
+
 	foreach (ARTICLE_FILTER) {
 		$filter->{$_} = $self->stash($_) if $self->stash($_);
 	}
+
 	my $article = $self->articles->get_article($filter);
 
 	return $self->redirect_to(($self->req->url =~ m/([\d\w\/]+?)\/[\d\w]+$/)[0]) if !$article;

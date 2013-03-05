@@ -1,5 +1,5 @@
 define(['jquery', 'app/shopFilters'], function($, draw_list){
-	
+
 	function checkBlockPosition(options){
 		var block = options.block
 		var pos_top = block.offset().top
@@ -57,15 +57,13 @@ define(['jquery', 'app/shopFilters'], function($, draw_list){
 							if(data.items.length > 0){
 								draw_list({ data: data 	});
 								$ele.data('next', _step + 16); // плюсуем шаг к предыдущему
-							}else{ 
+							}else{
 								$ele.remove();
 							}
 
 						}else{
-							console.log('else')
 							$(data).insertAfter($ele);
 							$ele.remove();
-
 						}
 
 						set_equal_height();
@@ -81,6 +79,6 @@ define(['jquery', 'app/shopFilters'], function($, draw_list){
 
 	})();
 
-	
-		
+
+
 })
