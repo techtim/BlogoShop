@@ -12,7 +12,7 @@
            {{if name == 'price'}}
                 <span class='price'>
            {{/if}}
-           
+
            {{if name == 'color'}}
                 <ul class='color'>
                     {{each value}}
@@ -34,7 +34,7 @@
 					{{/if}}
 				{{/if}}
            {{/if}}
-           
+
            {{if name == 'price'}}
                 </span>
            {{/if}}
@@ -51,15 +51,15 @@
 </ul>
 
 % if (ref $images eq 'ARRAY') {
-	%= include  'includes/shop_gallery', gallery => $images  
+	%= include  'includes/shop_gallery', gallery => $images
 % }
 
 <div class='shop__information__section'>
-	
+
 	<div class='description__section row'>
 		<%== stash 'descr' %>
 	</div>
-	
+
 	<dl class='clearfloat row'>
 		<dt>
             Бренд:
@@ -69,7 +69,7 @@
         	<%= $brand_name %>
         </dd>
     </dl>
-	
+
 	<dl class='clearfloat row size'>
 		<dt>Размер:</dt>
 		<dd>
@@ -81,9 +81,9 @@
 			</ul>
 		</dd>
 	</dl>
-	
+
 	<span id='params__helper'></span>
-	
+
 	<dl class='clearfloat row submit'>
 		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
 	</dl>
@@ -109,14 +109,14 @@
 		</h2>
 		<ul class='list__section'>
 			%= include 'includes/list_items', items => stash 'items'
-		</ul>  
+		</ul>
 	</div>
 % }
 
 </div>
 
 <script>
-	requirejs(['app/shop'], function(shop_item){
+	requirejs(['app/equalHeight','aapp/shop'], function(shop_item){
 		shop_item.alias = <%== $json_params_alias %>;
 		shop_item.subitems = <%== $json_subitems %>;
 		shop_item.init();
