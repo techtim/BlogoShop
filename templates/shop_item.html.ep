@@ -116,7 +116,7 @@
 </div>
 
 <script>
-	requirejs(['app/equalHeight','aapp/shop'], function(shop_item){
+	requirejs(['app/equalHeight','app/shop'], function(shop_item){
 		shop_item.alias = <%== $json_params_alias %>;
 		shop_item.subitems = <%== $json_subitems %>;
 		shop_item.init();
