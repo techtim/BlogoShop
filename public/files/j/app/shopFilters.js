@@ -130,9 +130,9 @@ define(['jquery', 'ui', 'tmpl'], function($){
 				dicount: function( price, sale ){
 					var price;
 					if(sale.indexOf('%') !== -1){
-						price = (price* parseInt(sale))/100;
+						price -= (price* parseInt(sale))/100;
 					}else{
-						price = sale;
+						price -= sale;
 					}
 					return price;
 				}
