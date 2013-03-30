@@ -45,17 +45,17 @@ sub index {
 }
 
 sub list {
-    my $self = shift;
+	my $self = shift;
 
-    my	$filter->{active} 		= 1;
-       	$filter->{'subitems.qty'}= {'$gt' => 0};
-       	$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
-
-    my $sort 	= { brand => 1 };
-    $sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
-    $sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
-
-    my $item 	= BlogoShop::Item->new($self);
+	my	$filter->{active} 		= 1;
+		$filter->{'subitems.qty'}= {'$gt' => 0};
+		$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
+# warn $self->dumper($filter);
+	my $sort 	= { price => -1 };
+	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
+	$sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
+# warn $self->dumper($sort);
+	my $item 	= BlogoShop::Item->new($self);
 	my $items = $item->list($filter, $sort, ($self->req->param('next') && $self->req->param('next')=~/(\d+)/)?$1:0);
 
 	if ($self->req->headers->header('X-Requested-With')) {
@@ -65,23 +65,23 @@ sub list {
 			$_->{link} = ($filter->{sex} ? "\/$filter->{sex}\/": '/'). join '/', $_->{category}, $_->{subcategory}, $_->{alias};
 		}
 		return $self->render(
-	        json => {
-	        	items => $items
-	        },
-    	);
+			json => {
+				items => $items
+			},
+		);
 	} else {
-	    return $self->render(
-	        items 	=> $items,
-	        %{$self->check_cart},
-	        %$filter,
-	        cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
-	        banners => $self->utils->get_banners($self, $filter->{subcategory}||$filter->{category}||''),
-	        type 	=> '',
-	        shop 	=> 1,
-	        page_name => 'shop',
-	        host 	=> $self->req->url->base,
-	        template=> 'shop',
-	        format 	=> 'html',
+		return $self->render(
+			items 	=> $items,
+			%{$self->check_cart},
+			%$filter,
+			cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
+			banners => $self->utils->get_banners($self, $filter->{subcategory}||$filter->{category}||''),
+			type 	=> '',
+			shop 	=> 1,
+			page_name => 'shop',
+			host 	=> $self->req->url->base,
+			template=> 'shop',
+			format 	=> 'html',
 		);
 	}
 }
@@ -130,7 +130,7 @@ sub brand {
 	my $item 	= BlogoShop::Item->new($self);
 	my $sort 	= {};
 	$sort->{price} 	= $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
-    $sort->{_id} 	= $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
+	$sort->{_id} 	= $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
 
 	# $item->list()
 	# warn $self->dumper([$self->app->db->items->find({brand => $brand->{_id}})->all]);
@@ -143,19 +143,19 @@ sub brand {
 			$_->{link} = ($filter->{sex} ? "\/$filter->{sex}\/": '/'). join '/', $_->{category}, $_->{subcategory}, $_->{alias};
 		}
 		return $self->render(
-	        json => {
-	        	items => $items
-	        },
-    	);
+			json => {
+				items => $items
+			},
+		);
 	} else {
 		return $self->render(
 			host 	=> $self->req->url->base,
-	        items 	=> $items,
-	        %{$self->check_cart},
-	        sex		=> '',
-		brand_id => $brand->{_id},
-	        page_name => 'shop',
-	        template=> 'brand', # return only
+			items 	=> $items,
+			%{$self->check_cart},
+			sex		=> '',
+			brand_id => $brand->{_id},
+			page_name => 'shop',
+			template=> 'brand', # return only
 			format 	=> 'html', 
 		);
 	}

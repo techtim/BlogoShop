@@ -22,10 +22,10 @@ define(['jquery', 'ui', 'tmpl'], function($){
 	};
 
 	var templates = {
-		items: '<li {{if sale.sale_active}}class="sale"{{/if}}>'+
+		items: '<li {{if typeof sale != "undefined" && sale.sale_active}}class="sale"{{/if}}>'+
 				'<a href="${link}"><span class="img__section">'+
 	        			'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
-            			'{{if $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
+            			'{{if typeof sale != "undefined" && $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
 	            			'<span class="ico__sale"></span>'+
 	            		'{{/if}}'+
 	            		'<span class="controls active preview__ico"></span>'+
@@ -33,8 +33,8 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		            '<span class="brand">${brand_name}</span>'+
 		            '<span class="item__caption">${name}</span>'+
 		        	'<span class="price">'+
-			        	'{{if $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
-						  	'<s>${price}</s>'+
+			        	'{{if typeof sale != "undefined"  && $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
+						  	'<s>${price}</s> ${$item.dicount(price, sale.sale_value )}'+
 						'{{else}}'+
 							'${price}'+
 						'{{/if}}'+
@@ -71,7 +71,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 							'<dt>Цена:</dt>'+
 							'<dd>'+
 								'<span class="price">'+
-									'{{if sale.sale_active}}'+
+									'{{if typeof sale != "undefined" && sale.sale_active}}'+
 									  	'<s>${price}</s>'+
 									'{{else}}'+
 										'${price}'+
@@ -126,6 +126,15 @@ define(['jquery', 'ui', 'tmpl'], function($){
 					var d = Math.floor( new Date().getTime() / 1000 );
 					if( active && start <= d && end >= d ) return true;
 					return false;
+				},
+				dicount: function( price, sale ){
+					var price;
+					if(sale.indexOf('%') !== -1){
+						price = (price* parseInt(sale))/100;
+					}else{
+						price = sale;
+					}
+					return price;
 				}
 			}),
 			$helper_tpl = $.tmpl(templates.scroll_helper, {

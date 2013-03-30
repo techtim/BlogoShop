@@ -37,6 +37,25 @@ use constant OPT_SUBITEM_PARAMS => {
 	deep => 'глубина',
 	consist => 'состав',
 	articol => 'артикул',
+
+	len_hand => 'длина рукава',
+	len_chest => 'в груди',
+	len_down_chest => 'под грудью',
+	len_talii => 'в талии',
+	len_bedra => 'в бедрах',
+
+	oprava => 'оправа',
+	h_oprava => 'высота оправы',
+	w_oprava => 'ширина оправы',
+	len_dygek => 'длина дужек',
+	type_lens => 'тип линз',
+	lens => 'линзы',
+
+	mechan => 'механизм',
+	h_corp => 'высота корпуса',
+	w_corp => 'ширина корпуса',
+	in_compl => 'в комплекте',
+	insure => 'гарантия на мех-м',
 };
 
 use constant COLORS => [qw( 111111 FFFFFF FF0000 00FF00 0000FF FFFF00 00FFFF FF00FF)]; # 111111 black 
@@ -186,8 +205,8 @@ sub _parse_data {
 	push @$error_message, 'no_category' if !$self->{category};
 	push @$error_message, 'no_name' if !$self->{name};
 
-	$self->{images} = $self->_get_images($ctrl, 'image') if @$error_message==0;
-	$self->{preview_image} = $self->{images}->[0]->{tag} if !$self->{preview_image} && @{$self->{images}} > 0;
+	$self->{images} = @$error_message==0 ? $self->_get_images($ctrl, 'image') : [];
+	$self->{preview_image} = $self->{images}->[0]->{tag} if @{$self->{images}} > 0 && !$self->{preview_image};
 	push @$error_message, 'no_price' if !$self->{price};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
 
@@ -245,7 +264,7 @@ sub _get_images {
 		}
 	}
 	return $images if @$images>0;
-	return 0;
+	return [];
 }
 
 sub _get_subitems {
