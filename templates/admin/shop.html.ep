@@ -5,7 +5,7 @@
 %= include 'includes/info_message', message => stash 'message'
 
 <script>
-	requirejs(['app/equalHeight'])
+	requirejs(['app/equalHeight', 'app/admin/itemsList'])
 </script>
 
     %= include 'includes/shop_admin_categories', categories => stash 'categories'
@@ -67,6 +67,15 @@
 			</select>
 			<button type='submit'>Искать</button>
 		%= end
+	</div>
+
+	<div class='fiters__section clearfloat'>
+		<ul class='price__filter'>
+			<li class='title'>товары:</li>
+    		<li><a href='#' data-type='all' class='current'>все</a></li>
+    		<li><a href='#' data-type='disabled'>неактивные</a></li>
+    		<li><a href='#' data-type='enabled'>активные</a></li>
+		</ul>
 	</div>
 
 	% if (@$items>0) {

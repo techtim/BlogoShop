@@ -14,7 +14,34 @@ define(['jquery'], function($){
 					$this.closest('li').toggleClass('not__active');
 				}
 			}
-		})
+		});
+	});
+
+	var $list = $('.list__section'),
+		$items = $list.find('li');
+
+	$('.price__filter').on('click', 'a', function( e ){
+		e.preventDefault();
+		var type = $(this).data('type');
+
+		$('.price__filter').find('a').removeClass('current');
+		$(this).addClass('current');
+
+		$items.css('display', 'block');
+
+		if( type === 'enabled'){
+			$items.filter(function( key, ele ){
+				if( $(ele).hasClass('disabled') ){
+					$(ele).css('display', 'none');
+				}
+			});
+		}else if( type === 'disabled'){
+			$items.filter(function( key, ele ){
+				if( !$(ele).hasClass('disabled') ){
+					$(ele).css('display', 'none');
+				}
+			});
+		}
 	});
 
 });
