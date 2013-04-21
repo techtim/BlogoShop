@@ -20,7 +20,7 @@ sub show {
 
     my $item = BlogoShop::Item->new($self);
 
-    if ($self->req->method eq 'POST') {
+    if ($self->req->method eq 'POST' && $filter->{category} ) {
         my $vars = {title => $self->req->param('title.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
                     descr => $self->req->param('descr.'.$filter->{category}.'.'.$filter->{subcategory}) || ''};
         if ($filter->{subcategory} eq '') {
@@ -50,12 +50,24 @@ sub show {
         $filter->{brand} = qr!$value! if $type eq 'brand';
     }
 
+    # Paging
+    my $skip = $self->{app}->config->{items_on_page} * 2 * 
+        ($self->req->param('page') && $self->req->param('page') =~ /(\d+)/ ? ($1>0 ? $1-1 : 0) : 0);
+
+    my $pager_url  = $self->req->url->path->to_string.'?'.$self->req->url->query->to_string;
+    $pager_url =~ s!csrftoken=[^\&]+\&?!!;
+    $pager_url =~ s!\&?page=\d+\&?!!;
+    $pager_url .= $pager_url =~ m!\?$! ? '' : '&';
+
     # warn $self->dumper($filter);
     return $self->render(
         %$filter,
-        items => $item->list($filter, {brand => 1}, 0, 1000),
+        cur_page  => $self->req->param('page') || 1,
+        pages => int( 0.99 + $item->count($filter)/($self->{app}->config->{items_on_page}*2) ),
+        items => $item->list($filter, {brand => 1}, $skip, $self->{app}->config->{items_on_page}*2),
         cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
-        host => $self->req->url->base,
+        host  => $self->req->url->base,
+        pager_url  => $pager_url,
         template => 'admin/shop',
         format => 'html',
     );

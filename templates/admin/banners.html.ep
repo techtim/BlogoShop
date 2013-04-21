@@ -84,19 +84,20 @@
             </p>
             <p>
                 <b>Категория:</b></br/>
-                <select name="category">
-                    <option value=""><b>главная</b></option>
-                    % foreach my $cat (@$categories) {
-                        <option value="<%= $cat->{_id} %>" <%= ($category && $category eq $cat->{_id} ? 'selected' :'') %>>
-                            <b><%== $cat->{name} %></b>
+                <input type="checkbox" name="category" value="" <%= 'checked' if $banner_cats->{''} %> >
+                <b>Главная</b>
+                <br>
+                % foreach my $cat (@$categories) {
+                    <input type="checkbox" name="category" value="<%= $cat->{_id} %>" <%= 'checked' if $banner_cats->{$cat->{_id}} %> >
+                    <b><%== $cat->{name} %></b>
+                    % foreach my $subcat (@{$cat->{subcats}}) {
+                        <input type="checkbox" name="category" value="<%= $cat->{_id}.'.'.$subcat->{_id} %>" 
+                            <%= 'checked' if $banner_cats->{ $cat->{_id}.'.'.$subcat->{_id} } %>>
+                        - <%== $subcat->{name} %>
                         </option>
-                        % foreach my $subcat (@{$cat->{subcats}}) {
-                            <option value="<%= $subcat->{_id} %>" <%= ($category && $category eq $subcat->{_id} ? 'selected' :'') %>>
-                            - <%== $subcat->{name} %>
-                            </option>
-                        % }
                     % }
-                </select>
+                    <br>
+                % }
             </p>
             <p>
                 <b>Частота показа:</b></br/>

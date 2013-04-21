@@ -75,7 +75,7 @@ sub list {
 			%{$self->check_cart},
 			%$filter,
 			cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
-			banners => $self->utils->get_banners($self, $filter->{subcategory}||$filter->{category}||''),
+			banners => $self->utils->get_banners( $self, $filter->{category}. ($filter->{subcategory} ? '.'.$filter->{subcategory} : '') ),
 			type 	=> '',
 			shop 	=> 1,
 			page_name => 'shop',

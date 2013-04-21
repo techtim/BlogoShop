@@ -151,6 +151,20 @@ sub list {
     return \@all;
 }
 
+sub count {
+	my ($self, $filt, $sort, $skip, $limit) = @_;
+	my %filter = ref $filt eq ref {} ? %$filt : ();
+	foreach (keys %filter) {
+		delete $filter{$_} if !$filter{$_};
+	}
+	$filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
+	# warn 'FLTR'. $self->{app}->dumper(\%filter);
+	$filter{sale} = {sale_active => 1} if $filter{sale};
+	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
+
+	return $self->{app}->db->items->find(\%filter)->count;
+}
+
 sub _parse_data {
 	my ($self, $ctrl) = @_;
 	

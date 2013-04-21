@@ -178,7 +178,8 @@ sub list_banners {
         $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner)});
         return $self->redirect_to('admin/banners') if !$banner;
         $self->stash(%$banner);
-        
+        $self->stash(banner_cats => ref $banner->{category} eq ref [] ? { map {$_ => 1} @{$banner->{category}} } : {} );
+
     } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         $banner->{$_} = $self->req->param($_) foreach BANNER_PARAMS;
         push @$error_message, 'no_link' if !$banner->{link};
@@ -192,7 +193,8 @@ sub list_banners {
                 $self->req->param('image_loaded');
             $banner->{weight} += 0;
             $banner->{link} = 'http://'.$banner->{link} unless $banner->{link} =~ m!^(http://)!;
-            
+            $banner->{category} = [$self->req->param(('category'))];
+
             my $id = delete $banner->{id};
             if ($id) { # delete returns true -> means save after edit
                 $self->app->db->banners->update({_id => MongoDB::OID->new(value =>$id)}, {'$set' => {%$banner}});
