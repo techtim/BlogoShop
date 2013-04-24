@@ -147,24 +147,32 @@
 			
 			<ul class='types__list' data-type='deliver'>
 				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled' value='courier' id='courier' data-price='350' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
+					<input type='radio' name='delivery_type' class='deliver__type disabled' value='fast_courier' id='fast_courier' data-price='500' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'fast_courier' %> disabled />
 					<label for='courier'>
-						курьерская доставка <span>(Москва)</span>
+						срочная доставка по Москве в пределах МКАД (в день заказа)
+					<span class='price'>500</span>
+					</label>
+				</li>
+				<li class='clearfloat'>
+					<input type='radio' name='delivery_type' class='deliver__type disabled' value='courier' id='courier' data-price='350' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
+					<label for='courier'>	
+						доставка по Москве в пределах МКАД
 						<span class='price'>350</span>
 					</label>
 				</li>
 				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='russian_post' id='russian__post' data-price='430' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'russian_post' %> disabled />
+					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='russian_post' id='russian__post' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'russian_post' %> disabled />
 					<label for='russian__post'>
 						<img src='/i/logos/russian-post.png' alt='Почта России' />
-						<span class='price'>430</span>
+						Почта России. Стоимость рассчитывается при отправке посылки в почтовом отделении. 
+						<span class='price'></span>
 					</label>
 				</li>
 				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='ems' id='ems' data-price='620' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
+					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='ems' id='ems' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
 					<label for='ems'>
 						<img src='/i/logos/ems.png' alt='EMS' />
-						<span class='price'>620</span>
+						<span class='price'></span>
 					</label>
 				</li>
 			</ul>

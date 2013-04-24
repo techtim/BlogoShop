@@ -178,7 +178,6 @@ sub list_banners {
         $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner)});
         return $self->redirect_to('admin/banners') if !$banner;
         $self->stash(%$banner);
-        $self->stash(banner_cats => ref $banner->{category} eq ref [] ? { map {$_ => 1} @{$banner->{category}} } : {} );
 
     } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         $banner->{$_} = $self->req->param($_) foreach BANNER_PARAMS;
@@ -223,6 +222,7 @@ sub list_banners {
     
     return $self->render(
         banners => [$self->app->db->banners->find()->sort({pos => 1})->all] || [],
+        banner_cats => ref $banner->{category} eq ref [] ? { map {$_ => 1} @{$banner->{category}} } : {},
         weights => \@weights,
         cat_alias => \%cat_alias || {},
         do => $self->stash('do') || '',
