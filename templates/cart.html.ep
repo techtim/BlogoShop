@@ -149,14 +149,14 @@
 				<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled' value='fast_courier' id='fast_courier' data-price='500' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'fast_courier' %> disabled />
 					<label for='courier'>
-						срочная доставка по Москве в пределах МКАД (в день заказа)
+						Срочная доставка по Москве в пределах МКАД (в день заказа)
 					<span class='price'>500</span>
 					</label>
 				</li>
 				<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled' value='courier' id='courier' data-price='350' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
 					<label for='courier'>	
-						доставка по Москве в пределах МКАД
+						Доставка по Москве в пределах МКАД
 						<span class='price'>350</span>
 					</label>
 				</li>
@@ -164,7 +164,7 @@
 					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='russian_post' id='russian__post' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'russian_post' %> disabled />
 					<label for='russian__post'>
 						<img src='/i/logos/russian-post.png' alt='Почта России' />
-						Почта России. Стоимость рассчитывается при отправке посылки в почтовом отделении. 
+						Почта России — Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
 						<span class='price'></span>
 					</label>
 				</li>
@@ -172,6 +172,7 @@
 					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='ems' id='ems' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
 					<label for='ems'>
 						<img src='/i/logos/ems.png' alt='EMS' />
+						EMS — Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
 						<span class='price'></span>
 					</label>
 				</li>
