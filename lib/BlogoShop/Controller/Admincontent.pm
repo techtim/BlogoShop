@@ -174,8 +174,8 @@ sub list_banners {
     }
     
     if ($self->stash('do') && $self->stash('do') eq 'edit') {
-        my $banner = $self->stash('banner') || $self->req->param('banner') || '';
-        $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner)});
+        my $banner_id = $self->stash('banner') || $self->req->param('banner') || '';
+        $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner_id)});
         return $self->redirect_to('admin/banners') if !$banner;
         $self->stash(%$banner);
 
@@ -203,23 +203,23 @@ sub list_banners {
                 #                warn 'banner SAVE '. $self->dumper($banner);
             }
             return $self->redirect_to('admin/banners/edit/'.$id);
-            
+
         } else {
             $self->stash('error_message' => $error_message);
             $self->stash(%$banner);
         }
-        
+
     } else {
         $self->stash($_ => '') foreach BANNER_PARAMS;
     }
-    
+
     my @weights; push @weights, {_id => $_, name => $_} foreach (1..5);
     my %cat_alias;
     foreach (@{$self->app->defaults->{categories}}) {
         $cat_alias{$_->{_id}} = $_->{name};
         $cat_alias{$_->{_id}} = $_->{name} foreach @{$_->{subcats}};
     }
-    
+
     return $self->render(
         banners => [$self->app->db->banners->find()->sort({pos => 1})->all] || [],
         banner_cats => ref $banner->{category} eq ref [] ? { map {$_ => 1} @{$banner->{category}} } : {},

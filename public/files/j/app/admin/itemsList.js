@@ -17,7 +17,7 @@ define(['jquery'], function($){
 		});
 	});
 
-	var $list = $('.list__section'),
+	var $list = $('.shop__items__list .list__section'),
 		$items = $list.find('li');
 
 	$('.price__filter').on('click', 'a', function( e ){
@@ -27,21 +27,20 @@ define(['jquery'], function($){
 		$('.price__filter').find('a').removeClass('current');
 		$(this).addClass('current');
 
-		$items.css('display', 'block');
+		$items.removeClass('hidden');
 
 		if( type === 'enabled'){
-			$items.filter(function( key, ele ){
-				if( $(ele).hasClass('disabled') ){
-					$(ele).css('display', 'none');
-				}
+			$list.find('.disabled').addClass('hidden');
+			$items.not('.hidden').css({
+				marginRight: 22
+			});
+			$list.filter(':not(.hidden)').css({
+				marginRight: 0
 			});
 		}else if( type === 'disabled'){
-			$items.filter(function( key, ele ){
-				if( !$(ele).hasClass('disabled') ){
-					$(ele).css('display', 'none');
-				}
-			});
+			$list.find(':not(.disabled)').addClass('hidden');
 		}
+
 	});
 
 });

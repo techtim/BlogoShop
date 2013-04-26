@@ -1524,6 +1524,10 @@ body {
       float: left;
       color: #666;
 
+      &.hidden {
+        display: none;
+      }
+
       &.active {
         .shop__information__section {
           display: block;
@@ -1534,8 +1538,8 @@ body {
         opacity: .5;
       }
 
-      &:nth-child(4n) {
-        margin-right: 0;
+      &:nth-of-type(4n) {
+          margin-right: 0;
       }
 
       &.scroll__helper {

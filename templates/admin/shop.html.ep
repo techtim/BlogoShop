@@ -78,6 +78,14 @@
 		</ul>
 	</div>
 
+	<ul class='pager__section shop__list clearfloat'>
+		<li class='title'>страница:</li>
+		% foreach (1..$pages) {
+			<!-- <li><a href='/admin/shop/<%= join('/',$category,$subcategory) %>?page=<%= $_ %>'></li> -->
+			<li <%== $_ == $cur_page ? "class='current'" : "" %>><a href='<%= $pager_url . 'page='. $_ %>'><%= $_ %></a></li>
+		% }
+	</ul>
+
 	% if (@$items>0) {
     <ul class='list__section'>
         % foreach my $item (@$items) {
@@ -108,14 +116,5 @@
 	</ul>
 	% }
 
-		
-</div>
 
-<div class="shop__items__list">
-	% foreach (1..$pages) {
-			<!--<a href='/admin/shop/<%= join('/',$category,$subcategory) %>?page=<%= $_ %>'> -->
-			<a href='<%= $pager_url . 'page='. $_ %>'>
-				<%== $_ == $cur_page ? "<b>$_</b>" : $_ %>
-			</a>
-		% }
 </div>
