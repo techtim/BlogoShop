@@ -13,7 +13,7 @@
 			<div class='img__section'>
 				<a href='http://shop.<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>'>
 				<img src="<%== config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>">
-				% if ($item->{sale}->{sale_active} && 
+				% if ($item->{sale}->{sale_active} &&
 				%	$item->{sale}->{sale_start_stamp} <= time() &&
 				%	$item->{sale}->{sale_end_stamp} >= time() ) {
 				<span class='ico__sale'></span>
@@ -26,7 +26,7 @@
 				% if ($item->{size}) {
 					<p class='size'>РАЗМЕР: <strong><%= $item->{size} %></strong></p>
 				% }
-				% foreach (@{$item->{color}}) { 
+				% foreach (@{$item->{color}}) {
 					<span class='color' style='background-color: #<%= $_ %>;'></span>
 				% }
 				% if ($item->{not_enought}) {
@@ -40,7 +40,7 @@
 				<p class='price'>
 					% if (@{$item->{price}} > 1) {
 					  	<s><%= $item->{price}->[0] %></s>
-					  	<%= $item->{price}->[1] %> 
+					  	<%= $item->{price}->[1] %>
 					% } else {
 						<%= $item->{price}->[0] %>
 					% }
@@ -48,7 +48,7 @@
 			</div>
 		</li>
   	% }
-		
+
 	</ul>
 
 	<div class='price__section clearfloat'>
@@ -57,14 +57,14 @@
 			<%= stash('cart_price') %>
 		</div>
 	</div>
-	
+
 	<a href='/cart/checkout' class='checkout__button'>оформить заказ</a>
-	
+
 	<div class='submit___section hidden clearfloat'>
 
 		<div class='left__section register item__block active'>
 			<h2 class='caption'>Регистрация:</h2>
-			
+
 			<ul>
 				<li>
 					<input type='text' placeholder='Имя' name='name' value='<%= stash('name')%>' required />
@@ -72,8 +72,8 @@
 				<li>
 					<input type='text' placeholder='Фамилия' name='surname' value='<%= stash('surname')%>' required />
 				</li>
-			</ul>	
-			
+			</ul>
+
 			<ul>
 				<li>
 					<input type='text' placeholder='Телефон' name='phone' value='<%= stash('phone')%>' required />
@@ -82,12 +82,12 @@
 					<input type='email' placeholder='e-mail' name='email' value='<%= stash('email')%>' required />
 				</li>
 			</ul>
-			<p class='message'>место под системное сообщение</p>	
+			<p class='message'>место под системное сообщение</p>
 		</div>
 		<div class='right__section login item__block hidden'>
 			<h2 class='caption light__gray'>Вход:</h2>
 			<a class='forgot' href='#'>забыт пароль</a>
-			
+
 			<ul>
 				<li>
 					<input type='text' placeholder='e-mail'   />
@@ -96,15 +96,15 @@
 					<input type='password' placeholder='пароль'   />
 				</li>
 			</ul>
-			
+
 			<a class='submit__form'>Войти</a>
 		</div>
-		
-		<div class='clear'></div>	
-		
+
+		<div class='clear'></div>
+
 		<div class='left__section address item__block disabled' >
 			<h2 class='caption'>Адреc доставки:</h2>
-			
+
 			<ul>
 				<li class='clearfloat'>
 					<input type='text' class='country' placeholder='Страна' name='country' value='<%= stash('country')%>' disabled required />
@@ -139,12 +139,12 @@
 				<div id="ymaps-map-id_134607452184377852671" style="width: 440px; height: 130px;"></div>
 			</div>
 		</div>
-		
+
 		<div class='clear'></div>
-		 
+
 		<div class='deliver__section item__block disabled'>
 			<h2 class='caption'>Способ доставки:</h2>
-			
+
 			<ul class='types__list' data-type='deliver'>
 				<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled' value='fast_courier' id='fast_courier' data-price='500' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'fast_courier' %> disabled />
@@ -155,7 +155,7 @@
 				</li>
 				<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled' value='courier' id='courier' data-price='350' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
-					<label for='courier'>	
+					<label for='courier'>
 						Доставка по Москве в пределах МКАД
 						<span class='price'>350</span>
 					</label>
@@ -164,7 +164,7 @@
 					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='russian_post' id='russian__post' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'russian_post' %> disabled />
 					<label for='russian__post'>
 						<img src='/i/logos/russian-post.png' alt='Почта России' />
-						Почта России — Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
+						<sup>Почта России.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.</sub>
 						<span class='price'></span>
 					</label>
 				</li>
@@ -172,16 +172,16 @@
 					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='ems' id='ems' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
 					<label for='ems'>
 						<img src='/i/logos/ems.png' alt='EMS' />
-						EMS — Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
+						<sup>EMS.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
 						<span class='price'></span>
 					</label>
 				</li>
 			</ul>
 		</div>
-	
+
 		<div class='pay__type item__block disabled'>
 			<h2 class='caption dark__gray'>Способы оплаты:</h2>
-			
+
 			<ul class='types__list'>
 				<li class='clearfloat' data-type='cash'>
 					<input type='radio' name='pay_type' id='pay__courier' value='cash' disabled />
@@ -192,8 +192,8 @@
 					<label for='nalog_payment'>Наложенный платеж</label>
 				</li>
 			</ul>
-		</div>	
-	
+		</div>
+
 		<div class='price__section total clearfloat'>
 			<h3>итого:</h3>
 			<div class='summ__section'>
@@ -201,7 +201,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<input type='submit' name='check' value='Оформить' class='finish__cart disabled hidden' disabled/>
 
 	%= end

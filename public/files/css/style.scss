@@ -2264,6 +2264,7 @@ body {
 
 
       li {
+        padding: 10px 0;
         border-top: 1px dotted #a1a1a1;
         cursor: pointer;
 
@@ -2283,8 +2284,15 @@ body {
           size: 12px;
           weight: bold;
         }
-        line-height: 40px;
-        text-transform: uppercase;
+
+        sup {
+          text-transform: uppercase;
+        }
+
+        sub {
+          color: #888;
+          font-weight: 400;
+        }
 
         span {
           margin-left: 8px;

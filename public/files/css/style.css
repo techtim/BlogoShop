@@ -2151,34 +2151,42 @@ body.overlayed #overlay {
 }
 /* line 2266, style.scss */
 .cart__items__list__section .submit___section .types__list li {
+  padding: 10px 0;
   border-top: 1px dotted #a1a1a1;
   cursor: pointer;
 }
-/* line 2272, style.scss */
+/* line 2273, style.scss */
 .cart__items__list__section .submit___section .types__list li.selected .price {
   color: #434343;
 }
-/* line 2278, style.scss */
+/* line 2279, style.scss */
 .cart__items__list__section .submit___section .types__list label {
   color: #4b4b4b;
   cursor: pointer;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
-  line-height: 40px;
+}
+/* line 2288, style.scss */
+.cart__items__list__section .submit___section .types__list label sup {
   text-transform: uppercase;
 }
-/* line 2289, style.scss */
+/* line 2292, style.scss */
+.cart__items__list__section .submit___section .types__list label sub {
+  color: #888;
+  font-weight: 400;
+}
+/* line 2297, style.scss */
 .cart__items__list__section .submit___section .types__list label span {
   margin-left: 8px;
   color: #c8c8c8;
   font-weight: 400;
 }
-/* line 2298, style.scss */
+/* line 2306, style.scss */
 .cart__items__list__section .submit___section .types__list img {
   vertical-align: middle;
 }
-/* line 2302, style.scss */
+/* line 2310, style.scss */
 .cart__items__list__section .submit___section .types__list .price {
   padding-right: 20px;
   float: right;
@@ -2193,15 +2201,15 @@ body.overlayed #overlay {
   -ms-transition: color 0.2s linear;
   transition: color 0.2s linear;
 }
-/* line 2317, style.scss */
+/* line 2325, style.scss */
 .cart__items__list__section .submit___section .pay__type.disabled {
   display: none;
 }
-/* line 2321, style.scss */
+/* line 2329, style.scss */
 .cart__items__list__section .submit___section .pay__type li {
   display: none;
 }
-/* line 2328, style.scss */
+/* line 2336, style.scss */
 .cart__items__list__section .finish__cart {
   display: block;
   margin: 10px auto;
@@ -2212,26 +2220,26 @@ body.overlayed #overlay {
   cursor: pointer;
   text-indent: -9999px;
 }
-/* line 2338, style.scss */
+/* line 2346, style.scss */
 .cart__items__list__section .finish__cart.disabled {
   background-position: left bottom;
   cursor: default;
 }
-/* line 2343, style.scss */
+/* line 2351, style.scss */
 .cart__items__list__section .finish__cart.hidden {
   display: none;
 }
 
-/* line 2349, style.scss */
+/* line 2357, style.scss */
 .footer__section {
   background: #444;
   overflow: hidden;
 }
-/* line 2353, style.scss */
+/* line 2361, style.scss */
 .footer__section .wrap {
   height: 94px;
 }
-/* line 2357, style.scss */
+/* line 2365, style.scss */
 .footer__section .copyright {
   float: left;
   padding-top: 12px;
@@ -2239,7 +2247,7 @@ body.overlayed #overlay {
   font-size: 11px;
   text-transform: uppercase;
 }
-/* line 2365, style.scss */
+/* line 2373, style.scss */
 .footer__section .contacts {
   float: right;
   padding-top: 12px;
@@ -2247,20 +2255,20 @@ body.overlayed #overlay {
   font-size: 11px;
   font-weight: bold;
 }
-/* line 2374, style.scss */
+/* line 2382, style.scss */
 .footer__section .contacts span {
   color: #adec3f;
 }
-/* line 2379, style.scss */
+/* line 2387, style.scss */
 .footer__section p {
   padding-bottom: 14px;
 }
-/* line 2382, style.scss */
+/* line 2390, style.scss */
 .footer__section p a {
   color: #fff;
   text-decoration: none;
 }
-/* line 2388, style.scss */
+/* line 2396, style.scss */
 .footer__section li {
   margin-right: 14px;
   padding-top: 3px;
@@ -2269,15 +2277,15 @@ body.overlayed #overlay {
   float: left;
   background: url("../i/footer-social-spr.png") no-repeat;
 }
-/* line 2399, style.scss */
+/* line 2407, style.scss */
 .footer__section li.vk {
   background-position: left -14px;
 }
-/* line 2403, style.scss */
+/* line 2411, style.scss */
 .footer__section li.lj {
   background-position: left bottom;
 }
-/* line 2408, style.scss */
+/* line 2416, style.scss */
 .footer__section li a {
   color: #fff;
   font-size: 11px;
@@ -2286,47 +2294,47 @@ body.overlayed #overlay {
   text-transform: uppercase;
 }
 
-/* line 2423, style.scss */
+/* line 2431, style.scss */
 .scroll__helper {
   height: 1px;
   clear: both;
   visibility: hidden;
 }
 
-/* line 2429, style.scss */
+/* line 2437, style.scss */
 .custom-select {
   position: relative;
 }
-/* line 2433, style.scss */
+/* line 2441, style.scss */
 .custom-select.open_list .custom-text {
   margin-bottom: 1px;
   background: #f6f6f6;
   border-bottom: 0;
   border-radius: 5px 5px 0 0;
 }
-/* line 2439, style.scss */
+/* line 2447, style.scss */
 .custom-select.open_list .custom-text:after {
   background-position: left top;
 }
-/* line 2446, style.scss */
+/* line 2454, style.scss */
 .custom-select.above .select-list {
   padding-top: 4px;
   border: 1px solid #c9c9c9;
   border-radius: 5px;
 }
-/* line 2452, style.scss */
+/* line 2460, style.scss */
 .custom-select.above .custom-text {
   border-radius: 5px;
 }
-/* line 2457, style.scss */
+/* line 2465, style.scss */
 .custom-select select {
   display: none;
 }
-/* line 2461, style.scss */
+/* line 2469, style.scss */
 .custom-select ul {
   position: relative;
 }
-/* line 2465, style.scss */
+/* line 2473, style.scss */
 .custom-select .custom-text {
   position: relative;
   height: 26px;
@@ -2347,7 +2355,7 @@ body.overlayed #overlay {
   background: -o-linear-gradient(top, #f6f6f6, #ededed);
   background: linear-gradient(to bottom, #f6f6f6, #ededed);
 }
-/* line 2483, style.scss */
+/* line 2491, style.scss */
 .custom-select .custom-text:after {
   position: absolute;
   top: 9px;
@@ -2358,11 +2366,11 @@ body.overlayed #overlay {
   background: url("../i/select-arrows-spr.png") no-repeat right bottom;
   content: '';
 }
-/* line 2495, style.scss */
+/* line 2503, style.scss */
 .custom-select .custom-scroll {
   overflow: hidden;
 }
-/* line 2499, style.scss */
+/* line 2507, style.scss */
 .custom-select .select-list {
   position: absolute;
   top: 26px;
@@ -2378,7 +2386,7 @@ body.overlayed #overlay {
   background: -o-linear-gradient(top, #f6f6f6, #ededed);
   background: linear-gradient(to bottom, #f6f6f6, #ededed);
 }
-/* line 2511, style.scss */
+/* line 2519, style.scss */
 .custom-select .select-list li {
   float: none;
   display: block;
@@ -2390,15 +2398,15 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 2526, style.scss */
+/* line 2534, style.scss */
 .custom-select .select-list li.current {
   display: none;
 }
-/* line 2530, style.scss */
+/* line 2538, style.scss */
 .custom-select .select-list li:hover {
   text-decoration: underline;
 }
-/* line 2536, style.scss */
+/* line 2544, style.scss */
 .custom-select .select-scroll {
   position: absolute;
   top: 0;
@@ -2407,7 +2415,7 @@ body.overlayed #overlay {
   background: #f0f0f0;
   z-index: 2;
 }
-/* line 2544, style.scss */
+/* line 2552, style.scss */
 .custom-select .select-scroll .scroll-drag {
   position: absolute;
   left: 2px;
@@ -2415,7 +2423,7 @@ body.overlayed #overlay {
   border-radius: 2px;
   cursor: pointer;
 }
-/* line 2551, style.scss */
+/* line 2559, style.scss */
 .custom-select .select-scroll .scroll-drag:after {
   position: relative;
   left: 50%;
@@ -2427,12 +2435,12 @@ body.overlayed #overlay {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 2567, style.scss */
+/* line 2575, style.scss */
 .custom-select .select-scroll .scroll-drag * {
   user-select: none;
 }
 
-/* line 2574, style.scss */
+/* line 2582, style.scss */
 #overlay {
   position: absolute;
   left: 0;
