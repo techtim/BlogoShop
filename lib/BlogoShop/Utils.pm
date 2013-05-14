@@ -199,8 +199,8 @@ sub get_list_brands {
 }
 
 sub get_banners {
-    my ($self, $ctrlr, $category) = @_;
-    my @banners = $ctrlr->app->db->banners->find({category=>$category, weight => {'$gt' => 0}})->all;
+    my ($self, $ctrlr, $category, $type) = @_;
+    my @banners = $ctrlr->app->db->banners->find({category=>$category, weight=>{'$gt' => 0}, type=>''.$type})->all;
     return [] if @banners == 0;
     my @rand_array;
     my $i = 0;
@@ -272,7 +272,7 @@ sub get_items_from_catalog {
 	my $res = $ctrlr->db->run_command({
 		group => {
 			ns 		=> 'items',
-			key 	=> {subcategory=>1}, 
+			key 	=> {subcategory=>1},
 			cond	=> { active => 1, 'subitems.qty' => {'$gt' => 0} },
 			'$reduce'	=> 'function(obj,prev) { prev.item = (prev._id > obj._id ? prev : obj) }',
 			# '$finalize' => 'function(out) { out = out.item }' ,

@@ -3,75 +3,78 @@
 <!--[<a href="/admin/articles/render">Обновить все статьи</a>]-->
 
 <ul class='pager__section clearfloat'>
-	<li class='title'>страница:</li>
-	% foreach my $i (1..$pages) {
-	<li>
-    	<a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
+    <li class='title'>страница:</li>
+    % foreach my $i (1..$pages) {
+    <li>
+        <a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
    </li>
-	% }   	
+    % }
 </ul>
-    
+
+
 <div class='sort__strip__section clearfloat'>
-	<h3>сортировать</h3>
-	%= form_for '' => (method => 'get') => begin
-	   
+    <h3>сортировать</h3>
+    %= form_for '' => (method => 'get') => begin
+
         <label>Тип:</label>
         <div class='selects__section'>
-        	%= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
-    	</div>
-        
+            %= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
+        </div>
+
         <label>Бренд:</label>
         <div class='selects__section'>
-       		%= include 'includes/select_block', name => 'brand', select => $brand, options => stash 'brands'
-  		</div>
-  		
+            %= include 'includes/select_block', name => 'brand', select => $brand, options => stash 'brands'
+        </div>
+
         <label>Таг:</label>
         <div class='selects__section'>
-        	<input type="text" name="tag" value="<%=stash 'tag' %>">
-	    </div>
-	    
-	    <button type="submit" name="submit" value="1">Показать</button>
-	% end
+            <input type="text" name="tag" value="<%=stash 'tag' %>">
+        </div>
+
+        <button type="submit" name="submit" value="1">Показать</button>
+    % end
 </div>
+
+<div class='clear'></div>
 
 <ul class='items__list with__border__bottom'>
     % foreach my $article (@$articles) {
         <li <%== $article->{active} ? '' : 'class="not__active"'%> data-id='<%== $article->{_id}->{value} %>'>
         	<a href='#' class='active__button'></a>
-        	
-            <a 
+
+            <a
             	% if ( !$article->{block}->{time} || $article->{block}->{time} < time() || $article->{block}->{admin_id} eq session('admin')->{_id} ) {
-            		href="/admin/article/edit/<%== $article->{_id}->{value} %>" 
+            		href="/admin/article/edit/<%== $article->{_id}->{value} %>"
             	 % }
             	 class='article__link'
             	 title='<%= $article->{name} %>'>
                 <%= $article->{name} %>
             </a>
-			
+
 			<div class='container brand'>
 			% if ( $article->{brand} ) {
 				<a href="/admin?brand=<%= $article->{brand} %>"><%= $brands_alias->{$article->{brand}} %></a>
 			% }
 			</div>
-			
+
 			<div class='container type'>
             % if ( $article->{type} ) {
         		<a href="/admin/articles?type=<%= $article->{type} %>"><%= $types_alias->{$article->{type}} %></a>
           	% }
             </div>
-            
+
 			<a class='preview' href="/<%== join '/', $article->{type}, $article->{alias} %>"  title='Предварительный просмотр'></a>
-			
+
             % if ( defined $article->{tag} && ref $article->{tag} eq 'ARRAY') {
                 % foreach my $t (@{$article->{tag}}) {
                     <a href="/admin/articles?tag=<%= $t %>"><%= $t %></a>
                 % }
             % }
-            
-			
+
+
         </li>
     % }
-    
+
 </ul>
 
 <script>

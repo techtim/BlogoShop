@@ -1,10 +1,11 @@
 define(['jquery'], function(){
+
 	var $section = $('.shop__items__list, .list__section'),
 		$item = $section.find('li'),
 		$overlay = $('#overlay'),
 		_window_width = $(window).width();
 
-	$item.find('.preview__ico').live('click', function(e){
+	$item.on('click', '.preview__ico', function(e){
 		e.stopPropagation();
 
 		var $this = $(this),
@@ -21,15 +22,15 @@ define(['jquery'], function(){
 
 		// по дефолту слой всегда справа, но
 		// если правая часть слоя вылезает за пределы окна - меняем класс
-		if( calculate_position( $desc_block ) ){ 
+		if( calculate_position( $desc_block ) ){
 			$desc_block.removeClass('right');
 			$desc_block.addClass('left');
-		};
+		}
 
 		$('body').addClass('overlayed');
 	});
 
-	$section.find('.shop__information__section').live('click', function( e ){
+	$section.on('click', '.shop__information__section', function( e ){
 		e.stopPropagation();
 	});
 

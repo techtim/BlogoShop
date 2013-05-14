@@ -6,23 +6,27 @@
 <div class='content__section'>
      % if (@$banners > 0) {
         % my $select_num = 1;
-        <div class='carousel'>
-            <ul class='items'>
-                % foreach (@$banners) {
-                % next if !$_->{link};
-                <li>
-                    <a href='<%= $_->{link} %>'>
-                    	<img src='<%= $_->{image} %>' alt='' />
-                    </a>
-                </li>
-                % }
-            </ul>
-            <ul class='controls'></ul>
+        <div class='carousel__main'>
+            <div class='carousel__wrapper'>
+                <ul class='items'>
+                    % foreach (@$banners) {
+                    % next if !$_->{link};
+                    <li class="carousel__item">
+                        <a href='<%= $_->{link} %>'>
+                        	<img src='<%= $_->{image} %>' alt='' />
+                        </a>
+                    </li>
+                    % }
+                </ul>
+                <a href="#" class="jcarousel-prev controls"></a>
+                <a href="#" class="jcarousel-next controls"></a>
+            </div>
+            <ul class='pagination'></ul>
         </div>
     % }
 
     <div class='blogs__section clearfloat'>
-        
+
         <h2 class='dotted__caption'>
             <span>блог</span>
         </h2>
@@ -39,12 +43,12 @@
 
         <ul class='list__section'>
             %= include 'includes/list_items', items => stash 'items'
-        </ul>  
+        </ul>
     </div>
     % }
 
     <script>
-        requirejs(['app/equalHeight', 'app/carousel', 'app/itemsDescr']);
+        requirejs(['app/equalHeight', 'app/carouselMain', 'app/itemsDescr']);
     </script>
 </div>
 

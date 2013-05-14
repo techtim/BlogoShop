@@ -1,139 +1,135 @@
 % layout 'admin';
 % title 'Редактирование баннеров';
 
-<div class="admin-container">
-    
-	<div class="main-heading section">
-        
-		<h1>
-			<a href="/admin">Админка</a>
-			&gt; <a href="/admin/banners">Редактирование баннеров</a>
-            <%== '&gt; '.$link if $do eq 'edit' %>
-		</h1>
-        
-		%= include 'includes/error_message', error_messages => stash 'error_message'
-        
-		%= include 'includes/info_message', message => stash 'message'
-        
-	</div>
 
-	<div class="section article-list">
-        %= form_for '/admin/banners/edit' => (method => 'post', enctype =>"multipart/form-data") => begin
-		<table class="blackhead">
-			<thead>
-				<tr>
-					<td colspan="1">Баннер</td>
-					<td colspan="1">Ссылка</td>
-					<td colspan="1">Категория</td>
-                    <td colspan="1">Частота показа</td>
-					<td colspan="1">Действие</td>
-				</tr>
-			</thead>
-			<tbody>
-				% foreach my $banner (@$banners) {
-                <tr>
-                    <td>
-                        <a href="/banner/<%= $banner->{name} %>" TARGET='_blank' title="просмотреть '<%= $banner->{name} %>'">
-                            <img width=200 src="<%= $banner->{image} %>">
-                        </a>
-                    </td>
-                    <td>
+<div class="banners__section">
+
+    <ul class="breadcrumps__section clearfloat">
+        <li><a>Баннеры</a></li>
+        <li>
+            <a href="/admin/banners/680"><%== '<strong>' if stash('type') eq '680' %>680<%== '</strong>' if stash('type') eq '680' %></a>
+        </li>
+        <li>
+            <a href="/admin/banners/240"><%== '<strong>' if stash('type') eq '240' %>240<%== '</strong>' if stash('type') eq '240' %></a>
+        </li>
+    </ul>
+
+	%= include 'includes/error_message', error_messages => stash 'error_message'
+
+	%= include 'includes/info_message', message => stash 'message'
+
+    <ul class="banners__list">
+        % foreach my $banner (@$banners) {
+            <li class="clearfloat banner__item <%= $banner->{weight} || 'disabled' %> type__<%= stash 'type' %>" id="b__<%= $banner->{_id} %>">
+                <!--
+                %= form_for '/admin/banners/edit' => (method => 'post', enctype =>"multipart/form-data") => begin
+                -->
+                    <a class="active__button" href="#"></a>
+
+                    <a href="/banner/<%= $banner->{name} %>" TARGET='_blank' title="просмотреть '<%= $banner->{name} %>'">
+                        <img src="<%= $banner->{image} %>" />
+                    </a>
+
+                    <div class="link">
                         <%= $banner->{link} %>
-                    </td>
-                    <td>
-                        <%= $banner->{category} ? $cat_alias->{$banner->{category}} : 'главная'  %>
-                    </td>
-                    <td>
-                        <%= $banner->{weight} || 'не показывать' %>
-                    </td>
-                    <td>
-                        <a href="/admin/banners/edit/<%= $banner->{_id} %>">
-                            <button type="button">Редактировать</button>
-                        </a>
-                    </td>
-                </tr>
-				% }
-			</tbody>
-		</table>
-        % end
-    </div>
+                    </div>
 
-    <div class="article-form-container">
+                    <div class="category">
+                        Категория: <%= $banner->{category} ? $cat_alias->{$banner->{category}} : 'главная'  %>
+                    </div>
 
-        <!-- start FORM -->
+                    <!-- <%= $banner->{weight} || 'не показывать' %> -->
+
+                    <a href="/admin/banners/<%= $banner->{type} %>/edit/<%= $banner->{_id} %>" class="edit"></a>
+                <!--
+                % end
+                -->
+            </li>
+        % }
+    </ul>
+
+    <div class="banner__edit">
+
         %= form_for '/admin/banners/save' => (method => 'post', enctype =>"multipart/form-data") => begin
-        
-        <div class="section article-title">
+
+            <input type="hidden" name="type" value="<%= stash 'type' %>">
+
             % if ($do eq 'edit') {
-            <h3>Редактирование баннера</h3>
-            <input type="hidden" name="id" value="<%= stash '_id' %>">
+                <input type="hidden" name="id" value="<%= stash '_id' %>">
             % } else {
-            <h3>Добавление баннера</h3>    
+                <a name="add"></a>
+                <h3 class="caption">Добавление баннера</h3>
             % }
-            <p>
-                <b>Банер:</b>
-                % if ($image) {
-                <input type="hidden" name="image_loaded" value="<%= $image %>">
-                <img src="<%= $image %>"><br>
-                % }
-                <input type="file" name="image" /> <%= $image ? 'изменить': 'добавить' %>
-            </p>
-            <p>
-                <b>Ссылка:</b></br/>
-                <input type="text" name="link" size="40" value="<%= stash 'link' %>" style="font-size: 18px; font-weight: bold;"/>
-            </p>
-            <p>
-                <b>Категория:</b></br/>
-                <input type="checkbox" name="category" value="" <%= 'checked' if $banner_cats->{''} %> >
-                <b>Главная</b>
-                <br>
-                % foreach my $cat (@$categories) {
-                    <input type="checkbox" name="category" value="<%= $cat->{_id} %>" <%= 'checked' if $banner_cats->{$cat->{_id}} %> >
-                    <b><%== $cat->{name} %></b>
-                    % foreach my $subcat (@{$cat->{subcats}}) {
-                        <input type="checkbox" name="category" value="<%= $cat->{_id}.'.'.$subcat->{_id} %>" 
-                            <%= 'checked' if $banner_cats->{ $cat->{_id}.'.'.$subcat->{_id} } %>>
-                        - <%== $subcat->{name} %>
-                        </option>
+
+            <div class="banner__info clearfloat <%= $weight ? '' : 'disabled' %>">
+
+                <a class="active__button <%= $do eq 'edit' && $weight eq '0' ? 'disabled' : 'enabled' %>" href="#"></a>
+
+                <div class="img__section">
+                    % if ($image) {
+                        <input type="hidden" name="image_loaded" value="<%= $image %>" />
+                        <img src="<%= $image %>" />
+                     % }
+                     <input type="file" name="image" /> <%= $image ? 'изменить': 'добавить' %>
+                </div>
+
+                <input type="text" name="link" value="<%= stash 'link' %>" class="banner__link <%= $do eq 'edit' ? 'disabled' : '' %>" <%= $do eq 'edit' ? 'disabled' : '' %>/>
+
+                <div class="banner__freq">
+                    <ul></ul>
+                    %= include 'includes/select_block', name => 'weight', select => $weight, must_fill => 'no' , options => stash 'weights'
+                </div>
+
+                <div class="controls__section">
+                    <button type="submit" name="save" value="1" class="button gray">
+                        <%== ($do eq 'edit' ? 'Сохранить' : 'Добавить баннер') %>
+                    </button>
+                    % if ($do eq 'edit') {
+                    <!--<button type="submit" name="cancel" value="1">
+                        Отмена
+                    </button>-->
                     % }
-                    <br>
+
+                    % if ($do eq 'edit') {
+                        <button type="submit" name="delete" class="delete" value="<%= stash '_id' %>" onCLick="return confirm('Удалить баннер?');">Удалить баннер!</button>
+                    % }
+                </div>
+            </div>
+
+
+            <div class="banners__cats clearfloat">
+
+                <ul>
+                    <li>
+                        <input type="checkbox" name="category" value="" <%= 'checked' if $banner_cats->{''} %> id="cat_main" />
+                        <label for="cat_main" class="cat__name">главная</label>
+                    </li>
+                </ul>
+
+                % foreach my $cat (@$categories) {
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="category" value="<%= $cat->{_id} %>" <%= 'class="checked"' if $banner_cats->{$cat->{_id}} %> <%= 'checked' if $banner_cats->{$cat->{_id}} %> id="cat__name__<%= $cat->{_id} %>"/>
+                            <label class="cat__name"  for="cat__name__<%= $cat->{_id} %>"><%== $cat->{name} %></label>
+                        </li>
+                        % foreach my $subcat (@{$cat->{subcats}}) {
+                            <li>
+                                <input type="checkbox" name="category" value="<%= $cat->{_id}.'.'.$subcat->{_id} %>" id="<%= $cat->{_id}.'.'.$subcat->{_id} %>"
+                                <%= 'checked' if $banner_cats->{ $cat->{_id}.'.'.$subcat->{_id} } %> />
+                                <label for="<%= $cat->{_id}.'.'.$subcat->{_id} %>"><%== $subcat->{name} %></label>
+                            </li>
+                        % }
+                    </ul>
                 % }
-            </p>
-            <p>
-                <b>Частота показа:</b></br/>
-                %= include 'includes/select_block', name => 'weight', select => $weight, must_fill => 'no' , options => stash 'weights'
-            </p>
-        </div>
-        
-        <div class="section submit-buttons">
-            
-            <table class="layout">
-                <tr>
-                    <td class="delete-wrapper">
-                        <button type="submit" name="save" value="1">
-                            <%== ($do eq 'edit' ? 'Сохранить банер' : 'Добавить баннер') %>
-                        </button>
-                        % if ($do eq 'edit') {
-                        <button type="submit" name="cancel" value="1">
-                            Отмена
-                        </button>
-                        % }
-                    </td>
-                    <td class="save-wrapper">
-                        % if ($do eq 'edit') {
-                        <span>
-                            <button type="submit" name="delete" value="<%= stash '_id' %>" onCLick="return confirm('Удалить баннер?');">Удалить баннер!</button>
-                        </span>
-                        % }
-                    </td>
-                </tr>
-            </table>
-            
-        </div>
-        <!-- /submit-buttons -->
-        
-		% end
-        
+            </div>
+
+    	% end
+
     </div>
-    
+
+    <script>
+        var banner_id = "<%= stash '_id' %>";
+        requirejs(['app/admin/banners']);
+    </script>
+
 </div>

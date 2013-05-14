@@ -1,30 +1,59 @@
 requirejs.config({
 	enforceDefine: true,
+	// urlArgs: "_=" +  (new Date()).getTime(),
 	paths: {
-		jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min',
-		carousel: '/j/libs/carousel',
-		tmpl: '/j/libs/tmpl',
-		fotorama: '/j/libs/fotorama',
-		customSelect: '/j/libs/customSelect',
-		mouseWheel: '/j/libs/mousewheel',
-		ui: '/j/libs/ui',
-		datePickerRu: '/j/libs/datepicker-ru',
-		scroll: '/j/libs/scroll'
+
+		'jquery': [
+			'//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min',
+			'libs/jquery'
+		],
+
+		'modernizr': [
+			'//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min',
+			'libs/modernizr'
+		],
+
+		'a': 'app',
+		'l': 'libs',
+
+		'mouseWheel': '/j/libs/mousewheel',
+		'ui': '/j/libs/ui',
+		'datePickerRu': '/j/libs/datepicker-ru'
+	},
+
+	shim: {
+
+		'jquery': {
+			exports: '$'
+		},
+
+		'modernizr': {
+			exports: 'Modernizr'
+		},
+
+		'l/carousel': {
+			deps: ['jquery'],
+			exports: '$.jcarousel'
+		},
+
+		'l/customSelect': {
+			deps: ['jquery'],
+			exports: '$.selectik'
+		},
+
+		'l/tmpl': {
+			deps: ['jquery'],
+			exports: '$.tmpl'
+		},
+
+		'l/ui': {
+			deps: ['jquery'],
+			exports: '$'
+		},
+
+		'fotorama': {
+			deps: ['jquery'],
+			exports: '$.fotorama'
+		}
 	}
 });
-
-requirejs(['jquery'], function($){ }, function(err){
-	var failedId = err.requireModules && err.requireModules[0];
- 
-	if(failedId === 'jquery'){
-		requirejs.undef(failedId);
-
-		requirejs.config({
-            paths: {
-                jquery: '/j/libs/jquery'
-            }
-        });
-
-		require(['jquery'], function () {});
-	}
-})

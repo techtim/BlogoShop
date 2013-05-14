@@ -6,7 +6,7 @@
 %= include 'includes/info_message', message => stash 'message'
 
 <div class='left__side__section'>
-	
+
 	<div class='list__section'>
 		<h3 class='caption'>Посты:</h3>
 		<%= link_to 'Создать новый пост' => '/admin/article/edit', class => 'add', title => 'Создать новый пост' %>
@@ -15,25 +15,25 @@
 			<%= link_to 'Список постов' => '/admin/articles' %>
 		</div>
 	</div>
-	
+
 	<div class='list__section'>
 		<h3 class='caption'>Cтатичные страницы:</h3>
 		<%= link_to 'Добавить статичную страницу' => '/admin/statics/edit', class => 'add', title => 'Добавить статичную страницу' %>
-		
+
 		<div class='items__section'>
 			<%= link_to 'Cписок статичных страниц' => '/admin/statics' %>
 		</div>
 	</div>
-	
+
 	<%= link_to 'Редактирование категорий' => '/admin/categories' %>
     <%= link_to 'Редактирование брендов' => '/admin/brands' %>
 </div>
 
 <div class='right__side__section'>
-	
+
 	<div class='banners__section'>
-		<h3 class='caption'>Баннеры</h3>
-		<%= link_to 'Редактирование баннеров' => '/admin/banners', class => 'add' %>
+		<h3 class='caption'><a href="/admin/banners">Баннеры</a></h3>
+		<%= link_to 'Редактирование баннеров' => '/admin/banners#add', class => 'add' %>
 		% foreach my $banner (@$banners) {
 			<a href="/admin/banners/edit/<%= $banner->{_id} %>" title="редактировать банер">
 				<img src="<%= $banner->{image} %>" />

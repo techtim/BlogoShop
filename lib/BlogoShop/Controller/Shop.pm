@@ -29,12 +29,12 @@ sub index {
 	delete $filter->{sale};
 	# @$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
 	my $items 	= $self->utils->get_items_from_catalog($self);
-	my $banners = $self->utils->get_banners($self, '');
 
     return $self->render(
 		items => $items,
     	articles => $art,
-        banners => $banners,
+        banners => $self->utils->get_banners($self, '', 680),
+        banners_h => $self->utils->get_banners($self, '', 240),
         %{$self->check_cart},
         page_name => 'shop',
         host => $self->req->url->base,
@@ -75,7 +75,8 @@ sub list {
 			%{$self->check_cart},
 			%$filter,
 			cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
-			banners => $self->utils->get_banners( $self, $filter->{category}. ($filter->{subcategory} ? '.'.$filter->{subcategory} : '') ),
+			banners => $self->utils->get_banners( $self, $filter->{category}. ($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 680 ),
+			banners_h => $self->utils->get_banners($self, $filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 240),
 			type 	=> '',
 			shop 	=> 1,
 			page_name => 'shop',
@@ -109,6 +110,7 @@ sub item {
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
 		items 	=> $item->list($filter, {}, 0, 8),
+		banners_h => $self->utils->get_banners($self, $filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 240),
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
 		host 	=> $self->req->url->base,
 		url 	=> $self->req->url,
@@ -151,9 +153,11 @@ sub brand {
 		return $self->render(
 			host 	=> $self->req->url->base,
 			items 	=> $items,
+			articles=> $self->articles->get_filtered_articles({brand => $brand->{_id}}, 6),
 			%{$self->check_cart},
 			sex		=> '',
 			brand_id => $brand->{_id},
+			banners_h => $self->utils->get_banners($self, '', 240),
 			page_name => 'shop',
 			template=> 'brand', # return only
 			format 	=> 'html', 
@@ -202,6 +206,7 @@ sub cart {
 	return $self->render(
 		items 	=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
 		sex 	=> '',
+		banners_h => $self->utils->get_banners($self, '', 240),
 		page_name => 'shop',
 		template=> 'cart',
 		format 	=> 'html',

@@ -65,15 +65,19 @@ sub startup {
 		}
 	);
 
-	(ref $self)->attr(admins => sub {return BlogoShop::Admins->new($self->db, $self->config)});
-	(ref $self)->attr(articles => sub {return  BlogoShop::Articles->new($self->db, $self->config)}); 
-	(ref $self)->attr(items => sub {return  BlogoShop::Item->new($self, $self->stash('id'))});
+	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
+	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
+	(ref $self)->attr(items 	=> sub {return BlogoShop::Item->new($self, $self->stash('id'))});
+	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new()});
+	(ref $self)->attr(conf 	=> sub {return $self->config});
 
 	# Helpers part
-	$self->helper(db => sub { shift->app->db });
-	$self->helper(admins => sub { shift->app->admins });
-	$self->helper(articles => sub { shift->app->articles });
-	$self->helper(items => sub { shift->app->items });
+	$self->helper(db 		=> sub { shift->app->db });
+	$self->helper(admins 	=> sub { shift->app->admins });
+	$self->helper(articles 	=> sub { shift->app->articles });
+	$self->helper(items 	=> sub { shift->app->items });
+	$self->helper(courier 	=> sub { shift->app->courier });
+	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();
 	$self->helper('utils' => sub {return $utils});
@@ -201,6 +205,7 @@ sub startup {
 		# Orders list
 		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
+		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
@@ -212,12 +217,15 @@ sub startup {
 		# Content
 		$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');
 		$admin_bridge->route('/categories/save')->via('post')->to('controller-Admincontent#list_categories', save => 1);
+
 		$admin_bridge->route('/brands')->via('get')->to('controller-Admincontent#list_brands');
 		$admin_bridge->route('/brands/:do', do => qr/[\w]+/)->to('controller-Admincontent#list_brands');
 		$admin_bridge->route('/brands/:do/:brand', do => qr/[\w]+/, brand => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_brands');
+
 		$admin_bridge->route('/banners')->via('get')->to('controller-Admincontent#list_banners');
-		$admin_bridge->route('/banners/:do')->via('post')->to('controller-Admincontent#list_banners');
-		$admin_bridge->route('/banners/:do/:banner', do => qr/[\w]+/, banner => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_banners');
+		$admin_bridge->route('/banners/:type', type => qr/\d+/)->via('get')->to('controller-Admincontent#list_banners');
+		$admin_bridge->route('/banners/:do', type => qr/\d+/, do => qr/[\w_]+/)->via('post')->to('controller-Admincontent#list_banners');
+		$admin_bridge->route('/banners/:type/:do/:banner', type => qr/\d+/, do => qr/[\w_]+/, banner => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_banners');
 		
 		# Service
 		$admin_bridge->route('/update_articles')->to('controller-Ajax#articles_update');

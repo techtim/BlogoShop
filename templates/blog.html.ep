@@ -19,21 +19,25 @@
     % } else {
     % if (@$banners > 0) {
         % my $select_num = 1;
-        <div class='carousel'>
-            <ul class='items'>
+        <div class='carousel__main'>
+            <div class='carousel__wrapper'>
+                <ul class='items'>
                 % foreach (@$banners) {
-                <li>
-                    <a href='<%= $_->{link} %>'>
-                    	<img src='<%= $_->{image} %>' alt='' />
-                    </a>
-                </li>
+                    <li>
+                        <a href='<%= $_->{link} %>'>
+                            <img src='<%= $_->{image} %>' alt='' />
+                        </a>
+                    </li>
                 % }
-            </ul>
-            <ul class='controls'></ul>
-            <script>
-                requirejs(['app/carousel'])
-            </script>
+                 </ul>
+                <a href="#" class="jcarousel-prev controls"></a>
+                <a href="#" class="jcarousel-next controls"></a>
+            </div>
+            <ul class='pagination'></ul>
         </div>
+        <script>
+            requirejs(['app/carouselMain']);
+        </script>
     % }
 
     <div class='blogs__section clearfloat'>

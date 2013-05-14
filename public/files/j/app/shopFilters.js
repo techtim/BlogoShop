@@ -1,4 +1,4 @@
-define(['jquery', 'ui', 'tmpl'], function($){
+define(['jquery', 'l/tmpl', 'l/ui'], function(){
 
 	var config = {
 		section: '.fiters__section',
@@ -101,7 +101,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 			_url = '';
 
 		if(typeof args.params === 'string'){ // если пришел урл, то все хорошо и _url = args.params
-			_url = args.params
+			_url = args.params;
 		}else if(typeof args.params === 'object') {  // если значение от слайдера - билдим урл
 			var _values = args.params;
 			_url = '?price_from='+_values[0]+'&amp;price_to='+_values[1];
@@ -130,9 +130,9 @@ define(['jquery', 'ui', 'tmpl'], function($){
 				dicount: function( price, sale ){
 					var price;
 					if(sale.indexOf('%') !== -1){
-						price -= (price* parseInt(sale))/100;
+						price = (price* parseInt(sale))/100;
 					}else{
-						price -= sale;
+						price = sale;
 					}
 					return price;
 				}
@@ -191,7 +191,7 @@ define(['jquery', 'ui', 'tmpl'], function($){
 		stop: function(e, ui){
 			filter({
 				params: ui.values
-			})
+			});
 		}
 	});
 

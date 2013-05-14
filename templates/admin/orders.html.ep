@@ -173,12 +173,21 @@
 								% } elsif ($order->{delivery_type} eq "courier") {
 									350
 								% } elsif ($order->{delivery_type} eq "russian_post") {
-									430
+									500
 								% } elsif ($order->{delivery_type} eq "ems") {
 								 	620
 								% }
 							</dd>
 						</dl>
+
+						% if ($order->{delivery_type} eq "courier") {
+						<dl class='contacts__section gray__bg clearfloat'>
+							<dt>Вызвать курьера:</dt>
+							<dd>
+								<input type='checkbox' name='courier' value=1 <%= 'checked' if $order->{courier_called} %>>
+							</dd>
+						</dl>
+						% }
 
 						<dl class='price__section clearfloat'>
 							<dt>СУММА:</dt>

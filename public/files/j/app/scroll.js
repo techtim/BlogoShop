@@ -1,14 +1,14 @@
 define(['jquery', 'app/shopFilters'], function($, draw_list){
 
 	function checkBlockPosition(options){
-		var block = options.block
-		var pos_top = block.offset().top
-		var block_height = block.height() || options.height
-		var from_top = $(window).scrollTop()
+		var block = options.block;
+		var pos_top = block.offset().top;
+		var block_height = block.height() || options.height;
+		var from_top = $(window).scrollTop();
 		if(pos_top >= (from_top-options.threshold) && pos_top <= ($(window).height() + $(window).scrollTop())){
-			return true
+			return true;
 		}else{
-			return false
+			return false;
 		}
 	}
 
@@ -50,30 +50,34 @@ define(['jquery', 'app/shopFilters'], function($, draw_list){
 
 					loading = true;
 
-					$.get(_url, {next: _step, rand: _rand}, function(data){
+					$.ajax({
+						url: _url,
+						data: {next: _step, rand: _rand},
+						success: function(data){
 
-						if ( _step ) { // если есть шаг - значит мы в магазине и нам надо сохранить хелпер для сролла
+							if ( _step ) { // если есть шаг - значит мы в магазине и нам надо сохранить хелпер для сролла
+								if(data.items.length > 0){
+									draw_list({ data: data	});
+									$ele.data('next', _step + 16); // плюсуем шаг к предыдущему
+								}else{
+									$ele.remove();
+								}
 
-							if(data.items.length > 0){
-								draw_list({ data: data 	});
-								$ele.data('next', _step + 16); // плюсуем шаг к предыдущему
 							}else{
+								var $data = $($.parseHTML(data))
+								$data.insertAfter($ele);
 								$ele.remove();
 							}
 
-						}else{
-							$(data).insertAfter($ele);
-							$ele.remove();
+							set_equal_height();
+							loading = false;
 						}
-
-						set_equal_height();
-						loading = false;
-					})
+					});
 				}else{
 					$ele.remove();
 				}
 
-			};
+			}
 
 		};
 

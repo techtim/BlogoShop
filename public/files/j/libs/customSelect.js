@@ -1,13 +1,13 @@
-// Copyright (c) 2012 Ivan Kubrakov 
+// Copyright (c) 2012 Ivan Kubrakov
 // Selectik: a jQuery custom select plugin http://brankub.github.com/selectik/
 
-define(['jquery'], function(){
+
 	(function($) {
 		// global variables
 		var openList = false;
 		var selectControl = false;
 		var trigger = false;
-		
+
 		$.selectik = function(element, options) {
 			// global variables for this instance of plugin
 			var count, standardTop, heightItem, heightContainer, disabled, heightList, heightShift, relating, heightScroll, scrollL = false, change = false, settings;
@@ -136,7 +136,7 @@ define(['jquery'], function(){
 			var _scrollHandlers = function(){
 	            var shiftL;
 				// bind mousewheel
-				$list.bind('mousewheel', function(event, deltaY) {
+				$list.on('mousewheel', function(event, deltaY) {
 					shiftL = parseInt($list.css('top'))+(deltaY*heightItem);
 					_shiftHelper(shiftL);
 					return false;
@@ -161,12 +161,12 @@ define(['jquery'], function(){
 					if (e.preventDefault()) { e.preventDefault(); }
 					var startPosition = parseInt($scroll.css('top'));
 					var helper = e.clientY;
-					$(document).bind('mousemove', function(e){
+					$(document).on('mousemove', function(e){
 						var newPosition = (helper - e.clientY) - startPosition;
 						_shiftHelper(newPosition*relating);
 					});
 				}else{
-					$(document).unbind('mousemove');
+					$(document).off('mousemove');
 						openList = true;
 					}
 			};
@@ -191,13 +191,13 @@ define(['jquery'], function(){
 				if (!scrollL) { return; }
 				_shiftHelper(-topShift);
 			};
-			
+
 			// private method: click on li
 			var _clickHandler = function(){
 				$listContainer.on('mousedown', 'li', function(){
 					 if ($(this).hasClass('disabled')) { return false; }
 					_changeSelected($(this));
-				});	
+				});
 			}
 
 			// private method: handlers
@@ -205,27 +205,27 @@ define(['jquery'], function(){
 	            // reset button
 	            var $reset = $('input[type="reset"]', $cselect.parents('form'));
 	            if ($reset.length > 0){
-	                $reset.bind('click', function(){
+	                $reset.on('click', function(){
 	                    var index = ($selected.length > 0) ? $selected.index(): 0;
 	                    _changeSelected($('option:eq('+index+')', $cselect));
 	                });
 	            }
 
 				// change on original select
-				$cselect.bind('change', function(){
+				$cselect.on('change', function(){
 					 if (change) { change = false; return false; }
 					_changeSelected($('option:selected', $(this)));
 				});
 
 				// click on select
-				$text.bind('click', function(){
+				$text.on('click', function(){
 		        	if( $container.hasClass('disable')) { return false; }
 					$cselect.focus();
 					_fadeList($listContainer, false, true);
 				});
 
 	            // active class
-	            $cselect.bind('focus', function(){
+	            $cselect.on('focus', function(){
 	                $container.addClass('active');
 	            });
 	            $cselect.bind('blur', function(){
@@ -233,12 +233,12 @@ define(['jquery'], function(){
 					if (openList){
 						selectik.hideCS();
 						$cselect.parent().removeClass('active');
-					}				
+					}
 	            });
 
-				$cselect.bind('keyup', function(e) { _keysHandlers(e); });
+				$cselect.on('keyup', function(e) { _keysHandlers(e); });
 				if ($.browser.opera){
-					$cselect.bind('keydown', function() { trigger = true; });
+					$cselect.on('keydown', function() { trigger = true; });
 				};
 			};
 
@@ -272,8 +272,8 @@ define(['jquery'], function(){
 			// private method: show/hdie list
 			var _fadeList = function(e, out, text){
 				if ($('.'+settings.containerClass+'.open_list').length == 1){
-					$('.'+settings.containerClass+'.open_list').children('select').data('selectik').hideCS();	
-				}			
+					$('.'+settings.containerClass+'.open_list').children('select').data('selectik').hideCS();
+				}
 	            if (!text){
 	                $('.'+settings.containerClass+'.open_list').children('.select-list').stop(true, true).fadeOut(settings.speedAnimation).parent().toggleClass('open_list');
 	                if (out){ return; }
@@ -308,7 +308,7 @@ define(['jquery'], function(){
 				var topPosition = ($(window).outerHeight() - (elParent.offset().top - $(window).scrollTop()) - elParent.outerHeight() < heightPosition) ? -quaItems*heightItem-(elParent.outerHeight()/4) : standardTop;
 				topPosition = ((elParent.offset().top - $(window).scrollTop()) < heightPosition) ? standardTop : topPosition;
 				e.css('top', topPosition);
-				if(topPosition < 0) { 
+				if(topPosition < 0) {
 					$container.removeClass('under');
 					$container.addClass('above');
 				}else{
@@ -364,7 +364,7 @@ define(['jquery'], function(){
 	            }
 	        });
 	    };
-		
+
 		// global handlers
 		$(window).resize(function(){
 	        if (openList){
@@ -372,7 +372,7 @@ define(['jquery'], function(){
 	            $('.open_list').children('select').data('selectik').positionCS($('.select-list:visible'));
 	        }
 		});
-		$(document).bind('click', function(){
+		$(document).on('click', function(){
 			if (trigger) { trigger = false; return; }
 			if (openList){
 				openList = false;
@@ -383,4 +383,3 @@ define(['jquery'], function(){
 		});
 
 	})(jQuery);
-});

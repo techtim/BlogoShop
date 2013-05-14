@@ -1,11 +1,11 @@
 
 <div class='sidebar__section fl'>
-	
+
 	<div class='menu__section'>
-		
+
 		<div class='caption__section clearfloat'>
 	    	<h2>Каталог</h2>
-	    	
+
 		    <a class='expand__items' href='#' data-role='categories'></a>
 
 	    	% my $sex = stash('sex')||'';
@@ -24,21 +24,21 @@
         		<a href='http://<%= config->{domain_name} %>/<%== $sex ne '' ? "$sex/" : '' %><%= $cat->{_id} %>'><%= $cat->{name} %></a>
         	</li>
         	 <ul class='submenu'>
-        	
+
         	% foreach my $sub (@{$cat->{subcats}}) {
         		% next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$sub->{_id}};
     			<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='<%= '/'.$sex if $sex %>/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
     		% }
 
 	        </ul>
-	       
+
 	    </ul>
 	    % }
-	    
+
 	</div>
-	
+
 	<div class='menu__section'>
-		
+
 		<div class='caption__section clearfloat'>
 			<h2>бренды и корнеры</h2>
 			<a class='expand__items inverted' href='#' data-role='brands'></a>
@@ -53,14 +53,24 @@
 	    </ul>
 	</div>
 
-	<div class="banner__slot">
-		<a href='/podarki'><img src="/i/240x400.jpg" alt="" /></a>
+	<div class="carousel__left">
+		<div class="carousel__wrapper">
+			<ul>
+			% foreach (@$banners_h) {
+	        % next if !$_->{link};
+	        	<li>
+	        		<img src='<%= $_->{image} %>' alt='' />
+	        	</li>
+	        % }
+        	</ul>
+    	</div>
+    	<script>requirejs(['app/carouselLeft']);</script>
 	</div>
-	
+
     <div class='subscribe__section'>
         %= form_for '/subscribe' => (method => 'post') => begin
         <label for='subsribe'>
-            Узнавайте первыми о скидках,<br/> 
+            Узнавайте первыми о скидках,<br/>
             спецпредложениях  и других интересных<br/>
             акциях магазина ХОХЛОВКА:
         </label>
@@ -77,13 +87,13 @@
 	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
-    <div class="fb-like-box" 
-    		data-href="http://www.facebook.com/xoxloveka" 
-    		data-width="260" 
-    		data-height="288" 
-    		data-show-faces="true" 
-    		data-border-color="C1C1C1" 
-    		data-stream="false" 
+    <div class="fb-like-box"
+    		data-href="http://www.facebook.com/xoxloveka"
+    		data-width="260"
+    		data-height="288"
+    		data-show-faces="true"
+    		data-border-color="C1C1C1"
+    		data-stream="false"
     		data-header="false">
     </div>
 </div>

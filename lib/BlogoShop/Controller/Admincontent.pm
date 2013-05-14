@@ -9,7 +9,7 @@ use utf8;
 use File::Path qw(make_path remove_tree);
 
 use constant BRAND_PARAMS => qw(name descr id category logo images);
-use constant BANNER_PARAMS => qw(id link image category weight);
+use constant BANNER_PARAMS => qw(id link image category weight type);
 
 sub list_categories {
     my $self = shift;
@@ -164,15 +164,17 @@ sub list_brands {
 sub list_banners {
     my $self = shift;	
     my $error_message = [];
-    
+
     return $self->redirect_to('admin') if $self->req->param('cancel');
-    
+    return $self->redirect_to('admin/banners/680') if !$self->stash('type') && $self->req->method ne 'POST';
+
     my $banner = {};
+
     if ($self->req->param('delete')) {
         $self->app->db->banners->remove({_id => MongoDB::OID->new(value => ($self->req->param('delete')=~m/([^\{\}\[\]]+)/)[0])});
         return $self->redirect_to('admin/banners');
     }
-    
+
     if ($self->stash('do') && $self->stash('do') eq 'edit') {
         my $banner_id = $self->stash('banner') || $self->req->param('banner') || '';
         $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner_id)});
@@ -193,6 +195,7 @@ sub list_banners {
             $banner->{weight} += 0;
             $banner->{link} = 'http://'.$banner->{link} unless $banner->{link} =~ m!^(http://)!;
             $banner->{category} = [$self->req->param(('category'))];
+            $banner->{category} = [''] if @{$banner->{category}} == 0; # set default main page
 
             my $id = delete $banner->{id};
             if ($id) { # delete returns true -> means save after edit
@@ -202,16 +205,19 @@ sub list_banners {
                 $id = $self->app->db->banners->save($banner);
                 #                warn 'banner SAVE '. $self->dumper($banner);
             }
-            return $self->redirect_to('admin/banners/edit/'.$id);
-
+            return $self->redirect_to('admin/banners/'.$banner->{type}.'/edit/'.$id);
         } else {
             $self->stash('error_message' => $error_message);
             $self->stash(%$banner);
         }
-
+    } elsif ($self->stash('do') && $self->stash('banner') && $self->stash('do') eq 'turn_off') {
+        $self->app->db->banners->update({_id => MongoDB::OID->new(value =>$self->stash('banner'))}, {'$set' => {weight => 0}});
     } else {
-        $self->stash($_ => '') foreach BANNER_PARAMS;
+        $self->stash($_ => $self->stash($_) || '') foreach BANNER_PARAMS;
     }
+
+    my $filter = {type => $self->stash('type')};
+    # return $self->redirect_to('admin/banners/w') if !$filter->{type};
 
     my @weights; push @weights, {_id => $_, name => $_} foreach (1..5);
     my %cat_alias;
@@ -221,11 +227,12 @@ sub list_banners {
     }
 
     return $self->render(
-        banners => [$self->app->db->banners->find()->sort({pos => 1})->all] || [],
+        banners => [$self->app->db->banners->find($filter)->sort({pos => 1})->all] || [],
         banner_cats => ref $banner->{category} eq ref [] ? { map {$_ => 1} @{$banner->{category}} } : {},
         weights => \@weights,
         cat_alias => \%cat_alias || {},
         do => $self->stash('do') || '',
+        type => $self->stash('type'),
         template => 'admin/banners',
         format => 'html',
     );

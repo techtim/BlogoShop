@@ -112,6 +112,11 @@
 % if ($error_message eq 'no_preview_image') {
 	Укажите превью
 % }
+
+% if ($error_message eq 'courier_failed') {
+	Ошибка при вызове курьера
+% }
+
 </strong>
 </font>
 	<br/>

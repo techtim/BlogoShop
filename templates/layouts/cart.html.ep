@@ -3,6 +3,10 @@
 	<head>
 		<meta charset='utf-8' />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="dns-prefetch" href="//ajax.googleapis.com">
+        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
 		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
@@ -12,15 +16,15 @@
     </head>
 	<body>
         <div class='wrap clearfloat'>
-        
+
             %= include 'includes/header'
             %= include 'includes/top'
             <%= content %>
-            
+
         </div>
 
         %= include 'includes/footer'
-        
+
         %= include 'includes/google_analytics'
         %= include 'includes/yandex_metrika_shop'
     </body>

@@ -27,19 +27,23 @@
 
 	% if (@$banners > 0 && !stash('tags')) {
     % my $select_num = 1;
-    <div class='carousel'>
-        <ul class='items'>
-            % foreach (@$banners) {
-            <li>
-                <a href='<%= $_->{link} %>'>
-                	<img src='<%= $_->{image} %>' alt='' />
-                </a>
-            </li>
+    <div class='carousel__main'>
+        <div class='carousel__wrapper'>
+            <ul class='items'>
+	        % foreach (@$banners) {
+	            <li class='carousel__item'>
+	                <a href='<%= $_->{link} %>'>
+	                	<img src='<%= $_->{image} %>' alt='' />
+	                </a>
+	            </li>
             % }
-        </ul>
-        <ul class='controls'></ul>
+    		 </ul>
+            <a href="#" class="jcarousel-prev controls"></a>
+            <a href="#" class="jcarousel-next controls"></a>
+        </div>
+        <ul class='pagination'></ul>
     </div>
-    <script>requirejs(['app/carousel']);</script>
+    <script>requirejs(['app/carouselMain']);</script>
     % }
 
 	<div class='shop__items__list'>

@@ -9,6 +9,12 @@
 	<p><img src="<%= $brand->{logo} %>"><p>
 	<p><%== $brand->{descr} %></p>
 
+	<div class='blogs__section'>
+		<ul class='clearfloat'>
+			%= include 'includes/list_articles'
+		</ul>
+	</div>
+
 	<div class='shop__items__list'>
 
 		<div class='fiters__section clearfloat'>

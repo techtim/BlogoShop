@@ -24,6 +24,11 @@
 % if ($message eq 'author_added') {
 	Добавлен автор
 % }
+
+% if ($message eq 'courier_called') {
+	Курьер вызван
+% }
+
 </strong>
 </font>
 <br/>

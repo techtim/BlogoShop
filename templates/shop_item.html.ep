@@ -85,6 +85,7 @@
 	<span id='params__helper'></span>
 
 	<dl class='clearfloat row submit'>
+		<%= $active %>
 		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
 	</dl>
 	% if (@$tags > 0) {

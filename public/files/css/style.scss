@@ -1,5 +1,6 @@
+@import 'compass';
 @import url('reset.css');
-@import url('fonts.css');
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&subset=latin,cyrillic);
 
 $img__dir: '../i/';
 
@@ -19,14 +20,6 @@ $img__dir: '../i/';
   transition: $type $time linear;
 }
 
-@mixin gradient($from, $to) {
-  background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
-  background: -webkit-linear-gradient(top, $from, $to);
-  background: -moz-linear-gradient(top, $from, $to);
-  background: -o-linear-gradient(top, $from, $to);
-  background: linear-gradient(to bottom, $from, $to);
-}
-
 @mixin disabled {
   cursor: default;
   -webkit-user-select: none;
@@ -40,8 +33,9 @@ $img__dir: '../i/';
     padding-left: 8px;
     color: $color;
     font: {
-      family: "PT Sans bold";
+      family: "PT Sans";
       size: 12px;
+      weight: bold;
     }
     text-transform: uppercase;
   }
@@ -52,6 +46,7 @@ $img__dir: '../i/';
     font: {
       family: "PT Sans";
       size: 12px;
+      weight: bold;
     }
     text-transform: uppercase;
   }
@@ -384,7 +379,7 @@ body {
   	    border-radius: 2px;
   	    color: #fff;
   	    line-height: 16px;
-  	    @include gradient(#373737, #363636);
+        @include background-image(linear-gradient(top,  #373737, #363636));
   	  }
 
   	  input[type='submit'] {
@@ -400,7 +395,7 @@ body {
   	      style: italic;
   	    }
   	    line-height: 18px;
-  	    @include gradient(#646464, #434343);
+        @include background-image(linear-gradient(top,  #646464, #434343));
   	  }
   	}
   }
@@ -646,10 +641,28 @@ body {
    }
 }
 
-.banner__slot {
-  padding-top: 10px;
-  img {
+.carousel__left {
+
+  .carousel__wrapper {
+    position: relative;
+
+    height: 420px;
+    width: 260px;
+    overflow: hidden;
+  }
+
+  ul {
+    width: 20000em;
+    position: absolute;
+  }
+
+  li {
+    float: left;
     border: 10px solid #cbcbcc;
+  }
+
+  img {
+    width: 240px;
   }
 }
 
@@ -780,21 +793,35 @@ body {
   }
 }
 
-.carousel {
-  height: 330px;
+.carousel__main {
   position: relative;
+  width: 680px;
   margin-bottom: 28px;
   padding-bottom: 18px;
 
-  .items {
-    display: block;
-    height: 330px;
+  .carousel__wrapper {
+    position: relative;
     width: 680px;
+    height: 330px;
     overflow: hidden;
+  }
+
+  .items {
+      width: 20000px;
+      position: absolute;
+  }
+
+  .carousel__item {
+    float: left;
+    width: 680px;
 
     a {
       display: block;
       height: 330px;
+      width: 680px;
+    }
+
+    img {
       width: 680px;
     }
   }
@@ -814,8 +841,12 @@ body {
     cursor: pointer;
     visibility: hidden;
 
-    &.hover {
-      background-position: left -213px;
+    &:hover {
+      background-position: 1px -213px;
+    }
+
+    &.visible {
+      visibility: visible;
     }
 
   }
@@ -834,8 +865,12 @@ body {
     cursor: pointer;
     visibility: hidden;
 
-    &.hover {
+    &:hover {
       background-position: right -213px;
+    }
+
+    &.visible {
+      visibility: visible;
     }
 
   }
@@ -844,7 +879,7 @@ body {
       visibility: hidden!important;
     }
 
-  .controls {
+  .pagination {
     position: absolute;
     bottom: - 10px;
     left: 50%;
@@ -890,6 +925,18 @@ body {
 
     &:nth-child(3n+3) {
       margin-right: 0;
+    }
+
+    &.special {
+      .img__box {
+        border: 3px solid #d50100;
+        @include box-sizing(border-box);
+      }
+
+      .caption, a:hover .caption {
+        color: #d50100;
+      }
+
     }
 
     a {
@@ -1419,6 +1466,10 @@ body {
       size: 10px;
     }
     text-transform: uppercase;
+  }
+
+  &.admin .title {
+    margin-top: -2px;
   }
 
   .price__filter, .new__filter {
@@ -2486,7 +2537,7 @@ body {
 		line-height: 26px;
 		text-transform: uppercase;
 		overflow: hidden;
-		@include gradient(#f6f6f6, #ededed);
+    @include background-image(linear-gradient(top,  #f6f6f6, #ededed));
 
 		&:after {
 			position: absolute;
@@ -2513,7 +2564,7 @@ body {
 		border-top: 0;
 		border-radius: 0 0 5px 5px;
 		z-index: 2;
-    @include gradient(#f6f6f6, #ededed);
+    @include background-image(linear-gradient(top,  #f6f6f6, #ededed));
 
 
     li {

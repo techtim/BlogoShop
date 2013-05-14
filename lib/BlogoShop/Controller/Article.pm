@@ -53,6 +53,7 @@ sub show {
 	return $self->render(
 		host => $self->req->url->base,
 		cut => $self->stash('cut') || '',
+		banners_h => $self->utils->get_banners($self, '', 240),
 		img_url => $img_url,
 		sex => '',
 		page_name => 'blog',
@@ -76,7 +77,7 @@ sub list {
     }
 	my $art = $self->articles->get_filtered_articles($filter, $self->config('articles_on_page'), $self->stash('move'), $self->stash('id')||0);
 	my $flag = 0;
-    my $banners = $self->utils->get_banners($self, '');
+
 	$self->res->headers->header('Cache-Control' => 'no-cache');
 
 	return $self->render(
@@ -86,7 +87,8 @@ sub list {
         brand => $self->stash('brand') || '',
         is_index => keys %$filter == 0 ? 1 : 0,
 		articles => $art,
-        banners => $banners,
+        banners => $self->utils->get_banners($self, '', 680),
+        banners_h => $self->utils->get_banners($self, '', 240),
         page_name => 'blog',
         template => $self->stash('move') && $self->req->headers->header('X-Requested-With') ? 'includes/list_articles' : 'blog', # return only
 		format => 'html', 

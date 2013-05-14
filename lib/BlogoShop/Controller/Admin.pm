@@ -48,7 +48,7 @@ sub index {
         tag => $filter->{tags} || '', 
         type => $filter->{type} || '',
         brand => $filter->{brand} || '',
-        banners => $self->utils->get_banners($self, ''),
+        banners => $self->utils->get_banners($self, '', 680),
         articles => \@arts,
         pages => $pages || 0,
         template => 'admin/admin',
