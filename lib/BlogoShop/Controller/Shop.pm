@@ -153,7 +153,7 @@ sub brand {
 		return $self->render(
 			host 	=> $self->req->url->base,
 			items 	=> $items,
-			articles=> $self->articles->get_filtered_articles({brand => $brand->{_id}}, 6),
+			articles=> $self->articles->get_filtered_articles({brand => $brand->{_id}, active => 1}, 6),
 			%{$self->check_cart},
 			sex		=> '',
 			brand_id => $brand->{_id},
