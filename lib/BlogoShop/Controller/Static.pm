@@ -13,6 +13,7 @@ sub show {
     return $self->render(
         %$page,
         type => '',
+        banners_h => $self->utils->get_banners($self, '', 240),
         host => $self->req->url->base,
         page_name => $self->stash('template'),
         template => 'static',
