@@ -1,24 +1,22 @@
 define([
 		'jquery',
-		'ui',
-		'tmpl',
-		'customSelect',
-		'ui',
-		'datePickerRu',
-		'mouseWheel'
+		'l/tmpl',
+		'l/ui',
+		'l/customSelect',
+		'l/mousewheel'
 ], function($){
-	
+
 	$('.dates__section input[type="text"]').datepicker({
 		dateFormat: 'dd.mm.y'
 	});
-	
+
 	(function bind__sale__dropdown(){
 		$section = $('.currency');
 		$dropdown = $('.dropdown', $section);
-		
+
 		$('.current__text', $section).click(function(e){
 			e.stopPropagation();
-			_rub = $(this).hasClass('rub');
+			var _rub = $(this).hasClass('rub');
 			if(_rub){
 				$dropdown.find('.perc').show();
 				$dropdown.find('.rub').hide();
@@ -28,30 +26,31 @@ define([
 			}
 			$(this).parent().toggleClass('active');
 		});
-		
+
 		$('li', $dropdown).click(function(){
 			$this = $(this);
 			_type = $this.data('type');
 			$('.current__text', $section).attr('class','').attr('class','current__text '+_type);
 		});
-		
+
 	})();
-	
+
 	(function bind__params(){
-		
+
 		var ele;
-		$('.button').live('click',function(e){
+		$('.button').on('click',function(e){
 			$this = $(this);
 			_role = $this.data('role');
 			ele = $this.closest('.row');
-			
+
 			if(_role == 'add__params'){
 				$helper = ele.find('.params__helper');
 				_empty_helper = !!$helper.parents('.params__strip__section');
 				if(_empty_helper) {
 					$('#params__strip').tmpl(null).appendTo($helper).each(function(){
 						$('select', $helper).selectik({
-							width: 100
+							width: 100,
+							maxItems: 10
 						});
 						bind__params__select(ele);
 					});
@@ -69,21 +68,21 @@ define([
 				draw__sub__item(ele.data('i'));
 				return false;
 			}else if(_role == 'create__copy'){
-				return true	
+				return true
 			}
 		});
-		
+
 		var bind__params__select = function(ele){
 			$select = $('.params__select', ele);
 			$select_api = $('select', ele).data('selectik');
-			
+
 			$select.change(function(){
 				var $selected = $('option:selected', this),
 					_selected_value = $selected.val(),
 					_empty_selected = $selected.is(':disabled'),
 					_sub_item = ele.hasClass('sub__item'),
 					_ele_param = ele.find('[data-type="'+_selected_value+'"]').length; // check if parameter is already displayed
-				
+
 				if(!_empty_selected && _ele_param === 0){
 					data = {};
 					data.id = ele.data('id');
@@ -91,7 +90,7 @@ define([
 					data.title = $selected.text();
 					data.subitem = _sub_item ? true : false;
 					if(_sub_item) data.i = ele.data('i');
-					
+
 					$block_to_append = $('.params__helper', ele);
 					$('#row').tmpl(data).insertBefore($block_to_append).each(function(){
 						$(this).closest('.row').data({
@@ -102,7 +101,7 @@ define([
 					$('option:selected', this).attr('disabled', true)
 					$select_api.hideCS();
 				}else{
-					
+
 					/*
 					 * если кликнутый параметр был уже выбран
 					 * то ищем его в списке параметров и подсвечиваем
@@ -115,19 +114,19 @@ define([
 					}, 2000);
 				}
 			});
-		
+
 		};
-		
+
 		(function bind__color__pallete(){
-			$('.add__color', ele).live('click', function(e){
+			$('.add__color', ele).on('click', function(e){
 				e.preventDefault();
 				e.stopPropagation();
 				$row = $(this).closest('.params__item');
 				$dropdown = $('.dropdown__section', $row);
 				$dropdown.closest('.dropdown__section').toggleClass('active');
 			});
-			
-			$('.colors__select li', ele).live('click',function(e){
+
+			$('.colors__select li', ele).on('click',function(e){
 				e.stopPropagation();
 				$this = $(this);
 				_color = $this.data('color');
@@ -142,52 +141,52 @@ define([
 				$input.val(_current_colors.join(','));
 				$this.hide();
 			});
-			
-			$('.selected__colors .delete', ele).live('click', function(e){
+
+			$('.selected__colors .delete', ele).on('click', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				
+
 				var $this = $(this),
 					$parent = $this.parent(),
 					$row = $this.closest('.params__item'),
 					$colors_block = $('.colors__select', $row),
 					_color = $parent.data('color');
-					
+
 				$('li[data-color="'+_color+'"]', $colors_block).show();
 				$parent.remove();
 			});
-			
-			$('.delete__button').live('click', function(e){
+
+			$('.delete__button').on('click', function(e){
 				e.preventDefault();
 				var $this = $(this),
 					_type = $this.data('type');
-					
+
 				if(_type == 'row'){
 					var $row = $this.closest('.row'),
 						_type = $row.data('type');
-					
+
 					$this.closest('.params__item').remove();
 					$('option[value="'+_type+'"]', $row).attr('disabled', false);
-					
+
 				}else if(_type == 'item'){
 					decrement_sub_item($this);
 					$this.closest('.sub__item').remove();
 				}
 			});
-			
-			$('.sex__section a').click(function(e){
+
+			$('.sex__section a').on('click', function(e){
 				e.preventDefault();
 				var $this = $(this),
 					$input_group = $('.sex__section input');
-					
+
 				$input_group.attr('checked',false);
 				$('.sex__section a').removeClass('current');
 				$this.addClass('current');
 				$('input', $this).attr('checked', true);
 			});
-			
+
 		})();
-	
+
 		var draw__sub__item = function(params){
 			$last__sub__item = $('.sub__item').last();
 			if($last__sub__item.length != 0){
@@ -207,7 +206,7 @@ define([
 				scrollTop: _pos_top-40
 			}, 800)
 		};
-	
+
 		var decrement_sub_item = function($ele){
 			var $parent = $ele.closest('.sub__item'),
 				$next_blocks = $parent.nextUntil('.sub__items')
@@ -216,7 +215,7 @@ define([
 				var $this = $(this),
 					_id = $this.data('i')-1;
 				$this.data('i', _id);
-				
+
 				$('input',$this).each(function(){
 					var $this = $(this),
 						_name = $this.attr('name'),
@@ -226,9 +225,9 @@ define([
 				})
 			});
 		};
-		
+
 	})();
-	
+
 	$(document).click(function(){
 		$('.dropdown').each(function(){
 			$this = $(this);
@@ -236,7 +235,7 @@ define([
 			if(_visible) $this.closest('.dropdown__section').removeClass('active');
 		})
 	});
-	
+
 	(function bind__visibility(){
 		$('.acive__item__checkbox').each(function(){
 			var $this = $(this),
@@ -248,7 +247,7 @@ define([
 				$('.row .visible').addClass('checked');
 			}
 		});
-		
+
 		$('.fake__checkbox').on('click', function(e){
 			e.preventDefault();
 			var $this = $(this),
@@ -266,13 +265,13 @@ define([
 				$parent.addClass('checked');
 			};
 		});
-		
+
 	})();
 
 	(function bind__photo__upload(){
 		$loading__section = $('.loading__section');
 		_row_count = 5;
-		
+
 		$('.add', $loading__section).click(function(e){
 			e.preventDefault();
 			$section = $('.upload__section');
@@ -283,9 +282,11 @@ define([
 				--_row_count;
 			};
 		});
-		
+
 	})();
-	
-	$('select').selectik();	
+
+	$('select').selectik({
+		maxItems: 10
+	});
 
 });

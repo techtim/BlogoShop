@@ -5,7 +5,8 @@ define(['jquery'], function(){
 		$overlay = $('#overlay'),
 		_window_width = $(window).width();
 
-	$item.on('click', '.preview__ico', function(e){
+	$('.shop__items__list').on('click', '.preview__ico', function(e){
+		e.preventDefault();
 		e.stopPropagation();
 
 		var $this = $(this),
@@ -30,7 +31,7 @@ define(['jquery'], function(){
 		$('body').addClass('overlayed');
 	});
 
-	$section.on('click', '.shop__information__section', function( e ){
+	$('.shop__items__list').on('click', '.shop__information__section', function( e ){
 		e.stopPropagation();
 	});
 

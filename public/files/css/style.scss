@@ -642,12 +642,14 @@ body {
 }
 
 .carousel__left {
+  border: 10px solid #cbcbcc;
+  @include box-sizing(border-box);
 
   .carousel__wrapper {
     position: relative;
 
     height: 420px;
-    width: 260px;
+    width: 240px;
     overflow: hidden;
   }
 
@@ -658,7 +660,6 @@ body {
 
   li {
     float: left;
-    border: 10px solid #cbcbcc;
   }
 
   img {

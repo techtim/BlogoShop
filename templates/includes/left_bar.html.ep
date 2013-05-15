@@ -59,7 +59,7 @@
 			% foreach (@$banners_h) {
 	        % next if !$_->{link};
 	        	<li>
-	        		<img src='<%= $_->{image} %>' alt='' />
+	        		<a href='<%= $_->{link} %>'><img src='<%= $_->{image} %>' alt='' /></a>
 	        	</li>
 	        % }
         	</ul>

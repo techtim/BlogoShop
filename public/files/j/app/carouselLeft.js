@@ -6,6 +6,11 @@ define(['l/carousel', 'modernizr'], function(){
 		$pagination = $('.carousel__left').find('.pagination'),
 		carousel;
 
+	if($carousel_section.find('li').length === 0 ) {
+		$carousel_section.hide();
+		return false;
+	}
+
 	$carousel
 		.jcarousel({
 			animation: {
@@ -20,7 +25,7 @@ define(['l/carousel', 'modernizr'], function(){
 		})
 		.jcarouselAutoscroll({
 			autostart: true,
-			interval: 3000
+			interval: 5000
 		})
 		.on('mouseenter', function(){
 			$(this).jcarouselAutoscroll('stop');

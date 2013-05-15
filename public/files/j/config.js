@@ -48,12 +48,17 @@ requirejs.config({
 
 		'l/ui': {
 			deps: ['jquery'],
-			exports: '$'
+			exports: '$.datepicker'
 		},
 
 		'fotorama': {
 			deps: ['jquery'],
 			exports: '$.fotorama'
+		},
+
+		'l/customSelect': {
+			deps: ['jquery'],
+			exports: '$.selectik'
 		}
 	}
 });

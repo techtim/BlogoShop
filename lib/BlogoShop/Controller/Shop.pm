@@ -103,14 +103,14 @@ sub item {
 			foreach qw(brand category subcategory);
 
 	$self->utils->check_item_price($item);
-
+# warn $self->dumper($item);
 	return $self->render(
 		%{$item->as_hash},
 		%{$self->check_cart},
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
 		items 	=> $item->list($filter, {}, 0, 8),
-		banners_h => $self->utils->get_banners($self, $filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 240),
+		banners_h => $self->utils->get_banners($self, $item->{category}, 240),
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
 		host 	=> $self->req->url->base,
 		url 	=> $self->req->url,
@@ -157,6 +157,7 @@ sub brand {
 			%{$self->check_cart},
 			sex		=> '',
 			brand_id => $brand->{_id},
+			is_brand => 1,
 			banners_h => $self->utils->get_banners($self, '', 240),
 			page_name => 'shop',
 			template=> 'brand', # return only

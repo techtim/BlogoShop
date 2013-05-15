@@ -20,7 +20,7 @@ define(['l/carousel', 'modernizr'], function(){
 		})
 		.jcarouselAutoscroll({
 			autostart: true,
-			interval: 3000
+			interval: 5000
 		})
 		.on('mouseenter', function(){
 			$(this).jcarouselAutoscroll('stop');

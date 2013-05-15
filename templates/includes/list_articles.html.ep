@@ -8,5 +8,10 @@
 %= include 'includes/preview_article', article => $article, even => $even, count => $count
 
 % }
+
+% unless ( stash('is_brand') ) {
+
 <div class='scroll__helper' data-href='<%== @$articles > 0 && $articles->[-1]->{show_fwd} ? $host. '/' . ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . 'next/'.($articles->[-1]->{_id}) : '' %>'></div>
+
+% }
 

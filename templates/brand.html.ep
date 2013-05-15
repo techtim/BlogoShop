@@ -38,12 +38,12 @@
 
 			<script>requirejs(['app/shopFilters', 'app/equalHeight', 'app/itemsDescr']);</script>
 		</div>
-		
+
 		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
 			<li class='scroll__helper shop' data-href='?price=dsc' data-next='16'></li>
-			<script>requirejs(['app/scroll']);</script>
-		</ul> 
+			<script>requirejs(['app/scroll', 'app/itemsDescr']);</script>
+		</ul>
 	</div>
 </div>
 <div class='clear'></div>

@@ -1,7 +1,9 @@
 define(['jquery', 'app/shopFilters'], function($, draw_list){
 
-	function checkBlockPosition(options){
+	function checkBlockPosition( options ){
 		var block = options.block;
+		if( !block.offset() ) return;
+
 		var pos_top = block.offset().top;
 		var block_height = block.height() || options.height;
 		var from_top = $(window).scrollTop();
