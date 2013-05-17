@@ -31,8 +31,8 @@ sub translit($)
 	return '' if !$str;
     $_ = $for_url ? lc($str) : $str;
 
-    s/\s+|\//_/g if $for_url; 
-    s/\"|\'//g if $for_url; 
+    s/\"|\'|\&|\;//g if $for_url;
+    s/\s+|\//_/g if $for_url;
     s/ъ|ь|Ъ|Ь|//g if $for_url;
     
 	s/Сх/Sh/; s/сх/sh/; s/СХ/SH/;

@@ -148,6 +148,7 @@ sub startup {
 	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show') if $bind_static;
 
 	$r->route('/rss')->to('controller-article#rss');
+	$r->route('/yandex_market')->to('controller-shop#yandex_market');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
 	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 
