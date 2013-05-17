@@ -156,7 +156,7 @@ sub dump_all {
 	my %filter = ref $filt eq ref {} ? %$filt : ();
 	$sort = {_id => 1} if ref $sort ne ref {} ||  keys %$sort == 0;
 
-	return [$self->{app}->db->items->find(\%filter)->sort($sort)->limit(100)->all];
+	return [$self->{app}->db->items->find(\%filter)->sort($sort)->all];
 }
 
 sub count {
