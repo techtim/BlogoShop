@@ -2567,6 +2567,9 @@ body {
 		z-index: 2;
     @include background-image(linear-gradient(top,  #f6f6f6, #ededed));
 
+    ul {
+      display: block;
+    }
 
     li {
 			float: none;
@@ -2605,7 +2608,6 @@ body {
 			position: absolute;
 			left: 2px;
 			display: block;
-			border-radius: 2px;
 			cursor: pointer;
 
 			&:after {

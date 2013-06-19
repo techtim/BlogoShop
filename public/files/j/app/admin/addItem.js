@@ -44,13 +44,12 @@ define([
 			ele = $this.closest('.row');
 
 			if(_role == 'add__params'){
-				$helper = ele.find('.params__helper');
-				_empty_helper = !!$helper.parents('.params__strip__section');
+				var $helper = ele.find('.params__helper');
+				var _empty_helper = !!$helper.parents('.params__strip__section');
 				if(_empty_helper) {
 					$('#params__strip').tmpl(null).appendTo($helper).each(function(){
 						$('select', $helper).selectik({
-							width: 100,
-							maxItems: 10
+							width: 100
 						});
 						bind__params__select(ele);
 					});
@@ -285,8 +284,6 @@ define([
 
 	})();
 
-	$('select').selectik({
-		maxItems: 10
-	});
+	$('select').selectik();
 
 });

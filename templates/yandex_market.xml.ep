@@ -25,23 +25,12 @@
         <local_delivery_cost>350</local_delivery_cost>
         
         <offers>
+        % my $cnt = 1;
         % foreach my $item (@$items) {
-            % next unless $ya_cats_hash->{ $item->{category}.'.'.$item->{subcategory} };
-            <offer id="<%= $item->{_id} %>" type="vendor.model" available="true">
+            % next if !$ya_cats_hash->{ $item->{category}.'.'.$item->{subcategory} } || !$item->{brand_name};
+            <offer id="<%= $cnt++ %>" type="vendor.model" available="true">
                 <url><%= $domain . '/' . join '/', $item->{category}, $item->{subcategory}, $item->{alias} %></url>
-                <price>
-                    % if ($item->{sale}->{sale_active} && 
-                    %   $item->{sale}->{sale_start_stamp} <= time() &&
-                    %   $item->{sale}->{sale_end_stamp} >= time() ) {
-                        <s><%= $item->{price} %></s>
-                        <%= $item->{price} - (
-                                $item->{sale}->{sale_value} =~ m/(%+)/ ?
-                                    $item->{price} * (($item->{sale}->{sale_value}=~/(\d+)/)[0]/100) :
-                                    $item->{sale}->{sale_value}) %> 
-                    % } else {
-                        <%= $item->{price} %>
-                    % }
-                </price>
+                <price><%= $item->{price} %></price>
                 <currencyId>RUR</currencyId>
                 <categoryId><%== $ya_cats_hash->{ $item->{category}.'.'.$item->{subcategory} } %></categoryId>
                 <picture><%== $domain.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %></picture>
@@ -52,16 +41,13 @@
                 <model><%= $item->{name} %></model>
                 <description><%= $item->{descr} %></description>
 
-                % if (@{$item->{images}} > 1) {
-                % shift @{$item->{images}};
-                % my $i = 1;
-                <param name="images">
+                % if (0 && @{$item->{images}} > 1) {
+                    % shift @{$item->{images}};
                     % foreach my $img (@{$item->{images}}) {
-                    <image id="<%= $i++ %>">
+                    <picture>
                         <%== $domain . config->{image_url} . join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $img->{tag} %>
-                    </image>
+                    </picture>
                     % }
-                </param>
                 % }
             </offer>
         % }
