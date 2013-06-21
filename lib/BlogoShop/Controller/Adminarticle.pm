@@ -63,9 +63,9 @@ sub check_input {
 	# creaete new mongo format id from new timestamp
 	$article->{new_id} = $self->utils->update_mongoid_with_time($self->stash('id'), $article->{article_date}, $article->{article_time}) 
 	if $article->{article_date} && $article->{article_time}; 
-	
+
 	#	$article->{author_info} = ($article->{author} ? $self->articles->get_authors($article->{author}) : '') if $article->{author};
-	
+
 	if ($self->{collection} eq 'articles') {
 		# treat like article with collection = 'articles'
 		$article->{alias} = lc($self->utils->translit($article->{name}));

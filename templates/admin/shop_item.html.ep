@@ -10,7 +10,7 @@
 %= include 'includes/info_message', message => stash 'message'
 
 <div class='middle__section shop__add__item'>
-    
+
 	%= form_for '' => (method => 'post', enctype =>"multipart/form-data") => begin
 	    
 	    <ul class='breadcrumps__section clearfloat'>
@@ -34,7 +34,8 @@
 						<b><%== $cat->{name} %></b>
 					</option>
 					% foreach my $subcat (@{$cat->{subcats}}) {
-					<option value="<%= $subcat->{_id} %>" <%= ($subcategory && $subcategory eq $subcat->{_id} ? 'selected' :'') %>>
+					<option value="<%= $cat->{_id}.'.'.$subcat->{_id} %>" 
+						<%= ($subcategory && $category eq $cat->{_id} && $subcategory eq $subcat->{_id} ? 'selected' :'') %>>
 						&nbsp;&nbsp;<%== $subcat->{name} %>
 					</option>
 					% }
@@ -45,27 +46,7 @@
 	    
 	    <div class='caption__row'>
 	    	<h2 class='caption fl'>Новый товар</h2>
-	    	<ul class='sex__section clearfloat'>
-	    		<li>
-	    			<a href='#' <%== "class='current'" if !$sex %>>
-	    				унисекс
-	    				<input type='checkbox' value='' name='sex' <%== "checked" if !$sex %>/>
-	    			</a>
-	    		</li>
-	    		<li>
-	    			<a href='#' <%== "class='current'" if $sex eq 'w' %>>
-	    				женское
-	    				<input type='checkbox' value='w' name='sex' <%== "checked" if $sex eq 'w' %>/>
-	    			</a>
-	    		</li>
-	    		<li>
-	    			<a href='#' <%== "class='current'" if $sex eq 'm' %>>
-	    				мужское
-	    				<input type='checkbox' value='m' name='sex' <%== "checked" if $sex eq 'm' %>/>
-	    			</a>
-	    		</li>
-			</ul>	
-			
+
 			<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#'>
 				<input type="checkbox" name="active" value='1' <%== "checked" if $active %>/>
 			</a>
@@ -78,8 +59,8 @@
 	    	<input type="hidden" name="alias " value="<%= stash 'alias' %>">
 	    % }
 		
-		<input type='hidden' name='category' value='<%= stash 'category' %>' /> 
-		<!--<input type='hidden' name='subcategory' value='<%= stash 'subcategory' %>' />-->
+		<!-- <input type='hidden' name='category' value='<%= stash 'category' %>' /> -->
+		<!-- <input type='hidden' name='subcategory' value='<%= stash 'subcategory' %>' /> -->
 
 		<div class='row'>
 			(название не должно заканчиваться на цифру)
@@ -168,14 +149,14 @@
 		    	<dl class='params__item clearfloat'>
 		    		<dd>размер</dd>
 		    		<dt>
-		    			<input type="text" name="size" class='size' value="<%= stash 'size' %>" placeholder='?'/>
+		    			<input type="text" name="size" class='size' value="<%= stash 'size' %>" placeholder='размер'/>
 		    			<input type="text" name="price" class='price' value="<%= stash 'price' %>" placeholder='цена'/>
 		    			<input type="text" name="qty" class='qty' value="<%= stash 'qty' %>" placeholder='кол-во'/>
 		    		</dt>
 		    	</dl>
 		    	
     		% foreach (sort keys %$opt_subitem_params) {
-    			% if (stash($_) ne '') {
+    			% if (stash($_) && stash($_) ne '') {
 	    		<dl class='params__item clearfloat' data-type='<%= $_ %>'>
 	    			<dd><%= $opt_subitem_params->{$_} %>
 	    			% if ($_ eq 'color') {
@@ -236,7 +217,7 @@
 			    	</dl>
 			    	
 				% foreach (sort keys %$opt_subitem_params) {
-	    			% if ($sub->{$_} ne '') {
+	    			% if ($sub->{$_} && $sub->{$_} ne '') {
 		    		<dl class='params__item clearfloat' data-type='<%= $_ %>'>
 		    			<dd><%= $opt_subitem_params->{$_} %>
 		    			% if ($_ eq 'color') {

@@ -195,7 +195,7 @@ sub cart {
 	$self->session(expires => 1), $cart->{cart_count} = 0 if @{$cart->{cart_items}} == 0;
 
 	$self->stash('checkout_ok' => $self->_checkout($cart)) if $self->stash('act') eq 'checkout';
-	
+
 	$cnt = 0;
 	foreach (sort @failed_items) {
 		$self->unbuy($cart->{cart_items}->[$_], 1);
@@ -258,7 +258,7 @@ sub _proceed_checkout {
 	    to      => $co_params->{email},
 	    cc		=> $self->config('superadmin_mail'),
         from    => 'noreply@'.$self->config('domain_name'),
-	    subject => 'Ваша покупка в магазине Xoxloveka',
+	    subject => 'Ваша покупка в магазине Barista Shop',
 	    type 	=> 'text/html',
 	    format => 'mail',
 	    data => $self->render_mail(template => 'order_mail'),
@@ -277,6 +277,7 @@ sub _proceed_checkout {
 	my $session = $self->session();
 	$session->{client}->{items} = {};
 
+	$order_id = $co_params->{order_id};
 	return $order_id;
 }
 

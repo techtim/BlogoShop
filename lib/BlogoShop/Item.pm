@@ -17,7 +17,7 @@ use constant ITEM_FIELDS => qw(id name alias descr active
 								category subcategory 
 								brand tags total_qty
 								sale_start sale_end sale_value sale_active
-								sex preview_image images
+								preview_image images
 								);
 use constant LIST_FIELDS => map {$_ => 1} qw(name active alias brand brand_name category subcategory subitems total_qty articol
 											tags descr preview_image price sale);
@@ -35,23 +35,23 @@ use constant OPT_SUBITEM_PARAMS => {
 	width => 'ширина',
 	height => 'высота',
 	deep => 'глубина',
-	consist => 'состав',
+	type => 'тип',
 	articol => 'артикул',
 
-	len_hand => 'длина рукава',
-	len_chest => 'в груди',
-	len_down_chest => 'под грудью',
-	len_talii => 'в талии',
-	len_bedra => 'в бедрах',
+	group_cnt => 'количество групп',
+	weight => 'вес',
+	coffee_used => 'используемый кофе',
+	holder_consist => 'материал рожка(холдера)',
+	boiler_type => 'тип нагревателя',
 
-	oprava => 'оправа',
-	h_oprava => 'высота оправы',
-	w_oprava => 'ширина оправы',
-	len_dygek => 'длина дужек',
-	type_lens => 'тип линз',
-	lens => 'линзы',
+	power => 'мощность',
+	water_volume => 'объем резервуара для воды',
+	manometr => 'манометр',
+	configur => 'настройки',
+	auto_decalcination => 'aвтоматическая декальцинация',
+	cappucino => 'возможность приготовления капучино',
 
-	mechan => 'механизм',
+	timer => 'таймер',
 	h_corp => 'высота корпуса',
 	w_corp => 'ширина корпуса',
 	in_compl => 'в комплекте',
@@ -78,7 +78,7 @@ sub new {
 	    my $tmp = merge( $self, { map {$_ => $ctrl->stash($_)||''} ITEM_FIELDS, keys OPT_SUBITEM_PARAMS } ); 
 	    $self 	= $tmp;
     }
-#warn $ctrl->dumper($self);
+# warn $ctrl->dumper($self);
 #	$self->{config} = $conf;
 	bless $self, $class;
 }
@@ -140,7 +140,7 @@ sub list {
     foreach (keys %filter) {
     	delete $filter{$_} if !$filter{$_};
     }
-    $filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
+
     # warn 'FLTR'. $self->{app}->dumper(\%filter);
 	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
@@ -157,7 +157,7 @@ sub count {
 	foreach (keys %filter) {
 		delete $filter{$_} if !$filter{$_};
 	}
-	$filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
+
 	# warn 'FLTR'. $self->{app}->dumper(\%filter);
 	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
@@ -171,17 +171,19 @@ sub _parse_data {
 	my $error_message = [];
 
 	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS, keys OPT_SUBITEM_PARAMS);
-#	warn $ctrl->dumper($ctrl->req->params());
+	# warn $ctrl->dumper($ctrl->req->params());
 	
 	$self->{active} = $self->{active} eq '' ? 0 : 0+$self->{active}; 
 	
 	$self->{brand_name} = $ctrl->app->db->brands->find_one({_id => $self->{brand}}, {name => 1}) || '';
 	$self->{brand_name} = $self->{brand_name}->{name} if $self->{brand_name};
 
-	$self->{category} = $self->{app}->db->categories->find_one({'subcats._id' => $self->{subcategory}}) if $self->{subcategory} ne '';
+	($self->{category}, $self->{subcategory}) = split '\.', $self->{subcategory}
+		if $self->{subcategory} =~ m/(\.+)/;
+	$self->{category} = $self->{app}->db->categories->find_one({_id => $self->{category}, 'subcats._id' => $self->{subcategory}}) if $self->{subcategory} ne '';
 	$self->{category} = $self->{category}->{_id} if $self->{subcategory} ne '';
 #	if !$self->{category};
-	
+
 	$self->{descr} 	=~ s/\r|(\r?\n)+$|\ +$//g if $self->{descr};
 	{ # shitty "Malformed UTF-8 character"
 		no warnings;
@@ -237,7 +239,7 @@ sub _get_images {
 	my @image_size = $ctrl->req->param($name.'_size');
 	my @image_subitem = $ctrl->req->param($name.'_subitem');
 	my %image_delete = map {$_ => 1} $ctrl->req->param($name.'_delete');
-	
+
 	# Collect new files
 	foreach my $file ($ctrl->req->upload($name)) {
 		unless ($file->filename || $file->filename =~ /\.(jpg|jpeg|bmp|gif|png|tif|swf|flv)$/i) {

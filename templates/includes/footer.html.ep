@@ -1,21 +1,7 @@
 <div class='footer__section'>
     <div class='wrap clearfloat'>
-        <p class='copyright'>2010-2012 &copy; магазин хохловка</p>
-
         <div class='contacts'>
-            <p>МОСКВА, М. КИТАЙ-ГОРОД, ХОХЛОВСКИЙ 7, <span>ТЕЛЕФОН: +7 (926) 930 90-05</span></p>
-            <p>ПОЧТА: <a href="mailto:XOXLOVEKA@YANDEX.RU">XOXLOVEKA@YANDEX.RU</a></p>
-            <ul>
-                <li class='fb'>
-                    <a href='http://www.facebook.com/xoxloveka'>facebook</a>
-                </li>
-                <li class='vk'>
-                    <a href='http://vk.com/id98564642'>вконтакте</a>
-                </li>
-                <li class='lj'>
-                    <a href='http://xoxloveka-ru.livejournal.com/'>ЖЖ</a>
-                </li>
-            </ul>
+            <p>МОСКВА, ЭЛЕКТРОЗАВОДСКАЯ УЛ. 21, <span>ТЕЛЕФОН: +7 (985) 172 4306, +7 (926) 571 2198</span></p>
         </div>
     </div>
 </div>

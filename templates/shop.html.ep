@@ -1,5 +1,5 @@
 % layout 'shop';
-% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
+% title 'Barista Shop - магазин профессионального оборудования для бариста: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
 
 %= include 'includes/left_bar'
 
@@ -18,9 +18,9 @@
 
 
 	% if ($cur_category->{descr}) {
-		<div class='shop__description'>
-			<a class='expand__items' href='#'></a>
-			<h4><%= $cur_category->{descr} %></h4>
+		<div class='shop__description active'>
+			<!--<a class='expand__items' href='#'></a>-->
+			<h3><%= $cur_category->{descr} %></h3>
 		</div>
 		<script>requirejs(['app/shopDescription']);</script>
 	% }

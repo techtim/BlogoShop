@@ -8,7 +8,7 @@
 		<link rel="dns-prefetch" href="//ajax.googleapis.com">
         <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
 
-		<meta property="og:site_name" content="магазин Хохловка" />
+		<meta property="og:site_name" content="Barista Shop" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="<%= $title %>" />
 		<meta property="og:url" content="<%== stash('host') . '/' . stash('type') . '/' . $alias %>" />
@@ -17,7 +17,7 @@
     		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
 		% }
 
-		% if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
+		% if (config->{domain_name} eq 'coffee.xoxloveka.ru' ) {
 		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
@@ -40,7 +40,7 @@
 		%= include 'includes/footer'
 
         <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-        %= include 'includes/google_analytics'
-        %= include 'includes/yandex_metrika'
+        %# = include 'includes/google_analytics'
+        %# = include 'includes/yandex_metrika'
 	</body>
 </html>

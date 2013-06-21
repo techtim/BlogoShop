@@ -1,5 +1,5 @@
 % layout 'cart';
-% title 'корзина Хохловка';
+% title 'корзина Barista Shop';
 
 %= include 'includes/left_bar'
 
@@ -136,7 +136,7 @@
 				</p>
 			</div>
 			<div class='map'>
-				<div id="ymaps-map-id_134607452184377852671" style="width: 440px; height: 130px;"></div>
+				<div id="ymaps-map-id_1371839526667283004" style="width: 440px; height: 130px;"></div>
 			</div>
 		</div>
 

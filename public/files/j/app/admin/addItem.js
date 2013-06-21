@@ -49,7 +49,7 @@ define([
 				if(_empty_helper) {
 					$('#params__strip').tmpl(null).appendTo($helper).each(function(){
 						$('select', $helper).selectik({
-							width: 100,
+							width: 140,
 							maxItems: 10
 						});
 						bind__params__select(ele);
@@ -188,7 +188,8 @@ define([
 		})();
 
 		var draw__sub__item = function(params){
-			$last__sub__item = $('.sub__item').last();
+			var $last__sub__item = $('.sub__item').last();
+
 			if($last__sub__item.length != 0){
 				data = {}
 				data.i = ~~$last__sub__item.data('i')+1;
@@ -269,8 +270,8 @@ define([
 	})();
 
 	(function bind__photo__upload(){
-		$loading__section = $('.loading__section');
-		_row_count = 5;
+		var $loading__section = $('.loading__section'),
+			_row_count = 5;
 
 		$('.add', $loading__section).click(function(e){
 			e.preventDefault();

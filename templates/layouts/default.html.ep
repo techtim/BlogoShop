@@ -9,7 +9,7 @@
 
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
-        % if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
+        % if (config->{domain_name} eq 'coffee.xoxloveka.ru' ) {
 		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
@@ -27,8 +27,8 @@
 
         %= include 'includes/footer'
 
-        %= include 'includes/google_analytics'
-        %= include 'includes/yandex_metrika'
-        %# include 'includes/adriver'
+        %# = include 'includes/google_analytics'
+        %# = include 'includes/yandex_metrika'
+
     </body>
 </html>

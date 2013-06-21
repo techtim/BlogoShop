@@ -8,26 +8,18 @@
 
 		    <a class='expand__items' href='#' data-role='categories'></a>
 
-	    	% my $sex = stash('sex')||'';
-		    <ul class='filters__section'>
-		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='all' <%== "class='current'" if !$sex %>>все</a></li>
-		    	<li><a href='http://<%= config->{domain_name} .'/w' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='female' <%== "class='current'" if $sex eq 'w' %>>женское</a></li>
-		    	<li><a href='http://<%= config->{domain_name} .'/m' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='male' <%== "class='current'" if $sex eq 'm' %>>мужское</a></li>
-		    </ul>
-
 		</div>
 
 	    % foreach my $cat (@$categories) {
-	    % next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$cat->{_id}};
+
 	    <ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %>'>
         	<li class='title'>
-        		<a href='http://<%= config->{domain_name} %>/<%== $sex ne '' ? "$sex/" : '' %><%= $cat->{_id} %>'><%= $cat->{name} %></a>
+        		<a href='http://<%= config->{domain_name} %>/<%= $cat->{_id} %>'><%= $cat->{name} %></a>
         	</li>
         	 <ul class='submenu'>
 
         	% foreach my $sub (@{$cat->{subcats}}) {
-        		% next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$sub->{_id}};
-    			<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='<%= '/'.$sex if $sex %>/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
+    			<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
     		% }
 
 	        </ul>
@@ -40,7 +32,7 @@
 	<div class='menu__section'>
 
 		<div class='caption__section clearfloat'>
-			<h2>бренды и корнеры</h2>
+			<h2>производители</h2>
 			<a class='expand__items inverted' href='#' data-role='brands'></a>
 		</div>
 
@@ -67,6 +59,7 @@
     	<script>requirejs(['app/carouselLeft']);</script>
 	</div>
 
+	% if (0) {
     <div class='subscribe__section'>
         %= form_for '/subscribe' => (method => 'post') => begin
         <label for='subsribe'>
@@ -79,6 +72,8 @@
         <input type='submit' value='подписаться' />
         %= end
     </div>
+    
+
     <div id="fb-root"></div>
 	<script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
@@ -96,4 +91,6 @@
     		data-stream="false"
     		data-header="false">
     </div>
+
+	% }
 </div>

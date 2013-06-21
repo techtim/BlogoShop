@@ -2,23 +2,23 @@
 mojo_mode: 'production' # 'development production'
 log_level: 'debug' # 'debug warn'
 
-db_name: 'dev_blogoshop'
+db_name: 'coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
-domain_name: 'dev.xoxloveka.ru'
+domain_name: 'coffee.xoxloveka.ru'
 
 hypnotoad:
-  workers: 4
+  workers: 2
   listen: 
-  - http://*:8080
-  lock_file: /var/lock/blogoshop.lock 
-  pid_file: /var/run/blogoshop.pid 
+  - http://*:7070
+  lock_file: /var/lock/coffee.lock 
+  pid_file: /var/run/coffee.pid 
   user: techtim 
   group: techtim
   proxy: 1
 
-image_dir: '/home/techtim/blogoshop/public/files/i/'
+image_dir: '/home/techtim/coffee/public/files/i/'
 default_img_dir: 'default'
 image_url: '/i/'
 nginx_img_resize: '/res/64'
@@ -27,10 +27,10 @@ nginx_res_item_prev: '/res/152'
 nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
-cookie_name: 'BlogoShop'
-cookie_domain: '.dev.xoxloveka.ru'
+cookie_name: 'BaristaShop'
+cookie_domain: '.coffee.xoxloveka.ru'
 cookie_expiration: 604800 # week
-cookie_secret: '$w3Etx0X|_o\/eKa'
+cookie_secret: '$w3Etx0XC0ofFeKa'
 
 block_voter_ip_time: 180 # 3 min
 

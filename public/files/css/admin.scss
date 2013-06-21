@@ -164,7 +164,7 @@ body {
 }
 
 .middle__section {
-	width: 500px;
+	width: 678px;
 	float: left;
 	margin-left: 40px;
 }
@@ -1131,6 +1131,7 @@ body {
 			}
 
 			dd {
+				height: 46px;
 				width: 102px;
 				padding-left: 8px;
 				float: left;
@@ -1141,6 +1142,7 @@ body {
 					weight: bold;
 				}
 				line-height: 46px;
+				overflow: hidden;
 				text-transform: uppercase;
 				@include transition(all, .2s);
 
@@ -1150,12 +1152,12 @@ body {
 			}
 
 			dt {
-				width: 328px;
+				width: 568px;
 				float: left;
 
 				input {
 					display: inline-block;
-					width: 62px;
+					width: 132px;
 					margin-top: 8px;
 					text-align: center;
 

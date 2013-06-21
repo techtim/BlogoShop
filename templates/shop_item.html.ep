@@ -1,5 +1,5 @@
 % layout 'shop';
-% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. join ' ', stash('name'), stash('brand_name'), $categories_alias->{$category} ;
+% title 'Barista Shop - магазин профессионального оборудования для бариста: '. join ' ', stash('name'), stash('brand_name'), $categories_alias->{$category} ;
 %= include 'includes/left_bar'
 
 <script id='subitem' type='text/x-jquery-tmpl'>
@@ -59,17 +59,18 @@
 	<div class='description__section row'>
 		<%== stash 'descr' %>
 	</div>
-
+	% if ($brand_name) {
 	<dl class='clearfloat row'>
 		<dt>
             Бренд:
         </dt>
         <dd>
-        	<!--<a href="/brand/<%= $brand %>"><%= $brand_name %></a>-->
-        	<%= $brand_name %>
+        	<a href="/brand/<%= $brand %>"><%= $brand_name %></a>
+        	<!--<%= $brand_name %>-->
         </dd>
     </dl>
-
+    % }
+    % if (grep {$_->{size}} @$subitems) {
 	<dl class='clearfloat row size'>
 		<dt>Размер:</dt>
 		<dd>
@@ -81,7 +82,7 @@
 			</ul>
 		</dd>
 	</dl>
-
+	% }
 	<span id='params__helper'></span>
 
 	<dl class='clearfloat row submit'>

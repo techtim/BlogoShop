@@ -15,12 +15,12 @@
 		<meta property="og:url" content="<%= stash('host').stash('url') %>" />
 		<meta property="og:image" content="<%= stash('host').config->{nginx_res_item_prev}.config->{image_url}.
 			join '/', 'item', stash('category'), stash('subcategory'), stash('alias'),stash('preview_image') %>" />
-		<meta property="og:site_name" content="магазин Хохловка" />
+		<meta property="og:site_name" content="Barista Shop" />
 		% }
 		<meta property="fb:admins" content="100000785354670" />
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
-		% if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
+		% if (config->{domain_name} eq 'coffee.xoxloveka.ru' ) {
 		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
@@ -38,7 +38,7 @@
 
         %= include 'includes/footer'
 
-        %= include 'includes/google_analytics'
-        %= include 'includes/yandex_metrika_shop'
+        %# = include 'includes/google_analytics'
+        %# = include 'includes/yandex_metrika_shop'
     </body>
 </html>

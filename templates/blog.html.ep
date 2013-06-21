@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'магазин дизайнерской одежды и аксессуаров Хохловка';
+% title 'Barista Shop - магазин профессионального оборудования для бариста';
 
 %= include 'includes/left_bar'
 

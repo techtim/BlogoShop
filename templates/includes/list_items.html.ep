@@ -10,7 +10,7 @@
 	>
 		
     	<span class='controls active preview__ico'></span>
-        <a href="http://<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>">
+        <a href="http://<%= config->{domain_name} %>/<%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>">
             <span class='img__section'>
         		<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>" alt='<%= $item->{name} %>' title='<%= $item->{name} %>' />
             	% if ($item->{sale}->{sale_active} && 
