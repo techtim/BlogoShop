@@ -108,6 +108,7 @@ body.overlayed #overlay {
   float: right;
   font-size: 13px;
   text-align: right;
+  padding-right: 5px;
 }
 /* line 139, style.scss */
 .shopping__cart__section .empty {
@@ -148,9 +149,10 @@ body.overlayed #overlay {
 /* line 175, style.scss */
 .top__gray__strip .logo {
   margin-top: 1px;
+  margin-left: 0px;
   float: left;
   height: 35px;
-  width: 160px;
+  width: 310px;
   background: url("../i/header/logo.png") no-repeat;
   background-size: 160px 35px;
   text-indent: -9999px;

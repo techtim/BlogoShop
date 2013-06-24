@@ -28,8 +28,8 @@ sub index {
 	my $session = $self->session();
 	$self->stash(admin => $session->{admin});
 	$self->stash(message => $self->flash('message')) if $self->flash('message');
-    $self->stash(error_message => $self->flash('error_message')) if $self->flash('error_message');
-    
+	$self->stash(error_message => $self->flash('error_message')) if $self->flash('error_message');
+
     my $page = $self->req->param('page') ? $self->req->param('page') : 1;
 	my $filter = {};
 	$self->req->param($_) ? $filter->{$_} = $self->req->param($_) : () foreach ARTICLE_PARAMS;

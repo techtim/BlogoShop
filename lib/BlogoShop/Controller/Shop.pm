@@ -24,24 +24,24 @@ sub index {
 		$filter->{sale}->{sale_start_stamp} = {'$lt' => time()};
 		$filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
 
-    my $item 	= BlogoShop::Item->new($self);
+	my $item 	= BlogoShop::Item->new($self);
 	# my $items 	= $item->list($filter, {}, int($self->config('items_on_startpage')/2));
 	delete $filter->{sale};
 	# @$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
 	my $items 	= $self->utils->get_items_from_catalog($self);
 
-    return $self->render(
+	return $self->render(
 		items => $items,
-    	articles => $art,
-        banners => $self->utils->get_banners($self, '', 680),
-        banners_h => $self->utils->get_banners($self, '', 240),
-        %{$self->check_cart},
-        page_name => 'shop',
-        host => $self->req->url->base,
-        sex => '',
-        template => 'index',
+		articles => $art,
+		banners => $self->utils->get_banners($self, '', 680),
+		banners_h => $self->utils->get_banners($self, '', 240),
+		%{$self->check_cart},
+		page_name => 'shop',
+		host => $self->req->url->base,
+		sex => '',
+		template => 'index',
 		format => 'html',
-    );
+	);
 }
 
 sub list {
@@ -255,9 +255,9 @@ sub _proceed_checkout {
 
 	$self->stash(%$co_params);
 	my $mail = $self->mail(
-	    to      => $co_params->{email},
-	    cc		=> $self->config('superadmin_mail'),
-        from    => 'noreply@'.$self->config('domain_name'),
+		to      => $co_params->{email},
+		cc		=> $self->config('superadmin_mail'),
+		from    => 'noreply@'.$self->config('domain_name'),
 	    subject => 'Ваша покупка в магазине Barista Shop',
 	    type 	=> 'text/html',
 	    format => 'mail',

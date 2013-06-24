@@ -6,7 +6,7 @@ db_name: 'coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
-domain_name: 'coffee.xoxloveka.ru'
+domain_name: 'barista-shop.ru'
 
 hypnotoad:
   workers: 2

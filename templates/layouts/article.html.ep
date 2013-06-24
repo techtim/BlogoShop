@@ -40,7 +40,7 @@
 		%= include 'includes/footer'
 
         <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-        %# = include 'includes/google_analytics'
+        %= include 'includes/google_analytics'
         %# = include 'includes/yandex_metrika'
 	</body>
 </html>
