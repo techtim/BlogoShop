@@ -73,6 +73,11 @@ define(['jquery', 'libs/mansory'], function( $ ){
 
 		$('.banners__cats').masonry({
             itemSelector: 'ul'
+        }).on('click', '#select_all', function(){
+			$(this).closest('.banners__cats').find('input').attr('checked', function( idx, oldVal ){
+				console.log(!oldVal);
+				return !oldVal;
+			});
         });
 	});
 });

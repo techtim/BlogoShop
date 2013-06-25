@@ -2008,6 +2008,7 @@ body {
       position: relative;
       opacity: 1;
       @include transition(all, .4s);
+      -webkit-transform: translate3d(0,0,0);
 
       .caption {
         color: #434343;
@@ -2313,7 +2314,7 @@ body {
 
     .types__list {
       margin-bottom: -10px;
-
+      -webkit-transform: translate3d(0,0,0);
 
       li {
         padding: 10px 0;

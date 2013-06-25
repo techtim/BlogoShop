@@ -148,7 +148,7 @@
 			<ul class='types__list' data-type='deliver'>
 				<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled' value='fast_courier' id='fast_courier' data-price='500' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'fast_courier' %> disabled />
-					<label for='courier'>
+					<label for='fast_courier'>
 						Срочная доставка по Москве в пределах МКАД (в день заказа)
 					<span class='price'>500</span>
 					</label>

@@ -100,6 +100,10 @@
             <div class="banners__cats clearfloat">
 
                 <ul>
+                    <li><input type="checkbox" id="select_all"><label for="select_all">Выбрать все</label></li>
+                </ul>
+
+                <ul>
                     <li>
                         <input type="checkbox" name="category" value="" <%= 'checked' if $banner_cats->{''} %> id="cat_main" />
                         <label for="cat_main" class="cat__name">главная</label>
