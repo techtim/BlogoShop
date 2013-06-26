@@ -27,6 +27,7 @@ sub index {
 	my $item 	= BlogoShop::Item->new($self);
 	# my $items 	= $item->list($filter, {}, int($self->config('items_on_startpage')/2));
 	delete $filter->{sale};
+
 	# @$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
 	my $items 	= $self->utils->get_items_from_catalog($self);
 
