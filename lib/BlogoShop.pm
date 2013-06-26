@@ -44,6 +44,7 @@ sub startup {
 	$self->secret($self->config('cookie_secret'));
 	$self->sessions->cookie_name($self->config('cookie_name'));
 	$self->sessions->default_expiration($self->config('cookie_expiration'));
+	$self->sessions->cookie_domain('.'.$self->config('domain_name'));
 
 	#Set Mode 'production' || 'development'
 	$self->mode($self->config('mojo_mode'));
@@ -121,9 +122,13 @@ sub startup {
 		types_alias => \%types_alias,
 	});
 
-	$self->hook(around_dispatch => sub {
-    	my ($next, $c) = @_;
+	$self->hook(before_dispatch => sub {
+		my $c = shift;
+		$c->stash(%{$c->app->utils->check_cart($c)});
+	});
 
+	$self->hook(around_dispatch => sub {
+		my ($next, $c) = @_;
 		my @cats = $c->app->db->categories->find({})->sort({pos => 1})->all;
 		$c->stash->{categories} 	  	= \@cats;
 		$c->stash->{categories_alias} 	= $c->app->utils->get_categories_alias(\@cats);

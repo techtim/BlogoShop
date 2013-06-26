@@ -328,9 +328,9 @@ sub check_cart {
 	my $need_full = shift || 0;
 
 	my $session = $self->session();
-#	warn 'SESSion '. $self->dumper($session);
+# warn 'SESSion '. $self->dumper($session);
 	return {cart_count => 0} if !$session || !$session->{client} || ref $session->{client} ne ref {};
-	
+
 	my ($ct, $sum) = (0,0);
 	my $items = [];
 	eval {

@@ -1,12 +1,12 @@
 ---
-mojo_mode: 'production' # 'development production'
+mojo_mode: 'development' #development production'
 log_level: 'debug' # 'debug warn'
 
-db_name: 'coffee'
+db_name: 'dev_coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
-domain_name: 'barista-shop.ru'
+domain_name: 'coffee.xoxloveka.ru'
 
 hypnotoad:
   workers: 2
