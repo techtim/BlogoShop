@@ -29,6 +29,7 @@
 			  fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));</script>
     	</li>
+        % if (0) {
     	<li class='vk'>
     		<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
 
@@ -49,6 +50,7 @@
 			  })();
 			</script>
     	</li>
+        % }
     </ul>
     
     <ul class='post__navigation clearfloat'>

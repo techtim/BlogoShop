@@ -4,28 +4,28 @@
 	<div class='menu__section'>
 
 		<div class='caption__section clearfloat'>
-	    	<h2>Каталог</h2>
+			<h2>Каталог</h2>
 
-		    <a class='expand__items' href='#' data-role='categories'></a>
+			<a class='expand__items' href='#' data-role='categories'></a>
 
 		</div>
 
-	    % foreach my $cat (@$categories) {
+		% foreach my $cat (@$categories) {
 
-	    <ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %>'>
-        	<li class='title'>
-        		<a href='http://<%= config->{domain_name} %>/<%= $cat->{_id} %>'><%= $cat->{name} %></a>
-        	</li>
-        	 <ul class='submenu'>
+		<ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %>'>
+			<li class='title'>
+				<a href='http://<%= config->{domain_name} %>/<%= $cat->{_id} %>'><%= $cat->{name} %></a>
+			</li>
+			 <ul class='submenu'>
 
-        	% foreach my $sub (@{$cat->{subcats}}) {
-    			<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
-    		% }
+			% foreach my $sub (@{$cat->{subcats}}) {
+				<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
+			% }
 
-	        </ul>
+			</ul>
 
-	    </ul>
-	    % }
+		</ul>
+		% }
 
 	</div>
 
@@ -36,61 +36,61 @@
 			<a class='expand__items inverted' href='#' data-role='brands'></a>
 		</div>
 
-	    <ul class='item'>
-	    % foreach my $brand (@$list_brands) {
-	    	<li class='title <%== 'current' if stash('brand_id') && stash('brand_id') eq $brand->{_id} %>' >
-	    		<a href='http://<%= config->{domain_name} %>/brand/<%= $brand->{_id} %>'><%= $brand->{name} %></a>
-	    	</li>
-	    % }
-	    </ul>
+		<ul class='item'>
+		% foreach my $brand (@$list_brands) {
+			<li class='title <%== 'current' if stash('brand_id') && stash('brand_id') eq $brand->{_id} %>' >
+				<a href='http://<%= config->{domain_name} %>/brand/<%= $brand->{_id} %>'><%= $brand->{name} %></a>
+			</li>
+		% }
+		</ul>
 	</div>
 
 	<div class="carousel__left">
 		<div class="carousel__wrapper">
 			<ul>
 			% foreach (@$banners_h) {
-	        % next if !$_->{link};
-	        	<li>
-	        		<a href='<%= $_->{link} %>'><img src='<%= $_->{image} %>' alt='' /></a>
-	        	</li>
-	        % }
-        	</ul>
-    	</div>
-    	<script>requirejs(['app/carouselLeft']);</script>
+			% next if !$_->{link};
+				<li>
+					<a href='<%= $_->{link} %>'><img src='<%= $_->{image} %>' alt='' /></a>
+				</li>
+			% }
+			</ul>
+		</div>
+		<script>requirejs(['app/carouselLeft']);</script>
 	</div>
 
 	% if (0) {
-    <div class='subscribe__section'>
-        %= form_for '/subscribe' => (method => 'post') => begin
-        <label for='subsribe'>
-            Узнавайте первыми о скидках,<br/>
-            спецпредложениях  и других интересных<br/>
-            акциях магазина ХОХЛОВКА:
-        </label>
+	<div class='subscribe__section'>
+		%= form_for '/subscribe' => (method => 'post') => begin
+		<label for='subsribe'>
+			Узнавайте первыми о скидках,<br/>
+			спецпредложениях  и других интересных<br/>
+			акциях магазина ХОХЛОВКА:
+		</label>
 
-        <input type='text' name="subscribe" id='subscribe' placeholder="e-mail"/>
-        <input type='submit' value='подписаться' />
-        %= end
-    </div>
-    
+		<input type='text' name="subscribe" id='subscribe' placeholder="e-mail"/>
+		<input type='submit' value='подписаться' />
+		%= end
+	</div>
+	% }
 
-    <div id="fb-root"></div>
+	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
 	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
+	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=272601979547946";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
-    <div class="fb-like-box"
-    		data-href="http://www.facebook.com/xoxloveka"
-    		data-width="260"
-    		data-height="288"
-    		data-show-faces="true"
-    		data-border-color="C1C1C1"
-    		data-stream="false"
-    		data-header="false">
-    </div>
+	<div class="fb-like-box"
+			data-href="http://www.facebook.com/baristashopmsk"
+			data-width="260"
+			data-height="288"
+			data-show-faces="true"
+			data-border-color="C1C1C1"
+			data-stream="false"
+			data-header="false">
+	</div>
 
-	% }
+
 </div>

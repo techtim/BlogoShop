@@ -31,7 +31,7 @@
 			}(document, 'script', 'facebook-jssdk'));</script>
 			<div class="fb-like" data-send="false" data-layout="button_count" data-width="200" data-show-faces="true" data-font="lucida grande"></div>
 		</li>
-		<!--
+		% if (0) {
 		<li>
 			<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?52"></script>
 
@@ -47,6 +47,6 @@
 		<li>
 			<a target="_blank" class="surfinbird__like_button" data-surf-config="{'layout': 'common-nocount-blue', 'width': '65', 'height': '21', 'text': 'Surf'}" href="http://surfingbird.ru/share">Surf</a>
 		</li>
-		-->
+		% }
 	</ul>
 </div>
