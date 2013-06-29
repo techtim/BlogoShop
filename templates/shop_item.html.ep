@@ -60,6 +60,7 @@
 		<%== stash 'descr' %>
 	</div>
 
+	% if ($brand_name) {
 	<dl class='clearfloat row'>
 		<dt>
             Бренд:
@@ -69,7 +70,8 @@
         	<%= $brand_name %>
         </dd>
     </dl>
-
+    % }
+    % if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
 	<dl class='clearfloat row size'>
 		<dt>Размер:</dt>
 		<dd>
@@ -81,11 +83,16 @@
 			</ul>
 		</dd>
 	</dl>
+	% }
 
 	<span id='params__helper'></span>
 
 	<dl class='clearfloat row submit'>
+	 	% if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
 		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
+		% } else {
+		<a href="#" class='submit__form'>Нет в наличии</a>
+		% }
 	</dl>
 	% if (@$tags > 0) {
 	<dl class='clearfloat row tags'>

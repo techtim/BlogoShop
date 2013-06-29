@@ -44,6 +44,7 @@ sub startup {
 	$self->secret($self->config('cookie_secret'));
 	$self->sessions->cookie_name($self->config('cookie_name'));
 	$self->sessions->default_expiration($self->config('cookie_expiration'));
+	$self->sessions->cookie_domain('.'.$self->config('domain_name'));
 
 	#Set Mode 'production' || 'development'
 	$self->mode($self->config('mojo_mode'));

@@ -8,9 +8,11 @@ use Data::Dumper;
 use File::Path qw(make_path remove_tree);
 use File::Copy::Recursive qw( dircopy );
 $File::Copy::Recursive::MaxDepth = 1;
-use Mojo::JSON;
-use Hash::Merge qw( merge );
 
+use Hash::Merge qw( merge );
+my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
+
+use Mojo::JSON;
 my $json  = Mojo::JSON->new;
 
 use constant ITEM_FIELDS => qw(id name alias descr active
@@ -75,7 +77,7 @@ sub new {
 	    );
     }
     if (!$self->{_id}) {
-	    my $tmp = merge( $self, { map {$_ => $ctrl->stash($_)||''} ITEM_FIELDS, keys OPT_SUBITEM_PARAMS } ); 
+	    my $tmp = $merge->merge( $self, { map {$_ => $ctrl->stash($_)||''} ITEM_FIELDS, keys OPT_SUBITEM_PARAMS } ); 
 	    $self 	= $tmp;
     }
 #warn $ctrl->dumper($self);
@@ -130,7 +132,7 @@ sub copy {
 sub get {
     my ($self, $id, $sub_id) = @_;
     my $it = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $id)});
-    return $it ? merge( $it, $it->{subitems}->[$sub_id] ) : {};
+    return $it ? $merge->merge( $it, $it->{subitems}->[$sub_id] ) : {};
 }
 
 sub list {

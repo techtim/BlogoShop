@@ -1,6 +1,9 @@
 <div class='footer__section'>
     <div class='wrap clearfloat'>
-        <p class='copyright'>2010-2012 &copy; магазин хохловка</p>
+        <p class='copyright'>
+            2010-2012 &copy; магазин хохловка<br/>
+            <a href="/tt1" class="legal">правовая информация</a>
+        </p>
 
         <div class='contacts'>
             <p>МОСКВА, М. КИТАЙ-ГОРОД, ХОХЛОВСКИЙ 7, <span>ТЕЛЕФОН: +7 (926) 930 90-05</span></p>
