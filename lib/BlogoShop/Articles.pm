@@ -57,6 +57,8 @@ sub update_article {
 		$article->{polls}->{$_} = $old_article->{polls}->{$_} if $old_questions{$_};
 	}
 	
+	my @vars = localtime(time);
+	$article->{last_update} = sprintf '%04d-%02d-%02d %02d:%02d', $vars[5]+1900, $vars[4]+1, $vars[3], $vars[2], $vars[1];
 	# Check diff between new and old id, if timestamp differ delete with old_id insert with new_id, else update;
 	if ( $article->{new_id} &&
 	substr($old_article->{_id}->{value}, 0, 6) ne substr($article->{new_id}, 0, 6)

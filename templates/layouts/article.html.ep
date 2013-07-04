@@ -6,7 +6,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 		<link rel="dns-prefetch" href="//ajax.googleapis.com">
-        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+
+		<meta property="fb:admins" content="272601979547946" />
+		<meta itemprop="datePublished" content="<%= stash('date_published') %>">
 
 		<meta property="og:site_name" content="Barista Shop" />
 		<meta property="og:type" content="article" />
@@ -14,7 +17,7 @@
 		<meta property="og:url" content="<%== stash('host') . '/' . stash('type') . '/' . $alias %>" />
 		<meta property="og:description" content="<%= stash 'preview_text' %>" />
 		% if (stash 'preview_image') {
-    		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
+			<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
 		% }
 
 		% if (config->{domain_name} eq 'coffee.xoxloveka.ru' ) {

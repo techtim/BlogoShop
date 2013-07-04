@@ -48,6 +48,7 @@ sub show {
 #		my $que = qr/<poll=\"$article->{polls}->{$_}->{question}\">.+?<\/poll>/;
 #		$article->{article_text} =~ s/$que/$poll_html/s;
 #	}
+	$article->{date_published} = $self->utils->date_format_from_mongoid(''.$article->{_id});
 
 	$self->stash(%$article);
 	return $self->render(

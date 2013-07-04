@@ -17,7 +17,7 @@
 			join '/', 'item', stash('category'), stash('subcategory'), stash('alias'),stash('preview_image') %>" />
 		<meta property="og:site_name" content="Barista Shop" />
 		% }
-		<meta property="fb:admins" content="100000785354670" />
+		<meta property="fb:admins" content="272601979547946" />
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
 		% if (config->{domain_name} eq 'coffee.xoxloveka.ru' ) {

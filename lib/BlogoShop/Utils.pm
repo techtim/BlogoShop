@@ -115,6 +115,14 @@ sub date_time_from_mongoid {
 	return (join ('-', $lt[2], $lt[3]+1, $lt[4]+1900). " $lt[1]\:$lt[0]");
 }
 
+sub date_format_from_mongoid {
+	my ($self, $id, $need_time) = @_; 
+	my $time = (hex(substr $id, 0, 8));
+	my @vars = localtime($time);
+	return (sprintf '%04d-%02d-%02d', $vars[5]+1900, $vars[4]+1, $vars[3]) .
+		($need_time ? sprintf ' %02d:%02d', $vars[2], $vars[1] : '');
+}
+
 sub update_mongoid_with_time {
 	my ($self, $id, $article_date, $article_time) = @_; 
 	my $old_time = (hex(substr $id, 0, 8));

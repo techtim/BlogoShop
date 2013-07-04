@@ -12,7 +12,7 @@
 		<li class='clearfloat sale'>
 			<div class='img__section'>
 				<a href='http://shop.<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>'>
-				<img src="<%== config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>">
+				<img src="<%== config->{nginx_img_resize}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>">
 				% if ($item->{sale}->{sale_active} &&
 				%	$item->{sale}->{sale_start_stamp} <= time() &&
 				%	$item->{sale}->{sale_end_stamp} >= time() ) {
@@ -125,21 +125,22 @@
 				</li>
 			</ul>
 		</div>
+		<!--
 		<div class='right__section pickup item__block disabled'>
 			<div class='fl'>
 				<h2 class='caption'>Самовывоз</h2>
 				<a class='pickup__checkbox fake__checkbox'><input type='checkbox' name='self_delivery' value='self' /></a>
 				<p>
 					Россия, Москва<br/>
-					М. Китай-город, Хохловский 7<br/>
-					<span>магазин «хохловка»</span>
+					ЭЛЕКТРОЗАВОДСКАЯ УЛ. 21<br/>
+					<span>старое здание завода "Электрон"</span>
 				</p>
 			</div>
 			<div class='map'>
 				<div id="ymaps-map-id_1371839526667283004" style="width: 440px; height: 130px;"></div>
 			</div>
 		</div>
-
+		-->
 		<div class='clear'></div>
 
 		<div class='deliver__section item__block disabled'>
