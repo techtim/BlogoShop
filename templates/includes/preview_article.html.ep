@@ -4,7 +4,7 @@
             join ('/', $article->{type}, $article->{alias}, $article->{preview_image}) %>)'>
 		</span>
         <span class='caption'><%= $article->{name} %></span>
-        <span class='text'><%= substr($article->{preview_text}, 0, 102) %></span>
+        <span class='text'><%= substr($article->{preview_text}, 0, 130).'...' %></span>
         <span class='date'><%= $article->{date} %></span>
     </a>
 </li>
