@@ -1,0 +1,10 @@
+% layout 'cart';
+% title 'корзина Хохловка';
+
+%= include 'includes/left_bar'
+
+<div class='content__section cart__items__list__section'>
+	<h2 class='caption'>Покупка совершена</h2> 
+	Ваш заказ принят. Номер заказа: <%= stash('order_id') %>
+
+</div>

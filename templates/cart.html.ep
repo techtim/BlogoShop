@@ -205,10 +205,8 @@
 	<input type='submit' name='check' value='Оформить' class='finish__cart disabled hidden' disabled/>
 
 	%= end
-% } elsif (stash('checkout_ok')) {
-	Ваш заказ принят. Номер заказа: <%= stash('checkout_ok') %>
 % } else {
-	ПУСТО
+	В корзине еще ничего нет
 % }
 </div>
 

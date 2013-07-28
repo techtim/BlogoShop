@@ -178,7 +178,7 @@ sub cart {
 	$filter->{_id}->{'$in'} = 
 		[ map {MongoDB::OID->new(value => ''.$_->{_id})} @{$cart->{cart_items}} ] 
 			if ref $cart->{cart_items} eq ref [];
-	
+
 	my $item 	  = BlogoShop::Item->new($self);
 	my $sel_items = {map {$_->{_id} => $_ } @{$item->list($filter, {}, 0, 1000)}}; # big stupid limit num to fetch all
 
@@ -196,14 +196,18 @@ sub cart {
 	$self->session(expires => 1), $cart->{cart_count} = 0 if @{$cart->{cart_items}} == 0;
 
 	$self->stash('checkout_ok' => $self->_checkout($cart)) if $self->stash('act') eq 'checkout';
-	
+
 	$cnt = 0;
 	foreach (sort @failed_items) {
 		$self->unbuy($cart->{cart_items}->[$_], 1);
 		splice (@{$cart->{cart_items}}, $_-$cnt, 1) if $_ ne '';
 		$cnt++ if $_ ne '';
 	}
-	$self->stash(%$cart) if !$self->stash('checkout_ok');
+
+	$self->flash(order_id => ''.$self->stash('checkout_ok'));
+	$self->redirect_to('/checkout') if $self->stash('checkout_ok');
+
+	$self->stash(%$cart);
 
 	return $self->render(
 		items 	=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
@@ -211,6 +215,22 @@ sub cart {
 		banners_h => $self->utils->get_banners($self, '', 240),
 		page_name => 'shop',
 		template=> 'cart',
+		format 	=> 'html',
+	);
+}
+
+sub show_checkout {
+	my $self = shift;
+	my $id = $self->flash('order_id') || 0;
+warn $self->dumper($id);
+	$self->redirect_to('/cart') if !$id;
+
+	return $self->render(
+		order_id=> $id,
+		sex 	=> '',
+		banners_h => $self->utils->get_banners($self, '', 240),
+		page_name => 'checkout',
+		template=> 'checkout',
 		format 	=> 'html',
 	);
 }
@@ -254,6 +274,7 @@ sub _proceed_checkout {
 	my $order_id 			= $self->app->db->orders->save($co_params);
 	$co_params->{order_id} 	= ($order_id=~/^(.{8})/)[0];
 
+	delete $co_params->{status}; #status reserved name in Mojo stash
 	$self->stash(%$co_params);
 	my $mail = $self->mail(
 	    to      => $co_params->{email},
@@ -278,7 +299,7 @@ sub _proceed_checkout {
 	my $session = $self->session();
 	$session->{client}->{items} = {};
 
-	return $order_id;
+	return $co_params->{order_id};
 }
 
 ##
@@ -333,6 +354,7 @@ sub check_cart {
 	
 	my ($ct, $sum) = (0,0);
 	my $items = [];
+
 	eval {
 		foreach my $key (keys %{$session->{client}->{items}}) {
 			for ($session->{client}->{items}->{$key}) {
@@ -342,7 +364,8 @@ sub check_cart {
 					if $need_full && $key=~m!:+!;
 			}
 		}
-	};
+	} if ref $session->{client}->{items} eq ref {};
+
 	$self->session(expires => 1) if $@; # if wrong cookies, clean them
 
 	return {cart_count => $ct, cart_price => $sum, cart_items => $items};

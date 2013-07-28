@@ -150,7 +150,17 @@ sub orders_update {
 	$self->app->db->orders->update($filter, {'$set' => {status => 'new'}}, {'multiple' => 1});
 	return $self->render(
 		json => {ok => [$self->app->db->orders->find($filter)->fields({status => 1})->all]},
-	);	
+	);
+}
+
+sub orders_cities {
+	my $self = shift;
+	my @ord = $self->app->db->orders->find()->all;
+	my $res;
+	for (@ord) {
+		$res .= $_->{city} ."\t". $self->utils->date_from_mongoid($_->{_id}) ."\t". $_->{delivery_type}. "\n";
+	}
+	return $self->render(text => $res);
 }
 
 sub write_file {

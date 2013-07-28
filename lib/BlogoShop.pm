@@ -151,6 +151,8 @@ sub startup {
 	$r->route('/rss')->to('controller-article#rss');
 	$r->route('/yandex_market')->to('controller-shop#yandex_market');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
+	$r->route('/orders_cities')->to('controller-ajax#orders_cities');
+
 	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 
 #    $self->routes->get('controller-shop#list')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
@@ -239,6 +241,7 @@ sub startup {
 	# --SHOP--
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
+	$r->route('/checkout')->to('controller-shop#show_checkout');
 	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
 	# list items 
 	$r->route('/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-shop#brand');
