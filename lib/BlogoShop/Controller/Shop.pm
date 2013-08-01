@@ -178,7 +178,7 @@ sub cart {
 	$filter->{_id}->{'$in'} = 
 		[ map {MongoDB::OID->new(value => ''.$_->{_id})} @{$cart->{cart_items}} ] 
 			if ref $cart->{cart_items} eq ref [];
-	
+
 	my $item 	  = BlogoShop::Item->new($self);
 	my $sel_items = {map {$_->{_id} => $_ } @{$item->list($filter, {}, 0, 1000)}}; # big stupid limit num to fetch all
 

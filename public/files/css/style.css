@@ -64,20 +64,21 @@ body.overlayed #overlay {
 /* line 91, style.scss */
 .header__section {
   background: #fff;
+  /*background-image: url(/i/header/header-barista-84.png);*/
 }
 /* line 94, style.scss */
 .header__section h1 {
   height: 70px;
-  width: 321px;
+  width: 400px;
   float: left;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 4px;
+  margin-left: 290px;
   margin-bottom: 10px;
 }
 /* line 102, style.scss */
 .header__section h1 a {
   display: block;
-  height: 70px;
+  height: 77px;
   background: url("../i/header/logo.png") no-repeat;
   text-indent: -9999px;
 }
@@ -99,7 +100,7 @@ body.overlayed #overlay {
 }
 /* line 127, style.scss */
 .header__section .contacts__section {
-  margin-top: 16px;
+  margin-top: 13px;
 }
 
 /* line 133, style.scss */
@@ -117,10 +118,8 @@ body.overlayed #overlay {
 /* line 143, style.scss */
 .shopping__cart__section a {
   padding-top: 4px;
-  padding-left: 40px;
-  background: url("../i/ico-cart.png") no-repeat 8px -23px;
   border-bottom: 4px solid #845730;
-  color: #fff;
+  color: #000;
   font-size: 13px;
   text-decoration: none;
   text-transform: uppercase;
@@ -149,12 +148,12 @@ body.overlayed #overlay {
 /* line 175, style.scss */
 .top__gray__strip .logo {
   margin-top: 1px;
-  margin-left: 0px;
+  margin-left: 9px;
   float: left;
   height: 35px;
-  width: 310px;
-  background: url("../i/header/logo.png") no-repeat;
-  background-size: 160px 35px;
+  width: 270px;
+  /*background: url("../i/header/logo_white.png") repeat-x;
+  background-size: 30px 31px;*/
   text-indent: -9999px;
 }
 /* line 185, style.scss */
@@ -220,7 +219,7 @@ body.overlayed #overlay {
 /* line 256, style.scss */
 .navigation__section {
   margin-bottom: 18px;
-  background: #000;
+  /*background: #fff;*/
   border-top: 1px dotted #444;
   border-bottom: 1px dotted #444;
   font-size: 13px;
@@ -242,7 +241,7 @@ body.overlayed #overlay {
 }
 /* line 281, style.scss */
 .navigation__section .main__nav__strip a {
-  color: #fff;
+  color: #000;
   font-size: 13px;
   text-decoration: none;
   text-transform: uppercase;
@@ -342,7 +341,7 @@ body.overlayed #overlay {
 /* line 383, style.scss */
 .navigation__section .shopping__cart__section a {
   background-position: 8px -23px;
-  color: #FFFFFF;
+  color: #000;
 }
 
 /* line 391, style.scss */
