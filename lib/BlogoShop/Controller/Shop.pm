@@ -222,7 +222,7 @@ sub cart {
 sub show_checkout {
 	my $self = shift;
 	my $id = $self->flash('order_id') || 0;
-warn $self->dumper($id);
+
 	$self->redirect_to('/cart') if !$id;
 
 	return $self->render(

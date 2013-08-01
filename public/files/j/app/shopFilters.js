@@ -24,34 +24,30 @@ define(['jquery', 'l/tmpl', 'l/ui'], function(){
 	var templates = {
 		items: '<li {{if typeof sale != "undefined" && sale.sale_active}}class="sale"{{/if}}>'+
 				'<a href="${link}"><span class="img__section">'+
-	        			'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
-            			'{{if typeof sale != "undefined" && $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
-	            			'<span class="ico__sale"></span>'+
-	            		'{{/if}}'+
-	            		'<span class="controls active preview__ico"></span>'+
-		            	'</span>'+
-		            '<span class="brand">${brand_name}</span>'+
-		            '<span class="item__caption">${name}</span>'+
-		        	'<span class="price">'+
-			        	'{{if typeof sale != "undefined"  && $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
-						  	'<s>${price}</s> ${$item.dicount(price, sale.sale_value )}'+
+						'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
+						'{{if typeof sale != "undefined" && $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
+							'<span class="ico__sale"></span>'+
+						'{{/if}}'+
+						'<span class="controls active preview__ico"></span>'+
+						'</span>'+
+					'<span class="brand">${brand_name}</span>'+
+					'<span class="item__caption">${name}</span>'+
+					'<span class="price">'+
+						'{{if typeof sale != "undefined"  && $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
+							'<s>${price}</s> ${$item.dicount(price, sale.sale_value )}'+
 						'{{else}}'+
 							'${price}'+
 						'{{/if}}'+
-		        	'</span>'+
-		        '</a>'+
-		        '<div class="shop__information__section right">'+
-	        		'<div class="helper">'+
-	        			'<div class="description__section row">'+
-	        				'${descr}'+
-	        			'</div>'+
-	        			'<dl class="clearfloat row">'+
+					'</span>'+
+				'</a>'+
+				'<div class="shop__information__section right">'+
+					'<div class="helper">'+
+						'<div class="description__section row">${descr}</div>'+
+						'<dl class="clearfloat row">'+
 							'<dt>Бренд:</dt>'+
-					        '<dd>'+
-					        	'${brand_name}'+
-					        '</dd>'+
-					    '</dl>'+
-					    '{{if size}}'+
+							'<dd>${brand_name}</dd>'+
+						'</dl>'+
+						'{{if size}}'+
 							'<dl class="clearfloat row">'+
 								'<dt>Размер:</dt>'+
 								'<dd>'+
@@ -72,7 +68,7 @@ define(['jquery', 'l/tmpl', 'l/ui'], function(){
 							'<dd>'+
 								'<span class="price">'+
 									'{{if typeof sale != "undefined" && sale.sale_active}}'+
-									  	'<s>${price}</s>'+
+										'<s>${price}</s>'+
 									'{{else}}'+
 										'${price}'+
 									'{{/if}}'+
@@ -89,9 +85,9 @@ define(['jquery', 'l/tmpl', 'l/ui'], function(){
 								'</dd>'+
 							'</dl>'+
 						'{{/if}}'+
-	        		'</div>'+
-        		'</div>'+
-		    '</li>',
+				'</div>'+
+			'</div>'+
+		'</li>',
 		scroll_helper: '<li class="'+config.scroll_helper.replace('.','')+'" data-href="${href}" data-next="${next}"></li>'
 	};
 
@@ -130,7 +126,7 @@ define(['jquery', 'l/tmpl', 'l/ui'], function(){
 				dicount: function( price, sale ){
 					var price;
 					if(sale.indexOf('%') !== -1){
-						price = (price* parseInt(sale))/100;
+						price -= (price * parseInt(sale))/100;
 					}else{
 						price = sale;
 					}
