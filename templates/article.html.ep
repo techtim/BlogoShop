@@ -5,7 +5,9 @@
 
 <div class='content__section post__page'>
     <h2><%= stash 'name' %></h2>
-    
+    % if (stash('author') ne '') {
+    <h3>Автор: <%= stash 'author' %></h3>
+    % }
     <%== stash 'article_text_rendered' %>
     
     <div class='tags__section'>

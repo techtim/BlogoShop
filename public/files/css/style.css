@@ -929,9 +929,10 @@ body.overlayed #overlay {
 /* line 1028, style.scss */
 .post__page h3 {
   margin-bottom: 16px;
-  color: #333;
+  color: #555555;
+  font-color: #555555;
   font-size: 14px;
-  font-weight: bold;
+  font-style: italic;
   line-height: 17px;
 }
 /* line 1038, style.scss */

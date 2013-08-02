@@ -8,7 +8,7 @@ use utf8;
 
 use File::Path qw(make_path remove_tree);
 use Encode;
-use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date);
+use constant ARTICLE_PARAMS => qw( active alias name author type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date);
 
 sub get {
 	my $self = shift;
