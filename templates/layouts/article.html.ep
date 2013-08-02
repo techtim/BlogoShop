@@ -20,11 +20,7 @@
 			<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
 		% }
 
-		% if (config->{domain_name} eq 'coffee.xoxloveka.ru' ) {
 		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
-        % } else {
-        <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
-        % }
 		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
 
 		<script data-main='/j/config' src='/j/require.js'></script>
