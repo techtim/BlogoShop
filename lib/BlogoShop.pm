@@ -86,6 +86,15 @@ sub startup {
 	my $json = JSON::XS->new();
 	$self->helper('json' => sub {return $json});
 	
+# 	my $qiwi = Business::Qiwi->new(
+#         trm_id => $self->config('qiwi_id'),
+#         serial => $self->config('qiwi_pass'),
+#         password => $self->config('qiwi_pass'),
+#     );
+    
+#     my $balance = $qiwi->get_balance;
+# warn $self->dumper($balance);
+
 	$self->plugin(mail => {
 		from     => 'noreply@sport.megafon.ru',
 		type     => 'text/plain',
@@ -152,6 +161,7 @@ sub startup {
 	$r->route('/yandex_market')->to('controller-shop#yandex_market');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
 	$r->route('/orders_cities')->to('controller-ajax#orders_cities');
+	$r->route('/soap')->to('controller-qiwi#soap');
 
 	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 
@@ -165,7 +175,7 @@ sub startup {
 		my $bind_types = join '|', map {$_->{_id}} @types;
 		$blog->route('/:type', type => qr/$bind_types/)->to('controller-article#list');
 		$blog->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
-		$blog->route('/tag/:tag', tag => qr/[а-яА-Я\w]+/i)->to('controller-article#list');
+		$blog->route('/tag/:tag', tag => qr/[^\{\}\[\]]+/i)->to('controller-article#list');
 		$blog->route('/brand/:brand', brand => qr/[^\{\}\[\]]+/)->to('controller-article#list');
 
 		$blog->route('/:move/:id', move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
