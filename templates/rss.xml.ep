@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-	<title>Хохловка: Новости</title>
+	<title>Barista-Shop: Новости</title>
 	<link><%= $domain %></link>
 	<description></description>
 	<language>ru-RU</language>
