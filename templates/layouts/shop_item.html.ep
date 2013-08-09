@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name='yandex-verification' content='7ae55845e253ef3b' />
+
+		<link rel="dns-prefetch" href="//ajax.googleapis.com">
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+
+		<meta name="keywords" content="<%= stash('meta_keys') %>"/>
+		<meta name="description" content="<%= stash('meta_descr') %>"/>
+
+		% if (stash('is_item')) {
+		<meta property="og:title" content="<%= stash('name') %>" />
+		<meta property="og:type" content="article" />
+		<meta property="og:description" content="<%= stash('descr') %>" />
+		<meta property="og:url" content="<%= stash('host').stash('url') %>" />
+		<meta property="og:image" content="<%= stash('host').config->{nginx_res_item_prev}.config->{image_url}.
+			join '/', 'item', stash('category'), stash('subcategory'), stash('alias'),stash('preview_image') %>" />
+		<meta property="og:site_name" content="Barista Shop" />
+		% }
+		<meta property="fb:admins" content="272601979547946" />
+		<title><%= title %></title>
+		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
+		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
+
+		<script data-main='/j/config' src='/j/require.js'></script>
+		<script>requirejs(['app/global'])</script>
+	</head>
+	<body>
+		<div class='wrap clearfloat'>
+			%= include 'includes/header'
+			%= include 'includes/top'
+			<%= content %>
+
+		</div>
+
+		%= include 'includes/footer'
+
+		%= include 'includes/google_analytics'
+		%# = include 'includes/yandex_metrika_shop'
+	</body>
+</html>
