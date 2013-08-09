@@ -11,8 +11,8 @@
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
 		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
 
-        <meta name="keywords" content="<%= $cur_category->{meta_keys} %>"/>
-        <meta name="description" content="<%= $cur_category->{meta_descr} %>"/>
+        <meta name="keywords" content="<%= stash 'meta_keys' %>"/>
+        <meta name="description" content="<%= stash 'meta_descr' %>"/>
 
         <script data-main='/j/config' src='/j/require.js'></script>
         <script>requirejs(['app/global'])</script>

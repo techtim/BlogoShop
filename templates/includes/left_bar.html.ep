@@ -11,7 +11,7 @@
 		</div>
 
 		% foreach my $cat (@$categories) {
-
+		% next if !$cat->{name};
 		<ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %>'>
 			<li class='title'>
 				<a href='http://<%= config->{domain_name} %>/<%= $cat->{_id} %>'><%= $cat->{name} %></a>
