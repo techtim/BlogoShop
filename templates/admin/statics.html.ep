@@ -50,6 +50,17 @@
 
 			</div>
 
+            <div class="section article-preview">
+                <h3>Мета слова:</h3>
+                    <input type="text" name="meta_keys" size="120" value="<%= stash 'meta_keys' %>"/>
+            </div>
+
+            <div class="section article-preview">
+                <h3>Мета описание:</h3>
+                <p>
+                    <textarea type="text" name="meta_descr" cols=100 rows=3 size=102><%= stash 'meta_descr' %></textarea>
+                </p>
+            </div>
 
 			<div class="section article-content">
 				<h3>Текст страницы:</h3>

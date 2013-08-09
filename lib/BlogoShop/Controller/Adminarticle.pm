@@ -8,7 +8,7 @@ use utf8;
 
 use File::Path qw(make_path remove_tree);
 use Encode;
-use constant ARTICLE_PARAMS => qw( active alias name author type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date);
+use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date meta_keys meta_descr);
 
 sub get {
 	my $self = shift;
@@ -53,7 +53,8 @@ sub check_input {
 	
 	$article->{preview_text} =~ s/\r|(\r?\n)+$|\ +$//g if $article->{preview_text};
 	$article->{article_text} =~ s/\r//g if $article->{article_text};
-	
+	$article->{meta_descr} =~ s/\r|(\r?\n)+$|\ +$//g if $article->{meta_descr};
+
 	{ # shitty "Malformed UTF-8 character"
 		no warnings;
 		$article->{preview_text} =~ s/\&raquo;|\&laquo;|\x{ab}|\x{bb}/\"/g if $article->{preview_text};

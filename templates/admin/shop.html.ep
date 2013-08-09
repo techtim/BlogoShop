@@ -34,11 +34,24 @@
 		% }
 	</ul>
 
-	% if ($category || $subcategory) {
+	
 		<script>requirejs(['app/admin/seoEditor']);</script>
 		<a class='toggle__seo__editor' href='#'>SEO</a>
 		<div class='seo__editor clearfloat'>
 			%= form_for '' => (method => 'post') => begin
+				<dl class='clearfloat'>
+					<dt><label for='meta__keys'>Мета слова:</label></dt>
+					<dd>
+						<input type='text' id='meta__keys' name="meta_keys.<%= $category.'.'.$subcategory %>" value="<%= $cur_category->{meta_keys} %>">
+					</dd>
+				</dl>
+				<dl class='clearfloat'>
+					<dt><label for='meta__description'>Мета описание:</label></dt>
+					<dd>
+						<textarea id='meta__description' name="meta_descr.<%= $category.'.'.$subcategory %>"><%= $cur_category->{meta_descr} %></textarea>
+					</dd>
+				</dl>
+				% if ($category || $subcategory) {
 				<dl class='clearfloat'>
 					<dt><label for='seo__title'>Заголовок:</label></dt>
 					<dd>
@@ -51,10 +64,11 @@
 						<textarea id='seo__description' name="descr.<%= $category.'.'.$subcategory %>"><%= $cur_category->{descr} %></textarea>
 					</dd>
 				</dl>
+				% }
 				<input type='submit' value='Сохранить' />
 			%= end
 		</div>
-	% }
+	
 
 	<div class="shop__search clearfloat">
 		%= form_for '/admin/shop/search' => (method => 'get') => begin

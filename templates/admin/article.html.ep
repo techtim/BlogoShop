@@ -69,14 +69,13 @@
 					<input type="text" name="author" size="90" value="<%= stash 'author' %>" style="font-size: 18px; font-weight: bold; width: 100%;"/>
 				</p>
 			</div>
-
+			<br>
 			<div class="section article-metadata">
 
 				<table class="layout" >
-
 					<tr>
 						<td class="bg-pink ta-right">
-							<label>Пост активен:</label>
+							<label><b>Пост активен:</b></label>
 						</td>
 						<td>
 							<span class="bg-pink input-wrap" >
@@ -102,7 +101,7 @@
 								<label>Дата поста:</label>
 							</td>
 							<td>
-								<input type="text" size=11 name="article_date" class="date" value="<%= stash 'article_date' %>">&nbsp;
+								<input type="text" size=15 name="article_date" class="date" value="<%= stash 'article_date' %>">&nbsp;
 								<input type="text" name="article_time" class="date" value="<%= stash 'article_time' %>">
 							</td>
 						</tr>
@@ -130,19 +129,37 @@
                             <label>Тэги:</label>
                         </td>
                         <td>
-                            <input type="text" name="tags" size="90" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>" "/>(через&nbsp;","&nbsp;или&nbsp;";")
+                            <input type="text" name="tags" size="120" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>" "/>(через&nbsp;","&nbsp;или&nbsp;";")
                         </td>
                     </tr>
-
+                    <tr>
+                        <td class="ta-right">
+                            <label>Мета слова:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="meta_keys" size="120" value="<%= stash 'meta_keys' %>"/>
+                        </td>
+                    </tr>
 				</table>
 			</div>
+
+			<div class="section article-preview">
+
+				<h3>Мета описание:</h3>
+
+				<p>
+					<textarea type="text" name="meta_descr" cols=100 rows=3 size=102><%= stash 'meta_descr' %></textarea>
+				</p>
+
+			</div>
+
 
 			<div class="section article-preview">
 
 				<h3>Текст превью:</h3>
 
 				<p>
-					<textarea type="text" name="preview_text" cols=80 rows=5 size=102><%= stash 'preview_text' %></textarea>
+					<textarea type="text" name="preview_text" cols=100 rows=5 size=102><%= stash 'preview_text' %></textarea>
 				</p>
 
 			</div>

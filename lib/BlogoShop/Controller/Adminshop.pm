@@ -20,10 +20,20 @@ sub show {
 
 	my $item = BlogoShop::Item->new($self);
 
-	if ($self->req->method eq 'POST' && $filter->{category} ) {
+	if ($self->req->method eq 'POST') { # && $filter->{category}
 		my $vars = {title => $self->req->param('title.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
-					descr => $self->req->param('descr.'.$filter->{category}.'.'.$filter->{subcategory}) || ''};
-		if ($filter->{subcategory} eq '') {
+					descr => $self->req->param('descr.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
+					meta_descr => $self->req->param('meta_descr.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
+					meta_keys => $self->req->param('meta_keys.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
+				};
+
+		if (!$filter->{category}) {
+			$self->app->db->categories->update(
+					{_id => 'index'}, # @index unique unrepetable key for shop startpage
+					{'$set' => $vars},
+					{ upsert => 1 },
+			);
+		} elsif ($filter->{subcategory} eq '') {
 			$self->app->db->categories->update(
 					{_id => $filter->{category}}, 
 					{'$set' => $vars},
@@ -39,7 +49,7 @@ sub show {
 					{'$set' => {subcats => $subcats}},
 			);
 		}
-		return $self->redirect_to("/admin/shop/$filter->{category}/$filter->{subcategory}");
+		return $self->redirect_to( "/admin/shop/".($filter->{category} ? "$filter->{category}/$filter->{subcategory}" : '') );
 	}
 
 	# Search Part  
@@ -65,7 +75,7 @@ sub show {
 		cur_page  => $self->req->param('page') || 1,
 		pages => int( 0.99 + $item->count($filter)/($self->{app}->config->{items_on_page}*2) ),
 		items => $item->list($filter, {brand => 1}, $skip, $self->{app}->config->{items_on_page}*2),
-		cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
+		cur_category => $self->stash('categories_info')->{$filter->{category} ? ( $filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '') ) : 'index' } || {},
 		host  => $self->req->url->base,
 		pager_url  => $pager_url,
 		template => 'admin/shop',

@@ -36,6 +36,7 @@ sub index {
 		articles => $art,
 		banners => $self->utils->get_banners($self, '', 680),
 		banners_h => $self->utils->get_banners($self, '', 240),
+		cur_category => $self->stash('categories_info')->{'index'} || {},
 		%{$self->check_cart},
 		page_name => 'shop',
 		host => $self->req->url->base,

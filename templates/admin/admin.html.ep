@@ -11,9 +11,7 @@
 		<h3 class='caption'>Посты:</h3>
 		<%= link_to 'Создать новый пост' => '/admin/article/edit', class => 'add', title => 'Создать новый пост' %>
 		%= include 'includes/admin_list_articles', articles => stash 'articles'
-		<div class='items__section'>
-			<%= link_to 'Список постов' => '/admin/articles' %>
-		</div>
+
 	</div>
 
 	<div class='list__section'>

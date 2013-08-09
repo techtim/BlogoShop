@@ -8,6 +8,9 @@
 		<link rel="dns-prefetch" href="//ajax.googleapis.com">
 		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
 
+		<meta name="keywords" content="<%= stash('meta_keys') %>"/>
+		<meta name="description" content="<%= stash('meta_descr') %>"/>
+
 		<meta property="fb:admins" content="272601979547946" />
 		<meta itemprop="datePublished" content="<%= stash('date_published') %>">
 
