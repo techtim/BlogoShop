@@ -1,5 +1,5 @@
 % layout 'shop_item';
-% title join ' ', stash('name'), stash('brand_name'), $categories_alias->{$category};
+% title join ' ', stash('name'), stash('brand_name'), $categories_alias->{$category}, $categories_alias->{$subcategory};
 %= include 'includes/left_bar'
 
 <script id='subitem' type='text/x-jquery-tmpl'>
