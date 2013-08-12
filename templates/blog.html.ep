@@ -1,5 +1,5 @@
 % layout 'default';
-% title 'Barista Shop - магазин профессионального оборудования для бариста';
+% title 'Barista Shop';
 
 %= include 'includes/left_bar'
 

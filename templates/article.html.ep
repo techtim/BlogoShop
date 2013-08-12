@@ -1,5 +1,5 @@
 % layout 'article';
-% title 'Barista Shop - магазин профессионального оборудования для бариста: '.$name;
+% title $name.' Barista Shop';
 
 %= include 'includes/left_bar'
 

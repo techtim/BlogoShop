@@ -1,5 +1,5 @@
 % layout 'cart';
-% title 'корзина Barista Shop';
+% title 'Корзина Barista Shop';
 
 %= include 'includes/left_bar'
 

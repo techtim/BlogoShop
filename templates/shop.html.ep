@@ -1,5 +1,5 @@
 % layout 'shop';
-% title 'Barista Shop - магазин профессионального оборудования для бариста: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
+% title ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
 
 %= include 'includes/left_bar'
 

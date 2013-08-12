@@ -1,5 +1,5 @@
 % layout 'shop_item';
-% title 'Barista Shop - магазин профессионального оборудования для бариста: '. join ' ', stash('name'), stash('brand_name'), $categories_alias->{$category} ;
+% title join ' ', stash('name'), stash('brand_name'), $categories_alias->{$category};
 %= include 'includes/left_bar'
 
 <script id='subitem' type='text/x-jquery-tmpl'>
