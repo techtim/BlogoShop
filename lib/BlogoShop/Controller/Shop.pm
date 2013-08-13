@@ -53,7 +53,10 @@ sub list {
 	my	$filter->{active} 		= 1;
 		$filter->{'subitems.qty'}= {'$gt' => 0};
 		$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
-# warn $self->dumper($filter);
+
+	return $self->render_not_found if !$self->stash('categories_alias')->{$filter->{category}};
+	return $self->render_not_found if $filter->{subcategory} && !$self->stash('categories_alias')->{$filter->{subcategory}};
+
 	my $sort 	= { price => -1 };
 	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
 	$sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
