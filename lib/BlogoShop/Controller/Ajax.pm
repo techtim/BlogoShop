@@ -163,6 +163,16 @@ sub orders_cities {
 	return $self->render(text => $res);
 }
 
+sub orders_emails {
+	my $self = shift;
+	my @ord = $self->app->db->orders->find()->fields({email=>1})->all;
+	my $res;
+	for (@ord) {
+		$res->{$_->{email}} = 1 if $_->{email} =~ m!.+\@.+\..+!;
+	}
+	return $self->render(text => (join "<br>", keys %$res));
+}
+
 sub write_file {
 	my $self= shift;
     

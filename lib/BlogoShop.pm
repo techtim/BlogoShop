@@ -248,6 +248,9 @@ sub startup {
 		$admin_bridge->route('/logout')->to('controller-login#logout');
 		$admin_bridge->route('/*' => sub {shift->redirect_to('/')});
 
+		# Statistics 
+		$admin_bridge->route('/orders_emails')->to('controller-Ajax#orders_emails');
+
 	# --SHOP--
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
