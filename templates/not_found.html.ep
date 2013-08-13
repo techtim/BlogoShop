@@ -1,0 +1,6 @@
+% layout 'default';
+% title 'Barista Shop - магазин профессионального оборудования для бариста.';
+
+<div class='not__found__section'>
+	<img src="/i/404-kto-takoi.jpg"/>
+</div>

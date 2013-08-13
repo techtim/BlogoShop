@@ -2497,6 +2497,10 @@ body.overlayed #overlay {
   user-select: none;
 }
 
+.not__found__section {
+  margin-left: 180px;
+}
+
 /* line 2612, style.scss */
 #overlay {
   position: absolute;
