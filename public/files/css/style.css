@@ -1139,6 +1139,11 @@ body.overlayed #overlay {
 }
 
 .shop__item__section .shop__information__section a{
+  color: black;
+  font-size: 13px;
+}
+
+.shop__item__section .shop__information__section .submit a{
   color: white;
 }
 
