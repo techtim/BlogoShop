@@ -1,5 +1,5 @@
 % layout 'default';
-% title $brand->{name}.'Barista Shop';
+% title $brand->{name};
 
 %= include 'includes/left_bar'
 

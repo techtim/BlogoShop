@@ -1057,7 +1057,7 @@ body.overlayed #overlay {
 /* line 1176, style.scss */
 .shop__item__section .gallery .full__size__section {
   position: relative;
-  height: 480px;
+  margin-bottom: 10px;
   width: 340px;
   float: left;
   background: white url("../i/spinner.gif") no-repeat center center;
@@ -1185,18 +1185,19 @@ body.overlayed #overlay {
   text-decoration: underline;
 }
 /* line 1306, style.scss */
-.shop__information__section .row.description__section {
-  padding-top: 0;
+.shop__description__section {
+  clear: both;
+  padding-top: 10px;
   color: #555;
   font-size: 13px;
   line-height: 19px;
 }
 /* line 1314, style.scss */
-.shop__information__section .row.description__section p {
+.shop__description__section p {
   margin-bottom: 20px;
 }
 /* line 1318, style.scss */
-.shop__information__section .row.description__section a {
+.shop__description__section a {
   color: #555;
   font-weight: bold;
 }

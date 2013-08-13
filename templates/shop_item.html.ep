@@ -56,9 +56,6 @@
 
 <div class='shop__information__section'>
 
-	<div class='description__section row'>
-		<%== stash 'descr' %>
-	</div>
 	% if ($brand_name) {
 	<dl class='clearfloat row'>
 		<dt>
@@ -98,6 +95,10 @@
 		</dd>
 	</dl>
 	% }
+</div>
+
+<div class='shop__description__section'>
+	<%== stash 'descr' %>
 </div>
 
 <div class='clear'></div>
