@@ -48,9 +48,6 @@ define([
 				var _empty_helper = !!$helper.parents('.params__strip__section');
 				if(_empty_helper) {
 					$('#params__strip').tmpl(null).appendTo($helper).each(function(){
-						$('select', $helper).selectik({
-							width: 100
-						});
 						bind__params__select(ele);
 					});
 				}
@@ -73,7 +70,6 @@ define([
 
 		var bind__params__select = function(ele){
 			$select = $('.params__select', ele);
-			$select_api = $('select', ele).data('selectik');
 
 			$select.change(function(){
 				var $selected = $('option:selected', this),
@@ -98,7 +94,6 @@ define([
 						});
 					});
 					$('option:selected', this).attr('disabled', true)
-					$select_api.hideCS();
 				}else{
 
 					/*
@@ -283,7 +278,4 @@ define([
 		});
 
 	})();
-
-	$('select').selectik();
-
 });
