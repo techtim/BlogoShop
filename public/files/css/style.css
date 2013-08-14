@@ -1147,6 +1147,24 @@ body.overlayed #overlay {
   color: white;
 }
 
+.shop__item__section .shop__information__section .tags dd{
+  width: 100px;
+  float: left;
+  color: #555;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.shop__item__section .shop__information__section .tags dt {
+  float: left;
+  width: 50px;
+  color: #222;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+
 /* line 1257, style.scss */
 .shop__information__section .row {
   padding: 16px 0;
@@ -1169,12 +1187,13 @@ body.overlayed #overlay {
 }
 /* line 1280, style.scss */
 .shop__information__section .row dd {
-  width: 160px;
-  float: left;
+  width: 125px;
+  float: right;
   color: #555;
   font-size: 12px;
   line-height: 14px;
 }
+
 /* line 1289, style.scss */
 .shop__information__section .row dd.consist {
   text-transform: uppercase;

@@ -41,15 +41,15 @@ use constant OPT_SUBITEM_PARAMS => {
 	group_cnt => 'количество групп',
 	weight => 'вес',
 	coffee_used => 'используемый кофе',
-	holder_consist => 'материал рожка(холдера)',
+	holder_consist => 'материал холдера',
 	boiler_type => 'тип нагревателя',
 
 	power => 'мощность',
-	water_volume => 'объем резервуара для воды',
+	water_volume => 'объем резервуара',
 	manometr => 'манометр',
 	configur => 'настройки',
 	auto_decalcination => 'aвтоматическая декальцинация',
-	cappucino => 'возможность приготовления капучино',
+	cappucino => 'приготовления капучино',
 
 	timer => 'таймер',
 	h_corp => 'высота корпуса',
