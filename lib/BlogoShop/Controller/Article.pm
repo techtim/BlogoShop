@@ -115,9 +115,13 @@ sub check_is_item_url {
 
 	my $url = $c->req->url->to_abs;
 	$url =~ s/blog\.//;
-	$url =~ m!ru/([^/]+)/([^/]+)!;
+	$url =~ m!ru/([^\/\?]+)!;
 	my $fir = $1;
-	if ($c->stash('categories_alias')->{$fir} || $fir =~ /(tag|brand)/) {
+
+	my $bind_static = join '|', map {$_->{alias}} $c->app->db->statics->find({})->fields({_id=>0,alias=>1})->all;
+	$bind_static .= '|' . (join '|', qw(tag brand));
+
+	if ($c->stash('categories_alias')->{$fir} || $fir =~ /($bind_static)/) {
 		$c->res->code(301);
 		return $c->redirect_to($url);
 	}

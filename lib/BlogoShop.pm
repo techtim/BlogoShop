@@ -148,11 +148,7 @@ sub startup {
 	$r->route('/update')->to('controller-Ajax#items_update_alias');
 
 	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
-	# make from array of hashes array of _ids and join ids to filter cuts in url
-	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
-	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show') if $bind_static;
 
-	$r->route('/rss')->to('controller-article#rss');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
 	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 
@@ -241,6 +237,12 @@ sub startup {
 		$admin_bridge->route('/*' => sub {shift->redirect_to('/')});
 
 	# --SHOP--
+
+	# make from array of hashes array of _ids and join ids to filter cuts in url
+	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
+	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show') if $bind_static;
+
+	$r->route('/rss')->to('controller-article#rss');
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
 	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
