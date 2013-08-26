@@ -71,9 +71,9 @@ body.overlayed #overlay {
   height: 70px;
   width: 400px;
   float: left;
-  margin-top: 4px;
-  margin-left: 290px;
-  margin-bottom: 10px;
+  margin-top: 6px;
+  margin-left: 320px;
+  margin-bottom: 6px;
 }
 /* line 102, style.scss */
 .header__section h1 a {
@@ -100,7 +100,7 @@ body.overlayed #overlay {
 }
 /* line 127, style.scss */
 .header__section .contacts__section {
-  margin-top: 13px;
+  margin-top: 10px;
 }
 
 /* line 133, style.scss */

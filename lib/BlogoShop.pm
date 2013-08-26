@@ -167,12 +167,13 @@ sub startup {
 		$blog->route('/:type', type => qr/$bind_types/)->to('controller-article#list');
 		$blog->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 		$blog->route('/tag/:tag', tag => qr![^\{\}\[\]/]+!i)->to('controller-article#list');
-		$blog->route('/brand/:brand', brand => qr/[^\{\}\[\]]+/)->to('controller-article#list');
+		# $blog->route('/brand/:brand', brand => qr/[^\{\}\[\]]+/)->to('controller-article#list');
 
 		$blog->route('/:move/:id', move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
 		$blog->route('/:type/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
 		$blog->route('/:type/:tag/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
 		$blog->route('/:type/:brand/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
+		$blog->any('/*')->to('controller-article#check_is_item_url');
 
 	$r->any('/')->to('controller-shop#index');
 
