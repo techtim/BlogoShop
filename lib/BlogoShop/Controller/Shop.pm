@@ -55,7 +55,7 @@ sub list {
 		$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
 
 	if (!$filter->{'tags'}) {
-		$c->stash(page_name => '');
+		$self->stash(page_name => '');
 		return $self->render_not_found if !$self->stash('categories_alias')->{$filter->{category}};
 		return $self->render_not_found if $filter->{subcategory} && !$self->stash('categories_alias')->{$filter->{subcategory}};
 	}
