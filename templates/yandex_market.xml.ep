@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="<%= $date %>">
+    <shop>
+        <name>Barista Shop</name>
+        <company>Barista Shop - магазин профессионального оборудования для приготовления кофе</company>
+        <url>http://barista-shop.ru</url>
+        
+        <currencies>
+            <currency id="RUR" rate="1" plus="0"/>
+        </currencies>
+        
+        <categories>
+
+        % foreach my $cat (@$ya_cats) {
+            <category id="<%= $cat->{ya_id} %>"><%= $cat->{name} %></category>
+            % foreach my $subcat (@{$cat->{subcats}}) {
+            <category id="<%= $subcat->{ya_id} %>" parentId="<%= $cat->{ya_id} %>"><%= $subcat->{name} %></category>
+            % }
+
+        % }
+            
+        </categories>
+        
+        <local_delivery_cost>350</local_delivery_cost>
+        
+        <offers>
+        % my $cnt = 1;
+        % foreach my $item (@$items) {
+            % next if !$ya_cats_hash->{ $item->{category}.'.'.$item->{subcategory} } || !$item->{brand_name};
+            <offer id="<%= $cnt++ %>" type="vendor.model" available="true">
+                <url><%= $domain . '/' . join '/', $item->{category}, $item->{subcategory}, $item->{alias} %></url>
+                <price><%= $item->{price} %></price>
+                <currencyId>RUR</currencyId>
+                <categoryId><%== $ya_cats_hash->{ $item->{category}.'.'.$item->{subcategory} } %></categoryId>
+                <picture><%== $domain.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %></picture>
+                <delivery>true</delivery>
+                <local_delivery_cost>350</local_delivery_cost>
+                <typePrefix><%= $categories_alias->{$item->{subcategory}} %></typePrefix>
+                <vendor><%= $item->{brand_name} %></vendor>
+                <model><%= $item->{name} %></model>
+                <description><%= $item->{descr} %></description>
+
+                % if (0 && @{$item->{images}} > 1) {
+                    % shift @{$item->{images}};
+                    % foreach my $img (@{$item->{images}}) {
+                    <picture>
+                        <%== $domain . config->{image_url} . join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $img->{tag} %>
+                    </picture>
+                    % }
+                % }
+            </offer>
+        % }
+
+        </offers>
+        
+    </shop>
+</yml_catalog>
