@@ -148,7 +148,7 @@ sub startup {
 	$r->route('/update')->to('controller-Ajax#items_update_alias');
 
 	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
-
+	$r->route('/yandex_market')->to('controller-shop#yandex_market');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
 	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
 

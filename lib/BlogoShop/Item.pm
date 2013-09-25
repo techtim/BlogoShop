@@ -151,6 +151,14 @@ sub list {
     return \@all;
 }
 
+sub dump_all {
+	my ($self, $filt, $sort) = @_;
+	my %filter = ref $filt eq ref {} ? %$filt : ();
+	$sort = {_id => 1} if ref $sort ne ref {} ||  keys %$sort == 0;
+
+	return [$self->{app}->db->items->find(\%filter)->sort($sort)->all];
+}
+
 sub count {
 	my ($self, $filt, $sort, $skip, $limit) = @_;
 	my %filter = ref $filt eq ref {} ? %$filt : ();

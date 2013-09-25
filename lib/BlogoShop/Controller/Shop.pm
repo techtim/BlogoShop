@@ -3,6 +3,7 @@ package BlogoShop::Controller::Shop;
 use Mojo::Base 'Mojolicious::Controller';
 use LWP::UserAgent ();
 use Hash::Merge qw( merge );
+use POSIX qw(strftime);
 
 use utf8;
 
@@ -355,6 +356,39 @@ sub check_cart {
 	$self->session(expires => 1) if $@; # if wrong cookies, clean them
 
 	return {cart_count => $ct, cart_price => $sum, cart_items => $items};
+}
+
+sub yandex_market {
+	my $self = shift;
+
+	my $ya_cats = $self->stash('categories');
+	my $ya_cats_hash = {};
+	my $cat_it = 1;
+	foreach my $cat (@$ya_cats) {
+		my $subcat_it = $cat_it*100;
+		$cat->{ya_id} = $cat_it++;
+		$ya_cats_hash->{ $cat->{_id} } = $cat->{ya_id};
+
+		foreach my $subcat (@{$cat->{subcats}}) {
+			$subcat->{ya_id} = $subcat_it++;
+			$subcat->{ya_id_par} = $cat->{ya_id};
+			$ya_cats_hash->{ $cat->{_id}.'.'.$subcat->{_id} } = $subcat->{ya_id};
+		}
+	}
+
+	my	$filter->{active} 		= 1;
+		$filter->{'subitems.qty'}= {'$gt' => 0};
+	my $item 	= BlogoShop::Item->new($self);
+
+	return $self->render(
+		items => $item->dump_all($filter, {category => 1}),
+		ya_cats => $ya_cats,
+		ya_cats_hash => $ya_cats_hash,
+		date => strftime("%Y-%m-%d %H:%M", localtime()),
+		domain => 'http://'.$self->config->{domain_name},
+		template => 'yandex_market', 
+		format => 'xml',
+	);
 }
 
 1;
