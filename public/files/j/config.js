@@ -16,6 +16,7 @@ requirejs.config({
 		'a': 'app',
 		'l': 'libs',
 
+		'fotorama': '/j/libs/fotorama',
 		'mouseWheel': '/j/libs/mousewheel',
 		'ui': '/j/libs/ui',
 		'datePickerRu': '/j/libs/datepicker-ru'

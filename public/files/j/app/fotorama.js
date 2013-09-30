@@ -7,7 +7,9 @@ define(['jquery', 'fotorama'], function($){
 	        backgroundColor: "#dddddd",
 	        thumbsBackgroundColor: "#dddddd",
 	        caption: true,
-	        thumbBorderColor: '#1F6B23'
+	        thumbBorderColor: '#1F6B23',
+	        width: 680,
+	        maxWidth: 680
 	    });
 	 }
 });
