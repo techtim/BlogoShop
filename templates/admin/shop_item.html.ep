@@ -175,7 +175,7 @@
 		    	</dl>
 		    	
     		% foreach (sort keys %$opt_subitem_params) {
-    			% if (stash($_) ne '') {
+    			% if (stash($_) && stash($_) ne '') {
 	    		<dl class='params__item clearfloat' data-type='<%= $_ %>'>
 	    			<dd><%= $opt_subitem_params->{$_} %>
 	    			% if ($_ eq 'color') {

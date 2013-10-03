@@ -106,7 +106,7 @@ sub get_images {
 	
 	my $images = [];
 	my @image_descr = $self->req->param($name.'_descr');
-	my @image_size = $self->req->param($name.'_size');
+	my @image_size = $self->req->param($name.'_size') || (0)x(0+@image_descr);
 	my %image_delete = map {$_ => 1} $self->req->param($name.'_delete');
 	
 	# Collect already uploaded files

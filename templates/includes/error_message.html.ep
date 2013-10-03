@@ -113,6 +113,10 @@
 	Укажите превью
 % }
 
+% if ($error_message eq 'no_qty') {
+    Для активации укажите количество > 0
+% }
+
 % if ($error_message eq 'courier_failed') {
 	Ошибка при вызове курьера
 % }

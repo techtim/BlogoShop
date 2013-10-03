@@ -25,7 +25,7 @@
 		</li>
 		% }
 		<li>
-			<%== '&gt; '.$brand if $brand %>
+			<%== '&gt; '.stash('brand') if stash('brand') && stash('brand') ne '' %>
 		</li>
 		% if ($category && $subcategory) {
 		<li>
@@ -70,12 +70,11 @@
 	</div>
 
 	<div class='fiters__section fl admin clearfloat'>
-		<ul class='price__filter'>
-			<li class='title'>товары:</li>
-    		<li><a href='#' data-type='all' class='current'>все</a></li>
-    		<li><a href='#' data-type='disabled'>неактивные</a></li>
-    		<li><a href='#' data-type='enabled'>активные</a></li>
-		</ul>
+		<!--<ul class='price__filter'> -->
+			<li><a href='#' <%== "class='current'" if !stash('active')|| stash('active') eq '' %>>все</a></li>
+			<li><a href='<%= $pager_url %>active=0' <%== "class='current'" if stash('active') && stash('active') eq '0' %>>неактивные</a></li>
+			<li><a href='<%= $pager_url %>active=1' <%== "class='current'" if stash('active') && stash('active') eq '1' %>>активные</a></li>
+		<!--</ul> -->
 	</div>
 
 	<ul class='pager__section shop__list clearfloat'>

@@ -140,7 +140,8 @@ sub list {
     my %filter = ref $filt eq ref {} ? %$filt : ();
 	$limit ||= $self->{app}->config->{items_on_page}; 
     foreach (keys %filter) {
-    	delete $filter{$_} if !$filter{$_};
+    	# delete $filter{$_} if !$filter{$_};
+    	delete $filter{$_} unless defined $filter{$_};
     }
     $filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
     # warn 'FLTR'. $self->{app}->dumper(\%filter);
@@ -148,7 +149,7 @@ sub list {
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 	$skip = $skip =~ m/(\d+)/ ? $1 : 0;
 # warn $filter->{tag};
-# warn Dumper($sort);
+# warn Dumper(\%filter);
 	my @all = $self->{app}->db->items->find(\%filter)->sort($sort)->fields({LIST_FIELDS})->skip($skip)->limit($limit)->all;
     return \@all;
 }
@@ -165,7 +166,8 @@ sub count {
 	my ($self, $filt, $sort, $skip, $limit) = @_;
 	my %filter = ref $filt eq ref {} ? %$filt : ();
 	foreach (keys %filter) {
-		delete $filter{$_} if !$filter{$_};
+		# delete $filter{$_} if !$filter{$_};
+		delete $filter{$_} unless defined $filter{$_};
 	}
 	$filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
 	# warn 'FLTR'. $self->{app}->dumper(\%filter);
@@ -215,6 +217,7 @@ sub _parse_data {
 	}
 	$self->{sale}->{$_} = delete $self->{$_} foreach SALE_PARAMS;
 	
+	$self->{qty} //= 0;
 	$self->{qty} 	   += 0;
 	$self->{size} 	   .= '';
 	$self->{price} 	   += 0;
@@ -226,13 +229,17 @@ sub _parse_data {
 	# store main item patrams in subitems[0]
 	unshift @{$self->{subitems}}, {map {$_ => $self->{$_}} keys BlogoShop::Item::OPT_SUBITEM_PARAMS};
 
+	# check critical params to save images
 	push @$error_message, 'no_category' if !$self->{category};
 	push @$error_message, 'no_name' if !$self->{name};
 
 	$self->{images} = @$error_message==0 ? $self->_get_images($ctrl, 'image') : [];
 	$self->{preview_image} = $self->{images}->[0]->{tag} if @{$self->{images}} > 0 && !$self->{preview_image};
+
+	# check other params
 	push @$error_message, 'no_price' if !$self->{price};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
+	push @$error_message, 'no_qty' if $self->{active} && !$self->{qty};
 
 	$self->{active} = 0, $ctrl->stash(error_message => $error_message) if @$error_message>0;
 
@@ -349,7 +356,7 @@ sub check_existing_alias {
 	$filter->{alias} 	= qr/^$self->{alias}\d*$/;
 	my @check = $self->{app}->db->items->find($filter)->fields({alias => 1})->sort({alias => -1})->all;
 	@check = sort {
-		my $ob = 0+($b->{alias}=~/(\d+)$/)[0]||0; my $oa = 0+($a->{alias}=~/(\d+)$/)[0]||0;
+		my $ob = 0+($b->{alias}=~/(\d+)$/ ? $1 : 0); my $oa = 0+($a->{alias}=~/(\d+)$/? $1 : 0);
 		$ob <=> $oa;
 	} @check;
 

@@ -11,9 +11,9 @@ sub show {
     my $self = shift;
 
     my $filter = {};
-    $filter->{$_} = $self->stash($_)||'' foreach ITEM_FIELDS;
-    $filter->{active} = 0+$self->req->param('active') if $self->req->param('active'); 
-    $filter->{sale} = { sale_active => 0+$self->req->param('sale') } if $self->req->param('sale');
+    defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : () foreach ITEM_FIELDS;
+    $filter->{active} = 0+$self->req->param('active') if defined $self->req->param('active');
+    $filter->{sale} = { sale_active => 0+$self->req->param('sale') } if defined $self->req->param('sale');
 
     return $self->redirect_to('/admin/shop/')
     	if $filter->{category} && !($self->stash('categories_alias'))->{$filter->{category}};
@@ -44,10 +44,10 @@ sub show {
 
     # Search Part  
     if ($self->stash('search')) {
-        my ($value, $type) = ($self->req->param('search'),$self->req->param('type'));
-        $filter->{name} = qr!$value! if $type eq 'name';
-        $filter->{"subitems.articol"} = $value if $type eq 'articol';
-        $filter->{brand} = qr!$value! if $type eq 'brand';
+        my ($value, $type) = ($self->req->param('search'), $self->req->param('type'));
+        $filter->{name} = qr!.*$value.*!i if $type eq 'name';
+        $filter->{"subitems.articol"} = qr!.*$value.*!i if $type eq 'articol';
+        $filter->{'$or'} = [{brand => qr!.*$value.*!i}, {brand_name => qr!.*$value.*!i}] if $type eq 'brand';
     }
 
     # Paging
@@ -62,10 +62,12 @@ sub show {
     # warn $self->dumper($filter);
     return $self->render(
         %$filter,
+        category => $filter->{category} ? $filter->{category} : '',
+        subcategory => $filter->{subcategory}? $filter->{subcategory} : '',
         cur_page  => $self->req->param('page') || 1,
         pages => int( 0.99 + $item->count($filter)/($self->{app}->config->{items_on_page}*2) ),
         items => $item->list($filter, {brand => 1}, $skip, $self->{app}->config->{items_on_page}*2),
-        cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
+        cur_category => $self->stash('categories_info')->{($filter->{category} || '').($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
         host  => $self->req->url->base,
         pager_url  => $pager_url,
         template => 'admin/shop',

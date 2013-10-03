@@ -21,13 +21,13 @@ sub index {
 
 	my  $filter->{active} 		= 1;
 		$filter->{'subitems.qty'}= {'$gt' => 0};
-		$filter->{sale}->{sale_active} = 1;
-		$filter->{sale}->{sale_start_stamp} = {'$lt' => time()};
-		$filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
-
+		# $filter->{sale}->{sale_active} = 1;
+		# $filter->{sale}->{sale_start_stamp} = {'$lt' => time()};
+		# $filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
+		# delete $filter->{sale};
     my $item 	= BlogoShop::Item->new($self);
 	# my $items 	= $item->list($filter, {}, int($self->config('items_on_startpage')/2));
-	delete $filter->{sale};
+	
 	# @$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
 	my $items 	= $self->utils->get_items_from_catalog($self);
 
@@ -50,7 +50,12 @@ sub list {
 
 	my	$filter->{active} 		= 1;
 		$filter->{'subitems.qty'}= {'$gt' => 0};
-		$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
+
+		defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
+		delete $filter->{category} 	if $filter->{category} eq '';
+		delete $filter->{subcategory} 	if $filter->{subcategory} eq '';
+		delete $filter->{sex} 			if $filter->{sex} eq ''; # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
+
 # warn $self->dumper($filter);
 	my $sort 	= { price => -1 };
 	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
