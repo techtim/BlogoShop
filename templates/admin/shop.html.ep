@@ -71,7 +71,7 @@
 
 	<div class='fiters__section fl admin clearfloat'>
 		<!--<ul class='price__filter'> -->
-			<li><a href='#' <%== "class='current'" if !stash('active')|| stash('active') eq '' %>>все</a></li>
+			<li><a href='<%= $pager_url %>' <%== "class='current'" if !stash('active')|| stash('active') eq '' %>>все</a></li>
 			<li><a href='<%= $pager_url %>active=0' <%== "class='current'" if stash('active') && stash('active') eq '0' %>>неактивные</a></li>
 			<li><a href='<%= $pager_url %>active=1' <%== "class='current'" if stash('active') && stash('active') eq '1' %>>активные</a></li>
 		<!--</ul> -->

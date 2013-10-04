@@ -113,7 +113,14 @@ sub startup {
 		my $js = '<meta name="csrftoken" content="' . $token . '"/>';
 		Mojo::ByteStream::b($js);
 	} );
-
+	$self->hook(before_routes => sub {
+		my $c = shift;
+		warn '!!!!!!:'.$c->req->url->path;
+		if($c->req->url->path =~ m!^(/soap)!){
+			$c->session('csrftoken' => 1);
+			$c->param('csrftoken' => 1); 
+		}
+	});
 	# Header plug for subdomains
 	$self->plugin('HeaderCondition');
 
@@ -161,6 +168,7 @@ sub startup {
 	$r->route('/yandex_market')->to('controller-shop#yandex_market');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
 	$r->route('/orders_cities')->to('controller-ajax#orders_cities');
+	$r->route('/bill')->to('controller-qiwi#bill');
 	$r->route('/soap')->to('controller-qiwi#soap');
 
 	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
@@ -208,6 +216,7 @@ sub startup {
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/search')->to('controller-Adminshop#show', search => 1);
+		$admin_bridge->route('/shop/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/:category', category => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route(
 			'/shop/:category/:subcategory',	category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!
@@ -216,6 +225,7 @@ sub startup {
 			'/shop/:category/:subcategory/:id/:act', id => qr/[\d\w]+/, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, act => qr!\w+!
 		)->to('controller-Adminshop#item', id => 'add', act => '');
 		
+
 		# Orders list
 		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
