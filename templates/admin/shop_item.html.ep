@@ -4,15 +4,16 @@
 <link rel='stylesheet' type='text/css' href='/css/ui.css' media='all' />
 
 %= include 'includes/shop_admin_categories', categories => stash 'categories'
+%= include 'includes/shop_admin_brands', brands => stash 'list_brands'
 
 
 %= include 'includes/error_message', error_messages => stash 'error_message'
 %= include 'includes/info_message', message => stash 'message'
 
 <div class='middle__section shop__add__item'>
-    
+
 	%= form_for '' => (method => 'post', enctype =>"multipart/form-data") => begin
-	    
+
 	    <ul class='breadcrumps__section clearfloat'>
 	    	<li>
 	    		<a href="/admin/shop/<%== $category %>"><%= $categories_alias->{$category} %></a>
@@ -42,7 +43,7 @@
 				</select>
 			</li>
 	    </ul>
-	    
+
 	    <div class='caption__row'>
 	    	<h2 class='caption fl'>Новый товар</h2>
 	    	<ul class='sex__section clearfloat'>
@@ -64,21 +65,21 @@
 	    				<input type='checkbox' value='m' name='sex' <%== "checked" if $sex eq 'm' %>/>
 	    			</a>
 	    		</li>
-			</ul>	
-			
+			</ul>
+
 			<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#'>
 				<input type="checkbox" name="active" value='1' <%== "checked" if $active %>/>
 			</a>
-		
+
     		<a class='button gray light fr with__margin__bottom centered' href='<%== $url.'/copy' if $action_type ne 'add' %>' data-role='create__copy'>Создать копию</a>
     	</div>
-		
+
 	    % if ($action_type ne 'add') {
 	    	<input type="hidden" name="id" value="<%= stash '_id' %>">
 	    	<input type="hidden" name="alias " value="<%= stash 'alias' %>">
 	    % }
-		
-		<input type='hidden' name='category' value='<%= stash 'category' %>' /> 
+
+		<input type='hidden' name='category' value='<%= stash 'category' %>' />
 		<!--<input type='hidden' name='subcategory' value='<%= stash 'subcategory' %>' />-->
 
 		<div class='row'>
@@ -87,16 +88,16 @@
 			<b>алиас:</b> <%= stash 'alias' %>
 		</div>
 
-	
+
 		<div class='row'>
 	    	<textarea type="text" name="descr" placeholder='Описание'><%= stash 'descr' %></textarea>
 	   	</div>
-   
+
 		<div class='row clearfloat'>
-		
+
 			<div class='fl'>
 				%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'brands'
-				
+
 				<div class='specials__section'>
 					<select>
 						<option value=''>спец. предолжени</option>
@@ -105,7 +106,7 @@
 						<input type="checkbox" name="" value='1' />
 					</a>
 				</div>
-			
+
 			</div>
 
 			<div class='sale__section'>
@@ -135,36 +136,36 @@
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 		</div>
-    
+
 		<div class='row tags'>
 			<div class='caption__strip'>
 				<h3 class='caption'>Теги</h3>
 			</div>
 			<input type="text" name="tags" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>"/>
 		</div>
-	    
+
 	    <div class='sub__items__section'>
 	    	<h2 class='caption'>параметры товара</h2>
 	    	<a class='button gray with__margin__bottom fr centered' href='#' data-role='add__subitem'>Добавить субтовар</a>
-	    	
+
 		    <div class='row item main__item'>
-		    	
+
 		    	<div class='caption__strip'>
 		    		<h3>основной товар</h3>
 		    		<a class='button green' href='#' data-role='add__params'>Добавить параметр</a>
-		    		
+
 		    	</div>
 
-		    	<dl class="params__item clearfloat" data-type="articol">   
-		    		<dd>артикул</dd>   
+		    	<dl class="params__item clearfloat" data-type="articol">
+		    		<dd>артикул</dd>
 		    		<dt>
 		    			<input type="text" class="articol" name="articol" value='<%= stash 'articol' %>' placeholder="?" />
-					</dt>  
+					</dt>
 				</dl>
-				
+
 		    	<dl class='params__item clearfloat'>
 		    		<dd>размер</dd>
 		    		<dt>
@@ -173,7 +174,7 @@
 		    			<input type="text" name="qty" class='qty' value="<%= stash 'qty' %>" placeholder='кол-во'/>
 		    		</dt>
 		    	</dl>
-		    	
+
     		% foreach (sort keys %$opt_subitem_params) {
     			% if (stash($_) && stash($_) ne '') {
 	    		<dl class='params__item clearfloat' data-type='<%= $_ %>'>
@@ -206,10 +207,10 @@
     			</dl>
     			% }
     		% }
-    		
+
     		<span class='params__helper'></span>
 			</div>
-		
+
 			% my $subitems = stash('subitems'); my $i = 1;
 			% if (ref $subitems eq 'ARRAY') {
 			% foreach my $sub (@$subitems) {
@@ -217,13 +218,13 @@
 			    	<div class='caption__strip'>
 			    		<h3>субтовар</h3>
 			    		<a class='button green' href='#' data-role='add__params'>Добавить параметр</a>
-			    		
+
 			    		<a class='delete__button item__delete' href='#' data-type='item'></a>
-    		
+
 			    		<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#' >
 			    			<input type="checkbox" name="sub${data.i}.active" value='1' />
 			    		</a>
-    		
+
 			    	</div>
 			    	<dl>
 			    		<dd>размер</dd>
@@ -232,9 +233,9 @@
 			    			<input type="text" name="sub<%= $i %>.price" class='price' value="<%= $sub->{price} %>" placeholder='цена'/>
 			    			<input type="text" name="sub<%= $i %>.qty" class='qty' value="<%= $sub->{qty} %>" placeholder='кол-во'/>
 			    		</dt>
-			    		
+
 			    	</dl>
-			    	
+
 				% foreach (sort keys %$opt_subitem_params) {
 	    			% if ($sub->{$_} ne '') {
 		    		<dl class='params__item clearfloat' data-type='<%= $_ %>'>
@@ -265,29 +266,29 @@
 		    			</dt>
 	    			</dl>
 	    			% }
-	    			
+
 	    		% }
 	    			<span class='params__helper'></span>
 				</div>
 			% $i++; }
 			% }
-		
-			
+
+
 		</div>
-		
+
 		<div class='loading__section clearfloat'>
 			<h2 class='caption'>Добавить фотографии</h2>
 			<a class='add' data-role='image__upload'></a>
-			
+
 			<div class='upload__section'>
-				
+
 				<div class='row clearfloat'>
             		<input type="file" name="image"/>
 	            </div>
-	            
+
 	            <p class='warning'>вы можете добавить максимум 6 фотографий</p>
 			</div>
-			
+
 			<div class="uploaded__section clearfloat">
 				<span class='images__counter'><span><%= ref $images eq 'ARRAY' ? 0+@$images : 0 %></span>/6</span>
 
@@ -295,7 +296,7 @@
 		        	<ul class='images__list clearfloat'>
 		            % foreach my $image (@$images) {
 						<li <%== $image->{tag} eq $preview_image ? 'class="checked"' : '' %>>
-							
+
 							<a class='fake__checkbox preview' href='#' data-type='preview'>
 								превью
 	            				<input type="radio" name="preview_image" value="<%== $image->{tag} %>" <%== $image->{tag} eq $preview_image ? 'CHECKED' : '' %> />
@@ -304,8 +305,8 @@
 		            		<input type="text" size=40 value="<%== $image->{tag} %>"/>-->
 		            		<input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
 		            		<input type="hidden" name="image_size" value="<%== $image->{size} %>"/>
-							
-				           	<span class='img__box'>	
+
+				           	<span class='img__box'>
 		            			<img src="<%== config->{image_url}.'item/'.join('/',$category,$subcategory,$alias,$image->{tag}) %>"/>
 		            			<a class='active fake__checkbox'>
 		            				<input type="checkbox" />
@@ -314,7 +315,7 @@
 		            				<input type="checkbox" name="image_delete" value="<%== $image->{tag}  %>"/>
 		            			</a>
 		            		</span>
-		            		
+
 		            		<span class='item__select'>
 		            			<label>субтовар</label>
 			            		<select name="image_subitem">
@@ -324,26 +325,26 @@
 									% }
 								</select>
 							</span>
-							
+
 						</li>
 		            % }
 		            </ul>
 		        % }
-		        
+
 		    </div>
-	
-		    
+
+
 		</div>
-	   
-        
+
+
 		<div class='submit__section'>
 			% if ($action_type  ne 'add') {
 	       		<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить товартовар');" class='button red delete__item'>Удалить товар!</button>
 	       	% }
-	       	
+
 			<a class='button gray submit__form' href='#' data-role='submit'>Сохранить товар</a>
 		</div>
-		
+
 		<!--
         <button type="submit" name="update" value="1">
             <%== ($action_type  eq 'add' ? 'Добавить товар и продолжить редактуру' : 'Сохранить товар и продолжить редактуру') %>
@@ -355,7 +356,7 @@
     % end
 </div>
 
-<script> 
+<script>
 	var params_type = {
 		% foreach (keys %$opt_subitem_params) {
 			<%= $_ %>: '<%= $opt_subitem_params->{$_} %>',
@@ -363,7 +364,7 @@
 	};
 </script>
 <script id='params__strip' type='text/x-jquery-tmpl'>
-	
+
 	<div class='params__strip__section'>
 		<select name='select_param' class='params__select'>
 			% foreach (sort keys %$opt_subitem_params) {
@@ -395,7 +396,7 @@
 			{{else}}
 				<input type='text' class='${data.type}' name='{{if data.subitem}}sub${data.i}.{{/if}}${data.type}' placeholder='?'/>
 			{{/if}}
-			
+
 			<a class='delete__button' href='#' title='Удалить параметр' data-type='row'></a>
 		</dt>
 	</dl>
@@ -406,14 +407,14 @@
     	<div class='caption__strip'>
     		<h3>субтовар</h3>
     		<a class='button green' href='#' data-role='add__params'>Добавить параметр</a>
-    		
+
     		<a class='delete__button item__delete' href='#' data-type='item'></a>
-    		
+
     		<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#' >
     			<input type="checkbox" name="sub${data.i}.active" value='1' />
     		</a>
     	</div>
-    	
+
     	<dl class='params__item clearfloat'>
     		<dd>размер</dd>
     		<dt>
@@ -430,7 +431,7 @@
 	<div class='row clearfloat new'>
 		<input type="file" name="image"/>
     </div>
-</script>      
+</script>
 
 
 <script>

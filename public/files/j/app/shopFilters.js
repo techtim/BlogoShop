@@ -160,6 +160,8 @@ define(['jquery', 'l/tmpl', 'l/ui'], function(){
 
 	$(config.section).on('click', 'a', function(e){
 
+		if ( $(this).closest('ul').hasClass('no-ajax') ) return true;
+
 		e.preventDefault();
 		var $this = $(this),
 			_url = $this.attr('href'),

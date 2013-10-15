@@ -57,7 +57,8 @@ sub show {
     my $pager_url  = $self->req->url->path->to_string.'?'.$self->req->url->query->to_string;
     $pager_url =~ s!csrftoken=[^\&]+\&?!!;
     $pager_url =~ s!\&?page=\d+\&?!!;
-    $pager_url =~ s!\&?active=\d+\&?!!;
+    my @act_cnt = ($pager_url =~ m!(active)!g);
+    $pager_url =~ s!\&?active=\d+\&?!! if  @act_cnt> 1;
     $pager_url .= $pager_url =~ m!\?$! ? '' : '&';
 
     # warn $self->dumper($filter);
