@@ -1,0 +1,18 @@
+    <div class='sidebar__section categories'>
+    	<h3 class='caption'>Бренды</h3>
+    	<a class='add' href='#'></a>
+
+        <ul class='categories__list__section'>
+            % foreach my $brand (@$brands) {
+            <li  <%== 'class=\'current\'' if stash('category') eq $brand->{_id} %> >
+            	<a class='ctegorie__title' href="/admin/shop/brand/<%= $brand->{_id} %>"><%= $brand->{name} %></a>
+                <a href="#" class="plus"></a>
+            </li>
+
+            % }
+        </ul>
+        <script>
+            requirejs(['app/admin/categoriesList']);
+        </script>
+    </div>
+</div>
