@@ -8,6 +8,7 @@ use utf8;
 
 use constant ORDER_FILTERS => qw (status);
 use constant ORDER_STATUS => qw (new proceed assembled finished canceled changed wait_delivery wait_courier self_delivery sent_courier sent_post sent_ems);
+use constant ORDERS_ON_PAGE => 10;
 my $status_regex = join '|', ORDER_STATUS;
 
 sub list {
@@ -29,8 +30,20 @@ sub list {
 
 	$counter = {map {$_->{status} => $_->{count} } @{$counter->{retval}}};
 
+	# Paging
+    my $skip = ORDERS_ON_PAGE *
+       ($self->req->param('page') && $self->req->param('page') =~ /(\d+)/ ? ($1>0 ? $1-1 : 0) : 0);
+
+    my $pager_url  =  $self->req->url->path->to_string.'?'.$self->req->url->query->to_string;
+    $pager_url =~ s!csrftoken=[^\&]+\&?!!;
+    $pager_url =~ s!\&?page=\d+\&?!!;
+    $pager_url .= $pager_url =~ m!\?$! ? '' : '&';
+
 	$self->stash($_) ? $filter->{$_} = $self->stash($_) : () foreach ORDER_FILTERS;
-	my $orders = [$self->app->db->orders->find($filter)->sort({_id => -1})->all];
+	my $orders = [
+		$self->app->db->orders->find($filter)->sort({_id => -1})->
+			skip($skip)->limit(ORDERS_ON_PAGE)->all
+	];
 	my $item   = BlogoShop::Item->new($self);
 
 	$filter->{orders_sum} = 0;
@@ -51,6 +64,9 @@ sub list {
         orders => $orders,
         orders_count => $orders_count,
         counter => $counter,
+        cur_page  => $self->req->param('page') || 1,
+        pages => int( 0.99 + ( $filter->{status} ? $counter->{$filter->{status}} : $orders_count ) / ORDERS_ON_PAGE ),
+        pager_url  => $pager_url,
         host => $self->req->url->base,
         template => 'admin/orders',
         format => 'html',

@@ -40,6 +40,15 @@
 		</ul>
 	</div>
 	
+	<div class='clearfloat'>
+		<ul class='pager__section shop__list clearfloat'>
+			<li class='title'>страница:</li>
+			% foreach (1..$pages) {
+				<li <%== $_ == $cur_page ? "class='current'" : "" %>><a href='<%= $pager_url . 'page='. $_ %>'><%= $_ %></a></li>
+			% }
+		</ul>
+	</div>
+
 	<ul class='list'>
 		% foreach my $order (@$orders) {
 			<li class="
@@ -224,6 +233,16 @@
 	        </li>
 	   % }
 	</ul>
+
+	<div class='clearfloat'>
+		<ul class='pager__section shop__list clearfloat'>
+			<li class='title'>страница:</li>
+			% foreach (1..$pages) {
+				<li <%== $_ == $cur_page ? "class='current'" : "" %>><a href='<%= $pager_url . 'page='. $_ %>'><%= $_ %></a></li>
+			% }
+		</ul>
+	</div>
 </div>
+
 
 <script>requirejs(['app/admin/orders'])</script>
