@@ -1,4 +1,5 @@
 % if (ref $items eq 'ARRAY') {
+% my $sex = stash('sex') ne '' ? stash('sex') : '';
 % foreach my $item (@$items) {
 % next if !$item->{alias};
 	<li 

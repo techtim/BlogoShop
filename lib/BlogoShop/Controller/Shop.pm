@@ -52,10 +52,8 @@ sub list {
 		$filter->{'subitems.qty'}= {'$gt' => 0};
 
 		defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
-		delete $filter->{category} 	if $filter->{category} eq '';
-		delete $filter->{subcategory} 	if $filter->{subcategory} eq '';
-		delete $filter->{sex} 			if $filter->{sex} eq ''; # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
-
+		 # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
+		($filter->{$_} && $filter->{$_} ne '' ? () : (delete $filter->{$_}) ) for qw(category subcategory sex);
 # warn $self->dumper($filter);
 	my $sort 	= { price => -1 };
 	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');

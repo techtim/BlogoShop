@@ -2408,77 +2408,80 @@ body {
 }
 
 .footer__section {
+  padding-bottom: 27px;
   background: #444;
+  border-top: 1px solid #696969;
   overflow: hidden;
 
   .wrap {
     height: 94px;
   }
 
-  .copyright {
+  .info {
+    margin-top: 24px;
     float: left;
-    padding-top: 12px;
-    color: #fff;
-    font-size: 11px;
-    text-transform: uppercase;
+
+    .socials {
+      margin-top: 11px;
+      margin-bottom: 14px;
+      @include pie-clearfix;
+
+      li {
+        margin-right: 15px;
+        float: left;
+      }
+
+      a {
+        height: 32px;
+        width: 32px;
+
+        display: block;
+
+        background: inline-image('icons-social.png') no-repeat;
+
+        &.fb {
+          background-position: -47px top;
+        }
+
+        &.inst {
+          background-position: right top;
+        }
+
+      }
+    }
+
+    p {
+      color: #FFF;
+      font-size: 12px;
+      line-height: 21px;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      span {
+        color: #adec3f;
+      }
+    }
   }
 
-  .contacts {
+  .links {
+    margin-top: 27px;
+    margin-right: 40px;
     float: right;
-    padding-top: 12px;
-    color: #fff;
-    font: {
-      size: 11px;
-      weight: bold;
-    }
-
-    span {
-      color: #adec3f;
-    }
-  }
-
-  p {
-    padding-bottom: 14px;
 
     a {
-      color: #fff;
+      margin-bottom: 4px;
+      color: #b2b2b2;
+      font-size: 12px;
       text-decoration: none;
+      text-transform: uppercase;
+
+      &:hover {
+        color: #FFF;
+        text-decoration: underline;
+      }
     }
   }
 
-  li {
-    margin-right: 14px;
-    padding: {
-      top: 3px;
-      bottom: 1px;
-      left: 18px;
-    }
-
-    float: left;
-    background: url($img__dir+'footer-social-spr.png') no-repeat;
-
-    &.vk {
-      background-position: left -14px;
-    }
-
-    &.lj {
-      background-position: left bottom;
-    }
-
-
-    a {
-      color: #fff;
-      font:{
-        size: 11px;
-        weight: bold;
-      }
-      text: {
-        decoration: none;
-        transform: uppercase;
-      }
-    }
-
-  }
 }
 
 .scroll__helper {
@@ -2620,7 +2623,7 @@ body {
 					left: -4px;
 				}
 				display: block;
-				content: '≡';
+				content: '';
 				font: {
 					size: 14px;
 					weight: bold;
@@ -2633,6 +2636,7 @@ body {
 		}
 	}
 }
+
 
 #overlay {
   position: absolute;

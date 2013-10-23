@@ -1831,20 +1831,21 @@ body.overlayed #overlay {
   -o-transition: all 0.4s linear;
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
+  -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 2012, style.scss */
+/* line 2013, style.scss */
 .cart__items__list__section .submit___section .item__block .caption {
   color: #434343;
 }
-/* line 2016, style.scss */
+/* line 2017, style.scss */
 .cart__items__list__section .submit___section .item__block.hidden {
   display: none;
 }
-/* line 2020, style.scss */
+/* line 2021, style.scss */
 .cart__items__list__section .submit___section .item__block.disabled {
   opacity: .5;
 }
-/* line 2023, style.scss */
+/* line 2024, style.scss */
 .cart__items__list__section .submit___section .item__block.disabled .custom-select, .cart__items__list__section .submit___section .item__block.disabled .custom-text, .cart__items__list__section .submit___section .item__block.disabled .pickup__checkbox, .cart__items__list__section .submit___section .item__block.disabled label, .cart__items__list__section .submit___section .item__block.disabled .types__list li {
   cursor: default;
   -webkit-user-select: none;
@@ -1852,7 +1853,7 @@ body.overlayed #overlay {
   -ms-user-select: none;
   user-select: none;
 }
-/* line 2028, style.scss */
+/* line 2029, style.scss */
 .cart__items__list__section .submit___section .item__block input {
   border: 1px solid #c1c1c1;
   -webkit-transition: all 0.4s linear;
@@ -1861,16 +1862,16 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2031, style.scss */
+/* line 2032, style.scss */
 .cart__items__list__section .submit___section .item__block input.error {
   border-color: #e60000;
 }
-/* line 2037, style.scss */
+/* line 2038, style.scss */
 .cart__items__list__section .submit___section .clear {
   height: 1px;
   background: #d9d9d9;
 }
-/* line 2042, style.scss */
+/* line 2043, style.scss */
 .cart__items__list__section .submit___section .message {
   color: #e60000;
   font-family: "PT Sans";
@@ -1885,33 +1886,33 @@ body.overlayed #overlay {
   -ms-transition: opacity 0.4s linear;
   transition: opacity 0.4s linear;
 }
-/* line 2056, style.scss */
+/* line 2057, style.scss */
 .cart__items__list__section .submit___section .message.active {
   opacity: 1;
   visibility: visible;
 }
-/* line 2062, style.scss */
+/* line 2063, style.scss */
 .cart__items__list__section .submit___section .left__section {
   width: 452px;
   float: left;
   background: url("../i/gray-delimiter.png") no-repeat right center;
 }
-/* line 2068, style.scss */
+/* line 2069, style.scss */
 .cart__items__list__section .submit___section .right__section {
   width: 204px;
   float: left;
   margin-left: 24px;
 }
-/* line 2075, style.scss */
+/* line 2076, style.scss */
 .cart__items__list__section .submit___section .register ul {
   float: left;
   margin-right: 10px;
 }
-/* line 2080, style.scss */
+/* line 2081, style.scss */
 .cart__items__list__section .submit___section .register li {
   margin-bottom: 8px;
 }
-/* line 2084, style.scss */
+/* line 2085, style.scss */
 .cart__items__list__section .submit___section .register input {
   width: 200px;
   line-height: 20px;
@@ -1934,21 +1935,21 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2090, style.scss */
+/* line 2091, style.scss */
 .cart__items__list__section .submit___section .register .message {
   width: 410px;
   clear: both;
 }
-/* line 2096, style.scss */
+/* line 2097, style.scss */
 .cart__items__list__section .submit___section .login {
   float: right;
   text-align: center;
 }
-/* line 2100, style.scss */
+/* line 2101, style.scss */
 .cart__items__list__section .submit___section .login .caption {
   float: left;
 }
-/* line 2104, style.scss */
+/* line 2105, style.scss */
 .cart__items__list__section .submit___section .login .forgot {
   float: right;
   margin-top: 4px;
@@ -1957,20 +1958,20 @@ body.overlayed #overlay {
   font-size: 10px;
   text-transform: uppercase;
 }
-/* line 2116, style.scss */
+/* line 2117, style.scss */
 .cart__items__list__section .submit___section .login .forgot:hover {
   text-decoration: none;
 }
-/* line 2121, style.scss */
+/* line 2122, style.scss */
 .cart__items__list__section .submit___section .login ul {
   display: block;
   clear: both;
 }
-/* line 2126, style.scss */
+/* line 2127, style.scss */
 .cart__items__list__section .submit___section .login li {
   margin-bottom: 8px;
 }
-/* line 2130, style.scss */
+/* line 2131, style.scss */
 .cart__items__list__section .submit___section .login input {
   height: 20px;
   width: 200px;
@@ -1994,11 +1995,11 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2138, style.scss */
+/* line 2139, style.scss */
 .cart__items__list__section .submit___section .login input[type='radio'] {
   border: none;
 }
-/* line 2142, style.scss */
+/* line 2143, style.scss */
 .cart__items__list__section .submit___section .login .submit__form {
   height: auto;
   width: auto;
@@ -2019,11 +2020,11 @@ body.overlayed #overlay {
   -ms-transition: background 0.4s linear;
   transition: background 0.4s linear;
 }
-/* line 2160, style.scss */
+/* line 2161, style.scss */
 .cart__items__list__section .submit___section .login .submit__form:hover {
   background: #444;
 }
-/* line 2167, style.scss */
+/* line 2168, style.scss */
 .cart__items__list__section .submit___section .address {
   height: 146px;
   -webkit-transition: all 0.4s linear;
@@ -2032,26 +2033,26 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2171, style.scss */
+/* line 2172, style.scss */
 .cart__items__list__section .submit___section .address.hidden {
   margin-left: -458px;
   display: block;
 }
-/* line 2176, style.scss */
+/* line 2177, style.scss */
 .cart__items__list__section .submit___section .address li {
   margin-bottom: 12px;
 }
-/* line 2180, style.scss */
+/* line 2181, style.scss */
 .cart__items__list__section .submit___section .address .custom-select {
   max-width: 140px;
   float: left;
   margin-left: 10px;
 }
-/* line 2185, style.scss */
+/* line 2186, style.scss */
 .cart__items__list__section .submit___section .address .custom-select:first-child {
   margin-left: 0;
 }
-/* line 2190, style.scss */
+/* line 2191, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'] {
   line-height: 20px;
 }
@@ -2073,7 +2074,7 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2194, style.scss */
+/* line 2195, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].light__gray {
   text-align: center;
 }
@@ -2095,60 +2096,60 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2199, style.scss */
+/* line 2200, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].country {
   margin-right: 10px;
   width: 130px;
   float: left;
 }
-/* line 2205, style.scss */
+/* line 2206, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].city {
   width: 126px;
   float: left;
 }
-/* line 2210, style.scss */
+/* line 2211, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].index {
   width: 110px;
   float: left;
   margin-left: 10px;
 }
-/* line 2216, style.scss */
+/* line 2217, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].addr {
   width: 198px;
   float: left;
 }
-/* line 2221, style.scss */
+/* line 2222, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].house, .cart__items__list__section .submit___section .address input[type='text'].building, .cart__items__list__section .submit___section .address input[type='text'].flat {
   width: 58px;
   float: left;
   margin-left: 10px;
   text-align: center;
 }
-/* line 2227, style.scss */
+/* line 2228, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].house::-webkit-input-placeholder, .cart__items__list__section .submit___section .address input[type='text'].building::-webkit-input-placeholder, .cart__items__list__section .submit___section .address input[type='text'].flat::-webkit-input-placeholder {
   padding-left: 0;
   text-align: center;
   text-transform: uppercase;
 }
-/* line 2235, style.scss */
+/* line 2236, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].house:-moz-placeholder, .cart__items__list__section .submit___section .address input[type='text'].building:-moz-placeholder, .cart__items__list__section .submit___section .address input[type='text'].flat:-moz-placeholder {
   padding-left: 0;
   text-align: center;
   text-transform: uppercase;
 }
-/* line 2244, style.scss */
+/* line 2245, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].receiver {
   width: 198px;
   float: left;
 }
-/* line 2250, style.scss */
+/* line 2251, style.scss */
 .cart__items__list__section .submit___section .address .message {
   width: 200px;
   float: left;
   margin-left: 10px;
   padding-top: 10px;
 }
-/* line 2258, style.scss */
+/* line 2259, style.scss */
 .cart__items__list__section .submit___section .pickup {
   height: 146px;
   -webkit-transition: all 0.4s linear;
@@ -2157,20 +2158,20 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2262, style.scss */
+/* line 2263, style.scss */
 .cart__items__list__section .submit___section .pickup.active {
   margin-left: 0;
   width: 680px;
 }
-/* line 2266, style.scss */
+/* line 2267, style.scss */
 .cart__items__list__section .submit___section .pickup.active .map {
   right: 0;
 }
-/* line 2271, style.scss */
+/* line 2272, style.scss */
 .cart__items__list__section .submit___section .pickup .caption {
   display: inline-block;
 }
-/* line 2275, style.scss */
+/* line 2276, style.scss */
 .cart__items__list__section .submit___section .pickup .pickup__checkbox {
   position: relative;
   top: 2px;
@@ -2181,11 +2182,11 @@ body.overlayed #overlay {
   background: url("../i/ico-checkbox.png") no-repeat 1px top;
   cursor: pointer;
 }
-/* line 2285, style.scss */
+/* line 2286, style.scss */
 .cart__items__list__section .submit___section .pickup .pickup__checkbox.checked {
   background-position: right top;
 }
-/* line 2290, style.scss */
+/* line 2291, style.scss */
 .cart__items__list__section .submit___section .pickup p {
   color: #868686;
   font-family: "PT Sans bold";
@@ -2193,11 +2194,11 @@ body.overlayed #overlay {
   line-height: 19px;
   text-transform: uppercase;
 }
-/* line 2299, style.scss */
+/* line 2300, style.scss */
 .cart__items__list__section .submit___section .pickup p span {
   color: #e60000;
 }
-/* line 2304, style.scss */
+/* line 2305, style.scss */
 .cart__items__list__section .submit___section .pickup .map {
   position: absolute;
   right: -460px;
@@ -2209,21 +2210,22 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2314, style.scss */
+/* line 2315, style.scss */
 .cart__items__list__section .submit___section .types__list {
   margin-bottom: -10px;
+  -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 2318, style.scss */
+/* line 2319, style.scss */
 .cart__items__list__section .submit___section .types__list li {
   padding: 10px 0;
   border-top: 1px dotted #a1a1a1;
   cursor: pointer;
 }
-/* line 2325, style.scss */
+/* line 2326, style.scss */
 .cart__items__list__section .submit___section .types__list li.selected .price {
   color: #434343;
 }
-/* line 2331, style.scss */
+/* line 2332, style.scss */
 .cart__items__list__section .submit___section .types__list label {
   color: #4b4b4b;
   cursor: pointer;
@@ -2231,26 +2233,26 @@ body.overlayed #overlay {
   font-size: 12px;
   font-weight: bold;
 }
-/* line 2340, style.scss */
+/* line 2341, style.scss */
 .cart__items__list__section .submit___section .types__list label sup {
   text-transform: uppercase;
 }
-/* line 2344, style.scss */
+/* line 2345, style.scss */
 .cart__items__list__section .submit___section .types__list label sub {
   color: #888;
   font-weight: 400;
 }
-/* line 2349, style.scss */
+/* line 2350, style.scss */
 .cart__items__list__section .submit___section .types__list label span {
   margin-left: 8px;
   color: #c8c8c8;
   font-weight: 400;
 }
-/* line 2358, style.scss */
+/* line 2359, style.scss */
 .cart__items__list__section .submit___section .types__list img {
   vertical-align: middle;
 }
-/* line 2362, style.scss */
+/* line 2363, style.scss */
 .cart__items__list__section .submit___section .types__list .price {
   padding-right: 20px;
   float: right;
@@ -2265,15 +2267,15 @@ body.overlayed #overlay {
   -ms-transition: color 0.2s linear;
   transition: color 0.2s linear;
 }
-/* line 2377, style.scss */
+/* line 2378, style.scss */
 .cart__items__list__section .submit___section .pay__type.disabled {
   display: none;
 }
-/* line 2381, style.scss */
+/* line 2382, style.scss */
 .cart__items__list__section .submit___section .pay__type li {
   display: none;
 }
-/* line 2388, style.scss */
+/* line 2389, style.scss */
 .cart__items__list__section .finish__cart {
   display: block;
   margin: 10px auto;
@@ -2284,121 +2286,137 @@ body.overlayed #overlay {
   cursor: pointer;
   text-indent: -9999px;
 }
-/* line 2398, style.scss */
+/* line 2399, style.scss */
 .cart__items__list__section .finish__cart.disabled {
   background-position: left bottom;
   cursor: default;
 }
-/* line 2403, style.scss */
+/* line 2404, style.scss */
 .cart__items__list__section .finish__cart.hidden {
   display: none;
 }
 
-/* line 2409, style.scss */
+/* line 2410, style.scss */
 .footer__section {
+  padding-bottom: 27px;
   background: #444;
+  border-top: 1px solid #696969;
   overflow: hidden;
 }
-/* line 2413, style.scss */
+/* line 2416, style.scss */
 .footer__section .wrap {
   height: 94px;
 }
-/* line 2417, style.scss */
-.footer__section .copyright {
+/* line 2420, style.scss */
+.footer__section .info {
+  margin-top: 24px;
   float: left;
-  padding-top: 12px;
-  color: #fff;
-  font-size: 11px;
-  text-transform: uppercase;
 }
-/* line 2425, style.scss */
-.footer__section .contacts {
-  float: right;
-  padding-top: 12px;
-  color: #fff;
-  font-size: 11px;
-  font-weight: bold;
+/* line 2424, style.scss */
+.footer__section .info .socials {
+  margin-top: 11px;
+  margin-bottom: 14px;
+  *zoom: 1;
+}
+/* line 38, ../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.footer__section .info .socials:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 2429, style.scss */
+.footer__section .info .socials li {
+  margin-right: 15px;
+  float: left;
 }
 /* line 2434, style.scss */
-.footer__section .contacts span {
-  color: #adec3f;
-}
-/* line 2439, style.scss */
-.footer__section p {
-  padding-bottom: 14px;
+.footer__section .info .socials a {
+  height: 32px;
+  width: 32px;
+  display: block;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAgCAYAAAA7ZacxAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGNjMyQTg3OTM0MkIxMUUzOUU3QThCMUFCODE0OTk0QiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGNjMyQTg3QTM0MkIxMUUzOUU3QThCMUFCODE0OTk0QiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkY2MzJBODc3MzQyQjExRTM5RTdBOEIxQUI4MTQ5OTRCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkY2MzJBODc4MzQyQjExRTM5RTdBOEIxQUI4MTQ5OTRCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+olqBgQAABKtJREFUeNrsm1uITVEYx9cZY1ymjFsa15qYGA+MjHHJw7iMcR0P8uABKbdSJCkPUjLy4MGgGAZl4o1kRIm5JIqYDEouKUQjdMwMOS6Z4786367Vau3j7LPW3usc7X/9mjn7stZqf2t961vf3isSj8eZoPlgDSgD40EOM6Me8Bw8AA3gJjOrCFgPqsFUMNxw+R2gDTSCUyBusOwicBQsBL2Yv/oNroFd4Bnjxgf9QV08ONVRncwAI0BLgG1voTpNtH0s6IoHr4+gMEIjvw5sYsHqBNhsYMQ3g4qA294K5hrwAFfBYmZH57jxuau/YakBlZpTwAZw0lLbN4J6zTJ+gjyf2sc7Zqc0UAYKvz/m0BxvS7p1V1tsu4m683xsH+9YgwXkOGhADgV3tqRb91SLbbdZt5koGW7/j8GoPp1VgE6EazLqvg4u0arkg3B8ZJKpKWLANfulH6Cf8LsviInncy0anlmuW9RmCkDdHmJWDmwwSPjdR74gl4VqSmL4bBY3djTZBbrG78mg0ZuuzrscL6CRM+p/7fVuxudZuPfgDxl4JSihcxfAPjofpYe0BdQI93dTGb+EMiaA5Rn4DN4qjh0AO5n/GTe7cskAlUmZqEmgh87FwALpfIl0/y5FNqvKpS6dDJkJlSrKvZ/ivcxi+ztBt8b9MTeXvVv6/Zgl8tpO1FglnRdHSBc4pihzWxaNid4Z3LaHYAYlbAaA2eCuSbfP3fMUqsjRXrCUDD0sifEPk9sXtRYsyrCHeBa8lpZ1jni6u5D+n84SL10yQfzl0iyaTh3dYYlU8x2ymbbb57qicFP76dxx6XgpHW8DeYoXL1GfXKeOKlKsY18Guf1pScqqNOX2GY1yucfvpYRHk3T8FeOvCBlbJfVKrtPSejPbFFS0zxM+XwTk/MI3cD/J/bcUSaOYUF6n1yRLrTT/ccNWUsQv6iutBl5Ix9dnkMvMdOPLufgaRdIm4jFhtoO55/b/aXz+Qcee/zRwOkaBUrHLUvcuMdNS+95Lv/Mp0HPTPEXneJfunO+IL/GWaMxrtT4ul/xa6rVbWOrFpHNjhOW1o3suH8EUgKfStb/AQOGavl7mfNHdnAPj/nHdZFX+GNqumCZCpZZ8apWOlZM3WkBem6/WqikWKJGuvaya572OfEefKVGj6sH54BN4AcYrzvNedzsc+Z5GPqNk2+90EjigWGEDzyPf0RCW+PjvDK19RU0EQ2n+bFZ4CR65bg0Hs2c9oKDNq3ig/TLdJE+yiHIdwaPTDvpbKFwzAjwBLdSAXkR5aMu0dISWeXUpBNDfKaGW0jQbiUvfbluQzgcRJtrOs2Lt0rF2imH8bLvcfvnjC1VMxVdeyxSdgN97kSVeuD13uV/5MUeo7NAjsILW7HPAaOo8r8nLdqeT27f5Tr4ntKlnRWmUaysniZsIQrp1d1hse0e296JciihLLEazOuJvuZZaanubD7GPn+9AlN/w8VTmaksPsEHz/kYDxj/EEt8giCpKsW5d/aBAzDFONMBn3xlu10pPrczMdi2ehbO18aQ+3Khpd6NmMW2aDFpvwOBIuEU75eDOry3aPEF2kAW3RZt7G75FO/pXgAEAzFB25MjjSkMAAAAASUVORK5CYII=') no-repeat;
 }
 /* line 2442, style.scss */
-.footer__section p a {
-  color: #fff;
-  text-decoration: none;
+.footer__section .info .socials a.fb {
+  background-position: -47px top;
 }
-/* line 2448, style.scss */
-.footer__section li {
-  margin-right: 14px;
-  padding-top: 3px;
-  padding-bottom: 1px;
-  padding-left: 18px;
-  float: left;
-  background: url("../i/footer-social-spr.png") no-repeat;
+/* line 2446, style.scss */
+.footer__section .info .socials a.inst {
+  background-position: right top;
 }
-/* line 2459, style.scss */
-.footer__section li.vk {
-  background-position: left -14px;
-}
-/* line 2463, style.scss */
-.footer__section li.lj {
-  background-position: left bottom;
-}
-/* line 2468, style.scss */
-.footer__section li a {
-  color: #fff;
-  font-size: 11px;
+/* line 2453, style.scss */
+.footer__section .info p {
+  color: #FFF;
+  font-size: 12px;
+  line-height: 21px;
   font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 2460, style.scss */
+.footer__section .info p span {
+  color: #adec3f;
+}
+/* line 2466, style.scss */
+.footer__section .links {
+  margin-top: 27px;
+  margin-right: 40px;
+  float: right;
+}
+/* line 2471, style.scss */
+.footer__section .links a {
+  margin-bottom: 4px;
+  color: #b2b2b2;
+  font-size: 12px;
   text-decoration: none;
   text-transform: uppercase;
 }
+/* line 2478, style.scss */
+.footer__section .links a:hover {
+  color: #FFF;
+  text-decoration: underline;
+}
 
-/* line 2483, style.scss */
+/* line 2487, style.scss */
 .scroll__helper {
   height: 1px;
   clear: both;
   visibility: hidden;
 }
 
-/* line 2489, style.scss */
+/* line 2493, style.scss */
 .custom-select {
   position: relative;
 }
-/* line 2493, style.scss */
+/* line 2497, style.scss */
 .custom-select.open_list .custom-text {
   margin-bottom: 1px;
   background: #f6f6f6;
   border-bottom: 0;
   border-radius: 5px 5px 0 0;
 }
-/* line 2499, style.scss */
+/* line 2503, style.scss */
 .custom-select.open_list .custom-text:after {
   background-position: left top;
 }
-/* line 2506, style.scss */
+/* line 2510, style.scss */
 .custom-select.above .select-list {
   padding-top: 4px;
   border: 1px solid #c9c9c9;
   border-radius: 5px;
 }
-/* line 2512, style.scss */
+/* line 2516, style.scss */
 .custom-select.above .custom-text {
   border-radius: 5px;
 }
-/* line 2517, style.scss */
+/* line 2521, style.scss */
 .custom-select select {
   display: none;
 }
-/* line 2521, style.scss */
+/* line 2525, style.scss */
 .custom-select ul {
   position: relative;
 }
-/* line 2525, style.scss */
+/* line 2529, style.scss */
 .custom-select .custom-text {
   position: relative;
   height: 26px;
@@ -2419,7 +2437,7 @@ body.overlayed #overlay {
   background-image: -o-linear-gradient(top, #f6f6f6, #ededed);
   background-image: linear-gradient(top, #f6f6f6, #ededed);
 }
-/* line 2543, style.scss */
+/* line 2547, style.scss */
 .custom-select .custom-text:after {
   position: absolute;
   top: 9px;
@@ -2430,11 +2448,11 @@ body.overlayed #overlay {
   background: url("../i/select-arrows-spr.png") no-repeat right bottom;
   content: '';
 }
-/* line 2555, style.scss */
+/* line 2559, style.scss */
 .custom-select .custom-scroll {
   overflow: hidden;
 }
-/* line 2559, style.scss */
+/* line 2563, style.scss */
 .custom-select .select-list {
   position: absolute;
   top: 26px;
@@ -2450,11 +2468,11 @@ body.overlayed #overlay {
   background-image: -o-linear-gradient(top, #f6f6f6, #ededed);
   background-image: linear-gradient(top, #f6f6f6, #ededed);
 }
-/* line 2570, style.scss */
+/* line 2574, style.scss */
 .custom-select .select-list ul {
   display: block;
 }
-/* line 2574, style.scss */
+/* line 2578, style.scss */
 .custom-select .select-list li {
   float: none;
   display: block;
@@ -2466,15 +2484,15 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 2589, style.scss */
+/* line 2593, style.scss */
 .custom-select .select-list li.current {
   display: none;
 }
-/* line 2593, style.scss */
+/* line 2597, style.scss */
 .custom-select .select-list li:hover {
   text-decoration: underline;
 }
-/* line 2599, style.scss */
+/* line 2603, style.scss */
 .custom-select .select-scroll {
   position: absolute;
   top: 0;
@@ -2483,14 +2501,14 @@ body.overlayed #overlay {
   background: #f0f0f0;
   z-index: 2;
 }
-/* line 2607, style.scss */
+/* line 2611, style.scss */
 .custom-select .select-scroll .scroll-drag {
   position: absolute;
   left: 2px;
   display: block;
   cursor: pointer;
 }
-/* line 2613, style.scss */
+/* line 2617, style.scss */
 .custom-select .select-scroll .scroll-drag:after {
   position: relative;
   left: 50%;
@@ -2498,16 +2516,16 @@ body.overlayed #overlay {
   margin-top: -14px;
   margin-left: -4px;
   display: block;
-  content: '≡';
+  content: '';
   font-size: 14px;
   font-weight: bold;
 }
-/* line 2629, style.scss */
+/* line 2633, style.scss */
 .custom-select .select-scroll .scroll-drag * {
   user-select: none;
 }
 
-/* line 2636, style.scss */
+/* line 2641, style.scss */
 #overlay {
   position: absolute;
   left: 0;
