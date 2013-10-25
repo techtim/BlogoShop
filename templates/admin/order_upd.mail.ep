@@ -1,7 +1,17 @@
 <html>
 <body>
-Администратор <%= $admin->{login} %> (<%= $admin->{email} %>), оставила коментарий к заказу <%= $order_id %>:<br/>
-<b><%= $ord_сomment_title %></b><br/>
-<%= stash('ord_comment_text') %>
+% if (stash('ord_сomment_title') ne '') {
+	Администратор <%= $admin->{login} %> (<%= $admin->{email} %>), оставил коментарий к заказу <%= $order_id %>:<br/>
+	<b><%= stash('ord_сomment_title') %></b><br/>
+	<%= stash('ord_comment_text') %>
+	<br/><br/>
+% }
+% if (stash('ord_status_new') ne '') {
+	Администратор <%= $admin->{login} %> (<%= $admin->{email} %>), изменил статус заказа <%= $order_id %>:<br/>
+	C <b>"<%= stash('ord_status_old') %>"</b> на <b>"<%= stash('ord_status_new') %>"</b><br/>
+	<br/><br/>
+% }
+
+<a href="http://<%= config->{domain_name} %>/admin/orders/id/<%= $order_id %>">перейти на страницу заказа</a>
 </body>
 </html>

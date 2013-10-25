@@ -6,8 +6,23 @@ use BlogoShop::Item;
 use BlogoShop::Courier;
 use utf8;
 
-use constant ORDER_FILTERS => qw (status);
+use constant ORDER_FILTERS => qw (status id);
 use constant ORDER_STATUS => qw (new proceed assembled finished canceled changed wait_delivery wait_courier self_delivery sent_courier sent_post sent_ems);
+use constant ORDER_STATUS_NAME => {
+	new => 'новый',
+	proceed => 'в обработке',
+	assembled => 'собран',
+	wait_delivery => 'ожидает отправки',
+	wait_courier => 'ожидает курьера',
+	self_delivery => 'отложен/самовывоз',
+	sent_courier => 'отправлен/курьером ',
+	sent_post => 'отправлен/почта',
+	sent_ems => 'отправлен/EMS',
+	finished => 'выполнен',
+	canceled => 'отменен',
+	changed => 'изменен',
+	deleted => 'удален',
+};
 use constant ORDERS_ON_PAGE => 30;
 my $status_regex = join '|', ORDER_STATUS;
 
@@ -40,6 +55,7 @@ sub list {
     $pager_url .= $pager_url =~ m!\?$! ? '' : '&';
 
 	$self->stash($_) ? $filter->{$_} = $self->stash($_) : () foreach ORDER_FILTERS;
+	$filter->{_id} = MongoDB::OID->new(value => delete $filter->{id}) if $filter->{id};
 
 	# FETCH ALL ORDERS WITH FILTER TO COUNT SUM
     my $orders = [$self->app->db->orders->find($filter)->sort({_id => -1})->all];
@@ -86,22 +102,30 @@ sub list {
 sub update {
 	my $self = shift;
 
+	my $old_order;
 	for ($self->req->param('status')) { 
+		$old_order = $self->app->db->orders->find_one({_id => MongoDB::OID->new(value => $self->stash('id'))});
 		$self->app->db->orders->update({_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {status => $_}})
 			if $_ && $_ =~ /($status_regex)/;
 		$self->app->db->orders->remove({_id => MongoDB::OID->new(value => $self->stash('id'))}) 
 			if $_ && $_ eq 'delete' && $self->stash('admin')->{login} eq $self->config('order_delete_power');
 	}
-	if ($self->req->param('comment.title') || $self->req->param('comment.text') ) {
+	if ($self->req->param('comment.title') || $self->req->param('comment.text') || $self->req->param('status')) {
 		$self->app->db->orders->update(
 			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
 				{ '$push' => { comments => 
 					{ login => $self->stash('admin')->{login}, title => $self->req->param('comment.title'), text => $self->req->param('comment.text')} 
 				} }
 		);
-		my $vars = {order_id => ($self->stash('id')=~/^(.{8})/)[0],
+		my $vars = {order_id => $self->stash('id'),
 					ord_сomment_title => ''.$self->req->param('comment.title'),
 					ord_comment_text  => ''.$self->req->param('comment.text')};
+
+		if ($self->req->param('status')) {
+			$vars->{ord_status_new} = ORDER_STATUS_NAME->{$self->req->param('status')};
+			$vars->{ord_status_old} = ORDER_STATUS_NAME->{$old_order->{status}};
+		}
+
 		$self->stash(%$vars);
 
 		my $mail = $self->mail(
@@ -134,7 +158,6 @@ sub call_courier {
 		{_id => MongoDB::OID->new(value => $self->stash('id'))},
 		{'$set' => {courier_called => 1}}
 	);
-warn 'COUR';
 
 	# return $self->render(text => 'oook');
 	return $self->redirect_to('/admin/orders/'.$self->stash('status'));

@@ -148,6 +148,7 @@ sub startup {
 		$c->stash->{active_categories} = $c->app->utils->get_active_categories($c->app->db);
 		$c->stash->{list_brands} 	  	= $c->app->utils->get_list_brands($c->app->db);
 		$c->stash->{name_brands} 	  	= {map {$_->{_id} => $_->{name}} @{$c->stash->{list_brands}}};
+		# $c->stash->{static_pages}		= {map {''.$_->{_id} => $_} $c->app->db->statics->find({})->fields({_id=>1,alias=>1,name=>1})->all};
 		$next->();
 	});
 
@@ -228,6 +229,7 @@ sub startup {
 
 		# Orders list
 		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
+		$admin_bridge->route('/orders/id/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
 

@@ -40,6 +40,7 @@
 		</ul>
 	</div>
 	
+	% if (!stash('_id') || stash('_id') eq '') {
 	<div class='clearfloat'>
 		<ul class='pager__section shop__list clearfloat'>
 			<li class='title'>страница:</li>
@@ -48,7 +49,7 @@
 			% }
 		</ul>
 	</div>
-
+	% }
 	<ul class='list'>
 		% foreach my $order (@$orders) {
 			<li class="
@@ -234,6 +235,7 @@
 	   % }
 	</ul>
 
+	% if (!stash('_id') || stash('_id') eq '') {
 	<div class='clearfloat'>
 		<ul class='pager__section shop__list clearfloat'>
 			<li class='title'>страница:</li>
@@ -242,6 +244,7 @@
 			% }
 		</ul>
 	</div>
+	% }
 </div>
 
 
