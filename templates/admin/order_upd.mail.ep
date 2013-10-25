@@ -1,0 +1,7 @@
+<html>
+<body>
+Администратор <%= $admin->{login} %> (<%= $admin->{email} %>), оставила коментарий к заказу <%= $order_id %>:<br/>
+<b><%= $ord_сomment_title %></b><br/>
+<%= stash('ord_comment_text') %>
+</body>
+</html>

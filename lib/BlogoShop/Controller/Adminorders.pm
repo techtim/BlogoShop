@@ -26,35 +26,37 @@ sub list {
 		}}
 	);
 
-	my $orders_count = $counter	->{count};
+	my $orders_count = $counter->{count};
 
 	$counter = {map {$_->{status} => $_->{count} } @{$counter->{retval}}};
 
 	# Paging
-	my $skip = ORDERS_ON_PAGE *
-	   ($self->req->param('page') && $self->req->param('page') =~ /(\d+)/ ? ($1>0 ? $1-1 : 0) : 0);
+    my $skip = ORDERS_ON_PAGE *
+       ($self->req->param('page') && $self->req->param('page') =~ /(\d+)/ ? ($1>0 ? $1-1 : 0) : 0);
 
-	my $pager_url  =  $self->req->url->path->to_string.'?'.$self->req->url->query->to_string;
-	$pager_url =~ s!csrftoken=[^\&]+\&?!!;
-	$pager_url =~ s!\&?page=\d+\&?!!;
-	$pager_url .= $pager_url =~ m!\?$! ? '' : '&';
+    my $pager_url  =  $self->req->url->path->to_string.'?'.$self->req->url->query->to_string;
+    $pager_url =~ s!csrftoken=[^\&]+\&?!!;
+    $pager_url =~ s!\&?page=\d+\&?!!;
+    $pager_url .= $pager_url =~ m!\?$! ? '' : '&';
 
 	$self->stash($_) ? $filter->{$_} = $self->stash($_) : () foreach ORDER_FILTERS;
 
 	# FETCH ALL ORDERS WITH FILTER TO COUNT SUM
-	my $orders = [$self->app->db->orders->find($filter)->sort({_id => -1})->all];
-	my $orders_sum = 0;
-	foreach my $order (@$orders) {
-		foreach (@{$order->{items}}) {
-			$orders_sum += $_->{price}*$_->{count};
-		}
-	}
+    my $orders = [$self->app->db->orders->find($filter)->sort({_id => -1})->all];
+    my $orders_sum = 0;
+    foreach my $order (@$orders) {
+            foreach (@{$order->{items}}) {
+                    $orders_sum += $_->{price}*$_->{count};
+            }
+    }
 
-	# FETCH ORDERS FOR PAGING
+    # FETCH ORDERS FOR PAGING
 	$orders = [
 		$self->app->db->orders->find($filter)->sort({_id => -1})->
 			skip($skip)->limit(ORDERS_ON_PAGE)->all
 	];
+	my $item   = BlogoShop::Item->new($self);
+
 	foreach my $order (@$orders) {
 		foreach (@{$order->{items}}) {
 			$_->{info} = $item->get($_->{_id}, $_->{sub_id});
@@ -68,17 +70,17 @@ sub list {
 
 	return $self->render( 
 		%$filter,
-		orders => $orders,
-		orders_count => $orders_count,
-		orders_sum => $orders_sum,
-		counter => $counter,
-		cur_page  => $self->req->param('page') || 1,
-		pages => int( 0.99 + ( $filter->{status} ? $counter->{$filter->{status}} : $orders_count ) / ORDERS_ON_PAGE ),
-		pager_url  => $pager_url,
-		host => $self->req->url->base,
-		template => 'admin/orders',
-		format => 'html',
-	);
+        orders => $orders,
+        orders_count => $orders_count,
+        orders_sum => $orders_sum,
+        counter => $counter,
+        cur_page  => $self->req->param('page') || 1,
+        pages => int( 0.99 + ( $filter->{status} ? $counter->{$filter->{status}} : $orders_count ) / ORDERS_ON_PAGE ),
+        pager_url  => $pager_url,
+        host => $self->req->url->base,
+        template => 'admin/orders',
+        format => 'html',
+    );
 }
 
 sub update {
@@ -97,20 +99,19 @@ sub update {
 					{ login => $self->stash('admin')->{login}, title => $self->req->param('comment.title'), text => $self->req->param('comment.text')} 
 				} }
 		);
+		my $vars = {order_id => ($self->stash('id')=~/^(.{8})/)[0],
+					ord_сomment_title => ''.$self->req->param('comment.title'),
+					ord_comment_text  => ''.$self->req->param('comment.text')};
+		$self->stash(%$vars);
+
 		my $mail = $self->mail(
 			to      => $self->config('superadmin_mail'),
 			# cc		=> $self->config('superadmin_mail'),
 			from    => 'noreply@'.$self->config('domain_name'),
-			subject => 'новый комментарий в заказе №'.($self->stash('id')=~/^(.{8})/)[0],
+			subject => 'Hовый комментарий в заказе №'.($self->stash('id')=~/^(.{8})/)[0],
 			type 	=> 'text/html',
 			format => 'mail',
-			data => $self->render_mail(
-				template => 'order_mail', 
-				admin => $self->stash('admin'),
-				order_id => ($self->stash('id')=~/^(.{8})/)[0], 
-				title => $self->req->param('comment.title'),
-				text => $self->req->param('comment.text')
-			),
+			data => $self->render_mail(	template => 'admin/order_upd'),
 			handler => 'mail',
 		);
 	}
