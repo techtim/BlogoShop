@@ -79,6 +79,7 @@ sub list {
 			$order->{sum} += $_->{price}*$_->{count};
 		}
 		$order->{order_id} 	= ($order->{_id}->{value}=~/^(.{8})/)[0];
+		$order->{order_id_full} 	= $order->{_id}->{value};
 	}
 
 	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
@@ -130,7 +131,7 @@ sub update {
 
 		my $mail = $self->mail(
 			to      => $self->config('superadmin_mail'),
-			# cc		=> $self->config('superadmin_mail'),
+			cc		=> 'xoxloveka.office@gmail.com',
 			from    => 'noreply@'.$self->config('domain_name'),
 			subject => 'Hовый комментарий в заказе №'.($self->stash('id')=~/^(.{8})/)[0],
 			type 	=> 'text/html',
