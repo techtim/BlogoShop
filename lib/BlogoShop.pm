@@ -11,6 +11,7 @@ use BlogoShop::Articles;
 use BlogoShop::Admins;
 use BlogoShop::Utils;
 use BlogoShop::Item;
+use BlogoShop::Qiwi;
 
 # This method will run once at server start
 sub startup {
@@ -71,6 +72,7 @@ sub startup {
 	(ref $self)->attr(items 	=> sub {return BlogoShop::Item->new($self, $self->stash('id'))});
 	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new()});
 	(ref $self)->attr(conf 	=> sub {return $self->config});
+	(ref $self)->attr(qiwi 	=> sub {return BlogoShop::Qiwi->new()});
 
 	# Helpers part
 	$self->helper(db 		=> sub { shift->app->db });
@@ -78,6 +80,7 @@ sub startup {
 	$self->helper(articles 	=> sub { shift->app->articles });
 	$self->helper(items 	=> sub { shift->app->items });
 	$self->helper(courier 	=> sub { shift->app->courier });
+	$self->helper(qiwi 	=> sub { shift->app->qiwi });
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();

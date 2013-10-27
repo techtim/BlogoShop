@@ -233,6 +233,12 @@
 						
 					</div>
 	        	% end
+	        	%= form_for '/admin/orders/qiwi/'.$order->{_id} => (method => 'post') => begin
+		        	<div class='cut'>
+		        		<button type='submit' class='submit__button' name="create" value="1" >Выставить счет</button>
+		        		<button type='submit' class='submit__button' name="cancel" value="1" >Отменить выставленный счет</button>
+		        	</div>
+	        	% end
 	        </li>
 	   % }
 	</ul>

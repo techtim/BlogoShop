@@ -165,4 +165,16 @@ sub call_courier {
 	# return $self->redirect_to('/admin/orders');
 }
 
+sub qiwi_create_bill {
+	my $self = shift;
+
+	return $self->render(text => 'Error: no order id') if !$self->stash('id');
+	my $order = $self->app->db->orders->find_one(
+		{_id => MongoDB::OID->new(value => $self->stash('id'))}
+	);
+	my $bill = $self->qiwi->create_bill($order);
+
+	return $self->redirect_to('/admin/orders/id'.$self->stash('id'));
+}
+
 1;

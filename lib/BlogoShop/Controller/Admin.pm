@@ -185,12 +185,12 @@ sub update_admin {
 	delete $edited_admin->{new_pass};
 	delete $edited_admin->{new_pass_ctrl};
 	delete $edited_admin->{old_pass};
-	delete $edited_admin->{type};
+	# delete $edited_admin->{type};
 
 	$self->admins->update($self,$edited_admin) if !$self->stash('error_message');
 	
 	$self->stash(admin => $edited_admin);# return submitted params to form
-	
+
 	$self->stash('error_message') ?
 		return $self->render(
 			admin => $edited_admin,
