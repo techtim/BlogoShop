@@ -1,5 +1,5 @@
 % layout 'shop';
-% title ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||''));
+% title ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||stash('tags')||''));
 
 %= include 'includes/left_bar'
 
