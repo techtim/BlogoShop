@@ -70,9 +70,17 @@
 
 	
 		<div class='row'>
-	    	<textarea type="text" name="descr" placeholder='Описание'><%= stash 'descr' %></textarea>
-	   	</div>
-   
+			<textarea type="text" name="descr" placeholder='Описание'><%= stash 'descr' %></textarea>
+		</div>
+
+		<div class='row'>
+			<input type="text" name="meta_keys" value="<%= stash 'meta_keys' %>" placeholder='мета ключи (через ",")' required="required"/>
+		</div>
+
+		<div class='row'>
+			<textarea type="text" name="meta_descr" placeholder='мета описание' rows=5><%= stash 'meta_descr' %></textarea>
+		</div>
+
 		<div class='row clearfloat'>
 		
 			<div class='fl'>

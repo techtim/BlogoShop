@@ -18,6 +18,7 @@ use constant ITEM_FIELDS => qw(id name alias descr active
 								brand tags total_qty
 								sale_start sale_end sale_value sale_active
 								preview_image images
+								meta_descr meta_keys
 								);
 use constant LIST_FIELDS => map {$_ => 1} qw(name active alias brand brand_name category subcategory subitems total_qty articol
 											tags descr preview_image price sale);

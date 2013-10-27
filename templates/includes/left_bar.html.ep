@@ -12,7 +12,7 @@
 
 		% foreach my $cat (@$categories) {
 		% next if !$cat->{name};
-		<ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %>'>
+		<ul class='item<%= stash('category') && stash('category') eq $cat->{_id} ? ' current' : ' toggled' %>'>
 			<li class='title'>
 				<a href='http://<%= config->{domain_name} %>/<%= $cat->{_id} %>'><%= $cat->{name} %></a>
 			</li>
@@ -29,7 +29,7 @@
 
 	</div>
 
-	<div class='menu__section'>
+	<div class='menu__section hidden'>
 
 		<div class='caption__section clearfloat'>
 			<h2>производители</h2>

@@ -10,7 +10,7 @@
         </dt>
         <dd>
            {{if name == 'price'}}
-                <span class='price'>
+                <span class='price' itemprop="price">
            {{/if}}
 
            {{if name == 'color'}}
@@ -42,12 +42,15 @@
     </dl>
 </script>
 
-<div class='content__section shop__item__section'>
+<div class='content__section shop__item__section' itemscope itemtype="http://data-vocabulary.org/Product">
+
+<meta itemprop="currency" content="RUB" />
+<meta itemprop="condition" content="new" />
 
 <ul class='breadcrumps__section clearfloat'>
-	<li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
+	<li><span itemprop="category"><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></span></li>
 	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
-	<li>/ <h2><%= stash 'name' %></h2></li>
+	<li>/ <h2><span itemprop="name"><%= stash 'name' %></span></h2></li>
 </ul>
 
 % if (ref $images eq 'ARRAY') {
@@ -62,7 +65,7 @@
             Бренд:
         </dt>
         <dd>
-        	<a href="/brand/<%= $brand %>"><%= $brand_name %></a>
+        	<span itemprop="brand"><a href="/brand/<%= $brand %>"><%= $brand_name %></a></span>
         	<!--<%= $brand_name %>-->
         </dd>
     </dl>
@@ -98,7 +101,7 @@
 </div>
 
 <div class='shop__description__section'>
-	<%== stash 'descr' %>
+	<span itemprop="description"><%== stash 'descr' %></span>
 </div>
 
 <div class='clear'></div>
