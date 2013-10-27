@@ -28,6 +28,8 @@
 
 		<script data-main='/j/config' src='/j/require.js'></script>
 		<script>requirejs(['app/global', 'app/fotorama'])</script>
+
+		%= include 'includes/google_analytics'
 	</head>
 
 	<body>

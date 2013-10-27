@@ -27,6 +27,8 @@
 
 		<script data-main='/j/config' src='/j/require.js'></script>
 		<script>requirejs(['app/global'])</script>
+
+		%= include 'includes/google_analytics'
 	</head>
 	<body>
 		<div class='wrap clearfloat'>
@@ -38,7 +40,6 @@
 
 		%= include 'includes/footer'
 
-		%= include 'includes/google_analytics'
 		%# = include 'includes/yandex_metrika_shop'
 	</body>
 </html>
