@@ -111,13 +111,15 @@ sub update {
 		$self->app->db->orders->remove({_id => MongoDB::OID->new(value => $self->stash('id'))}) 
 			if $_ && $_ eq 'delete' && $self->stash('admin')->{login} eq $self->config('order_delete_power');
 	}
-	if ($self->req->param('comment.title') || $self->req->param('comment.text') || $self->req->param('status')) {
+	if ($self->req->param('comment.title') || $self->req->param('comment.text')) {
 		$self->app->db->orders->update(
 			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
 				{ '$push' => { comments => 
 					{ login => $self->stash('admin')->{login}, title => $self->req->param('comment.title'), text => $self->req->param('comment.text')} 
 				} }
 		);
+	}
+	if ($self->req->param('comment.title') || $self->req->param('comment.text') || $self->req->param('status') ne $old_order->{status}) {
 		my $vars = {order_id => $self->stash('id'),
 					ord_сomment_title => ''.$self->req->param('comment.title'),
 					ord_comment_text  => ''.$self->req->param('comment.text')};
@@ -140,7 +142,37 @@ sub update {
 			handler => 'mail',
 		);
 	}
+	if ($self->req->param('delivery_cost') && $self->req->param('delivery_cost') !~ m![^\d]+!) {
+		$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {delivery_cost => $self->req->param('delivery_cost')}}
+		);
+	}
+
 	$self->call_courier() if $self->req->param('courier');
+
+	if ($self->req->param('create_qiwi')) {
+		my $order = $self->app->db->orders->find_one(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}
+		);
+		my $status = $self->qiwi->create_bill($order, $self);
+		$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
+			{'$set' => {qiwi_status => $status}}
+		);
+		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
+	}
+
+	if ($self->req->param('cancel_qiwi')) {
+		my $order = $self->app->db->orders->find_one(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}
+		);
+		my $status = $self->qiwi->cancel_bill($order, $self);
+		$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
+			{'$set' => {qiwi_status => $status}}
+		);
+		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
+	}
 
 	return $self->redirect_to('/admin/orders/'.$self->stash('status'));
 }
@@ -165,16 +197,17 @@ sub call_courier {
 	# return $self->redirect_to('/admin/orders');
 }
 
-sub qiwi_create_bill {
+sub qiwi_update_bills {
 	my $self = shift;
 
-	return $self->render(text => 'Error: no order id') if !$self->stash('id');
-	my $order = $self->app->db->orders->find_one(
-		{_id => MongoDB::OID->new(value => $self->stash('id'))}
-	);
-	my $bill = $self->qiwi->create_bill($order);
-
-	return $self->redirect_to('/admin/orders/id'.$self->stash('id'));
+	my $orders = $self->qiwi->get_bill_list();
+	foreach (@$orders) {
+		$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => delete $_->{_id})},
+			{'$set' => {qiwi_status => $_ }}
+		);
+	}
+	return $self->redirect_to('/admin/orders/');
 }
 
 1;

@@ -235,6 +235,7 @@ sub startup {
 		$admin_bridge->route('/orders/id/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
+		$admin_bridge->route('/orders/qiwi/update')->via('get')->to('controller-Adminorders#qiwi_update_bills');
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');

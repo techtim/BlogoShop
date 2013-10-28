@@ -6,7 +6,7 @@
 
 <div class='orders__list__section left__side__section'>
 	<h2 class='caption'>Заказы</h2>
-
+	<a href="/admin/orders/qiwi/update"> Обновить статусы QIWI заказов </a>
 	<ul class='statistic__strip__section clearfloat'>
 		<li class='total'>
 			<a href='/admin/orders'><%= <%= $orders_count %></a>
@@ -230,14 +230,21 @@
 								<button type='submit' class='submit__button'>Сохранить</button>
 							</div>
 						</div>
-						
+
+						% if ($order->{pay_type} eq 'qiwi' ) {
+						<div class='qiwi'>
+
+							Цена доставки: <input type='text' name='delivery_cost' value='<%= $order->{delivery_cost} %>'>
+							% my $qiwi = $order->{qiwi_status};
+							% if (!$qiwi) {
+			        			<input type='submit' name='create_qiwi' value='Выставить счет' >
+			        		% } else {
+			        			Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
+			        			<input type='submit' name='cancel_qiwi' value='Отменить выставленный счет'>
+			        		% }
+			        	</div>
+			        	% }
 					</div>
-	        	% end
-	        	%= form_for '/admin/orders/qiwi/'.$order->{_id} => (method => 'post') => begin
-		        	<div class='cut'>
-		        		<button type='submit' class='submit__button' name="create" value="1" >Выставить счет</button>
-		        		<button type='submit' class='submit__button' name="cancel" value="1" >Отменить выставленный счет</button>
-		        	</div>
 	        	% end
 	        </li>
 	   % }

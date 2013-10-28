@@ -68,22 +68,6 @@ sub soap_bill {
 		print Dumper($result);
 		
 }
-# CREATE BILL
-# <xs:element minOccurs="0" name="login" type="xs:string"/>
-# <xs:element minOccurs="0" name="password" type="xs:string"/>
-# <xs:element minOccurs="0" name="user" type="xs:string"/>
-# <xs:element minOccurs="0" name="amount" type="xs:string"/>
-# <xs:element minOccurs="0" name="comment" type="xs:string"/>
-# <xs:element minOccurs="0" name="txn" type="xs:string"/>
-# <xs:element minOccurs="0" name="lifetime" type="xs:string"/>
-# <xs:element name="alarm" type="xs:int"/>
-# <xs:element name="create" type="xs:boolean"/>
-
-# <xs:complexType name="cancelBill">
-# <xs:sequence>
-# <xs:element minOccurs="0" name="login" type="xs:string"/>
-# <xs:element minOccurs="0" name="password" type="xs:string"/>
-# <xs:element minOccurs="0" name="txn" type="xs:string"/>
 
 
 1;
