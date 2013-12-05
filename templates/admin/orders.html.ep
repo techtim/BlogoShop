@@ -6,7 +6,7 @@
 
 <div class='orders__list__section left__side__section'>
 	<h2 class='caption'>Заказы</h2>
-	<a href="/admin/orders/qiwi/update"> Обновить статусы QIWI заказов </a>
+	<a href="/admin/orders/qiwi_update"> Обновить статусы QIWI заказов </a>
 	<ul class='statistic__strip__section clearfloat'>
 		<li class='total'>
 			<a href='/admin/orders'><%= <%= $orders_count %></a>
@@ -15,6 +15,7 @@
 			cумма заказов: <strong><%= $orders_sum %></strong> P
 		</li>
 		<li class="fr"><a href="#" class="filter__toggle">фильтры</a></li>
+		<li class="fr"><a href="#" class="qiwi_filter__toggle">Q</a></li>
 	</ul>
 
 	<div class="filters__section clearfloat <%= 'hidden' if stash('status') eq '' %>">
@@ -39,7 +40,17 @@
 			<li<%== " class='current'" if stash('status') eq 'canceled' %>>отменен:<a href="/admin/orders/canceled" class='canceled'><%= $counter->{canceled}||0 %></a></li>
 		</ul>
 	</div>
-	
+
+	<div class="qiwi_filters__section clearfloat <%= 'hidden' if stash('qiwi_status') eq '' %>">
+		QIWI:
+		<ul class='clearfloat'>
+			<li<%== " class='current'" if stash('qiwi_status') eq '500' %>>выставить счет:<a href="/admin/orders/qiwi/500" class='new'><%= $qiwi_counter->{500}||0 %></a></li>
+			<li<%== " class='current'" if stash('qiwi_status') eq '60' %>>оплачен:<a href="/admin/orders/qiwi/60" class='finished'><%= $qiwi_counter->{60}||0 %></a></li>
+			<li<%== " class='current'" if stash('qiwi_status') eq '50' %>>ожидает оплаты:<a href="/admin/orders/qiwi/50" class='wait_pay'><%= $qiwi_counter->{50}||0 %></a></li>
+			<li<%== " class='current'" if stash('qiwi_status') eq '160' %>>отменен:<a href="/admin/orders/qiwi/160" class='wait_pay'><%= $qiwi_counter->{160}||0 %></a></li>
+		</ul>
+	</div>
+
 	% if (!stash('_id') || stash('_id') eq '') {
 	<div class='clearfloat'>
 		<ul class='pager__section shop__list clearfloat'>
@@ -73,7 +84,9 @@
 
 	       		%= form_for '/admin/orders/'.(stash('status') ? stash('status').'/' : '').$order->{_id} => (method => 'post') => begin
 		        	<div class='cut'>
-		        		<div class='order__num'>Заказ № <span><a href="/admin/orders/id/<%= $order->{order_id_full} %>"><%= $order->{order_id} %></a></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong></div>
+			        		<div class='order__num'>Заказ № <span><a href="/admin/orders/id/<%= $order->{order_id_full} %>"><%= $order->{order_id} %></a></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong>
+			        		<%== '&nbsp;&nbsp;&nbsp;<strong>Q</strong>' if $order->{pay_type} eq 'qiwi' %>
+		        		</div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
 
 						<button type='submit' class='submit__button active'>Сохранить</button>

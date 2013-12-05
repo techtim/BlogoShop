@@ -119,8 +119,17 @@
 							<label>Бренд:</label>
 						</td>
 						<td>
-							%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'brands'
-						</td>
+						<div class="banners__cats clearfloat">
+		                % foreach my $brand (@$list_brands) {
+		                    <ul>
+		                        <li>
+		                            <input type="checkbox" name="brand" value="<%= $brand->{_id} %>" <%= 'class="checked"' if $article_brands->{$brand->{_id}} %> <%= 'checked' if $article_brands->{$brand->{_id}} %> id="brand__name__<%= $brand->{_id} %>"/>
+		                            <label class="brand__name"  for="brand__name__<%= $brand->{_id} %>"><%== $brand->{name} %></label>
+		                        </li>
+		                    </ul>
+		                % }
+			            </div>
+			            </td>
 					</tr>
                     <tr>
                         <td class="ta-right">

@@ -7,10 +7,9 @@
 %= include 'includes/shop_admin_brands', brands => stash 'list_brands'
 
 
-%= include 'includes/error_message', error_messages => stash 'error_message'
-%= include 'includes/info_message', message => stash 'message'
-
 <div class='middle__section shop__add__item'>
+	%= include 'includes/error_message', error_messages => stash 'error_message'
+	%= include 'includes/info_message', message => stash 'message'
 
 	%= form_for '' => (method => 'post', enctype =>"multipart/form-data") => begin
 
@@ -35,7 +34,8 @@
 						<b><%== $cat->{name} %></b>
 					</option>
 					% foreach my $subcat (@{$cat->{subcats}}) {
-					<option value="<%= $subcat->{_id} %>" <%= ($subcategory && $subcategory eq $subcat->{_id} ? 'selected' :'') %>>
+					<option value="<%= $cat->{_id}.'.'.$subcat->{_id} %>" 
+						<%= ($subcategory && $category eq $cat->{_id} && $subcategory eq $subcat->{_id} ? 'selected' :'') %>>
 						&nbsp;&nbsp;<%== $subcat->{name} %>
 					</option>
 					% }
@@ -99,12 +99,9 @@
 				%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'brands'
 
 				<div class='specials__section'>
-					<select>
-						<option value=''>спец. предолжени</option>
-					</select>
-					<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#'>
-						<input type="checkbox" name="" value='1' />
-					</a>
+					<strong>вес:</strong>
+					%= include 'includes/select_block', name => 'weight', select => stash('weight'), must_fill => 'yes', options => stash 'weights'
+					КГ
 				</div>
 
 			</div>
@@ -146,6 +143,8 @@
 			</div>
 			<input type="text" name="tags" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>"/>
 		</div>
+
+
 
 	    <div class='sub__items__section'>
 	    	<h2 class='caption'>параметры товара</h2>
