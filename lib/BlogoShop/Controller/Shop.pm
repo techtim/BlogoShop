@@ -212,7 +212,7 @@ sub cart {
 	$self->redirect_to('/checkout') if $self->stash('checkout_ok');
 
 	$self->stash(%$cart);
-warn $self->dumper( $self->logistics->get_cities({"courier" => "1"}) );
+# warn $self->dumper( $self->logistics->get_cities({"courier" => "1"}) );
 	return $self->render(
 		items 		=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
 		total_weight => $total_weight,
@@ -361,22 +361,25 @@ sub check_cart {
 	my ($ct, $sum) = (0,0);
 	my $items = [];
 
-	eval {
-		foreach my $key (keys %{$session->{client}->{items}}) {
-			for ($session->{client}->{items}->{$key}) {
-				$ct += $_->{count};
-				$sum += $_->{price}*$_->{count};
-				push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } 
-					if $need_full && $key=~m!:+!;
+	if ($session->{client}->{items} && ref $session->{client}->{items} eq ref {}) {
+		eval {
+			foreach my $key (keys %{$session->{client}->{items}}) {
+				for ($session->{client}->{items}->{$key}) {
+					$ct += $_->{count};
+					$sum += $_->{price}*$_->{count};
+					push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } 
+						if $need_full && $key=~m!:+!;
+				}
 			}
+		};
+		if ($@) {
+			$self->session(expires => 1); # if wrong cookies, clean them
+			return {cart_count => 0};
 		}
-	} if ref $session->{client}->{items} eq ref {};
-
-	if ($@) {
-		$self->session(expires => 1); # if wrong cookies, clean them
+		return {cart_count => $ct, cart_price => $sum, cart_items => $items};
+	} else { 
 		return {cart_count => 0};
 	}
-	return {cart_count => $ct, cart_price => $sum, cart_items => $items};
 }
 
 sub yandex_market {

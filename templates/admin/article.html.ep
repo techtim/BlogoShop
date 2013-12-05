@@ -24,7 +24,7 @@
 
 			% if ($action_type ne 'add') {
 
-				<a href="/admin/articles">Список постов</a> &gt;
+				<a href="/admin">Список постов</a> &gt;
 
 				<span>Правка поста
 					% if (stash 'alias') {

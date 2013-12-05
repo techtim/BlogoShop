@@ -1,5 +1,5 @@
 <span class='img__description'>
-<img src='<%= $img_url %>' />
-<%== $img_descr %>
+<img src='<%= stash('img_url') %>' />
+<%== stash('img_descr') %>
 </span>
 

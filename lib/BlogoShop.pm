@@ -273,7 +273,7 @@ sub startup {
 	# --SHOP--
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
-	$r->route('/cart/ship_cost/:order_id')->via('get')->to('controller-ajax#check_logist_cost');
+	$r->route('/cart/ship_cost')->via('get')->to('controller-ajax#check_logist_cost');
 
 	$r->route('/checkout')->to('controller-shop#show_checkout');
 	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');

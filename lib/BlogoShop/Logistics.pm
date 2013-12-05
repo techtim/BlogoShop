@@ -23,18 +23,18 @@ sub _send_req {
 	my ($self, $params) = @_;
 
 	$params->{logistics_id} = $self->{logistics_id};
+
 	my $xml_req = $self->{controller}->render(
 		partial => 1,
 		%$params,
 		format => 'xml',
-		handler  => 'tx',
 	);
 
 	my $ua = LWP::UserAgent->new();
 	my $res = $ua->post( 'http://client-shop-logistics.ru/index.php?route=deliveries/api', {xml => encode_base64($xml_req)} )->content;
 	my $result = {};
 	eval {
-		$result = XMLin($res);
+		$result = XMLin(Encode::decode('utf8', $res));
 	};
 	if ($@) {
 		warn 'XML parse error:'.$@;
@@ -48,11 +48,13 @@ sub _send_req {
 sub check_cost {
 	my ($self, $order) = @_;
 
-	my %params = %$order;
+	my %params;
+	$order->{from_city} = 405065;
+    $order->{to_city} = $order->{city};
 
-	$params{template} = 'xml/delivery_cost';
+	$order->{template} = 'xml/delivery_cost';
 
-	my $res = $self->_send_req(\%params);
+	my $res = $self->_send_req($order);
 
 	return $res;
 }
@@ -60,7 +62,7 @@ sub check_cost {
 sub get_cities {
 	my ($self, $filter) = @_;
 	# return [] unless ref $filter ne ref {};
-	return [BlogoShop->db->logCities->find()->all];
+	return [BlogoShop->db->logCities->find()->sort({name => 1})->all];
 }
 
 sub get_data {

@@ -234,9 +234,8 @@ sub import_cities {
 
 sub check_logist_cost {
 	my $c = shift;
-	return $c->render(json => {error => 'no order id' } ) if $c->stash('order_id');
-	my $order = $c->req->param('order_id');
-	my $cost = $c->logistics->check_cost();
+	return $c->render(json => {error => 'no city or weight' } ) if !$c->req->param('city') || !$c->req->param('weight');
+	my $cost = $c->logistics->check_cost({city => $c->req->param('city'), weight => $c->req->param('weight')});
 	return $c->render(json => {cost => $cost});
 }
 

@@ -39,7 +39,7 @@ sub update_article {
 	
 	my $old_article = $self->get_article_by_id($id, $collection);
 	return if !$old_article;
-	
+
 	if ($old_article->{type} ne $article->{type} || $old_article->{alias} ne $article->{alias}) { # check if alias changed , change directory with images
 		
 		my $old = $self->{config}->{image_dir}.($old_article->{type} ? $old_article->{type} : $self->{config}->{default_img_dir}).'/'.($old_article->{alias}||$self->{config}->{default_img_dir});
@@ -218,7 +218,7 @@ sub check_existing_alias {
 		{"alias" => '1'} # fetch only alias
 	)->sort({alias => -1})->all;
 	
-	return ($#check > -1 ? ($check[0]->{alias} =~ /(\d?$)/)[0] + 1 : '');  
+	return ($#check > -1 ? ($check[0]->{alias} =~ /(\d+)$/ ? $1 + 1 : 1) : '');  
 }
 
 sub block_article {
