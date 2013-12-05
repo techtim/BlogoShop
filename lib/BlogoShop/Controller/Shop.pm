@@ -184,7 +184,7 @@ sub cart {
 
 	my $item 	  = BlogoShop::Item->new($self);
 	my $sel_items = {map {$_->{_id} => $_ } @{$item->list($filter, {}, 0, 1000)}}; # big stupid limit num to fetch all
-
+	my $total_weight = 0;
 	my ($cnt, @failed_items) = (0, ());
 	foreach my $it (@{$cart->{cart_items}}) {
 		$it->{$_} = $sel_items->{ $it->{_id} }->{ $_ } for CART_ITEM_FIELDS;
@@ -193,6 +193,7 @@ sub cart {
 		my $h = merge( $it, $sel_items->{ $it->{_id} }->{subitems}->[$it->{sub_id}] );
 		$it = $h;
 		$it->{count} = $it->{qty} if $it->{count} > $it->{qty};
+		$total_weight += $it->{weight} if $it->{weight};
 		$cnt++;
 	}
 
@@ -207,18 +208,20 @@ sub cart {
 		$cnt++ if $_ ne '';
 	}
 
-	$self->flash(order_id => ''.$self->stash('checkout_ok'));
+	$self->flash(order_id => ''.$self->stash('checkout_ok')) if $self->stash('checkout_ok');
 	$self->redirect_to('/checkout') if $self->stash('checkout_ok');
 
 	$self->stash(%$cart);
-
+warn $self->dumper( $self->logistics->get_cities({"courier" => "1"}) );
 	return $self->render(
-		items 	=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
-		sex 	=> '',
-		banners_h => $self->utils->get_banners($self, '', 240),
-		page_name => 'shop',
-		template=> 'cart',
-		format 	=> 'html',
+		items 		=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
+		total_weight => $total_weight,
+		cities 		=> $self->logistics->get_cities({"courier" => "1"}),
+		sex 		=> '',
+		banners_h 	=> $self->utils->get_banners($self, '', 240),
+		page_name 	=> 'shop',
+		template	=> 'cart',
+		format 		=> 'html',
 	);
 }
 
@@ -229,12 +232,12 @@ sub show_checkout {
 	$self->redirect_to('/cart') if !$id;
 
 	return $self->render(
-		order_id=> $id,
-		sex 	=> '',
-		banners_h => $self->utils->get_banners($self, '', 240),
-		page_name => 'checkout',
-		template=> 'checkout',
-		format 	=> 'html',
+		order_id	=> $id,
+		sex 		=> '',
+		banners_h 	=> $self->utils->get_banners($self, '', 240),
+		page_name 	=> 'checkout',
+		template	=> 'checkout',
+		format 		=> 'html',
 	);
 }
 
@@ -369,8 +372,10 @@ sub check_cart {
 		}
 	} if ref $session->{client}->{items} eq ref {};
 
-	$self->session(expires => 1) if $@; # if wrong cookies, clean them
-
+	if ($@) {
+		$self->session(expires => 1); # if wrong cookies, clean them
+		return {cart_count => 0};
+	}
 	return {cart_count => $ct, cart_price => $sum, cart_items => $items};
 }
 

@@ -12,11 +12,12 @@ use BlogoShop::Admins;
 use BlogoShop::Utils;
 use BlogoShop::Item;
 use BlogoShop::Qiwi;
+use BlogoShop::Logistics;
 
 # This method will run once at server start
 sub startup {
 	my $self = shift;
-	
+
 	# Add conf
 	$self->plugin('yaml_config',  {
 		file      => 'BlogoShop.yml',
@@ -81,6 +82,9 @@ sub startup {
 	$self->helper(items 	=> sub { shift->app->items });
 	$self->helper(courier 	=> sub { shift->app->courier });
 	$self->helper(qiwi 	=> sub { shift->app->qiwi });
+	$self->helper(logistics => sub { return BlogoShop::Logistics->new(
+			controller => shift,
+	) } );
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();
@@ -88,15 +92,7 @@ sub startup {
 	
 	my $json = JSON::XS->new();
 	$self->helper('json' => sub {return $json});
-	
-# 	my $qiwi = Business::Qiwi->new(
-#         trm_id => $self->config('qiwi_id'),
-#         serial => $self->config('qiwi_pass'),
-#         password => $self->config('qiwi_pass'),
-#     );
-    
-#     my $balance = $qiwi->get_balance;
-# warn $self->dumper($balance);
+
 
 	$self->plugin(mail => {
 		from     => 'noreply@sport.megafon.ru',
@@ -231,11 +227,14 @@ sub startup {
 		
 
 		# Orders list
+		$admin_bridge->route('/orders/qiwi_update')->via('get')->to('controller-Adminorders#qiwi_update_bills');
+
+		$admin_bridge->route('/orders/qiwi/:qiwi_status', status => => qr/[\w\d]+/)->via('get')->to('controller-Adminorders#list', qiwi_status => '');
 		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/id/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
-		$admin_bridge->route('/orders/qiwi/update')->via('get')->to('controller-Adminorders#qiwi_update_bills');
+		
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
@@ -267,9 +266,15 @@ sub startup {
 		# Statistics 
 		$admin_bridge->route('/orders_emails')->to('controller-Ajax#orders_emails');
 
+		# Logistics 
+		$admin_bridge->route('/logist/import_cities')->to('controller-Ajax#import_logist_cities');
+		$admin_bridge->route('/logist/import_metros')->to('controller-Ajax#import_logist_metros');
+
 	# --SHOP--
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
+	$r->route('/cart/ship_cost/:order_id')->via('get')->to('controller-ajax#check_logist_cost');
+
 	$r->route('/checkout')->to('controller-shop#show_checkout');
 	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
 	# list items 

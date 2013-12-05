@@ -232,4 +232,25 @@ sub import_cities {
     return $self->render(json => {success => $rus});	
 }
 
+sub check_logist_cost {
+	my $c = shift;
+	return $c->render(json => {error => 'no order id' } ) if $c->stash('order_id');
+	my $order = $c->req->param('order_id');
+	my $cost = $c->logistics->check_cost();
+	return $c->render(json => {cost => $cost});
+}
+
+sub import_logist_cities {
+	my $c = shift;
+	my $cities = $c->logistics->get_data('city');
+	return $c->render(json => {success => $cities});		
+}
+
+sub import_logist_metros {
+	my $c = shift;
+	my $metro = $c->logistics->get_data('metro');
+	return $c->render(json => {success => $metro});		
+}
+
+
 1;

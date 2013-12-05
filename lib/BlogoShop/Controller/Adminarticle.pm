@@ -35,20 +35,13 @@ sub post {
 			$self->update() ;
 }
 
-# Utils
-sub add_params {
-	my $self = shift;
-	$self->stash(brands => [$self->app->db->brands->find()->all] || []);
-	#	$self->stash(tags => (map {$_->{tag}} $self->app->db->tags->find()->sort({_id => 1})->all) || [] );
-}
-
 sub check_input {
 	my ($self, $article) = @_;
 	
 	my $error_message = [];
 	
 	($self->req->param($_) ? $article->{$_} = $self->req->param($_) : ()) foreach ARTICLE_PARAMS;
-	
+
 	$article->{active} += 0;
 	
 	$article->{preview_text} =~ s/\r|(\r?\n)+$|\ +$//g if $article->{preview_text};
@@ -59,13 +52,15 @@ sub check_input {
 		$article->{preview_text} =~ s/\&raquo;|\&laquo;|\x{ab}|\x{bb}/\"/g if $article->{preview_text};
 		$article->{article_text} =~ s/\&raquo;|\&laquo;|\x{ab}|\x{bb}/\"/g if $article->{article_text};
 	};
-	
+
+	$article->{brand} = $self->req->param('brand') ? [$self->req->param('brand')] : [];
+
 	# creaete new mongo format id from new timestamp
 	$article->{new_id} = $self->utils->update_mongoid_with_time($self->stash('id'), $article->{article_date}, $article->{article_time}) 
 	if $article->{article_date} && $article->{article_time}; 
-	
+
 	#	$article->{author_info} = ($article->{author} ? $self->articles->get_authors($article->{author}) : '') if $article->{author};
-	
+
 	if ($self->{collection} eq 'articles') {
 		# treat like article with collection = 'articles'
 		$article->{alias} = lc($self->utils->translit($article->{name}));
@@ -145,12 +140,11 @@ sub get_images {
 sub add {
 	my $self = shift;
 	
-	$self->add_params();
-	
 	$self->stash($_ => '') foreach ARTICLE_PARAMS;
 	
 	$self->render(
 	action_type => 'add',
+	article_brands => {},
 	template => 'admin/' . ($self->{'collection'} ne 'articles' ? $self->{'collection'} : 'article'),
 	format => 'html',
 	);
@@ -180,9 +174,7 @@ sub create {
 
 sub edit {
 	my $self= shift;
-	
-	$self->add_params();
-	
+
 	my $article = $self->articles->get_article_by_id($self->stash('id'), $self->{collection});
 	
 	if (!$article) {
@@ -202,9 +194,13 @@ sub edit {
 	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
 	$self->stash('message' => $self->flash('message')) if $self->flash('message');
 	
+	my $article_brands = ref $article->{brand} eq ref [] ?
+		{map {$_ => 1} @{$article->{brand}}} : {$article->{brand} => 1};
+
 	$self->render(
 		%$article,
 		id => $article->{_id}->{value},
+		article_brands => $article_brands,
 		action_type => 'edit',
 		template => 'admin/' . ($self->{collection} ne 'articles' ? $self->{collection} : 'article'),
 		format => 'html',

@@ -17,7 +17,7 @@ my $json  = Mojo::JSON->new;
 
 use constant ITEM_FIELDS => qw(id name alias descr active
 								category subcategory 
-								brand tags total_qty
+								brand tags total_qty weight
 								sale_start sale_end sale_value sale_active
 								sex preview_image images
 								);
@@ -190,7 +190,9 @@ sub _parse_data {
 	$self->{brand_name} = $ctrl->app->db->brands->find_one({_id => $self->{brand}}, {name => 1}) || '';
 	$self->{brand_name} = $self->{brand_name}->{name} if $self->{brand_name};
 
-	$self->{category} = $self->{app}->db->categories->find_one({'subcats._id' => $self->{subcategory}}) if $self->{subcategory} ne '';
+	($self->{category}, $self->{subcategory}) = split '\.', $self->{subcategory}
+		if $self->{subcategory} =~ m/(\.+)/;
+	$self->{category} = $self->{app}->db->categories->find_one({_id => $self->{category}, 'subcats._id' => $self->{subcategory}}) if $self->{subcategory} ne '';
 	$self->{category} = $self->{category}->{_id} if $self->{subcategory} ne '';
 #	if !$self->{category};
 	
@@ -217,10 +219,11 @@ sub _parse_data {
 	}
 	$self->{sale}->{$_} = delete $self->{$_} foreach SALE_PARAMS;
 	
-	$self->{qty} //= 0;
-	$self->{qty} 	   += 0;
-	$self->{size} 	   .= '';
-	$self->{price} 	   += 0;
+	$self->{qty} 	//= 0;
+	$self->{qty} 	+= 0;
+	$self->{size} 	.= '';
+	$self->{price} 	+= 0;
+	$self->{weight}	+= 0 if $self->{weight};
 	$self->{total_qty} 	= $self->{qty}; 
 	$self->{subitems}	= $self->_get_subitems($ctrl);
 
@@ -238,6 +241,7 @@ sub _parse_data {
 
 	# check other params
 	push @$error_message, 'no_price' if !$self->{price};
+	push @$error_message, 'no_weight' if !$self->{weight};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
 	push @$error_message, 'no_qty' if $self->{active} && !$self->{qty};
 
