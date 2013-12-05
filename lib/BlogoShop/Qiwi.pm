@@ -83,9 +83,9 @@ sub create_bill {
 		SOAP::Data->name( create => 1 )->type('boolean'),
 	);
 
-	# warn 'QIWI result:'. Dumper $result->result;
+	warn 'QIWI result:'. Dumper $result;
 	return {
-		status => $result->result, 
+		status => 0+$result->result, 
 		descr => QIWI_CODES->{$result->result}
 	};
 }
@@ -126,9 +126,10 @@ sub get_bill_list {
 	);
 
 	my $html = $result->result;
+	warn 'GET_BILL_LIST'. Dumper $result->result;
 	my $orders = [];
 	while ( $html =~ /id="([^"]+)" status="(\d+)"/g ) {
-		push @$orders, {_id => $1, status => $2, descr => QIWI_CODES->{$2}};
+		push @$orders, {_id => $1, status => 0+$2, descr => QIWI_CODES->{$2}};
 	}
 	return $orders;
 }

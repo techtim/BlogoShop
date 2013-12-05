@@ -66,8 +66,8 @@
             Бренд:
         </dt>
         <dd>
-        	<!--<a href="/brand/<%= $brand %>"><%= $brand_name %></a>-->
-        	<%= $brand_name %>
+        	<a style='color: #555;' href="/brand/<%= $brand %>"><%= $brand_name %></a>
+        	<!-- <%= $brand_name %> -->
         </dd>
     </dl>
     % }

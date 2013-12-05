@@ -193,7 +193,7 @@ sub store_image {
 
 sub get_list_brands {
     my ($self, $db) = @_;
-    my $list_brands = {};
+    # my $list_brands = {};
     # push @{$list_brands->{$_->{category}->{_id}}}, $_ foreach ($db->brands->find({})->sort({name=>1})->all);
     return [$db->brands->find({})->sort({name=>1})->all];
 }

@@ -1,0 +1,98 @@
+<request>
+	<function>add_delivery</function>
+	<api_id>455656</api_id>
+	<deliveries>
+		<delivery>
+			<project_key>test_key</project_key>
+			<code></code>
+			<delivery_date><%= stash('date') %></delivery_date>
+			<date_transfer_to_store><%= stash('date') %></date_transfer_to_store> 
+			<from_city><%= stash('from_city_id') %></from_city>
+			<to_city><%= stash('to_city_id') %></to_city>
+			<time_from>12:00</time_from>
+			<time_to>19:30</time_to>
+			<order_id><%= stash('_id') %></order_id>
+			% if (stash('metro_id')) '<metro>'.stash('metro_id').'</metro>';
+			<address><%= $address %></address>
+			<contact_person><%= stash('receiver') %></contact_person>
+			<phone><%= stash('phone') %></phone>
+			<phone_sms><%= stash('phone') %></phone_sms>
+			<price><%= stash('orders_sum') %></price>
+			<ocen_price><%= stash('orders_sum') %></ocen_price>
+			<additional_info></additional_info>
+			<site_name>xoxloveka.ru</site_name>
+			<pickup_place></pickup_place>
+			<zabor_places_code></zabor_places_code> 
+			<add_product_from_disct>0</add_product_from_disct>
+			<number_of_place>0</number_of_place>
+			<delivery_speed>normal</delivery_speed>
+			<shop_logistics_cheque>0</shop_logistics_cheque> 
+			<barcodes></barcodes>
+			<partial_redemption>0</partial_redemption>
+			<return_shipping_documents></return_shipping_documents>  
+			<use_from_canceled>0</use_from_canceled> 
+				<products>
+					% foreach my $item ($@items) {
+					<product>
+						<articul><%= $item->{_id}.'_'.$item->{sub_id} %></articul>
+						<name><%= $item->{name} %></name>
+						<quantity><%= $item->{count} %></quantity>
+						<item_price><%= $item->{price} %></item_price>
+					</product>
+					% }
+					<product>
+						<articul>22229</articul>
+						<name>тестовое название</name>
+						<quantity>20</quantity>
+						<item_price>2000</item_price>
+					</product>
+				</products>
+		</delivery>
+		<delivery>
+			<project_key>test_key</project_key>
+			<code></code> 
+			<delivery_date>2012-03-13</delivery_date>
+			<from_city>Москва</from_city>
+			<to_city>Москва</to_city>
+			<time_from>12:33</time_from>
+			<time_to>18:33</time_to>
+			<order_id>zzz888</order_id>
+			<metro>Бибирево</metro>
+			<address>ул. Ленина 33-44</address>
+			<contact_person>Иван</contact_person>
+			<phone>23234534545</phone>
+			<phone_sms>2323233232</phone_sms> 
+			<price>1000</price>
+			<ocen_price>0</ocen_price>
+			<additional_info>Доп. инфо new!!!</additional_info>
+			 <site_name>www.site.com</site_name>
+			<pickup_place/>
+			<zabor_places_code/>
+			<add_product_from_disct>0</add_product_from_disct>
+			<number_of_place>1</number_of_place>
+			<delivery_speed>normal</delivery_speed>  
+			<shop_logistics_cheque>0</shop_logistics_cheque>  
+			<barcodes>
+				<barcode>08555011300003</barcode>
+			</barcodes>
+
+			<partial_redemption></partial_redemption>
+			<return_shipping_documents></return_shipping_documents>  
+			<use_from_canceled>0</use_from_canceled>  
+			<products>
+				<product>
+					<articul>4556-44</articul>
+					<name>тестовое название</name>
+					<quantity>30</quantity>
+					<item_price>3000</item_price>
+				</product>
+				<product>
+					<articul>22229-22</articul>
+					<name>тестовоен азвание</name>
+					<quantity>40</quantity>
+					<item_price>4000</item_price>
+				</product>
+			</products>
+		</delivery>
+	</deliveries>
+</request>

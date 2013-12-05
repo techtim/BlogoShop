@@ -1,0 +1,10 @@
+<request>
+  <function>get_delivery_price</function>
+  <api_id><%= stash('logistics_id') %></api_id>
+  <from_city><%= stash('from_city') %></from_city>
+  <to_city><%= stash('to_city') %></to_city>
+  <pickup_place></pickup_place>
+  <weight><%= stash('total_weight') %></weight>
+  <tarifs_type>1</tarifs_type> 
+  %# 1 - курьерская 2 - самовывоз
+</request>

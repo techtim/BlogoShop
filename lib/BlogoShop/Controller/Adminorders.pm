@@ -6,7 +6,7 @@ use BlogoShop::Item;
 use BlogoShop::Courier;
 use utf8;
 
-use constant ORDER_FILTERS => qw (status id);
+use constant ORDER_FILTERS => qw (status id qiwi_status);
 use constant ORDER_STATUS => qw (new proceed assembled finished canceled changed wait_delivery wait_courier self_delivery sent_courier sent_post sent_ems);
 use constant ORDER_STATUS_NAME => {
 	new => 'новый',
@@ -42,8 +42,21 @@ sub list {
 	);
 
 	my $orders_count = $counter->{count};
-
 	$counter = {map {$_->{status} => $_->{count} } @{$counter->{retval}}};
+
+	my $qiwi_counter = 
+		$self->app->db->run_command({
+		group => {
+			ns		=> 'orders',
+			key		=> {qiwi_status => {status => 1}}, 
+			cond	=> {pay_type => 'qiwi'},
+			'$reduce' => 'function(obj,prev) { prev.count++ }',
+			initial	=> {count => 0},
+		}}
+	);
+
+	my $qiwi_orders_count = $qiwi_counter->{count};
+	$qiwi_counter = {map {$_->{qiwi_status}{status}||500 => $_->{count} } @{$qiwi_counter->{retval}}}; # status 500 for new oreders
 
 	# Paging
     my $skip = ORDERS_ON_PAGE *
@@ -57,6 +70,17 @@ sub list {
 	$self->stash($_) ? $filter->{$_} = $self->stash($_) : () foreach ORDER_FILTERS;
 	$filter->{_id} = MongoDB::OID->new(value => delete $filter->{id}) if $filter->{id};
 
+	# QIWI 
+	if ($filter->{qiwi_status}) {
+		$filter->{pay_type} = "qiwi";
+		if ($filter->{qiwi_status} eq '500') { # 500 means new qiwi order
+			delete $filter->{qiwi_status};
+			$filter->{'qiwi_status'}{'$exists'} = 0;
+		} else {
+			$filter->{'qiwi_status.status'} = 0+delete $filter->{qiwi_status};
+		}
+	}
+	# warn 'FILTER2'. $self->dumper($filter);
 	# FETCH ALL ORDERS WITH FILTER TO COUNT SUM
     my $orders = [$self->app->db->orders->find($filter)->sort({_id => -1})->all];
     my $orders_sum = 0;
@@ -87,16 +111,19 @@ sub list {
 
 	return $self->render( 
 		%$filter,
-        orders => $orders,
-        orders_count => $orders_count,
-        orders_sum => $orders_sum,
-        counter => $counter,
-        cur_page  => $self->req->param('page') || 1,
-        pages => int( 0.99 + ( $filter->{status} ? $counter->{$filter->{status}} : $orders_count ) / ORDERS_ON_PAGE ),
-        pager_url  => $pager_url,
-        host => $self->req->url->base,
-        template => 'admin/orders',
-        format => 'html',
+		status 		=> $filter->{status} || "",
+		qiwi_status	=> $filter->{qiwi_status} || '', 
+        orders 		=> $orders,
+        orders_count=> $orders_count,
+        orders_sum 	=> $orders_sum,
+        counter 	=> $counter,
+        qiwi_counter=> $qiwi_counter,
+        cur_page  	=> $self->req->param('page') || 1,
+        pages 		=> int( 0.99 + ( $filter->{status} ? $counter->{$filter->{status}} : $orders_count ) / ORDERS_ON_PAGE ),
+        pager_url  	=> $pager_url,
+        host 		=> $self->req->url->base,
+        template 	=> 'admin/orders',
+        format 		=> 'html',
     );
 }
 

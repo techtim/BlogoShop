@@ -10,7 +10,8 @@ domain_name: 'xoxloveka.ru'
 
 hypnotoad:
   workers: 4
-  listen: http://*:8080
+  listen: 
+  - http://*:8080
   lock_file: /var/lock/blogoshop.lock 
   pid_file: /var/run/blogoshop.pid 
   user: techtim 
@@ -27,13 +28,15 @@ nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
 cookie_name: 'BlogoShop'
+cookie_domain: '.dev.xoxloveka.ru'
 cookie_expiration: 604800 # week
 cookie_secret: '$w3Etx0X|_o\/eKa'
 
 block_voter_ip_time: 180 # 3 min
 
 articles_on_page: 9
-articles_on_startpage: 6
+articles_on_startpage: 9
+articles_on_brandpage: 6
 related_articles_count: 3
 
 items_on_page: 16
@@ -46,3 +49,8 @@ order_delete_power: 'vladimir'
 
 recaptcha_public_key: '6Lc9jtISAAAAABMneliM7sxkpvWGa6yT7iuk_Nd6'
 recaptcha_private_key: '6Lc9jtISAAAAAM6wAcAjkq5D3v4E2-sJoOnRsMjk'
+
+qiwi_id: 231734
+qiwi_pass: '88original7'
+
+logistics_id: 'e78025d0ae6757f573ebc9a3dfec764b'

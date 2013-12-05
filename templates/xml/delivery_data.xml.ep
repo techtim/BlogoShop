@@ -1,0 +1,5 @@
+<request>
+  <function>get_dictionary</function>
+  <api_id><%= stash('logistics_id') %></api_id>
+  <dictionary_type><%= stash('type') %></dictionary_type>  
+</request>
