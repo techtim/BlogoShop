@@ -83,9 +83,9 @@ sub create_bill {
 		SOAP::Data->name( create => 1 )->type('boolean'),
 	);
 
-	warn 'QIWI result:'. Dumper $result;
+	# warn 'QIWI result:'. Dumper $result;
 	return {
-		status => 0+$result->result, 
+		status => $result->result, 
 		descr => QIWI_CODES->{$result->result}
 	};
 }

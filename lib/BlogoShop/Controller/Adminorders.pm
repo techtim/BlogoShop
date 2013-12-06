@@ -186,6 +186,21 @@ sub update {
 			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
 			{'$set' => {qiwi_status => $status}}
 		);
+delete $order->{status}; # status binded mojo var
+		$self->stash(%$order);
+
+		my $mail = $self->mail(
+			to      => $order->{email},
+			cc		=> 'xoxloveka.shop@gmail.com',
+			from    => 'noreply@'.$self->config('domain_name'),
+			subject => 'Оплата покупки на сайте Xoxloveka.',
+			type 	=> 'text/html',
+			format => 'mail',
+			data => $self->render_mail(	template => 'mails/qiwi_order'),
+			handler => 'mail',
+		);
+		$status->{descr};
+
 		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
 	}
 
