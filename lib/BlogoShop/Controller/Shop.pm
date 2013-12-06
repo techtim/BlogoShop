@@ -3,7 +3,7 @@ package BlogoShop::Controller::Shop;
 use Mojo::Base 'Mojolicious::Controller';
 use LWP::UserAgent ();
 use Hash::Merge qw( merge );
-use POSIX qw(strftime);
+use POSIX qw(strftime ceil);
 
 use utf8;
 
@@ -193,7 +193,8 @@ sub cart {
 		my $h = merge( $it, $sel_items->{ $it->{_id} }->{subitems}->[$it->{sub_id}] );
 		$it = $h;
 		$it->{count} = $it->{qty} if $it->{count} > $it->{qty};
-		$total_weight += $it->{weight} if $it->{weight};
+		# get item weight or default subcategory weight
+		$total_weight += ($it->{weight} || $self->stash('categories_info')->{$it->{category}.'.'.$it->{subcategory}}->{weight}); 
 		$cnt++;
 	}
 
@@ -212,10 +213,10 @@ sub cart {
 	$self->redirect_to('/checkout') if $self->stash('checkout_ok');
 
 	$self->stash(%$cart);
-# warn $self->dumper( $self->logistics->get_cities({"courier" => "1"}) );
+
 	return $self->render(
 		items 		=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
-		total_weight => $total_weight,
+		total_weight => ceil($total_weight),
 		cities 		=> $self->logistics->get_cities({"courier" => "1"}),
 		sex 		=> '',
 		banners_h 	=> $self->utils->get_banners($self, '', 240),

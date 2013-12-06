@@ -199,7 +199,6 @@ delete $order->{status}; # status binded mojo var
 			data => $self->render_mail(	template => 'mails/qiwi_order'),
 			handler => 'mail',
 		);
-		$status->{descr};
 
 		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
 	}

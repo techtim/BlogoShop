@@ -31,7 +31,10 @@
 	                	<option value="<%= $_ %>" <%= 'selected' if $subcat->{pos} && $subcat->{pos} == $_ %>><%= $_ %></option>
 	                % }
             	</select>
-
+                &emsp;&emsp;
+                %= include 'includes/select_block', name => 'weight.cat.'.$cat->{_id}.'.subcat.'.$subcat->{_id}, select => $subcat->{weight}, must_fill => 'yes', options => stash 'weights'
+                кг
+                &emsp;&emsp;
                 <input type="checkbox" name="delete_subcat:<%= $cat->{_id} %>" value="<%= $subcat->{_id} %>">удалить<br>
             % }
 

@@ -11,12 +11,22 @@ use File::Path qw(make_path remove_tree);
 use constant BRAND_PARAMS => qw(name descr id category logo images);
 use constant BANNER_PARAMS => qw(id link image category weight type);
 
+use constant WEIGHTS => [
+    {_id => 0.5, name => '0.1-0.5'},
+    {_id => 1, name => '0.5-1'},
+    {_id => 2, name => '2'},
+    {_id => 3, name => '3'},
+    {_id => 4, name => '4'},
+    {_id => 5, name => '5'}
+];
+
 sub list_categories {
     my $self = shift;
     my $error_message = [];
     
     return $self->render(
     	template => 'admin/categories',
+        weights => WEIGHTS,
     	categories => [$self->app->db->categories->find()->sort({pos=>1})->all] || [],
     ) unless $self->stash('save');
     
@@ -79,7 +89,8 @@ sub list_categories {
 	        );
 		}
 		foreach (@{$cat->{subcats}}) {
-			$_->{pos} = 0+$self->req->param("pos.cat.$cat->{_id}.subcat.$_->{_id}")||@{$cat->{subcats}};
+            $_->{pos} = 0+$self->req->param("pos.cat.$cat->{_id}.subcat.$_->{_id}")||@{$cat->{subcats}};
+            $_->{weight} = 0+($self->req->param("weight.cat.$cat->{_id}.subcat.$_->{_id}")||1);
 		}
 		@{$cat->{subcats}} = sort {$a->{pos} <=> $b->{pos}} @{$cat->{subcats}}; 
 		$self->app->db->categories->update(
