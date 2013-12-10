@@ -269,7 +269,6 @@ body {
   }
 }
 
-
 .navigation__section {
   margin-bottom: 18px;
   border-top: 1px dotted #444;
@@ -408,7 +407,6 @@ body {
   }
 }
 
-
 .expand__items {
   height: 22px;
   width: 21px;
@@ -507,6 +505,35 @@ body {
 	  	display: block;
 	  	clear: both;
 
+      @mixin redLink {
+        li.title > a {
+          color: red;
+        }
+      }
+
+      &.podarki {
+        border: 3px solid red;
+        border-bottom: 0;
+        @include redLink;
+      }
+
+      &.dom_i_interer, &.ukrashenija_i_bizhuterija {
+        border-left: 3px solid red;
+        border-right: 3px solid red;
+        @include redLink;
+      }
+
+      &.aksessuary {
+        margin-bottom: 12px;
+        border: 3px solid red;
+        border-top: 0;
+        @include redLink;
+
+        .title {
+          margin-bottom: -3px;
+        }
+      }
+
       &.current {
         .submenu {
           display: block;
@@ -552,6 +579,9 @@ body {
           weight: bold;
         }
 
+        &.hny {
+          color: red;
+        }
 
         a {
           padding-left: 0;
@@ -2203,13 +2233,8 @@ body {
           float: left;
         }
 
-        &.city {
-          width: 126px;
-          float: left;
-        }
-
         &.index {
-          width: 110px;
+          width: 70px;
           float: left;
           margin-left: 10px;
         }
@@ -2246,6 +2271,11 @@ body {
           width: 198px;
           float: left;
         }
+      }
+
+      .city > select {
+        width: 190px;
+        float: left;
       }
 
       .message {

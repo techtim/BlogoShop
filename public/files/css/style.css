@@ -217,7 +217,7 @@ body.overlayed #overlay {
   top: 4px;
 }
 
-/* line 273, style.scss */
+/* line 272, style.scss */
 .navigation__section {
   margin-bottom: 18px;
   border-top: 1px dotted #444;
@@ -225,47 +225,47 @@ body.overlayed #overlay {
   font-size: 13px;
   line-height: 32px;
 }
-/* line 281, style.scss */
+/* line 280, style.scss */
 .navigation__section .main__nav__strip {
   float: left;
   width: 770px;
 }
-/* line 285, style.scss */
+/* line 284, style.scss */
 .navigation__section .main__nav__strip li {
   float: left;
   margin-left: 42px;
 }
-/* line 289, style.scss */
+/* line 288, style.scss */
 .navigation__section .main__nav__strip li:first-child {
   margin-left: 0;
 }
-/* line 295, style.scss */
+/* line 294, style.scss */
 .navigation__section .main__nav__strip li.current a {
   color: #e60000;
 }
-/* line 302, style.scss */
+/* line 301, style.scss */
 .navigation__section .main__nav__strip a {
   color: #444;
   font-size: 13px;
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 311, style.scss */
+/* line 310, style.scss */
 .navigation__section .main__nav__strip a:hover {
   color: #e60000;
   text-decoration: underline;
 }
-/* line 316, style.scss */
+/* line 315, style.scss */
 .navigation__section .main__nav__strip a.disabled {
   color: #aeaeae;
   cursor: default;
 }
-/* line 320, style.scss */
+/* line 319, style.scss */
 .navigation__section .main__nav__strip a.disabled:hover {
   color: #aeaeae;
   text-decoration: none;
 }
-/* line 326, style.scss */
+/* line 325, style.scss */
 .navigation__section .main__nav__strip a.home {
   display: inline-block;
   height: 10px;
@@ -273,7 +273,7 @@ body.overlayed #overlay {
   background: url("../i/ico-crown.png") no-repeat;
   background-size: 13px 10px;
 }
-/* line 336, style.scss */
+/* line 335, style.scss */
 .navigation__section .sub__nav__strip {
   position: relative;
   top: -1px;
@@ -282,33 +282,33 @@ body.overlayed #overlay {
   background: #555;
   border-top: 1px dotted #434343;
 }
-/* line 344, style.scss */
+/* line 343, style.scss */
 .navigation__section .sub__nav__strip li {
   float: left;
   margin-left: 28px;
 }
-/* line 348, style.scss */
+/* line 347, style.scss */
 .navigation__section .sub__nav__strip li:first-child {
   margin-left: 14px;
 }
-/* line 353, style.scss */
+/* line 352, style.scss */
 .navigation__section .sub__nav__strip a {
   color: #fff;
   font-size: 10px;
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 363, style.scss */
+/* line 362, style.scss */
 .navigation__section .sub__nav__strip a:hover {
   text-decoration: underline;
 }
-/* line 368, style.scss */
+/* line 367, style.scss */
 .navigation__section .sub__nav__strip .search__form__section {
   float: right;
   padding-top: 8px;
   padding-right: 10px;
 }
-/* line 373, style.scss */
+/* line 372, style.scss */
 .navigation__section .sub__nav__strip .search__form__section input[type='text'] {
   height: 16px;
   width: 180px;
@@ -324,7 +324,7 @@ body.overlayed #overlay {
   background-image: -o-linear-gradient(top, #373737, #363636);
   background-image: linear-gradient(top, #373737, #363636);
 }
-/* line 385, style.scss */
+/* line 384, style.scss */
 .navigation__section .sub__nav__strip .search__form__section input[type='submit'] {
   height: 18px;
   float: left;
@@ -342,13 +342,13 @@ body.overlayed #overlay {
   background-image: -o-linear-gradient(top, #646464, #434343);
   background-image: linear-gradient(top, #646464, #434343);
 }
-/* line 404, style.scss */
+/* line 403, style.scss */
 .navigation__section .shopping__cart__section a {
   background-position: 8px 1px;
   color: #363636;
 }
 
-/* line 412, style.scss */
+/* line 410, style.scss */
 .expand__items {
   height: 22px;
   width: 21px;
@@ -360,44 +360,44 @@ body.overlayed #overlay {
   background-size: 21px 44px;
   cursor: pointer;
 }
-/* line 423, style.scss */
+/* line 421, style.scss */
 .expand__items.opened {
   background-position: left -23px;
 }
-/* line 427, style.scss */
+/* line 425, style.scss */
 .expand__items.inverted {
   background-position: left -23px;
 }
-/* line 430, style.scss */
+/* line 428, style.scss */
 .expand__items.inverted.opened {
   background-position: left top;
 }
 
-/* line 436, style.scss */
+/* line 434, style.scss */
 .sidebar__section {
   width: 260px;
 }
-/* line 439, style.scss */
+/* line 437, style.scss */
 .sidebar__section .menu__section {
   margin-bottom: 7px;
   border-bottom: 1px dotted #a1a1a1;
 }
-/* line 445, style.scss */
+/* line 443, style.scss */
 .sidebar__section .menu__section.hidden .caption__section {
   padding: 0;
   border-bottom: 0;
 }
-/* line 450, style.scss */
+/* line 448, style.scss */
 .sidebar__section .menu__section.hidden .item {
   display: none;
 }
-/* line 455, style.scss */
+/* line 453, style.scss */
 .sidebar__section .menu__section .caption__section {
   margin-bottom: 6px;
   padding-bottom: 6px;
   border-bottom: 1px dotted #a1a1a1;
 }
-/* line 461, style.scss */
+/* line 459, style.scss */
 .sidebar__section .menu__section h2 {
   margin-top: 2px;
   float: left;
@@ -405,18 +405,18 @@ body.overlayed #overlay {
   font-size: 13px;
   text-transform: uppercase;
 }
-/* line 469, style.scss */
+/* line 467, style.scss */
 .sidebar__section .menu__section .filters__section {
   position: relative;
   top: 1px;
   float: right;
 }
-/* line 474, style.scss */
+/* line 472, style.scss */
 .sidebar__section .menu__section .filters__section li {
   float: left;
   margin-left: 1px;
 }
-/* line 479, style.scss */
+/* line 477, style.scss */
 .sidebar__section .menu__section .filters__section a {
   padding: 0 5px;
   border: 1px solid #c4c4c4;
@@ -425,7 +425,7 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 492, style.scss */
+/* line 490, style.scss */
 .sidebar__section .menu__section .filters__section a.current, .sidebar__section .menu__section .filters__section a:hover {
   background: #434343;
   border-color: #434343;
@@ -433,46 +433,78 @@ body.overlayed #overlay {
   cursor: pointer;
   text-decoration: none;
 }
-/* line 500, style.scss */
+/* line 498, style.scss */
 .sidebar__section .menu__section .filters__section a.current {
   cursor: default;
 }
-/* line 506, style.scss */
+/* line 504, style.scss */
 .sidebar__section .menu__section .item {
   display: block;
   clear: both;
 }
-/* line 511, style.scss */
+/* line 514, style.scss */
+.sidebar__section .menu__section .item.podarki {
+  border: 3px solid red;
+  border-bottom: 0;
+}
+/* line 509, style.scss */
+.sidebar__section .menu__section .item.podarki li.title > a {
+  color: red;
+}
+/* line 520, style.scss */
+.sidebar__section .menu__section .item.dom_i_interer, .sidebar__section .menu__section .item.ukrashenija_i_bizhuterija {
+  border-left: 3px solid red;
+  border-right: 3px solid red;
+}
+/* line 509, style.scss */
+.sidebar__section .menu__section .item.dom_i_interer li.title > a, .sidebar__section .menu__section .item.ukrashenija_i_bizhuterija li.title > a {
+  color: red;
+}
+/* line 526, style.scss */
+.sidebar__section .menu__section .item.aksessuary {
+  margin-bottom: 12px;
+  border: 3px solid red;
+  border-top: 0;
+}
+/* line 509, style.scss */
+.sidebar__section .menu__section .item.aksessuary li.title > a {
+  color: red;
+}
+/* line 532, style.scss */
+.sidebar__section .menu__section .item.aksessuary .title {
+  margin-bottom: -3px;
+}
+/* line 538, style.scss */
 .sidebar__section .menu__section .item.current .submenu {
   display: block;
 }
-/* line 515, style.scss */
+/* line 542, style.scss */
 .sidebar__section .menu__section .item.current .title a {
   color: #E60000;
 }
-/* line 521, style.scss */
+/* line 548, style.scss */
 .sidebar__section .menu__section .item.toggled .submenu {
   display: block;
 }
-/* line 526, style.scss */
+/* line 553, style.scss */
 .sidebar__section .menu__section .item .submenu {
   display: none;
 }
-/* line 531, style.scss */
+/* line 558, style.scss */
 .sidebar__section .menu__section .submenu {
   display: block;
 }
-/* line 534, style.scss */
+/* line 561, style.scss */
 .sidebar__section .menu__section .submenu a {
   font-size: 12px;
   font-weight: 400;
 }
-/* line 542, style.scss */
+/* line 569, style.scss */
 .sidebar__section .menu__section li {
   padding-bottom: 10px;
   text-transform: uppercase;
 }
-/* line 546, style.scss */
+/* line 573, style.scss */
 .sidebar__section .menu__section li.title {
   padding-top: 6px;
   padding-left: 9px;
@@ -480,16 +512,20 @@ body.overlayed #overlay {
   font-size: 12px;
   font-weight: bold;
 }
-/* line 556, style.scss */
+/* line 582, style.scss */
+.sidebar__section .menu__section li.title.hny {
+  color: red;
+}
+/* line 586, style.scss */
 .sidebar__section .menu__section li.title a {
   padding-left: 0;
   color: #232323;
 }
-/* line 564, style.scss */
+/* line 594, style.scss */
 .sidebar__section .menu__section li.current a {
   color: #E60000;
 }
-/* line 569, style.scss */
+/* line 599, style.scss */
 .sidebar__section .menu__section li a {
   display: block;
   padding-left: 18px;
@@ -498,18 +534,18 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 581, style.scss */
+/* line 611, style.scss */
 .sidebar__section .menu__section li a:hover {
   color: #e60000;
   text-decoration: underline;
 }
-/* line 591, style.scss */
+/* line 621, style.scss */
 .sidebar__section .subscribe__section {
   padding-top: 54px;
   background: url("../i/subscribe-bg.png") no-repeat center 11px;
   background-size: 43px 30px;
 }
-/* line 597, style.scss */
+/* line 627, style.scss */
 .sidebar__section .subscribe__section label {
   display: block;
   padding-bottom: 10px;
@@ -519,7 +555,7 @@ body.overlayed #overlay {
   line-height: 13px;
   text-align: center;
 }
-/* line 609, style.scss */
+/* line 639, style.scss */
 .sidebar__section .subscribe__section input[type='text'] {
   display: block;
   width: 100%;
@@ -527,7 +563,7 @@ body.overlayed #overlay {
   border: 1px solid #c1c1c1;
   line-height: 20px;
 }
-/* line 616, style.scss */
+/* line 646, style.scss */
 .sidebar__section .subscribe__section input[type='text']:after {
   content: '';
   display: block;
@@ -536,7 +572,7 @@ body.overlayed #overlay {
   margin-top: 2px;
   background: url("../i/subscribe-shadow.png") no-repeat;
 }
-/* line 626, style.scss */
+/* line 656, style.scss */
 .sidebar__section .subscribe__section input[type='submit'] {
   display: block;
   width: 102px;
@@ -551,46 +587,46 @@ body.overlayed #overlay {
   font-style: italic;
 }
 
-/* line 644, style.scss */
+/* line 674, style.scss */
 .carousel__left {
   border: 10px solid #cbcbcc;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 648, style.scss */
+/* line 678, style.scss */
 .carousel__left .carousel__wrapper {
   position: relative;
   height: 404px;
   width: 240px;
   overflow: hidden;
 }
-/* line 656, style.scss */
+/* line 686, style.scss */
 .carousel__left ul {
   width: 20000em;
   position: absolute;
 }
-/* line 661, style.scss */
+/* line 691, style.scss */
 .carousel__left li {
   float: left;
 }
-/* line 665, style.scss */
+/* line 695, style.scss */
 .carousel__left img {
   width: 240px;
 }
 
-/* line 671, style.scss */
+/* line 701, style.scss */
 .content__section {
   width: 680px;
   float: right;
 }
-/* line 675, style.scss */
+/* line 705, style.scss */
 .content__section .caption__section {
   position: relative;
   margin-top: 34px;
   border-top: 1px dotted #a1a1a1;
 }
-/* line 680, style.scss */
+/* line 710, style.scss */
 .content__section .caption__section h2 {
   position: absolute;
   left: 50%;
@@ -598,7 +634,7 @@ body.overlayed #overlay {
   text-indent: -9999px;
 }
 
-/* line 689, style.scss */
+/* line 719, style.scss */
 .dotted__caption {
   margin-bottom: 30px;
   border-bottom: 1px dotted #a1a1a1;
@@ -608,7 +644,7 @@ body.overlayed #overlay {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 702, style.scss */
+/* line 732, style.scss */
 .dotted__caption span {
   position: relative;
   top: 7px;
@@ -616,12 +652,12 @@ body.overlayed #overlay {
   background: #fff;
 }
 
-/* line 711, style.scss */
+/* line 741, style.scss */
 .fake__checkbox input {
   display: none;
 }
 
-/* line 716, style.scss */
+/* line 746, style.scss */
 .delete {
   height: 27px;
   width: 22px;
@@ -634,17 +670,17 @@ body.overlayed #overlay {
   -ms-transition: opacity 0.4s linear;
   transition: opacity 0.4s linear;
 }
-/* line 724, style.scss */
+/* line 754, style.scss */
 .delete:hover {
   opacity: 1;
 }
 
-/* line 730, style.scss */
+/* line 760, style.scss */
 .sale .ico__sale {
   display: block;
 }
 
-/* line 735, style.scss */
+/* line 765, style.scss */
 .ico__sale {
   position: absolute;
   left: -5px;
@@ -655,36 +691,36 @@ body.overlayed #overlay {
   background: url("../i/ico-sale.png") no-repeat;
 }
 
-/* line 745, style.scss */
+/* line 775, style.scss */
 .breadcrumps__section {
   padding-bottom: 20px;
 }
-/* line 748, style.scss */
+/* line 778, style.scss */
 .breadcrumps__section li {
   float: left;
   color: #868686;
   font-size: 15px;
   font-weight: bold;
 }
-/* line 757, style.scss */
+/* line 787, style.scss */
 .breadcrumps__section li.current a {
   color: #e60000;
   text-decoration: underline;
 }
-/* line 763, style.scss */
+/* line 793, style.scss */
 .breadcrumps__section li:last-child {
   color: #555;
   text-transform: uppercase;
 }
-/* line 767, style.scss */
+/* line 797, style.scss */
 .breadcrumps__section li:last-child a {
   color: #555;
 }
-/* line 773, style.scss */
+/* line 803, style.scss */
 .breadcrumps__section li:first-child a {
   margin-left: 0;
 }
-/* line 779, style.scss */
+/* line 809, style.scss */
 .breadcrumps__section a {
   margin: 0 4px;
   color: #868686;
@@ -693,51 +729,51 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 792, style.scss */
+/* line 822, style.scss */
 .breadcrumps__section h2 {
   display: inline;
 }
 
-/* line 797, style.scss */
+/* line 827, style.scss */
 .carousel__main {
   position: relative;
   width: 680px;
   margin-bottom: 28px;
   padding-bottom: 18px;
 }
-/* line 803, style.scss */
+/* line 833, style.scss */
 .carousel__main .carousel__wrapper {
   position: relative;
   width: 680px;
   height: 330px;
   overflow: hidden;
 }
-/* line 810, style.scss */
+/* line 840, style.scss */
 .carousel__main .items {
   width: 20000px;
   position: absolute;
 }
-/* line 815, style.scss */
+/* line 845, style.scss */
 .carousel__main .carousel__item {
   float: left;
   width: 680px;
 }
-/* line 819, style.scss */
+/* line 849, style.scss */
 .carousel__main .carousel__item a {
   display: block;
   height: 330px;
   width: 680px;
 }
-/* line 825, style.scss */
+/* line 855, style.scss */
 .carousel__main .carousel__item img {
   width: 680px;
 }
-/* line 830, style.scss */
+/* line 860, style.scss */
 .carousel__main .jcarousel-clip {
   width: 680px;
   overflow: hidden;
 }
-/* line 835, style.scss */
+/* line 865, style.scss */
 .carousel__main .jcarousel-prev {
   position: absolute;
   left: 0;
@@ -748,19 +784,19 @@ body.overlayed #overlay {
   cursor: pointer;
   visibility: hidden;
 }
-/* line 845, style.scss */
+/* line 875, style.scss */
 .carousel__main .jcarousel-prev:hover {
   background-position: 1px -213px;
 }
-/* line 849, style.scss */
+/* line 879, style.scss */
 .carousel__main .jcarousel-prev.visible {
   visibility: visible;
 }
-/* line 855, style.scss */
+/* line 885, style.scss */
 .carousel__main .jcarousel-prev-disabled {
   visibility: hidden !important;
 }
-/* line 859, style.scss */
+/* line 889, style.scss */
 .carousel__main .jcarousel-next {
   position: absolute;
   right: 0;
@@ -771,34 +807,34 @@ body.overlayed #overlay {
   cursor: pointer;
   visibility: hidden;
 }
-/* line 869, style.scss */
+/* line 899, style.scss */
 .carousel__main .jcarousel-next:hover {
   background-position: right -213px;
 }
-/* line 873, style.scss */
+/* line 903, style.scss */
 .carousel__main .jcarousel-next.visible {
   visibility: visible;
 }
-/* line 879, style.scss */
+/* line 909, style.scss */
 .carousel__main .jcarousel-next-disabled {
   visibility: hidden !important;
 }
-/* line 883, style.scss */
+/* line 913, style.scss */
 .carousel__main .pagination {
   position: absolute;
   bottom: -10px;
   left: 50%;
 }
-/* line 888, style.scss */
+/* line 918, style.scss */
 .carousel__main .pagination li {
   float: left;
   margin-left: 5px;
 }
-/* line 892, style.scss */
+/* line 922, style.scss */
 .carousel__main .pagination li.first {
   margin-left: 0;
 }
-/* line 896, style.scss */
+/* line 926, style.scss */
 .carousel__main .pagination li a {
   display: block;
   height: 11px;
@@ -806,45 +842,45 @@ body.overlayed #overlay {
   background: url("../i/carousel-controls-spr.png") no-repeat;
   text-decoration: none;
 }
-/* line 903, style.scss */
+/* line 933, style.scss */
 .carousel__main .pagination li a.current {
   position: relative;
   top: 1px;
   background-position: right bottom;
 }
 
-/* line 917, style.scss */
+/* line 947, style.scss */
 .blogs__section ul {
   padding-top: 18px;
 }
-/* line 921, style.scss */
+/* line 951, style.scss */
 .blogs__section li {
   float: left;
   width: 212px;
   margin-right: 20px;
   margin-bottom: 36px;
 }
-/* line 927, style.scss */
+/* line 957, style.scss */
 .blogs__section li:nth-child(3n+3) {
   margin-right: 0;
 }
-/* line 932, style.scss */
+/* line 962, style.scss */
 .blogs__section li.special .img__box {
   border: 3px solid #d50100;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 937, style.scss */
+/* line 967, style.scss */
 .blogs__section li.special .caption, .blogs__section li.special a:hover .caption {
   color: #d50100;
 }
-/* line 943, style.scss */
+/* line 973, style.scss */
 .blogs__section li a {
   display: block;
   text-decoration: none;
 }
-/* line 948, style.scss */
+/* line 978, style.scss */
 .blogs__section li a .img__box {
   display: block;
   height: 136px;
@@ -854,13 +890,13 @@ body.overlayed #overlay {
   background-repeat: no-repeat;
   overflow: hidden;
 }
-/* line 958, style.scss */
+/* line 988, style.scss */
 .blogs__section li a img {
   position: absolute;
   top: 50%;
   width: 212px;
 }
-/* line 964, style.scss */
+/* line 994, style.scss */
 .blogs__section li a .caption {
   color: #999;
   font-size: 14px;
@@ -869,7 +905,7 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 977, style.scss */
+/* line 1007, style.scss */
 .blogs__section li a .text {
   display: block;
   padding-top: 6px;
@@ -879,43 +915,43 @@ body.overlayed #overlay {
   font-weight: 400;
   line-height: 14px;
 }
-/* line 989, style.scss */
+/* line 1019, style.scss */
 .blogs__section li a .date {
   color: #959494;
   font-size: 12px;
   font-style: italic;
 }
-/* line 997, style.scss */
+/* line 1027, style.scss */
 .blogs__section li a:hover .caption {
   color: #404040;
   text-decoration: underline;
 }
 
-/* line 1007, style.scss */
+/* line 1037, style.scss */
 .post__page {
   position: relative;
   min-height: 1300px;
 }
-/* line 1011, style.scss */
+/* line 1041, style.scss */
 .post__page h2 {
   padding-bottom: 14px;
   color: #4b4b4b;
   font-size: 21px;
   text-transform: uppercase;
 }
-/* line 1018, style.scss */
+/* line 1048, style.scss */
 .post__page .blog__img {
   margin-bottom: 10px;
   border: 1px solid #b2b2b2;
 }
-/* line 1023, style.scss */
+/* line 1053, style.scss */
 .post__page p {
   margin-bottom: 16px;
   color: #333;
   font-size: 14px;
   line-height: 17px;
 }
-/* line 1029, style.scss */
+/* line 1059, style.scss */
 .post__page p .img__description {
   display: block;
   margin-top: -4px;
@@ -924,14 +960,14 @@ body.overlayed #overlay {
   font-style: italic;
   text-align: left;
 }
-/* line 1039, style.scss */
+/* line 1069, style.scss */
 .post__page p .img__description img {
   display: block;
   max-width: 680px;
   margin-bottom: 0;
   border: 1px solid #B2B2B2;
 }
-/* line 1049, style.scss */
+/* line 1079, style.scss */
 .post__page h3 {
   margin-bottom: 16px;
   color: #333;
@@ -939,7 +975,7 @@ body.overlayed #overlay {
   font-weight: bold;
   line-height: 17px;
 }
-/* line 1059, style.scss */
+/* line 1089, style.scss */
 .post__page blockquote {
   position: relative;
   margin-bottom: 20px;
@@ -954,7 +990,7 @@ body.overlayed #overlay {
   font-weight: bold;
   text-align: center;
 }
-/* line 1077, style.scss */
+/* line 1107, style.scss */
 .post__page blockquote:before {
   position: absolute;
   left: 10px;
@@ -964,7 +1000,7 @@ body.overlayed #overlay {
   width: 15px;
   background: url(../i/flag.png) no-repeat;
 }
-/* line 1088, style.scss */
+/* line 1118, style.scss */
 .post__page .tags__section {
   float: left;
   margin-top: 30px;
@@ -975,44 +1011,44 @@ body.overlayed #overlay {
   font-size: 12px;
   font-style: italic;
 }
-/* line 1100, style.scss */
+/* line 1130, style.scss */
 .post__page .tags__section a {
   color: #959494;
   text-decoration: none;
 }
-/* line 1104, style.scss */
+/* line 1134, style.scss */
 .post__page .tags__section a:hover {
   color: #e60000;
   text-decoration: underline;
 }
-/* line 1111, style.scss */
+/* line 1141, style.scss */
 .post__page .socials__section {
   padding-bottom: 16px;
 }
-/* line 1114, style.scss */
+/* line 1144, style.scss */
 .post__page .socials__section li {
   float: left;
 }
-/* line 1117, style.scss */
+/* line 1147, style.scss */
 .post__page .socials__section li.fb {
   margin-right: 20px;
 }
-/* line 1123, style.scss */
+/* line 1153, style.scss */
 .post__page .post__navigation {
   border-top: 1px dotted #a1a1a1;
 }
-/* line 1126, style.scss */
+/* line 1156, style.scss */
 .post__page .post__navigation li {
   display: table;
   float: left;
   width: 340px;
   margin: 14px 0;
 }
-/* line 1132, style.scss */
+/* line 1162, style.scss */
 .post__page .post__navigation li.next {
   float: right;
 }
-/* line 1139, style.scss */
+/* line 1169, style.scss */
 .post__page .post__navigation a {
   display: table-cell;
   height: 30px;
@@ -1029,36 +1065,36 @@ body.overlayed #overlay {
   text-transform: uppercase;
   vertical-align: middle;
 }
-/* line 1161, style.scss */
+/* line 1191, style.scss */
 .post__page .post__navigation a:hover {
   background-position: left -156px;
   color: #636363;
 }
-/* line 1166, style.scss */
+/* line 1196, style.scss */
 .post__page .post__navigation a.next {
   background: url("../i/post-navigation-right.png") no-repeat right top;
   padding-left: 0;
   padding-right: 42px;
   text-align: right;
 }
-/* line 1174, style.scss */
+/* line 1204, style.scss */
 .post__page .post__navigation a.next:hover {
   background-position: right -156px;
 }
-/* line 1182, style.scss */
+/* line 1212, style.scss */
 .post__page .blogs__section {
   padding-top: 20px;
   border-top: 1px dotted #a1a1a1;
 }
 
-/* line 1191, style.scss */
+/* line 1221, style.scss */
 .shop__item__section .gallery {
   position: relative;
   width: 420px;
   float: left;
   z-index: 5;
 }
-/* line 1197, style.scss */
+/* line 1227, style.scss */
 .shop__item__section .gallery .full__size__section {
   position: relative;
   height: 480px;
@@ -1066,7 +1102,7 @@ body.overlayed #overlay {
   float: left;
   background: white url("../i/spinner.gif") no-repeat center center;
 }
-/* line 1204, style.scss */
+/* line 1234, style.scss */
 .shop__item__section .gallery .full__size__section img {
   max-height: 100%;
   max-width: 100%;
@@ -1079,22 +1115,22 @@ body.overlayed #overlay {
   -ms-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
 }
-/* line 1212, style.scss */
+/* line 1242, style.scss */
 .shop__item__section .gallery .full__size__section img.loaded {
   opacity: 1;
 }
-/* line 1219, style.scss */
+/* line 1249, style.scss */
 .shop__item__section .gallery .previews__section {
   float: left;
   margin-left: 14px;
 }
-/* line 1223, style.scss */
+/* line 1253, style.scss */
 .shop__item__section .gallery .previews__section li {
   height: 68px;
   width: 50px;
   margin-bottom: 10px;
 }
-/* line 1228, style.scss */
+/* line 1258, style.scss */
 .shop__item__section .gallery .previews__section li a {
   opacity: .5;
   -webkit-transition: all 0.2s linear;
@@ -1103,16 +1139,16 @@ body.overlayed #overlay {
   -ms-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 1232, style.scss */
+/* line 1262, style.scss */
 .shop__item__section .gallery .previews__section li a.current, .shop__item__section .gallery .previews__section li a:hover {
   opacity: 1;
 }
-/* line 1236, style.scss */
+/* line 1266, style.scss */
 .shop__item__section .gallery .previews__section li a img {
   max-width: 50px;
   border: 1px solid #B2B2B2;
 }
-/* line 1244, style.scss */
+/* line 1274, style.scss */
 .shop__item__section .gallery .popup__full__img {
   position: absolute;
   top: -2px;
@@ -1127,34 +1163,34 @@ body.overlayed #overlay {
   visibility: hidden;
   z-index: 5;
 }
-/* line 1258, style.scss */
+/* line 1288, style.scss */
 .shop__item__section .gallery .popup__full__img.visible {
   opacity: 1;
   visibility: visible;
 }
-/* line 1263, style.scss */
+/* line 1293, style.scss */
 .shop__item__section .gallery .popup__full__img img {
   position: absolute;
   top: 0;
   left: 0;
 }
-/* line 1271, style.scss */
+/* line 1301, style.scss */
 .shop__item__section .shop__information__section {
   width: 240px;
   float: left;
 }
 
-/* line 1278, style.scss */
+/* line 1308, style.scss */
 .shop__information__section .row {
   padding: 16px 0;
   border-bottom: 1px dotted #a1a1a1;
   clear: both;
 }
-/* line 1283, style.scss */
+/* line 1313, style.scss */
 .shop__information__section .row.color {
   padding-bottom: 10px;
 }
-/* line 1287, style.scss */
+/* line 1317, style.scss */
 .shop__information__section .row dt {
   float: left;
   width: 80px;
@@ -1164,7 +1200,7 @@ body.overlayed #overlay {
   text-align: left;
   text-transform: uppercase;
 }
-/* line 1301, style.scss */
+/* line 1331, style.scss */
 .shop__information__section .row dd {
   width: 160px;
   float: left;
@@ -1172,49 +1208,49 @@ body.overlayed #overlay {
   font-size: 12px;
   line-height: 14px;
 }
-/* line 1310, style.scss */
+/* line 1340, style.scss */
 .shop__information__section .row dd.consist {
   text-transform: uppercase;
 }
-/* line 1316, style.scss */
+/* line 1346, style.scss */
 .shop__information__section .row.tags a {
   color: #959494;
   text-decoration: none;
 }
-/* line 1320, style.scss */
+/* line 1350, style.scss */
 .shop__information__section .row.tags a:hover {
   color: #E60000;
   text-decoration: underline;
 }
-/* line 1327, style.scss */
+/* line 1357, style.scss */
 .shop__information__section .row.description__section {
   padding-top: 0;
   color: #555;
   font-size: 13px;
   line-height: 19px;
 }
-/* line 1335, style.scss */
+/* line 1365, style.scss */
 .shop__information__section .row.description__section p {
   margin-bottom: 20px;
 }
-/* line 1339, style.scss */
+/* line 1369, style.scss */
 .shop__information__section .row.description__section a {
   color: #555;
   font-weight: bold;
 }
-/* line 1345, style.scss */
+/* line 1375, style.scss */
 .shop__information__section .row.size {
   padding: 0;
 }
-/* line 1348, style.scss */
+/* line 1378, style.scss */
 .shop__information__section .row.size dt {
   padding: 16px 0;
 }
-/* line 1354, style.scss */
+/* line 1384, style.scss */
 .shop__information__section .row .sizes__section {
   padding-top: 10px;
 }
-/* line 1357, style.scss */
+/* line 1387, style.scss */
 .shop__information__section .row .sizes__section li {
   margin-left: 4px;
   margin-bottom: 4px;
@@ -1230,24 +1266,24 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 1368, style.scss */
+/* line 1398, style.scss */
 .shop__information__section .row .sizes__section li:first-child {
   margin-left: 0;
 }
-/* line 1372, style.scss */
+/* line 1402, style.scss */
 .shop__information__section .row .sizes__section li:hover, .shop__information__section .row .sizes__section li.current {
   border-color: #323232;
   color: #323232;
 }
-/* line 1377, style.scss */
+/* line 1407, style.scss */
 .shop__information__section .row .sizes__section li.current {
   cursor: default;
 }
-/* line 1383, style.scss */
+/* line 1413, style.scss */
 .shop__information__section .row .color {
   margin: -9px 0;
 }
-/* line 1386, style.scss */
+/* line 1416, style.scss */
 .shop__information__section .row .color li {
   height: 26px;
   width: 26px;
@@ -1256,15 +1292,15 @@ body.overlayed #overlay {
   border: 1px solid #dadada;
   cursor: pointer;
 }
-/* line 1394, style.scss */
+/* line 1424, style.scss */
 .shop__information__section .row .color li.selected {
   border-color: #E60000;
 }
-/* line 1398, style.scss */
+/* line 1428, style.scss */
 .shop__information__section .row .color li input {
   display: none;
 }
-/* line 1404, style.scss */
+/* line 1434, style.scss */
 .shop__information__section .row .price {
   padding-right: 16px;
   float: left;
@@ -1273,29 +1309,29 @@ body.overlayed #overlay {
   color: #434343;
   font-size: 20px;
 }
-/* line 1412, style.scss */
+/* line 1442, style.scss */
 .shop__information__section .row .price s {
   margin-right: 6px;
   color: #E60000;
   font-size: 18px;
 }
 
-/* line 1422, style.scss */
+/* line 1452, style.scss */
 .socials__section {
   clear: both;
 }
-/* line 1424, style.scss */
+/* line 1454, style.scss */
 .socials__section li {
   margin-right: 8px;
   float: left;
 }
 
-/* line 1431, style.scss */
+/* line 1461, style.scss */
 .submit__form {
   cursor: pointer;
 }
 
-/* line 1434, style.scss */
+/* line 1464, style.scss */
 .submit__form, .checkout__button {
   height: 33px;
   width: 174px;
@@ -1311,17 +1347,17 @@ body.overlayed #overlay {
   text-transform: uppercase;
 }
 
-/* line 1453, style.scss */
+/* line 1483, style.scss */
 .fiters__section {
   padding-top: 12px;
   padding-bottom: 12px;
   border-top: 1px dotted #A1A1A1;
 }
-/* line 1458, style.scss */
+/* line 1488, style.scss */
 .fiters__section li {
   float: left;
 }
-/* line 1462, style.scss */
+/* line 1492, style.scss */
 .fiters__section .title {
   margin-top: 1px;
   margin-right: 6px;
@@ -1329,11 +1365,11 @@ body.overlayed #overlay {
   font-size: 10px;
   text-transform: uppercase;
 }
-/* line 1472, style.scss */
+/* line 1502, style.scss */
 .fiters__section.admin .title {
   margin-top: -2px;
 }
-/* line 1477, style.scss */
+/* line 1507, style.scss */
 .fiters__section .price__filter a, .fiters__section .new__filter a {
   position: relative;
   top: -5px;
@@ -1345,38 +1381,38 @@ body.overlayed #overlay {
   text-align: center;
   text-decoration: none;
 }
-/* line 1492, style.scss */
+/* line 1522, style.scss */
 .fiters__section .price__filter a:hover, .fiters__section .price__filter a.current, .fiters__section .new__filter a:hover, .fiters__section .new__filter a.current {
   background: #434343;
   border-color: #434343;
   color: #fff;
 }
-/* line 1500, style.scss */
+/* line 1530, style.scss */
 .fiters__section .price__slider {
   float: left;
   color: #434343;
   font-size: 12px;
 }
-/* line 1507, style.scss */
+/* line 1537, style.scss */
 .fiters__section .price__slider .label {
   margin-right: 10px;
   width: 144px;
 }
-/* line 1511, style.scss */
+/* line 1541, style.scss */
 .fiters__section .price__slider .label:last-child {
   margin-right: 0;
 }
-/* line 1515, style.scss */
+/* line 1545, style.scss */
 .fiters__section .price__slider .label.min__price {
   text-align: right;
 }
-/* line 1519, style.scss */
+/* line 1549, style.scss */
 .fiters__section .price__slider .label span {
   padding-right: 10px;
   background: url("../i/ico-rub-small.png") no-repeat right 1px;
   background-size: 7px 10px;
 }
-/* line 1527, style.scss */
+/* line 1557, style.scss */
 .fiters__section .price__slider .slider {
   position: relative;
   margin-top: 5px;
@@ -1385,13 +1421,13 @@ body.overlayed #overlay {
   width: 208px;
   background: #a2a2a2;
 }
-/* line 1536, style.scss */
+/* line 1566, style.scss */
 .fiters__section .price__slider .ui-slider-range {
   position: absolute;
   height: 3px;
   background: #434343;
 }
-/* line 1542, style.scss */
+/* line 1572, style.scss */
 .fiters__section .price__slider .ui-slider-handle {
   position: absolute;
   top: -2px;
@@ -1401,23 +1437,23 @@ body.overlayed #overlay {
   background: #434343;
   border-radius: 5px;
 }
-/* line 1553, style.scss */
+/* line 1583, style.scss */
 .fiters__section .new__filter {
   float: right;
 }
 
-/* line 1559, style.scss */
+/* line 1589, style.scss */
 .shop__items__list {
   width: 680px;
   float: right;
 }
-/* line 1563, style.scss */
+/* line 1593, style.scss */
 .shop__items__list .ico__sale {
   left: auto;
   right: 3px;
   top: 3px;
 }
-/* line 1571, style.scss */
+/* line 1601, style.scss */
 .shop__items__list .list__section li {
   position: relative;
   margin-right: 22px;
@@ -1426,23 +1462,23 @@ body.overlayed #overlay {
   float: left;
   color: #666;
 }
-/* line 1579, style.scss */
+/* line 1609, style.scss */
 .shop__items__list .list__section li.hidden {
   display: none;
 }
-/* line 1584, style.scss */
+/* line 1614, style.scss */
 .shop__items__list .list__section li.active .shop__information__section {
   display: block;
 }
-/* line 1589, style.scss */
+/* line 1619, style.scss */
 .shop__items__list .list__section li.not__active {
   opacity: .5;
 }
-/* line 1593, style.scss */
+/* line 1623, style.scss */
 .shop__items__list .list__section li:nth-of-type(4n) {
   margin-right: 0;
 }
-/* line 1597, style.scss */
+/* line 1627, style.scss */
 .shop__items__list .list__section li.scroll__helper {
   margin-bottom: 0;
   height: 16px;
@@ -1452,53 +1488,53 @@ body.overlayed #overlay {
   clear: both;
   visibility: visible;
 }
-/* line 1607, style.scss */
+/* line 1637, style.scss */
 .shop__items__list .list__section li .preview__ico {
   position: absolute !important;
   top: 181px;
   right: 6px;
 }
-/* line 1613, style.scss */
+/* line 1643, style.scss */
 .shop__items__list .list__section li a {
   color: #666;
   font-size: 12px;
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 1623, style.scss */
+/* line 1653, style.scss */
 .shop__items__list .list__section li a span {
   display: block;
 }
-/* line 1626, style.scss */
+/* line 1656, style.scss */
 .shop__items__list .list__section li a span.articol {
   color: #DE1500;
   clear: both;
 }
-/* line 1631, style.scss */
+/* line 1661, style.scss */
 .shop__items__list .list__section li a span.brand {
   clear: both;
 }
-/* line 1635, style.scss */
+/* line 1665, style.scss */
 .shop__items__list .list__section li a span.item__caption {
   padding: 2px 0;
   clear: both;
   font-weight: bold;
 }
-/* line 1641, style.scss */
+/* line 1671, style.scss */
 .shop__items__list .list__section li a span.price {
   padding-right: 10px;
   display: inline-block;
   background: url("../i/ico-rub-small.png") no-repeat right center;
   background-size: 7px 10px;
 }
-/* line 1650, style.scss */
+/* line 1680, style.scss */
 .shop__items__list .list__section li .controls {
   position: relative;
   margin-bottom: 4px;
   cursor: pointer;
   z-index: 2;
 }
-/* line 1656, style.scss */
+/* line 1686, style.scss */
 .shop__items__list .list__section li .controls.active {
   float: left;
   height: 16px;
@@ -1507,14 +1543,14 @@ body.overlayed #overlay {
   background: url("../i/ico-visible.png") no-repeat;
   background-size: 24px 57px;
 }
-/* line 1665, style.scss */
+/* line 1695, style.scss */
 .shop__items__list .list__section li .controls.delete {
   float: right;
   height: 20px;
   width: 20px;
   background: url("../i/ico-delete.png") no-repeat;
 }
-/* line 1673, style.scss */
+/* line 1703, style.scss */
 .shop__items__list .list__section li .img__section {
   position: relative;
   height: 206px;
@@ -1522,16 +1558,16 @@ body.overlayed #overlay {
   margin-bottom: 4px;
   overflow: hidden;
 }
-/* line 1680, style.scss */
+/* line 1710, style.scss */
 .shop__items__list .list__section li .img__section img {
   max-width: 152px;
   border: 1px solid #b2b2b2;
 }
-/* line 1686, style.scss */
+/* line 1716, style.scss */
 .shop__items__list .list__section li s {
   color: #E60000;
 }
-/* line 1691, style.scss */
+/* line 1721, style.scss */
 .shop__items__list .list__section .shop__information__section {
   position: absolute;
   top: -29px;
@@ -1542,28 +1578,28 @@ body.overlayed #overlay {
   border: 1px solid #818181;
   z-index: 3;
 }
-/* line 1701, style.scss */
+/* line 1731, style.scss */
 .shop__items__list .list__section .shop__information__section.right {
   left: 183px;
 }
-/* line 1704, style.scss */
+/* line 1734, style.scss */
 .shop__items__list .list__section .shop__information__section.right:after {
   left: -22px;
 }
-/* line 1709, style.scss */
+/* line 1739, style.scss */
 .shop__items__list .list__section .shop__information__section.left {
   left: -182px;
 }
-/* line 1712, style.scss */
+/* line 1742, style.scss */
 .shop__items__list .list__section .shop__information__section.left:after {
   right: -22px;
 }
-/* line 1717, style.scss */
+/* line 1747, style.scss */
 .shop__items__list .list__section .shop__information__section .helper {
   padding: 14px 8px 14px;
   overflow: hidden;
 }
-/* line 1721, style.scss */
+/* line 1751, style.scss */
 .shop__items__list .list__section .shop__information__section .helper:before {
   position: absolute;
   left: 0;
@@ -1574,7 +1610,7 @@ body.overlayed #overlay {
   content: '';
   z-index: 2;
 }
-/* line 1733, style.scss */
+/* line 1763, style.scss */
 .shop__items__list .list__section .shop__information__section:after {
   position: absolute;
   top: 196px;
@@ -1591,35 +1627,35 @@ body.overlayed #overlay {
   transform: rotate(45deg);
   z-index: 1;
 }
-/* line 1750, style.scss */
+/* line 1780, style.scss */
 .shop__items__list .list__section .shop__information__section .row {
   position: relative;
   z-index: 2;
 }
-/* line 1755, style.scss */
+/* line 1785, style.scss */
 .shop__items__list .list__section .shop__information__section dt {
   width: 58px;
 }
-/* line 1759, style.scss */
+/* line 1789, style.scss */
 .shop__items__list .list__section .shop__information__section dd {
   width: 158px;
 }
 
-/* line 1767, style.scss */
+/* line 1797, style.scss */
 .shop__description {
   position: relative;
 }
-/* line 1770, style.scss */
+/* line 1800, style.scss */
 .shop__description .expand__items {
   position: absolute;
   top: -32px;
   right: 0;
 }
-/* line 1777, style.scss */
+/* line 1807, style.scss */
 .shop__description.active h4 {
   display: block;
 }
-/* line 1782, style.scss */
+/* line 1812, style.scss */
 .shop__description h4 {
   padding-bottom: 10px;
   display: none;
@@ -1627,12 +1663,12 @@ body.overlayed #overlay {
   font-size: 10px;
 }
 
-/* line 1793, style.scss */
+/* line 1823, style.scss */
 .cart__items__list__section {
   position: relative;
   overflow: hidden;
 }
-/* line 1797, style.scss */
+/* line 1827, style.scss */
 .cart__items__list__section .caption {
   margin-bottom: 20px;
   color: #868686;
@@ -1646,19 +1682,19 @@ body.overlayed #overlay {
   -ms-transition: color 0.4s linear;
   transition: color 0.4s linear;
 }
-/* line 1808, style.scss */
+/* line 1838, style.scss */
 .cart__items__list__section .caption.light__gray {
   color: #c8c8c8;
 }
-/* line 1812, style.scss */
+/* line 1842, style.scss */
 .cart__items__list__section .caption.dark__gray {
   color: #434343;
 }
-/* line 1819, style.scss */
+/* line 1849, style.scss */
 .cart__items__list__section .items__list.hidden {
   display: none;
 }
-/* line 1823, style.scss */
+/* line 1853, style.scss */
 .cart__items__list__section .items__list li {
   height: 90px;
   width: 330px;
@@ -1668,11 +1704,11 @@ body.overlayed #overlay {
   border: 1px solid #cbcbcb;
   background: #f0f0f0;
 }
-/* line 1832, style.scss */
+/* line 1862, style.scss */
 .cart__items__list__section .items__list li:nth-child(2n) {
   margin-right: 0;
 }
-/* line 1837, style.scss */
+/* line 1867, style.scss */
 .cart__items__list__section .items__list li .img__section {
   position: relative;
   height: 68px;
@@ -1681,18 +1717,18 @@ body.overlayed #overlay {
   margin-top: 10px;
   margin-left: 12px;
 }
-/* line 1845, style.scss */
+/* line 1875, style.scss */
 .cart__items__list__section .items__list li .img__section img {
   height: auto;
   max-width: 100%;
 }
-/* line 1851, style.scss */
+/* line 1881, style.scss */
 .cart__items__list__section .items__list li .description__section {
   width: 126px;
   float: left;
   margin-left: 10px;
 }
-/* line 1856, style.scss */
+/* line 1886, style.scss */
 .cart__items__list__section .items__list li .description__section h3 {
   padding-top: 9px;
   padding-bottom: 2px;
@@ -1700,32 +1736,32 @@ body.overlayed #overlay {
   font-size: 12px;
   text-transform: uppercase;
 }
-/* line 1865, style.scss */
+/* line 1895, style.scss */
 .cart__items__list__section .items__list li .description__section h3 a {
   color: #666;
   text-decoration: none;
 }
-/* line 1871, style.scss */
+/* line 1901, style.scss */
 .cart__items__list__section .items__list li .description__section h4 {
   padding-bottom: 6px;
   color: #464646;
   font-size: 12px;
   font-weight: bold;
 }
-/* line 1880, style.scss */
+/* line 1910, style.scss */
 .cart__items__list__section .items__list li .description__section .size {
   color: #666;
   font-size: 12px;
   text-transform: uppercase;
 }
-/* line 1887, style.scss */
+/* line 1917, style.scss */
 .cart__items__list__section .items__list li .description__section .size .color {
   height: 14px;
   width: 14px;
   margin: -3px 0 -3px 4px;
   display: inline-block;
 }
-/* line 1896, style.scss */
+/* line 1926, style.scss */
 .cart__items__list__section .items__list li .info__section {
   width: 122px;
   float: right;
@@ -1733,13 +1769,13 @@ body.overlayed #overlay {
   margin-right: 10px;
   text-align: right;
 }
-/* line 1903, style.scss */
+/* line 1933, style.scss */
 .cart__items__list__section .items__list li .info__section .delete {
   position: relative;
   top: 6px;
   margin-right: 4px;
 }
-/* line 1909, style.scss */
+/* line 1939, style.scss */
 .cart__items__list__section .items__list li .info__section input[type='number'] {
   height: 20px;
   width: 44px;
@@ -1750,7 +1786,7 @@ body.overlayed #overlay {
   font-weight: bold;
   text-align: center;
 }
-/* line 1924, style.scss */
+/* line 1954, style.scss */
 .cart__items__list__section .items__list li .info__section .price {
   margin-top: 12px;
   padding-right: 16px;
@@ -1761,11 +1797,11 @@ body.overlayed #overlay {
   font-size: 20px;
   text-align: right;
 }
-/* line 1936, style.scss */
+/* line 1966, style.scss */
 .cart__items__list__section .items__list li .info__section .price s {
   color: #e60000;
 }
-/* line 1944, style.scss */
+/* line 1974, style.scss */
 .cart__items__list__section .price__section {
   clear: both;
   background: #f2ffea;
@@ -1773,16 +1809,16 @@ body.overlayed #overlay {
   border-bottom: 1px dotted #a1a1a1;
   line-height: 52px;
 }
-/* line 1951, style.scss */
+/* line 1981, style.scss */
 .cart__items__list__section .price__section.hidden {
   display: none;
 }
-/* line 1955, style.scss */
+/* line 1985, style.scss */
 .cart__items__list__section .price__section.total {
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
 }
-/* line 1960, style.scss */
+/* line 1990, style.scss */
 .cart__items__list__section .price__section h3 {
   float: left;
   margin-left: 4px;
@@ -1791,7 +1827,7 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 1971, style.scss */
+/* line 2001, style.scss */
 .cart__items__list__section .price__section .summ__section {
   float: right;
   margin-right: 4px;
@@ -1801,28 +1837,28 @@ body.overlayed #overlay {
   font-size: 32px;
   font-weight: bold;
 }
-/* line 1984, style.scss */
+/* line 2014, style.scss */
 .cart__items__list__section .checkout__button {
   margin-top: 18px;
 }
-/* line 1990, style.scss */
+/* line 2020, style.scss */
 .cart__items__list__section .submit___section.hidden {
   display: none;
 }
-/* line 1994, style.scss */
+/* line 2024, style.scss */
 .cart__items__list__section .submit___section .caption {
   margin-bottom: 10px;
 }
-/* line 1998, style.scss */
+/* line 2028, style.scss */
 .cart__items__list__section .submit___section .item__block {
   padding-top: 22px;
   padding-bottom: 10px;
 }
-/* line 2002, style.scss */
+/* line 2032, style.scss */
 .cart__items__list__section .submit___section .item__block:last-child {
   border-bottom: 0;
 }
-/* line 2007, style.scss */
+/* line 2037, style.scss */
 .cart__items__list__section .submit___section .item__block {
   position: relative;
   opacity: 1;
@@ -1833,19 +1869,19 @@ body.overlayed #overlay {
   transition: all 0.4s linear;
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 2013, style.scss */
+/* line 2043, style.scss */
 .cart__items__list__section .submit___section .item__block .caption {
   color: #434343;
 }
-/* line 2017, style.scss */
+/* line 2047, style.scss */
 .cart__items__list__section .submit___section .item__block.hidden {
   display: none;
 }
-/* line 2021, style.scss */
+/* line 2051, style.scss */
 .cart__items__list__section .submit___section .item__block.disabled {
   opacity: .5;
 }
-/* line 2024, style.scss */
+/* line 2054, style.scss */
 .cart__items__list__section .submit___section .item__block.disabled .custom-select, .cart__items__list__section .submit___section .item__block.disabled .custom-text, .cart__items__list__section .submit___section .item__block.disabled .pickup__checkbox, .cart__items__list__section .submit___section .item__block.disabled label, .cart__items__list__section .submit___section .item__block.disabled .types__list li {
   cursor: default;
   -webkit-user-select: none;
@@ -1853,7 +1889,7 @@ body.overlayed #overlay {
   -ms-user-select: none;
   user-select: none;
 }
-/* line 2029, style.scss */
+/* line 2059, style.scss */
 .cart__items__list__section .submit___section .item__block input {
   border: 1px solid #c1c1c1;
   -webkit-transition: all 0.4s linear;
@@ -1862,16 +1898,16 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2032, style.scss */
+/* line 2062, style.scss */
 .cart__items__list__section .submit___section .item__block input.error {
   border-color: #e60000;
 }
-/* line 2038, style.scss */
+/* line 2068, style.scss */
 .cart__items__list__section .submit___section .clear {
   height: 1px;
   background: #d9d9d9;
 }
-/* line 2043, style.scss */
+/* line 2073, style.scss */
 .cart__items__list__section .submit___section .message {
   color: #e60000;
   font-family: "PT Sans";
@@ -1886,33 +1922,33 @@ body.overlayed #overlay {
   -ms-transition: opacity 0.4s linear;
   transition: opacity 0.4s linear;
 }
-/* line 2057, style.scss */
+/* line 2087, style.scss */
 .cart__items__list__section .submit___section .message.active {
   opacity: 1;
   visibility: visible;
 }
-/* line 2063, style.scss */
+/* line 2093, style.scss */
 .cart__items__list__section .submit___section .left__section {
   width: 452px;
   float: left;
   background: url("../i/gray-delimiter.png") no-repeat right center;
 }
-/* line 2069, style.scss */
+/* line 2099, style.scss */
 .cart__items__list__section .submit___section .right__section {
   width: 204px;
   float: left;
   margin-left: 24px;
 }
-/* line 2076, style.scss */
+/* line 2106, style.scss */
 .cart__items__list__section .submit___section .register ul {
   float: left;
   margin-right: 10px;
 }
-/* line 2081, style.scss */
+/* line 2111, style.scss */
 .cart__items__list__section .submit___section .register li {
   margin-bottom: 8px;
 }
-/* line 2085, style.scss */
+/* line 2115, style.scss */
 .cart__items__list__section .submit___section .register input {
   width: 200px;
   line-height: 20px;
@@ -1935,21 +1971,21 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2091, style.scss */
+/* line 2121, style.scss */
 .cart__items__list__section .submit___section .register .message {
   width: 410px;
   clear: both;
 }
-/* line 2097, style.scss */
+/* line 2127, style.scss */
 .cart__items__list__section .submit___section .login {
   float: right;
   text-align: center;
 }
-/* line 2101, style.scss */
+/* line 2131, style.scss */
 .cart__items__list__section .submit___section .login .caption {
   float: left;
 }
-/* line 2105, style.scss */
+/* line 2135, style.scss */
 .cart__items__list__section .submit___section .login .forgot {
   float: right;
   margin-top: 4px;
@@ -1958,20 +1994,20 @@ body.overlayed #overlay {
   font-size: 10px;
   text-transform: uppercase;
 }
-/* line 2117, style.scss */
+/* line 2147, style.scss */
 .cart__items__list__section .submit___section .login .forgot:hover {
   text-decoration: none;
 }
-/* line 2122, style.scss */
+/* line 2152, style.scss */
 .cart__items__list__section .submit___section .login ul {
   display: block;
   clear: both;
 }
-/* line 2127, style.scss */
+/* line 2157, style.scss */
 .cart__items__list__section .submit___section .login li {
   margin-bottom: 8px;
 }
-/* line 2131, style.scss */
+/* line 2161, style.scss */
 .cart__items__list__section .submit___section .login input {
   height: 20px;
   width: 200px;
@@ -1995,11 +2031,11 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2139, style.scss */
+/* line 2169, style.scss */
 .cart__items__list__section .submit___section .login input[type='radio'] {
   border: none;
 }
-/* line 2143, style.scss */
+/* line 2173, style.scss */
 .cart__items__list__section .submit___section .login .submit__form {
   height: auto;
   width: auto;
@@ -2020,11 +2056,11 @@ body.overlayed #overlay {
   -ms-transition: background 0.4s linear;
   transition: background 0.4s linear;
 }
-/* line 2161, style.scss */
+/* line 2191, style.scss */
 .cart__items__list__section .submit___section .login .submit__form:hover {
   background: #444;
 }
-/* line 2168, style.scss */
+/* line 2198, style.scss */
 .cart__items__list__section .submit___section .address {
   height: 146px;
   -webkit-transition: all 0.4s linear;
@@ -2033,26 +2069,26 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2172, style.scss */
+/* line 2202, style.scss */
 .cart__items__list__section .submit___section .address.hidden {
   margin-left: -458px;
   display: block;
 }
-/* line 2177, style.scss */
+/* line 2207, style.scss */
 .cart__items__list__section .submit___section .address li {
   margin-bottom: 12px;
 }
-/* line 2181, style.scss */
+/* line 2211, style.scss */
 .cart__items__list__section .submit___section .address .custom-select {
   max-width: 140px;
   float: left;
   margin-left: 10px;
 }
-/* line 2186, style.scss */
+/* line 2216, style.scss */
 .cart__items__list__section .submit___section .address .custom-select:first-child {
   margin-left: 0;
 }
-/* line 2191, style.scss */
+/* line 2221, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'] {
   line-height: 20px;
 }
@@ -2074,7 +2110,7 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2195, style.scss */
+/* line 2225, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].light__gray {
   text-align: center;
 }
@@ -2096,60 +2132,60 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2200, style.scss */
+/* line 2230, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].country {
   margin-right: 10px;
   width: 130px;
   float: left;
 }
-/* line 2206, style.scss */
-.cart__items__list__section .submit___section .address input[type='text'].city {
-  width: 126px;
-  float: left;
-}
-/* line 2211, style.scss */
+/* line 2236, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].index {
-  width: 110px;
+  width: 70px;
   float: left;
   margin-left: 10px;
 }
-/* line 2217, style.scss */
+/* line 2242, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].addr {
   width: 198px;
   float: left;
 }
-/* line 2222, style.scss */
+/* line 2247, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].house, .cart__items__list__section .submit___section .address input[type='text'].building, .cart__items__list__section .submit___section .address input[type='text'].flat {
   width: 58px;
   float: left;
   margin-left: 10px;
   text-align: center;
 }
-/* line 2228, style.scss */
+/* line 2253, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].house::-webkit-input-placeholder, .cart__items__list__section .submit___section .address input[type='text'].building::-webkit-input-placeholder, .cart__items__list__section .submit___section .address input[type='text'].flat::-webkit-input-placeholder {
   padding-left: 0;
   text-align: center;
   text-transform: uppercase;
 }
-/* line 2236, style.scss */
+/* line 2261, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].house:-moz-placeholder, .cart__items__list__section .submit___section .address input[type='text'].building:-moz-placeholder, .cart__items__list__section .submit___section .address input[type='text'].flat:-moz-placeholder {
   padding-left: 0;
   text-align: center;
   text-transform: uppercase;
 }
-/* line 2245, style.scss */
+/* line 2270, style.scss */
 .cart__items__list__section .submit___section .address input[type='text'].receiver {
   width: 198px;
   float: left;
 }
-/* line 2251, style.scss */
+/* line 2276, style.scss */
+.cart__items__list__section .submit___section .address .city > select {
+  width: 190px;
+  float: left;
+}
+/* line 2281, style.scss */
 .cart__items__list__section .submit___section .address .message {
   width: 200px;
   float: left;
   margin-left: 10px;
   padding-top: 10px;
 }
-/* line 2259, style.scss */
+/* line 2289, style.scss */
 .cart__items__list__section .submit___section .pickup {
   height: 146px;
   -webkit-transition: all 0.4s linear;
@@ -2158,20 +2194,20 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2263, style.scss */
+/* line 2293, style.scss */
 .cart__items__list__section .submit___section .pickup.active {
   margin-left: 0;
   width: 680px;
 }
-/* line 2267, style.scss */
+/* line 2297, style.scss */
 .cart__items__list__section .submit___section .pickup.active .map {
   right: 0;
 }
-/* line 2272, style.scss */
+/* line 2302, style.scss */
 .cart__items__list__section .submit___section .pickup .caption {
   display: inline-block;
 }
-/* line 2276, style.scss */
+/* line 2306, style.scss */
 .cart__items__list__section .submit___section .pickup .pickup__checkbox {
   position: relative;
   top: 2px;
@@ -2182,11 +2218,11 @@ body.overlayed #overlay {
   background: url("../i/ico-checkbox.png") no-repeat 1px top;
   cursor: pointer;
 }
-/* line 2286, style.scss */
+/* line 2316, style.scss */
 .cart__items__list__section .submit___section .pickup .pickup__checkbox.checked {
   background-position: right top;
 }
-/* line 2291, style.scss */
+/* line 2321, style.scss */
 .cart__items__list__section .submit___section .pickup p {
   color: #868686;
   font-family: "PT Sans bold";
@@ -2194,11 +2230,11 @@ body.overlayed #overlay {
   line-height: 19px;
   text-transform: uppercase;
 }
-/* line 2300, style.scss */
+/* line 2330, style.scss */
 .cart__items__list__section .submit___section .pickup p span {
   color: #e60000;
 }
-/* line 2305, style.scss */
+/* line 2335, style.scss */
 .cart__items__list__section .submit___section .pickup .map {
   position: absolute;
   right: -460px;
@@ -2210,22 +2246,22 @@ body.overlayed #overlay {
   -ms-transition: all 0.4s linear;
   transition: all 0.4s linear;
 }
-/* line 2315, style.scss */
+/* line 2345, style.scss */
 .cart__items__list__section .submit___section .types__list {
   margin-bottom: -10px;
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 2319, style.scss */
+/* line 2349, style.scss */
 .cart__items__list__section .submit___section .types__list li {
   padding: 10px 0;
   border-top: 1px dotted #a1a1a1;
   cursor: pointer;
 }
-/* line 2326, style.scss */
+/* line 2356, style.scss */
 .cart__items__list__section .submit___section .types__list li.selected .price {
   color: #434343;
 }
-/* line 2332, style.scss */
+/* line 2362, style.scss */
 .cart__items__list__section .submit___section .types__list label {
   color: #4b4b4b;
   cursor: pointer;
@@ -2233,26 +2269,26 @@ body.overlayed #overlay {
   font-size: 12px;
   font-weight: bold;
 }
-/* line 2341, style.scss */
+/* line 2371, style.scss */
 .cart__items__list__section .submit___section .types__list label sup {
   text-transform: uppercase;
 }
-/* line 2345, style.scss */
+/* line 2375, style.scss */
 .cart__items__list__section .submit___section .types__list label sub {
   color: #888;
   font-weight: 400;
 }
-/* line 2350, style.scss */
+/* line 2380, style.scss */
 .cart__items__list__section .submit___section .types__list label span {
   margin-left: 8px;
   color: #c8c8c8;
   font-weight: 400;
 }
-/* line 2359, style.scss */
+/* line 2389, style.scss */
 .cart__items__list__section .submit___section .types__list img {
   vertical-align: middle;
 }
-/* line 2363, style.scss */
+/* line 2393, style.scss */
 .cart__items__list__section .submit___section .types__list .price {
   padding-right: 20px;
   float: right;
@@ -2267,15 +2303,15 @@ body.overlayed #overlay {
   -ms-transition: color 0.2s linear;
   transition: color 0.2s linear;
 }
-/* line 2378, style.scss */
+/* line 2408, style.scss */
 .cart__items__list__section .submit___section .pay__type.disabled {
   display: none;
 }
-/* line 2382, style.scss */
+/* line 2412, style.scss */
 .cart__items__list__section .submit___section .pay__type li {
   display: none;
 }
-/* line 2389, style.scss */
+/* line 2419, style.scss */
 .cart__items__list__section .finish__cart {
   display: block;
   margin: 10px auto;
@@ -2286,33 +2322,33 @@ body.overlayed #overlay {
   cursor: pointer;
   text-indent: -9999px;
 }
-/* line 2399, style.scss */
+/* line 2429, style.scss */
 .cart__items__list__section .finish__cart.disabled {
   background-position: left bottom;
   cursor: default;
 }
-/* line 2404, style.scss */
+/* line 2434, style.scss */
 .cart__items__list__section .finish__cart.hidden {
   display: none;
 }
 
-/* line 2410, style.scss */
+/* line 2440, style.scss */
 .footer__section {
   padding-bottom: 27px;
   background: #444;
   border-top: 1px solid #696969;
   overflow: hidden;
 }
-/* line 2416, style.scss */
+/* line 2446, style.scss */
 .footer__section .wrap {
   height: 94px;
 }
-/* line 2420, style.scss */
+/* line 2450, style.scss */
 .footer__section .info {
   margin-top: 24px;
   float: left;
 }
-/* line 2424, style.scss */
+/* line 2454, style.scss */
 .footer__section .info .socials {
   margin-top: 11px;
   margin-bottom: 14px;
@@ -2324,27 +2360,27 @@ body.overlayed #overlay {
   display: table;
   clear: both;
 }
-/* line 2429, style.scss */
+/* line 2459, style.scss */
 .footer__section .info .socials li {
   margin-right: 15px;
   float: left;
 }
-/* line 2434, style.scss */
+/* line 2464, style.scss */
 .footer__section .info .socials a {
   height: 32px;
   width: 32px;
   display: block;
   background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAAAgCAYAAAA7ZacxAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGNjMyQTg3OTM0MkIxMUUzOUU3QThCMUFCODE0OTk0QiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGNjMyQTg3QTM0MkIxMUUzOUU3QThCMUFCODE0OTk0QiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkY2MzJBODc3MzQyQjExRTM5RTdBOEIxQUI4MTQ5OTRCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkY2MzJBODc4MzQyQjExRTM5RTdBOEIxQUI4MTQ5OTRCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+olqBgQAABKtJREFUeNrsm1uITVEYx9cZY1ymjFsa15qYGA+MjHHJw7iMcR0P8uABKbdSJCkPUjLy4MGgGAZl4o1kRIm5JIqYDEouKUQjdMwMOS6Z4786367Vau3j7LPW3usc7X/9mjn7stZqf2t961vf3isSj8eZoPlgDSgD40EOM6Me8Bw8AA3gJjOrCFgPqsFUMNxw+R2gDTSCUyBusOwicBQsBL2Yv/oNroFd4Bnjxgf9QV08ONVRncwAI0BLgG1voTpNtH0s6IoHr4+gMEIjvw5sYsHqBNhsYMQ3g4qA294K5hrwAFfBYmZH57jxuau/YakBlZpTwAZw0lLbN4J6zTJ+gjyf2sc7Zqc0UAYKvz/m0BxvS7p1V1tsu4m683xsH+9YgwXkOGhADgV3tqRb91SLbbdZt5koGW7/j8GoPp1VgE6EazLqvg4u0arkg3B8ZJKpKWLANfulH6Cf8LsviInncy0anlmuW9RmCkDdHmJWDmwwSPjdR74gl4VqSmL4bBY3djTZBbrG78mg0ZuuzrscL6CRM+p/7fVuxudZuPfgDxl4JSihcxfAPjofpYe0BdQI93dTGb+EMiaA5Rn4DN4qjh0AO5n/GTe7cskAlUmZqEmgh87FwALpfIl0/y5FNqvKpS6dDJkJlSrKvZ/ivcxi+ztBt8b9MTeXvVv6/Zgl8tpO1FglnRdHSBc4pihzWxaNid4Z3LaHYAYlbAaA2eCuSbfP3fMUqsjRXrCUDD0sifEPk9sXtRYsyrCHeBa8lpZ1jni6u5D+n84SL10yQfzl0iyaTh3dYYlU8x2ymbbb57qicFP76dxx6XgpHW8DeYoXL1GfXKeOKlKsY18Guf1pScqqNOX2GY1yucfvpYRHk3T8FeOvCBlbJfVKrtPSejPbFFS0zxM+XwTk/MI3cD/J/bcUSaOYUF6n1yRLrTT/ccNWUsQv6iutBl5Ix9dnkMvMdOPLufgaRdIm4jFhtoO55/b/aXz+Qcee/zRwOkaBUrHLUvcuMdNS+95Lv/Mp0HPTPEXneJfunO+IL/GWaMxrtT4ul/xa6rVbWOrFpHNjhOW1o3suH8EUgKfStb/AQOGavl7mfNHdnAPj/nHdZFX+GNqumCZCpZZ8apWOlZM3WkBem6/WqikWKJGuvaya572OfEefKVGj6sH54BN4AcYrzvNedzsc+Z5GPqNk2+90EjigWGEDzyPf0RCW+PjvDK19RU0EQ2n+bFZ4CR65bg0Hs2c9oKDNq3ig/TLdJE+yiHIdwaPTDvpbKFwzAjwBLdSAXkR5aMu0dISWeXUpBNDfKaGW0jQbiUvfbluQzgcRJtrOs2Lt0rF2imH8bLvcfvnjC1VMxVdeyxSdgN97kSVeuD13uV/5MUeo7NAjsILW7HPAaOo8r8nLdqeT27f5Tr4ntKlnRWmUaysniZsIQrp1d1hse0e296JciihLLEazOuJvuZZaanubD7GPn+9AlN/w8VTmaksPsEHz/kYDxj/EEt8giCpKsW5d/aBAzDFONMBn3xlu10pPrczMdi2ehbO18aQ+3Khpd6NmMW2aDFpvwOBIuEU75eDOry3aPEF2kAW3RZt7G75FO/pXgAEAzFB25MjjSkMAAAAASUVORK5CYII=') no-repeat;
 }
-/* line 2442, style.scss */
+/* line 2472, style.scss */
 .footer__section .info .socials a.fb {
   background-position: -47px top;
 }
-/* line 2446, style.scss */
+/* line 2476, style.scss */
 .footer__section .info .socials a.inst {
   background-position: right top;
 }
-/* line 2453, style.scss */
+/* line 2483, style.scss */
 .footer__section .info p {
   color: #FFF;
   font-size: 12px;
@@ -2352,17 +2388,17 @@ body.overlayed #overlay {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 2460, style.scss */
+/* line 2490, style.scss */
 .footer__section .info p span {
   color: #adec3f;
 }
-/* line 2466, style.scss */
+/* line 2496, style.scss */
 .footer__section .links {
   margin-top: 27px;
   margin-right: 40px;
   float: right;
 }
-/* line 2471, style.scss */
+/* line 2501, style.scss */
 .footer__section .links a {
   margin-bottom: 4px;
   color: #b2b2b2;
@@ -2370,53 +2406,53 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 2478, style.scss */
+/* line 2508, style.scss */
 .footer__section .links a:hover {
   color: #FFF;
   text-decoration: underline;
 }
 
-/* line 2487, style.scss */
+/* line 2517, style.scss */
 .scroll__helper {
   height: 1px;
   clear: both;
   visibility: hidden;
 }
 
-/* line 2493, style.scss */
+/* line 2523, style.scss */
 .custom-select {
   position: relative;
 }
-/* line 2497, style.scss */
+/* line 2527, style.scss */
 .custom-select.open_list .custom-text {
   margin-bottom: 1px;
   background: #f6f6f6;
   border-bottom: 0;
   border-radius: 5px 5px 0 0;
 }
-/* line 2503, style.scss */
+/* line 2533, style.scss */
 .custom-select.open_list .custom-text:after {
   background-position: left top;
 }
-/* line 2510, style.scss */
+/* line 2540, style.scss */
 .custom-select.above .select-list {
   padding-top: 4px;
   border: 1px solid #c9c9c9;
   border-radius: 5px;
 }
-/* line 2516, style.scss */
+/* line 2546, style.scss */
 .custom-select.above .custom-text {
   border-radius: 5px;
 }
-/* line 2521, style.scss */
+/* line 2551, style.scss */
 .custom-select select {
   display: none;
 }
-/* line 2525, style.scss */
+/* line 2555, style.scss */
 .custom-select ul {
   position: relative;
 }
-/* line 2529, style.scss */
+/* line 2559, style.scss */
 .custom-select .custom-text {
   position: relative;
   height: 26px;
@@ -2437,7 +2473,7 @@ body.overlayed #overlay {
   background-image: -o-linear-gradient(top, #f6f6f6, #ededed);
   background-image: linear-gradient(top, #f6f6f6, #ededed);
 }
-/* line 2547, style.scss */
+/* line 2577, style.scss */
 .custom-select .custom-text:after {
   position: absolute;
   top: 9px;
@@ -2448,11 +2484,11 @@ body.overlayed #overlay {
   background: url("../i/select-arrows-spr.png") no-repeat right bottom;
   content: '';
 }
-/* line 2559, style.scss */
+/* line 2589, style.scss */
 .custom-select .custom-scroll {
   overflow: hidden;
 }
-/* line 2563, style.scss */
+/* line 2593, style.scss */
 .custom-select .select-list {
   position: absolute;
   top: 26px;
@@ -2468,11 +2504,11 @@ body.overlayed #overlay {
   background-image: -o-linear-gradient(top, #f6f6f6, #ededed);
   background-image: linear-gradient(top, #f6f6f6, #ededed);
 }
-/* line 2574, style.scss */
+/* line 2604, style.scss */
 .custom-select .select-list ul {
   display: block;
 }
-/* line 2578, style.scss */
+/* line 2608, style.scss */
 .custom-select .select-list li {
   float: none;
   display: block;
@@ -2484,15 +2520,15 @@ body.overlayed #overlay {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 2593, style.scss */
+/* line 2623, style.scss */
 .custom-select .select-list li.current {
   display: none;
 }
-/* line 2597, style.scss */
+/* line 2627, style.scss */
 .custom-select .select-list li:hover {
   text-decoration: underline;
 }
-/* line 2603, style.scss */
+/* line 2633, style.scss */
 .custom-select .select-scroll {
   position: absolute;
   top: 0;
@@ -2501,14 +2537,14 @@ body.overlayed #overlay {
   background: #f0f0f0;
   z-index: 2;
 }
-/* line 2611, style.scss */
+/* line 2641, style.scss */
 .custom-select .select-scroll .scroll-drag {
   position: absolute;
   left: 2px;
   display: block;
   cursor: pointer;
 }
-/* line 2617, style.scss */
+/* line 2647, style.scss */
 .custom-select .select-scroll .scroll-drag:after {
   position: relative;
   left: 50%;
@@ -2520,12 +2556,12 @@ body.overlayed #overlay {
   font-size: 14px;
   font-weight: bold;
 }
-/* line 2633, style.scss */
+/* line 2663, style.scss */
 .custom-select .select-scroll .scroll-drag * {
   user-select: none;
 }
 
-/* line 2641, style.scss */
+/* line 2671, style.scss */
 #overlay {
   position: absolute;
   left: 0;
