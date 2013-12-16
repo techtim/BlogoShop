@@ -58,6 +58,11 @@
 
 	<div class='description__section row'>
 		<%== stash 'descr' %>
+		% if (stash('online_only')) {
+		<dl class="only-online">
+			Только online
+		</dl>
+		% }
 	</div>
 
 	% if ($brand_name) {

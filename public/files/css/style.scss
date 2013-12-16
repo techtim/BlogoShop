@@ -1447,6 +1447,20 @@ body {
     }
 
   }
+
+  .only-online {
+    margin-top: 8px;
+
+    padding-top: 16px;
+    padding-bottom: 14px;
+
+    border: 2px solid red;
+    color: #444;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
 }
 
 .socials__section {

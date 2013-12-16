@@ -103,7 +103,8 @@
 					%= include 'includes/select_block', name => 'weight', select => stash('weight'), must_fill => 'yes', options => stash 'weights'
 					КГ
 				</div>
-
+				<strong>только онлайн:</strong>
+				<input type="checkbox" name="online_only" value=1 <%== stash('online_only') ne '' ? 'checked="checked"' : ''%>>
 			</div>
 
 			<div class='sale__section'>
