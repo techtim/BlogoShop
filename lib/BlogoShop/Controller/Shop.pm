@@ -9,9 +9,9 @@ use utf8;
 
 use constant ITEM_FIELDS => qw(brand sale category subcategory tags sex);
 use constant CART_ITEM_FIELDS => ITEM_FIELDS, qw(name alias preview_image);
-use constant CHECKOUT_FIELDS => qw(	name surname phone email 
+use constant CHECKOUT_FIELDS => qw(	name surname phone email total_weight
 									country city zip address dom korp flat receiver 
-									delivery_type self_delivery pay_type);
+									delivery_type self_delivery delivery_cost pay_type);
 use constant SORT_FIELDS => qw(time price);
 
 sub index {
@@ -49,7 +49,7 @@ sub list {
 	my $self = shift;
 
 	my	$filter->{active} 		= 1;
-		$filter->{'subitems.qty'}= {'$gt' => 0};
+		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
 
 		defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
 		 # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
@@ -267,6 +267,8 @@ sub _checkout {
 	}
 	$all_is_ok = 0 if @{$co_params->{items}} == 0;
 
+	$co_params->{delivery_cost} = $self->logistics->check_cost({city => $co_params->{city}, weight => $co_params->{total_weight}})
+		if !$co_params->{delivery_cost} || $co_params->{delivery_cost} =~ m![^\d]+!;
 	return $self->_proceed_checkout($co_params) 
 		if $all_is_ok;
 
