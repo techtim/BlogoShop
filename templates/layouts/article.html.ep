@@ -1,46 +1,32 @@
 <!DOCTYPE HTML>
-<html lang="ru-RU" xmlns:fb="http://ogp.me/ns/fb#">
+<html xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
 		<meta charset='utf-8' />
-		<title><%= title %></title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+		<title><%= title %></title>
 		<link rel="dns-prefetch" href="//ajax.googleapis.com">
-        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
 
-		<meta property="og:site_name" content="магазин Хохловка" />
-		<meta property="og:type" content="article" />
-		<meta property="og:title" content="<%= $title %>" />
-		<meta property="og:url" content="<%== stash('host') . '/' . stash('type') . '/' . $alias %>" />
-		<meta property="og:description" content="<%= stash 'preview_text' %>" />
-		% if (stash 'preview_image') {
-    		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
-		% }
+		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
+		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
 
-		% if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
-		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
-        % } else {
-        <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
-        % }
-		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
-
-		<script data-main='/j/config' src='/j/require.js'></script>
-		<script>requirejs(['app/global', 'app/fotorama'])</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+		<script src='/j/carousel.js'></script>
+		<script src='/j/j.js'></script>
 	</head>
 
 	<body>
-        <div class='wrap clearfloat'>
+%= include 'includes/header'
+%= include 'includes/top'
+<%= content %>
 
-            %= include 'includes/header'
-            %= include 'includes/top'
-            <%= content %>
+%= include 'includes/footer'
 
-        </div>
-
-		%= include 'includes/footer'
-
-        <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-        %= include 'includes/google_analytics'
-        %= include 'includes/yandex_metrika'
+<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+%= include 'includes/google_analytics'
+%= include 'includes/yandex_metrika'
 	</body>
 </html>

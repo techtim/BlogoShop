@@ -176,20 +176,20 @@ sub startup {
 #    $self->routes->get('controller-shop#list')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
 
 	# --BLOG--
-	my  $blog = $r->route->over( headers => {Host => 'blog.'.$self->config('domain_name')} );
+	# my  $blog = $r->route->over( headers => {Host => 'blog.'.$self->config('domain_name')} );
 
-		$blog->any('/')->to('controller-article#list');
-		$blog->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
+		$r->route('/blog')->to('controller-article#list');
+		$r->route('/blog/blog/subscribe')->via('post')->to('controller-ajax#subscribe');
 		my $bind_types = join '|', map {$_->{_id}} @types;
-		$blog->route('/:type', type => qr/$bind_types/)->to('controller-article#list');
-		$blog->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
-		$blog->route('/tag/:tag', tag => qr/[^\{\}\[\]]+/i)->to('controller-article#list');
-		$blog->route('/brand/:brand', brand => qr/[^\{\}\[\]]+/)->to('controller-article#list');
+		$r->route('/blog/:type', type => qr/$bind_types/)->to('controller-article#list');
+		$r->route('/blog/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
+		$r->route('/blog/tag/:tag', tag => qr/[^\{\}\[\]]+/i)->to('controller-article#list');
+		$r->route('/blog/brand/:brand', brand => qr/[^\{\}\[\]]+/)->to('controller-article#list');
 
-		$blog->route('/:move/:id', move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
-		$blog->route('/:type/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
-		$blog->route('/:type/:tag/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
-		$blog->route('/:type/:brand/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
+		$r->route('/blog/:move/:id', move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
+		$r->route('/blog/:type/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
+		$r->route('/blog/:type/:tag/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
+		$r->route('/blog/:type/:brand/:move/:id', type => qr/$bind_types/, move => qr/next|prev/, id => qr/[\d\w]+/)->to('controller-article#list');
 
 	$r->any('/')->to('controller-shop#index');
 

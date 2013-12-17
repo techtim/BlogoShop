@@ -1,18 +1,15 @@
-<div class='header__section clearfloat'>
-    <h1><a href='http://<%= config('domain_name') %>'>Хохловка магазин</a></h1>
+<div class="header__section">
+    <div class="wrapper">
+        <h1><a href="/"></a></h1>
 
-    <div class='contacts__section fr'>
-        <div class='row'>
-            <label>АДРЕС:</label>
-            МОСКВА, ХОХЛОВСКИЙ ПЕРЕУЛОК 7
-        </div>
-        <div class='row'>
-            <label>ТЕЛЕФОН:</label>
-            +7 (926) 930 90-05
-        </div>
-        <div class='row'>
-            <label>часы работы:</label> 
-            ежедневно с 12 до 22
+        <p class="slogan">
+            быстрее<br/>лучше
+        </p>
+
+        <div class="addr__section">
+            <p><label>Адрес:</label> Москва, ул. 2-я Машиностроения, д. 17</p>
+            <p><label>Тел / Faх: </label> 8 495 675-84-37, 8 495 788-60-03, 8 495 974-63-53</p>
+            <p><label>Электропочта:</label> info@fizruk.ru</p>
         </div>
     </div>
 </div>

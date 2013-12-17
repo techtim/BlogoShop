@@ -1,0 +1,24 @@
+% if (@$banners > 0) {
+    % my $select_num = 1;
+    <div class="carousel__section__main">
+        <div class="wrapper">
+            <ul class="items">
+                % foreach (@$banners) {
+                % next if !$_->{link};
+                <li>
+                    <div class="inner__wrapper">
+                        <img src="<%= $_->{image} %>" alt="">
+                        <div class="description">
+                            <h2><%= $_->{name} %></h2>
+                            <p><%= $_->{descr} %></p>
+                            <a href="<%= $_->{link} %>" class="button">открыть проект</a>
+                        </div>
+                    </div>
+                </li>
+                % }
+            </ul>
+            <a href="#" class="jcarousel-prev controls"></a>
+            <a href="#" class="jcarousel-next controls"></a>
+        </div>
+    </div>
+% }

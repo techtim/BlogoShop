@@ -1,40 +1,62 @@
 % layout 'default';
-% title 'магазин дизайнерской одежды и аксессуаров Хохловка';
+% title 'Полиграфия Fizra';
 
-%= include 'includes/left_bar'
+%= include 'includes/carousel'
 
-<div class='content__section'>
-     % if (@$banners > 0) {
-        % my $select_num = 1;
-        <div class='carousel__main'>
-            <div class='carousel__wrapper'>
-                <ul class='items'>
-                    % foreach (@$banners) {
-                    % next if !$_->{link};
-                    <li class="carousel__item">
-                        <a href='<%= $_->{link} %>'>
-                        	<img src='<%= $_->{image} %>' alt='' />
-                        </a>
-                    </li>
-                    % }
-                </ul>
-                <a href="#" class="jcarousel-prev controls"></a>
-                <a href="#" class="jcarousel-next controls"></a>
-            </div>
-            <ul class='pagination'></ul>
+
+<div class="content__section wrapper">
+    %= include 'includes/left_bar'
+
+    <div class="right__side">
+        <div class="intro__section">
+            <h2 class="caption"><%= stash 'intro_title' %></h2>
+    
+            <%== stash 'intro_text_rendered' %>
         </div>
-    % }
 
-    <div class='blogs__section clearfloat'>
+        <div class="news__section preview__list">
+            <h2 class="caption">НОВЫЕ ПРОЕКТЫ ТИПОГРАФИИ ФИЗРА</h2>
 
-        <h2 class='dotted__caption'>
-            <span>блог</span>
-        </h2>
-        <ul class='clearfloat'>
-            %= include 'includes/list_articles'
-        </ul>
-    </div>
+            <ul class="list">
+                %= include 'includes/list_articles'
+                <li class="item">
+                    <a href="#">
+                        <span class="img__section"><img src="i/tmp/news.jpg" alt=""></span>
+                        <span class="category">шелкография</span>
+                        <span class="title">визитки на цветной бумаге из переработанных обрезков</span>
+                        <span class="date">22 мая 2013</span>
+                    </a>
+                </li>
+            </ul>
+        <a href="#" class="button__show__more"><span>Показать еще</span></a>
+        </div>
 
+        <div class="services__section preview__list">
+            <h2 class="caption">НОВЫЕ ПРОЕКТЫ ТИПОГРАФИИ ФИЗРА</h2>
+
+            <ul class="list">
+                <li class="item">
+                    <a href="#">
+                        <span class="img__section"><img src="i/tmp/services.jpg" alt=""></span>
+                        <span class="category">офсетная печать</span>
+                        <span class="title">Листовки 10к шт. А4 (4+4):</span>
+                        <span class="price">10950 руб</span>
+                    </a>
+                </li>
+            </ul>
+        <a href="#" class="button__show__more"><span>Показать еще</span></a>
+        </div>
+
+        <ul class="texts__section preview__list">
+            <li class="item">
+                <a href="#">
+                    <span class="caption">Печать журналов</span>
+                    <span class="text">Сегодня журнал является одним из самых популярных полиграфических продуктов среди СМИ, и к нему предъявляют повышенные эстетические требования, ведь в первую очередь журналы листают, а уже потом - читают...</span>
+                </a>
+            </li>
+        <a href="#" class="button__show__more"><span>Показать еще</span></a>
+
+<!--
     % if (stash('items')) {
     <div class='shop__items__list'>
          <h2 class='dotted__caption'>
@@ -47,9 +69,20 @@
     </div>
     % }
 
+    <div class='blogs__section clearfloat'>
+
+        <h2 class='dotted__caption'>
+            <span>блог</span>
+        </h2>
+        <ul class='clearfloat'>
+            %= include 'includes/list_articles'
+        </ul>
+    </div>
+
     <script>
         requirejs(['app/equalHeight', 'app/carouselMain', 'app/itemsDescr']);
     </script>
-</div>
+-->
+    </div>
 
 <div class='clear'></div>

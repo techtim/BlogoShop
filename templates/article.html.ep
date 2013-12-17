@@ -1,26 +1,32 @@
 % layout 'article';
-% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '.$name;
+% title $name;
 
-%= include 'includes/left_bar'
+<div class="content__section wrapper">
+	%= include 'includes/left_bar'
 
-<div class='content__section post__page'>
-    <h2><%= stash 'name' %></h2>
-    
-    <%== stash 'article_text_rendered' %>
-    
-    <div class='tags__section'>
-    % if (ref $tags eq 'ARRAY') {
-        % my $ct = 0;
-        % foreach (@$tags) {
-        <a href='/tag/<%= $_ %>'><%= $_ %></a><%= ',' if $tags->[-1] ne $_ %>
-        % } }
-    </div>    
-    <div class='clear'></div>
-    
-    <ul class='socials__section clearfloat'>
-    	<li class='fb'>
-    		<div id="fb-root"></div>
-		    <fb:like send="false" layout="button_count" width="160" show_faces="false"></fb:like>
+	<div class="right__side text__post">
+		<h3 class="caption"><%= stash 'name' %></h3>
+	
+	
+		<%== stash 'article_text_rendered' %>
+	
+	
+		<div class='tags__section'>
+		% if (ref $tags eq 'ARRAY') {
+			% my $ct = 0;
+			% foreach (@$tags) {
+			<a href='/tag/<%= $_ %>'><%= $_ %></a><%= ',' if $tags->[-1] ne $_ %>
+			% } }
+		</div>    
+
+	</div>
+	<div class='clear'></div>
+	
+	<!--
+	<ul class='socials__section clearfloat'>
+		<li class='fb'>
+			<div id="fb-root"></div>
+			<fb:like send="false" layout="button_count" width="160" show_faces="false"></fb:like>
 			<script>(function(d, s, id) {
 			  var js, fjs = d.getElementsByTagName(s)[0];
 			  if (d.getElementById(id)) return;
@@ -28,9 +34,9 @@
 			  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
 			  fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));</script>
-    	</li>
-    	<li class='vk'>
-    		<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
+		</li>
+		<li class='vk'>
+			<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
 
 			<script type="text/javascript">
 				VK.init({apiId: 3005244, onlyWidgets: true});
@@ -38,41 +44,41 @@
 			</script>
 
 			<div id="vk_like"></div>
-    	</li>
-    	<li class='gp'>
-    		<g:plusone size='medium' annotation="inline" width="160" href="магазин Хохловка"></g:plusone>
+		</li>
+		<li class='gp'>
+			<g:plusone size='medium' annotation="inline" width="160" href="магазин Хохловка"></g:plusone>
 			<script type="text/javascript">
 			  (function() {
-			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			    po.src = 'https://apis.google.com/js/plusone.js';
-			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				po.src = 'https://apis.google.com/js/plusone.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 			  })();
 			</script>
-    	</li>
-    </ul>
-    
-    <ul class='post__navigation clearfloat'>
-       	% if ($prev_article->{name}) {
-        <li>
-            <a class='prev' href='/<%== join '/', $prev_article->{type}, $prev_article->{alias} %>' class='clearfloat'>
+		</li>
+	</ul>
+	-->
+	<ul class='post__navigation clearfloat'>
+		% if ($prev_article->{name}) {
+		<li>
+			<a class='prev' href='/<%== join '/', $prev_article->{type}, $prev_article->{alias} %>' class='clearfloat'>
 				<%= $prev_article->{name} %>
-            </a>
-        </li>
-        % }
-        % if ($next_article -> {name}) {
-        <li class='next'>
-            <a class='next' href='/<%== join '/', $next_article->{type}, $next_article->{alias} %>' class='clearfloat'>
-            	<%= $next_article->{name} %>
-            </a>
-        </li>
-        % }
-    </ul>
-    <div class='clear'></div>
-    <ul class='blogs__section'>
-        % foreach my $article (@$related_articles) {
-            %= include 'includes/preview_article', article => $article
-        % }
-    </ul>
+			</a>
+		</li>
+		% }
+		% if ($next_article -> {name}) {
+		<li class='next'>
+			<a class='next' href='/<%== join '/', $next_article->{type}, $next_article->{alias} %>' class='clearfloat'>
+				<%= $next_article->{name} %>
+			</a>
+		</li>
+		% }
+	</ul>
+	<div class='clear'></div>
+	<ul class='blogs__section'>
+		% foreach my $article (@$related_articles) {
+			%= include 'includes/preview_article', article => $article
+		% }
+	</ul>
 </div>
 
 <div class='clear'></div>

@@ -4,32 +4,30 @@
 		<meta charset='utf-8' />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="dns-prefetch" href="//ajax.googleapis.com">
-        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-
 		<title><%= title %></title>
+		<link rel="dns-prefetch" href="//ajax.googleapis.com">
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
-        % if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
-		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
-        % } else {
-        <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
-        % }
-        <script data-main='/j/config' src='/j/require.js'></script>
-        <script>requirejs(['app/global'])</script>
-    </head>
+		<link rel='stylesheet' type='text/css' href='css/style.css' media='all' />
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+		<script src='/j/carousel.js'></script>
+		<script src='/j/j.js'></script>
+	</head>
 	<body>
-        <div class='wrap clearfloat'>
-            %= include 'includes/header'
-            %= include 'includes/top'
 
-            <%= content %>
+%= include 'includes/header'
+%= include 'includes/top'
+<%= content %>
 
-        </div>
 
-        %= include 'includes/footer'
+%= include 'includes/footer'
 
-        %= include 'includes/google_analytics'
-        %= include 'includes/yandex_metrika'
-        %# include 'includes/adriver'
-    </body>
+%= include 'includes/google_analytics'
+%= include 'includes/yandex_metrika'
+%# include 'includes/adriver'
+	</body>
 </html>

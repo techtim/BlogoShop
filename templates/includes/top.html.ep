@@ -1,60 +1,23 @@
-<div class='navigation__section clearfloat'>
-    <ul class='main__nav__strip clearfloat'>
-    	<li <%= 'current' if stash('page_name') eq '' %>><a href='http://<%= config->{domain_name} %>' class='home'></a></li>
-        <li class='item__1 <%= 'current' if stash('page_name') eq 'blog' %>'><a href='http://blog.<%= config->{domain_name} %>/'>БЛОГ</a></li>
-        <li class='item__2 <%= 'current' if stash('page_name') eq 'map' %>'><a href='http://<%= config->{domain_name} %>/map'>ГДЕ МЫ</a></li>
-        <li class='item__3 <%= 'current' if stash('page_name') eq 'about' %>'><a href='http://<%= config->{domain_name} %>/about'>КТО МЫ</a></li>
-        <!--<li class='item__4 <%= 'current' if stash('page_name') eq 'shop' %>'><a href='http://shop.<%= config->{domain_name} %>/'>ONLINE-МАГАЗИН</a></li>-->
-        <li class='item__5 <%= 'current' if stash('page_name') eq 'delivery' %>'><a href='http://<%= config->{domain_name} %>/delivery'>ДОСТАВКА</a></li>
-        <li class='item__6 <%= 'current' if stash('page_name') eq 'pay' %>'><a href='http://<%= config->{domain_name} %>/pay'>ОПЛАТА</a></li>
+<div class="menu__section">
+	<div class="wrapper">
+		<ul class="navigation__section">
+			<!--<li <%= 'current' if stash('page_name') eq '' %>><a href='http://<%= config->{domain_name} %>' class='home'></a></li>-->
+			<li<%= ' current' if stash('page_name') eq 'blog' %>><a href='http://<%= config->{domain_name} %>/blog'>Блог</a></li>
+			<li<%= ' current' if stash('page_name') eq 'about' %>><a href='http://<%= config->{domain_name} %>/about'>О нас</a></li>
+			<li<%= ' current' if stash('page_name') eq 'requires' %>><a href='http://<%= config->{domain_name} %>/map'>Требования</a></li>
+			<li<%= ' current' if stash('page_name') eq 'services' %>><a href='http://<%= config->{domain_name} %>/about'>Услуги</a></li>
+			<!--<li<%= ' current' if stash('page_name') eq 'calc' %>><a href='http://shop.<%= config->{domain_name} %>/'>Калькулятор</a></li>-->
+			<li<%= ' current' if stash('page_name') eq 'pay' %>><a href='http://<%= config->{domain_name} %>/delivery'>Оплата</a></li>
+			<li<%= ' current' if stash('page_name') eq 'delivery' %>><a href='http://<%= config->{domain_name} %>/delivery'>Доставка</a></li>
+			<li<%= ' current' if stash('page_name') eq 'contacts' %>><a href='http://<%= config->{domain_name} %>/pay'>Контакты</a></li>
+		</ul>
 
-    </ul>
-    % if (stash('page_name') eq 'shop') {
-    <div class='shopping__cart__section'>
-        % if (!stash('cart_count') || stash('cart_count') eq '0') {
-        <span class='empty'>КОРЗИНА: ПУСТО</span>
-        % } else {
-        <a href="http://shop.<%= config->{domain_name} %>/cart">КОРЗИНА: <%= stash 'cart_count' %> = <%= stash 'cart_price' %> Р</a>
-        % }
-    </div>
-    % }
-    <div class='clear'></div>
-	<!--<ul class='sub__nav__strip clearfloat'>
-		<li><a href='#'>новые поступления</a></li>
-		<li><a href='#'>скидки</a></li>
-		<li><a href='#'>специальные предложения</a></li>
-
-		<li class='search__form__section'>
-			<form>
-				<input type='text' value='' />
-				<input type='submit' value='найти' />
-			</form>
-		</li>
-	</ul>-->
-
-</div>
-
-<div class="top__gray__strip">
-	<div class="wrap">
-		<a href="/" class="logo" title='магазин Хохловка'></a>
-
-		<p class="time">
-			<span>ежедневно</span>
-			с 12 до 22
-		</p>
-
-		<a href="/map" class="address">МОСКВА, ХОХЛОВСКИЙ ПЕРЕУЛОК, 7</a>
-		<p class="phone">+7 (926) 930 90-05</p>
-
-		% if (stash('page_name') eq 'shop') {
-	    <div class='shopping__cart__section'>
-	        % if (!stash('cart_count') || stash('cart_count') eq '0') {
-	        <span class='empty'>КОРЗИНА: ПУСТО</span>
-	        % } else {
-	        <a href="http://shop.<%= config->{domain_name} %>/cart">КОРЗИНА: <%= stash 'cart_count' %> = <%= stash 'cart_price' %> Р</a>
-	        % }
-	    </div>
-	    % }
-
+		<div class="basket empty">
+			% if (!stash('cart_count') || stash('cart_count') eq '0') {
+			<p class="basket__empty">КОРЗИНА: ПУСТО</p>
+			% } else {
+			<a href="http://shop.<%= config->{domain_name} %>/cart">КОРЗИНА: <%= stash 'cart_count' %> = <%= stash 'cart_price' %> Р</a>
+			% }
+		</div>
 	</div>
 </div>

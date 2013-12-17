@@ -33,7 +33,12 @@
                     <div class="link">
                         <%= $banner->{link} %>
                     </div>
-
+                    <div class="title">
+                        <%= $banner->{name} %>
+                    </div>
+                    <div class="descr">
+                        <%= $banner->{descr} %>
+                    </div>
                     <div class="category">
                         Категория: <%= $banner->{category} ? $cat_alias->{$banner->{category}} : 'главная'  %>
                     </div>
@@ -73,8 +78,14 @@
                      <input type="file" name="image" /> <%= $image ? 'изменить': 'добавить' %>
                 </div>
 
-                <input type="text" name="link" value="<%= stash 'link' %>" class="banner__link <%= $do eq 'edit' ? 'disabled' : '' %>" <%= $do eq 'edit' ? 'disabled' : '' %>/>
-
+                <br><br>
+                <br>
+                Ссылка:<input type="text" name="link" value="<%= stash 'link' %>" size=60 class="" <%= $do eq 'edit' ? 'disabled' : '' %>/>
+                <br>
+                Название:<input type="text" name="name" value="<%= stash 'name' %>" size=60 class="" <%= $do eq 'edit' ? 'disabled' : '' %>/>
+                <br>
+                Описание:<input type="text" name="descr" value="<%= stash 'descr' %>" size=100 class="" <%= $do eq 'edit' ? 'disabled' : '' %>/>
+                <br>
                 <div class="banner__freq">
                     <ul></ul>
                     %= include 'includes/select_block', name => 'weight', select => $weight, must_fill => 'no' , options => stash 'weights'
@@ -96,7 +107,7 @@
                 </div>
             </div>
 
-
+            <br><br><br><br>
             <div class="banners__cats clearfloat">
 
                 <ul>

@@ -1,5 +1,5 @@
 % layout 'article';
-% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '.$name.' распродажа летней одежды';
+% title 'Полиграфия Fizra: '.$name;
 
 %= include 'includes/left_bar'
 
@@ -8,5 +8,3 @@
     
     <%== stash 'article_text_rendered' %>
 </div>
-
-<div class='clear'></div>

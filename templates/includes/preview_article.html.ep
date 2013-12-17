@@ -1,10 +1,10 @@
 <li class='<%= $article->{type} %>'>
-    <a href='http://blog.<%= config->{domain_name} %>/<%== join '/', $article->{type}, $article->{alias} %>'>
-    	<span class='img__box' style='background-image: url(<%== config->{nginx_res_post_prev} . config->{image_url} .
-            join ('/', $article->{type}, $article->{alias}, $article->{preview_image}) %>)'>
+    <a href='http://<%= config->{domain_name} %>/<%== join '/', 'blog', $article->{type}, $article->{alias} %>'>
+    	<span class='img__section'> <img src='<%== config->{nginx_res_post_prev} . config->{image_url} .
+            join ('/', $article->{type}, $article->{alias}, $article->{preview_image}) %>'>
 		</span>
-        <span class='caption'><%= $article->{name} %></span>
-        <span class='text'><%= substr($article->{preview_text}, 0, 102) %></span>
+        <span class='category'><%= $article->{brand} %></span>
+        <span class='title'><%= substr($article->{preview_text}, 0, 102) %></span>
         <span class='date'><%= $article->{date} %></span>
     </a>
 </li>
