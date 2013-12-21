@@ -1,6 +1,7 @@
 <div class='sidebar__section fl'>
     <ul>
     % foreach my $cat (@$categories) {
+    	% next if !$cat->{name};
         <li><a href="/cat/<%= $cat->{_id} %>"><b><%= $cat->{name} %></b></a></li>
         % foreach my $subcat (@{$cat->{subcats}}) {
         <li>&nbsp;&nbsp;<a href="/subcat/<%= $subcat->{_id} %>"><%= $subcat->{name} %></a></li>

@@ -14,7 +14,7 @@ use constant {
 	AUTHORS_COLLECTION => 'authors',
 };
 
-use constant LIST_FIELDS => {map {$_ => 1} qw( name alias preview_image preview_size tags type preview_text date)};
+use constant LIST_FIELDS => {map {$_ => 1} qw( name alias preview_image preview_size tags type preview_text date brand)};
 
 sub new {
 	my ($class, $db, $conf) = @_;

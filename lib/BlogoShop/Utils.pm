@@ -243,25 +243,17 @@ sub get_active_categories {
 		group => {
 			ns 		=> 'items',
 			key 	=> {category=>1, subcategory=>1}, 
-			cond	=> { active => 1, 'subitems.qty' => {'$gt' => 0} },
-			'$reduce'	=> 'function(obj,prev) { prev.s.push(obj.sex) }',
-			initial	=> {s => []},
+			cond	=> { active => 1 },
+			'$reduce'	=> 'function(obj,prev) { prev++ }',
+			initial	=> {},
 		}}
 	);
-	# warn Dumper($res->{retval});	
-	foreach my $fetch (@{$res->{retval}}) {
-		foreach my $sex ( @{$fetch->{'s'}} ) {
-			if ($sex eq '') {
-				$hash->{$_}->{$fetch->{subcategory}} = $hash->{$_}->{$fetch->{category}} = 1 foreach qw(u m w);
-				last;
-			} else {
-				$hash->{$_}->{$fetch->{subcategory}} = $hash->{$_}->{$fetch->{category}} = 1 foreach ('u', $sex);
-			}
-		}
-	}
+
+	$hash->{$_->{category}} = $hash->{$_->{category}.'.'.$_->{subcategory}} = 1
+		foreach @{$res->{retval}};
 
 	$hash->{time} = time();
-	# warn '!!!!!!!!!!save_active_categories=>';
+	warn '!!!!!!!!!!save_active_categories=>'.Dumper $hash;
 	$db->stuff->save($hash);
 	return $hash;
 }

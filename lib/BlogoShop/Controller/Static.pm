@@ -14,6 +14,7 @@ sub show {
         %$page,
         type => '',
         banners_h => $self->utils->get_banners($self, '', 240),
+        banners => $self->utils->get_banners($self, '', 680),
         host => $self->req->url->base,
         page_name => $self->stash('template'),
         template => 'static',

@@ -5,6 +5,7 @@
 
         <ul class='categories__list__section'>
             % foreach my $cat (@$categories) {
+            % next if !$cat->{name};
             <li  <%== 'class=\'current\'' if stash('category') eq $cat->{_id} %> >
             	<a class='categorie__title' href="/admin/shop/<%= $cat->{_id} %>"><%= $cat->{name} %></a>
                 <a href="#" class="plus"></a>

@@ -1,10 +1,13 @@
 % layout 'article';
 % title 'Полиграфия Fizra: '.$name;
 
-%= include 'includes/left_bar'
+%= include 'includes/carousel'
 
-<div class='content__section post__page'>
-    <h2><%= stash 'name' %></h2>
-    
-    <%== stash 'article_text_rendered' %>
+<div class='content__section wrapper'>
+	%= include 'includes/left_bar'
+	<div class="right__side text__post">
+		<h2><%= stash 'name' %></h2>
+		
+		<%== stash 'article_text_rendered' %>
+	</div>
 </div>

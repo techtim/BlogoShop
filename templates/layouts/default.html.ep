@@ -4,6 +4,10 @@
 		<meta charset='utf-8' />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+		% if (ref stash('cur_category') eq ref {} ) {
+		<meta name="keywords" content="<%= stash('cur_category')->{meta_keys} %>"/>
+		<meta name="description" content="<%= stash('cur_category')->{meta_descr} %>"/>
+		% }
 		<title><%= title %></title>
 		<link rel="dns-prefetch" href="//ajax.googleapis.com">
 		<link rel="dns-prefetch" href="//fonts.googleapis.com">

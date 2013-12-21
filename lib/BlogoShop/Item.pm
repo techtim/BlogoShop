@@ -17,11 +17,11 @@ my $json  = Mojo::JSON->new;
 
 use constant ITEM_FIELDS => qw(id name alias descr active
 								category subcategory 
-								brand tags total_qty weight
+								brand tags weight
 								sale_start sale_end sale_value sale_active
 								sex preview_image images
 								);
-use constant LIST_FIELDS => map {$_ => 1} qw(name active alias brand brand_name category subcategory subitems total_qty articol
+use constant LIST_FIELDS => map {$_ => 1} qw(name active alias brand brand_name category subcategory subitems articol
 											tags descr preview_image price sale);
 
 use constant SALE_PARAMS => qw(sale_start sale_end sale_value sale_active);
@@ -31,7 +31,7 @@ use constant SUBITEM_PARAMS => qw (size price qty);
 use constant OPT_SUBITEM_PARAMS => {
 	size => "размер", 
 	price => "цена",
-	qty => "кол-во",
+	# qty => "кол-во",
 	color => 'цвет',
 	length => 'длина',
 	width => 'ширина',
@@ -218,13 +218,9 @@ sub _parse_data {
 		$self->{sale_active} = 0;
 	}
 	$self->{sale}->{$_} = delete $self->{$_} foreach SALE_PARAMS;
-	
-	$self->{qty} 	//= 0;
-	$self->{qty} 	+= 0;
+
 	$self->{size} 	.= '';
 	$self->{price} 	+= 0;
-	$self->{weight}	+= 0 if $self->{weight};
-	$self->{total_qty} 	= $self->{qty}; 
 	$self->{subitems}	= $self->_get_subitems($ctrl);
 
 	$self->{preview_image} = '' if !$self->{preview_image};
@@ -241,9 +237,7 @@ sub _parse_data {
 
 	# check other params
 	push @$error_message, 'no_price' if !$self->{price};
-	push @$error_message, 'no_weight' if !$self->{weight};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
-	push @$error_message, 'no_qty' if $self->{active} && !$self->{qty};
 
 	$self->{active} = 0, $ctrl->stash(error_message => $error_message) if @$error_message>0;
 

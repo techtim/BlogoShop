@@ -20,22 +20,23 @@ sub index {
 	my $art = $self->articles->get_filtered_articles({active => 1}, $self->config('articles_on_startpage'));
 
 	my  $filter->{active} 		= 1;
-		$filter->{'subitems.qty'}= {'$gt' => 0};
+		# $filter->{'subitems.qty'}= {'$gt' => 0};
 		# $filter->{sale}->{sale_active} = 1;
 		# $filter->{sale}->{sale_start_stamp} = {'$lt' => time()};
 		# $filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
 		# delete $filter->{sale};
     my $item 	= BlogoShop::Item->new($self);
-	# my $items 	= $item->list($filter, {}, int($self->config('items_on_startpage')/2));
+	my $items 	= $item->list($filter, int($self->config('items_on_startpage')/2));
 	
 	# @$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
-	my $items 	= $self->utils->get_items_from_catalog($self);
+	# my $items 	= $self->utils->get_items_from_catalog($self);
 
     return $self->render(
 		items => $items,
     	articles => $art,
         banners => $self->utils->get_banners($self, '', 680),
         banners_h => $self->utils->get_banners($self, '', 240),
+        cur_category => $self->stash('categories_info')->{'index'} || {},
         %{$self->check_cart},
         page_name => 'shop',
         host => $self->req->url->base,
@@ -116,6 +117,7 @@ sub item {
 		items 	=> $item->list($filter, {}, 0, 8),
 		banners_h => $self->utils->get_banners($self, $item->{category}, 240),
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
+		cur_category => {},
 		host 	=> $self->req->url->base,
 		url 	=> $self->req->url,
 		is_item => 1,

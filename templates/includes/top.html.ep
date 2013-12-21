@@ -4,12 +4,12 @@
 			<!--<li <%= 'current' if stash('page_name') eq '' %>><a href='http://<%= config->{domain_name} %>' class='home'></a></li>-->
 			<li<%= ' current' if stash('page_name') eq 'blog' %>><a href='http://<%= config->{domain_name} %>/blog'>Блог</a></li>
 			<li<%= ' current' if stash('page_name') eq 'about' %>><a href='http://<%= config->{domain_name} %>/about'>О нас</a></li>
-			<li<%= ' current' if stash('page_name') eq 'requires' %>><a href='http://<%= config->{domain_name} %>/map'>Требования</a></li>
-			<li<%= ' current' if stash('page_name') eq 'services' %>><a href='http://<%= config->{domain_name} %>/about'>Услуги</a></li>
+			<li<%= ' current' if stash('page_name') eq 'requires' %>><a href='http://<%= config->{domain_name} %>/requires'>Требования</a></li>
+			<li<%= ' current' if stash('page_name') eq 'services' %>><a href='http://<%= config->{domain_name} %>/services'>Услуги</a></li>
 			<!--<li<%= ' current' if stash('page_name') eq 'calc' %>><a href='http://shop.<%= config->{domain_name} %>/'>Калькулятор</a></li>-->
-			<li<%= ' current' if stash('page_name') eq 'pay' %>><a href='http://<%= config->{domain_name} %>/delivery'>Оплата</a></li>
+			<li<%= ' current' if stash('page_name') eq 'pay' %>><a href='http://<%= config->{domain_name} %>/pay'>Оплата</a></li>
 			<li<%= ' current' if stash('page_name') eq 'delivery' %>><a href='http://<%= config->{domain_name} %>/delivery'>Доставка</a></li>
-			<li<%= ' current' if stash('page_name') eq 'contacts' %>><a href='http://<%= config->{domain_name} %>/pay'>Контакты</a></li>
+			<li<%= ' current' if stash('page_name') eq 'contacts' %>><a href='http://<%= config->{domain_name} %>/contacts'>Контакты</a></li>
 		</ul>
 
 		<div class="basket empty">

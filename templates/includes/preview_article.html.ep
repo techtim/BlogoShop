@@ -3,7 +3,7 @@
     	<span class='img__section'> <img src='<%== config->{nginx_res_post_prev} . config->{image_url} .
             join ('/', $article->{type}, $article->{alias}, $article->{preview_image}) %>'>
 		</span>
-        <span class='category'><%= $article->{brand} %></span>
+        <span class='category'><%= $name_brands->{$article->{brand}[0]} if ref $article->{brand} eq ref [] %></span>
         <span class='title'><%= substr($article->{preview_text}, 0, 102) %></span>
         <span class='date'><%= $article->{date} %></span>
     </a>

@@ -8,6 +8,9 @@
         <link rel="dns-prefetch" href="//ajax.googleapis.com">
         <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
 
+        <meta name="keywords" content="<%= stash('cur_category')->{meta_keys} %>"/>
+		<meta name="description" content="<%= stash('cur_category')->{meta_descr} %>"/>
+
 		% if (stash('is_item')) {
 		<meta property="og:title" content="<%= stash('name') %>" />
 		<meta property="og:type" content="article" />
@@ -20,23 +23,19 @@
 		<meta property="fb:admins" content="100000785354670" />
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
-		% if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
-		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
-        % } else {
-        <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
-        % }
-        <script data-main='/j/config' src='/j/require.js'></script>
+		
+		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
+
+        <!-- <script data-main='/j/config' src='/j/require.js'></script> -->
         <script>requirejs(['app/global'])</script>
     </head>
 	<body>
-        <div class='wrap clearfloat'>
-            %= include 'includes/header'
-            %= include 'includes/top'
-            <%= content %>
 
-        </div>
+%= include 'includes/header'
+%= include 'includes/top'
+<%= content %>
 
-        %= include 'includes/footer'
+        %# = include 'includes/footer'
 
         %= include 'includes/google_analytics'
         %= include 'includes/yandex_metrika_shop'

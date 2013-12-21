@@ -5,6 +5,41 @@ body {
   font-size: 12px;
 }
 
+/* line 79, style.scss */
+/*body.overlayed #overlay {
+  display: block;
+}
+*/
+.wrapper {
+  width: 980px;
+  margin: 0 auto;
+}
+
+/* line 85, style.scss */
+.wrap {
+  width: 980px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+/* line 54, style.scss */
+.clearfloat {
+  display: block;
+}
+
+/* line 43, style.scss */
+.clearfloat:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both !important;
+  visibility: hidden;
+}
+
+.clear {
+  clear: both;
+}
+
 /* line 53, admin.scss */
 .fl {
   float: left;
@@ -1696,6 +1731,11 @@ body {
 .orders__list__section .statistic__strip__section .filter__toggle.active {
   background-position: 71px 9px;
 }
+
+.fiters__section.admin .title {
+  margin-top: -2px;
+}
+
 /* line 1796, admin.scss */
 .orders__list__section .filters__section.hidden {
   display: none;

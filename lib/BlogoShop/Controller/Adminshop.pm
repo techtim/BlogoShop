@@ -5,7 +5,7 @@ use LWP::UserAgent ();
 use BlogoShop::Item;
 use utf8;
 
-use constant ITEM_FIELDS => qw( brand discount category subcategory tag sex );
+use constant ITEM_FIELDS => qw( brand discount category subcategory tag );
 
 use constant WEIGHTS => [
     {_id => 0.5, name => '0.1-0.5'},
@@ -29,10 +29,20 @@ sub show {
 
     my $item = BlogoShop::Item->new($c);
 
-    if ($c->req->method eq 'POST' && $filter->{category} ) {
+    if ($c->req->method eq 'POST') {
         my $vars = {title => $c->req->param('title.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
-                    descr => $c->req->param('descr.'.$filter->{category}.'.'.$filter->{subcategory}) || ''};
-        if ($filter->{subcategory} eq '') {
+                    descr => $c->req->param('descr.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
+                    meta_descr => $c->req->param('meta_descr.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
+                    meta_keys => $c->req->param('meta_keys.'.$filter->{category}.'.'.$filter->{subcategory}) || '',
+                };
+
+        if (!$filter->{category}) {
+            $c->app->db->categories->update(
+                    {_id => 'index'}, # @index unique unrepetable key for shop startpage
+                    {'$set' => $vars},
+                    { upsert => 1 },
+            );
+        } elsif ($filter->{subcategory} eq '') {
             $c->app->db->categories->update(
                     {_id => $filter->{category}}, 
                     {'$set' => $vars},
@@ -48,7 +58,7 @@ sub show {
                     {'$set' => {subcats => $subcats}},
             );
         }
-        return $c->redirect_to("/admin/shop/$filter->{category}/$filter->{subcategory}");
+        return $c->redirect_to( "/admin/shop/".($filter->{category} ? "$filter->{category}/$filter->{subcategory}" : '') );
     }
 
     # Search Part  
@@ -78,7 +88,7 @@ sub show {
         cur_page  => $c->req->param('page') || 1,
         pages => int( 0.99 + $item->count($filter)/($c->{app}->config->{items_on_page}*2) ),
         items => $item->list($filter, {brand => 1}, $skip, $c->{app}->config->{items_on_page}*2),
-        cur_category => $c->stash('categories_info')->{($filter->{category} || '').($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
+        cur_category => $c->stash('categories_info')->{$filter->{category} ? ( $filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '') ) : 'index' } || {},
         host  => $c->req->url->base,
         pager_url  => $pager_url,
         template => 'admin/shop',
@@ -99,8 +109,10 @@ sub item {
 	if ($c->req->method eq 'POST') {
 		# delete
         $c->app->db->stuff->remove({_id => 'active_categories'});
-		$item->delete, return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory})) 
-			if $c->req->param('delete') && $item->{_id};
+		if ( $c->req->param('delete') && $item->{_id} ) {
+            $item->delete;
+            return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory}));
+        }
 
 		# save
 		my $id = $item->save($c); # save returns 0 if failed + puts error_message to controller and form data to item
