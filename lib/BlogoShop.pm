@@ -222,6 +222,9 @@ sub startup {
 			'/shop/:category/:subcategory',	category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!
 		)->to('controller-Adminshop#show');
 		$admin_bridge->route(
+			'/shop/:category/:subcategory/:act', category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, act => qr!on|off!
+		)->to('controller-Adminshop#turn_category');
+		$admin_bridge->route(
 			'/shop/:category/:subcategory/:id/:act', id => qr/[\d\w]+/, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, act => qr!\w+!
 		)->to('controller-Adminshop#item', id => 'add', act => '');
 		
