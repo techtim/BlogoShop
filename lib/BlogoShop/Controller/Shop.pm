@@ -102,7 +102,7 @@ sub item {
 	my $self = shift;
 
 	my $item = BlogoShop::Item->new($self);
-	return $self->redirect_to('/'. join '/', $item->{category}, $item->{subcategory}) if !$item->{_id};
+	return $self->redirect_to('/'. join '/', $item->{category}, $item->{subcategory}) if !$item->{_id} || !$item->{active};
 
 	return $self->buy($item) if $self->stash('act') eq 'buy';
 
