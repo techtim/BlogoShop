@@ -20,7 +20,7 @@ sub index {
 	my $art = $self->articles->get_filtered_articles({active => 1}, $self->config('articles_on_startpage'));
 
 	my  $filter->{active} 		= 1;
-		$filter->{'subitems.qty'}= {'$gt' => 0};
+		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
 		# $filter->{sale}->{sale_active} = 1;
 		# $filter->{sale}->{sale_start_stamp} = {'$lt' => time()};
 		# $filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
@@ -54,7 +54,14 @@ sub list {
 		defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
 		 # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
 		($filter->{$_} && $filter->{$_} ne '' ? () : (delete $filter->{$_}) ) for qw(category subcategory sex);
+
+	for ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')}->{state}) {
+		return $self->redirect_to('/'.$filter->{category}) if $_ && $_ eq 'off';
+	}
+	
+
 # warn $self->dumper($filter);
+
 	my $sort 	= { price => -1 };
 	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
 	$sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
@@ -100,7 +107,7 @@ sub item {
 	return $self->buy($item) if $self->stash('act') eq 'buy';
 
 	my  $filter->{active} = 1;
-		$filter->{'subitems.qty'} = {'$gt' => 0};
+		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
 		$filter->{alias} = {'$ne' => $item->{alias}};
 	$item->{$_} ? 
 		push @{$filter->{'$or'}}, {$_ => $item->{$_}} : () 

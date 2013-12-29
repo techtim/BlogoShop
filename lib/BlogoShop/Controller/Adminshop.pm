@@ -97,7 +97,7 @@ sub item {
 		if $c->stash('act') eq 'copy' && $item->{_id};
 
 	if ($c->req->method eq 'POST') {
-		# delete
+		# delete categories cache entry from db
         $c->app->db->stuff->remove({_id => 'active_categories'});
 		$item->delete, return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory})) 
 			if $c->req->param('delete') && $item->{_id};
@@ -134,6 +134,17 @@ sub call_courier {
 
     $c->config('logistics_id');
 
+}
+
+sub turn_category {
+    my ($c) = @_;
+
+    $c->db->items->update({category => $c->stash('category'), subcategory => $c->stash('subcategory')}, 
+        {'$set' => {active => $c->stash('act') eq 'on' ? 1 : 0}}, {'multiple' => 1 });
+    $c->app->db->stuff->remove({_id => 'active_categories'});
+    $c->db->categories->update({_id => $c->stash('category'), "subcats._id" => $c->stash('subcategory')}, { '$set' => {'subcats.$.state' => $c->stash('act')} });
+
+    return $c->redirect_to("/admin/shop/".$c->stash('category')."/".$c->stash('subcategory'));
 }
 
 1;

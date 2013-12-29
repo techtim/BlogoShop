@@ -32,6 +32,14 @@
 		<li>
 			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/add" class='add__item'>Добавить вещь</a>
 		</li>
+
+		<li>
+			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/
+				<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
+					class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
+			<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." раздел" %>
+			</a>
+		</li>
 		% }
 	</ul>
 
