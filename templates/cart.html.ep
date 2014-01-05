@@ -192,6 +192,10 @@
 					<input type='radio' name='pay_type' id='nalog_payment' value='nalog_payment' disabled />
 					<label for='nalog_payment'>Наложенный платеж</label>
 				</li>
+				<li class='clearfloat' data-type='nalog_payment'>
+					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
+					<label for='nalog_payment'>QIWI платеж</label>
+				</li>
 			</ul>
 		</div>
 

@@ -39,6 +39,7 @@ sub index {
 		banners_h => $self->utils->get_banners($self, '', 240),
 		meta_descr => $self->stash('categories_info')->{'index'}->{meta_descr},
 		meta_keys => $self->stash('categories_info')->{'index'}->{meta_keys},
+		cur_category => $self->stash('categories_info')->{'index'} || {},
 		%{$self->check_cart},
 		page_name => 'shop',
 		host => $self->req->url->base,

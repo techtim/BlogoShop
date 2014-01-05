@@ -11,6 +11,7 @@ use BlogoShop::Articles;
 use BlogoShop::Admins;
 use BlogoShop::Utils;
 use BlogoShop::Item;
+use BlogoShop::Qiwi;
 
 # This method will run once at server start
 sub startup {
@@ -71,6 +72,7 @@ sub startup {
 	(ref $self)->attr(items 	=> sub {return BlogoShop::Item->new($self, $self->stash('id'))});
 	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new()});
 	(ref $self)->attr(conf 	=> sub {return $self->config});
+	(ref $self)->attr(qiwi 	=> sub {return BlogoShop::Qiwi->new()});
 
 	# Helpers part
 	$self->helper(db 		=> sub { shift->app->db });
@@ -78,6 +80,7 @@ sub startup {
 	$self->helper(articles 	=> sub { shift->app->articles });
 	$self->helper(items 	=> sub { shift->app->items });
 	$self->helper(courier 	=> sub { shift->app->courier });
+	$self->helper(qiwi 	=> sub { shift->app->qiwi });
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();
@@ -205,7 +208,11 @@ sub startup {
 		)->to('controller-Adminshop#item', id => 'add', act => '');
 		
 		# Orders list
+		$admin_bridge->route('/orders/qiwi_update')->via('get')->to('controller-Adminorders#qiwi_update_bills');
+
+		$admin_bridge->route('/orders/qiwi/:qiwi_status', status => => qr/[\w\d]+/)->via('get')->to('controller-Adminorders#list', qiwi_status => '');
 		$admin_bridge->route('/orders/:status', status => => qr/\w+/)->via('get')->to('controller-Adminorders#list', status => '');
+		$admin_bridge->route('/orders/id/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
 
@@ -213,8 +220,7 @@ sub startup {
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'statics');
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'statics');
-		
-		
+
 		
 		# Content
 		$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');

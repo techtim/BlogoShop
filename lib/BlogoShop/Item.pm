@@ -38,6 +38,7 @@ use constant OPT_SUBITEM_PARAMS => {
 	deep => 'глубина',
 	type => 'тип',
 	articol => 'артикул',
+	roast_date => 'дата обжарки',
 
 	group_cnt => 'количество групп',
 	weight => 'вес',

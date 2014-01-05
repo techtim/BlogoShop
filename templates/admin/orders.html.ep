@@ -6,7 +6,7 @@
 
 <div class='orders__list__section left__side__section'>
 	<h2 class='caption'>Заказы</h2>
-
+	<a href="/admin/orders/qiwi_update"> Обновить статусы QIWI заказов </a>
 	<ul class='statistic__strip__section clearfloat'>
 		<li class='total'>
 			<a href='/admin/orders'><%= <%= $orders_count %></a>
@@ -15,6 +15,7 @@
 			cумма заказов: <strong><%= $orders_sum %></strong> P
 		</li>
 		<li class="fr"><a href="#" class="filter__toggle">фильтры</a></li>
+		<li class="fr"><a href="#" class="qiwi_filter__toggle">Q</a></li>
 	</ul>
 
 	<div class="filters__section clearfloat <%= 'hidden' if stash('status') eq '' %>">
@@ -39,7 +40,27 @@
 			<li<%== " class='current'" if stash('status') eq 'canceled' %>>отменен:<a href="/admin/orders/canceled" class='canceled'><%= $counter->{canceled}||0 %></a></li>
 		</ul>
 	</div>
-	
+
+	<div class="qiwi_filters__section clearfloat <%= 'hidden' if stash('qiwi_status') eq '' %>">
+		QIWI:
+		<ul class='clearfloat'>
+			<li<%== " class='current'" if stash('qiwi_status') eq '500' %>>выставить счет:<a href="/admin/orders/qiwi/500" class='new'><%= $qiwi_counter->{500}||0 %></a></li>
+			<li<%== " class='current'" if stash('qiwi_status') eq '60' %>>оплачен:<a href="/admin/orders/qiwi/60" class='finished'><%= $qiwi_counter->{60}||0 %></a></li>
+			<li<%== " class='current'" if stash('qiwi_status') eq '50' %>>ожидает оплаты:<a href="/admin/orders/qiwi/50" class='wait_pay'><%= $qiwi_counter->{50}||0 %></a></li>
+			<li<%== " class='current'" if stash('qiwi_status') eq '160' %>>отменен:<a href="/admin/orders/qiwi/160" class='wait_pay'><%= $qiwi_counter->{160}||0 %></a></li>
+		</ul>
+	</div>
+
+	% if (!stash('_id') || stash('_id') eq '') {
+	<div class='clearfloat'>
+		<ul class='pager__section shop__list clearfloat'>
+			<li class='title'>страница:</li>
+			% foreach (1..$pages) {
+				<li <%== $_ == $cur_page ? "class='current'" : "" %>><a href='<%= $pager_url . 'page='. $_ %>'><%= $_ %></a></li>
+			% }
+		</ul>
+	</div>
+	% }
 	<ul class='list'>
 		% foreach my $order (@$orders) {
 			<li class="
@@ -57,11 +78,15 @@
 				<%= 'canceled' if $order->{status} eq 'canceled'%>
 				<%= 'canceled' if $order->{status} eq 'canceled' %>
 				<%= 'canceled' if $order->{status} eq 'changed' %>
-				<%= 'new' if $order->{status} eq 'new' %>">
+				<%= 'new' if $order->{status} eq 'new' %>
+				<%= 'active' if stash('_id') %>
+				">
 
 	       		%= form_for '/admin/orders/'.(stash('status') ? stash('status').'/' : '').$order->{_id} => (method => 'post') => begin
 		        	<div class='cut'>
-		        		<div class='order__num'>Заказ № <span><%= $order->{order_id} %></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong></div>
+			        		<div class='order__num'>Заказ № <span><a href="/admin/orders/id/<%= $order->{order_id_full} %>"><%= $order->{order_id} %></a></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong>
+			        		<%== '&nbsp;&nbsp;&nbsp;<strong>Q</strong>' if $order->{pay_type} eq 'qiwi' %>
+		        		</div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
 
 						<button type='submit' class='submit__button active'>Сохранить</button>
@@ -136,8 +161,10 @@
 									Почта России 
 									% $sum += 430;
 								% } elsif ($order->{delivery_type} eq "ems") {
-								 	EMS
-								 	% $sum += 620;
+									EMS
+									% $sum += 620;
+								% } elsif ($order->{delivery_type} eq "logistics") {
+								 	Logistics
 								% }
 							</dd>
 						</dl>
@@ -168,24 +195,21 @@
 						<dl class='deliver__price__section clearfloat'>
 							<dt>СТОИМОСТЬ доставки:</dt>
 							<dd>
-								% if ($order->{self_delivery} ne '') {
-									
-								% } elsif ($order->{delivery_type} eq "courier") {
-									350
-								% } elsif ($order->{delivery_type} eq "russian_post") {
-									500
-								% } elsif ($order->{delivery_type} eq "ems") {
-								 	620
+								% if ($order->{delivery_type} ne '') {
+									<input type='text' name='delivery_cost' value='<%= $order->{delivery_cost} %>'>
+								% 	$sum += $order->{delivery_cost} if $order->{delivery_cost};
 								% }
 							</dd>
 						</dl>
 
-						% if ($order->{delivery_type} eq "courier") {
-						<dl class='contacts__section gray__bg clearfloat'>
-							<dt>Вызвать курьера:</dt>
-							<dd>
+						% if (0 && $order->{delivery_type} eq "logistics") {
+						<dl class='deliver__price__section gray__bg clearfloat'>
+							<dt>
+								Вызвать курьера: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								<input type='checkbox' name='courier' value=1 <%= 'checked' if $order->{courier_called} %>>
-							</dd>
+							</dt>
+							<dd></dd>
 						</dl>
 						% }
 
@@ -218,12 +242,36 @@
 								<button type='submit' class='submit__button'>Сохранить</button>
 							</div>
 						</div>
-						
+
+						% if ($order->{pay_type} eq 'qiwi' ) {
+						<div class='qiwi'>
+							<b>Qiwi:</b>
+							% my $qiwi = $order->{qiwi_status};
+							% if (!$qiwi) {
+			        			<input type='submit' name='create_qiwi' value='Выставить счет' >
+			        		% } else {
+			        			Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
+			        			<input type='submit' name='cancel_qiwi' value='Отменить выставленный счет'>
+			        		% }
+			        	</div>
+			        	% }
 					</div>
 	        	% end
 	        </li>
 	   % }
 	</ul>
+
+	% if (!stash('_id') || stash('_id') eq '') {
+	<div class='clearfloat'>
+		<ul class='pager__section shop__list clearfloat'>
+			<li class='title'>страница:</li>
+			% foreach (1..$pages) {
+				<li <%== $_ == $cur_page ? "class='current'" : "" %>><a href='<%= $pager_url . 'page='. $_ %>'><%= $_ %></a></li>
+			% }
+		</ul>
+	</div>
+	% }
 </div>
+
 
 <script>requirejs(['app/admin/orders'])</script>
