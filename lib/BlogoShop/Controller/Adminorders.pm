@@ -186,7 +186,9 @@ sub update {
 			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
 			{'$set' => {qiwi_status => $status}}
 		);
-delete $order->{status}; # status binded mojo var
+		
+		delete $order->{status}; # status binded mojo var
+
 		$self->stash(%$order);
 
 		my $mail = $self->mail(

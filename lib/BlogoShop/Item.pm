@@ -15,7 +15,7 @@ my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
 use Mojo::JSON;
 my $json  = Mojo::JSON->new;
 
-use constant ITEM_FIELDS => qw(id name alias descr active
+use constant ITEM_FIELDS => qw(id name alias descr active deleted
 								category subcategory 
 								brand tags total_qty weight
 								sale_start sale_end sale_value sale_active
@@ -71,6 +71,7 @@ sub new {
 	    %$self = ( %$self, 
 	    	%{ $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $ctrl->stash('id'))}) || {} } 
 	    );
+	    $self->{$_} = $self->{subitems}->[0]{$_} foreach SUBITEM_PARAMS;
     } elsif ($ctrl->stash('alias')) {
     	%$self = ( %$self, 
 	    	%{ $self->{app}->db->items->find_one({alias => $ctrl->stash('alias')}) || {} } 
@@ -111,8 +112,13 @@ sub save {
 
 sub delete {
 	my ($self) = @_;
-	warn 'DELETE:'.$self->{_id};
-	$self->{app}->db->items->remove({_id => MongoDB::OID->new(value => ''.$self->{_id})}); 
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$set' => {deleted => 1}}); 
+	return 1;
+}
+
+sub undelete {
+	my ($self) = @_;
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$unset' => {deleted => ""}}); 
 	return 1;
 }
 
@@ -145,6 +151,7 @@ sub list {
     }
     $filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
     # warn 'FLTR'. $self->{app}->dumper(\%filter);
+    $filter{deleted} = {'$exists' => 0} unless defined $filter{deleted};
 	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 	$skip = $skip =~ m/(\d+)/ ? $1 : 0;
@@ -157,6 +164,7 @@ sub list {
 sub dump_all {
 	my ($self, $filt, $sort) = @_;
 	my %filter = ref $filt eq ref {} ? %$filt : ();
+	$filter{deleted} = {'$exists' => 0};
 	$sort = {_id => 1} if ref $sort ne ref {} ||  keys %$sort == 0;
 
 	return [$self->{app}->db->items->find(\%filter)->sort($sort)->all];
@@ -172,6 +180,7 @@ sub count {
 	$filter{sex} = {'$in' => ['', $filter{sex}]} if $filter{sex}; # to show unisex cloths
 	# warn 'FLTR'. $self->{app}->dumper(\%filter);
 	$filter{sale} = {sale_active => 1} if $filter{sale};
+	$filter{deleted} = {'$exists' => 0} unless defined $filter{deleted};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 
 	return $self->{app}->db->items->find(\%filter)->count;
@@ -182,7 +191,8 @@ sub _parse_data {
 	
 	my $error_message = [];
 
-	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS, keys OPT_SUBITEM_PARAMS);
+	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS);
+	( defined $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : () ) foreach keys OPT_SUBITEM_PARAMS;
 #	warn $ctrl->dumper($ctrl->req->params());
 	
 	$self->{active} = $self->{active} eq '' ? 0 : 0+$self->{active}; 
@@ -229,8 +239,8 @@ sub _parse_data {
 
 	$self->{preview_image} = '' if !$self->{preview_image};
 
-	# store main item patrams in subitems[0]
-	unshift @{$self->{subitems}}, {map {$_ => $self->{$_}} keys BlogoShop::Item::OPT_SUBITEM_PARAMS};
+	# store main item params in subitems[0]
+	unshift @{$self->{subitems}}, {map {$_ => $self->{$_}} grep {defined $self->{$_}} keys BlogoShop::Item::OPT_SUBITEM_PARAMS};
 
 	# check critical params to save images
 	push @$error_message, 'no_category' if !$self->{category};
@@ -243,7 +253,7 @@ sub _parse_data {
 	push @$error_message, 'no_price' if !$self->{price};
 	push @$error_message, 'no_weight' if !$self->{weight};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
-	push @$error_message, 'no_qty' if $self->{active} && !$self->{qty};
+	push @$error_message, 'no_qty' if $self->{active} && ! grep {$_->{qty}} @{$self->{subitems}};
 
 	$self->{active} = 0, $ctrl->stash(error_message => $error_message) if @$error_message>0;
 

@@ -339,7 +339,11 @@
 
 		<div class='submit__section'>
 			% if ($action_type  ne 'add') {
-	       		<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить товартовар');" class='button red delete__item'>Удалить товар!</button>
+				% if (stash('deleted') eq '') {
+					<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить товартовар');" class='button red delete__item'>Удалить товар!</button>
+	       		% } else {
+					<button type="submit" name="undelete" value="1" onCLick="return confirm('Восстановить товартовар');" class='button green delete__item'>Восстановить товар!</button>
+	       		% }
 	       	% }
 
 			<a class='button gray submit__form' href='#' data-role='submit'>Сохранить товар</a>

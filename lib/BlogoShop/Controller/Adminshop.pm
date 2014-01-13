@@ -23,6 +23,7 @@ sub show {
     defined $c->stash($_) ? ($filter->{$_} = $c->stash($_)) : () foreach ITEM_FIELDS;
     $filter->{active} = 0+$c->req->param('active') if defined $c->req->param('active');
     $filter->{sale} = { sale_active => 0+$c->req->param('sale') } if defined $c->req->param('sale');
+    $filter->{deleted} = 1 if defined $c->req->param('deleted') && $c->stash('admin')->{login} eq $c->config->{order_delete_power};
 
     return $c->redirect_to('/admin/shop/')
     	if $filter->{category} && !($c->stash('categories_alias'))->{$filter->{category}};
@@ -91,7 +92,8 @@ sub item {
     my $c = shift;
 
     my $item = BlogoShop::Item->new($c);
-
+    return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory}))
+        if $item->{deleted} && $c->stash('admin')->{login} ne $c->config->{order_delete_power};
 	# copy
 	return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory}, $item->copy($c))) 
 		if $c->stash('act') eq 'copy' && $item->{_id};
@@ -101,7 +103,8 @@ sub item {
         $c->app->db->stuff->remove({_id => 'active_categories'});
 		$item->delete, return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory})) 
 			if $c->req->param('delete') && $item->{_id};
-
+        $item->undelete, return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory},$item->{_id}))
+            if $c->req->param('undelete') && $item->{_id};
 		# save
 		my $id = $item->save($c); # save returns 0 if failed + puts error_message to controller and form data to item
 		return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory},$id)) if $id;

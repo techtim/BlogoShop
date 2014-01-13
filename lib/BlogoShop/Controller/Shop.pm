@@ -59,9 +59,6 @@ sub list {
 		return $self->redirect_to('/'.$filter->{category}) if $_ && $_ eq 'off';
 	}
 	
-
-# warn $self->dumper($filter);
-
 	my $sort 	= { price => -1 };
 	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
 	$sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
