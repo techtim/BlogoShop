@@ -15,7 +15,7 @@ my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
 use Mojo::JSON;
 my $json  = Mojo::JSON->new;
 
-use constant ITEM_FIELDS => qw(id name alias descr active deleted
+use constant ITEM_FIELDS => qw(id name alias descr active
 								category subcategory 
 								brand tags total_qty weight
 								sale_start sale_end sale_value sale_active
