@@ -1,6 +1,6 @@
 <div class='navigation__section clearfloat'>
     <ul class='main__nav__strip clearfloat'>
-        <li class='item__1 <%= 'current' if stash('page_name') eq 'blog' %>'><a href='http://blog.<%= config->{domain_name} %>/' title='Блог'>БЛОГ</a></li>
+        <li class='item__1 <%= 'current' if stash('page_name') eq 'blog' %>'><a href='http://<%= config->{domain_name} %>/blog' title='Блог'>БЛОГ</a></li>
         <li class='item__3 <%= 'current' if stash('page_name') eq 'about' %>'><a href='http://<%= config->{domain_name} %>/about' title='Где мы / кто мы'>ГДЕ МЫ / КТО МЫ</a></li>
         <!--<li class='item__4 <%= 'current' if stash('page_name') eq 'shop' %>'><a href='http://<%= config->{domain_name} %>/'>ONLINE-МАГАЗИН</a></li>-->
         <li class='item__5 <%= 'current' if stash('page_name') eq 'delivery' %>'><a href='http://<%= config->{domain_name} %>/delivery' title='Доставка'>ДОСТАВКА</a></li>
@@ -36,14 +36,6 @@
 <div class="top__gray__strip">
 	<div class="wrap">
 		<a href="http://<%= config->{domain_name} %>" class="logo" title='Barista Shop (Магазин для бариста)'></a>
-
-		<p class="time">
-			<span>ежедневно</span>
-			с 12 до 20
-		</p>
-
-		<a href="/map" class="address">МОСКВА, Электрозаводская ул. 21</a>
-		<p class="phone">+7 (985) 172 4306, +7 (926) 571 2198</p>
 
 		% if (0 && stash('page_name') eq 'shop') {
 	    <div class='shopping__cart__section'>

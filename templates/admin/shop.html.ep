@@ -25,11 +25,11 @@
 		</li>
 		% }
 		<li>
-			<%== '&gt; '.$brand if $brand %>
+			<%== '&gt; '.stash('name_brands')->{stash('brand')} if stash('brand') && stash('brand') ne '' %>
 		</li>
 		% if ($category && $subcategory) {
 		<li>
-			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/add" class='add__item'>Добавить вещь</a>
+			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/add" class='add__item'>Добавить товар</a>
 		</li>
 		% }
 	</ul>

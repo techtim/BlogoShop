@@ -77,7 +77,7 @@ sub create_bill {
 		SOAP::Data->name( txn => $order->{_id}->{value} ),
 		SOAP::Data->name( user => ''.$order->{phone} ),
 		SOAP::Data->name( amount => $order->{sum} ),
-		SOAP::Data->name( comment => $order->{comment} || 'Xoxloveka.ru bill' ),
+		SOAP::Data->name( comment => $order->{comment} || 'Barista-Shop.ru bill' ),
 		SOAP::Data->name( lifetime => $order->{lifetime} ),
 		SOAP::Data->name( alarm => 1 )->type('int'),
 		SOAP::Data->name( create => 1 )->type('boolean'),

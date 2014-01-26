@@ -158,9 +158,9 @@ sub startup {
 #    $self->routes->get('controller-shop#list')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
 
 	# --BLOG--
-	my  $blog = $r->route->over( headers => {Host => 'blog.'.$self->config('domain_name')} );
-
-		$blog->any('/')->to('controller-article#list');
+	# my  $blog = $r->route->over( headers => {Host => 'blog.'.$self->config('domain_name')} );
+	my  $blog = $r->bridge('/blog');
+		$blog->route('/')->to('controller-article#list');
 		$blog->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
 		my $bind_types = join '|', map {$_->{_id}} @types;
 		$blog->route('/:type', type => qr/$bind_types/)->to('controller-article#list');

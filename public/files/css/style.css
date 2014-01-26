@@ -103,6 +103,11 @@ body.overlayed #overlay {
   margin-top: 10px;
 }
 
+.header__section .contacts__section .phone {
+  font-size: 13px;
+  font-weight: bold;
+}
+
 /* line 133, style.scss */
 .shopping__cart__section {
   height: 32px;
@@ -202,7 +207,7 @@ body.overlayed #overlay {
   margin-left: 18px;
   margin-top: 10px;
   float: left;
-  color: #fff;
+  color: #222;
   font-size: 13px;
   font-weight: bold;
 }

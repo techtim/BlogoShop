@@ -53,3 +53,6 @@ recaptcha_private_key: '6Lc9jtISAAAAAM6wAcAjkq5D3v4E2-sJoOnRsMjk'
 address_for_courier: 'м. Китай-Город, Хохловский пер. д.7, магазин Хохловка'
 descr_for_courier: 'С торца здания есть ворота, проходите через проходную, после проходной повернуть налево, за вывеской справа, в глубине арки, будет черная дверь.'
 phone_for_courier: 89269309005
+
+qiwi_id: 5931016
+qiwi_pass: 'hu6NE4kMsPC0pXNXJWNH'

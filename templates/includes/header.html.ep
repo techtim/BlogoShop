@@ -7,12 +7,12 @@
             МОСКВА, Электрозаводская ул. 21
         </div>
         <div class='row'>
-            <label>ТЕЛЕФОН:</label>
-            +7 (985) 172 4306, +7 (926) 571 2198
-        </div>
-        <div class='row'>
             <label>часы работы:</label>
             ежедневно с 12 до 20
+        </div>
+        <div class='row'>
+            <label>ТЕЛЕФОН:</label>
+            <span class='phone'>+7 (985) 172 4306 </span>
         </div>
     </div>
 </div>
