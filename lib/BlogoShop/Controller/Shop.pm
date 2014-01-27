@@ -40,7 +40,6 @@ sub index {
 		meta_descr => $self->stash('categories_info')->{'index'}->{meta_descr},
 		meta_keys => $self->stash('categories_info')->{'index'}->{meta_keys},
 		cur_category => $self->stash('categories_info')->{'index'} || {},
-		%{$self->check_cart},
 		page_name => 'shop',
 		host => $self->req->url->base,
 		sex => '',
@@ -83,7 +82,6 @@ sub list {
 	} else {
 		return $self->render(
 			items 	=> $items,
-			%{$self->check_cart},
 			%$filter,
 			cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
 			banners => $self->utils->get_banners( $self, $filter->{category}. ($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 680 ),
@@ -117,7 +115,6 @@ sub item {
 # warn $self->dumper($item);
 	return $self->render(
 		%{$item->as_hash},
-		%{$self->check_cart},
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
 		items 	=> $item->list($filter, {}, 0, 8),
@@ -264,6 +261,7 @@ sub _proceed_checkout {
 	my $order_id 			= $self->app->db->orders->save($co_params);
 	$co_params->{order_id} 	= ($order_id=~/^(.{8})/)[0];
 
+	delete $co_params->{status}; #status reserved name in Mojo stash
 	$self->stash(%$co_params);
 	my $mail = $self->mail(
 		to      => $co_params->{email},
@@ -339,24 +337,31 @@ sub check_cart {
 	my $need_full = shift || 0;
 
 	my $session = $self->session();
-# warn 'SESSion '. $self->dumper($session);
+#	warn 'SESSion '. $self->dumper($session);
 	return {cart_count => 0} if !$session || !$session->{client} || ref $session->{client} ne ref {};
-
+	
 	my ($ct, $sum) = (0,0);
 	my $items = [];
-	eval {
-		foreach my $key (keys %{$session->{client}->{items}}) {
-			for ($session->{client}->{items}->{$key}) {
-				$ct += $_->{count};
-				$sum += $_->{price}*$_->{count};
-				push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } 
-					if $need_full && $key=~m!:+!;
-			}
-		}
-	};
-	$self->session(expires => 1) if $@; # if wrong cookies, clean them
 
-	return {cart_count => $ct, cart_price => $sum, cart_items => $items};
+	if ($session->{client}->{items} && ref $session->{client}->{items} eq ref {}) {
+		eval {
+			foreach my $key (keys %{$session->{client}->{items}}) {
+				for ($session->{client}->{items}->{$key}) {
+					$ct += $_->{count};
+					$sum += $_->{price}*$_->{count};
+					push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } 
+						if $need_full && $key=~m!:+!;
+				}
+			}
+		};
+		if ($@) {
+			$self->session(expires => 1); # if wrong cookies, clean them
+			return {cart_count => 0};
+		}
+		return {cart_count => $ct, cart_price => $sum, cart_items => $items};
+	} else { 
+		return {cart_count => 0};
+	}
 }
 
 sub yandex_market {

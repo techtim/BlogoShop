@@ -20,7 +20,7 @@
 	% if ($cur_category->{descr}) {
 		<div class='shop__description active'>
 			<!--<a class='expand__items' href='#'></a>-->
-			<h3><%== $cur_category->{descr} %></h3>
+			<%== $cur_category->{descr} %>
 		</div>
 		<script>requirejs(['app/shopDescription']);</script>
 	% }

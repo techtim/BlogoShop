@@ -1634,6 +1634,12 @@ body.overlayed #overlay {
 /* line 1745, style.scss */
 .shop__description {
   position: relative;
+  font-size: 14px;
+  font-style: normal;
+  font-family: Arial, sans-serif;
+  line-height: 17px;
+  padding-bottom: 10px;
+  color: #434343;
 }
 /* line 1748, style.scss */
 .shop__description .expand__items {

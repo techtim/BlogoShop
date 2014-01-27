@@ -121,7 +121,7 @@
 							<label>Бренд:</label>
 						</td>
 						<td>
-							%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'brands'
+							%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'list_brands'
 						</td>
 					</tr>
                     <tr>

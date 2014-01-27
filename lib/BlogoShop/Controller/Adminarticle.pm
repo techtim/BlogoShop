@@ -36,12 +36,6 @@ sub post {
 }
 
 # Utils
-sub add_params {
-	my $self = shift;
-	$self->stash(brands => [$self->app->db->brands->find()->all] || []);
-	#	$self->stash(tags => (map {$_->{tag}} $self->app->db->tags->find()->sort({_id => 1})->all) || [] );
-}
-
 sub check_input {
 	my ($self, $article) = @_;
 	
@@ -107,9 +101,9 @@ sub get_images {
 	
 	my $images = [];
 	my @image_descr = $self->req->param($name.'_descr');
-	my @image_size = $self->req->param($name.'_size');
+	my @image_size = $self->req->param($name.'_size') || (0)x(0+@image_descr);
 	my %image_delete = map {$_ => 1} $self->req->param($name.'_delete');
-	
+
 	# Collect already uploaded files
 	foreach ($self->req->param($name.'_tag')) {
 		my $tmp = {tag => $_, descr => shift @image_descr, size => 0+shift @image_size};
@@ -146,8 +140,6 @@ sub get_images {
 sub add {
 	my $self = shift;
 	
-	$self->add_params();
-	
 	$self->stash($_ => '') foreach ARTICLE_PARAMS;
 	
 	$self->render(
@@ -181,8 +173,6 @@ sub create {
 
 sub edit {
 	my $self= shift;
-	
-	$self->add_params();
 	
 	my $article = $self->articles->get_article_by_id($self->stash('id'), $self->{collection});
 	

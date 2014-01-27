@@ -366,22 +366,29 @@ sub check_cart {
 	my $session = $c->session();
 # warn 'SESSion '. $c->dumper($session);
 	return {cart_count => 0} if !$session || !$session->{client} || ref $session->{client} ne ref {};
-
+	
 	my ($ct, $sum) = (0,0);
 	my $items = [];
-	eval {
-		foreach my $key (keys %{$session->{client}->{items}}) {
-			for ($session->{client}->{items}->{$key}) {
-				$ct += $_->{count};
-				$sum += $_->{price}*$_->{count};
-				push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } 
-					if $need_full && $key=~m!:+!;
-			}
-		}
-	};
-	$c->session(expires => 1) if $@; # if wrong cookies, clean them
 
-	return {cart_count => $ct, cart_price => $sum, cart_items => $items};
+	if ($session->{client}->{items} && ref $session->{client}->{items} eq ref {}) {
+		eval {
+			foreach my $key (keys %{$session->{client}->{items}}) {
+				for ($session->{client}->{items}->{$key}) {
+					$ct += $_->{count};
+					$sum += $_->{price}*$_->{count};
+					push @$items, {_id => (split ':', $key)[0], sub_id => (split ':', $key)[1], count => $_->{count} } 
+						if $need_full && $key=~m!:+!;
+				}
+			}
+		};
+		if ($@) {
+			$self->session(expires => 1); # if wrong cookies, clean them
+			return {cart_count => 0};
+		}
+		return {cart_count => $ct, cart_price => $sum, cart_items => $items};
+	} else { 
+		return {cart_count => 0};
+	}
 }
 
 1;

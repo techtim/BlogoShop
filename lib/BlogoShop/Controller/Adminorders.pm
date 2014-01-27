@@ -6,7 +6,7 @@ use BlogoShop::Item;
 use BlogoShop::Courier;
 use utf8;
 
-use constant ORDER_FILTERS => qw (status);
+use constant ORDER_FILTERS => qw (status id qiwi_status);
 use constant ORDER_STATUS => qw (new proceed assembled finished canceled changed wait_delivery wait_courier self_delivery sent_courier sent_post sent_ems);
 use constant ORDER_STATUS_NAME => {
 	new => 'новый',
@@ -231,7 +231,6 @@ sub call_courier {
 		{_id => MongoDB::OID->new(value => $self->stash('id'))},
 		{'$set' => {courier_called => 1}}
 	);
-warn 'COUR';
 
 	# return $self->render(text => 'oook');
 	return $self->redirect_to('/admin/orders/'.$self->stash('status'));
