@@ -150,4 +150,25 @@ sub turn_category {
     return $c->redirect_to("/admin/shop/".$c->stash('category')."/".$c->stash('subcategory'));
 }
 
+sub multi_act {
+    my ($c) = @_;
+
+    my @ids = $c->req->param('item');
+
+    if ($c->req->param('action') && @ids > 0) {
+        if ($c->req->param('action') =~ m/(on|off)/ ) {
+            $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
+                { '$set' => { active => ($c->req->param('action') eq 'on'? 1 : 0) } },
+                {'multiple' => 1 }
+            );
+        } elsif ($c->req->param('action') eq 'delete') {
+            $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
+                { '$set' => {deleted => 1} },
+                {'multiple' => 1 }
+            );
+        }
+    }
+    return $c->redirect_to("/admin/shop/".$c->req->param('category').($c->req->param('subcategory') ? "/".$c->req->param('subcategory') : ''));
+}
+
 1;

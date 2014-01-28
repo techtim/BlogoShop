@@ -26,7 +26,7 @@
 		</li>
 		% }
 		<li>
-			<%== '&gt; '.stash('brand') if stash('brand') && stash('brand') ne '' %>
+			<%== '&gt; '.stash('name_brands')->{stash('brand')} if stash('brand') && stash('brand') ne '' %>
 		</li>
 		% if ($category && $subcategory) {
 		<li>
@@ -40,6 +40,15 @@
 			<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." раздел" %>
 			</a>
 		</li>
+		% }
+		% if (0 && stash('brand') && stash('brand') ne '') {
+		<li>
+			<a href="/admin/shop/brand/<%== stash('brand') %>/
+				<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
+					class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
+			<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." бренд" %>
+			</a>
+		</li>			
 		% }
 	</ul>
 
@@ -95,6 +104,19 @@
 	</ul>
 	<div class='clear'></div>
 
+	%= form_for '/admin/shop/multi' => (method => 'post') => begin
+	<input type='hidden' name='category' value='<%= stash('category') %>'/>
+	<input type='hidden' name='subcategory' value='<%= stash('subcategory') %>'/>
+	<div class='multi__action'>
+		<span> групповое действие:
+		<select name="action">
+			<option value="off">выключть</option>
+			<option value="on">включть</option>
+			<option value="delete">удалить</option>
+		</select>
+		<button type="submit" name="multi" value="1" class="button grey">сохранить</button>
+		</span> 
+	</div>
 	% if (@$items>0) {
     <ul class='list__section'>
         % foreach my $item (@$items) {
@@ -110,6 +132,7 @@
         	<a class='active controls' href=''></a>
         	<a class='delete controls' href=''></a>
 			-->
+			<span class='checkbox unchecked'><input type="checkbox" name="item" value="<%= $item->{_id} %>"> выбрать </span>
 
 			<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
 				<span class='articol'><%= $item->{articol} %></span>
@@ -124,6 +147,6 @@
 		% }
 	</ul>
 	% }
-
+	%= end
 
 </div>

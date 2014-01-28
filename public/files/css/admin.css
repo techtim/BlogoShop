@@ -215,6 +215,18 @@ body {
   opacity: .5;
 }
 
+.list__section .checkbox {
+  display: block;
+  color: #ffffff;
+  width: 150px;
+  height: 22px;
+  padding-top: 2px;
+  padding-left: 4px;
+  margin-bottom: 2px;
+  background: #505050;
+  /*background: #7ddc2b;*/
+}
+
 /* line 261, admin.scss */
 .caption {
   display: inline-block;
@@ -494,6 +506,26 @@ body {
 /* line 529, admin.scss */
 .pager__section a.current {
   color: #de1500;
+}
+
+.multi__action {
+  height: 50px;
+  background: #505050;
+}
+
+.multi__action span {
+  display: block;
+  padding-top: 15px;
+  padding-left: 12px;
+  color: #ffffff;
+}
+
+.multi__action .button.gray {
+  background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#cccccc));
+  background: -webkit-linear-gradient(top, #dfdfdf, #cccccc);
+  background: -moz-linear-gradient(top, #dfdfdf, #cccccc);
+  background: -o-linear-gradient(top, #dfdfdf, #cccccc);
+  background: linear-gradient(to bottom, #dfdfdf, #cccccc);
 }
 
 /* line 535, admin.scss */

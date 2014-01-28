@@ -55,10 +55,12 @@ sub list {
 		 # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
 		($filter->{$_} && $filter->{$_} ne '' ? () : (delete $filter->{$_}) ) for qw(category subcategory sex);
 
-	for ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')}->{state}) {
-		return $self->redirect_to('/'.$filter->{category}) if $_ && $_ eq 'off';
+	if ($filter->{category} && $filter->{subcategory}) {
+		for ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')}->{state}) {
+			return $self->redirect_to('/'.$filter->{category}) if $_ && $_ eq 'off';
+		}
 	}
-	
+
 	my $sort 	= { price => -1 };
 	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
 	$sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
@@ -82,7 +84,7 @@ sub list {
 			items 	=> $items,
 			%{$self->check_cart},
 			%$filter,
-			cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
+			cur_category => $filter->{category} ? ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {}) : {},
 			banners => $self->utils->get_banners( $self, $filter->{category}. ($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 680 ),
 			banners_h => $self->utils->get_banners($self, $filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 240),
 			type 	=> '',

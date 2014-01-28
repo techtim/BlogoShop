@@ -112,14 +112,7 @@ sub startup {
 		my $js = '<meta name="csrftoken" content="' . $token . '"/>';
 		Mojo::ByteStream::b($js);
 	} );
-	$self->hook(before_routes => sub {
-		my $c = shift;
-		warn '!!!!!!:'.$c->req->url->path;
-		if($c->req->url->path =~ m!^(/soap)!){
-			$c->session('csrftoken' => 1);
-			$c->param('csrftoken' => 1); 
-		}
-	});
+
 	# Header plug for subdomains
 	$self->plugin('HeaderCondition');
 
@@ -135,6 +128,14 @@ sub startup {
 	$self->defaults({
 		types       => \@types,
 		types_alias => \%types_alias,
+	});
+
+	$self->hook(before_routes => sub {
+		my $c = shift;
+		if($c->req->url->path =~ m!^(/soap)!){
+			$c->session('csrftoken' => 1);
+			$c->param('csrftoken' => 1); 
+		}
 	});
 
 	$self->hook(around_dispatch => sub {
@@ -216,6 +217,7 @@ sub startup {
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/search')->to('controller-Adminshop#show', search => 1);
+		$admin_bridge->route('/shop/multi')->via('post')->to('controller-Adminshop#multi_act');
 		$admin_bridge->route('/shop/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/:category', category => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route(
