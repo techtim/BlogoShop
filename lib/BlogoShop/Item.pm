@@ -10,11 +10,12 @@ use File::Copy::Recursive qw( dircopy );
 $File::Copy::Recursive::MaxDepth = 1;
 use Mojo::JSON;
 use Hash::Merge qw( merge );
+my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
 
 my $json  = Mojo::JSON->new;
 
 use constant ITEM_FIELDS => qw(id name alias descr active
-								category subcategory 
+								category subcategory recomend_items 
 								brand tags total_qty
 								sale_start sale_end sale_value sale_active
 								preview_image images
@@ -64,55 +65,61 @@ use constant COLORS => [qw( 111111 FFFFFF FF0000 00FF00 0000FF FFFF00 00FFFF FF0
 #use overload '%{}' => 'hash';
 
 sub new {
-    my ($class, $ctrl) = @_;
+	my ($class, $ctrl) = @_;
 	my $self;
-    $self->{app} = $ctrl->app if $ctrl;
-    if ($ctrl->stash('id') && $ctrl->stash('id') ne 'add') {
-	    %$self = ( %$self, 
-	    	%{ $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $ctrl->stash('id'))}) || {} } 
-	    );
-    } elsif ($ctrl->stash('alias')) {
-    	%$self = ( %$self, 
-	    	%{ $self->{app}->db->items->find_one({alias => $ctrl->stash('alias')}) || {} } 
-	    );
-    }
-    if (!$self->{_id}) {
-	    my $tmp = merge( $self, { map {$_ => $ctrl->stash($_)||''} ITEM_FIELDS, keys OPT_SUBITEM_PARAMS } ); 
-	    $self 	= $tmp;
-    }
+	$self->{app} = $ctrl->app if $ctrl;
+	if ($ctrl->stash('id') && $ctrl->stash('id') ne 'add') {
+		%$self = ( %$self, 
+			%{ $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $ctrl->stash('id'))}) || {} } 
+		);
+		$self->{$_} = $self->{subitems}->[0]{$_} foreach SUBITEM_PARAMS;
+	} elsif ($ctrl->stash('alias')) {
+		%$self = ( %$self, 
+			%{ $self->{app}->db->items->find_one({alias => $ctrl->stash('alias')}) || {} } 
+		);
+	}
+	if (!$self->{_id}) {
+		my $tmp = $merge->merge( $self, { map {$_ => $ctrl->stash($_)||''} ITEM_FIELDS } ); 
+		$self 	= $tmp;
+	}
 # warn $ctrl->dumper($self);
 #	$self->{config} = $conf;
 	bless $self, $class;
 }
 
 sub save {
-    my ($self, $ctrl) = @_;
+	my ($self, $ctrl) = @_;
 
-    $self->_parse_data($ctrl);
-    warn 'ERROR:'.$ctrl->dumper($ctrl->stash('error_message')) if $ctrl->stash('error_message');
+	$self->_parse_data($ctrl);
+	warn 'ERROR:'.$ctrl->dumper($ctrl->stash('error_message')) if $ctrl->stash('error_message');
 #    return 0 if $ctrl->stash('error_message');
-    $ctrl->flash('error_message' => $ctrl->stash('error_message')) if $ctrl->stash('error_message');
+	$ctrl->flash('error_message' => $ctrl->stash('error_message')) if $ctrl->stash('error_message');
 
 	if ($self->{name} && $self->{category}) {
-	    if ($self->{id} && $self->{_id}) {
-	    	local $self->{_id};
-	    	delete $self->{_id};
-	    	$self->_update($ctrl);
-	    	warn 'UPD:';#. $ctrl->dumper($self->as_hash);
-	    	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.delete $self->{id})}, {'$set' => {%{$self->as_hash}}});
-	    } else {
-	    	warn 'SAVE:';#.$ctrl->dumper($self->as_hash);
-	    	$self->{_id} = $self->{app}->db->items->save($self->as_hash);
-	    }
+		if ($self->{id} && $self->{_id}) {
+			local $self->{_id};
+			delete $self->{_id};
+			$self->_update($ctrl);
+			warn 'UPD:';#. $ctrl->dumper($self->as_hash);
+			$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.delete $self->{id})}, {'$set' => {%{$self->as_hash}}});
+		} else {
+			warn 'SAVE:';#.$ctrl->dumper($self->as_hash);
+			$self->{_id} = $self->{app}->db->items->save($self->as_hash);
+		}
 	}
 
-    return $self->{_id}||0;
+	return $self->{_id}||0;
 }
 
 sub delete {
 	my ($self) = @_;
-	warn 'DELETE:'.$self->{_id};
-	$self->{app}->db->items->remove({_id => MongoDB::OID->new(value => ''.$self->{_id})}); 
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$set' => {deleted => 1}}); 
+	return 1;
+}
+
+sub undelete {
+	my ($self) = @_;
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$unset' => {deleted => ""}}); 
 	return 1;
 }
 
@@ -130,32 +137,34 @@ sub copy {
 }
 
 sub get {
-    my ($self, $id, $sub_id) = @_;
-    my $it = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $id)});
-    return $it ? merge( $it, $it->{subitems}->[$sub_id] ) : {};
+	my ($self, $id, $sub_id) = @_;
+	my $it = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $id)});
+	return $it ? $merge->merge( $it, $it->{subitems}->[$sub_id] ) : {};
 }
 
 sub list {
-    my ($self, $filt, $sort, $skip, $limit) = @_;
-    my %filter = ref $filt eq ref {} ? %$filt : ();
+	my ($self, $filt, $sort, $skip, $limit) = @_;
+	my %filter = ref $filt eq ref {} ? %$filt : ();
 	$limit ||= $self->{app}->config->{items_on_page}; 
-    foreach (keys %filter) {
-    	delete $filter{$_} if !$filter{$_};
-    }
+	foreach (keys %filter) {
+		delete $filter{$_} if !$filter{$_};
+	}
 
-    # warn 'FLTR'. $self->{app}->dumper(\%filter);
+	# warn 'FLTR'. $self->{app}->dumper(\%filter);
+	$filter{deleted} = {'$exists' => 0} unless defined $filter{deleted};
 	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 	$skip = $skip =~ m/(\d+)/ ? $1 : 0;
 # warn $filter->{tag};
 # warn Dumper($sort);
 	my @all = $self->{app}->db->items->find(\%filter)->sort($sort)->fields({LIST_FIELDS})->skip($skip)->limit($limit)->all;
-    return \@all;
+	return \@all;
 }
 
 sub dump_all {
 	my ($self, $filt, $sort) = @_;
 	my %filter = ref $filt eq ref {} ? %$filt : ();
+	$filter{deleted} = {'$exists' => 0};
 	$sort = {_id => 1} if ref $sort ne ref {} ||  keys %$sort == 0;
 
 	return [$self->{app}->db->items->find(\%filter)->sort($sort)->all];
@@ -169,6 +178,7 @@ sub count {
 	}
 
 	# warn 'FLTR'. $self->{app}->dumper(\%filter);
+	$filter{deleted} = {'$exists' => 0};
 	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 
@@ -180,7 +190,10 @@ sub _parse_data {
 	
 	my $error_message = [];
 
-	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS, keys OPT_SUBITEM_PARAMS);
+	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS);
+	( $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : () ) foreach keys OPT_SUBITEM_PARAMS;
+	$self->{recomend_items} = [$ctrl->req->param('recomend_items')];
+
 	# warn $ctrl->dumper($ctrl->req->params());
 	
 	$self->{active} = $self->{active} eq '' ? 0 : 0+$self->{active}; 
@@ -226,7 +239,7 @@ sub _parse_data {
 	$self->{preview_image} = '' if !$self->{preview_image};
 
 	# store main item patrams in subitems[0]
-	unshift @{$self->{subitems}}, {map {$_ => $self->{$_}} keys BlogoShop::Item::OPT_SUBITEM_PARAMS};
+	unshift @{$self->{subitems}}, {map {$_ => $self->{$_}} grep {defined $self->{$_}} keys BlogoShop::Item::OPT_SUBITEM_PARAMS};
 
 	push @$error_message, 'no_category' if !$self->{category};
 	push @$error_message, 'no_name' if !$self->{name};
@@ -235,6 +248,7 @@ sub _parse_data {
 	$self->{preview_image} = $self->{images}->[0]->{tag} if @{$self->{images}} > 0 && !$self->{preview_image};
 	push @$error_message, 'no_price' if !$self->{price};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
+	push @$error_message, 'no_qty' if $self->{active} && ! grep {$_->{qty}} @{$self->{subitems}};
 
 	$self->{active} = 0, $ctrl->stash(error_message => $error_message) if @$error_message>0;
 
@@ -286,7 +300,7 @@ sub _get_images {
 	for (0..$#{$images}) {
 		if ($images->[$_]->{tag} eq $self->{preview_image}) {
 			my $img = splice(@$images,$_,1); # delete from position
-	    	unshift @$images, $img;
+			unshift @$images, $img;
 		}
 	}
 	return $images if @$images>0;
@@ -319,10 +333,10 @@ sub _update {
 	my ($self, $ctrl) = @_;
 	my $old_item = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => ''.$self->{id})});
 
-    if ($old_item->{alias} ne $self->{alias} || 
-    	$self->{subcategory} ne $old_item->{subcategory} || 
-    	$self->{category} ne $old_item->{category})
-    {
+	if ($old_item->{alias} ne $self->{alias} || 
+		$self->{subcategory} ne $old_item->{subcategory} || 
+		$self->{category} ne $old_item->{category})
+	{
 		my $old = $ctrl->config('image_dir').'item/'.
 			join('/', $old_item->{category}, $old_item->{subcategory}) .'/'.
 			($old_item->{alias} ? $old_item->{alias} : $ctrl->config('default_img_dir'));
@@ -337,8 +351,8 @@ sub _update {
 		warn "*****\ncp $old $new\n*****";
 		dircopy($old, $new);
 		# system("cp -r $old $new");
-    }
-    return 1;
+	}
+	return 1;
 }
 
 sub check_existing_alias {
@@ -367,17 +381,17 @@ sub check_existing_alias {
 }
 
 sub TO_JSON {
-    my $self = shift;
-    my $tmp = \%{$self};
-    return $json->encode($tmp);
+	my $self = shift;
+	my $tmp = \%{$self};
+	return $json->encode($tmp);
 }
 
 sub as_hash {
 	my $self = shift;
 	my $tmp = {%{$self}};
-    delete $tmp->{app};
-    delete $tmp->{id};
-    return $tmp;
+	delete $tmp->{app};
+	delete $tmp->{id};
+	return $tmp;
 }
 
 1;

@@ -1,23 +1,24 @@
 ---
-mojo_mode: 'development' # 'production'
-log_level: 'debug' # 'warn'
+mojo_mode: 'production' #development production'
+log_level: 'warn' # 'debug warn'
 
-db_name: 'blogoshop'
+db_name: 'coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
-domain_name: 'xoxloveka.ru'
+domain_name: 'barista-shop.ru'
 
 hypnotoad:
-  workers: 4
-  listen: http://*:8080
-  lock_file: /var/lock/blogoshop.lock 
-  pid_file: /var/run/blogoshop.pid 
+  workers: 2
+  listen: 
+  - http://*:7070
+  lock_file: /var/lock/coffee.lock 
+  pid_file: /var/run/coffee.pid 
   user: techtim 
   group: techtim
   proxy: 1
 
-image_dir: '/opt/blogoshop/public/files/i/'
+image_dir: '/opt/coffee/public/files/i/'
 default_img_dir: 'default'
 image_url: '/i/'
 nginx_img_resize: '/res/64'
@@ -26,23 +27,33 @@ nginx_res_item_prev: '/res/152'
 nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
-cookie_name: 'BlogoShop'
+cookie_name: 'BaristaShop'
+cookie_domain: '.barista-shop.ru'
 cookie_expiration: 604800 # week
-cookie_secret: '$w3Etx0X|_o\/eKa'
+cookie_secret: '$w3Etx0XC0ofFeKa'
 
 block_voter_ip_time: 180 # 3 min
 
 articles_on_page: 9
 articles_on_startpage: 6
+articles_on_brandpage: 6
 related_articles_count: 3
 
 items_on_page: 16
 items_on_startpage: 8
+items_recomends_count: 6
 
 articles_on_admin_page: 30
 
-superadmin_mail: 'xoxloveka.shop@gmail.com'
-order_delete_power: 'vladimir'
+superadmin_mail: 'timmy88@gmail.com, losbaristas@gmail.com'
+order_delete_power: 'techtim' #'vladimir'
 
 recaptcha_public_key: '6Lc9jtISAAAAABMneliM7sxkpvWGa6yT7iuk_Nd6'
 recaptcha_private_key: '6Lc9jtISAAAAAM6wAcAjkq5D3v4E2-sJoOnRsMjk'
+
+address_for_courier: 'м. Китай-Город, Хохловский пер. д.7, магазин Хохловка'
+descr_for_courier: 'С торца здания есть ворота, проходите через проходную, после проходной повернуть налево, за вывеской справа, в глубине арки, будет черная дверь.'
+phone_for_courier: 89269309005
+
+qiwi_id: 5931016
+qiwi_pass: 'hu6NE4kMsPC0pXNXJWNH'

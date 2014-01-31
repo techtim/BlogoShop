@@ -110,14 +110,20 @@ sub item {
 	$item->{$_} ? 
 		push @{$filter->{'$or'}}, {$_ => $item->{$_}} : () 
 			foreach qw(brand category subcategory);
+	my $recomend_items = [];
+	
+	push @$recomend_items, @{$item->list({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @{$item->{recomend_items}}]} }, {}, 0, 3)}
+		if ref $item->{recomend_items} eq ref [];
+	push @$recomend_items, @{$item->list($filter, {}, 0, $self->config('items_recomends_count') - @$recomend_items)};
 
 	$self->utils->check_item_price($item);
+
 # warn $self->dumper($item);
 	return $self->render(
 		%{$item->as_hash},
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
-		items 	=> $item->list($filter, {}, 0, 8),
+		items 	=> $recomend_items,
 		banners_h => $self->utils->get_banners($self, $item->{category}, 240),
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
 		host 	=> $self->req->url->base,

@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use utf8 qw(encode decode);
 
-use Redis;
+# use Redis;
 use Time::Local;
 use Data::Dumper;
 use Digest::MD5 qw( md5_hex );
@@ -20,7 +20,7 @@ use constant {
 sub new {
 	my $class= shift;
 	my $self = {}; 
-	$self->{redis} = Redis->new;
+	# $self->{redis} = Redis->new;
 	$self->{months} = [qw(января февраля марта апреля мая июня июля августа сентября октября ноября декабря)];
 	bless $self, $class; 
 }

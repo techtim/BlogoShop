@@ -181,7 +181,7 @@
 		    		<dt>
 		    		% if ($_ eq 'color') {
 		    			<ul class='selected__colors'>
-		    			% $color = ref $color eq ref [] ? $color : [$color];
+		    			% my $color = ref stash('color') eq ref [] ? [stash('color')] : [''];
 		    			% foreach (@$color) {
 		    				<li style='background-color: #<%=$_%>' data-color='<%= $_ %>'></li>
 		    			% }
@@ -214,7 +214,7 @@
 			    		</a>
     		
 			    	</div>
-			    	<dl>
+			    	<dl class='params__item clearfloat'>
 			    		<dd>размер</dd>
 			    		<dt>
 			    			<input type="text" name="sub<%= $i %>.size" class='size' value="<%= $sub->{size} %>" placeholder='?'/>
@@ -264,6 +264,19 @@
 			
 		</div>
 		
+		<div class='loading__section clearfloat'>
+			<h2 class='caption'>Рекомендованные товары</h2>
+			<dl class='params__item clearfloat'>
+				% my $recomend_items = ref(stash('recomend_items')) eq ref [] ? stash('recomend_items') : ['' x 3];
+				<dt>
+					<input type="text" name="recomend_items" class='size' value="<%= $recomend_items->[0] %>" placeholder='id'/>
+					<input type="text" name="recomend_items" class='price' value="<%= $recomend_items->[1] %>" placeholder='id'/>
+					<input type="text" name="recomend_items" class='qty' value="<%= $recomend_items->[2] %>" placeholder='id'/>
+				</dt>
+				
+			</dl>
+		</div>
+
 		<div class='loading__section clearfloat'>
 			<h2 class='caption'>Добавить фотографии</h2>
 			<a class='add' data-role='image__upload'></a>
