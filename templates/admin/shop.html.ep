@@ -89,9 +89,9 @@
 
 	<div class='fiters__section fl admin clearfloat'>
 		<ul class='price__filter no-ajax'>
-			<li><a href='<%= $pager_url %>' <%== "class='current'" if !stash('active')|| stash('active') eq '' %>>все</a></li>
-			<li><a href='<%= $pager_url %>active=0' <%== "class='current'" if stash('active') && stash('active') eq '0' %>>неактивные</a></li>
-			<li><a href='<%= $pager_url %>active=1' <%== "class='current'" if stash('active') && stash('active') eq '1' %>>активные</a></li>
+			<li><a href='<%= $pager_url_no_state %>' <%== "class='current'" if !defined stash('active')|| stash('active') eq '' %>>все</a></li>
+			<li><a href='<%= $pager_url_no_state %>active=0' <%== "class='current'" if defined stash('active') && stash('active') eq '0' %>>неактивные</a></li>
+			<li><a href='<%= $pager_url_no_state %>active=1' <%== "class='current'" if defined stash('active') && stash('active') eq '1' %>>активные</a></li>
 		</ul>
 	</div>
 
@@ -113,8 +113,12 @@
 			<option value="off">выключть</option>
 			<option value="on">включть</option>
 			<option value="delete">удалить</option>
+			<option value="req_to_brand">заказать</option>
+			% if ($admin->{login} eq $config->{order_delete_power}) { 
+			<option value="undelete">востановить</option>
+			% }
 		</select>
-		<button type="submit" name="multi" value="1" class="button grey">сохранить</button>
+		<button type="submit" name="multi" value="1">сохранить</button>
 		</span> 
 	</div>
 	% if (@$items>0) {
@@ -136,7 +140,7 @@
 
 			<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
 				<span class='articol'><%= $item->{articol} %></span>
-				<span class='brand'><%= $item->{brand} %></span>
+				<span class='brand'><%= stash('name_brands')->{$item->{brand}} %></span>
 				<span class='item__caption'><%= $item->{name} %></span>
 				<span class='price'><%= $item->{price} %></span>
 				% if ($item->{total_qty} && $item->{total_qty} <= 0) {

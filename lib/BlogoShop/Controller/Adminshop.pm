@@ -68,8 +68,9 @@ sub show {
     $pager_url =~ s!csrftoken=[^\&]+\&?!!;
     $pager_url =~ s!\&?page=\d+\&?!!;
     my @act_cnt = ($pager_url =~ m!(active)!g);
-    $pager_url =~ s!\&?active=\d+\&?!! if  @act_cnt> 1;
     $pager_url .= $pager_url =~ m!\?$! ? '' : '&';
+    my $pager_url_no_state = $pager_url;
+    $pager_url_no_state =~ s!\&?active=.+\&?!!g;
 
     # warn $c->dumper($filter);
     return $c->render(
@@ -82,6 +83,7 @@ sub show {
         cur_category => $c->stash('categories_info')->{($filter->{category} || '').($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
         host  => $c->req->url->base,
         pager_url  => $pager_url,
+        pager_url_no_state => $pager_url_no_state,
         template => 'admin/shop',
         format => 'html',
     );
@@ -164,6 +166,13 @@ sub multi_act {
         } elsif ($c->req->param('action') eq 'delete') {
             $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
                 { '$set' => {deleted => 1} },
+                {'multiple' => 1 }
+            );
+        } elsif ($c->req->param('action') eq 'req_to_brand') {
+            $c->docs->create_brand_request();
+        } elsif ($c->req->param('action') eq 'undelete') {
+            $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
+                { '$unset' => {deleted => ""} },
                 {'multiple' => 1 }
             );
         }

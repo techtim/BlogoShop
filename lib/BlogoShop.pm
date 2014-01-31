@@ -13,6 +13,7 @@ use BlogoShop::Utils;
 use BlogoShop::Item;
 use BlogoShop::Qiwi;
 use BlogoShop::Logistics;
+use BlogoShop::Docs;
 
 # This method will run once at server start
 sub startup {
@@ -74,6 +75,7 @@ sub startup {
 	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new()});
 	(ref $self)->attr(conf 	=> sub {return $self->config});
 	(ref $self)->attr(qiwi 	=> sub {return BlogoShop::Qiwi->new()});
+	(ref $self)->attr(docs 	=> sub {return BlogoShop::Docs->new()});
 
 	# Helpers part
 	$self->helper(db 		=> sub { shift->app->db });
@@ -82,9 +84,11 @@ sub startup {
 	$self->helper(items 	=> sub { shift->app->items });
 	$self->helper(courier 	=> sub { shift->app->courier });
 	$self->helper(qiwi 	=> sub { shift->app->qiwi });
+	$self->helper(docs 	=> sub { shift->app->docs });
 	$self->helper(logistics => sub { return BlogoShop::Logistics->new(
 			controller => shift,
 	) } );
+
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();
