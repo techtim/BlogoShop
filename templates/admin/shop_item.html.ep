@@ -87,12 +87,8 @@
 				%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'brands'
 				
 				<div class='specials__section'>
-					<select>
-						<option value=''>спец. предолжени</option>
-					</select>
-					<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#'>
-						<input type="checkbox" name="" value='1' />
-					</a>
+					<strong>под заказ:</strong>
+					<input type="checkbox" name="on_order" value=1 <%== stash('on_order') ne '' ? 'checked="checked"' : ''%>>
 				</div>
 			
 			</div>

@@ -958,6 +958,8 @@ body {
 /* line 992, admin.scss */
 .shop__add__item form .specials__section {
   margin-top: 13px;
+  margin-left: 5px;
+  font-size: 14px;
 }
 /* line 995, admin.scss */
 .shop__add__item form .specials__section a.active {

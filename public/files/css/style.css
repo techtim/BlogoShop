@@ -1238,6 +1238,9 @@ body.overlayed #overlay {
 .shop__information__section .row.size dt {
   padding: 16px 0;
 }
+.shop__information__section .row.on__order dt {
+  padding-left: 80px;
+}
 /* line 1333, style.scss */
 .shop__information__section .row .sizes__section {
   padding-top: 10px;

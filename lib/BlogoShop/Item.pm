@@ -18,7 +18,7 @@ use constant ITEM_FIELDS => qw(id name alias descr active
 								category subcategory recomend_items 
 								brand tags total_qty
 								sale_start sale_end sale_value sale_active
-								preview_image images
+								preview_image images on_order
 								meta_descr meta_keys
 								);
 use constant LIST_FIELDS => map {$_ => 1} qw(name active alias brand brand_name category subcategory subitems total_qty articol
@@ -29,10 +29,9 @@ use constant SALE_PARAMS => qw(sale_start sale_end sale_value sale_active);
 use constant SUBITEM_PARAMS => qw (size price qty);
 
 use constant OPT_SUBITEM_PARAMS => {
-	size => "размер", 
 	price => "цена",
+	# size => "размер", 
 	qty => "кол-во",
-	color => 'цвет',
 	length => 'длина',
 	width => 'ширина',
 	height => 'высота',
@@ -191,6 +190,7 @@ sub _parse_data {
 	my $error_message = [];
 
 	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS);
+
 	( $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : () ) foreach keys OPT_SUBITEM_PARAMS;
 	$self->{recomend_items} = [$ctrl->req->param('recomend_items')];
 
@@ -205,7 +205,7 @@ sub _parse_data {
 		if $self->{subcategory} =~ m/(\.+)/;
 	$self->{category} = $self->{app}->db->categories->find_one({_id => $self->{category}, 'subcats._id' => $self->{subcategory}}) if $self->{subcategory} ne '';
 	$self->{category} = $self->{category}->{_id} if $self->{subcategory} ne '';
-#	if !$self->{category};
+
 
 	$self->{descr} 	=~ s/\r|(\r?\n)+$|\ +$//g if $self->{descr};
 	{ # shitty "Malformed UTF-8 character"
@@ -316,7 +316,8 @@ sub _get_subitems {
 		my $sub = {};
 		$sub->{$_} = $ctrl->req->param("sub$ct.".$_)||'' foreach (keys OPT_SUBITEM_PARAMS);
 
-		last unless $sub->{qty} || $sub->{size} || $sub->{price};
+		last unless $sub->{qty} 
+		|| $sub->{price};
 		$self->{total_qty} += $sub->{qty};
 		$sub->{qty} 	+= 0;
 		$sub->{price}	+= 0;
