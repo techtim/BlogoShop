@@ -1,12 +1,12 @@
 ---
-mojo_mode: 'development' #development production'
-log_level: 'debug' # 'debug warn'
+mojo_mode: 'production' # 'development production'
+log_level: 'warn' # 'debug warn'
 
-db_name: 'dev_coffee'
+db_name: 'coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
-domain_name: 'coffee.xoxloveka.ru'
+domain_name: 'barista-shop.ru'
 
 hypnotoad:
   workers: 2
@@ -18,7 +18,7 @@ hypnotoad:
   group: techtim
   proxy: 1
 
-image_dir: '/home/techtim/coffee/public/files/i/'
+image_dir: '/opt/coffee/public/files/i/'
 default_img_dir: 'default'
 image_url: '/i/'
 nginx_img_resize: '/res/64'
@@ -28,7 +28,7 @@ nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
 cookie_name: 'BaristaShop'
-cookie_domain: '.coffee.xoxloveka.ru'
+cookie_domain: '.barist-shop.ru'
 cookie_expiration: 604800 # week
 cookie_secret: '$w3Etx0XC0ofFeKa'
 
@@ -45,7 +45,7 @@ items_recomends_count: 6
 
 articles_on_admin_page: 30
 
-superadmin_mail: 'timmy88@gmail.com'
+superadmin_mail: 'timmy88@gmail.com, losbaristas@gmail.com'
 order_delete_power: 'techtim' #'vladimir'
 
 recaptcha_public_key: '6Lc9jtISAAAAABMneliM7sxkpvWGa6yT7iuk_Nd6'
