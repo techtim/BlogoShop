@@ -1,0 +1,201 @@
+#!/usr/bin/env perl
+#
+# to start TM :
+# script/tm prefork --listen http://*:8888
+#
+# ############################################################################################
+
+package TaskManager;
+use Mojo::Base 'Mojolicious';
+use MongoDB ();
+# use POSIX ();
+use JSON::XS();
+use Data::Dumper;
+use FindBin;
+use Cwd;
+use YAML::XS qw( LoadFile );
+# use Switch;
+
+use constant {
+	DEFAULT_TASK_TIMEOUT => 180,
+	RETRY_INTERVAL => 60,
+	MAX_LOG_ENTRIES => 20,
+	CHECK_MUTEX_INTERVAL => 10,
+	LOOP_INTERVAL => 20,
+	DEFAULT_TTL => 300,
+	INTERVALS => {
+		s => 1,
+		m => 60,
+		h => 60*60,
+		d => 24*60*60,
+		w => 7*24*60*60,
+		M => 30*24*60*60,
+	},
+};
+
+my $config = LoadFile(getcwd."/BlogoShop.yml");
+
+my $mongo =
+		MongoDB::Connection->new(
+			host 	=> $config->{db_host},
+			port 	=> $config->{db_port},
+	
+		)->get_database($config->{db_name});
+
+# warn Dumper $mongo;
+
+sub new {
+	my ($class) = @_;
+	my $self;
+	my $config = LoadFile(getcwd."/BlogoShop.yml");
+	$self->{config} = $config;
+
+	# warn Dumper $config;
+
+	bless $self, $class;
+}
+
+sub add {
+	
+}
+
+sub get_by_id {
+	my ($self, $id) = @_;
+
+}
+
+sub delete {
+	my ($self, $id) = @_;
+	return {status => 'ok'};
+}
+
+
+sub run {
+	my ($self, $task) = @_;
+
+	my $act = $task->{action};
+	$task->{ids} = ref $task->{ids} eq ref [] ? $task->{ids} : [$task->{ids}];
+	if ($act eq 'activate_item') {
+			if (
+				$mongo->get_collection('items')->update({_id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @{$task->{ids}} ] }}, 
+	                { '$set' => {active => 1} },
+	                {'multiple' => 1 }
+            	) 
+			) {
+				$mongo->get_collection('tasks')->remove({"_id" => $task->{_id}});
+			}
+	} elsif ($act eq '' ) {
+
+	}
+	
+}
+
+
+sub _run_pending_tasks {
+	my ($class, %args) = @_;
+
+	warn Dumper([$mongo->get_collection('tasks')->find({})->all]);
+	warn 'time:'.time;
+	foreach ($mongo->get_collection('tasks')->find({start_time => {'$lt' => time } })->all) {
+		$class->run($_);
+	}
+}
+
+sub start_loop {
+	my ($class, %args) = @_;
+	#my $count = 0;
+	while (1){
+		# $class->_calculate_next_start_time(%args);
+		$class->_run_pending_tasks(%args);
+		
+		for(1 .. LOOP_INTERVAL){
+			sleep(1);
+			# check the parent process
+			# unless( kill 0 => $ppid ){
+			# 	warn "Shutdown loop process...";
+			# 	return 1;
+			# }
+		}
+		#$count++;
+	}
+	return 0;
+}
+
+package ::main;
+my $tm = new TaskManager;
+$tm->start_loop();
+
+
+# package TaskManager;
+# use FindBin;
+# use lib "$FindBin::Bin/../lib";
+
+# sub startup {
+# 	my $self = shift;
+	
+# 	$self->plugin('yaml_config',  {
+# 		file      => getcwd."/BlogoShop.yml",
+# 		stash_key => 'config',
+# 		class     => 'YAML::XS',
+# 		helper	  => 'config'
+# 	});
+# 	$self->mode('tm');
+# 	# Init Log
+# 	$self->log->level($self->config('log_level'));
+# 	$self->log->path('log/tm_error.log');
+# 	$SIG{__WARN__} = sub {
+# 		my $mess = shift || '';
+# 		$mess =~ s/\n$//;
+# 		@_ = ($self->log, $mess); 
+# 		goto &Mojo::Log::warn; 
+# 	};
+
+# 	(ref $self)->attr(
+# 		mongo => sub {
+# 			MongoDB::Connection->new(
+# 				host 	=> $self->config('db_host'),
+# 				port 	=> $self->config('db_port'),
+# 				j 		=> 1,
+# 				w 		=> "majority",
+# 			);
+# 		}
+# 	);
+# 	(ref $self)->attr(
+# 		worker_id => sub { $self->config('taskmanager_instance_id') . '.' . $$ }
+# 	);
+# 	(ref $self)->attr(
+# 		conf => sub { $self->config() }
+# 	);
+# 	(ref $self)->attr( db => sub { shift->mongo->get_database($self->config('db_name')) } );
+
+# 	my $r = $self->routes;
+# 	# Normal route to controller
+# 	# $r->get('/')->to('controller-interface#get_tasks_list');
+# 	# my 	$api_bridge = $r->bridge('/api');
+# 	# 	$api_bridge->get('/tasks')->to('controller-api#get_tasks_list');
+# 	# 	$api_bridge->post('/tasks')-ц>to('controller-api#add_task');
+# 	# 	$api_bridge->get('/tasks/:id')->to('controller-api#get_task_status');
+# 	# 	$api_bridge->post('/tasks/:id/run')->to('controller-api#run_task');
+# 	# my 	$publuc_api_bridge = $api_bridge->bridge('/public');
+# 	# 	$publuc_api_bridge->route('/tasks/list')->to('controller-interface#get_tasks_list');
+# 	# 	$publuc_api_bridge->route('/tasks/:id')->to('controller-api-public#get_task_status');
+# 	# 	$publuc_api_bridge->route('/tasks/:id/result')->to('controller-api-public#get_task_result');
+
+# 	$ppid = $$;
+# 	exit TaskManager->start_loop(
+# 			# port 				=> $mojo_port,
+# 		) unless fork();
+# }
+
+# package ::main;
+# use File::Basename 'dirname';
+# use File::Spec;
+
+# use lib join '/', File::Spec->splitdir(dirname(__FILE__)), 'lib';
+# use lib join '/', File::Spec->splitdir(dirname(__FILE__)), '..', 'lib';
+
+# $ENV{MOJO_APP} ||= 'TaskManager';
+# require Mojolicious::Commands;
+# Mojolicious::Commands->start('TaskManager');
+
+1;
