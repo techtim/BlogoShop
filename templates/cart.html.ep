@@ -125,6 +125,39 @@
 				</li>
 			</ul>
 		</div>
+
+		% if (0) {
+		<div class='left__section address item__block disabled' >
+			<h2 class='caption'>Адреc доставки:</h2>
+
+			<ul>
+				<li class='clearfloat'>
+					<input type='text' class='country' placeholder='Страна' name='country' value='Россия' disabled required />
+
+					<!-- <input type='text' class='city' placeholder='Город' name='city' value='<%= stash('city')%>' required disabled/>-->
+
+
+					<span class="city">
+						%= include 'includes/select_block'	, name => 'city', select => stash('city'), must_fill => 'yes', options => stash 'cities'
+					</span>
+					</cpan>
+					<!-- ajax url to get delivery cost http://dev.xoxloveka.ru/cart/ship_cost?city={id from select_block cities}&weight=<%= stash('total_weight') %> -->
+					<input type='text' class='index' placeholder='индекс' name='zip' value='<%= stash('zip')%>' required disabled/>
+					<input type='hidden' name='total_weight' value='<%= stash('total_weight') %>'>
+				</li>
+				<li class='clearfloat'>
+					<input type='text' class='addr' placeholder='Адрес' name='address' value='<%= stash('address')%>' required disabled/>
+					<input type='text' class='house' placeholder='Дом' name='dom' value='<%= stash('dom')%>' required disabled/>
+					<input type='text' class='building' placeholder='Корп' name='korp' value='<%= stash('korp')%>' disabled/>
+					<input type='text' class='flat' placeholder='Кв' name='flat' value='<%= stash('flat')%>' disabled/>
+				</li>
+				<li class='clearfloat'>
+					<input type='text' class='receiver' placeholder='Получатель' name='receiver' value='<%= stash('receiver')%>' required disabled/>
+					<p class='message'>место под системное сообщение</p>
+				</li>
+			</ul>
+		</div>
+		% }
 		<div class='right__section pickup item__block disabled'>
 			<div class='fl'>
 				<h2 class='caption'>Самовывоз</h2>
@@ -176,6 +209,18 @@
 						<span class='price'></span>
 					</label>
 				</li>
+				% if (0) {
+				<li class='clearfloat'>
+					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='logistics' id='logistics' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'logistics' %> disabled />
+					<label for='logistics'>
+						<!-- <img src='/i/logos/ems.png' alt='EMS' /> -->
+						<sup>Logistics.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
+						<span class='price'>
+						<input type='input' name='delivery_cost' class='delivery__cost disabled'  value='Выберите город' id=''>
+						</span>
+					</label>
+				</li>
+				% }
 			</ul>
 		</div>
 
@@ -188,12 +233,8 @@
 					<label for='pay__courier'>Наличные курьеру</label>
 				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
-					<input type='radio' name='pay_type' id='nalog_payment' value='nalog_payment' disabled />
-					<label for='nalog_payment'>Наложенный платеж</label>
-				</li>
-				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
-					<label for='nalog_payment'>QIWI платеж</label>
+					<label for='nalog_payment'>QIWI платеж (счет будет выставлен на указанный телефон)</label>
 				</li>
 			</ul>
 		</div>
