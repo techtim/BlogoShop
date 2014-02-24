@@ -94,8 +94,6 @@ sub run {
 sub _run_pending_tasks {
 	my ($class, %args) = @_;
 
-	warn Dumper([$mongo->get_collection('tasks')->find({})->all]);
-	warn 'time:'.time;
 	foreach ($mongo->get_collection('tasks')->find({start_time => {'$lt' => time } })->all) {
 		$class->run($_);
 	}
