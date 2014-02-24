@@ -59,7 +59,7 @@ sub update_article {
 	
 	# Check diff between new and old id, if timestamp differ delete with old_id insert with new_id, else update;
 	if ( $article->{new_id} &&
-	substr($old_article->{_id}->{value}, 0, 6) ne substr($article->{new_id}, 0, 6)
+		substr($old_article->{_id}->{value}, 0, 6) ne substr($article->{new_id}, 0, 6)
 	) {
 		$article->{_id} = MongoDB::OID->new(value => $article->{new_id});
 		delete $article->{new_id};

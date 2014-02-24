@@ -9,12 +9,13 @@
             	<a class='categorie__title' href="/admin/shop/<%= $cat->{_id} %>"><%= $cat->{name} %></a>
                 <a href="#" class="plus"></a>
 
-                <!--<select name="pos">
+                % if (0) {
+                <select name="pos">
                     % foreach (0..@$categories) {
                     <option value="<%= $_ %>" <%= 'selected' if $cat->{pos} == $_ %>><%= $_ %></option>
                     % }
                 </select>
-                -->
+                % }
 
                 <ul class='second__lvl'>
                     % foreach my $subcat (@{$cat->{subcats}}) {

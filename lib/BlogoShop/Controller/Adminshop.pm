@@ -158,7 +158,7 @@ sub multi_act {
     my @ids = $c->req->param('item');
 
     if ($c->req->param('action') && @ids > 0) {
-        if ($c->req->param('action') =~ m/(on|off)/ ) {
+        if ($c->req->param('action') =~ m/^(on|off)$/ ) {
             $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
                 { '$set' => { active => ($c->req->param('action') eq 'on'? 1 : 0) } },
                 {'multiple' => 1 }
@@ -175,7 +175,12 @@ sub multi_act {
                 { '$unset' => {deleted => ""} },
                 {'multiple' => 1 }
             );
+        } elsif ($c->req->param('action') eq 'on_timer') {
+            return if !$c->req->param('date');
+            my $date = $c->utils->timestamp_from_date($c->req->param('date'));
+            $c->db->tasks->save({ start_time => $date, ids => \@ids, action => 'activate_item' });
         }
+
     }
     return $c->redirect_to("/admin/shop/".$c->req->param('category').($c->req->param('subcategory') ? "/".$c->req->param('subcategory') : ''));
 }

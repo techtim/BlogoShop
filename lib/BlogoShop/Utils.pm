@@ -112,7 +112,7 @@ sub date_time_from_mongoid {
 	return strftime("%a, %d %b %Y %H:%M:%S %z", localtime($time)) if defined $for_rss && $for_rss == 1;
 	my @lt = (localtime($time))[1..5];
 	$lt[0] =~ s/^(\d{1})$/0$1/;
-	return (join ('-', $lt[2], $lt[3]+1, $lt[4]+1900). " $lt[1]\:$lt[0]");
+	return (join ('-', $lt[2], $lt[3]+1, $lt[4]+1900) , " $lt[1]\:$lt[0]");
 }
 
 sub update_mongoid_with_time {
@@ -120,7 +120,8 @@ sub update_mongoid_with_time {
 	my $old_time = (hex(substr $id, 0, 8));
 	my @new_time;
 	push @new_time, $_ foreach reverse (split (':', $article_time), 0); # sec, min, hour 
-	push @new_time, $_ foreach split ('-', $article_date); # day, month, year
+	push @new_time, $_ foreach split (/\-|\./, $article_date); # day, month, year
+	$new_time[5] =~ s/^(\d{2})$/20$1/;
 	$new_time[5] -= 1900; # get unix year
 	$new_time[4]--; # mounth 0..11
 	$id =~ s/[\d\w]{8}/sprintf("%x",timelocal(@new_time))/e;
@@ -134,7 +135,7 @@ sub timestamp_from_date {
 	$time[5] > 2000 ?
 		$time[5] -= 1900 :
 		$time[5] += 100 ;
-	return sprintf("%d",timelocal(@time))
+	return 0+sprintf("%d",timelocal(@time))
 }
 
 sub get_images {

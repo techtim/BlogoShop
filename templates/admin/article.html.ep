@@ -1,6 +1,9 @@
 % layout 'admin';
 % title ($action_type eq 'add' ? 'Новая статья' : 'Правка статьи');
 
+<script>
+	requirejs(['app/admin/addItem'])
+</script>
 
 <style type="text/css">
 
@@ -99,7 +102,7 @@
 								<label>Дата поста:</label>
 							</td>
 							<td>
-								<input type="text" size=11 name="article_date" class="date" value="<%= stash 'article_date' %>">&nbsp;
+								<span class="dates__section"><input type="text" name="article_date" value="<%= stash 'article_date' %>" /></span>
 								<input type="text" name="article_time" class="date" value="<%= stash 'article_time' %>">
 							</td>
 						</tr>

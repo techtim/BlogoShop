@@ -5,7 +5,7 @@
 %= include 'includes/info_message', message => stash 'message'
 
 <script>
-	requirejs(['app/equalHeight', 'app/shopFilters'])
+	requirejs(['app/equalHeight', 'app/shopFilters', 'app/admin/addItem'])
 </script>
 
     %= include 'includes/shop_admin_categories', categories => stash 'categories'
@@ -107,19 +107,21 @@
 	%= form_for '/admin/shop/multi' => (method => 'post') => begin
 	<input type='hidden' name='category' value='<%= stash('category') %>'/>
 	<input type='hidden' name='subcategory' value='<%= stash('subcategory') %>'/>
-	<div class='multi__action'>
+	<div class='multi__action dates__section'>
 		<span> групповое действие:
 		<select name="action">
 			<option value="off">выключть</option>
 			<option value="on">включть</option>
+			<option value="on_timer">включить по таймеру</option>
 			<option value="delete">удалить</option>
-			<option value="req_to_brand">заказать</option>
+			%# <option value="req_to_brand">заказать</option>
 			% if ($admin->{login} eq $config->{order_delete_power}) { 
 			<option value="undelete">востановить</option>
 			% }
 		</select>
+		дата:<input type="text" name="date" value="" />
 		<button type="submit" name="multi" value="1">сохранить</button>
-		</span> 
+		</span>	
 	</div>
 	% if (@$items>0) {
     <ul class='list__section'>
@@ -136,7 +138,8 @@
         	<a class='active controls' href=''></a>
         	<a class='delete controls' href=''></a>
 			-->
-			<span class='checkbox unchecked'><input type="checkbox" name="item" value="<%= $item->{_id} %>"> выбрать </span>
+
+			<span id='active_check' class='checkbox unchecked'><input type="checkbox" name="item" value="<%= $item->{_id} %>"> выбрать </span>
 
 			<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
 				<span class='articol'><%= $item->{articol} %></span>
