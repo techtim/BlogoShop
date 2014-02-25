@@ -112,7 +112,7 @@ sub date_time_from_mongoid {
 	return strftime("%a, %d %b %Y %H:%M:%S %z", localtime($time)) if defined $for_rss && $for_rss == 1;
 	my @lt = (localtime($time))[1..5];
 	$lt[0] =~ s/^(\d{1})$/0$1/;
-	return (join ('-', $lt[2], $lt[3]+1, $lt[4]+1900) , " $lt[1]\:$lt[0]");
+	return wantarray ? (join ('-',$lt[2], $lt[3]+1, $lt[4]+1900) , " $lt[1]\:$lt[0]") : (join ('-', $lt[2], $lt[3]+1, $lt[4]+1900) . " $lt[1]\:$lt[0]");
 }
 
 sub update_mongoid_with_time {
