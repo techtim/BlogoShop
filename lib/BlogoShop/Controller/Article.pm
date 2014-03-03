@@ -37,17 +37,6 @@ sub show {
         ($self->app->db->articles->find({_id => {'$gt' => $article->{'_id'}}, active => 1})->sort({_id => 1})->limit(1)->all)[0] || {});
 
 	my $img_url = $self->config('image_url').($article->{type} || $self->config('default_img_dir')).'/'.$article->{alias}.'/';
-	# Polls check
-#	foreach (keys %{$article->{polls}}) {
-#		$article->{polls}->{$_}->{total_count} = 0;
-#		foreach my $key (keys %{$article->{polls}->{$_}->{answers}}) {
-#			$article->{polls}->{$_}->{total_count} += $article->{polls}->{$_}->{answers}->{$key}->{count} || 0;
-#		}
-#		my $poll_html = $self->render( template => 'includes/poll_block', partial => 1, poll => $article->{polls}->{$_}, img_url => $img_url, %$article );
-#		$article->{polls}->{$_}->{question} =~ s/([;\?\:\!\.\-\+\*])/\\$1/gi;
-#		my $que = qr/<poll=\"$article->{polls}->{$_}->{question}\">.+?<\/poll>/;
-#		$article->{article_text} =~ s/$que/$poll_html/s;
-#	}
 
 	$self->stash(%$article);
 	return $self->render(
@@ -56,7 +45,7 @@ sub show {
 		banners_h => $self->utils->get_banners($self, '', 240),
 		img_url => $img_url,
 		sex => '',
-		page_name => 'blog',
+		page_name => ($article->{type} =~ /(post|special)/ ? 'blog' : $article->{type}),
 		template => 'article',
 		format => 'html',
 	);
@@ -89,7 +78,7 @@ sub list {
 		articles => $art,
         banners => $self->utils->get_banners($self, '', 680),
         banners_h => $self->utils->get_banners($self, '', 240),
-        page_name => 'blog',
+        page_name => (!$filter->{type} || $filter->{type} =~ /(post|special)/ ? 'blog' : $filter->{type}),
         template => $self->stash('move') && $self->req->headers->header('X-Requested-With') ? 'includes/list_articles' : 'blog', # return only
 		format => 'html', 
 	);

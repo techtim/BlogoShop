@@ -117,7 +117,7 @@ sub list {
         orders_count=> $orders_count,
         orders_sum 	=> $orders_sum,
         counter 	=> $counter,
-        qiwi_counter=> $qiwi_counter,
+        qiwi_counter=> $qiwi_counter||{},
         cur_page  	=> $self->req->param('page') || 1,
         pages 		=> int( 0.99 + ( $filter->{status} ? $counter->{$filter->{status}} : $orders_count ) / ORDERS_ON_PAGE ),
         pager_url  	=> $pager_url,
