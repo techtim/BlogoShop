@@ -170,7 +170,7 @@ sub get_images {
 		$file->move_to($folder_path.$image->{tag});
         
 		$image->{descr} = shift @image_descr;
-		$image->{descr} =~ s/\"/&quot/g;
+		$image->{descr} =~ s/\"/&quot/g if $image->{descr};
         
 		push @$images, $image;
 	}
@@ -320,7 +320,7 @@ sub render_article {
     
 	my %images = map {$_->{tag} => $_} @{$article->{images}} if ref $article->{images} eq 'ARRAY';
 	my $img_url = $controller->config('image_url').($article->{type}|| $controller->config('default_img_dir')).'/'.$article->{alias}.'/';
-    
+
 	my @galleries;
 	while ($text =~ m/<gallery>(.+?)<\/gallery>/gs) {
 		my $html = $1;
