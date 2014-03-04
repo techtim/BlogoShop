@@ -442,38 +442,6 @@ body.overlayed #overlay {
   display: block;
   clear: both;
 }
-/* line 514, style.scss */
-.sidebar__section .menu__section .item.podarki {
-  border: 3px solid red;
-  border-bottom: 0;
-}
-/* line 509, style.scss */
-.sidebar__section .menu__section .item.podarki li.title > a {
-  color: red;
-}
-/* line 520, style.scss */
-.sidebar__section .menu__section .item.dom_i_interer, .sidebar__section .menu__section .item.ukrashenija_i_bizhuterija {
-  border-left: 3px solid red;
-  border-right: 3px solid red;
-}
-/* line 509, style.scss */
-.sidebar__section .menu__section .item.dom_i_interer li.title > a, .sidebar__section .menu__section .item.ukrashenija_i_bizhuterija li.title > a {
-  color: red;
-}
-/* line 526, style.scss */
-.sidebar__section .menu__section .item.aksessuary {
-  margin-bottom: 12px;
-  border: 3px solid red;
-  border-top: 0;
-}
-/* line 509, style.scss */
-.sidebar__section .menu__section .item.aksessuary li.title > a {
-  color: red;
-}
-/* line 532, style.scss */
-.sidebar__section .menu__section .item.aksessuary .title {
-  margin-bottom: -3px;
-}
 /* line 538, style.scss */
 .sidebar__section .menu__section .item.current .submenu {
   display: block;

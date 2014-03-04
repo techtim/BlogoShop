@@ -1,0 +1,40 @@
+% layout 'admin';
+% title 'Админка';
+
+
+%= include 'includes/error_message', error_messages => stash 'error_message'
+%= include 'includes/info_message', message => stash 'message'
+
+<div class='left__side__section'>
+
+	<div class='list__section'>
+		<h3 class='caption'>Группы:</h3>
+		<%= link_to 'Создать новую группу' => '/admin/group/edit', class => 'add', title => 'Создать новую группу' %>
+
+		<ul class='pager__section clearfloat'>
+			<li class='title'>страница:</li>
+			% foreach my $i (1..$pages) {
+			<li>
+				<a href='?<%== "page=$i" %>'><%= $i %></a>
+		   </li>
+			% }
+		</ul>
+
+		<ul class='items__list with__border__bottom'>
+			% foreach my $group (@$groups) {
+				<li data-id='<%== $group->{_id}->{value} %>'>
+
+					<a href="/admin/group/edit/<%== $group->{_id}->{value} %>"
+						 class='group__link'
+						 title='<%= $group->{name} %>'>
+						<%= $group->{name} %>
+					</a>
+
+					<a class='preview' href="/<%== join '/', 'groups', $group->{alias} %>"  title='Предварительный просмотр'></a>
+
+				</li>
+			% }
+		</ul>
+	</div>
+<div class='clear'></div>
+

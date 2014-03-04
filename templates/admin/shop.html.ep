@@ -113,6 +113,7 @@
 			<option value="off">выключть</option>
 			<option value="on">включть</option>
 			<option value="on_timer">включить по таймеру</option>
+			<option value="add_to_group">добавить в группу</option>
 			<option value="delete">удалить</option>
 			%# <option value="req_to_brand">заказать</option>
 			% if ($admin->{login} eq $config->{order_delete_power}) { 
@@ -120,6 +121,7 @@
 			% }
 		</select>
 		дата:<input type="text" name="date" value="" />
+		%= include 'includes/select_block', name => 'group_id', select => '', options => stash 'groups'
 		<button type="submit" name="multi" value="1">сохранить</button>
 		</span>	
 	</div>
@@ -133,7 +135,6 @@
 					<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>">
 				</span>
 			</a>
-
 			<!--
         	<a class='active controls' href=''></a>
         	<a class='delete controls' href=''></a>
@@ -146,9 +147,10 @@
 				<span class='brand'><%= stash('name_brands')->{$item->{brand}} %></span>
 				<span class='item__caption'><%= $item->{name} %></span>
 				<span class='price'><%= $item->{price} %></span>
-				% if ($item->{total_qty} && $item->{total_qty} <= 0) {
-					<span class='item__caption'>нет в наличии</span>
+				% if (!grep {$_->{qty} > 0} @{$item->{subitems}}) {
+					<span class='item__caption' style="color:red">нет в наличии</span>
 				% }
+				<span class='group'><%= $groups_alias->{$item->{group_id}} %></span>
 			</a>
 		</li>
 		% }

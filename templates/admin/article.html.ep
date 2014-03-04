@@ -84,6 +84,14 @@
 							</span>
 						</td>
 					</tr>
+					<tr>
+						<td class="bg-pink ta-right">
+							<label>Привязать группу товаров:</label>
+						</td>
+						<td>
+							%= include 'includes/select_block', name => 'group_id', select => stash('group_id'), options => stash 'groups'
+						</td>
+					</tr>
 					% if ($action_type  ne 'add') {
 
 						% if (stash 'alias') {
@@ -139,7 +147,7 @@
                             <label>Тэги:</label>
                         </td>
                         <td>
-                            <input type="text" name="tags" size="90" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>" "/>(через&nbsp;","&nbsp;или&nbsp;";")
+                            <input type="text" name="tags" size="90" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>"/>(через&nbsp;","&nbsp;или&nbsp;";")
                         </td>
                     </tr>
 

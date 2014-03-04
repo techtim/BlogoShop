@@ -1,0 +1,246 @@
+% layout 'admin';
+% title ($action_type eq 'add' ? 'Новая статья' : 'Правка статьи');
+
+<script>
+	requirejs(['app/admin/addItem'])
+</script>
+
+<style type="text/css">
+
+	#add-image-upload-fields-wrapper {
+		text-align: center;
+	}
+
+	#add-image-upload-fields {
+		display: inline-block;
+		border-bottom: 1px dashed green;
+		color: green;
+		cursor: pointer;
+	}
+</style>
+
+<div class="admin-container">
+
+	<div class="section main-heading">
+		<h1>
+			<a href="/admin/groups">РЕДАКТИРОВАНИЕ ГРУППЫ</a> &gt;
+			% if ($action_type ne 'add') {
+				<span>
+					% if (stash 'alias') {
+						<a href="http://<%= config->{domain_name} %>/group/<%== $alias %>" TARGET='_blank'><%== stash 'name' %></a>
+					% } else {
+						"<%== stash 'name' %>"
+					% }
+				</span>
+			% } else {
+				<span>Новая группа</span>
+			% }
+		</h1>
+
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+		%= include 'includes/info_message', message => stash 'message'
+
+		% if (defined 'message') {
+			<h3>
+				<%= stash 'message' %>
+			</h3>
+		% }
+	</div>
+
+	<div class="article-form-container">
+
+		<!-- start FORM -->
+		%= form_for '' => (method => 'post', enctype =>"multipart/form-data") => begin
+
+			<div class="section article-title">
+
+				% if ($action_type ne 'add') {
+					<input type="hidden" name="id" value="<%= stash '_id' %>">
+				% }
+
+				<p>
+					<b>НАЗВАНИЕ:</b></br/>
+					<input type="text" name="name" size="90" value="<%= stash 'name' %>" style="font-size: 18px; font-weight: bold; width: 100%;"/>
+				</p>
+				<p>
+					<b>ALIAS (URL):</b></br/>
+					<input class="wide" type="text" name="alias" value="<%== $alias %>" style="font-size: 18px; font-weight: bold; width: 100%;"/>
+				</p>
+				<p>
+					<b>ОБЛОЖКА ГРУППЫ:</b></br/>
+					<input type="file" name="preview_image" id="preview-file"/>
+					% if ($preview_image) {
+						<br>
+						<input type="hidden" name="preview_image_tag" value="<%= $preview_image %>"/>
+						<img src=<%== config->{image_url}. join('/', $type, $alias, $preview_image) %> />
+					% }
+				</p>
+			</div>
+
+			<div class="section article-metadata">
+
+				<table class="layout" >
+					<tr>
+						<td class="ta-right">
+							
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+				</table>
+			</div>
+
+
+			<div class="section article-content">
+				<h3>Описание группы:</h3>
+
+				<p>
+					<textarea type="text" name="group_text" cols=100 rows=20><%= stash 'group_text' %></textarea>
+				</p>
+			</div>
+
+			% if (ref $images eq 'ARRAY') {
+			<div class="section loaded-images">
+				<h3>Загруженные картинки:</h3>
+
+				<table class="blackhead">
+
+					<thead>
+						<tr>
+							<td width="330">описание</td>
+							<td width="250">таг (для вставки)</td>
+							<td>превью (уменьшено)</td>
+						</tr>
+					</thead>
+
+					<tbody>
+						% my $counter=1;
+						% foreach my $image (@$images) {
+							<tr>
+								<td>
+									<input type="text" name="image_descr" size=60 value="<%== $image->{descr} %>"/>
+								</td>
+								<td>
+									<input type="text" size=40 value="<%== $image->{tag} %>"/>
+                                    <input type="hidden" name="image_tag" value="<%== $image->{tag} %>"/>
+								</td>
+								<td>
+									<input type="checkbox" name="image_delete" value="<%== $image->{tag}  %>"/> <label>Удалить при сохранении статьи</label><br/>
+									<img width="160px" src="<%== config->{image_url} . join('/', $type, $alias, $image->{tag}) %>"/>
+								</td>
+							</tr>
+						% }
+					</tbody>
+				</table>
+			</div>
+			% }
+			<div class="section new-images">
+
+				<h3><b>ВЫБРАТЬ КАРТИНКИ ДЛЯ ДОБАВЛЕНИЯ:</b></h3>
+
+				<table class="blackhead" id="new_upload_fields">
+
+					<thead>
+						<tr>
+							<td width="430">описание</td>
+							<td>файл</td>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td>
+									<input type="text" name="image_descr" size=80/>
+								</td>
+								<td>
+									<input type="file" name="image"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" name="image_descr" size=80/>
+								</td>
+								<td>
+									<input type="file" name="image"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" name="image_descr" size=80/>
+								</td>
+								<td>
+									<input type="file" name="image"/>
+								</td>
+							</tr>
+					</tbody>
+				</table>
+				<p id="add-image-upload-fields-wrapper">
+					<span id="add-image-upload-fields">Добавить 10 полей для заливки</span>
+				</p>
+			</div>
+
+			<div class="section submit-buttons">
+
+				<table class="layout">
+					<tr>
+						<td class="save-wrapper">
+							<button type="submit" name="update" value="1">
+								<%== ($action_type  eq 'add' ? 'Добавить и продолжить редактуру' : 'Сохранить и продолжить редактуру') %>
+							</button>
+							<button type="submit" name="submit" value="1">
+								<%== ($action_type  eq 'add' ? 'Добавить и закрыть' : 'Сохранить и закрыть') %>
+							</button>
+						</td>
+						<td class="delete-wrapper">
+							% if ($action_type  ne 'add') {
+								<span>
+									<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить 	статью?');">Удалить группу</button>
+								</span>
+							% }
+						</td>
+					</tr>
+				</table>
+
+			</div>
+			<!-- /submit-buttons -->
+
+		% end
+		<!-- end FORM -->
+
+		<hr>
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+	$( "#add-image-upload-fields" ).click( function () {
+
+		var more_fields =
+			'<tr>' +
+				'<td width="100"></td>' +
+				'<td>' +
+					'<input type="text" name="image_descr" size=40/>' +
+				'</td>' +
+				'<td>' +
+					'<input type="file" name="image"/>' +
+				'</td>' +
+			'</tr>';
+
+		var $tbody = $("#new_upload_fields tbody");
+
+		function jack_in( to, what ) {
+			var $what = $(what);
+			to.append( what );
+		}
+
+		for ( var z = 0; z < 8; z++ ) {
+			jack_in( $tbody, more_fields );
+			console.log(z);
+			// $tbody.append( $more_fields );
+		}
+
+	});
+
+</script>
