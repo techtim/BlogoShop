@@ -81,6 +81,8 @@ sub show {
         pages => int( 0.99 + $item->count($filter)/($c->{app}->config->{items_on_page}*2) ),
         items => $item->list($filter, {brand => 1}, $skip, $c->{app}->config->{items_on_page}*2),
         cur_category => $c->stash('categories_info')->{($filter->{category} || '').($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
+        groups => $c->groups->get_all(),
+        groups_alias => $c->groups->get_all(1),
         host  => $c->req->url->base,
         pager_url  => $pager_url,
         pager_url_no_state => $pager_url_no_state,
@@ -179,8 +181,13 @@ sub multi_act {
             return if !$c->req->param('date');
             my $date = $c->utils->timestamp_from_date($c->req->param('date'));
             $c->db->tasks->save({ start_time => $date, ids => \@ids, action => 'activate_item' });
-        }
-
+        } elsif ($c->req->param('action') eq 'add_to_group') {
+            # return if !$c->req->param('group_id');
+            $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
+                { '$set' => {group_id => $c->req->param('group_id')} },
+                {'multiple' => 1 }
+            );
+        }   
     }
     return $c->redirect_to("/admin/shop/".$c->req->param('category').($c->req->param('subcategory') ? "/".$c->req->param('subcategory') : ''));
 }

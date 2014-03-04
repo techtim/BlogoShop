@@ -8,7 +8,7 @@ use utf8;
 
 use File::Path qw(make_path remove_tree);
 use Encode;
-use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date);
+use constant ARTICLE_PARAMS => qw( active alias name type brand preview_size tags preview_text preview_image preview_image_wide article_text images source article_time article_date group_id);
 
 sub get {
 	my $self = shift;
@@ -201,6 +201,7 @@ sub edit {
 		%$article,
 		id => $article->{_id}->{value},
 		article_brands => $article_brands,
+		groups => $self->groups->get_all(),
 		action_type => 'edit',
 		template => 'admin/' . ($self->{collection} ne 'articles' ? $self->{collection} : 'article'),
 		format => 'html',
@@ -293,26 +294,6 @@ sub list_videos {
 		videos => \@videos,
 		pages => 3,
 		template => 'admin/list_videos',
-		format => 'html',
-	);
-}
-
-sub list_big_games {
-	my $self= shift;
-	my $page = $self->req->param('page') ? $self->req->param('page') : 1;
-	
-	my @big_games_news = $self->app->db->big_games_news->find({})->
-		skip(($page-1)*($self->config('articles_on_admin_page')||30))->
-		limit($self->config('articles_on_admin_page')||30)->
-		sort({'_id' => -1})->all;
-	
-	my $pages = $self->app->db->big_games_news->find({})->count/($self->config('articles_on_admin_page')||30);
-	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
-	
-	return $self->render(
-		articles => \@big_games_news,
-		pages => $pages || 0,
-		template => 'admin/list_big_games',
 		format => 'html',
 	);
 }

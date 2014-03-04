@@ -176,6 +176,30 @@ sub brand {
 	}
 }
 
+sub group {
+	my $self = shift;
+
+	my $filter = {alias => $self->stash('group')};
+
+	my $group = $self->groups->get_group($filter);
+
+	my $item 	= BlogoShop::Item->new($self);
+	$filter = {active => 1, group_id => ''.$group->{_id}};
+	$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
+	my $items = $item->list($filter, { price => -1 }, 0, 1000);
+
+	return $self->render(
+			%$group,
+			host 	=> $self->req->url->base,
+			items 	=> $items,
+			sex		=> '',
+			banners_h => $self->utils->get_banners($self, '', 240),
+			page_name => 'shop',
+			template=> 'group', # return only
+			format 	=> 'html', 
+	);
+}
+
 sub cart {
 	my $self = shift;
 	my $filter = {};

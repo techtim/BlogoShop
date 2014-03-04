@@ -41,7 +41,7 @@ sub index {
     skip(($page-1)*($self->config('articles_on_admin_page')||30))->
     limit($self->config('articles_on_admin_page')||30)->
     sort({'_id' => -1})->all;
-	my $pages = $self->app->db->articles->find($filter)->count/($self->config('articles_on_admin_page')||30);
+	my $pages = $self->app->db->articles->find($filter)->count() / ($self->config('articles_on_admin_page')||30);
 	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
 
 	return $self->render(

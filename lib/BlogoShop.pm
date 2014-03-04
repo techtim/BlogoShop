@@ -14,6 +14,7 @@ use BlogoShop::Item;
 use BlogoShop::Qiwi;
 use BlogoShop::Logistics;
 use BlogoShop::Docs;
+use BlogoShop::Group;
 
 # This method will run once at server start
 sub startup {
@@ -71,6 +72,7 @@ sub startup {
 
 	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
 	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
+	(ref $self)->attr(groups	=> sub {return BlogoShop::Group->new()});
 	(ref $self)->attr(items 	=> sub {return BlogoShop::Item->new($self, $self->stash('id'))});
 	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new()});
 	(ref $self)->attr(conf 	=> sub {return $self->config});
@@ -81,6 +83,7 @@ sub startup {
 	$self->helper(db 		=> sub { shift->app->db });
 	$self->helper(admins 	=> sub { shift->app->admins });
 	$self->helper(articles 	=> sub { shift->app->articles });
+	$self->helper(groups 	=> sub { shift->app->groups });
 	$self->helper(items 	=> sub { shift->app->items });
 	$self->helper(courier 	=> sub { shift->app->courier });
 	$self->helper(qiwi 	=> sub { shift->app->qiwi });
@@ -218,6 +221,12 @@ sub startup {
 		$admin_bridge->route('/articles')->via('get')->to('controller-Adminarticle#list');
 		$admin_bridge->route('/articles/render')->via('get')->to('controller-Adminarticle#render_all');
 		
+		# Group part
+		$admin_bridge->route('/group/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Admingroup#get', id => 'add');
+		$admin_bridge->route('/group/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Admingroup#post', id => 'add');
+		
+		$admin_bridge->route('/groups')->via('get')->to('controller-Admingroup#list');
+
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/search')->to('controller-Adminshop#show', search => 1);
@@ -289,6 +298,8 @@ sub startup {
 	# list items 
 	$r->route('/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-shop#brand');
 	$r->route('/tag/:tags', tag => qr![^\{\}\[\]/]+!)->to('controller-shop#list');
+
+	$r->route('/group/:group', group => qr![^\{\}\[\]/]+!)->to('controller-shop#group');
 
 	$r->route('/:sex/:category/:subcategory',
 		sex => qr!m|w!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)

@@ -24,6 +24,13 @@ sub show {
 
 	$article->{article_text} = $article->{article_text_rendered};
 
+	if ($article->{group_id}) {
+		my $item 	= BlogoShop::Item->new($self);
+		my $filter = {active => 1, group_id => $article->{group_id}};
+		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
+		$article->{items} = $item->list($filter, {_id => -1}, 0, 1000);
+	}
+
     $filter = {};
     $filter->{tags}->{'$in'} = $article->{tags} if $article->{tags};
     $filter->{brand} = $article->{brand} if $article->{brand};

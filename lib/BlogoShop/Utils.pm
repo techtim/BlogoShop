@@ -141,7 +141,7 @@ sub timestamp_from_date {
 sub get_images {
 	my ($self, $controller, $name, $path) = @_;
     
-    return 0 if !$path || !$name;
+    return [] if !$path || !$name;
 	my $images = [];
 	my @image_descr = $controller->req->param($name.'_descr');
     
@@ -150,7 +150,7 @@ sub get_images {
 	# Collect already uploaded files
 	foreach ($controller->req->param($name.'_tag')) {
 		my $tmp = {tag => $_, descr => shift @image_descr};
-		$tmp->{descr} =~ s/\"/&quot;/g;
+		$tmp->{descr} =~ s/\"/&quot;/g if $tmp->{descr};
 		push @$images, $tmp unless $image_delete{$_}; 
 	}
     
@@ -175,8 +175,9 @@ sub get_images {
 		push @$images, $image;
 	}
     
-	return $images if @$images>0;
-	return 0;
+    return $images->[-1]->{tag} if $name =~ m/(preview)/;
+	return $images if @$images>1;
+	return [];
 }
 
 sub store_image {
@@ -306,10 +307,10 @@ sub check_item_price {
 sub render_article {
 	my ($self, $controller, $article) = @_;
     
-	return $article->{article_text} if !$article->{article_text};
-    
-	my $text = $article->{article_text};
-    
+	return $article->{article_text} if !$article->{article_text} && !$article->{group_text};
+
+	my $text = $article->{article_text} || $article->{group_text} ;
+
 	$text =~ s/([^\n\r]+)/<p>$1<\/p>\r/g;
 	$text =~ s/\r?\n\r?\n/<br>/gi;
 	{ # shitty "Malformed UTF-8 character"
