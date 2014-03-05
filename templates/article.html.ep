@@ -8,15 +8,29 @@
     
     <%== stash 'article_text_rendered' %>
     
+
+   
+    <div class='shop__items__list'>
+        <div class='fiters__section clearfloat'>
+
+        </div>
+
+        <ul class='list__section clearfloat'>
+            %= include 'includes/list_items', items => stash 'items'
+            <!--<li class='scroll__helper shop' data-href='?price=brand' data-next='16'></li>
+            <script>requirejs(['app/scroll']);</script>-->
+        </ul>
+    </div>
+
     <div class='tags__section'>
     % if (ref $tags eq 'ARRAY') {
         % my $ct = 0;
         % foreach (@$tags) {
         <a href='/tag/<%= $_ %>'><%= $_ %></a><%= ',' if $tags->[-1] ne $_ %>
         % } }
-    </div>    
+    </div>
     <div class='clear'></div>
-    
+
     <ul class='socials__section clearfloat'>
     	<li class='fb'>
     		<div id="fb-root"></div>
@@ -50,18 +64,6 @@
 			</script>
     	</li>
     </ul>
-    
-    <div class='shop__items__list'>
-        <div class='fiters__section clearfloat'>
-
-        </div>
-
-        <ul class='list__section clearfloat'>
-            %= include 'includes/list_items', items => stash 'items'
-            <!--<li class='scroll__helper shop' data-href='?price=brand' data-next='16'></li>
-            <script>requirejs(['app/scroll']);</script>-->
-        </ul>
-    </div>
 
     <ul class='post__navigation clearfloat'>
        	% if ($prev_article->{name}) {
