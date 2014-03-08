@@ -9,7 +9,7 @@
     <%== stash 'article_text_rendered' %>
     
 
-   
+    % if (stash('items')) {
     <div class='shop__items__list'>
         <div class='fiters__section clearfloat'>
 
@@ -21,7 +21,7 @@
             <script>requirejs(['app/scroll']);</script>-->
         </ul>
     </div>
-
+    % }
     <div class='tags__section'>
     % if (ref $tags eq 'ARRAY') {
         % my $ct = 0;
@@ -90,3 +90,5 @@
 </div>
 
 <div class='clear'></div>
+
+<script>require(['app/equalHeight', 'app/itemsDescr'])</script>

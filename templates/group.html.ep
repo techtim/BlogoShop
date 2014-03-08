@@ -55,3 +55,5 @@
     
 </div>
 <div class='clear'></div>
+
+<script>require(['app/equalHeight', 'app/itemsDescr'])</script>
