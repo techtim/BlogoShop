@@ -1,4 +1,4 @@
-<blockquote class="incut-<%== $type %>">
+<blockquote class="incut-<%== stash('type') %>">
     <p><span class="quote-mark-pre">«</span><%== $quote_text %><span class="quote-mark-post">»</span></p>
 </blockquote>
 <!-- right normal -->

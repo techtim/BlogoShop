@@ -2,7 +2,7 @@
 % title ($action_type eq 'add' ? 'Новая статья' : 'Правка статьи');
 
 <script>
-	requirejs(['app/admin/addItem'])
+	requirejs(['app/admin/addItem', 'app/equalHeight'])
 </script>
 
 <style type="text/css">
@@ -210,7 +210,67 @@
 		<hr>
 
 	</div>
+	<div class="shop__items__list">
+		%= form_for '/admin/shop/multi' => (method => 'post') => begin
+		<input type='hidden' name='category' value='<%= stash('category') %>'/>
+		<input type='hidden' name='subcategory' value='<%= stash('subcategory') %>'/>
+		<input type='hidden' name='redirect_to' value='group/edit/<%= stash '_id' %>'>
+		<div class='multi__action dates__section'>
+			<span> групповое действие:
+			<select name="action">
+				<option value="off">выключть</option>
+				<option value="on">включть</option>
+				<option value="on_timer">включить по таймеру</option>
+				<option value="add_to_group">добавить в группу</option>
+				<option value="delete">удалить</option>
+				%# <option value="req_to_brand">заказать</option>
+				% if ($admin->{login} eq $config->{order_delete_power}) { 
+				<option value="undelete">востановить</option>
+				% }
+			</select>
+			дата:<input type="text" name="date" value="" />
+			%= include 'includes/select_block', name => 'group_id', select => '', options => stash 'groups'
+			<button type="submit" name="multi" value="1">сохранить</button>
+			</span>	
+		</div>
+		% if (@$items>0) {
+	    <ul class='list__section'>
+	        % foreach my $item (@$items) {
 
+			<li <%== 'class=\'disabled\'' if $item->{active} eq 0 %>>
+				<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
+					<span class='img__section'>
+						<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>">
+						% if ($item->{sale}->{sale_active} && 
+						%	$item->{sale}->{sale_start_stamp} <= time() &&
+						%	$item->{sale}->{sale_end_stamp} >= time()) {
+			            	<span class='ico__sale'></span>
+		            	% }
+					</span>
+				</a>
+				<!--
+	        	<a class='active controls' href=''></a>
+	        	<a class='delete controls' href=''></a>
+				-->
+
+				<span id='active_check' class='checkbox unchecked'><input type="checkbox" name="item" value="<%= $item->{_id} %>"> выбрать </span>
+
+				<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
+					<span class='articol'><%= $item->{articol} %></span>
+					<span class='brand'><%= stash('name_brands')->{$item->{brand}} %></span>
+					<span class='item__caption'><%= $item->{name} %></span>
+					<span class='price'><%= $item->{price} %></span>
+					% if (!grep {$_->{qty} > 0} @{$item->{subitems}}) {
+						<span class='item__caption' style="color:red">нет в наличии</span>
+					% }
+					<span class='group'><%= $groups_alias->{$item->{group_id}} %></span>
+				</a>
+			</li>
+			% }
+		</ul>
+		% }
+		%= end
+	</div>	
 </div>
 
 <script type="text/javascript">

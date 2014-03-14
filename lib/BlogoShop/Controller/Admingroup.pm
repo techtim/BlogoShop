@@ -87,7 +87,7 @@ sub check_input {
 	# $group->{date} = $self->utils->date_from_mongoid($group->{new_id}||$self->stash('id')) if $self->stash('id');
 	
 	push @$error_message, 'no_article_name' if !$group->{name} || $group->{name} eq '';
-	push @$error_message, 'no_article_text' if !$group->{group_text} || $group->{group_text} eq '';
+	push @$error_message, 'no_article_alias' if !$group->{alias} || $group->{alias} eq '';
 	$group->{active} = 0,	$self->stash('error_message' => $error_message) if @$error_message > 0; 
 	
 	if (@$error_message > 0) {
@@ -172,23 +172,30 @@ sub create {
 }
 
 sub edit {
-	my $self= shift;
+	my $c= shift;
 
-	my $group = $self->groups->get_group_by_id($self->stash('id'), $self->{collection});
+	my $group = $c->groups->get_group_by_id($c->stash('id'), $c->{collection});
 	
 	if (!$group) {
-		$self->flash('error_message' => ['no_group']);
-		return $self->redirect_to('/admin/'.$self->{collection});
+		$c->flash('error_message' => ['no_group']);
+		return $c->redirect_to('/admin/'.$c->{collection});
 	}
 
 	$group->{$_} = ($group->{$_} ? $group->{$_} : '') foreach GROUP_PARAMS;
 	
-	$self->stash('error_message' => $self->flash('error_message')) if $self->flash('error_message');
-	$self->stash('message' => $self->flash('message')) if $self->flash('message');
+	my $item 	= BlogoShop::Item->new($c);
+	my $filter = {group_id => $c->stash('id')};
+	# $filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
+	$group->{items} = $item->list($filter, {_id => -1}, 0, 1000);
 
-	$self->render(
+	$c->stash('error_message' => $c->flash('error_message')) if $c->flash('error_message');
+	$c->stash('message' => $c->flash('message')) if $c->flash('message');
+
+	return $c->render(
 		%$group,
 		id => $group->{_id}->{value},
+		groups => $c->groups->get_all(),
+		groups_alias => $c->groups->get_all(1),
 		action_type => 'edit',
 		template => 'admin/group',
 		format => 'html',

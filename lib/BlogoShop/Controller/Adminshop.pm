@@ -189,6 +189,7 @@ sub multi_act {
             );
         }   
     }
+    return $c->redirect_to("/admin/".$c->req->param('redirect_to')) if $c->req->param('redirect_to');
     return $c->redirect_to("/admin/shop/".$c->req->param('category').($c->req->param('subcategory') ? "/".$c->req->param('subcategory') : ''));
 }
 

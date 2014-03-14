@@ -344,8 +344,9 @@ sub render_article {
     
 	$text =~ s/<video="([^"]+)">/$controller->render("includes\/video", partial => 1, video_src => $img_url.$1, video_id => md5_hex($1))/eg;
     
-	while ($text =~ s/<bq>(.+?)<\/bq>/$controller->render("includes\/blockquote", partial => 1, quote_text => $1)/sge) {;} 
-    
+	# while ($text =~ s/<bq>(.+?)<\/bq>|<blockquote>(.+?)<\/blockquote>/$controller->render("includes\/blockquote", partial => 1, quote_text => $1)/sge) {;} 
+    $text =~ s/<bq>(.+?)<\/bq>/<blockquote>$1<\/blockquote>/sg;
+
 	return $text;
 }
 

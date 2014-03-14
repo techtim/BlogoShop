@@ -86,11 +86,16 @@ sub remove_group {
 	return 0 unless $group;
 	eval {
 		remove_tree( $self->{config}->{image_dir} . 
-		'groups/' .
-		($group->{alias} ? $group->{alias} : $self->{config}->{default_img_dir})
+			$group->{type} . '/' .
+			($group->{alias} ? $group->{alias} : $self->{config}->{default_img_dir})
 		);
 	};
 	warn "ERROR on group files delete:\"$@\"" if $@;
+
+	$self->{db}->get_collection('items')->update({ group_id => ''.$group->{_id} }, 
+		{ '$unset' => {group_id => ""} },
+		{ 'multiple' => 1 }
+	);
 	return $self->{db}->get_collection(GROUPS_COLLECTION)->remove(
 		{_id => MongoDB::OID->new(value => $id)},
 	);

@@ -16,7 +16,7 @@
                 <img src="<%= $brand->{logo} %>" />
             </div>
 
-            <a href="/brand/<%= $brand->{name} %>" TARGET='_blank' title="просмотреть '<%= $brand->{name} %>'" class='brand__name'>
+            <a href="/brand/<%== $brand->{_id} %>" TARGET='_blank' title="просмотреть '<%= $brand->{name} %>'" class='brand__name'>
                 <%= $brand->{name} %>
             </a>
 

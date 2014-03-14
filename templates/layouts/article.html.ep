@@ -25,7 +25,7 @@
 		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
 
 		<script data-main='/j/config' src='/j/require.js'></script>
-		<script>requirejs(['app/global', 'app/fotorama'])</script>
+		<script>requirejs(['app/global', 'app/fotorama', 'app/equalHeight'])</script>
 	</head>
 
 	<body>

@@ -53,6 +53,10 @@
 	Заполните текст статьи
 % }
 
+% if ($error_message eq 'no_article_alias') {
+	Заполниете ALIAS
+% }
+
 % if ($error_message eq 'no_rubric') {
 	Укажите рубрику
 % }

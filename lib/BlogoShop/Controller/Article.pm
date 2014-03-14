@@ -28,7 +28,8 @@ sub show {
 		my $item 	= BlogoShop::Item->new($self);
 		my $filter = {active => 1, group_id => $article->{group_id}};
 		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
-		$article->{items} = $item->list($filter, {_id => -1}, 0, 1000);
+		my $items = $item->list($filter, {_id => -1}, 0, 1000);
+		$article->{items} = $items if @$items > 0;
 	}
 
     $filter = {};
