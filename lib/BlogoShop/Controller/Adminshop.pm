@@ -184,7 +184,7 @@ sub multi_act {
         } elsif ($c->req->param('action') eq 'add_to_group') {
             # return if !$c->req->param('group_id');
             $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
-                { '$set' => {group_id => $c->req->param('group_id')} },
+                { '$push' => {group_id => $c->req->param('group_id')} },
                 {'multiple' => 1 }
             );
         }   

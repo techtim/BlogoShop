@@ -25,10 +25,10 @@ sub show {
 	$article->{article_text} = $article->{article_text_rendered};
 
 	if ($article->{group_id}) {
-		my $item 	= BlogoShop::Item->new($self);
+		my $group = BlogoShop::Group->new($article->{group_id});
 		my $filter = {active => 1, group_id => $article->{group_id}};
-		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
-		my $items = $item->list($filter, {_id => -1}, 0, 1000);
+		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];		
+		my $items = $group->get_group_items($filter);
 		$article->{items} = $items if @$items > 0;
 	}
 
@@ -84,8 +84,8 @@ sub list {
         brand => $self->stash('brand') || '',
         is_index => keys %$filter == 0 ? 1 : 0,
 		articles => $art,
-        banners => $self->utils->get_banners($self, '', 680),
-        banners_h => $self->utils->get_banners($self, '', 240),
+        banners => $self->utils->get_banners($self, ($filter->{type} ? 'type_'.$filter->{type} : '') , 680),
+        banners_h => $self->utils->get_banners($self, ($filter->{type} ? 'type_'.$filter->{type} : ''), 240),
         page_name => (!$filter->{type} || $filter->{type} =~ /(post|special)/ ? 'blog' : $filter->{type}),
         template => $self->stash('move') && $self->req->headers->header('X-Requested-With') ? 'includes/list_articles' : 'blog', # return only
 		format => 'html', 

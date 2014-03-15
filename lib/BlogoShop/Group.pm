@@ -12,10 +12,15 @@ use constant {
 };
 
 sub new {
-	my ($class, $db, $conf) = @_;
+	my ($class, $id) = @_;
 	my $self;
 	$self->{db} = BlogoShop->db;
 	$self->{config} = BlogoShop->conf;
+	if ($id) {
+	    %$self = ( %$self, 
+	    	%{ BlogoShop->db->groups->find_one( {'$or' => [{_id => MongoDB::OID->new(value => $id)}, {alias => $id}]} ) || {} } 
+	    );
+	};
 	bless $self, $class;	 
 }
 
@@ -48,22 +53,30 @@ sub update_group {
 	
 	delete $group->{_id} if $group->{_id};
 	$self->{db}->get_collection(GROUPS_COLLECTION)->update(
-	{_id => MongoDB::OID->new(value => $id)}, {'$set' => $group}
+		{_id => MongoDB::OID->new(value => $id)}, {'$set' => $group}
 	);
 	return $id;
 
 }
 
-# sub render_all_groups {
-# 	my ($self, $controller) = @_;
-	
-# 	my @arts = $self->{db}->groups->find()->all;
-# 	foreach my $group (@arts) {
-# 		$group->{group_text_rendered} = $controller->utils->render_article($controller, $group);
-# 		$self->update_group($group->{_id}, $group);
-# 	}
-# 	return 1;
-# }
+sub get_group_items {
+	my ($self, $filter, $count) = @_;
+
+	return [] if !$self->{_id};
+
+	$filter->{group_id} = ''.$self->{_id};
+
+	if ($self->{alias} eq 'sale'){
+		delete $filter->{group_id};
+		$filter->{"sale\.sale_active"} = "1";
+		$filter->{"sale\.sale_start_stamp"} = {'$lte' => time()};
+		$filter->{"sale\.sale_end_stamp"} = {'$gte' => time()};
+	}
+
+	$count //= 1000;
+
+	return [BlogoShop->db->items->find($filter)->sort({price => -1})->limit($count)->all];
+}
 
 sub get_group {
 	my ($self, $filter) = @_;
@@ -93,7 +106,7 @@ sub remove_group {
 	warn "ERROR on group files delete:\"$@\"" if $@;
 
 	$self->{db}->get_collection('items')->update({ group_id => ''.$group->{_id} }, 
-		{ '$unset' => {group_id => ""} },
+		{ '$pull' => {group_id => $id} },
 		{ 'multiple' => 1 }
 	);
 	return $self->{db}->get_collection(GROUPS_COLLECTION)->remove(

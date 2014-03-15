@@ -37,7 +37,7 @@ sub startup {
 		@_ = ($self->log, $mess); 
 		goto &Mojo::Log::warn; 
 	};
-	
+
 	# Set cache size for rendered templates
 	$self->renderer->cache->max_keys(500);
 
@@ -155,6 +155,7 @@ sub startup {
 		$c->stash->{active_categories} = $c->app->utils->get_active_categories($c->app->db);
 		$c->stash->{list_brands} 	  	= $c->app->utils->get_list_brands($c->app->db);
 		$c->stash->{name_brands} 	  	= {map {$_->{_id} => $_->{name}} @{$c->stash->{list_brands}}};
+		$c->stash->{article_types}		= $c->app->utils->get_article_types();
 		# $c->stash->{static_pages}		= {map {''.$_->{_id} => $_} $c->app->db->statics->find({})->fields({_id=>1,alias=>1,name=>1})->all};
 		$next->();
 	});
@@ -226,6 +227,7 @@ sub startup {
 		$admin_bridge->route('/group/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Admingroup#post', id => 'add');
 		
 		$admin_bridge->route('/groups')->via('get')->to('controller-Admingroup#list');
+		$admin_bridge->route('/update_groups_items')->via('get')->to('controller-Admingroup#update_items_make_group_array');
 
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
@@ -243,7 +245,6 @@ sub startup {
 			'/shop/:category/:subcategory/:id/:act', id => qr/[\d\w]+/, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, act => qr!\w+!
 		)->to('controller-Adminshop#item', id => 'add', act => '');
 		
-
 		# Orders list
 		$admin_bridge->route('/orders/qiwi_update')->via('get')->to('controller-Adminorders#qiwi_update_bills');
 
@@ -252,15 +253,12 @@ sub startup {
 		$admin_bridge->route('/orders/id/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
-		
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'statics');
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'statics');
-		
-		
-		
+
 		# Content
 		$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');
 		$admin_bridge->route('/categories/save')->via('post')->to('controller-Admincontent#list_categories', save => 1);
@@ -300,6 +298,7 @@ sub startup {
 	$r->route('/tag/:tags', tag => qr![^\{\}\[\]/]+!)->to('controller-shop#list');
 
 	$r->route('/group/:group', group => qr![^\{\}\[\]/]+!)->to('controller-shop#group');
+	$r->route('/sale')->to('controller-shop#group', group => 'sale');
 
 	$r->route('/:sex/:category/:subcategory',
 		sex => qr!m|w!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)

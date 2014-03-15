@@ -138,12 +138,14 @@ sub get_images {
 
 # Handlers
 sub add {
-	my $self = shift;
+	my $c = shift;
 	
-	$self->stash($_ => '') foreach GROUP_PARAMS;
-	
-	$self->render(
+	$c->stash($_ => '') foreach GROUP_PARAMS;
+
+	$c->render(
 		action_type => 'add',
+		groups => $c->groups->get_all(),
+		groups_alias => $c->groups->get_all(1),
 		template => 'admin/group',
 		format => 'html',
 	);
@@ -174,9 +176,9 @@ sub create {
 sub edit {
 	my $c= shift;
 
-	my $group = $c->groups->get_group_by_id($c->stash('id'), $c->{collection});
+	my $group = BlogoShop::Group->new($c->stash('id'));
 	
-	if (!$group) {
+	if (!$group->{_id}) {
 		$c->flash('error_message' => ['no_group']);
 		return $c->redirect_to('/admin/'.$c->{collection});
 	}
@@ -185,8 +187,8 @@ sub edit {
 	
 	my $item 	= BlogoShop::Item->new($c);
 	my $filter = {group_id => $c->stash('id')};
-	# $filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
-	$group->{items} = $item->list($filter, {_id => -1}, 0, 1000);
+
+	$group->{items} = $group->get_group_items($filter);
 
 	$c->stash('error_message' => $c->flash('error_message')) if $c->flash('error_message');
 	$c->stash('message' => $c->flash('message')) if $c->flash('message');
@@ -240,6 +242,17 @@ sub update {
 	}
 	
 	return $self->redirect_to('/admin');
+}
+
+sub update_items_make_group_array {
+	my $c = shift;
+
+	my $items = [$c->app->db->items->find({group_id => {'$exists' => 1}})->all];
+	foreach (@$items) {
+		$c->app->db->items->update({_id => $_->{_id}}, {'$set' => {group_id => [$_->{group_id}]}});
+	}
+
+	return $c->render(json => {"update items" => 'ok'});
 }
 
 1;

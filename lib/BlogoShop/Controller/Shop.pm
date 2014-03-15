@@ -26,9 +26,7 @@ sub index {
 		# $filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
 		# delete $filter->{sale};
     my $item 	= BlogoShop::Item->new($self);
-	# my $items 	= $item->list($filter, {}, int($self->config('items_on_startpage')/2));
-	
-	# @$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
+
 	my $items 	= $self->utils->get_items_from_catalog($self);
 
     return $self->render(
@@ -64,7 +62,7 @@ sub list {
 	my $sort 	= { price => -1 };
 	$sort->{price} = $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
 	$sort->{_id} = $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
-# warn $self->dumper($sort);
+
 	my $item 	= BlogoShop::Item->new($self);
 	my $items = $item->list($filter, $sort, ($self->req->param('next') && $self->req->param('next')=~/(\d+)/)?$1:0);
 
@@ -181,18 +179,18 @@ sub group {
 
 	my $filter = {alias => $self->stash('group')};
 
-	my $group = $self->groups->get_group($filter);
+	my $group = BlogoShop::Group->new($self->stash('group'));
 
-	my $item 	= BlogoShop::Item->new($self);
-	$filter = {active => 1, group_id => ''.$group->{_id}};
+	$filter = {active => 1};
 	$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
-	my $items = $item->list($filter, { price => -1 }, 0, 1000);
+	my $items = $group->get_group_items($filter, 1000);
 
 	return $self->render(
 			%$group,
 			host 	=> $self->req->url->base,
 			items 	=> $items,
 			sex		=> '',
+			category=> '',
 			banners_h => $self->utils->get_banners($self, '', 240),
 			page_name => 'shop',
 			template=> 'group', # return only
