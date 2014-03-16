@@ -149,13 +149,12 @@
 
 			<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
 				<span class='articol'><%= $item->{articol} %></span>
-				<span class='brand'><%= stash('name_brands')->{$item->{brand}} %></span>
+				<span class='brand'><%= stash('name_brands')->{$item->{brand}} if stash('name_brands')->{$item->{brand}} %></span>
 				<span class='item__caption'><%= $item->{name} %></span>
 				<span class='price'><%= $item->{price} %></span>
 				% if (!grep {$_->{qty} > 0} @{$item->{subitems}}) {
 					<span class='item__caption' style="color:red">нет в наличии</span>
 				% }
-				<span class='group'><%= $groups_alias->{$item->{group_id}} %></span>
 			</a>
 		</li>
 		% }

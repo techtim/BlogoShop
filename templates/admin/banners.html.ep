@@ -34,10 +34,6 @@
                         <%= $banner->{link} %>
                     </div>
 
-                    <div class="category">
-                        Категория: <%= $banner->{category} ? $cat_alias->{$banner->{category}} : 'главная'  %>
-                    </div>
-
                     <!-- <%= $banner->{weight} || 'не показывать' %> -->
 
                     <a href="/admin/banners/<%= $banner->{type} %>/edit/<%= $banner->{_id} %>" class="edit"></a>
@@ -110,6 +106,15 @@
                     </li>
                 </ul>
 
+                % foreach my $type (keys %$article_types) {
+                <ul>
+                    <li>
+                        <input type="checkbox" name="category" value="<%= 'type_'.$type %>" <%= 'class="checked"' if $banner_cats->{'type_'.$type} %> <%= 'checked' if $banner_cats->{'type_'.$type} %> id="cat__name__<%= 'type_'.$type %>"/>
+                        <label class="cat__name"  for="cat__name__<%= 'type_'.$type %>">РАЗДЕЛ: <%== $article_types->{$type} %></label>
+                    </li>
+                </ul>
+                % }
+
                 % foreach my $cat (@$categories) {
                     <ul>
                         <li>
@@ -125,6 +130,7 @@
                         % }
                     </ul>
                 % }
+
             </div>
 
     	% end

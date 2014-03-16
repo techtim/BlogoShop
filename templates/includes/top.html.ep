@@ -9,6 +9,7 @@
         <li class='item__6 <%= 'current' if stash('page_name') eq 'pay' %>'><a href='http://<%= config->{domain_name} %>/pay'>ОПЛАТА</a></li>
         <li class='item__7 <%= 'current' if stash('page_name') eq 'lookbook' %>'><a href='http://blog.<%= config->{domain_name} %>/lookbook'>ЛУКБУКИ</a></li>
         <li class='item__8 <%= 'current' if stash('page_name') eq 'new' %>'><a href='http://blog.<%= config->{domain_name} %>/new'>НОВИНКИ</a></li>
+        <li class='item__9 <%= 'current' if stash('page_name') eq 'sale' %>'><a href='http://<%= config->{domain_name} %>/sale'>SALE</a></li>
     </ul>
     % if (stash('page_name') eq 'shop') {
     <div class='shopping__cart__section'>

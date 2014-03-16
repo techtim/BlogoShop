@@ -38,7 +38,7 @@
 				% }
 				% if ($admin->{login} eq $config->{order_delete_power}) { 
 					<li><%= link_to 'удаленные товары' => '/admin/shop'.
-						(stash('category') && stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '').'?deleted=1' %></li>
+						(stash('category') && !ref stash('category') && stash('category') ne '' ? '/'.stash('category').'/'.(stash('subcategory')||'') : '').'?deleted=1' %></li>
 				% }
 				 <li class='site__link'><a href='/' title='Вернуться на сайт'></a></li>				 	
 			</ul>

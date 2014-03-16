@@ -6,8 +6,7 @@
 <div class='content__section post__page'>
     <h2><%= stash 'name' %></h2>
     <img src="<%== config->{image_url}.join '/', $type, $alias, $preview_image %>">
-    <%== stash 'group_text_rendered' %>
-    
+    <%== stash('group_text_rendered') if stash 'group_text_rendered' %>
     
     <div class='shop__items__list'>
         <div class='fiters__section clearfloat'>

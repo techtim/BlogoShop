@@ -101,6 +101,11 @@
     Укажите тип
 % }
 
+% if ($error_message eq 'no_group') {
+    Группа не найдена
+% }
+
+
 % if ($error_message eq 'no_alias') {
     Укажите адрес страницы
 % }

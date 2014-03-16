@@ -192,9 +192,9 @@
 							</button>
 						</td>
 						<td class="delete-wrapper">
-							% if ($action_type  ne 'add') {
+							% if ($action_type ne 'add' && $alias ne 'sale') {
 								<span>
-									<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить 	статью?');">Удалить группу</button>
+									<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить группу?');">Удалить группу</button>
 								</span>
 							% }
 						</td>
@@ -233,7 +233,8 @@
 			<button type="submit" name="multi" value="1">сохранить</button>
 			</span>	
 		</div>
-		% if (@$items>0) {
+		% if (ref stash('items') eq ref []) {
+		% my $items = stash('items');
 	    <ul class='list__section'>
 	        % foreach my $item (@$items) {
 

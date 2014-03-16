@@ -161,8 +161,10 @@
 									Почта России 
 									% $sum += 430;
 								% } elsif ($order->{delivery_type} eq "ems") {
-								 	EMS
-								 	% $sum += 620;
+									EMS
+									% $sum += 620;
+								% } elsif ($order->{delivery_type} eq "logistics") {
+								 	Logistics
 								% }
 							</dd>
 						</dl>
@@ -193,24 +195,21 @@
 						<dl class='deliver__price__section clearfloat'>
 							<dt>СТОИМОСТЬ доставки:</dt>
 							<dd>
-								% if ($order->{self_delivery} ne '') {
-									
-								% } elsif ($order->{delivery_type} eq "courier") {
-									350
-								% } elsif ($order->{delivery_type} eq "russian_post") {
-									500
-								% } elsif ($order->{delivery_type} eq "ems") {
-								 	620
+								% if ($order->{delivery_type} ne '') {
+									<input type='text' name='delivery_cost' value='<%= $order->{delivery_cost} %>'>
+								% 	$sum += $order->{delivery_cost} if $order->{delivery_cost};
 								% }
 							</dd>
 						</dl>
 
-						% if ($order->{delivery_type} eq "courier") {
-						<dl class='contacts__section gray__bg clearfloat'>
-							<dt>Вызвать курьера:</dt>
-							<dd>
+						% if ($order->{delivery_type} eq "logistics") {
+						<dl class='deliver__price__section gray__bg clearfloat'>
+							<dt>
+								Вызвать курьера: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 								<input type='checkbox' name='courier' value=1 <%= 'checked' if $order->{courier_called} %>>
-							</dd>
+							</dt>
+							<dd></dd>
 						</dl>
 						% }
 
@@ -246,8 +245,7 @@
 
 						% if ($order->{pay_type} eq 'qiwi' ) {
 						<div class='qiwi'>
-
-							Цена доставки: <input type='text' name='delivery_cost' value='<%= $order->{delivery_cost} %>'>
+							<b>Qiwi:</b>
 							% my $qiwi = $order->{qiwi_status};
 							% if (!$qiwi) {
 			        			<input type='submit' name='create_qiwi' value='Выставить счет' >
