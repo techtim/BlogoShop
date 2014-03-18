@@ -59,7 +59,7 @@ sub show {
         $filter->{"subitems.articol"} = qr!.*$value.*!i if $type eq 'articol';
         $filter->{'$or'} = [{brand => qr!.*$value.*!i}, {brand_name => qr!.*$value.*!i}] if $type eq 'brand';
     }
-
+    my $sort = $c->stash('brand') ? {articol => 1} : {brand => 1};
     # Paging
     my $skip = $c->{app}->config->{items_on_page} * 2 * 
         ($c->req->param('page') && $c->req->param('page') =~ /(\d+)/ ? ($1>0 ? $1-1 : 0) : 0);
@@ -79,7 +79,7 @@ sub show {
         subcategory => $filter->{subcategory}? $filter->{subcategory} : '',
         cur_page  => $c->req->param('page') || 1,
         pages => int( 0.99 + $item->count($filter)/($c->{app}->config->{items_on_page}*2) ),
-        items => $item->list($filter, {brand => 1}, $skip, $c->{app}->config->{items_on_page}*2),
+        items => $item->list($filter, $sort, $skip, $c->{app}->config->{items_on_page}*2),
         cur_category => $c->stash('categories_info')->{($filter->{category} || '').($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
         groups => $c->groups->get_all(),
         groups_alias => $c->groups->get_all(1),
