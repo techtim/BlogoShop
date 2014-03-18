@@ -44,10 +44,15 @@
 
 <div class='content__section shop__item__section'>
 
+% if (session('admin')) {
+	<a href="/admin/shop/<%= join '/', $category, $subcategory, $_id %>"><span style="color:green;float:right">редактировать</span></a>
+% }
+
 <ul class='breadcrumps__section clearfloat'>
 	<li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
 	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
 	<li>/ <h2><%= stash 'name' %></h2></li>
+	
 </ul>
 
 % if (ref $images eq 'ARRAY') {
