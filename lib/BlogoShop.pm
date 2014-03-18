@@ -253,6 +253,8 @@ sub startup {
 		$admin_bridge->route('/orders/id/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
+		$admin_bridge->route('/orders/:id/:act/:item_id/:item_sub_id', id => qr/[\d\w]+/, act => qr/[\w]+/)->via('get')->to('controller-Adminorders#edit_order');
+		$admin_bridge->route('/orders/:status/:id/:act/:item_id/:item_sub_id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('get')->to('controller-Adminorders#edit_order');
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
@@ -329,4 +331,4 @@ sub startup {
 #	    mojo             => $self,
 #	    template_options => { },
 #    );
-#    $self->renderer->add_handler(tx => $xslate);                                                                                                                    
+#    $self->renderer->add_handler(tx => $xslate);

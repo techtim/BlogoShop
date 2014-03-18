@@ -1920,7 +1920,7 @@ body {
 .orders__list__section .list li .items__list__section li {
   margin-right: 8px;
   margin-bottom: 8px;
-  height: 70px;
+  height: 90px;
   width: 284px;
   padding: 10px;
   float: left;
@@ -1959,6 +1959,7 @@ body {
 .orders__list__section .list li .items__list__section li .meta__section {
   width: 64px;
   float: left;
+  padding-top: 25px;
 }
 /* line 2011, admin.scss */
 .orders__list__section .list li .items__list__section li .meta__section .count {
@@ -1975,7 +1976,8 @@ body {
 }
 /* line 2026, admin.scss */
 .orders__list__section .list li .items__list__section li .meta__section .price {
-  padding-right: 20px;
+  padding-right: 30px;
+  padding-top: 10px;
   background: url(../i/ico-rub.png) no-repeat right 4px;
   color: #434343;
   clear: both;
@@ -2130,6 +2132,23 @@ body {
   border: 1px solid #c9c9c9;
   box-sizing: border-box;
   line-height: 24px;
+}
+
+.orders__list__section .delete {
+  height: 27px;
+  width: 22px;
+  display: block;
+  background: url("../i/ico-delete.png") no-repeat center center;
+  opacity: .5;
+  -webkit-transition: opacity 0.4s linear;
+  -moz-transition: opacity 0.4s linear;
+  -o-transition: opacity 0.4s linear;
+  -ms-transition: opacity 0.4s linear;
+  transition: opacity 0.4s linear;
+}
+/* line 754, style.scss */
+.orders__list__section .delete:hover {
+  opacity: 1;
 }
 
 /* line 2209, admin.scss */

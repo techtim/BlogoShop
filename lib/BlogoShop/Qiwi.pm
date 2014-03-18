@@ -62,7 +62,7 @@ sub create_bill {
 		$_->{info} = $item->get($_->{_id}, $_->{sub_id});
 		$order->{sum} += $_->{price}*$_->{count};
 	}
-	$order->{sum} += $order->{delivery_cost};
+	$order->{sum} += $order->{delivery_cost}||0;
 	$order->{order_id} 	= ($order->{_id}->{value}=~/^(.{8})/)[0];
 	$order->{order_id_full} 	= $order->{_id}->{value};
 
@@ -70,11 +70,14 @@ sub create_bill {
 	my $dt = DateTime->from_epoch( epoch => time()+3600*24*30 );
 	$order->{lifetime} = $dt->strftime('%d.%m.%Y %H:%M:%S');
 	$order->{phone} =~ s/^(\+7|7|8)//;
+	my $txn = $order->{qiwi_status}{txn} || $order->{_id}->{value};
+	$txn =~ m/(.+?)(\d{1})$/;
+	$txn = $1.($2+1);
 
 	my $result = $client->call('createBill', 
 		SOAP::Data->name( login => $self->{login} ),
 		SOAP::Data->name( password => $self->{pass} ),
-		SOAP::Data->name( txn => $order->{_id}->{value} ),
+		SOAP::Data->name( txn => $txn ),
 		SOAP::Data->name( user => ''.$order->{phone} ),
 		SOAP::Data->name( amount => $order->{sum} ),
 		SOAP::Data->name( comment => $order->{comment} || 'Xoxloveka.ru bill' ),
@@ -86,22 +89,32 @@ sub create_bill {
 	# warn 'QIWI result:'. Dumper $result;
 	return {
 		status => $result->result, 
-		descr => QIWI_CODES->{$result->result}
+		descr => QIWI_CODES->{$result->result},
+		 # status=>0, descr=>QIWI_CODES->{0},
+		txn => $txn
 	};
 }
 
 sub cancel_bill {
 	my ($self, $order) = @_;
 
-	my $client = SOAP::Lite->service('https://ishop.qiwi.ru/docs/IShopServerWS.wsdl')->proxy(QIWI_PROXY);
-		
-	my $result = $client->call('cancelBill', 
-		SOAP::Data->name( login => $self->{login} ),
-		SOAP::Data->name( password => $self->{pass} ),
-		SOAP::Data->name( txn => ''.$order->{_id}->{value} ),
-	);
+	my $result = { status=>160, descr=>QIWI_CODES->{160} };
+	
+	if ($order->{qiwi_status}) {
 
-	return { status=>160, descr=>QIWI_CODES->{160} };
+		$result->{txn} = $order->{qiwi_status}->{txn};
+
+		my $client = SOAP::Lite->service('https://ishop.qiwi.ru/docs/IShopServerWS.wsdl')->proxy(QIWI_PROXY);
+
+		$client->call('cancelBill', 
+			SOAP::Data->name( login => $self->{login} ),
+			SOAP::Data->name( password => $self->{pass} ),
+			SOAP::Data->name( txn => ''.$order->{qiwi_status}{txn} ),
+		);
+	}
+
+	return $result;
+
 }
 
 sub get_bill_list {
@@ -129,7 +142,9 @@ sub get_bill_list {
 	warn 'GET_BILL_LIST'. Dumper $result->result;
 	my $orders = [];
 	while ( $html =~ /id="([^"]+)" status="(\d+)"/g ) {
-		push @$orders, {_id => $1, status => 0+$2, descr => QIWI_CODES->{$2}};
+		my $status = $2;
+		$status = 160 if $status == 150;
+		push @$orders, {txn => $1, status => 0+$status, descr => QIWI_CODES->{$status}};
 	}
 	return $orders;
 }

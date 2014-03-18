@@ -118,7 +118,7 @@
 						% foreach (@{$order->{items}}) {
 							<li>
 								% if ($_->{info}->{alias}) {
-								<a href="http://shop.<%= config->{domain_name} %>/<%= join '/', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias} %>" target="_blank">
+								<a href="http://<%= config->{domain_name} %>/<%= join '/', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias} %>" target="_blank">
 									<img src="<%== config->{image_url}.join '/', 'item', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias}, $_->{info}->{preview_image} %>">
 								</a>
 								<div class='description__section'>
@@ -126,10 +126,16 @@
 									<h4><%= $_->{info}->{name} %></h4>
 									<p>Размер: <%= $_->{info}->{size} %></p>
 									<p>Артикул: <%= $_->{info}->{articol} %></p>
+									% if ($_->{info}->{qty} == 0 ) {
+										<p style="color:red">Нет или последний товар</p>
+									% }
 								</div>
 								<div class='meta__section'>
 									<span class='count'><%= $_->{count} %></span>
 									<span class='price'><%= $_->{price}*$_->{count} %></span>
+								</div>
+								<div class='info__section'>
+									<a class='delete' href='/admin/orders/<%= (stash('status') ? stash('status').'/' : '') %><%= join ('/', $order->{_id}, 'remove', $_->{info}->{_id}, $_->{sub_id}) %>' title='Удалить товар из заказа'></a>
 								</div>
 								% } else {
 									<div class='description__section'>
@@ -159,10 +165,8 @@
 									% $sum += 350;
 								% } elsif ($order->{delivery_type} eq "russian_post") {
 									Почта России 
-									% $sum += 430;
 								% } elsif ($order->{delivery_type} eq "ems") {
 									EMS
-									% $sum += 620;
 								% } elsif ($order->{delivery_type} eq "logistics") {
 								 	Logistics
 								% }
@@ -247,12 +251,12 @@
 						<div class='qiwi'>
 							<b>Qiwi:</b>
 							% my $qiwi = $order->{qiwi_status};
-							% if (!$qiwi) {
+							% if ($qiwi) {
+								Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
+							% }
 			        			<input type='submit' name='create_qiwi' value='Выставить счет' >
-			        		% } else {
-			        			Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
-			        			<input type='submit' name='cancel_qiwi' value='Отменить выставленный счет'>
-			        		% }
+			        			<input type='submit' name='cancel_qiwi' value='Отменить счет'>
+			        		
 			        	</div>
 			        	% }
 					</div>

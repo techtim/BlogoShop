@@ -295,7 +295,8 @@ sub _checkout {
 	}
 	$all_is_ok = 0 if @{$co_params->{items}} == 0;
 
-	$co_params->{delivery_cost} = $self->logistics->check_cost({city => $co_params->{city}, weight => $co_params->{total_weight}})
+	# $co_params->{delivery_cost} = $self->logistics->check_cost({city => $co_params->{city}, weight => $co_params->{total_weight}})
+	$co_params->{delivery_cost} = ""
 		if !$co_params->{delivery_cost} || $co_params->{delivery_cost} =~ m![^\d]+!;
 	return $self->_proceed_checkout($co_params) 
 		if $all_is_ok;

@@ -95,6 +95,7 @@ sub list {
 		$self->app->db->orders->find($filter)->sort({_id => -1})->
 			skip($skip)->limit(ORDERS_ON_PAGE)->all
 	];
+
 	my $item   = BlogoShop::Item->new($self);
 
 	foreach my $order (@$orders) {
@@ -220,6 +221,35 @@ sub update {
 	return $self->redirect_to('/admin/orders/'.$self->stash('status'));
 }
 
+sub edit_order {
+	my $self = shift;
+
+	if ($self->stash('act') eq 'remove') {
+		my $order = $self->app->db->orders->find_one(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}
+		);
+
+		my $order_item = (grep {$_->{_id} eq $self->stash('item_id') && $_->{sub_id} eq $self->stash('item_sub_id')} @{$order->{items}})[0];
+
+		$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
+			{'$pull' => 
+				{
+					items => {_id => $self->stash('item_id')},
+					sub_id => 0+$self->stash('sub_id'),
+				}
+			}
+		);
+
+		$self->app->db->items->update(
+			{ _id => MongoDB::OID->new(value => ''.$self->stash('item_id')) }, 
+			{ '$inc' => { "subitems.".$self->stash('item_sub_id').".qty" => $order_item->{count} } }
+		);
+	}
+
+	return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));
+}
+
 sub call_courier {
 	my $self = shift;
 
@@ -246,7 +276,7 @@ sub qiwi_update_bills {
 	my $orders = $self->qiwi->get_bill_list();
 	foreach (@$orders) {
 		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => delete $_->{_id})},
+			{qiwi_status => {txn => $_->{txn}}},
 			{'$set' => {qiwi_status => $_ }}
 		);
 	}
