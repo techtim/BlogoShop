@@ -30,7 +30,7 @@
 						<%= $group->{name} %>
 					</a>
 
-					<a class='preview' href="/<%== join '/', 'groups', $group->{alias} %>"  title='Предварительный просмотр'></a>
+					<a class='preview' href="/<%== join '/', 'group', $group->{alias} %>"  title='Предварительный просмотр'></a>
 
 				</li>
 			% }
