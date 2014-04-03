@@ -27,7 +27,8 @@ sub index {
 		# delete $filter->{sale};
     my $item 	= BlogoShop::Item->new($self);
 
-	my $items 	= $self->utils->get_items_from_catalog($self);
+    my $group = BlogoShop::Group->new('sale');
+	my $items = $group->get_group_items($filter, 1000);
 
     return $self->render(
 		items => $items,
@@ -80,7 +81,7 @@ sub list {
 	} else {
 		return $self->render(
 			items 	=> $items,
-			%{$self->check_cart},
+			%{$self->check_cart()},
 			%$filter,
 			cur_category => $filter->{category} ? ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {}) : {},
 			banners => $self->utils->get_banners( $self, $filter->{category}. ($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 680 ),
@@ -104,7 +105,7 @@ sub item {
 	return $self->buy($item) if $self->stash('act') eq 'buy';
 
 	my  $filter->{active} = 1;
-		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
+		$filter->{'subitems.qty'} = {'$gt' => 0};
 		$filter->{alias} = {'$ne' => $item->{alias}};
 	$item->{$_} ? 
 		push @{$filter->{'$or'}}, {$_ => $item->{$_}} : () 
@@ -183,7 +184,7 @@ sub group {
 
 	$filter = {active => 1};
 	$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
-	my $items = $group->get_group_items($filter, 1000);
+	my $items = $group->get_group_items($filter, {brand => 1}, 1000);
 
 	return $self->render(
 			%$group,

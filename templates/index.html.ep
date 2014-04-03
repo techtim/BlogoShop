@@ -38,7 +38,7 @@
     % if (stash('items')) {
     <div class='shop__items__list'>
          <h2 class='dotted__caption'>
-            <span>последние поступления</span>
+            <span>распродажа</span>
         </h2>
 
         <ul class='list__section'>

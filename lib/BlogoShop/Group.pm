@@ -60,7 +60,7 @@ sub update_group {
 }
 
 sub get_group_items {
-	my ($self, $filter, $count) = @_;
+	my ($self, $filter, $sort, $count) = @_;
 
 	return [] if !$self->{_id};
 
@@ -72,10 +72,10 @@ sub get_group_items {
 		$filter->{"sale\.sale_start_stamp"} = {'$lte' => time()};
 		$filter->{"sale\.sale_end_stamp"} = {'$gte' => time()};
 	}
-
+	ref $sort ne ref {} ? $sort = {price => -1} : ();
 	$count //= 1000;
 
-	return [BlogoShop->db->items->find($filter)->sort({price => -1})->limit($count)->all];
+	return [BlogoShop->db->items->find($filter)->sort($sort)->limit($count)->all];
 }
 
 sub get_group {
