@@ -155,9 +155,10 @@ sub list {
 	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 	$skip = $skip =~ m/(\d+)/ ? $1 : 0;
-# warn $filter->{tag};
-# warn Dumper(\%filter);
+# warn "FILT:". Dumper(\%filter);
+# warn Dumper($sort);
 	my @all = $self->{app}->db->items->find(\%filter)->sort($sort)->fields({LIST_FIELDS})->skip($skip)->limit($limit)->all;
+# warn ''.+@all;
     return \@all;
 }
 

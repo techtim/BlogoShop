@@ -8,26 +8,28 @@
 
 		    <a class='expand__items' href='#' data-role='categories'></a>
 
-	    	% my $sex = stash('sex')||'';
+	    	% my $sex = stash('is_brand') ? '' : stash('sex')||'';
 		    <ul class='filters__section'>
-		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='all' <%== "class='current'" if !$sex %>>все</a></li>
+		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='all' <%== "class='current'" if !$sex && !stash('is_brand') %>>все</a></li>
+		    	% if (!stash('is_brand')) {
 		    	<li><a href='http://<%= config->{domain_name} .'/w' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='female' <%== "class='current'" if $sex eq 'w' %>>женское</a></li>
 		    	<li><a href='http://<%= config->{domain_name} .'/m' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='male' <%== "class='current'" if $sex eq 'm' %>>мужское</a></li>
+			    % }
 		    </ul>
 
 		</div>
 
 	    % foreach my $cat (@$categories) {
 	    % next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$cat->{_id}};
-	    <ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %> <%= $cat->{_id} %>'>
+	    <ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %> <%= $cat->{_id} %><%= ' toggled' if stash('is_brand') %>'>
         	<li class='title'>
-        		<a href='http://<%= config->{domain_name} %>/<%== $sex ne '' ? "$sex/" : '' %><%= $cat->{_id} %>'><%= $cat->{name} %></a>
+        		<a href='http://<%= config->{domain_name} %>/<%== $sex ne '' ? "$sex/" : '' %><%= 'brand/'.stash('brand').'/' if stash('is_brand') %><%= $cat->{_id} %>'><%= $cat->{name} %></a>
         	</li>
         	<ul class='submenu'>
 
         	% foreach my $sub (@{$cat->{subcats}}) {
         		% next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$sub->{_id}};
-    			<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='<%= '/'.$sex if $sex %>/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
+    			<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='<%= '/'.$sex if $sex %>/<%= 'brand/'.stash('brand').'/' if stash('is_brand') %><%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
     		% }
 
 	        </ul>
@@ -46,7 +48,7 @@
 
 	    <ul class='item'>
 	    % foreach my $brand (@$list_brands) {
-	    	<li class='title <%== 'current' if stash('brand_id') && stash('brand_id') eq $brand->{_id} %>' >
+	    	<li class='title <%== 'current' if stash('is_brand') && stash('brand') eq $brand->{_id} %>' >
 	    		<a href='http://<%= config->{domain_name} %>/brand/<%= $brand->{_id} %>'><%= $brand->{name} %></a>
 	    	</li>
 	    % }

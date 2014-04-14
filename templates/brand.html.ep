@@ -1,10 +1,10 @@
 % layout 'default';
-% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '.$brand->{name};
+% title 'магазин дизайнерской одежды и аксессуаров Хохловка: '.$brand_info->{name};
 
 %= include 'includes/left_bar'
 
 <div class='content__section post__page'>
-	 % my $brand = stash('brand');
+	 % my $brand = stash('brand_info');
 	<h2><%= $brand->{name} %></h2>
 	<p><img src="<%= $brand->{logo} %>"><p>
 	<p><%== $brand->{descr} %></p>
@@ -41,7 +41,7 @@
 
 		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
-			<li class='scroll__helper shop' data-href='?price=dsc' data-next='16'></li>
+			<li class='scroll__helper shop' data-href='?price=dsc' data-next='<%= config->{items_on_page} %>'></li>
 			<script>requirejs(['app/scroll', 'app/itemsDescr']);</script>
 		</ul>
 	</div>

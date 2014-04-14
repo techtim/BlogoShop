@@ -48,7 +48,7 @@ sub list {
 	my $self = shift;
 
 	my	$filter->{active} 		= 1;
-		$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
+		$filter->{'subitems.qty'} = {'$gt' => 0};
 
 		defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
 		 # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
@@ -79,6 +79,9 @@ sub list {
 			},
 		);
 	} else {
+		# filter left catalog for brand if needed
+		$self->stash( active_categories => $self->app->utils->get_active_categories($self->app->db, {brand => $self->stash('brand')}) ) if $self->stash('brand');
+		$self->stash( 'is_brand' => 1 ) if $self->stash('brand');
 		return $self->render(
 			items 	=> $items,
 			%{$self->check_cart()},
@@ -102,7 +105,7 @@ sub item {
 	my $item = BlogoShop::Item->new($self);
 	return $self->redirect_to('/'. join '/', $item->{category}, $item->{subcategory}) if !$item->{_id} || !$item->{active};
 
-	return $self->buy($item) if $self->stash('act') eq 'buy';
+	return $self->buy($item, {brand => $self->stash('brand')}) if $self->stash('act') eq 'buy';
 
 	my  $filter->{active} = 1;
 		$filter->{'subitems.qty'} = {'$gt' => 0};
@@ -112,7 +115,11 @@ sub item {
 			foreach qw(brand category subcategory);
 
 	$self->utils->check_item_price($item);
-# warn $self->dumper($item);
+
+	# filter left catalog for brand if needed
+	$self->stash( active_categories => $self->app->utils->get_active_categories($self->app->db, {brand => $self->stash('brand')}) ) if $self->stash('brand');
+	$self->stash( 'is_brand' => 1 ) if $self->stash('brand');
+
 	return $self->render(
 		%{$item->as_hash},
 		%{$self->check_cart},
@@ -131,43 +138,44 @@ sub item {
 }
 
 sub brand {
-	my $self = shift;
+	my $c = shift;
 	my $filter = {active => 1};
 	$filter->{'subitems.qty'} = {'$gt' => 0};
-	my $brand = $self->app->db->brands->find_one({_id => $self->stash('brand')});
-	return $self->redirect_to('/') if !$brand;
-	$self->stash(brand => $brand);
+	my $brand = $c->app->db->brands->find_one({_id => $c->stash('brand')});
+	return $c->redirect_to('/') if !$brand;
+	$c->stash(brand_info => $brand);
 	$filter->{brand} = $brand->{_id};
-	my $item 	= BlogoShop::Item->new($self);
+	my $item 	= BlogoShop::Item->new($c);
 	my $sort 	= {};
-	$sort->{price} 	= $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
-	$sort->{_id} 	= $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
+	$sort->{price} 	= $c->req->param('price') eq 'asc' ?  1 : -1 if $c->req->param('price');
+	$sort->{_id} 	= $c->req->param('time') eq 'asc' ?  1 : -1 if $c->req->param('time');
 
 	# $item->list()
-	# warn $self->dumper([$self->app->db->items->find({brand => $brand->{_id}})->all]);
-	my $items = $item->list($filter, $sort, $self->req->param('next')?($self->req->param('next')=~/(\d+)/)[0]:0);
+	# warn $c->dumper([$c->app->db->items->find({brand => $brand->{_id}})->all]);
+	my $items = $item->list($filter, $sort, $c->req->param('next')?($c->req->param('next')=~/(\d+)/)[0]:0);
 
-	if ($self->req->headers->header('X-Requested-With')) {
+	if ($c->req->headers->header('X-Requested-With')) {
 		foreach (@$items) {
-			$_->{preview_image} = $self->config->{nginx_res_item_prev}.$self->config->{image_url}.
+			$_->{preview_image} = $c->config->{nginx_res_item_prev}.$c->config->{image_url}.
 				join '/', 'item', $_->{category}, $_->{subcategory}, $_->{alias},$_->{preview_image};
 			$_->{link} = ($filter->{sex} ? "\/$filter->{sex}\/": '/'). join '/', $_->{category}, $_->{subcategory}, $_->{alias};
 		}
-		return $self->render(
+		return $c->render(
 			json => {
 				items => $items
 			},
 		);
 	} else {
-		return $self->render(
-			host 	=> $self->req->url->base,
+		return $c->render(
+			host 	=> $c->req->url->base,
 			items 	=> $items,
-			articles=> $self->articles->get_filtered_articles({brand => $brand->{_id}, active => 1}, 6),
-			%{$self->check_cart},
+			articles=> $c->articles->get_filtered_articles({brand => $brand->{_id}, active => 1}, 6),
+			%{$c->check_cart},
 			sex		=> '',
 			brand_id => $brand->{_id},
 			is_brand => 1,
-			banners_h => $self->utils->get_banners($self, '', 240),
+			banners_h => $c->utils->get_banners($c, '', 240),
+			active_categories => $c->app->utils->get_active_categories($c->app->db, {brand => $brand->{_id}}),
 			page_name => 'shop',
 			template=> 'brand', # return only
 			format 	=> 'html', 
@@ -346,7 +354,7 @@ sub _proceed_checkout {
 ##
 
 sub buy {
-	my ($self, $item) = @_;
+	my ($self, $item, $params) = @_;
 
 	my $session = $self->session();
 
@@ -367,7 +375,9 @@ sub buy {
 	return
 		$self->req->headers->header('X-Requested-With') ?
 			$self->render(json => {ok => $item->{_id}}) :
-			$self->redirect_to('/'. join '/', $item->{category}, $item->{subcategory}, $item->{alias});
+			$self->redirect_to('/'. ($params->{brand} ? 'brand/'.$params->{brand}.'/' : '')
+				.join '/', $item->{category}, $item->{subcategory}, $item->{alias}
+			);
 }
 
 sub unbuy {

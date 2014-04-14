@@ -71,7 +71,7 @@
 
 		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
-			<li class='scroll__helper shop' data-href='?price=brand' data-next='16'></li>
+			<li class='scroll__helper shop' data-href='?price=brand' data-next='<%= config->{items_on_page} %>' ></li>
 			<script>requirejs(['app/scroll']);</script>
 		</ul>
 	</div>

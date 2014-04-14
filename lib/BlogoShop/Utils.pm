@@ -235,17 +235,19 @@ sub get_categories_info {
 }
 
 sub get_active_categories {
-	my ($self, $db) = @_;
+	my ($self, $db, $cond) = @_;
 
-	my $hash->{_id} = 'active_categories';
-	my $cats = $db->stuff->find_one({_id => $hash->{_id}});
-	return $cats if $cats;
+	$cond = ref $cond eq ref {} ? $cond : {};
 
+	my $hash->{_id} = 'active_categories'.join ('_', values %$cond);
+	# my $cats = $db->stuff->find_one({_id => $hash->{_id}});
+	# return $cats if $cats;
+	
 	my $res = $db->run_command({
 		group => {
 			ns 		=> 'items',
-			key 	=> {category=>1, subcategory=>1}, 
-			cond	=> { active => 1, 'subitems.qty' => {'$gt' => 0} },
+			key 	=> {category=>1, subcategory=>1},
+			cond	=> { active => 1, 'subitems.qty' => {'$gt' => 0}, %$cond },
 			'$reduce'	=> 'function(obj,prev) { prev.s.push(obj.sex) }',
 			initial	=> {s => []},
 		}}

@@ -15,7 +15,7 @@
 	<body>
 		<div class='wrap'>
 			<div class='header__section clearfloat'>
-				<h2>АДМИНЬ, блеать!</h2>
+				<h2>Панель администратора</h2>
 				
 				<div class='user__section'>
 					<ul>

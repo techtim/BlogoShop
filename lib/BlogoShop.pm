@@ -296,7 +296,18 @@ sub startup {
 	$r->route('/checkout')->to('controller-shop#show_checkout');
 	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
 	# list items 
+	# BRAND
 	$r->route('/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-shop#brand');
+	$r->route('/brand/:brand/:category/:subcategory', 
+		brand => qr![^\{\}\[\]/]+!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)
+			->to('controller-shop#list', sex => '', subcategory => '', move => '', id => '');
+	$r->route('/brand/:brand/:category/:subcategory',
+		brand => qr![^\{\}\[\]/]+!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)
+			->to('controller-shop#list', sex => '', category => '', subcategory => '', move => '', id => '');
+	$r->route('/brand/:brand/:category/:subcategory/:alias/:act/:subitem',
+		brand => qr![^\{\}\[\]/]+!, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, alias => qr![^\{\}\[\]/]+!, act => qr!\w+!, subitem => qr!\d+!)
+			->to('controller-shop#item', act => '', subitem => 0);
+
 	$r->route('/tag/:tags', tag => qr![^\{\}\[\]/]+!)->to('controller-shop#list');
 
 	$r->route('/group/:group', group => qr![^\{\}\[\]/]+!)->to('controller-shop#group');
@@ -315,6 +326,8 @@ sub startup {
 	$r->route('/:category/:subcategory/:alias/:act/:subitem',
 		category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, alias => qr![^\{\}\[\]/]+!, act => qr!\w+!, subitem => qr!\d+!)
 			->to('controller-shop#item', act => '', subitem => 0);
+
+
 
 	$r->any('/*' => sub {shift->redirect_to('/')});
 }
