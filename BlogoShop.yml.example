@@ -40,6 +40,7 @@ articles_on_brandpage: 6
 related_articles_count: 3
 
 items_on_page: 16
+items_on_admins_page: 16
 items_on_startpage: 8
 
 articles_on_admin_page: 30
