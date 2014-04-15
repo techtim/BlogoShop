@@ -114,6 +114,7 @@
 			<option value="on">включть</option>
 			<option value="on_timer">включить по таймеру</option>
 			<option value="add_to_group">добавить в группу</option>
+			<option value="del_from_group">удалить из группы</option>
 			<option value="delete">удалить</option>
 			%# <option value="req_to_brand">заказать</option>
 			% if ($admin->{login} eq $config->{order_delete_power}) { 

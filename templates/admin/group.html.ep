@@ -214,6 +214,7 @@
 		%= form_for '/admin/shop/multi' => (method => 'post') => begin
 		<input type='hidden' name='category' value='<%= stash('category') %>'/>
 		<input type='hidden' name='subcategory' value='<%= stash('subcategory') %>'/>
+		<input type='hidden' name='group_id' value='<%= stash '_id' %>'/>
 		<input type='hidden' name='redirect_to' value='group/edit/<%= stash '_id' %>'>
 		<div class='multi__action dates__section'>
 			<span> групповое действие:
@@ -222,6 +223,7 @@
 				<option value="on">включть</option>
 				<option value="on_timer">включить по таймеру</option>
 				<option value="add_to_group">добавить в группу</option>
+				<option value="del_from_group">удалить из группы</option>
 				<option value="delete">удалить</option>
 				%# <option value="req_to_brand">заказать</option>
 				% if ($admin->{login} eq $config->{order_delete_power}) { 
@@ -229,7 +231,7 @@
 				% }
 			</select>
 			дата:<input type="text" name="date" value="" />
-			%= include 'includes/select_block', name => 'group_id', select => '', options => stash 'groups'
+			%= include 'includes/select_block', name => 'group_id', select => stash('_id'), options => stash 'groups'
 			<button type="submit" name="multi" value="1">сохранить</button>
 			</span>	
 		</div>
