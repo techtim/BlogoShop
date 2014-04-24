@@ -13,6 +13,12 @@ use constant CHECKOUT_FIELDS => qw(	name surname phone email total_weight
 									country city zip address dom korp flat receiver 
 									delivery_type self_delivery delivery_cost pay_type);
 use constant SORT_FIELDS => qw(time price);
+use constant YANDEX_TYPES => {
+	yandex_cash => 'GP',
+	yandex_card => 'AC',
+	yandex_money => 'PC'
+};
+
 
 sub index {
 	my $self = shift;
@@ -210,7 +216,7 @@ sub group {
 sub cart {
 	my $self = shift;
 	my $filter = {};
-	
+
 	return $self->unbuy({_id => $self->stash('id'), sub_id => $self->stash('sub_id')}) if $self->stash('act') eq 'unbuy';
 
 	my $cart = $self->check_cart(1);
@@ -231,7 +237,7 @@ sub cart {
 		$it = $h;
 		$it->{count} = $it->{qty} if $it->{count} > $it->{qty};
 		# get item weight or default subcategory weight
-		$total_weight += ($it->{weight} || $self->stash('categories_info')->{$it->{category}.'.'.$it->{subcategory}}->{weight}); 
+		$total_weight += ($it->{weight} || $self->stash('categories_info')->{$it->{category}.'.'.$it->{subcategory}}->{weight} || 0.5); 
 		$cnt++;
 	}
 
@@ -247,7 +253,7 @@ sub cart {
 	}
 
 	$self->flash(order_id => ''.$self->stash('checkout_ok')) if $self->stash('checkout_ok');
-	$self->redirect_to('/checkout') if $self->stash('checkout_ok');
+	$self->redirect_to('/checkout/'.$self->stash('full_order_id')) if $self->stash('checkout_ok');
 
 	$self->stash(%$cart);
 
@@ -265,12 +271,27 @@ sub cart {
 
 sub show_checkout {
 	my $self = shift;
-	my $id = $self->flash('order_id') || 0;
+	my $id = $self->stash('order_id') || 0;
 
 	$self->redirect_to('/cart') if !$id;
+	my $order = $self->app->db->orders->find_one({_id => MongoDB::OID->new(value => $id)});
+
+	my $item   = BlogoShop::Item->new($self);
+
+	foreach (@{$order->{items}}) {
+		$_->{info} = $item->get($_->{_id}, $_->{sub_id});
+		$order->{sum} += $_->{price}*$_->{count};
+	}
+	$order->{order_id} 	= ($order->{_id}->{value}=~/^(.{8})/)[0];
+	$order->{order_id_full} 	= $order->{_id}->{value};
+	$order->{total_sum} = $order->{sum} + ($order->{delivery_cost}||0);
+
+	delete $order->{status};
 
 	return $self->render(
-		order_id	=> $id,
+		%$order,
+		yandex_pay_types => YANDEX_TYPES,
+		pay_type	=> $order->{pay_type}||'cash',
 		sex 		=> '',
 		banners_h 	=> $self->utils->get_banners($self, '', 240),
 		page_name 	=> 'checkout',
@@ -307,7 +328,10 @@ sub _checkout {
 	# $co_params->{delivery_cost} = $self->logistics->check_cost({city => $co_params->{city}, weight => $co_params->{total_weight}})
 	$co_params->{delivery_cost} = ""
 		if !$co_params->{delivery_cost} || $co_params->{delivery_cost} =~ m![^\d]+!;
-	return $self->_proceed_checkout($co_params) 
+	$co_params->{delivery_cost} = 350 if $co_params->{delivery_type} eq 'courier';
+	$co_params->{delivery_cost} = 500 if $co_params->{delivery_type} eq 'fast_courier';
+
+	return $self->_proceed_checkout($co_params)
 		if $all_is_ok;
 
 	$self->stash(%$co_params);
@@ -320,6 +344,7 @@ sub _proceed_checkout {
 	$co_params->{status} 	= 'new';
 	my $order_id 			= $self->app->db->orders->save($co_params);
 	$co_params->{order_id} 	= ($order_id=~/^(.{8})/)[0];
+	$co_params->{full_order_id} = $order_id;
 
 	delete $co_params->{status}; #status reserved name in Mojo stash
 	$self->stash(%$co_params);

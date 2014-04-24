@@ -156,13 +156,41 @@
 						</dl>
 
 						<dl class='row gray'>
+							<dt>СПОСОБ оплаты:</dt>
+							<dd>
+								% if ($order->{pay_type} eq 'cash') {
+									Наличными
+								% } elsif ($order->{pay_type} eq "qiwi") {
+									<div class='qiwi'>
+										<b>QIWI:</b>
+										% my $qiwi = $order->{qiwi_status};
+										% if ($qiwi) {
+											Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
+										% }
+						        			<input type='submit' name='create_qiwi' value='Выставить счет' >
+						        			<input type='submit' name='cancel_qiwi' value='Отменить счет'>
+						        		
+						        	</div>
+								% } elsif ($order->{pay_type} eq "yandex_money") {
+									Yandex деньги <%== "(<b>подтвержден</b>)" if $order->{checked} %>
+									<input type='submit' name='checked' value='Подтвердить наличие'>
+								% } elsif ($order->{pay_type} eq "yandex_card") {
+									Yandex карта <%== "(<b>подтвержден</b>)" if $order->{checked} %>
+									<input type='submit' name='checked' value='Подтвердить наличие'>
+								% } elsif ($order->{pay_type} eq "yandex_cash") {
+								 	Yandex наличные <%== '(<b>подтвержден</b>)' if $order->{checked} %>
+								 	<input type='submit' name='checked' value='Подтвердить наличие'>
+								% }
+							</dd>
+						</dl>
+
+						<dl class='row gray'>
 							<dt>СПОСОБ доставки:</dt>
 							<dd>
 								% if ($order->{self_delivery} ne '') {
 									Самовывоз
 								% } elsif ($order->{delivery_type} eq "courier") {
 									Курьерская доставка по указанному адресу (только Москва).
-									% $sum += 350;
 								% } elsif ($order->{delivery_type} eq "russian_post") {
 									Почта России 
 								% } elsif ($order->{delivery_type} eq "ems") {
@@ -247,18 +275,6 @@
 							</div>
 						</div>
 
-						% if ($order->{pay_type} eq 'qiwi' ) {
-						<div class='qiwi'>
-							<b>Qiwi:</b>
-							% my $qiwi = $order->{qiwi_status};
-							% if ($qiwi) {
-								Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
-							% }
-			        			<input type='submit' name='create_qiwi' value='Выставить счет' >
-			        			<input type='submit' name='cancel_qiwi' value='Отменить счет'>
-			        		
-			        	</div>
-			        	% }
 					</div>
 	        	% end
 	        </li>

@@ -1817,6 +1817,39 @@ body.overlayed #overlay {
   font-size: 32px;
   font-weight: bold;
 }
+
+.cart__items__list__section .delivery__section {
+  clear: both;
+  background: #fff;
+  border-top: 1px dotted #a1a1a1;
+  /*border-bottom: 1px dotted #a1a1a1;*/
+  line-height: 52px;
+}
+
+.cart__items__list__section .delivery__section.total {
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+}
+/* line 2004, style.scss */
+.cart__items__list__section .delivery__section h3 {
+  float: left;
+  margin-left: 4px;
+  color: #868686;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/* line 2015, style.scss */
+.cart__items__list__section .delivery__section .summ__section {
+  float: right;
+  margin-right: 4px;
+  padding-right: 36px;
+  background: url("../i/ico-rub-big.png") no-repeat right 15px;
+  color: #7bd03c;
+  font-size: 32px;
+  font-weight: bold;
+}
+
 /* line 2028, style.scss */
 .cart__items__list__section .checkout__button {
   margin-top: 18px;
@@ -2310,6 +2343,10 @@ body.overlayed #overlay {
 /* line 2448, style.scss */
 .cart__items__list__section .finish__cart.hidden {
   display: none;
+}
+
+.cart__items__list__section .checkout_text {
+  margin: 25px 0px;
 }
 
 /* line 2454, style.scss */

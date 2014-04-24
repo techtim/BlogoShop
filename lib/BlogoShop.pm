@@ -294,6 +294,7 @@ sub startup {
 	$r->route('/cart/ship_cost')->via('get')->to('controller-ajax#check_logist_cost');
 
 	$r->route('/checkout')->to('controller-shop#show_checkout');
+	$r->route('/checkout/:order_id', order_id => qr/[\d\w]+/)->to('controller-shop#show_checkout');
 	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
 	# list items 
 	# BRAND

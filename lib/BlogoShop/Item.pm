@@ -39,6 +39,7 @@ use constant OPT_SUBITEM_PARAMS => {
 	deep => 'глубина',
 	consist => 'состав',
 	articol => 'артикул',
+	care => 'уход',
 
 	len_hand => 'длина рукава',
 	len_chest => 'в груди',

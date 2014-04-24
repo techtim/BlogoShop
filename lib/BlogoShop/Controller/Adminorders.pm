@@ -24,6 +24,12 @@ use constant ORDER_STATUS_NAME => {
 	deleted => 'удален',
 };
 use constant ORDERS_ON_PAGE => 30;
+use constant YANDEX_TYPES => {
+	yandex_cash => 'GP',
+	yandex_card => 'AC',
+	yandex_money => 'PC'
+};
+
 my $status_regex = join '|', ORDER_STATUS;
 
 sub list {
@@ -178,47 +184,36 @@ sub update {
 
 	$self->call_courier() if $self->req->param('courier');
 
-	if ($self->req->param('create_qiwi')) {
-		my $order = $self->app->db->orders->find_one(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}
-		);
-		my $status = $self->qiwi->create_bill($order, $self);
-		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
-			{'$set' => {qiwi_status => $status}}
-		);
-		
-		delete $order->{status}; # status binded mojo var
+	$self->qiwi_update_order() if $self->req->param('create_qiwi') || $self->req->param('cancel_qiwi');
+	
+	$self->yandex_update_order() if $self->req->param('checked');
 
-		$self->stash(%$order);
+	return $self->redirect_to('/admin/orders/'.($self->stash('status')||''));
+}
 
-		my $mail = $self->mail(
+sub yandex_update_order {
+	my $self = shift;
+
+	my $order = $self->app->db->orders->find_one({_id => MongoDB::OID->new(value => $self->stash('id'))});
+
+	return if !$order;
+	$self->stash(order => $order);
+	my $mail = $self->mail(
 			to      => $order->{email},
-			cc		=> 'xoxloveka.shop@gmail.com',
+			cc		=> 'xoxloveka.office@gmail.com',
 			from    => 'noreply@'.$self->config('domain_name'),
-			subject => 'Оплата покупки на сайте Xoxloveka.',
+			subject => 'Уведомление об оплате покупки в магазине Хохловка',
 			type 	=> 'text/html',
 			format => 'mail',
-			data => $self->render_mail(	template => 'mails/qiwi_order'),
+			data => $self->render_mail(	template => 'mails/yandex_order'),
 			handler => 'mail',
 		);
 
-		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
-	}
-
-	if ($self->req->param('cancel_qiwi')) {
-		my $order = $self->app->db->orders->find_one(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}
+	$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {checked => 1}}
 		);
-		my $status = $self->qiwi->cancel_bill($order, $self);
-		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
-			{'$set' => {qiwi_status => $status}}
-		);
-		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
-	}
 
-	return $self->redirect_to('/admin/orders/'.$self->stash('status'));
+	return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));
 }
 
 sub edit_order {
@@ -269,6 +264,50 @@ sub call_courier {
 	return $self->redirect_to('/admin/orders/'.$self->stash('status'));
 	# return $self->redirect_to('/admin/orders');
 }
+sub qiwi_update_order {
+	my $self = shift;
+
+	if ($self->req->param('create_qiwi')) {
+		my $order = $self->app->db->orders->find_one(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}
+		);
+		my $status = $self->qiwi->create_bill($order, $self);
+		$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
+			{'$set' => {qiwi_status => $status}}
+		);
+		
+		delete $order->{status}; # status binded mojo var
+
+		$self->stash(%$order);
+
+		my $mail = $self->mail(
+			to      => $order->{email},
+			cc		=> 'xoxloveka.shop@gmail.com',
+			from    => 'noreply@'.$self->config('domain_name'),
+			subject => 'Оплата покупки на сайте Xoxloveka.',
+			type 	=> 'text/html',
+			format => 'mail',
+			data => $self->render_mail(	template => 'mails/qiwi_order'),
+			handler => 'mail',
+		);
+
+		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
+	}
+
+	if ($self->req->param('cancel_qiwi')) {
+		my $order = $self->app->db->orders->find_one(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}
+		);
+		my $status = $self->qiwi->cancel_bill($order, $self);
+		$self->app->db->orders->update(
+			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
+			{'$set' => {qiwi_status => $status}}
+		);
+		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
+	}
+}
+
 
 sub qiwi_update_bills {
 	my $self = shift;

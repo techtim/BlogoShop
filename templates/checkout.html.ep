@@ -5,6 +5,110 @@
 
 <div class='content__section cart__items__list__section'>
 	<h2 class='caption'>Покупка совершена</h2> 
-	Ваш заказ принят. Номер заказа: <%= stash('order_id') %>
+	<div class='checkout_text'> 
+		 % if (stash('pay_type') eq 'cash') {
+			Спасибо, что воспользовались услугами нашего интернет-магазина. Ваш заказ принят и отправлен на обработку. Наш менеджер свяжется с вами в ближайшее время для уточнения удобного времени доставки. Стандартный срок доставки нашего магазина 1-4 дня. <b> Оплата заказа производится наличными.</b>
+		% } elsif (stash('pay_type') eq 'yandex_card') {
+			Спасибо, что воспользовались услугами нашего интернет-магазина. Ваш заказ принят и отправлен на обработку. Наш менеджер уточнит наличие товаров и свяжется с вами в ближайшее время. После подтверждения заказа, на ваш e-mail придет письмо со ссылкой для оплаты заказа.
+		% } elsif (stash('pay_type') eq 'yandex_cash') {
+			Спасибо, что воспользовались услугами нашего интернет-магазина. Ваш заказ принят и отправлен на обработку. Наш менеджер уточнит наличие товаров и свяжется с вами в ближайшее время. После подтверждения заказа, на ваш e-mail придет письмо со ссылкой для оплаты заказа.
+		% } elsif (stash('pay_type') eq 'yandex_money') {
+			Спасибо, что воспользовались услугами нашего интернет-магазина. Ваш заказ принят и отправлен на обработку. Наш менеджер уточнит наличие товаров и свяжется с вами в ближайшее время. После подтверждения заказа, на ваш e-mail придет письмо со ссылкой для оплаты заказа.
+		% } elsif (stash('pay_type') eq 'qiwi') {
+			Спасибо, что воспользовались услугами нашего интернет-магазина. Ваш заказ принят и отправлен на обработку. Наш менеджер уточнит наличие товаров и свяжется с вами в ближайшее время. После подтверждения заказа, на ваш e-mail придет письмо со ссылкой для оплаты заказа. Счет будет выставлен на ваш номер телефона, указанный при заказе.
+		% }
+		<br><br>
+		Номер заказа: <%= stash('order_id') %>
+	</div> 
 
+	<ul class='items__list'>
+	% foreach my $item (@$items) {
+		<li class='clearfloat sale'>
+			<div class='img__section'>
+				<img src="<%== config->{image_url}.join '/', 'item', $item->{info}->{category}, $item->{info}->{subcategory}, $item->{info}->{alias}, $item->{info}->{preview_image} %>">
+			</div>
+			<div class='description__section'>
+				<h3><a href=''><%= stash('name_brands')->{$item->{info}{brand}} if stash('name_brands')->{$item->{info}{brand}} %></a></h3>
+				<h4><%= $item->{name} %></h4>
+				% if ($item->{info}{size}) {
+					<p class='size'>РАЗМЕР: <strong><%= $item->{info}{size} %></strong></p>
+				% }
+				% foreach (@{$item->{info}{color}}) {
+					<span class='color' style='background-color: #<%= $_ %>;'></span>
+				% }
+			</div>
+			<div class='info__section'>
+				<p class='price'>
+						<%= $item->{price} %>
+				</p>
+			</div>
+		</li>
+  	% }
+
+	</ul>
+
+	<div class='clear'></div>
+
+
+	<div class='submit___section'>
+
+		<div class='deliver__section item__block'>
+			<h2 class='caption'>Aдрес доставки:</h2>
+			<%= join ', ' , (stash('country'), stash('city'), stash('zip'), stash('address')) %>
+			<%= join ' - ', (stash('dom'), stash('korp'), stash('flat')) %>
+		</div>
+		<div class='deliver__section item__block'>
+			<h2 class='caption'>Способ доставки:</h2>
+
+			<ul class='types__list' data-type='deliver'>
+				% if (stash('delivery_type') eq 'fast_courier') {
+				<li class='clearfloat'>					
+					<label for='fast_courier'>
+						Срочная доставка по Москве в пределах МКАД (в день заказа)
+					<span class='price'><%= stash('delivery_cost') %></span>
+					</label>
+				</li>
+				% } elsif (stash('delivery_type') eq 'courier') {
+				<li class='clearfloat'>
+					<label for='courier'>
+						Доставка по Москве в пределах МКАД
+						<span class='price'><%= stash('delivery_cost') %></span>
+					</label>
+				</li>
+				% } elsif (stash('delivery_type') eq 'russian_post') {
+				<li class='clearfloat'>
+					<label for='russian__post'>
+						<img src='/i/logos/russian-post.png' alt='Почта России' />
+						<sup>Почта России.</sup>
+						<span class='price'><%= stash('delivery_cost') %></span>
+					</label>
+				</li>
+				% } elsif (stash('delivery_type') eq 'ems') {
+				<li class='clearfloat'>
+					<label for='ems'>
+						<img src='/i/logos/ems.png' alt='EMS' />
+						<sup>EMS.</sup> 
+						<span class='price'><%= stash('delivery_cost') %></span>
+					</label>
+				</li>
+				% }
+			</ul>
+		</div>
+	</div>
+
+	<div class='price__section clearfloat'>
+		<h3>стоимость заказа:</h3>
+		<div class='summ__section'>
+			<%= stash('total_sum') %>
+		</div>
+	</div>
+
+	% if (stash('checked')) {
+	<br>
+	<dl class='clearfloat row submit'>
+	<a href="https://<%= config->{ya_money_url} %>?ShopID=<%= config->{ya_shop_id} %>&scid=<%= config->{ya_scid} %>&paymentType=<%= $yandex_pay_types->{stash('pay_type')} %>&customerNumber=<%= stash('_id') %>&Sum=<%= stash('total_sum') %>&cps_email=<%= stash('email') %>&cps_phone=<%= stash('phone') %>" class='submit__form'>
+		Оплатить</a>
+	</dl>
+	</a>
+	% }
 </div>

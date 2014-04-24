@@ -54,4 +54,8 @@ recaptcha_private_key: '6Lc9jtISAAAAAM6wAcAjkq5D3v4E2-sJoOnRsMjk'
 qiwi_id: 231734
 qiwi_pass: '88original7'
 
+ya_money_url: 'money.yandex.ru/eshop.xml'
+ya_shop_id: 15321
+ya_scid: 7231
+
 logistics_id: 'e78025d0ae6757f573ebc9a3dfec764b'

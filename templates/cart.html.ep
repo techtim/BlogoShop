@@ -21,7 +21,7 @@
 				</a>
 			</div>
 			<div class='description__section'>
-				<h3><a href=''><%= $item->{brand} %></a></h3>
+				<h3><a href=''><%= stash('name_brands')->{$item->{brand}} if stash('name_brands')->{$item->{brand}} %></a></h3>
 				<h4><%= $item->{name} %></h4>
 				% if ($item->{size}) {
 					<p class='size'>РАЗМЕР: <strong><%= $item->{size} %></strong></p>
@@ -232,6 +232,34 @@
 					<input type='radio' name='pay_type' id='pay__courier' value='cash' disabled />
 					<label for='pay__courier'>Наличные курьеру</label>
 				</li>
+				<li class='clearfloat' data-type='cash'>
+					<input type='radio' name='pay_type' id='qiwi' value='yandex_money' disabled />
+					<label for='cash'>Yandex деньги (ссылка на оплату будем выслана на email)</label>
+				</li>
+				<li class='clearfloat' data-type='cash'>
+					<input type='radio' name='pay_type' id='qiwi' value='yandex_cart' disabled />
+					<label for='cash'>Пластиковая карта (ссылка на оплату будем выслана на email)</label>
+				</li>
+				<li class='clearfloat' data-type='cash'>
+					<input type='radio' name='pay_type' id='qiwi' value='yandex_cash' disabled />
+					<label for='cash'>Наличными через терминал (ссылка на оплату будем выслана на email)</label>
+				</li>
+				<li class='clearfloat' data-type='cash'>
+					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
+					<label for='nalog_payment'>QIWI платеж (счет будет выставлен на указанный телефон)</label>
+				</li>
+				<li class='clearfloat' data-type='nalog_payment'>
+					<input type='radio' name='pay_type' id='qiwi' value='yandex_money' disabled />
+					<label for='cash'>Yandex деньги (ссылка на оплату будем выслана на email)</label>
+				</li>
+				<li class='clearfloat' data-type='nalog_payment'>
+					<input type='radio' name='pay_type' id='qiwi' value='yandex_card' disabled />
+					<label for='cash'>Пластиковая карта (ссылка на оплату будем выслана на email)</label>
+				</li>
+				<li class='clearfloat' data-type='nalog_payment'>
+					<input type='radio' name='pay_type' id='qiwi' value='yandex_cash' disabled />
+					<label for='cash'>Наличными через терминал (ссылка на оплату будем выслана на email)</label>
+				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
 					<label for='nalog_payment'>QIWI платеж (счет будет выставлен на указанный телефон)</label>
@@ -255,5 +283,5 @@
 % }
 </div>
 
-<script async type="text/javascript" src="http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&coordorder=longlat&load=package.full&wizard=constructor&onload=fid_134945918937914001744"></script>
+
 <script>requirejs(['app/cart'])</script>
