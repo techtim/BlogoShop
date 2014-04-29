@@ -1,0 +1,134 @@
+.custom-select
+	position: relative
+
+	&.open_list
+		.custom-text
+			margin-bottom: 1px
+			background: #f6f6f6
+			border-bottom: 0
+			border-radius: 5px 5px 0 0
+
+			&:after
+				background-position: left top
+
+
+
+
+	&.above
+		.select-list
+			padding-top: 4px
+			border: 1px solid #c9c9c9
+			border-radius: 5px
+
+		.custom-text
+			border-radius: 5px
+
+	select
+		display: none
+
+
+	ul
+		position: relative
+
+
+	.custom-text
+		position: relative
+		height: 26px
+		display: block
+		padding-left: 8px
+		border: 1px solid #c9c9c9
+		border-radius: 5px
+		color: #4b4b4b!important
+		cursor: pointer
+		font:
+			family: "PT Sans bold"
+			size: 12px
+
+		line-height: 26px
+		text-transform: uppercase
+		overflow: hidden
+		background-image: linear-gradient(top,  #f6f6f6, #ededed)
+
+		&:after
+			position: absolute
+			top: 9px
+			right: 7px
+			display: block
+			height: 8px
+			width: 9px
+			background: url($img__dir + 'select-arrows-spr.png') no-repeat right bottom
+			content: ''
+
+	.custom-scroll
+		overflow: hidden
+
+	.select-list
+		position: absolute
+		top: 26px
+		padding-left: 8px
+		display: block
+		border: 1px solid #c9c9c9
+		border-top: 0
+		border-radius: 0 0 5px 5px
+		z-index: 2
+		background-image: linear-gradient(top,  #f6f6f6, #ededed)
+
+		ul
+			display: block
+
+		li
+			float: none
+			display: block
+			margin-bottom: 4px
+			color: #4b4b4b!important
+			cursor: pointer
+			font:
+				family: "PT Sans bold"
+				size: 12px
+			text:
+				decoration: none
+				transform: uppercase
+
+
+			&.current
+				display: none
+
+			&:hover
+				text-decoration: underline
+
+
+
+
+	.select-scroll
+		position: absolute
+		top: 0
+		right: 7px
+		width: 9px
+		background: #f0f0f0
+		z-index: 2
+
+		.scroll-drag
+			position: absolute
+			left: 2px
+			display: block
+			cursor: pointer
+
+			&:after
+				position: relative
+				left: 50%
+				top: 50%
+				margin:
+					top: -14px
+					left: -4px
+
+				display: block
+				content: ''
+				font:
+					size: 14px
+					weight: bold
+
+			*
+				user-select: none
+
+
+

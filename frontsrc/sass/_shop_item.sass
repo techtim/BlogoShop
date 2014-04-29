@@ -1,0 +1,77 @@
+.shop__item__section
+
+	.gallery
+		position: relative
+		width: 420px
+		float: left
+		z-index: 5
+
+		.full__size__section
+			position: relative
+			height: 480px
+			width: 340px
+			float: left
+			background: #fff url($img__dir + 'spinner.gif') no-repeat center center
+
+			img
+				max-height: 100%
+				max-width: 100%
+				border: 1px solid #B2B2B2
+					cursor: crosshair
+				opacity: 0
+				transition: opacity .2s linear
+
+				&.loaded
+					opacity: 1
+
+		.previews__section
+			float: left
+			margin-left: 14px
+
+			li
+				height: 68px
+				width: 50px
+				margin-bottom: 10px
+
+				a
+					opacity: .5
+					transition: all .2s linear
+
+					&.current, &:hover
+						opacity: 1
+
+
+					img
+						max-width: 50px
+						border: 1px solid #B2B2B2
+
+
+		.popup__full__img
+			position: absolute
+			top: -2px
+			left: 352px
+			width: 320px
+			height: 320px
+			border: 2px solid #fff
+			background: #fff url($img__dir + 'spinner.gif') no-repeat center center
+			color: #333
+			opacity: 0
+			overflow: hidden
+			visibility: hidden
+			z-index: 5
+
+			&.visible
+				opacity: 1
+				visibility: visible
+
+
+			img
+				position: absolute
+				top: 0
+				left: 0
+
+
+	.shop__information__section
+		width: 240px
+		float: left
+

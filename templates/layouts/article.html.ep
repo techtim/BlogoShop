@@ -18,9 +18,9 @@
 		% }
 
 		% if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
-		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/main.css?ver=3' media='all' />
         % } else {
-        <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
+        <link rel='stylesheet' type='text/css' href='/css/main.minified.css' media='all' />
         % }
 		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
 

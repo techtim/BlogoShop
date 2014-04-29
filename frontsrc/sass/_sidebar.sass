@@ -1,0 +1,196 @@
+.sidebar__section
+	width: 260px
+
+	.menu__section
+		margin-bottom: 7px
+		border-bottom: 1px dotted #a1a1a1
+
+		&.hidden
+			.caption__section
+				padding: 0
+				border-bottom: 0
+			.item
+				display: none
+
+		.caption__section
+			margin-bottom: 6px
+			padding-bottom: 6px
+			border-bottom: 1px dotted #a1a1a1
+
+
+		h2
+			margin-top: 2px
+			float: left
+			color: #b4b4b4
+			font-size: 13px
+			text-transform: uppercase
+
+		.filters__section
+			position: relative
+			top: 1px
+			float: right
+
+			li
+				float: left
+				margin-left: 1px
+
+			a
+				padding: 0 5px
+				border: 1px solid #c4c4c4
+				color: #434343
+				font:
+					size: 10px
+				text:
+					decoration: none
+					transform: uppercase
+
+				&.current, &:hover
+					background: #434343
+					border-color: #434343
+					color: #fff
+					cursor: pointer
+					text-decoration: none
+
+				&.current
+					cursor: default
+
+		.item
+			display: block
+			clear: both
+
+			@mixin redLink
+				li.title > a
+					color: red
+
+			&.podarki
+				border: 3px solid red
+				border-bottom: 0
+				+redLink
+
+			&.dom_i_interer, &.ukrashenija_i_bizhuterija
+				border-left: 3px solid red
+				border-right: 3px solid red
+				+redLink
+
+
+			&.aksessuary
+				margin-bottom: 12px
+				border: 3px solid red
+				border-top: 0
+				+redLink
+
+				.title
+					margin-bottom: -3px
+
+
+			&.current
+				.submenu
+					display: block
+
+				.title a
+					color: #E60000
+
+			&.toggled
+				.submenu
+					display: block
+
+			.submenu
+				display: none
+
+		.submenu
+			display: block
+
+			a
+				font:
+					size: 12px
+					weight: 400
+
+
+		li
+			padding-bottom: 10px
+			text-transform: uppercase
+
+			&.title
+				padding-top: 6px
+				padding-left: 9px
+				color: #232323
+				font:
+					size: 12px
+					weight: bold
+
+				&.hny
+					color: red
+
+				a
+					padding-left: 0
+					color: #232323
+
+			&.current
+				a
+					color: #E60000
+
+			a
+				display: block
+				padding-left: 18px
+				color: #868686
+				font:
+					size: 12px
+				text:
+					decoration: none
+					transform: uppercase
+
+				&:hover
+					color: #e60000
+					text-decoration: underline
+
+
+	.subscribe__section
+
+		padding-top: 54px
+		background: url($img__dir +'subscribe-bg.png') no-repeat center 11px
+		background-size: 43px 30px
+
+		label
+			display: block
+			padding-bottom: 10px
+			color: #959494
+			font:
+				size: 10px
+				style: italic
+
+			line-height: 13px
+			text-align: center
+
+		input[type='text']
+			display: block
+			width: 100%
+			height: 20px
+			border: 1px solid #c1c1c1
+			line-height: 20px
+
+			&:after
+				content: ''
+				display: block
+				width: 230px
+				height: 20px
+				margin-top: 2px
+				background: url($img__dir + 'subscribe-shadow.png') no-repeat
+
+
+		input[type='submit']
+			display: block
+			width: 102px
+			height: 22px
+			margin: 20px auto
+			background: url($img__dir +'submit-bg.png') repeat-x left top
+			border: 0
+			border-radius: 4px
+			color: #fff
+			cursor: pointer
+			font:
+				size: 11px
+				style: italic
+
+
+
+

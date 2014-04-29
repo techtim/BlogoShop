@@ -1,0 +1,584 @@
+.cart__items__list__section
+	position: relative
+	overflow: hidden
+
+	.caption
+		margin-bottom: 20px
+		color: #868686
+		font:
+			family: Arial, sans-serif
+			size: 15px
+			weight: bold
+		text-transform: uppercase
+		transition: color .4s linear
+
+		&.light__gray
+			color: #c8c8c8
+
+
+		&.dark__gray
+			color: #434343
+
+
+
+	.items__list
+
+		&.hidden
+			display: none
+
+
+		li
+			height: 90px
+			width: 330px
+			float: left
+			margin-right: 16px
+			margin-bottom: 20px
+			border: 1px solid #cbcbcb
+			background: #f0f0f0
+
+			&:nth-child(2n)
+				margin-right: 0
+
+			.img__section
+				position: relative
+				height: 68px
+				width: 50px
+				float: left
+				margin-top: 10px
+				margin-left: 12px
+
+				img
+					height: auto
+					max-width: 100%
+
+			.description__section
+				width: 126px
+				float: left
+				margin-left: 10px
+
+				h3
+					padding-top: 9px
+					padding-bottom: 2px
+					color: #666
+					font:
+						size: 12px
+					text-transform: uppercase
+
+					a
+						color: #666
+						text-decoration: none
+
+				h4
+					padding-bottom: 6px
+					color: #464646
+					font:
+						size: 12px
+						weight: bold
+
+
+
+				.size
+					color: #666
+					font:
+						size: 12px
+
+					text-transform: uppercase
+
+					.color
+						height: 14px
+						width: 14px
+						margin: -3px 0 -3px 4px
+						display: inline-block
+
+
+			.info__section
+				width: 122px
+				float: right
+				margin-top: 10px
+				margin-right: 10px
+				text-align: right
+
+				.delete
+					position: relative
+					top: 6px
+					margin-right: 4px
+
+
+				input[type='number']
+					height: 20px
+					width: 44px
+					display: inline-block
+					border: 1px solid #c1c1c1
+					color: #000
+					font:
+						size: 15px
+						weight: bold
+
+					text:
+						align: center
+
+
+
+				.price
+					margin-top: 12px
+					padding-right: 16px
+					background: url($img__dir + 'ico-rub.png') no-repeat right 3px
+					background-size: 11px 15px
+					color: #434343
+					clear: both
+					font:
+						size: 20px
+
+					text-align: right
+
+					s
+						color: #e60000
+
+
+
+
+
+
+	.price__section
+		clear: both
+		background: #f2ffea
+		border-top: 1px dotted #a1a1a1
+		border-bottom: 1px dotted #a1a1a1
+		line-height: 52px
+
+		&.hidden
+			display: none
+
+
+		&.total
+			border-top: 1px solid #d9d9d9
+			border-bottom: 1px solid #d9d9d9
+
+
+		h3
+			float: left
+			margin-left: 4px
+			color: #868686
+			font:
+				size: 15px
+				weight: bold
+
+			text-transform: uppercase
+
+
+		.summ__section
+			float: right
+			margin-right: 4px
+			padding-right: 36px
+			background: url($img__dir + 'ico-rub-big.png') no-repeat right 15px
+			color: #7bd03c
+			font:
+				size: 32px
+				weight: bold
+
+
+
+
+	.checkout__button
+		margin-top: 18px
+
+
+	.submit___section
+
+		&.hidden
+			display: none
+
+
+		.caption
+			margin-bottom: 10px
+
+
+		.item__block
+			padding-top: 22px
+			padding-bottom: 10px
+
+			&:last-child
+				border-bottom: 0
+
+
+
+		.item__block
+			position: relative
+			opacity: 1
+			transition: all .4s linear
+			transform: translate3d(0,0,0)
+
+			.caption
+				color: #434343
+
+			&.hidden
+				display: none
+
+			&.disabled
+				opacity: .5
+
+				.custom-select, .custom-text, .pickup__checkbox, label, .types__list li
+					+disabled
+
+
+
+			input
+				border: 1px solid #c1c1c1
+				transition: all .4s linear
+				&.error
+					border-color: #e60000
+
+
+
+
+		.clear
+			height: 1px
+			background: #d9d9d9
+
+
+		.message
+			color: #e60000
+			font:
+				family: "PT Sans"
+				size: 10px
+
+			text:
+				align: center
+				transform: uppercase
+
+			opacity: 0
+			visibility: hidden
+			transition: opacity .4s linear
+
+			&.active
+				opacity: 1
+				visibility: visible
+
+
+
+		.left__section
+			width: 452px
+			float: left
+			background: url($img__dir + 'gray-delimiter.png') no-repeat right center
+
+
+		.right__section
+			width: 204px
+			float: left
+			margin-left: 24px
+
+
+		.register
+			ul
+				float: left
+				margin-right: 10px
+
+
+			li
+				margin-bottom: 8px
+
+
+			input
+				width: 200px
+				line-height: 20px
+				+placeholder(#464646)
+
+
+			.message
+				width: 410px
+				clear: both
+
+
+
+		.login
+			float: right
+			text-align: center
+
+			.caption
+				float: left
+
+
+			.forgot
+				float: right
+				margin-top: 4px
+				color: #464646
+				font:
+					family: $font-stack
+					size: 10px
+
+				text:
+					transform: uppercase
+
+
+				&:hover
+					text-decoration: none
+
+
+
+			ul
+				display: block
+				clear: both
+
+
+			li
+				margin-bottom: 8px
+
+
+			input
+				height: 20px
+				width: 200px
+				line-height: 20px
+				+placeholder(#c8c8c8)
+
+
+			input[type='radio']
+				border: none
+
+
+			.submit__form
+				height: auto
+				width: auto
+				display: inline-block
+				margin-top: -6px
+				padding: 0 12px
+				background: #bcbcbc
+				border-radius: 6px
+				color: #fff
+				font-size: 10px
+				line-height: 18px
+				text:
+					align: center
+					decoration: none
+					transform: uppercase
+
+				transition: background .4s linear
+
+				&:hover
+					background: #444
+
+
+
+
+
+		.address
+			height: 146px
+			transition: all .4s linear
+
+			&.hidden
+				margin-left: -458px
+				display: block
+
+
+			li
+				margin-bottom: 12px
+
+
+			.custom-select
+				max-width: 140px
+				float: left
+				margin-left: 10px
+
+				&:first-child
+					margin-left: 0
+
+
+
+			input[type='text']
+				line-height: 20px
+				+placeholder(#4b4b4b)
+
+				&.light__gray
+					text-align: center
+					+placeholder(#c8c8c8)
+
+
+				&.country
+					margin-right: 10px
+					width: 130px
+					float: left
+
+
+				&.index
+					width: 70px
+					float: left
+					margin-left: 10px
+
+
+				&.addr
+					width: 198px
+					float: left
+
+
+				&.house, &.building, &.flat
+					width: 58px
+					float: left
+					margin-left: 10px
+					text-align: center
+
+					&::input-placeholder
+						padding-left: 0
+						text:
+							align: center
+							transform: uppercase
+
+
+
+
+				&.receiver
+					width: 198px
+					float: left
+
+
+
+			.city > select
+				width: 190px
+				float: left
+
+
+			.message
+				width: 200px
+				float: left
+				margin-left: 10px
+				padding-top: 10px
+
+
+
+		.pickup
+			height: 146px
+			transition: all .4s linear
+
+			&.active
+				margin-left: 0
+				width: 680px
+
+				.map
+					right: 0
+
+
+
+			.caption
+				display: inline-block
+
+
+			.pickup__checkbox
+				position: relative
+				top: 2px
+				height: 18px
+				width: 20px
+				display: inline-block
+				margin-left: 10px
+				background: url($img__dir + 'ico-checkbox.png') no-repeat 1px top
+				cursor: pointer
+
+				&.checked
+					background-position: right top
+
+
+
+			p
+				color: #868686
+				font:
+					family: "PT Sans bold"
+					size: 12px
+
+				line-height: 19px
+				text-transform: uppercase
+
+				span
+					color: #e60000
+
+
+
+			.map
+				position: absolute
+				right: -460px
+				height: 134px
+				overflow: hidden
+				transition: all .4s linear
+
+
+
+
+		.types__list
+			margin-bottom: -10px
+			transform: translate3d(0,0,0)
+
+			li
+				padding: 10px 0
+				border-top: 1px dotted #a1a1a1
+				cursor: pointer
+
+
+				&.selected
+					.price
+						color: #434343
+
+			label
+				color: #4b4b4b
+				cursor: pointer
+				font:
+					family: Arial
+					size: 12px
+					weight: bold
+
+
+				sup
+					text-transform: uppercase
+
+
+				sub
+					color: #888
+					font-weight: 400
+
+
+				span
+					margin-left: 8px
+					color: #c8c8c8
+					font:
+						weight: 400
+
+
+
+
+			img
+				vertical-align: middle
+
+
+			.price
+				padding-right: 20px
+				float: right
+				background: url($img__dir + 'ico-rub.png') no-repeat right center
+				background-size: 11px 15px
+				color: #c8c8c8
+				font:
+					size: 20px
+					weight: 400
+				transition: color .2s linear
+
+
+
+		.pay__type
+			&.disabled
+				display: none
+
+
+			li
+				display: none
+
+	.finish__cart
+		display: block
+		margin: 10px auto
+		height: 34px
+		width: 122px
+		border: 0
+		background: url($img__dir + 'finish-cart.png') no-repeat
+		cursor: pointer
+		text-indent: -9999px
+
+		&.disabled
+			background-position: left bottom
+			cursor: default
+
+
+		&.hidden
+			display: none
