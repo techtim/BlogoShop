@@ -2,22 +2,22 @@
 
 	.gallery
 		position: relative
-		width: 420px
+		width: 440px
 		float: left
 		z-index: 5
 
 		.full__size__section
+			margin-bottom: 20px
 			position: relative
-			height: 480px
-			width: 340px
+			height: 536px
+			width: 360px
 			float: left
 			background: #fff url($img__dir + 'spinner.gif') no-repeat center center
 
 			img
 				max-height: 100%
 				max-width: 100%
-				border: 1px solid #B2B2B2
-					cursor: crosshair
+				cursor: crosshair
 				opacity: 0
 				transition: opacity .2s linear
 
@@ -37,19 +37,21 @@
 					opacity: .5
 					transition: all .2s linear
 
+					&.current > img
+						border: 1px solid #B2B2B2
+
 					&.current, &:hover
 						opacity: 1
 
-
 					img
 						max-width: 50px
-						border: 1px solid #B2B2B2
+						box-sizing: border-box
 
 
 		.popup__full__img
 			position: absolute
 			top: -2px
-			left: 352px
+			left: 362px
 			width: 320px
 			height: 320px
 			border: 2px solid #fff
@@ -72,6 +74,7 @@
 
 
 	.shop__information__section
+		margin-bottom: 20px
 		width: 240px
-		float: left
+		float: right
 

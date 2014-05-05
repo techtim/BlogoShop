@@ -4,7 +4,7 @@
 @import "mixins"
 
 @import "reset"
-@import "fotorama.css"
+@import "fotorama"
 
 body
 	background: url($img__dir +  'body-bg.png') repeat-x left top
@@ -155,6 +155,39 @@ strong, b
 	background: #434343
 	opacity: .5
 	z-index: 2
+
+.submit__form, .checkout__button
+	padding-left: 61px
+
+	width: 100%
+	height: 43px
+
+	display: inline-block
+	box-sizing: border-box
+
+	background: $submit-button-bg url($img__dir + 'ico-add-to-cart.png') no-repeat 30px 10px
+	border: 2px solid $submit-button-bg
+
+	color: #ffffff
+	cursor: pointer
+	font-family: $font-stack
+	font-weight: bold
+	font-size: 12px
+
+	line-height: 41px
+
+	text-decoration: none
+	text-transform: uppercase
+
+	&:hover:not(.disabled)
+		background-color: #ffffff
+		background-position: 30px -43px
+		color: $submit-button-bg
+
+.checkout__button
+	padding-left: 0
+	text-align: center
+	background-image: none
 
 
 @import "header"

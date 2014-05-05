@@ -50,8 +50,8 @@
 
 <ul class='breadcrumps__section clearfloat'>
 	<li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
-	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
-	<li>/ <h2><%= stash 'name' %></h2></li>
+	<li>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
+	<li class="current">/ <h2><%= stash 'name' %></h2></li>
 	
 </ul>
 

@@ -566,18 +566,25 @@
 				display: none
 
 	.finish__cart
+		@extend .submit__form
 		display: block
 		margin: 10px auto
+		padding-left: 10px
+
 		height: 34px
 		width: 122px
-		border: 0
-		background: url($img__dir + 'finish-cart.png') no-repeat
-		cursor: pointer
-		text-indent: -9999px
+
+		background-image: none
+		line-height: 28px
+
+		&:hover
+			background-image: none
 
 		&.disabled
-			background-position: left bottom
+			background: rgba($submit-button-bg, .5)
+			border-color: rgba($submit-button-bg, .0)
 			cursor: default
+
 
 
 		&.hidden

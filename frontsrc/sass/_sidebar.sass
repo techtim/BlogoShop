@@ -58,31 +58,6 @@
 			display: block
 			clear: both
 
-			@mixin redLink
-				li.title > a
-					color: red
-
-			&.podarki
-				border: 3px solid red
-				border-bottom: 0
-				+redLink
-
-			&.dom_i_interer, &.ukrashenija_i_bizhuterija
-				border-left: 3px solid red
-				border-right: 3px solid red
-				+redLink
-
-
-			&.aksessuary
-				margin-bottom: 12px
-				border: 3px solid red
-				border-top: 0
-				+redLink
-
-				.title
-					margin-bottom: -3px
-
-
 			&.current
 				.submenu
 					display: block
