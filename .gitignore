@@ -1,4 +1,7 @@
 *.log
+.idea/*
+.sass-cache/*
+node_modules/*
 /log/
 BlogoShop.yml
 /.settings/
