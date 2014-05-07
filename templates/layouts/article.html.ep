@@ -24,11 +24,13 @@
         % }
 		<link rel='stylesheet' type='text/css' href='/css/fotorama.css' media='all' />
 
+        % if (config->{domain_name} eq 'xoxloveka.ru' ) {
 		<script data-main='/j/config' src='/j/require.js'></script>
 		<script>requirejs(['app/global', 'app/fotorama', 'app/equalHeight'])</script>
+		% }
 	</head>
 
-	<body>
+	<body ng-app="xoxlovka">
         <div class='wrap clearfloat'>
 
             %= include 'includes/header'

@@ -43,7 +43,7 @@ define(['jquery'], function($){
 
 									// Preload image
 									objImage = new Image();
-									objImage.src = url;
+									objImage.assets = url;
 									
 									var o = $(this);
 									

@@ -1,12 +1,15 @@
 
 <div class='sidebar__section fl'>
 
-	<div class='menu__section'>
+	<div class='menu__section' di-sidebar-menu>
 
 		<div class='caption__section clearfloat'>
 	    	<h2>Каталог</h2>
 
-		    <a class='expand__items' href='#' data-role='categories'></a>
+		    <a class='expand__items' href='#'
+		        ng-class="{'opened': isOpened}"
+		        ng-click="toggle()"
+		        di-prevent-default></a>
 
 	    	% my $sex = stash('is_brand') ? '' : stash('sex')||'';
 		    <ul class='filters__section'>
@@ -21,7 +24,10 @@
 
 	    % foreach my $cat (@$categories) {
 	    % next unless $active_categories->{$sex eq '' ? 'u' : $sex}->{$cat->{_id}};
-	    <ul class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %> <%= $cat->{_id} %><%= ' toggled' if stash('is_brand') %>'>
+	    <ul
+	        class='item<%= ' current' if stash('category') && stash('category') eq $cat->{_id} %> <%= $cat->{_id} %><%= ' toggled' if stash('is_brand') %>'
+	        ng-class="{'toggled': isOpened}"
+	    >
         	<li class='title'>
         		<a href='http://<%= config->{domain_name} %>/<%== $sex ne '' ? "$sex/" : '' %><%= 'brand/'.stash('brand').'/' if stash('is_brand') %><%= $cat->{_id} %>'><%= $cat->{name} %></a>
         	</li>
@@ -39,11 +45,14 @@
 
 	</div>
 
-	<div class='menu__section'>
+	<div class='menu__section' di-sidebar-menu="opened" ng-class="{'hidden': !isOpened}">
 
 		<div class='caption__section clearfloat'>
 			<h2>бренды и корнеры</h2>
-			<a class='expand__items inverted' href='#' data-role='brands'></a>
+			<a class='expand__items' href='#'
+                ng-class="{'opened': isOpened}"
+                ng-click="toggle()"
+                di-prevent-default></a>
 		</div>
 
 	    <ul class='item'>
@@ -55,19 +64,14 @@
 	    </ul>
 	</div>
 
-	<div class="carousel__left">
-		<div class="carousel__wrapper">
-			<ul>
-			% foreach (@$banners_h) {
-	        % next if !$_->{link};
-	        	<li>
-	        		<a href='<%= $_->{link} %>'><img src='<%= $_->{image} %>' alt='' /></a>
-	        	</li>
-	        % }
-        	</ul>
-    	</div>
-    	<script>requirejs(['app/carouselLeft']);</script>
-	</div>
+	<di-carousel position="left">
+        % foreach (@$banners_h) {
+        % next if !$_->{link};
+            <li class="carousel-item">
+                <a href='<%= $_->{link} %>'><img src='<%= $_->{image} %>' alt='' /></a>
+            </li>
+        % }
+    </di-carousel>
 
     <div class='subscribe__section'>
         %= form_for '/subscribe' => (method => 'post') => begin
@@ -82,13 +86,15 @@
         %= end
     </div>
     <div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
+    % if (config->{domain_name} eq 'xoxloveka.ru' ) {
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+	% }
     <div class="fb-like-box"
     		data-href="http://www.facebook.com/xoxloveka"
     		data-width="260"

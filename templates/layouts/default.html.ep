@@ -14,10 +14,12 @@
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
         % }
+        % if (config->{domain_name} eq 'xoxloveka.ru' ) {
         <script data-main='/j/config' src='/j/require.js'></script>
         <script>requirejs(['app/global'])</script>
+        % }
     </head>
-	<body>
+	<body ng-app="xoxlovka">
         <div class='wrap clearfloat'>
             %= include 'includes/header'
             %= include 'includes/top'

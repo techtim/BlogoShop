@@ -36,7 +36,7 @@
 
 </div>
 
-<div class="top__gray__strip">
+<div class="top__gray__strip" di-sticky-header>
 	<div class="wrap">
 		<a href="/" class="logo" title='магазин Хохловка'></a>
 

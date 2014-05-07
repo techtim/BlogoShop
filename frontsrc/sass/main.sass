@@ -1,0 +1,226 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&subset=latin,cyrillic)
+
+@import "vars"
+@import "mixins"
+
+@import "reset"
+@import "fotorama"
+
+body
+	background: url($img__dir +  'body-bg.png') repeat-x left top
+	font: 12px Arial, sans-serif
+	&.overlayed
+
+		#overlay
+			display: block
+
+.wrap
+	width: 980px
+	margin: 0 auto
+	padding-bottom: 60px
+
+.fl
+	float: left
+
+.fr
+	float: right
+
+strong, b
+	font-weight: bold
+
+.clearfloat
+	display: inline-block
+
+	&:after
+		content: "."
+		display: block
+		height: 0
+		clear: both  !important
+		visibility: hidden
+
+* html .clearfloat
+	height: 1%
+
+.clearfloat
+	display: block
+
+.clear
+	clear: both
+
+.expand__items
+	height: 22px
+	width: 21px
+	float: right
+	margin-left: 6px
+	margin-top: -3px
+	margin-bottom: -2px
+	background: url($img__dir + 'ico-menu-dropdown.png') no-repeat
+	background-size: 21px 44px
+	cursor: pointer
+
+	&.opened
+		background-position: left -23px
+
+	&.inverted
+		background-position: left -23px
+
+		&.opened
+			background-position: left top
+
+
+.content__section
+	width: 680px
+	float: right
+
+	.caption__section
+		position: relative
+		margin-top: 34px
+		border-top: 1px dotted #a1a1a1
+
+		h2
+			position: absolute
+			left: 50%
+			top: -4px
+			text-indent: -9999px
+
+
+
+.dotted__caption
+	margin-bottom: 30px
+	border-bottom: 1px dotted #a1a1a1
+	color: #666
+	font:
+		family: Georgia
+		size: 13px
+	text:
+		align: center
+		transform: uppercase
+
+	span
+		position: relative
+		top: 7px
+		padding: 0 8px
+		background: #fff
+
+
+.fake__checkbox
+	input
+		display: none
+
+.delete
+	height: 27px
+	width: 22px
+	display: inline-block
+	background: url($img__dir + 'ico-delete.png') no-repeat center center
+	opacity: .5
+	transition: opacity .4s linear
+
+	&:hover
+		opacity: 1
+
+.sale
+	.ico__sale
+		display: block
+
+
+.ico__sale
+	position: absolute
+	left: -5px
+	bottom: -5px
+	height: 26px
+	width: 26px
+	display: none
+	background: url($img__dir + 'ico-sale.png') no-repeat
+
+.socials__section
+	clear: both
+	li
+		margin-right: 8px
+		float: left
+
+
+.scroll__helper
+	height: 1px
+	clear: both
+	visibility: hidden
+
+
+#overlay
+	position: absolute
+	left: 0
+	top: 0
+	height: 9999px
+	width: 100%
+	display: none
+	background: #434343
+	opacity: .5
+	z-index: 2
+
+.submit__form, .checkout__button
+	padding-left: 61px
+
+	width: 100%
+	height: 43px
+
+	display: inline-block
+	box-sizing: border-box
+
+	background: $submit-button-bg url($img__dir + 'ico-add-to-cart.png') no-repeat 30px 10px
+	border: 2px solid $submit-button-bg
+
+	color: #ffffff
+	cursor: pointer
+	font-family: $font-stack
+	font-weight: bold
+	font-size: 12px
+
+	line-height: 41px
+
+	text-decoration: none
+	text-transform: uppercase
+
+	&:hover:not(.disabled)
+		background-color: #ffffff
+		background-position: 30px -43px
+		color: $submit-button-bg
+
+.checkout__button
+	padding-left: 0
+	text-align: center
+	background-image: none
+
+
+@import "header"
+@import "gray_strip"
+@import "navigation"
+@import "shoping_cart"
+@import "sidebar"
+
+@import "breadcrumps"
+@import "carousel"
+
+@import "blog"
+@import "post"
+
+@import "shop_item"
+@import "shop_information"
+@import "shop_lists"
+@import "shop_description"
+@import "cart_list"
+
+@import "filters"
+@import "custom_select"
+
+@import "footer"
+
+
+
+
+
+
+
+
+
+
+
+

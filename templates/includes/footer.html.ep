@@ -30,3 +30,5 @@
     </div>
 </div>
 <div id='overlay'></div>
+
+<script src="/j/build.js"></script>

@@ -28,7 +28,7 @@
         <script data-main='/j/config' src='/j/require.js'></script>
         <script>requirejs(['app/global'])</script>
     </head>
-	<body>
+	<body ng-app="xoxlovka">
         <div class='wrap clearfloat'>
             %= include 'includes/header'
             %= include 'includes/top'

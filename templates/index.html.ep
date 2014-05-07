@@ -6,23 +6,16 @@
 <div class='content__section'>
      % if (@$banners > 0) {
         % my $select_num = 1;
-        <div class='carousel__main'>
-            <div class='carousel__wrapper'>
-                <ul class='items'>
-                    % foreach (@$banners) {
-                    % next if !$_->{link};
-                    <li class="carousel__item">
-                        <a href='<%= $_->{link} %>'>
-                        	<img src='<%= $_->{image} %>' alt='' />
-                        </a>
-                    </li>
-                    % }
-                </ul>
-                <a href="#" class="jcarousel-prev controls"></a>
-                <a href="#" class="jcarousel-next controls"></a>
-            </div>
-            <ul class='pagination'></ul>
-        </div>
+        <di-carousel position="center" pagination="true">
+            % foreach (@$banners) {
+            % next if !$_->{link};
+            <li class="carousel-item">
+                <a href='<%= $_->{link} %>'>
+                    <img src='<%= $_->{image} %>' alt='' />
+                </a>
+            </li>
+            % }
+        </di-carousel>
     % }
 
     <div class='blogs__section clearfloat'>
@@ -47,9 +40,11 @@
     </div>
     % }
 
+    % if (config->{domain_name} eq 'xoxloveka.ru' ) {
     <script>
         requirejs(['app/equalHeight', 'app/carouselMain', 'app/itemsDescr']);
     </script>
+    % }
 </div>
 
 <div class='clear'></div>
