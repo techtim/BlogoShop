@@ -3,9 +3,9 @@
 /log/
 BlogoShop.yml
 /.settings/
-/.idea/
-/node_modules/
-/.sass-cache/
+/.idea/*
+/node_modules/*
+/.sass-cache/*
 .project
 /public/files/i/item/
 /public/files/i/post/
