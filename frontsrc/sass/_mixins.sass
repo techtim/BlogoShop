@@ -1,0 +1,13 @@
+@mixin placeholder($color)
+	&::placeholder
+		padding-left: 8px
+		color: $color
+		font:
+			family: $font-stack
+			size: 12px
+			weight: bold
+		text-transform: uppercase
+
+@mixin disabled
+	cursor: default
+	user-select: none
