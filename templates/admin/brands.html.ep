@@ -8,7 +8,7 @@
     <ul class='list__section'>
         % foreach my $brand (@$brands) {
         <li>
-            <a href='#' class='active fake__checkbox'>
+            <a href='/admin/brands/active/<%== $brand->{_id} %>' class=' active <%== 'inactive' if !$brand->{active} %> fake__checkbox'>
                 <input type='checkbox' />
             </a>
 
