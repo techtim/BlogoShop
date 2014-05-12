@@ -10,9 +10,9 @@
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
         % if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
-		<link rel='stylesheet' type='text/css' href='/css/style.css?ver=2' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/main.css' media='all' />
         % } else {
-        <link rel='stylesheet' type='text/css' href='/css/style.minified.css' media='all' />
+        <link rel='stylesheet' type='text/css' href='/css/main.minified.css' media='all' />
         % }
         <script data-main='/j/config' src='/j/require.js'></script>
         <script>requirejs(['app/global'])</script>
