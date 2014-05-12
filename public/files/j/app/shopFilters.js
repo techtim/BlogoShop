@@ -23,8 +23,7 @@ define(['jquery', 'l/tmpl', 'l/ui'], function(){
 
 	var templates = {
 		items: '<li {{if typeof sale != "undefined" && sale.sale_active}}class="sale"{{/if}}>'+
-				'<a href="${link}"><span class="img__section">'+
-						'<img src="${preview_image}" alt="${brand_name} ${name}" title="${brand_name} ${name}" />'+
+				'<a href="${link}"><span class="img__section" style="background-image: url(${preview_image})">'+
 						'{{if typeof sale != "undefined" && $item.sale_active( sale.sale_active, sale.sale_start_stamp, sale.sale_end_stamp) }}'+
 							'<span class="ico__sale"></span>'+
 						'{{/if}}'+
