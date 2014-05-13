@@ -57,6 +57,7 @@
 
 	    <ul class='item'>
 	    % foreach my $brand (@$list_brands) {
+	    	% next if !$brand->{active};
 	    	<li class='title <%== 'current' if stash('is_brand') && stash('brand') eq $brand->{_id} %>' >
 	    		<a href='http://<%= config->{domain_name} %>/brand/<%= $brand->{_id} %>'><%= $brand->{name} %></a>
 	    	</li>
