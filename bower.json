@@ -15,9 +15,10 @@
   ],
   "dependencies": {
     "normalize-css": "~3.0.1",
-    "angular": "1.3.0-beta.7",
+    "angular": "1.3.0-beta.8",
     "fotorama": "~4.5.1",
     "modernizr": "~2.8.1",
-    "jcarousel": "~0.3.1"
+    "jcarousel": "~0.3.1",
+    "jquery": "~2.1.1"
   }
 }

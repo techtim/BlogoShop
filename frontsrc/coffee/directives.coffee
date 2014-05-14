@@ -27,46 +27,46 @@ do (angular) ->
       scope.isOpened = true if attrs.diSidebarMenu == 'opened'
 
   .directive 'diCarousel', ->
-    transitions = {}
+      transitions = {}
 
-    if (Modernizr.csstransitions)
-      transitions =
-        transforms: Modernizr.csstransforms
-        transforms3d: Modernizr.csstransforms3d
-    else
-      transitions = false
+      if (Modernizr.csstransitions)
+        transitions =
+          transforms: Modernizr.csstransforms
+          transforms3d: Modernizr.csstransforms3d
+      else
+        transitions = false
 
-    return {} =
-      restrict: 'E'
-      replace: true
-      template: "
-        <div class='carousel' ng-class='position'>
-          <div class='carousel-wrapper'>
-            <ul class='carousel-items' ng-transclude></ul>
-            <a href='#' class='jcarousel-prev controls' ng-if='visibleControls'></a>
-            <a href='#' class='jcarousel-next controls' ng-if='visibleControls'></a>
-          </div>
-          <ul class='pagination' ng-show='pagination'></ul>
-      </div>"
-      transclude: true
-      scope: true
-      controller: ($scope) ->
-        $scope.visibleControls = false
-        $scope.hideControls = -> $scope.visibleControls = false
-        $scope.showControls = -> $scope.visibleControls = true
-      link: (scope, ele, attrs) ->
-        scope.position = attrs.position
+      return {} =
+        restrict: 'E'
+        replace: true
+        template: "
+          <div class='carousel' ng-class='position'>
+            <div class='carousel-wrapper'>
+              <ul class='carousel-items' ng-transclude></ul>
+              <a href='#' class='jcarousel-prev controls' ng-show='visibleControls'></a>
+              <a href='#' class='jcarousel-next controls' ng-show='visibleControls'></a>
+            </div>
+            <ul class='pagination' ng-show='pagination'></ul>
+        </div>"
+        transclude: true
+        scope: true
+        controller: ($scope) ->
+          $scope.visibleControls = false
+          $scope.hideControls = -> $scope.visibleControls = false
+          $scope.showControls = -> $scope.visibleControls = true
+        link: (scope, ele, attrs) ->
+          scope.position = attrs.position
 
-        scope.pagination = if attrs.pagination then true else false
+          scope.pagination = if attrs.pagination then true else false
 
-        carouselConfig =
-          animation:
-            duration: 800
-            easing: 'linear'
-          transitions: transitions
-          wrap: 'circular'
+          carouselConfig =
+            animation:
+              duration: 800
+              easing: 'linear'
+            transitions: transitions
+            wrap: 'circular'
 
-        ele.find('.carousel-wrapper')
+          ele.find('.carousel-wrapper')
           .jcarousel carouselConfig
           .jcarouselAutoscroll {} =
             autostart: true
@@ -78,7 +78,7 @@ do (angular) ->
             $(@).jcarouselAutoscroll 'start'
             scope.$apply -> scope.hideControls()
 
-        ele.find('.pagination')
+          ele.find('.pagination')
           .on 'jcarouselpagination:create', 'li:eq(0)', () ->
             $(@).addClass 'current'
           .on 'jcarouselpagination:active', 'li', () ->
@@ -88,11 +88,12 @@ do (angular) ->
           .jcarouselPagination {} =
             item: (page) -> "<li><a href='##{page}' di-prevent-default></a></li>"
 
-        ele.find('.jcarousel-prev').jcarouselControl {} =
-          target: '-=1'
+          ele.find('.jcarousel-prev').jcarouselControl {} =
+            target: '-=1'
 
-        ele.find('.jcarousel-next').jcarouselControl {} =
-          target: '+=1'
+          ele.find('.jcarousel-next').jcarouselControl {} =
+            target: '+=1'
+
 
 
 

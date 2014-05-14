@@ -35,14 +35,14 @@ module.exports = function (grunt) {
     }
 
     var libsDeps = [
-        paths.vendors + 'jquery/dist/jquery.min.js', // jquery shoul be the first
+        paths.vendors + 'jquery/dist/jquery.min.js', // jquery should be the first
         paths.vendors + 'angular/angular.min.js',
         paths.vendors + 'modernizr/modernizr.js',
         paths.vendors + 'jcarousel/dist/jquery.jcarousel.js',
         paths.vendors + 'fotorama/fotorama.js'
     ];
 
-    var app = [paths.public + 'js/*.js'];
+    var app = [paths.assets + 'js/*.js'];
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
                 flatten: false,
                 cwd: paths.assets + 'coffee/',
                 src: ['*.coffee', '*/*.coffee'],
-                dest: paths.public + 'js/',
+                dest: paths.assets + 'js/',
                 ext: '.js',
                 options: {
                     bare: true,

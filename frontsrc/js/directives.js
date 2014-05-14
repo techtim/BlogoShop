@@ -53,7 +53,7 @@
     return {
       restrict: 'E',
       replace: true,
-      template: "<div class='carousel' ng-class='position'> <div class='carousel-wrapper'> <ul class='carousel-items' ng-transclude></ul> <a href='#' class='jcarousel-prev controls' ng-if='visibleControls'></a> <a href='#' class='jcarousel-next controls' ng-if='visibleControls'></a> </div> <ul class='pagination' ng-show='pagination'></ul> </div>",
+      template: "<div class='carousel' ng-class='position'> <div class='carousel-wrapper'> <ul class='carousel-items' ng-transclude></ul> <a href='#' class='jcarousel-prev controls' ng-show='visibleControls'></a> <a href='#' class='jcarousel-next controls' ng-show='visibleControls'></a> </div> <ul class='pagination' ng-show='pagination'></ul> </div>",
       transclude: true,
       scope: true,
       controller: function($scope) {

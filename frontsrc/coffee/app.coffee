@@ -1,2 +1,2 @@
 do (angular) ->
-  angular.module 'xoxlovka', ['directives']
+  angular.module 'xoxlovka', ['controllers', 'directives']

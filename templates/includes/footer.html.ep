@@ -31,4 +31,12 @@
 </div>
 <div id='overlay'></div>
 
+<script>
+    window.xoxlovka = window.xoxloka || {};
+    window.xoxlovka.config = {
+        previewsUrl: {
+           item: '<%== config->{nginx_res_item_prev}.config->{image_url} %>'
+        }
+    }
+</script>
 <script src="/j/build.js"></script>
