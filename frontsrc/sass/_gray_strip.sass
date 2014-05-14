@@ -1,0 +1,90 @@
+.top__gray__strip
+	position: fixed
+	top: -34px
+	left: 0
+	height: 34px
+	width: 100%
+	background: #444
+	opacity: .3
+	z-index: 10
+	transition: all .1s linear
+
+	&.active
+		top: 0
+		opacity: 1
+
+	.logo
+		margin-top: 8px
+		float: left
+		height: 20px
+		width: 174px
+		background: url($img__dir + 'small-logo.png') no-repeat
+		background-size: 174px 20px
+		text-indent: -9999px
+
+
+	.time
+		margin-top: 3px
+		margin-left: 24px
+		margin-right: 12px
+		padding-top: 2px
+		float: left
+		height: 26px
+		width: 80px
+		background: url($img__dir + 'time-bg.png') no-repeat
+		background-size: 79px 27px
+		color: #fff
+		font:
+			size: 12px
+			weight: bold
+		text:
+			align: center
+			transform: uppercase
+
+
+		span
+			padding-bottom: 1px
+			display: block
+			color: #b9b8b8
+			font-size: 10px
+			font-weight: 400
+			text-transform: lowercase
+
+
+
+	.address
+		margin-left: 10px
+		margin-top: 10px
+		float: left
+		color: #a1a1a1
+		font:
+			size: 13px
+		text:
+			decoration: none
+			transform: uppercase
+
+
+		&:hover
+			border-bottom: 1px dashed
+			color: #fff
+
+	.phone
+		margin-left: 18px
+		margin-top: 10px
+		float: left
+		color: #fff
+		font:
+			size: 13px
+			weight: bold
+
+
+
+	.shopping__cart__section
+		margin-top: 6px
+
+		.empty
+			position: relative
+			top: 4px
+
+
+
