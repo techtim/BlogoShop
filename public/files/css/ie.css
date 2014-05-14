@@ -1,3 +1,0 @@
-.wrap-main {
-	width:expression(document.body.clientWidth < 1172? "1172px": "auto" );
-}

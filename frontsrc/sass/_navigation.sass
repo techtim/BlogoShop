@@ -1,0 +1,114 @@
+.navigation__section
+	margin-bottom: 18px
+	border-top: 1px dotted #444
+	border-bottom: 1px dotted #444
+	font-size: 13px
+	line-height: 32px
+
+	.main__nav__strip
+		float: left
+		width: 770px
+
+		li
+			float: left
+			margin-left: 42px
+
+			&:first-child
+				margin-left: 0
+
+			&.current
+				a
+					color: #e60000
+
+		a
+			color: #444
+			font-size: 13px
+			text:
+				decoration: none
+				transform: uppercase
+
+			&:hover
+				color: #e60000
+				text-decoration: underline
+
+			&.disabled
+				color: #aeaeae
+				cursor: default
+
+				&:hover
+					color: #aeaeae
+					text-decoration: none
+
+
+
+			&.home
+				display: inline-block
+				height: 10px
+				width: 13px
+				background: url($img__dir + 'ico-crown.png') no-repeat
+				background-size: 13px 10px
+
+	.sub__nav__strip
+		position: relative
+		top: -1px
+		width: 100%
+		display: block
+		background: #555
+		border-top: 1px dotted #434343
+
+		li
+			float: left
+			margin-left: 28px
+
+			&:first-child
+				margin-left: 14px
+
+		a
+			color: #fff
+			font:
+				size: 10px
+			text:
+				decoration: none
+				transform: uppercase
+
+			&:hover
+				text-decoration: underline
+
+		.search__form__section
+			float: right
+			padding-top: 8px
+			padding-right: 10px
+
+			input[type='text']
+				height: 16px
+				width: 180px
+				float: left
+				margin-right: 10px
+				border: 0
+				border-radius: 2px
+				background-image: linear-gradient(top,  #373737, #363636)
+				color: #fff
+				line-height: 16px
+
+			input[type='submit']
+				height: 18px
+				float: left
+				padding: 0 12px
+				color: #bdbdbd
+				cursor: pointer
+
+				background-image: linear-gradient(top,  #646464, #434343)
+				border: 0
+				border-radius: 2px
+				font:
+					size: 11px
+					style: italic
+				line-height: 18px
+
+	.shopping__cart__section
+		a
+			background-position: 8px 1px
+			color: #363636
+
+
+

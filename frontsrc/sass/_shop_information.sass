@@ -1,0 +1,135 @@
+.shop__information__section
+	.row
+		padding: 16px 0
+		border-bottom: 1px dotted #a1a1a1
+		clear: both
+
+		&.color
+			padding-bottom: 10px
+
+		dt
+			float: left
+			width: 80px
+			color: #222
+			font:
+				size: 12px
+				weight: bold
+			text:
+				align: left
+				transform: uppercase
+
+		dd
+			width: 160px
+			float: left
+			color: #555
+			font:
+				size: 12px
+
+			line-height: 14px
+
+			&.consist
+				text-transform: uppercase
+
+		&.tags
+			a
+				color: #959494
+				text-decoration: none
+
+				&:hover
+					color: #E60000
+					text-decoration: underline
+
+		&.description__section
+			padding-top: 0
+			color: #555
+			font:
+				size: 13px
+			line-height: 19px
+
+			p
+				margin-bottom: 20px
+
+			a
+				color: #555
+				font-weight: bold
+
+
+
+		&.size
+			padding: 0
+
+			dt
+				padding: 16px 0
+
+		.sizes__section
+			padding-top: 10px
+
+			li
+				margin-left: 4px
+				margin-bottom: 4px
+				padding: 0 7px
+				float: left
+				border: 1px solid #dadada
+				cursor: pointer
+				font-size: 11px
+				line-height: 23px
+				transition: all .4s linear
+
+				&:first-child
+					margin-left: 0
+
+				&:hover, &.current
+					border-color: #323232
+					color: #323232
+
+
+				&.current
+					cursor: default
+
+
+
+
+		.color
+			margin: -9px 0
+
+			li
+				height: 26px
+				width: 26px
+				margin-right: 4px
+				float: left
+				border: 1px solid #dadada
+				cursor: pointer
+
+				&.selected
+					border-color: #E60000
+
+
+				input
+					display: none
+
+		.price
+			padding-right: 16px
+			float: left
+			background: url($img__dir + 'ico-rub.png') no-repeat right top
+			background-size: 11px 15px
+			color: #434343
+			font-size: 20px
+
+			s
+				margin-right: 6px
+				color: #E60000
+				font-size: 18px
+
+	.only-online
+		margin-top: 8px
+
+		padding-top: 16px
+		padding-bottom: 14px
+
+		border: 2px solid red
+		color: #444
+		font-size: 14px
+		font-weight: bold
+		text-align: center
+		text-transform: uppercase
+

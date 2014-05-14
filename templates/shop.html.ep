@@ -1,7 +1,6 @@
 % layout 'shop';
 % title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||stash('tags')||''));
 
-<pre><%= stash("items_json") %></pre>
 %= include 'includes/left_bar'
 
 <div class='content__section post__page'>

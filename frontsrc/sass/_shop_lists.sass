@@ -1,0 +1,189 @@
+.shop__items__list
+	width: 680px
+	float: right
+
+	.ico__sale
+		left: auto
+		right: 3px
+		top: 3px
+
+	.list__section
+
+		li
+			position: relative
+			margin-right: 22px
+			margin-bottom: 24px
+			width: 153px
+			float: left
+			color: #666
+
+			&.hidden
+				display: none
+
+
+			&.active
+				.shop__information__section
+					display: block
+
+			&.not__active
+				opacity: .5
+
+
+			&:nth-of-type(4n)
+				margin-right: 0
+
+
+			&.scroll__helper
+				margin-bottom: 0
+				height: 16px
+				width: 100%
+				display: block
+				background: url($img__dir + 'spinner.gif') no-repeat center center
+				clear: both
+				visibility: visible
+
+
+			.preview__ico
+				position: absolute!important
+				top: 207px
+				right: 6px
+
+
+			a
+				color: #666
+				font:
+					size: 12px
+				text:
+					decoration: none
+					transform: uppercase
+
+
+				span
+					display: block
+
+					&.articol
+						color: #DE1500
+						clear: both
+
+
+					&.brand
+						clear: both
+
+
+					&.item__caption
+						padding: 2px 0
+						clear: both
+						font-weight: bold
+
+
+					&.price
+						padding-right: 10px
+						display: inline-block
+						background: url($img__dir + 'ico-rub-small.png') no-repeat right center
+						background-size: 7px 10px
+
+			.controls
+				position: relative
+				margin-bottom: 4px
+				cursor: pointer
+				z-index: 2
+
+				&.active
+					float: left
+					height: 16px
+					width: 24px
+					margin-top: 2px
+					background: url($img__dir + 'ico-visible.png') no-repeat
+					background-size: 24px 57px
+
+
+				&.delete
+					float: right
+					height: 20px
+					width: 20px
+					background: url($img__dir + 'ico-delete.png') no-repeat
+
+			.img__section
+				position: relative
+				height: 231px
+				width: 154px
+				margin-bottom: 4px
+
+				background-position: center center
+				background-repeat: no-repeat
+				background-size: cover
+				overflow: hidden
+
+			s
+				color: #E60000
+
+		.shop__information__section
+			position: absolute
+			top: -29px
+			width: 264px
+			display: none
+			background: #fff
+			box-shadow: 1px 1px 22px #000
+			border: 1px solid #818181
+			z-index: 3
+
+			&.right
+				left: 183px
+
+				&:after
+					left: -22px
+
+
+
+			&.left
+				left: -182px
+
+				&:after
+					right: -22px
+
+
+
+			.helper
+				padding: 14px 8px 14px
+				overflow: hidden
+
+				&:before
+					position: absolute
+					left: 0
+					top: 0
+					height: 270px
+					width: 264px
+					background: #fff
+					content: ''
+					z-index: 2
+
+
+
+			&:after
+				position: absolute
+				top: 196px
+				height: 44px
+				width: 44px
+				background: #fff
+				border: 1px solid #9a9a9a
+				box-shadow: 1px 1px 22px #000
+				content: ''
+				transform: rotate(45deg)
+				z-index: 1
+
+
+			.row
+				position: relative
+				z-index: 2
+
+
+			dt
+				width: 58px
+
+
+			dd
+				width: 158px
+
+
+
+
