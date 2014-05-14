@@ -1,0 +1,108 @@
+.carousel
+	position: relative
+
+	&.center
+		width: 680px
+		margin-bottom: 28px
+		padding-bottom: 18px
+
+		.carousel-wrapper
+			width: 680px
+			height: 330px
+		.carousel-item
+			width: 680px
+
+			a
+				height: 330px
+				width: 680px
+
+			img
+				width: 680px
+
+		.jcarousel-clip
+			width: 680px
+
+		.jcarousel-prev
+			position: absolute
+			left: 0
+			top: 0px
+			width: 100px
+			height: 330px
+			background: url($img__dir + 'carousel-arrows-spr.png') no-repeat left 138px
+			cursor: pointer
+
+			&:hover
+				background-position: 1px -213px
+
+		.jcarousel-prev-disabled
+			visibility: hidden!important
+
+		.jcarousel-next
+			position: absolute
+			right: 0
+			top: 0
+			width: 68px
+			height: 330px
+			background: url($img__dir + 'carousel-arrows-spr.png') no-repeat right 138px
+			cursor: pointer
+
+			&:hover
+				background-position: right -213px
+
+		.jcarousel-next-disabled
+			visibility: hidden!important
+		.pagination
+			position: absolute
+			bottom: - 10px
+			width: 100%
+			text-align: center
+
+			li
+				display: inline
+				margin-right: 5px
+
+				a
+					display: inline-block
+					height: 11px
+					width: 13px
+					background: url($img__dir + 'carousel-controls-spr.png') no-repeat
+					text-decoration: none
+
+					&.current
+						position: relative
+						top: 1px
+						background-position: right bottom
+
+
+	&.left
+		border: 10px solid #cbcbcc
+		box-sizing: border-box
+
+		.carousel-wrapper
+			width: 240px
+			height: 400px
+
+		img
+			width: 240px
+
+	&-wrapper
+		position: relative
+		overflow: hidden
+
+	&-items
+		width: 20000px
+		position: absolute
+
+	&-item
+		float: left
+
+		a
+			display: block
+
+	.jcarousel-clip
+		overflow: hidden
+
+	.jcarousel-prev
+		position: absolute
+		left: 0
+		top: 0px
