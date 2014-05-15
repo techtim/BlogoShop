@@ -1,6 +1,7 @@
 (function(angular) {
   return angular.module('controllers', ['imports']).controller('shopItems', function($scope, shopItems) {
-    return console.log(shopItems);
+    console.log($scope);
+    return $scope.shopItems = shopItems;
   });
 })(angular);
 

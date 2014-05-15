@@ -17,7 +17,7 @@
     		<meta property="og:image" content="<%== $host . config->{image_url} . join '/', $type, $alias, stash 'preview_image' %>" />
 		% }
 
-		% if (config->{domain_name} eq 'dev.xoxloveka.ru' ) {
+		% if (config->{domain_name} eq 'js.xoxloveka.ru' ) {
 		<link rel='stylesheet' type='text/css' href='/css/main.css?ver=3' media='all' />
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/main.minified.css' media='all' />

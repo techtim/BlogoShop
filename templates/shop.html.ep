@@ -1,8 +1,12 @@
 % layout 'shop';
 % title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||stash('tags')||''));
 
+<pre><%= stash("items_json") %></pre>
+
 <script>
+    % if (stash("items_json") ne '') {
     window.shopItems = <%= stash("items_json") %>;
+    % }
 </script>
 %= include 'includes/left_bar'
 
@@ -66,7 +70,6 @@
             </li>
         </ul>
 	</div>
-
 </div>
 % if (config->{domain_name} eq 'xoxloveka.ru' ) {
 <script>require(['app/equalHeight', 'app/itemsDescr'])</script>

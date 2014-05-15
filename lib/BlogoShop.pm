@@ -3,6 +3,7 @@ package BlogoShop;
 use Mojo::Base 'Mojolicious';
 
 use MongoDB;
+use MongoDB::OID;
 
 use JSON::XS;
 use Redis;
@@ -15,6 +16,11 @@ use BlogoShop::Qiwi;
 use BlogoShop::Logistics;
 use BlogoShop::Docs;
 use BlogoShop::Group;
+
+{
+	no warnings 'redefine'; 
+	*MongoDB::OID::TO_JSON = sub {$_[0]->value};
+}
 
 # This method will run once at server start
 sub startup {

@@ -95,14 +95,14 @@
           js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=188688837836508";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-like-box"
+                data-href="http://www.facebook.com/xoxloveka"
+                data-width="260"
+                data-height="288"
+                data-show-faces="true"
+                data-border-color="C1C1C1"
+                data-stream="false"
+                data-header="false">
+        </div>
 	% }
-    <div class="fb-like-box"
-    		data-href="http://www.facebook.com/xoxloveka"
-    		data-width="260"
-    		data-height="288"
-    		data-show-faces="true"
-    		data-border-color="C1C1C1"
-    		data-stream="false"
-    		data-header="false">
-    </div>
 </div>
