@@ -3,7 +3,8 @@ module.exports = function (grunt) {
     var paths = {
         public: './public/files/',
         assets: './frontsrc/',
-        vendors: './public/vendors/'
+        vendors: './public/vendors/',
+        test: './frontsrc/tests/'
     };
 
     function getSassConfig(target) {
@@ -39,10 +40,12 @@ module.exports = function (grunt) {
         paths.vendors + 'angular/angular.min.js',
         paths.vendors + 'modernizr/modernizr.js',
         paths.vendors + 'jcarousel/dist/jquery.jcarousel.js',
+        paths.vendors + 'underscore/underscore.js',
         paths.vendors + 'fotorama/fotorama.js'
     ];
 
     var app = [paths.assets + 'js/*.js'];
+    var unitCoffee = [paths.test+'unit/*.coffee', paths.test+'unit/*/**.coffee'];
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -73,6 +76,14 @@ module.exports = function (grunt) {
                     bare: true,
                     sourceMap: true
                 }
+            },
+            unit: {
+                options: {
+                    bare: true
+                },
+                files: {
+                    './frontsrc/tests/unit/unit.spec.js': unitCoffee
+                }
             }
         },
 
@@ -102,6 +113,11 @@ module.exports = function (grunt) {
             sass: {
                 files: [paths.assets + 'sass/*.sass', paths.assets + 'sass/*/*.sass'],
                 tasks: ['sass', 'autoprefixer']
+            },
+
+            unitCoffe: {
+                files: unitCoffee,
+                tasks: ['coffee:unit']
             }
         }
     });

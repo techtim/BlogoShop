@@ -1,8 +1,6 @@
 % layout 'shop';
 % title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||stash('tags')||''));
 
-<pre><%= stash("items_json") %></pre>
-
 <script>
     % if (stash("items_json") ne '') {
     window.shopItems = <%= stash("items_json") %>;
@@ -63,9 +61,13 @@
 		</div>
 
         <ul class='list__section clearfloat' ng-controller="shopItems">
-            <li ng-repeat="item in shopItems">
-                <a ng-href="">
-                    <span class='brand'>{{item.brand_name}}</span>
+            <li ng-repeat="item in shopItems track by item.timestamp">
+                <a ng-href="{{item.link}}">
+                    <span class="img__section"
+                        ng-style="{'background-image': 'url('+item.preview+')'}"
+                    ></span>
+                    <span class="brand">{{item.brand_name}}</span>
+                    <span class="item__caption">{{item.name}}</span>
                 </a>
             </li>
         </ul>

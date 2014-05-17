@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<%= jquery_ajax_csrf_protection %>
 		<title><%= title %></title>
-		<link rel='stylesheet' type='text/css' href='/css/style.css' media='all' />
+		<link rel='stylesheet' type='text/css' href='/css/main.css' media='all' />
     	<link rel='stylesheet' type='text/css' href='/css/admin.css' media='all' />
     	
 		<script data-main='/j/config' src='/j/require.js'></script>

@@ -19,6 +19,9 @@
     "fotorama": "~4.5.1",
     "modernizr": "~2.8.1",
     "jcarousel": "~0.3.1",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "underscore": "~1.6.0",
+    "angular-mocks": "~1.2.15",
+    "jasmine-jquery": "1.7"
   }
 }

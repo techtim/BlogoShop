@@ -34,6 +34,7 @@
 <script>
     window.xoxlovka = window.xoxloka || {};
     window.xoxlovka.config = {
+        domain: '<%= config->{domain_name} %>',
         previewsUrl: {
            item: '<%== config->{nginx_res_item_prev}.config->{image_url} %>'
         }
