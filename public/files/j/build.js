@@ -4401,7 +4401,11 @@ window.Modernizr = (function( window, document, undefined ) {
 
 (function(angular) {
   return angular.module('controllers', ['imports']).controller('shopItems', function($scope, shopItems) {
-    return $scope.shopItems = shopItems.list();
+    $scope.shopItems = shopItems.list();
+    $scope.sortHelper = function(field) {
+      return $scope.sortBy = field;
+    };
+    return $scope.sortBy = '';
   });
 })(angular);
 
@@ -4519,6 +4523,55 @@ window.Modernizr = (function( window, document, undefined ) {
         });
       }
     };
+  }).directive('diCheckLast', function() {
+    return {
+      link: function(scope, element) {
+        if (scope.$last) {
+          return element.ready(function() {
+            var items, itemsHeight;
+            items = element.prevAll(element.nodeName);
+            itemsHeight = [];
+            _.each(items, function(item) {
+              return itemsHeight.push($(item).height());
+            });
+            return $(items).height(_.max(itemsHeight));
+          });
+        }
+      }
+    };
+  }).directive('diPrice', function() {
+    return {
+      require: 'ngModel',
+      restrict: 'E',
+      scope: true,
+      link: function(scope, ele, attrs, ctrl) {
+        var setPrice, waitForModel;
+        waitForModel = scope.$watch(function() {
+          return ctrl.$viewValue;
+        }, function(modelValue) {
+          setPrice(modelValue);
+          return waitForModel();
+        }, true);
+        return setPrice = function(model) {
+          var percent;
+          if (model.saleIsActive) {
+            ctrl.$modelValue = _.extend(model, {
+              oldPrice: model.price
+            });
+            if (model.sale.sale_value.indexOf('%') !== -1) {
+              percent = parseInt(model.sale.sale_value, 10);
+              return ctrl.$modelValue = _.extend(model, {
+                price: model.price * percent / 100
+              });
+            } else {
+              return ctrl.$modelValue = _.extend(model, {
+                price: model.sale.sale_value
+              });
+            }
+          }
+        };
+      }
+    };
   });
 })(angular);
 
@@ -4540,14 +4593,14 @@ window.Modernizr = (function( window, document, undefined ) {
     };
   }).service('shopItems', function(config, imports, execTimeStamp) {
     var shopItems;
-    shopItems = imports.shopItems;
+    shopItems = _.toArray(imports.shopItems);
     this.list = function() {
       var previewsUrl;
       previewsUrl = config.previewsUrl.item;
       _.each(shopItems, function(item) {
         var now, saleIsActive;
         now = Math.round(new Date() / 1000);
-        if (item.sale.sale_active && item.sale.sale_start_stamp <= now && item.sale.sale_end_stamp >= now) {
+        if (item.sale.sale_active === '1' && item.sale.sale_start_stamp <= now && item.sale.sale_end_stamp >= now) {
           saleIsActive = true;
         }
         return _.extend(item, {

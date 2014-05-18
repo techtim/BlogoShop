@@ -94,6 +94,44 @@ do (angular) ->
           ele.find('.jcarousel-next').jcarouselControl {} =
             target: '+=1'
 
+  # directive finds all DOM nodes which should have equal height and sets it
+  .directive 'diCheckLast', ->
+    link: (scope, element) ->
+      if (scope.$last)
+        element.ready ->
+          items = element.prevAll element.nodeName
+          itemsHeight = []
+
+          _.each items, (item) ->
+            itemsHeight.push $(item).height()
+
+          $(items).height _.max(itemsHeight)
+
+
+
+
+  .directive 'diPrice', ->
+    require: 'ngModel'
+    restrict: 'E'
+    scope: true
+    link: (scope, ele, attrs, ctrl) ->
+
+      waitForModel = scope.$watch () ->
+        ctrl.$viewValue
+      , (modelValue) ->
+        setPrice(modelValue)
+        waitForModel()
+      , true
+
+      setPrice = (model) ->
+        if model.saleIsActive
+          ctrl.$modelValue = _.extend model, oldPrice: model.price
+
+          if (model.sale.sale_value.indexOf('%') != -1)
+            percent =  parseInt model.sale.sale_value, 10
+            ctrl.$modelValue = _.extend model, price: model.price*percent/100
+          else
+            ctrl.$modelValue = _.extend model, price: model.sale.sale_value
 
 
 

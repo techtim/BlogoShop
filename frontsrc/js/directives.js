@@ -110,6 +110,55 @@
         });
       }
     };
+  }).directive('diCheckLast', function() {
+    return {
+      link: function(scope, element) {
+        if (scope.$last) {
+          return element.ready(function() {
+            var items, itemsHeight;
+            items = element.prevAll(element.nodeName);
+            itemsHeight = [];
+            _.each(items, function(item) {
+              return itemsHeight.push($(item).height());
+            });
+            return $(items).height(_.max(itemsHeight));
+          });
+        }
+      }
+    };
+  }).directive('diPrice', function() {
+    return {
+      require: 'ngModel',
+      restrict: 'E',
+      scope: true,
+      link: function(scope, ele, attrs, ctrl) {
+        var setPrice, waitForModel;
+        waitForModel = scope.$watch(function() {
+          return ctrl.$viewValue;
+        }, function(modelValue) {
+          setPrice(modelValue);
+          return waitForModel();
+        }, true);
+        return setPrice = function(model) {
+          var percent;
+          if (model.saleIsActive) {
+            ctrl.$modelValue = _.extend(model, {
+              oldPrice: model.price
+            });
+            if (model.sale.sale_value.indexOf('%') !== -1) {
+              percent = parseInt(model.sale.sale_value, 10);
+              return ctrl.$modelValue = _.extend(model, {
+                price: model.price * percent / 100
+              });
+            } else {
+              return ctrl.$modelValue = _.extend(model, {
+                price: model.sale.sale_value
+              });
+            }
+          }
+        };
+      }
+    };
   });
 })(angular);
 

@@ -45,29 +45,54 @@
         </di-carousel>
     % }
 
-	<div class='shop__items__list'>
+	<div class='shop__items__list' ng-controller="shopItems">
 		<div class='fiters__section clearfloat'>
+
 			<ul class='price__filter'>
 				<li class='title'>цена:</li>
-				<li><a href='?price=dsc'>&darr;</a></li>
-				<li><a href='?price=asc'>&uarr;</a></li>
+				<li><a href='#'
+				    ng-click="sortHelper('price')"
+				    ng-class="{'current': sortBy == 'price'}"
+				    di-prevent-default>&darr;</a></li>
+				<li><a href='#'
+				    ng-click="sortHelper('-price')"
+				    ng-class="{'current': sortBy == '-price'}"
+				    di-prevent-default>&uarr;</a></li>
 			</ul>
 
 			<ul class='new__filter'>
 				<li class='title'>новинки:</li>
-				<li><a href='?time=dsc'>&darr;</a></li>
-				<li><a href='?time=asc'>&uarr;</a></li>
+				<li><a href='#'
+				    ng-click="sortHelper('timestamp')"
+				    ng-class="{'current': sortBy == 'timestamp'}"
+				    di-prevent-default>&darr;</a></li>
+				<li><a href='#'
+				    ng-click="sortHelper('-timestamp')"
+				    ng-class="{'current': sortBy == '-timestamp'}"
+				    di-prevent-default>&uarr;</a></li>
 			</ul>
 		</div>
 
-        <ul class='list__section clearfloat' ng-controller="shopItems">
-            <li ng-repeat="item in shopItems track by item.timestamp">
+        <ul class='list__section clearfloat'>
+            <li ng-repeat="item in shopItems | orderBy:sortBy"
+                ng-class="{'sale': item.saleIsActive}"
+                di-check-last>
                 <a ng-href="{{item.link}}">
                     <span class="img__section"
                         ng-style="{'background-image': 'url('+item.preview+')'}"
-                    ></span>
+                    >
+                        <span class='ico__sale' ng-if="item.saleIsActive"></span>
+                    </span>
                     <span class="brand">{{item.brand_name}}</span>
                     <span class="item__caption">{{item.name}}</span>
+                    <di-price class="price" ng-model="item">
+                        <span ng-if="item.oldPrice">
+                            <s>{{item.oldPrice}}</s>
+                            {{item.price}}
+                        </span>
+                        <span ng-if="!item.oldPrice">{{item.price}}</span>
+                        <i class="fa fa-rub"></i>
+                    </di-price>
                 </a>
             </li>
         </ul>

@@ -5,14 +5,14 @@
     };
   }).service('shopItems', function(config, imports, execTimeStamp) {
     var shopItems;
-    shopItems = imports.shopItems;
+    shopItems = _.toArray(imports.shopItems);
     this.list = function() {
       var previewsUrl;
       previewsUrl = config.previewsUrl.item;
       _.each(shopItems, function(item) {
         var now, saleIsActive;
         now = Math.round(new Date() / 1000);
-        if (item.sale.sale_active && item.sale.sale_start_stamp <= now && item.sale.sale_end_stamp >= now) {
+        if (item.sale.sale_active === '1' && item.sale.sale_start_stamp <= now && item.sale.sale_end_stamp >= now) {
           saleIsActive = true;
         }
         return _.extend(item, {
