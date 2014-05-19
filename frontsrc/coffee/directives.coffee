@@ -107,9 +107,15 @@ do (angular) ->
 
           $(items).height _.max(itemsHeight)
 
+  .directive 'diDropdown',  ->
+    controller: ($scope) ->
+      $scope.isOpened = false
 
+      $scope.toggleDropDown = ->
+        $scope.isOpened = !$scope.isOpened
+    link: (scope) ->
 
-
+  # directive defines sales and calculates new price
   .directive 'diPrice', ->
     require: 'ngModel'
     restrict: 'E'

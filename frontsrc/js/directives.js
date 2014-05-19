@@ -126,6 +126,16 @@
         }
       }
     };
+  }).directive('diDropdown', function() {
+    return {
+      controller: function($scope) {
+        $scope.isOpened = false;
+        return $scope.toggleDropDown = function() {
+          return $scope.isOpened = !$scope.isOpened;
+        };
+      },
+      link: function(scope) {}
+    };
   }).directive('diPrice', function() {
     return {
       require: 'ngModel',

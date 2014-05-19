@@ -4,7 +4,6 @@ do (angular) ->
       return (id)->
         parseInt(id.substr(0,8), 16) * 1000
 
-
     .service 'shopItems', (config, imports, execTimeStamp) ->
       shopItems = _.toArray imports.shopItems
 

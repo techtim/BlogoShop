@@ -1843,6 +1843,11 @@ strong, b {
   width: 680px;
   float: right;
 }
+.shop__items__list .tools {
+  padding: 9px 0;
+  border-top: 1px dotted #a1a1a1;
+  border-bottom: 1px dotted #a1a1a1;
+}
 .shop__items__list .ico__sale {
   left: auto;
   right: 3px;
@@ -2627,6 +2632,88 @@ strong, b {
 }
 .cart__items__list__section .finish__cart.hidden {
   display: none;
+}
+
+.filters {
+  position: relative;
+  float: left;
+}
+.filters__caption {
+  position: relative;
+  padding: 6px 0 6px 8px;
+  height: 23px;
+  width: 104px;
+  color: #434343;
+  cursor: pointer;
+  font-size: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #c3c3c3;
+  background-color: rgba(67, 67, 67, 0.1);
+  text-transform: uppercase;
+  -webkit-transition: all 0.5s linear;
+          transition: all 0.5s linear;
+}
+.filters__caption:after {
+  position: absolute;
+  top: 9px;
+  right: 4px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #434343;
+  content: "";
+}
+.filters__caption.is-opened {
+  width: 154px;
+}
+.filters__caption.is-opened:after {
+  border: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #434343;
+}
+.filters__list {
+  position: absolute;
+  top: 22px;
+  width: 104px;
+  display: none;
+  background: white;
+  border: 1px solid #c3c3c3;
+  border-bottom: 0;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  z-index: 1;
+}
+.filters__list.is-opened {
+  width: 154px;
+  display: block;
+  -webkit-transition: all 0.5s linear;
+          transition: all 0.5s linear;
+}
+.filters__type {
+  padding: 6px 0 6px;
+  height: 23px;
+  border-bottom: 1px solid #c3c3c3;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #434343;
+  cursor: pointer;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.filters__type.is-current {
+  font-weight: bold;
+}
+.filters__type.is-current .fa {
+  color: #434343;
+}
+.filters__type .fa {
+  margin-left: 9px;
+  margin-right: 9px;
+  color: silver;
 }
 
 .fiters__section {

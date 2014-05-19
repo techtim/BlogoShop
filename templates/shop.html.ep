@@ -46,32 +46,34 @@
     % }
 
 	<div class='shop__items__list' ng-controller="shopItems">
-		<div class='fiters__section clearfloat'>
 
-			<ul class='price__filter'>
-				<li class='title'>цена:</li>
-				<li><a href='#'
-				    ng-click="sortHelper('price')"
-				    ng-class="{'current': sortBy == 'price'}"
-				    di-prevent-default>&darr;</a></li>
-				<li><a href='#'
-				    ng-click="sortHelper('-price')"
-				    ng-class="{'current': sortBy == '-price'}"
-				    di-prevent-default>&uarr;</a></li>
-			</ul>
+	    <div class="tools clearfloat">
+            <div class="filters" di-dropdown>
 
-			<ul class='new__filter'>
-				<li class='title'>новинки:</li>
-				<li><a href='#'
-				    ng-click="sortHelper('timestamp')"
-				    ng-class="{'current': sortBy == 'timestamp'}"
-				    di-prevent-default>&darr;</a></li>
-				<li><a href='#'
-				    ng-click="sortHelper('-timestamp')"
-				    ng-class="{'current': sortBy == '-timestamp'}"
-				    di-prevent-default>&uarr;</a></li>
-			</ul>
-		</div>
+                <h5 class="filters__caption"
+                    ng-class="{'is-opened': isOpened}"
+                    ng-click="toggleDropDown()">Сортировать</h5>
+
+                <ul class="filters__list" ng-class="{'is-opened': isOpened}">
+                    <li class="filters__type"
+                        ng-class="{'is-current': sortBy == 'timestamp'}"
+                        ng-click="sortHelper('timestamp'); toggleDropDown();">
+                        <i class="fa fa-circle"></i>Новые поступления
+                    </li>
+                    <li class="filters__type"
+                        ng-class="{'is-current': sortBy == 'price'}"
+                        ng-click="sortHelper('price'); toggleDropDown();">
+                        <i class="fa fa-circle"></i>Цена: Min/Max
+                    </li>
+                    <li class="filters__type"
+                        ng-class="{'is-current': sortBy == '-price'}"
+                        ng-click="sortHelper('-price'); toggleDropDown();">
+                        <i class="fa fa-circle"></i>Цена: Max/Min
+                    </li>
+                </ul>
+
+            </div>
+	    </div>
 
         <ul class='list__section clearfloat'>
             <li ng-repeat="item in shopItems | orderBy:sortBy"

@@ -1,4 +1,0 @@
-#! /usr/bin/env sh
-
-node ./r.js -o ./config.js
-csso ../css/style.concat.css ../css/style.minified.css
