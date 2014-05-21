@@ -225,6 +225,68 @@ l.addOption(e.value);d.on("$destroy",function(){l.removeOption(e.value)})}}}}],w
 !window.angular.$$csp()&&window.angular.element(document).find("head").prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}</style>');
 //# sourceMappingURL=angular.min.js.map
 
+"use strict";
+
+var paginationModule = angular.module('simplePagination', []);
+
+paginationModule.factory('Pagination', function() {
+
+  var pagination = {};
+
+  pagination.getNew = function(perPage) {
+
+    perPage = perPage === undefined ? 5 : perPage;
+
+    var paginator = {
+      numPages: 1,
+      perPage: perPage,
+      page: 0
+    };
+
+    paginator.prevPage = function() {
+      if (paginator.page > 0) {
+        paginator.page -= 1;
+      }
+    };
+
+    paginator.nextPage = function() {
+      if (paginator.page < paginator.numPages - 1) {
+        paginator.page += 1;
+      }
+    };
+
+    paginator.toPageId = function(id) {
+      if (id >= 0 && id <= paginator.numPages - 1) {
+        paginator.page = id;
+      }
+    };
+
+    return paginator;
+  };
+
+  return pagination;
+});
+
+paginationModule.filter('startFrom', function() {
+  return function(input, start) {
+    if (input === undefined) {
+      return input;
+    } else {
+      return input.slice(+start);
+    }
+  };
+});
+
+paginationModule.filter('range', function() {
+  return function(input, total) {
+    total = parseInt(total);
+    for (var i = 0; i < total; i++) {
+      input.push(i);
+    }
+    return input;
+  };
+});
+
 /*!
  * Modernizr v2.8.1
  * www.modernizr.com
@@ -4400,8 +4462,10 @@ window.Modernizr = (function( window, document, undefined ) {
 //# sourceMappingURL=app.js.map
 
 (function(angular) {
-  return angular.module('controllers', ['imports']).controller('shopItems', function($scope, shopItems) {
+  return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($scope, shopItems, Pagination) {
     $scope.shopItems = shopItems.list();
+    $scope.pagination = Pagination.getNew();
+    $scope.pagination.numPages = Math.ceil($scope.shopItems.length / $scope.pagination.perPage);
     $scope.sortHelper = function(field) {
       return $scope.sortBy = field;
     };
@@ -4539,7 +4603,7 @@ window.Modernizr = (function( window, document, undefined ) {
         }
       }
     };
-  }).directive('diDropdown', function() {
+  }).directive('diDropdown', function($document) {
     return {
       controller: function($scope) {
         $scope.isOpened = false;
@@ -4547,7 +4611,11 @@ window.Modernizr = (function( window, document, undefined ) {
           return $scope.isOpened = !$scope.isOpened;
         };
       },
-      link: function(scope) {}
+      link: function(scope) {
+        return $document.click(function() {
+          return console.log('close menu mthfckr!');
+        });
+      }
     };
   }).directive('diPrice', function() {
     return {

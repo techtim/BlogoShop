@@ -38,6 +38,7 @@ module.exports = function (grunt) {
     var libsDeps = [
         paths.vendors + 'jquery/dist/jquery.min.js', // jquery should be the first
         paths.vendors + 'angular/angular.min.js',
+        paths.vendors + 'ng-simplePagination/simplePagination.js',
         paths.vendors + 'modernizr/modernizr.js',
         paths.vendors + 'jcarousel/dist/jquery.jcarousel.js',
         paths.vendors + 'underscore/underscore.js',

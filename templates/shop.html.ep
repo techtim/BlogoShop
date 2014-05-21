@@ -71,12 +71,27 @@
                         <i class="fa fa-circle"></i>Цена: Max/Min
                     </li>
                 </ul>
+            </div>
 
+            <div class="shop-navigation">
+                <button class="shop-navigation__button"
+                    ng-click="pagination.prevPage()"
+                    ng-disabled="pagination.page == 0"></button>
+
+                <span class="shop-navigation__page-counter">
+                    {{pagination.page+1}} из {{pagination.numPages}}
+                </span>
+                <button class="shop-navigation__button shop-navigation__button--next"
+                    ng-click="pagination.nextPage()"
+                    ng-disabled="pagination.page + 1 >= pagination.numPages"></button>
             </div>
 	    </div>
 
         <ul class='list__section clearfloat'>
-            <li ng-repeat="item in shopItems | orderBy:sortBy"
+            <li ng-repeat="item in shopItems  |
+                orderBy:sortBy |
+                startFrom: pagination.page * pagination.perPage |
+                limitTo: pagination.perPage""
                 ng-class="{'sale': item.saleIsActive}"
                 di-check-last>
                 <a ng-href="{{item.link}}">

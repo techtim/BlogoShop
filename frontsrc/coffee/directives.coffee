@@ -107,13 +107,15 @@ do (angular) ->
 
           $(items).height _.max(itemsHeight)
 
-  .directive 'diDropdown',  ->
+  .directive 'diDropdown',  ($document) ->
     controller: ($scope) ->
       $scope.isOpened = false
 
       $scope.toggleDropDown = ->
         $scope.isOpened = !$scope.isOpened
     link: (scope) ->
+      $document.click ->
+        console.log 'close menu mthfckr!'
 
   # directive defines sales and calculates new price
   .directive 'diPrice', ->

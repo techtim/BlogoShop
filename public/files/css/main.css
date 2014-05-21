@@ -2027,6 +2027,54 @@ strong, b {
   font-size: 10px;
 }
 
+.shop-navigation {
+  float: right;
+}
+.shop-navigation__button {
+  position: relative;
+  width: 23px;
+  height: 23px;
+  background: white;
+  border: 1px solid #c3c3c3;
+  cursor: pointer;
+}
+.shop-navigation__button[disabled] {
+  cursor: default;
+  opacity: 0.8;
+}
+.shop-navigation__button:hover:not(:disabled) {
+  background: #434343;
+}
+.shop-navigation__button:hover:not(:disabled):after {
+  border-right-color: white;
+}
+.shop-navigation__button:after {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  border-right: 5px solid #434343;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  content: "";
+}
+.shop-navigation__button--next:after {
+  border: 0;
+  border-left: 5px solid #434343;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.shop-navigation__button--next:hover:not(:disabled):after {
+  border-left-color: white;
+}
+.shop-navigation__page-counter {
+  position: relative;
+  top: -3px;
+  margin: 0 8px;
+  color: #434343;
+  font-weight: bold;
+  font-size: 10px;
+}
+
 .cart__items__list__section {
   position: relative;
   overflow: hidden;

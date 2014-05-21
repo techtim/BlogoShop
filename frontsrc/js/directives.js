@@ -126,7 +126,7 @@
         }
       }
     };
-  }).directive('diDropdown', function() {
+  }).directive('diDropdown', function($document) {
     return {
       controller: function($scope) {
         $scope.isOpened = false;
@@ -134,7 +134,11 @@
           return $scope.isOpened = !$scope.isOpened;
         };
       },
-      link: function(scope) {}
+      link: function(scope) {
+        return $document.click(function() {
+          return console.log('close menu mthfckr!');
+        });
+      }
     };
   }).directive('diPrice', function() {
     return {

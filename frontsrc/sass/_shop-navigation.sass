@@ -1,0 +1,58 @@
+$shop-navigation-button-height: 23px
+
+.shop-navigation
+	float: right
+
+	&__button
+		position: relative
+
+		width: $shop-navigation-button-height
+		height: $shop-navigation-button-height
+
+		background: #ffffff
+		border: 1px solid $filters-border-color
+		cursor: pointer
+
+		&[disabled]
+			cursor: default
+			opacity: .8
+
+		&:hover:not(:disabled)
+			background: $filters-text-color
+			&:after
+				border-right-color: #fff
+
+
+		&:after
+			position: absolute
+			left: 8px
+			top: 6px
+
+			border-right: $filters-triangle-size solid $filters-text-color
+			border-top: $filters-triangle-size solid transparent
+			border-bottom: $filters-triangle-size solid transparent
+			content: ''
+
+
+		&--next
+			&:after
+				border: 0
+				border-left: $filters-triangle-size solid $filters-text-color
+				border-top: $filters-triangle-size solid transparent
+				border-bottom: $filters-triangle-size solid transparent
+
+			&:hover:not(:disabled):after
+				border-left-color: #fff
+
+
+
+
+	&__page-counter
+		position: relative
+		top: -3px
+
+		margin: 0 8px
+
+		color: $filters-text-color
+		font-weight: bold
+		font-size: 10px
