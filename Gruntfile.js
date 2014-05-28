@@ -9,6 +9,9 @@ module.exports = function (grunt) {
 
     function getSassConfig(target) {
         var conf = {
+            options: {
+                spawn: false
+            },
             files: [{
                 expand: true,
                 cwd: 'frontsrc/sass',
@@ -75,12 +78,14 @@ module.exports = function (grunt) {
                 ext: '.js',
                 options: {
                     bare: true,
-                    sourceMap: true
+                    sourceMap: true,
+                    spawn: false
                 }
             },
             unit: {
                 options: {
-                    bare: true
+                    bare: true,
+                    spawn: false
                 },
                 files: {
                     './frontsrc/tests/unit/unit.spec.js': unitCoffee
@@ -92,6 +97,18 @@ module.exports = function (grunt) {
             dist: {
                 src: [].concat(libsDeps, app),
                 dest: paths.public + 'j/build.js'
+            }
+        },
+
+        csso: {
+            compress: {
+                options: {
+                    report: 'gzip',
+                    spawn: false
+                },
+                files: {
+                    './public/files/css/main.minified.css': [ paths.public + 'css/main.minified.css']
+                }
             }
         },
 
@@ -113,7 +130,7 @@ module.exports = function (grunt) {
 
             sass: {
                 files: [paths.assets + 'sass/*.sass', paths.assets + 'sass/*/*.sass'],
-                tasks: ['sass', 'autoprefixer']
+                tasks: ['sass', 'autoprefixer', 'csso']
             },
 
             unitCoffe: {
@@ -124,6 +141,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-csso');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
