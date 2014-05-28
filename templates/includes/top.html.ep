@@ -36,7 +36,7 @@
 
 </div>
 
-<div class="top__gray__strip" di-sticky-header>
+<div class="top__gray__strip" di-sticky-header ng-class="{'active': show}">
 	<div class="wrap">
 		<a href="/" class="logo" title='магазин Хохловка'></a>
 

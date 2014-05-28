@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
@@ -20,15 +19,12 @@
 		<meta property="fb:admins" content="100000785354670" />
 		<title><%= title %></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/i/favicon.ico" />
+
 		% if (config->{domain_name} eq 'js.xoxloveka.ru' ) {
 		<link rel='stylesheet' type='text/css' href='/css/main.css?ver=2' media='all' />
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/main.minified.css' media='all' />
         % }
-        % if (config->{domain_name} eq 'xoxloveka.ru' ) {
-        <script data-main='/j/config' src='/j/require.js'></script>
-        <script>requirejs(['app/global'])</script>
-        %}
     </head>
 	<body ng-app="xoxlovka">
         <div class='wrap clearfloat'>

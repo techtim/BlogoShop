@@ -129,14 +129,3 @@
 		</ul>
 	</div>
 % }
-
-</div>
-
-<script>
-	requirejs(['app/equalHeight', 'app/itemsDescr']);
-	requirejs(['app/shop'], function(shop_item){
-		shop_item.alias = <%== $json_params_alias %>;
-		shop_item.subitems = <%== $json_subitems %>;
-		shop_item.init();
-	})
-</script>

@@ -16,6 +16,7 @@
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-sass": "^0.7.3",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-csso": "^0.6.1",
     "grunt-ngmin": "0.0.3",
     "gulp-sass": "~0.7.0",
     "jasmine-reporters": "^0.4.0",

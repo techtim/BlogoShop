@@ -1,27 +1,16 @@
 (function(angular) {
   return angular.module('directives', []).directive('diStickyHeader', function($window) {
     return {
-      link: function(scope, ele) {
+      scope: true,
+      link: function(scope) {
         var threshold;
+        scope.show = false;
         threshold = $('.header__section').height() + $('.navigation__section').height();
         return $($window).on('scroll', function() {
-          if ($($window).scrollTop() >= threshold) {
-            return ele.addClass('active');
-          } else {
-            return ele.removeClass('active');
-          }
-        });
-      }
-    };
-  }).directive('diPreventDefault', function() {
-    return {
-      priority: 1001,
-      link: function(scope, elem, attrs) {
-        if (attrs.ngClick || attrs.href === '' || attrs.href === '#') {
-          return elem.on('click', function(e) {
-            return e.preventDefault();
+          return scope.$apply(function() {
+            return scope.show = $($window).scrollTop() >= threshold;
           });
-        }
+        });
       }
     };
   }).directive('diSidebarMenu', function() {
@@ -44,7 +33,6 @@
     transitions = {};
     if (Modernizr.csstransitions) {
       transitions = {
-        transforms: Modernizr.csstransforms,
         transforms3d: Modernizr.csstransforms3d
       };
     } else {
@@ -110,34 +98,74 @@
         });
       }
     };
-  }).directive('diCheckLast', function() {
+  }).directive('diCheckLast', function($timeout) {
     return {
       link: function(scope, element) {
         if (scope.$last) {
           return element.ready(function() {
             var items, itemsHeight;
             items = element.prevAll(element.nodeName);
-            itemsHeight = [];
-            _.each(items, function(item) {
-              return itemsHeight.push($(item).height());
+            itemsHeight = _.reduce(items, function(memo, item) {
+              memo.push($(item).outerHeight(true));
+              return memo;
+            }, []);
+            return $timeout(function() {
+              return $(items).height(_.max(itemsHeight));
             });
-            return $(items).height(_.max(itemsHeight));
           });
         }
       }
     };
-  }).directive('diDropdown', function($document) {
+  }).directive('diDropdown', function() {
     return {
       controller: function($scope) {
         $scope.isOpened = false;
         return $scope.toggleDropDown = function() {
           return $scope.isOpened = !$scope.isOpened;
         };
-      },
-      link: function(scope) {
-        return $document.click(function() {
-          return console.log('close menu mthfckr!');
+      }
+    };
+  }).directive('diOverlay', function($rootScope, $document) {
+    return {
+      scope: true,
+      link: function(scope, ele) {
+        var closeAndEmit;
+        scope.show = false;
+        $rootScope.$on('overlay.show', function() {
+          scope.show = true;
+          return ele.height($document.height());
         });
+        $rootScope.$on('overlay.hide', function() {
+          return scope.show = false;
+        });
+        ele.on('click', function() {
+          return closeAndEmit();
+        });
+        $document.on('keyup', function(e) {
+          if (e.keyCode === 27) {
+            return closeAndEmit();
+          }
+        });
+        return closeAndEmit = function() {
+          if (scope.show) {
+            return scope.$apply(function() {
+              $rootScope.$emit('overlay.closed');
+              return scope.show = false;
+            });
+          }
+        };
+      }
+    };
+  }).directive('diPreventDefault', function() {
+    return {
+      priority: 1001,
+      link: function(scope, elem, attrs) {
+        if (attrs.ngClick) {
+          elem.on('click', function(e) {
+            console.log('click');
+            e.preventDefault();
+          });
+        }
       }
     };
   }).directive('diPrice', function() {
@@ -172,6 +200,42 @@
           }
         };
       }
+    };
+  }).directive('diShopDescription', function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      controller: function($scope) {
+        return $scope.toggle = function() {
+          return $scope.opened = !$scope.opened;
+        };
+      }
+    };
+  }).directive('diShopItemPreview', function($document, $rootScope) {
+    var calculateBlockPosition;
+    calculateBlockPosition = function(block) {
+      var documentWidth, leftSide, rightSide, width;
+      documentWidth = $($document).width();
+      width = block.width();
+      leftSide = block.offset().left;
+      rightSide = leftSide + width * 2;
+      console.log(rightSide, leftSide, width, documentWidth);
+      return rightSide > documentWidth;
+    };
+    return function(scope, ele) {
+      scope.showed = false;
+      scope.toggleDescription = function() {
+        var emitEvent;
+        emitEvent = "overlay." + (scope.showed ? 'hide' : 'show');
+        $rootScope.$emit(emitEvent);
+        scope.showed = !scope.showed;
+        if (scope.showed) {
+          return scope["class"] = calculateBlockPosition(ele) ? 'left' : 'right';
+        }
+      };
+      return $rootScope.$on('overlay.closed', function() {
+        return scope.showed = false;
+      });
     };
   });
 })(angular);

@@ -29,15 +29,17 @@
         </ul>
     </div>
 </div>
-<div id='overlay'></div>
+
+<div id='overlay' di-overlay ng-class="{'is-active': show}"></div>
 
 <script>
     window.xoxlovka = window.xoxloka || {};
     window.xoxlovka.config = {
         domain: '<%= config->{domain_name} %>',
+        itemsOnPage: 24,
         previewsUrl: {
            item: '<%== config->{nginx_res_item_prev}.config->{image_url} %>'
         }
     }
 </script>
-<script src="/j/build.js"></script>
+<script src="/j/build.js" async></script>

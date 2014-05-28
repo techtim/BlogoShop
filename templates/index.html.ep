@@ -6,7 +6,7 @@
 <div class='content__section'>
      % if (@$banners > 0) {
         % my $select_num = 1;
-        <di-carousel position="center" pagination="true">
+        <di-carousel position="center" pagination="true" class="is-hidden">
             % foreach (@$banners) {
             % next if !$_->{link};
             <li class="carousel-item">
