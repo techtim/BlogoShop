@@ -103,8 +103,12 @@ sub startup {
 	my $utils = BlogoShop::Utils->new();
 	$self->helper('utils' => sub {return $utils});
 	
-	my $json = JSON::XS->new();
-	$self->helper('json' => sub {return $json});
+	(ref $self)->attr(
+		json => sub {
+			JSON::XS->new->allow_blessed->convert_blessed;
+		}
+	);
+	$self->helper(json => sub { shift->app->json });
 
 
 	$self->plugin(mail => {

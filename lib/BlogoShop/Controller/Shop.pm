@@ -90,7 +90,7 @@ sub list {
 		$self->stash( 'is_brand' => 1 ) if $self->stash('brand');
 		return $self->render(
 			items 	=> $items,
-			items_json => $self->render(json => $items, partial => 1),
+			items_json => $self->json->encode($items),
 			%{$self->check_cart()},
 			%$filter,
 			cur_category => $filter->{category} ? ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {}) : {},
