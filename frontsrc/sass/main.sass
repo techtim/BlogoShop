@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&subset=latin,cyrillic)
 @import url(http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css)
 
+@import "angular"
 @import "vars"
 @import "mixins"
 
@@ -10,10 +11,6 @@
 body
 	background: url($img__dir +  'body-bg.png') repeat-x left top
 	font: 12px Arial, sans-serif
-	&.overlayed
-
-		#overlay
-			display: block
 
 .wrap
 	width: 980px
@@ -157,6 +154,9 @@ strong, b
 	opacity: .5
 	z-index: 2
 
+	&.is-active
+		display: block
+
 .submit__form, .checkout__button
 	padding-left: 61px
 
@@ -209,6 +209,7 @@ strong, b
 @import "shop_lists"
 @import "shop_description"
 @import "shop-navigation"
+@import "shop-item-preview"
 @import "cart_list"
 
 @import "filters"

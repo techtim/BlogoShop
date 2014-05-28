@@ -1,7 +1,8 @@
 .filters
 	position: relative
-
 	float: left
+
+	width: $filters-block-width
 
 	&__caption
 		position: relative
@@ -30,7 +31,7 @@
 			content: ''
 
 		&.is-opened
-			width: 154px
+			width: $filters-block-width
 
 			&:after
 				border: 0
@@ -79,6 +80,30 @@
 			margin-left: 9px
 			margin-right: 9px
 			color: #c0c0c0
+
+	&__selected
+		float: left
+		margin-left: 12px
+
+		color: $filters-text-color
+		font-size: $filters-font-size
+		text-transform: uppercase
+
+	&__remove-filters
+		margin-left: 8px
+		width: $shop-navigation-button-height
+
+		background: #ffffff
+		border: 1px solid $filters-border-color
+		cursor: pointer
+		color: $filters-text-color
+		line-height: ($shop-navigation-button-height)-2
+		text-align: center
+
+		&:hover
+			color: #e60000
+			border-color: #e60000
+
 
 .fiters__section
 	padding-top: 12px

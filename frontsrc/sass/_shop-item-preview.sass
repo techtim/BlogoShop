@@ -1,0 +1,91 @@
+.shop-item-preview
+	position: absolute
+	top: -29px
+	width: 264px
+	background: #fff
+	box-shadow: 1px 1px 22px #000
+	border: 1px solid #818181
+	z-index: 3
+
+	&.right
+		left: 183px
+
+		&:after
+			left: -22px
+
+	&.left
+		left: -182px
+
+		&:after
+			right: -22px
+
+	.helper
+		padding: 14px 8px 14px
+		overflow: hidden
+
+		&:before
+			position: absolute
+			left: 0
+			top: 0
+			height: 270px
+			width: 264px
+			background: #fff
+			content: ''
+			z-index: 2
+
+
+	&:after
+		position: absolute
+		top: 196px
+		height: 44px
+		width: 44px
+		background: #fff
+		border: 1px solid #9a9a9a
+		box-shadow: 1px 1px 22px #000
+		content: ''
+		transform: rotate(45deg)
+		z-index: 1
+
+
+	&__row
+		position: relative
+		padding: 16px 0
+
+		border-bottom: 1px dotted #a1a1a1
+		z-index: 2
+		@extend .clearfloat
+
+		&:last-child
+			border-bottom: 0
+
+
+	&__title
+		width: 58px
+
+		float: left
+
+		color: #222
+		font-size: 12px
+		font-weight: bold
+		text-transform: uppercase
+
+
+	&__value
+		width: 158px
+
+		float: left
+
+		color: #555555
+		font-size: 12px
+		line-height: 14px
+
+
+	&__description
+		padding-top: 0
+		color: #555
+		font-size: 13px
+		line-height: 19px
+
+	&__price
+		color: #434343
+		font-size: 20px
