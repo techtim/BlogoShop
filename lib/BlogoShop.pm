@@ -16,6 +16,11 @@ use BlogoShop::Logistics;
 use BlogoShop::Docs;
 use BlogoShop::Group;
 
+{
+	no warnings 'redefine'; 
+	*MongoDB::OID::TO_JSON = sub {$_[0]->value};
+}
+
 # This method will run once at server start
 sub startup {
 	my $self = shift;
@@ -70,6 +75,12 @@ sub startup {
 		}
 	);
 
+	(ref $self)->attr(
+		json => sub {
+			JSON::XS->new->allow_blessed->convert_blessed;
+		}
+	);
+	
 	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
 	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
 	(ref $self)->attr(groups	=> sub {return BlogoShop::Group->new()});
@@ -96,9 +107,8 @@ sub startup {
 
 	my $utils = BlogoShop::Utils->new();
 	$self->helper('utils' => sub {return $utils});
-	
-	my $json = JSON::XS->new();
-	$self->helper('json' => sub {return $json});
+
+	$self->helper(json => sub { shift->app->json });
 
 
 	$self->plugin(mail => {

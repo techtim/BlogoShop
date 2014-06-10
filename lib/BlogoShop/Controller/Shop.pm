@@ -90,6 +90,7 @@ sub list {
 		$self->stash( 'is_brand' => 1 ) if $self->stash('brand');
 		return $self->render(
 			items 	=> $items,
+			items_json => $self->json->encode($items),
 			%{$self->check_cart()},
 			%$filter,
 			cur_category => $filter->{category} ? ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {}) : {},
@@ -129,9 +130,11 @@ sub item {
 	return $self->render(
 		%{$item->as_hash},
 		%{$self->check_cart},
+		item_json => $self->json->encode($item->as_hash),
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
 		items 	=> $item->list($filter, {}, 0, 8),
+		items_json => $self->json->encode($item->list($filter, {}, 0, 8)),
 		banners_h => $self->utils->get_banners($self, $item->{category}, 240),
 		img_url => $self->config->{image_url}.join('/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}).'/',
 		host 	=> $self->req->url->base,
