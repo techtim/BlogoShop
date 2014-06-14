@@ -3,7 +3,6 @@ package BlogoShop;
 use Mojo::Base 'Mojolicious';
 
 use MongoDB;
-use MongoDB::OID;
 
 use JSON::XS;
 use Redis;
@@ -76,6 +75,12 @@ sub startup {
 		}
 	);
 
+	(ref $self)->attr(
+		json => sub {
+			JSON::XS->new->allow_blessed->convert_blessed;
+		}
+	);
+	
 	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
 	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
 	(ref $self)->attr(groups	=> sub {return BlogoShop::Group->new()});
@@ -102,12 +107,7 @@ sub startup {
 
 	my $utils = BlogoShop::Utils->new();
 	$self->helper('utils' => sub {return $utils});
-	
-	(ref $self)->attr(
-		json => sub {
-			JSON::XS->new->allow_blessed->convert_blessed;
-		}
-	);
+
 	$self->helper(json => sub { shift->app->json });
 
 
