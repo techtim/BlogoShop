@@ -2,6 +2,11 @@
 % title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. join ' ', stash('name'), stash('brand_name'), $categories_alias->{$category} ;
 %= include 'includes/left_bar'
 
+% if (stash('item_json')) {
+<script>
+    window.shopItem = <%== $item_json %>;
+</script>
+% }
 <script id='subitem' type='text/x-jquery-tmpl'>
 
     <dl class='row clearfloat {{if name == 'color'}}color{{/if}}'>
@@ -44,88 +49,85 @@
 
 <div class='content__section shop__item__section'>
 
-<ul class='breadcrumps__section clearfloat'>
-	<li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
-	<li>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
-	<li class="current">/ <h2><%= stash 'name' %></h2></li>
-</ul>
+    <ul class='breadcrumps__section clearfloat'>
+        <li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
+        <li>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
+        <li class="current">/ <h2><%= stash 'name' %></h2></li>
+    </ul>
 
-% if (session('admin')) {
-	<a class="fr" href="/admin/shop/<%= join '/', $category, $subcategory, $_id %>"><span style="color:green;">редактировать</span></a>
-	<div class="clear"></div>
-% }
-
-% if (ref $images eq 'ARRAY') {
-	%= include  'includes/shop_gallery', gallery => $images
-% }
-
-<div class='shop__information__section'>
-
-	<div class='description__section row'>
-		<%== stash 'descr' %>
-		% if (stash('online_only')) {
-		<dl class="only-online">
-			Только online
-		</dl>
-		% }
-	</div>
-
-	% if ($brand_name) {
-	<dl class='clearfloat row'>
-		<dt>
-            Бренд:
-        </dt>
-        <dd>
-        	<a style='color: #555;' href="/brand/<%= $brand %>"><%= $brand_name %></a>
-        	<!-- <%= $brand_name %> -->
-        </dd>
-    </dl>
+    % if (session('admin')) {
+        <a class="fr" href="/admin/shop/<%= join '/', $category, $subcategory, $_id %>"><span style="color:green;">редактировать</span></a>
+        <div class="clear"></div>
     % }
-    % if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
-	<dl class='clearfloat row size'>
-		<dt>Размер:</dt>
-		<dd>
-			<ul class='sizes__section clearfloat'>
-				% foreach (@$subitems) {
-				% next unless $_->{qty};
-				<li data-value="<%= $_->{size} %>"><%= $_->{size} %></li>
-				% }
-			</ul>
-		</dd>
-	</dl>
-	% }
 
-	<span id='params__helper'></span>
+    <di-shop-gallery></di-shop-gallery>
 
-	<dl class='clearfloat row submit'>
-	 	% if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
-		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
-		% } else {
-		<a href="#" class='submit__form'>Нет в наличии</a>
-		% }
-	</dl>
-	% if (@$tags > 0) {
-	<dl class='clearfloat row tags'>
-		<dt>Таги:</dt>
-		<dd>
-		% foreach (@$tags) {
-		<a href="<%= '/tag/'.$_ %>" ><%= $_ %></a>&nbsp;
-		% }
-		</dd>
-	</dl>
-	% }
+    <div class='shop__information__section'>
+
+        <div class='description__section row'>
+            <%== stash 'descr' %>
+            % if (stash('online_only')) {
+            <dl class="only-online">
+                Только online
+            </dl>
+            % }
+        </div>
+
+        % if ($brand_name) {
+        <dl class='clearfloat row'>
+            <dt>
+                Бренд:
+            </dt>
+            <dd>
+                <a style='color: #555;' href="/brand/<%= $brand %>"><%= $brand_name %></a>
+                <!-- <%= $brand_name %> -->
+            </dd>
+        </dl>
+        % }
+        % if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
+        <dl class='clearfloat row size'>
+            <dt>Размер:</dt>
+            <dd>
+                <ul class='sizes__section clearfloat'>
+                    % foreach (@$subitems) {
+                    % next unless $_->{qty};
+                    <li data-value="<%= $_->{size} %>"><%= $_->{size} %></li>
+                    % }
+                </ul>
+            </dd>
+        </dl>
+        % }
+
+        <span id='params__helper'></span>
+
+        <dl class='clearfloat row submit'>
+            % if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
+            <a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
+            % } else {
+            <a href="#" class='submit__form'>Нет в наличии</a>
+            % }
+        </dl>
+        % if (@$tags > 0) {
+        <dl class='clearfloat row tags'>
+            <dt>Таги:</dt>
+            <dd>
+            % foreach (@$tags) {
+            <a href="<%= '/tag/'.$_ %>" ><%= $_ %></a>&nbsp;
+            % }
+            </dd>
+        </dl>
+        % }
+    </div>
+
+    <div class='clear'></div>
+
+
+    % if (@$items>0) {
+        <div class="shop__items__list">
+            <h2 class='dotted__caption'>
+                <span>рекомендуем</span>
+            </h2>
+            %= include 'includes/list_items', no_toolbar => '1' , items => stash 'items_json'
+        </div>
+    % }
 </div>
-
-<div class='clear'></div>
-
-
-% if (@$items>0) {
-	<div class="shop__items__list">
-		<h2 class='dotted__caption'>
-			<span>рекомендуем</span>
-		</h2>
-		<ul class='list__section'>
-			%= include 'includes/list_items', items => stash 'items'
-		</ul>
-	</div>
-% }

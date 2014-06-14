@@ -19,7 +19,7 @@
           link: "http://" + config.domain + "/" + (item.sex ? item.sex + '/' : '') + item.category + "/" + item.subcategory + "/" + item.alias,
           preview: "" + previewsUrl + "/item/" + item.category + "/" + item.subcategory + "/" + item.alias + "/" + item.preview_image,
           saleIsActive: saleIsActive,
-          timestamp: execTimeStamp(item._id)
+          timestamp: execTimeStamp(item._id.$oid)
         });
       });
       return shopItems;

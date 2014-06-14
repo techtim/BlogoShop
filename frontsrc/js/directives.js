@@ -237,6 +237,54 @@
         return scope.showed = false;
       });
     };
+  }).directive('diShopGallery', function(imports, config) {
+    return {
+      restrict: 'E',
+      scope: true,
+      template: "<div class='shop-gallery'> <div class='shop-gallery__popup' ng-class=\"{'shop-gallery__popup--visible': xt}\" > <img class='shop-gallery__popup-img' ng-style=\"{'top': xt, 'left': xl}\" ng-src='{{activeImage.url}}' alt='' /> </div> <div class='shop-gallery__full-size'> <a href='#'> <img class='shop-gallery__full-img' ng-src='{{activeImage.url}}' ng-class=\"{'shop-gallery__full-img--loaded': activeImage.url}\" ng-mousemove='moveImage($event)' ng-mouseover='calculateSizes($event)' ng-mouseleave='removeSizes()' /> </a> </div> <ul class='shop-gallery__previews'> <li class='shop-gallery__previews-item' ng-repeat='image in images'> <img class='shop-gallery__previews-img' ng-class=\"{'shop-gallery__previews-img--current': activeImage.url == image.url}\" ng-click='setActive(image)' ng-src='{{image.resizedUrl}}'/> </li> </ul> </div>",
+      link: function(scope, ele) {
+        var $popupEle, fullSizeEleOffset, h1, h2, h4, rh, rw, urlPart, w1, w2, w4;
+        w1 = w2 = w4 = h1 = h2 = h4 = rw = rh = null;
+        fullSizeEleOffset = $('.shop-gallery__full-size', ele).offset();
+        $popupEle = $('.shop-gallery__popup', ele);
+        urlPart = "" + imports.shopItem.category + "/" + imports.shopItem.subcategory + "/" + imports.shopItem.alias;
+        scope.activeImage = {};
+        scope.images = _.reduce(imports.shopItem.images, function(memo, img) {
+          img.resizedUrl = "" + config.previewsUrl.galleryPreview + "item/" + urlPart + "/" + img.tag;
+          img.url = "/i/item/" + urlPart + "/" + img.tag;
+          memo.push(img);
+          return memo;
+        }, []);
+        scope.activeImage = _.first(scope.images);
+        scope.calculateSizes = function(event) {
+          var h3, w3;
+          w1 = $('.shop-gallery__full-img', ele).width();
+          h1 = $('.shop-gallery__full-img', ele).height();
+          w2 = $popupEle.width();
+          h2 = $popupEle.height();
+          w3 = $('img', $popupEle).width();
+          h3 = $('img', $popupEle).height();
+          w4 = w3 - w2;
+          h4 = h3 - h2;
+          rw = w4 / w1;
+          rh = h4 / h1;
+          return scope.moveImage(event);
+        };
+        scope.moveImage = function(event) {
+          var pl, pt;
+          pl = event.pageX - fullSizeEleOffset.left;
+          pt = event.pageY - fullSizeEleOffset.top;
+          scope.xl = -1 * pl * rw;
+          return scope.xt = -1 * pt * rh;
+        };
+        scope.removeSizes = function() {
+          return scope.xl = scope.xt = null;
+        };
+        return scope.setActive = function(image) {
+          return scope.activeImage = image;
+        };
+      }
+    };
   });
 })(angular);
 

@@ -38,6 +38,7 @@ sub index {
 
     return $self->render(
 		items => $items,
+		items_json => $self->json->encode($items),
     	articles => $art,
         banners => $self->utils->get_banners($self, '', 680),
         banners_h => $self->utils->get_banners($self, '', 240),

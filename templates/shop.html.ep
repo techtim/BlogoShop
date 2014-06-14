@@ -3,7 +3,7 @@
 
 % if (stash("items_json") ne '') {
 <script>
-    window.shopItems = <%= stash("items_json") %>;
+    window.shopItems = <%== $items_json %>;
 </script>
 % }
 %= include 'includes/left_bar'

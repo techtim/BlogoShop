@@ -5,3 +5,4 @@ do (angular) ->
     .constant 'config', window.xoxlovka.config || {}
     .constant 'imports',
       shopItems: window.shopItems || []
+      shopItem: window.shopItem || []

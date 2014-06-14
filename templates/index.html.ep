@@ -4,18 +4,18 @@
 %= include 'includes/left_bar'
 
 <div class='content__section'>
-     % if (@$banners > 0) {
-        % my $select_num = 1;
-        <di-carousel position="center" pagination="true" class="is-hidden">
-            % foreach (@$banners) {
-            % next if !$_->{link};
-            <li class="carousel-item">
-                <a href='<%= $_->{link} %>'>
-                    <img src='<%= $_->{image} %>' alt='' />
-                </a>
-            </li>
-            % }
-        </di-carousel>
+    % if (@$banners > 0) {
+    % my $select_num = 1;
+    <di-carousel position="center" pagination="true" class="is-hidden" ng-cloak>
+        % foreach (@$banners) {
+        % next if !$_->{link};
+        <li class="carousel-item">
+            <a href='<%= $_->{link} %>'>
+                <img src='<%= $_->{image} %>' alt='' />
+            </a>
+        </li>
+        % }
+    </di-carousel>
     % }
 
     <div class='blogs__section clearfloat'>
@@ -30,20 +30,12 @@
 
     % if (stash('items')) {
     <div class='shop__items__list'>
-         <h2 class='dotted__caption'>
+        <h2 class='dotted__caption'>
             <span>распродажа</span>
         </h2>
 
-        <ul class='list__section'>
-            %= include 'includes/list_items', items => stash 'items'
-        </ul>
+        %= include 'includes/list_items', no_toolbar => '1' , items => stash 'items_json'
     </div>
-    % }
-
-    % if (config->{domain_name} eq 'xoxloveka.ru' ) {
-    <script>
-        requirejs(['app/equalHeight', 'app/carouselMain', 'app/itemsDescr']);
-    </script>
     % }
 </div>
 

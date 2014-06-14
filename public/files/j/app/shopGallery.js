@@ -68,6 +68,7 @@ define(['jquery'], function($){
 
 			xl = (xl>w4) ? w4 : xl,
 			xt = (xt>h4) ? h4 : xt;
+
 			$popup.find('img').css({'left':xl*(-1),'top':xt*(-1)})
 		}
 		

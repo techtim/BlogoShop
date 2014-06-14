@@ -38,7 +38,8 @@
         domain: '<%= config->{domain_name} %>',
         itemsOnPage: 24,
         previewsUrl: {
-           item: '<%== config->{nginx_res_item_prev}.config->{image_url} %>'
+            item: '<%== config->{nginx_res_item_prev}.config->{image_url} %>',
+            galleryPreview: '<%== config->{nginx_img_resize}.config->{image_url} %>'
         }
     }
 </script>
