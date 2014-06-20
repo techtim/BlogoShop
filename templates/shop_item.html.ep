@@ -4,7 +4,9 @@
 
 % if (stash('item_json')) {
 <script>
+    window.xoxlovka = window.xoxlovka || {};
     window.shopItem = <%== $item_json %>;
+    window.xoxlovka.aliases = <%== $json_params_alias %>;
 </script>
 % }
 <script id='subitem' type='text/x-jquery-tmpl'>
@@ -62,10 +64,10 @@
 
     <di-shop-gallery></di-shop-gallery>
 
-    <div class='shop__information__section'>
+    <div class='shop__information__section shop-item' ng-cloak ng-controller="shopItem">
 
         <div class='description__section row'>
-            <%== stash 'descr' %>
+            {{shopItem.main.descr}}
             % if (stash('online_only')) {
             <dl class="only-online">
                 Только online
@@ -73,32 +75,62 @@
             % }
         </div>
 
-        % if ($brand_name) {
         <dl class='clearfloat row'>
             <dt>
                 Бренд:
             </dt>
             <dd>
-                <a style='color: #555;' href="/brand/<%= $brand %>"><%= $brand_name %></a>
-                <!-- <%= $brand_name %> -->
+                <a class="shop-item__brand-link"
+                   ng-bind="shopItem.main.brand_name"
+                   ng-href="/brand/{{shopItem.brand_name | lowercase}}">?</a>
             </dd>
         </dl>
-        % }
-        % if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
-        <dl class='clearfloat row size'>
+
+        <dl class="clearfloat row size">
             <dt>Размер:</dt>
             <dd>
                 <ul class='sizes__section clearfloat'>
-                    % foreach (@$subitems) {
-                    % next unless $_->{qty};
-                    <li data-value="<%= $_->{size} %>"><%= $_->{size} %></li>
-                    % }
+                    <li ng-bind="subitem.size"
+                        ng-repeat="subitem in shopItem.main.subitems">?</li>
                 </ul>
             </dd>
         </dl>
-        % }
 
-        <span id='params__helper'></span>
+        <dl class="clearfloat row"
+            ng-class="{'color': key === 'color'}"
+            ng-repeat="(key, value) in shopItem.custom">
+
+            <dt>{{shopItemSvc.getAliasName(key)}}</dt>
+            <dd ng-switch="key === 'color'">
+
+                <ul class="color" ng-switch-when="true">
+                    <li
+                        ng-style="{'background-color': '#{{color}}' }"
+                        ng-repeat="color in value">
+                    </li>
+                </ul>
+
+                <span ng-switch-default class="shop-item__{{key}}">
+
+                    <span ng-switch="key === 'price'">
+                        <span ng-switch-when="true">
+
+                            <s class="shop-item__price--old" ng-if="value.oldPrice">
+                                {{value.oldPrice}}
+                            </s>
+                            <span ng-if="value.price">{{value.price}}</span>
+
+                            <span ng-if="!value.oldPrice">{{value}}</span>
+
+                            <i class="fa fa-rub" ng-if="key ==='price'"></i>
+                        </span>
+
+                        <span ng-switch-default>{{value}}</span>
+                    </ng-switch>
+
+                </span>
+            </dd>
+        </dl>
 
         <dl class='clearfloat row submit'>
             % if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
@@ -107,16 +139,17 @@
             <a href="#" class='submit__form'>Нет в наличии</a>
             % }
         </dl>
-        % if (@$tags > 0) {
-        <dl class='clearfloat row tags'>
+
+        <dl class='clearfloat row tags' ng-if="shopItem.main.tags">
             <dt>Таги:</dt>
             <dd>
-            % foreach (@$tags) {
-            <a href="<%= '/tag/'.$_ %>" ><%= $_ %></a>&nbsp;
-            % }
+                <a class="shop-item__tag-link"
+                   ng-bind="tag"
+                   ng-href="/tag/{{tag}}"
+                   ng-repeat="tag in shopItem.main.tags"></a>
             </dd>
         </dl>
-        % }
+
     </div>
 
     <div class='clear'></div>

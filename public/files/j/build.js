@@ -4481,6 +4481,17 @@ window.Modernizr = (function( window, document, undefined ) {
       return $scope.sortBy = field;
     };
     return $scope.sortBy = '';
+  }).controller('shopItem', function($scope, shopItemSvc) {
+    var extraFields, mainField;
+    mainField = ['descr', 'brand_name', 'subitems', 'tags'];
+    extraFields = ['_id', 'active', 'alias', 'articol', 'brand', 'category', 'images', 'name', 'preview_image', 'sale', 'subcategory', 'size', 'total_qty', 'qty', 'weight'];
+    $scope.shopItem = {
+      main: _.pick(shopItemSvc.getItem(), mainField),
+      custom: _.omit(shopItemSvc.getItem(), mainField.concat(extraFields))
+    };
+    $scope.shopItemSvc = shopItemSvc;
+    shopItemSvc.selectSubitem(0);
+    return console.log($scope);
   });
 })(angular);
 
@@ -4656,7 +4667,7 @@ window.Modernizr = (function( window, document, undefined ) {
         }
       }
     };
-  }).directive('diPrice', function() {
+  }).directive('diPrice', function(calculateSale) {
     return {
       require: 'ngModel',
       restrict: 'E',
@@ -4670,21 +4681,13 @@ window.Modernizr = (function( window, document, undefined ) {
           return waitForModel();
         }, true);
         return setPrice = function(model) {
-          var percent;
           if (model.saleIsActive) {
             ctrl.$modelValue = _.extend(model, {
               oldPrice: model.price
             });
-            if (model.sale.sale_value.indexOf('%') !== -1) {
-              percent = parseInt(model.sale.sale_value, 10);
-              return ctrl.$modelValue = _.extend(model, {
-                price: model.price * percent / 100
-              });
-            } else {
-              return ctrl.$modelValue = _.extend(model, {
-                price: model.sale.sale_value
-              });
-            }
+            return _.extend(model, {
+              price: calculateSale(model.price, model.sale)
+            });
           }
         };
       }
@@ -4792,8 +4795,9 @@ window.Modernizr = (function( window, document, undefined ) {
 (function(angular) {
   window.xoxlovka = window.xoxlovka || {};
   return angular.module('imports', []).constant('config', window.xoxlovka.config || {}).constant('imports', {
+    aliases: window.xoxlovka.aliases || {},
     shopItems: window.shopItems || [],
-    shopItem: window.shopItem || []
+    shopItem: window.shopItem || {}
   });
 })(angular);
 
@@ -4803,6 +4807,16 @@ window.Modernizr = (function( window, document, undefined ) {
   return angular.module('services', []).service('execTimeStamp', function() {
     return function(id) {
       return parseInt(id.substr(0, 8), 16) * 1000;
+    };
+  }).service('calculateSale', function() {
+    return function(price, sale) {
+      var percent;
+      if (sale.sale_value.indexOf('%') !== -1) {
+        percent = parseInt(sale.sale_value, 10);
+        return price * percent / 100;
+      } else {
+        return sale.sale_value;
+      }
     };
   }).service('shopItems', function(config, imports, execTimeStamp) {
     var shopItems;
@@ -4825,6 +4839,52 @@ window.Modernizr = (function( window, document, undefined ) {
       });
       return shopItems;
     };
+  }).service('shopItemSvc', function(calculateSale, imports) {
+    var aliases, recalculatePrice;
+    aliases = imports.aliases;
+    this.shopItem = imports.shopItem;
+    this.shopItem = _.reduce(this.shopItem, function(memo, value, key) {
+      if ((!_.isObject(value)) && value.toString().length || (_.isObject(value)) && (!_.isEmpty(value))) {
+        memo[key] = value;
+      }
+      return memo;
+    }, {});
+    this.shopItem.subitems = _.reduce(this.shopItem.subitems, function(memo, item) {
+      if (item.qty > 0) {
+        memo.push(item);
+      }
+      return memo;
+    }, []);
+    this.getItem = (function(_this) {
+      return function() {
+        return _this.shopItem;
+      };
+    })(this);
+    this.getAliasName = function(alias) {
+      var _ref;
+      return (_ref = aliases[alias]) != null ? _ref : '';
+    };
+    this.selectSubitem = (function(_this) {
+      return function(key) {
+        return console.log(_this.shopItem.subitems[key]);
+      };
+    })(this);
+    recalculatePrice = (function(_this) {
+      return function() {
+        var now, oldPrice;
+        now = Math.round(+new Date() / 1000);
+        if (_this.shopItem.sale.sale_active === '1' && now < _this.shopItem.sale.sale_end_stamp && now > _this.shopItem.sale.sale_start_stamp) {
+          oldPrice = _this.shopItem.price;
+          _this.shopItem.price = {};
+          return _.extend(_this.shopItem.price, {
+            oldPrice: oldPrice,
+            price: calculateSale(oldPrice, _this.shopItem.sale),
+            saleIsActive: true
+          });
+        }
+      };
+    })(this);
+    recalculatePrice();
   });
 })(angular);
 

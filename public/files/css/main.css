@@ -2208,6 +2208,22 @@ strong, b {
   left: 0;
 }
 
+.shop-item__brand-link {
+  color: #555555;
+}
+.shop-item__tag-link {
+  margin-right: 4px;
+}
+.shop-item__price {
+  color: #434343 !important;
+  font-size: 20px !important;
+}
+.shop-item__price--old {
+  margin-right: 6px;
+  color: #e60000;
+  font-size: 18px;
+}
+
 .cart__items__list__section {
   position: relative;
   overflow: hidden;

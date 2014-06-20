@@ -18,6 +18,17 @@
       return $scope.sortBy = field;
     };
     return $scope.sortBy = '';
+  }).controller('shopItem', function($scope, shopItemSvc) {
+    var extraFields, mainField;
+    mainField = ['descr', 'brand_name', 'subitems', 'tags'];
+    extraFields = ['_id', 'active', 'alias', 'articol', 'brand', 'category', 'images', 'name', 'preview_image', 'sale', 'subcategory', 'size', 'total_qty', 'qty', 'weight'];
+    $scope.shopItem = {
+      main: _.pick(shopItemSvc.getItem(), mainField),
+      custom: _.omit(shopItemSvc.getItem(), mainField.concat(extraFields))
+    };
+    $scope.shopItemSvc = shopItemSvc;
+    shopItemSvc.selectSubitem(0);
+    return console.log($scope);
   });
 })(angular);
 

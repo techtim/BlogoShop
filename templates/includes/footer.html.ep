@@ -33,7 +33,7 @@
 <div id='overlay' di-overlay ng-class="{'is-active': show}"></div>
 
 <script>
-    window.xoxlovka = window.xoxloka || {};
+    window.xoxlovka = window.xoxlovka || {};
     window.xoxlovka.config = {
         domain: '<%= config->{domain_name} %>',
         itemsOnPage: 24,

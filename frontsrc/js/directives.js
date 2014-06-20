@@ -168,7 +168,7 @@
         }
       }
     };
-  }).directive('diPrice', function() {
+  }).directive('diPrice', function(calculateSale) {
     return {
       require: 'ngModel',
       restrict: 'E',
@@ -182,21 +182,13 @@
           return waitForModel();
         }, true);
         return setPrice = function(model) {
-          var percent;
           if (model.saleIsActive) {
             ctrl.$modelValue = _.extend(model, {
               oldPrice: model.price
             });
-            if (model.sale.sale_value.indexOf('%') !== -1) {
-              percent = parseInt(model.sale.sale_value, 10);
-              return ctrl.$modelValue = _.extend(model, {
-                price: model.price * percent / 100
-              });
-            } else {
-              return ctrl.$modelValue = _.extend(model, {
-                price: model.sale.sale_value
-              });
-            }
+            return _.extend(model, {
+              price: calculateSale(model.price, model.sale)
+            });
           }
         };
       }

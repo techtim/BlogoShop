@@ -129,7 +129,6 @@ do (angular) ->
             $rootScope.$emit 'overlay.closed'
             scope.show = false
 
-
   .directive 'diPreventDefault', ->
     priority: 1001
     link: (scope, elem, attrs) ->
@@ -141,7 +140,7 @@ do (angular) ->
         return
 
   # directive defines sales and calculates new price
-  .directive 'diPrice', ->
+  .directive 'diPrice', (calculateSale) ->
     require: 'ngModel'
     restrict: 'E'
     scope: true
@@ -157,12 +156,7 @@ do (angular) ->
       setPrice = (model) ->
         if model.saleIsActive
           ctrl.$modelValue = _.extend model, oldPrice: model.price
-
-          if (model.sale.sale_value.indexOf('%') != -1)
-            percent =  parseInt model.sale.sale_value, 10
-            ctrl.$modelValue = _.extend model, price: model.price*percent/100
-          else
-            ctrl.$modelValue = _.extend model, price: model.sale.sale_value
+          _.extend model, price: calculateSale model.price, model.sale
 
   .directive 'diShopDescription', ->
     restrict: 'E'
