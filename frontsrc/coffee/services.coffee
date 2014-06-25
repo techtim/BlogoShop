@@ -37,12 +37,6 @@ do (angular) ->
 
       @shopItem = imports.shopItem
 
-      # remove empty field from shop
-      @shopItem = _.reduce @shopItem, (memo, value, key) ->
-        memo[key] = value if (!_.isObject value) and value.toString().length or (_.isObject value) and (!_.isEmpty value)
-        return memo
-      , {}
-
       # remove subitems without quantity
       @shopItem.subitems = _.reduce @shopItem.subitems, (memo, item) ->
         memo.push item if item.qty > 0
@@ -55,7 +49,20 @@ do (angular) ->
         return aliases[alias] ? ''
 
       @selectSubitem = (key) =>
-        console.log @shopItem.subitems[key]
+        selectedSubitem = @shopItem.subitems[key]
+        _.extend @shopItem, selectedSubitem
+
+        if (_.isArray selectedSubitem.price)
+          @shopItem.price = {}
+          _.extend @shopItem, price:
+            oldPrice: _.first selectedSubitem.price
+            price: selectedSubitem.price[1]
+
+          console.log @shopItem
+        else
+          @shopItem.price = selectedSubitem.price
+
+        removeEmptyFields()
 
       recalculatePrice = =>
         now = Math.round +new Date()/1000
@@ -68,9 +75,15 @@ do (angular) ->
             price: calculateSale(oldPrice, @shopItem.sale)
             saleIsActive: true
 
+      # remove empty field from item
+      removeEmptyFields = =>
+        @shopItem = _.reduce @shopItem, (memo, value, key) ->
+          memo[key] = value if (!_.isObject value) and value.toString().length or (_.isObject value) and (!_.isEmpty value)
+          return memo
+        , {}
 
+      removeEmptyFields()
       recalculatePrice()
-
 
       return
 

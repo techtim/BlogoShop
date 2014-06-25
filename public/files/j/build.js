@@ -4482,13 +4482,17 @@ window.Modernizr = (function( window, document, undefined ) {
     };
     return $scope.sortBy = '';
   }).controller('shopItem', function($scope, shopItemSvc) {
-    var extraFields, mainField;
-    mainField = ['descr', 'brand_name', 'subitems', 'tags'];
+    var extraFields, mainFields;
+    mainFields = ['descr', 'brand_name', 'subitems', 'tags'];
     extraFields = ['_id', 'active', 'alias', 'articol', 'brand', 'category', 'images', 'name', 'preview_image', 'sale', 'subcategory', 'size', 'total_qty', 'qty', 'weight'];
-    $scope.shopItem = {
-      main: _.pick(shopItemSvc.getItem(), mainField),
-      custom: _.omit(shopItemSvc.getItem(), mainField.concat(extraFields))
-    };
+    $scope.$watch(function() {
+      return shopItemSvc.shopItem;
+    }, function(shopItem) {
+      return $scope.shopItem = {
+        main: _.pick(shopItem, mainFields),
+        custom: _.omit(shopItem, mainFields.concat(extraFields))
+      };
+    }, true);
     $scope.shopItemSvc = shopItemSvc;
     shopItemSvc.selectSubitem(0);
     return console.log($scope);
@@ -4840,15 +4844,9 @@ window.Modernizr = (function( window, document, undefined ) {
       return shopItems;
     };
   }).service('shopItemSvc', function(calculateSale, imports) {
-    var aliases, recalculatePrice;
+    var aliases, recalculatePrice, removeEmptyFields;
     aliases = imports.aliases;
     this.shopItem = imports.shopItem;
-    this.shopItem = _.reduce(this.shopItem, function(memo, value, key) {
-      if ((!_.isObject(value)) && value.toString().length || (_.isObject(value)) && (!_.isEmpty(value))) {
-        memo[key] = value;
-      }
-      return memo;
-    }, {});
     this.shopItem.subitems = _.reduce(this.shopItem.subitems, function(memo, item) {
       if (item.qty > 0) {
         memo.push(item);
@@ -4866,7 +4864,22 @@ window.Modernizr = (function( window, document, undefined ) {
     };
     this.selectSubitem = (function(_this) {
       return function(key) {
-        return console.log(_this.shopItem.subitems[key]);
+        var selectedSubitem;
+        selectedSubitem = _this.shopItem.subitems[key];
+        _.extend(_this.shopItem, selectedSubitem);
+        if (_.isArray(selectedSubitem.price)) {
+          _this.shopItem.price = {};
+          _.extend(_this.shopItem, {
+            price: {
+              oldPrice: _.first(selectedSubitem.price),
+              price: selectedSubitem.price[1]
+            }
+          });
+          console.log(_this.shopItem);
+        } else {
+          _this.shopItem.price = selectedSubitem.price;
+        }
+        return removeEmptyFields();
       };
     })(this);
     recalculatePrice = (function(_this) {
@@ -4884,6 +4897,17 @@ window.Modernizr = (function( window, document, undefined ) {
         }
       };
     })(this);
+    removeEmptyFields = (function(_this) {
+      return function() {
+        return _this.shopItem = _.reduce(_this.shopItem, function(memo, value, key) {
+          if ((!_.isObject(value)) && value.toString().length || (_.isObject(value)) && (!_.isEmpty(value))) {
+            memo[key] = value;
+          }
+          return memo;
+        }, {});
+      };
+    })(this);
+    removeEmptyFields();
     recalculatePrice();
   });
 })(angular);

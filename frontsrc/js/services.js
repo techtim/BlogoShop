@@ -35,15 +35,9 @@
       return shopItems;
     };
   }).service('shopItemSvc', function(calculateSale, imports) {
-    var aliases, recalculatePrice;
+    var aliases, recalculatePrice, removeEmptyFields;
     aliases = imports.aliases;
     this.shopItem = imports.shopItem;
-    this.shopItem = _.reduce(this.shopItem, function(memo, value, key) {
-      if ((!_.isObject(value)) && value.toString().length || (_.isObject(value)) && (!_.isEmpty(value))) {
-        memo[key] = value;
-      }
-      return memo;
-    }, {});
     this.shopItem.subitems = _.reduce(this.shopItem.subitems, function(memo, item) {
       if (item.qty > 0) {
         memo.push(item);
@@ -61,7 +55,22 @@
     };
     this.selectSubitem = (function(_this) {
       return function(key) {
-        return console.log(_this.shopItem.subitems[key]);
+        var selectedSubitem;
+        selectedSubitem = _this.shopItem.subitems[key];
+        _.extend(_this.shopItem, selectedSubitem);
+        if (_.isArray(selectedSubitem.price)) {
+          _this.shopItem.price = {};
+          _.extend(_this.shopItem, {
+            price: {
+              oldPrice: _.first(selectedSubitem.price),
+              price: selectedSubitem.price[1]
+            }
+          });
+          console.log(_this.shopItem);
+        } else {
+          _this.shopItem.price = selectedSubitem.price;
+        }
+        return removeEmptyFields();
       };
     })(this);
     recalculatePrice = (function(_this) {
@@ -79,6 +88,17 @@
         }
       };
     })(this);
+    removeEmptyFields = (function(_this) {
+      return function() {
+        return _this.shopItem = _.reduce(_this.shopItem, function(memo, value, key) {
+          if ((!_.isObject(value)) && value.toString().length || (_.isObject(value)) && (!_.isEmpty(value))) {
+            memo[key] = value;
+          }
+          return memo;
+        }, {});
+      };
+    })(this);
+    removeEmptyFields();
     recalculatePrice();
   });
 })(angular);

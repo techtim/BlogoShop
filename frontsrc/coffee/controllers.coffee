@@ -23,13 +23,12 @@ do (angular) ->
       $scope.sortBy = ''
 
     .controller 'shopItem', ($scope, shopItemSvc) ->
-      mainField = [
+      mainFields = [
         'descr'
         'brand_name'
         'subitems'
         'tags'
       ]
-
       extraFields = [
         '_id'
         'active'
@@ -48,9 +47,13 @@ do (angular) ->
         'weight'
       ]
 
-      $scope.shopItem =
-        main: _.pick shopItemSvc.getItem(), mainField
-        custom: _.omit shopItemSvc.getItem(), mainField.concat extraFields
+      $scope.$watch () ->
+        shopItemSvc.shopItem
+      , (shopItem) ->
+        $scope.shopItem =
+          main: _.pick shopItem, mainFields
+          custom: _.omit shopItem, mainFields.concat extraFields
+      , true
 
       $scope.shopItemSvc = shopItemSvc
 

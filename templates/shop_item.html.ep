@@ -91,6 +91,7 @@
             <dd>
                 <ul class='sizes__section clearfloat'>
                     <li ng-bind="subitem.size"
+                        ng-click="shopItemSvc.selectSubitem($index)"
                         ng-repeat="subitem in shopItem.main.subitems">?</li>
                 </ul>
             </dd>
