@@ -16,34 +16,7 @@
 	</div>
 
 	<div class='shop__items__list'>
-
-		<div class='fiters__section clearfloat'>
-			<ul class='price__filter'>
-				<li class='title'>цена:</li>
-				<li><a href='?price=dsc'>&darr;</a></li>
-				<li><a href='?price=asc'>&uarr;</a></li>
-			</ul>
-
-			<!-- <ul class='price__slider clearfloat'>
-				<li class='label min__price'><span>0</span></li>
-				<li class='slider'></li>
-				<li class='label max__price'><span>9999</span></li>
-			</ul> -->
-
-			<ul class='new__filter'>
-				<li class='title'>новинки:</li>
-				<li><a href='?time=dsc'>&darr;</a></li>
-				<li><a href='?time=asc'>&uarr;</a></li>
-			</ul>
-
-			<script>requirejs(['app/shopFilters', 'app/equalHeight', 'app/itemsDescr']);</script>
-		</div>
-
-		<ul class='list__section clearfloat'>
-			%= include 'includes/list_items', items => stash 'items'
-			<li class='scroll__helper shop' data-href='?price=dsc' data-next='<%= config->{items_on_page} %>'></li>
-			<script>requirejs(['app/scroll', 'app/itemsDescr']);</script>
-		</ul>
+        %= include 'includes/list_items', items => stash 'items_json'
 	</div>
 </div>
 <div class='clear'></div>

@@ -13,12 +13,12 @@
         return sale.sale_value;
       }
     };
-  }).service('shopItems', function(config, imports, execTimeStamp) {
+  }).service('shopItems', function(CONFIG, IMPORTS, execTimeStamp) {
     var shopItems;
-    shopItems = _.toArray(imports.shopItems);
+    shopItems = _.toArray(IMPORTS.shopItems);
     this.list = function() {
       var previewsUrl;
-      previewsUrl = config.previewsUrl.item;
+      previewsUrl = CONFIG.previewsUrl.item;
       _.each(shopItems, function(item) {
         var now, saleIsActive;
         now = Math.round(new Date() / 1000);
@@ -26,7 +26,7 @@
           saleIsActive = true;
         }
         return _.extend(item, {
-          link: "http://" + config.domain + "/" + (item.sex ? item.sex + '/' : '') + item.category + "/" + item.subcategory + "/" + item.alias,
+          link: "http://" + CONFIG.domain + "/" + (item.sex ? item.sex + '/' : '') + item.category + "/" + item.subcategory + "/" + item.alias,
           preview: "" + previewsUrl + "/item/" + item.category + "/" + item.subcategory + "/" + item.alias + "/" + item.preview_image,
           saleIsActive: saleIsActive,
           timestamp: execTimeStamp(item._id.$oid)
@@ -34,16 +34,10 @@
       });
       return shopItems;
     };
-  }).service('shopItemSvc', function(calculateSale, imports) {
+  }).service('shopItemSvc', function(calculateSale, IMPORTS) {
     var aliases, recalculatePrice, removeEmptyFields;
-    aliases = imports.aliases;
-    this.shopItem = imports.shopItem;
-    this.shopItem.subitems = _.reduce(this.shopItem.subitems, function(memo, item) {
-      if (item.qty > 0) {
-        memo.push(item);
-      }
-      return memo;
-    }, []);
+    aliases = IMPORTS.aliases;
+    this.shopItem = IMPORTS.shopItem;
     this.getItem = (function(_this) {
       return function() {
         return _this.shopItem;
@@ -53,12 +47,19 @@
       var _ref;
       return (_ref = aliases[alias]) != null ? _ref : '';
     };
+    this.getSelectedSubitemId = (function(_this) {
+      return function() {
+        return _this.selectedSubitemId;
+      };
+    })(this);
     this.selectSubitem = (function(_this) {
       return function(key) {
         var selectedSubitem;
+        _this.selectedSubitemId = key;
         selectedSubitem = _this.shopItem.subitems[key];
         _.extend(_this.shopItem, selectedSubitem);
-        if (_.isArray(selectedSubitem.price)) {
+        _this.createItemUrl(key);
+        if ((_.isArray(selectedSubitem.price)) && selectedSubitem.price[0] !== selectedSubitem.price[1]) {
           _this.shopItem.price = {};
           _.extend(_this.shopItem, {
             price: {
@@ -66,11 +67,17 @@
               price: selectedSubitem.price[1]
             }
           });
-          console.log(_this.shopItem);
         } else {
-          _this.shopItem.price = selectedSubitem.price;
+          _this.shopItem.price = _.isArray(selectedSubitem.price) ? selectedSubitem.price[0] : selectedSubitem.price;
         }
         return removeEmptyFields();
+      };
+    })(this);
+    this.createItemUrl = (function(_this) {
+      return function(id) {
+        return _.extend(_this.shopItem, {
+          url: "" + _this.shopItem.category + "/" + _this.shopItem.subcategory + "/" + _this.shopItem.alias + "/buy/" + id
+        });
       };
     })(this);
     recalculatePrice = (function(_this) {

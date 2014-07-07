@@ -43,7 +43,8 @@
 
             <button class="shop-navigation__button--all"
                     ng-class="{'is-active': pagination.showedAll}"
-                    ng-click="pagination.showAll()">Показать все</button>
+                    ng-click="pagination.showAll()"
+                    ng-if="pagination.numPages > 1">Показать все</button>
 
             <button class="shop-navigation__button"
                     ng-click="pagination.prevPage()"

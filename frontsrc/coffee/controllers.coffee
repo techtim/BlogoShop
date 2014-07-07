@@ -1,12 +1,12 @@
 do (angular) ->
   angular.module 'controllers', ['imports', 'simplePagination']
-    .controller 'shopItems', ($scope, shopItems, Pagination, config) ->
+    .controller 'shopItems', ($scope, shopItems, Pagination, CONFIG) ->
       $scope.shopItems = shopItems.list()
 
-      $scope.pagination = Pagination.getNew(config.itemsOnPage || 5)
+      $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5)
       $scope.pagination.numPages = Math.ceil($scope.shopItems.length/$scope.pagination.perPage)
 
-      $scope.pagination.showAll = () ->
+      $scope.pagination.showAll = ->
         if (!@showedAll)
           @showedAll = true
           @oldPerPage = @perPage
@@ -29,6 +29,7 @@ do (angular) ->
         'subitems'
         'tags'
       ]
+
       extraFields = [
         '_id'
         'active'
@@ -39,11 +40,13 @@ do (angular) ->
         'images'
         'name'
         'preview_image'
+        'sex'
         'sale'
         'subcategory'
         'size'
         'total_qty'
         'qty'
+        'url'
         'weight'
       ]
 
@@ -60,3 +63,29 @@ do (angular) ->
       shopItemSvc.selectSubitem 0
 
       console.log $scope
+
+    .controller 'shopCart', ($scope, DELIVER_PRICE) ->
+      $scope.cartPrice = 0
+      $scope.isOrdering = false
+
+      waitForPrice = $scope.$watch 'cartPrice', (newValue, oldValue) ->
+        $scope.cartPrice = newValue
+        $scope.totalPrice = newValue
+        waitForPrice()
+
+      $scope.startOrder = -> $scope.isOrdering = true
+
+      $scope.stateModels = _.chain []
+        .tap (array) -> _.times 3, -> array.push {}
+        .value()
+
+      $scope.selecetDeliverType = (type) ->
+        $scope.deliverType = type
+        $scope.paymentType = if type.toLowerCase().indexOf('courier') >= 0 then 'cash' else 'nalog_payment'
+        calculateTotalPrice $scope.paymentType, $scope.deliverType
+
+      calculateTotalPrice = (type, deliverType) ->
+        orderPrice = if type == 'nalog_payment' then 0 else DELIVER_PRICE[deliverType]
+
+        $scope.totalPrice = $scope.cartPrice + orderPrice
+

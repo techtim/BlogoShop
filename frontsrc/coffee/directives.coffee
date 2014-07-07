@@ -100,6 +100,20 @@ do (angular) ->
 
           $timeout -> $(items).height _.max(itemsHeight)
 
+  .directive 'diCheckbox', ->
+    require: 'ngModel'
+    restrict: 'E'
+    scope:
+      disabled: '=ngDisabled'
+    link: (scope, ele, attrs, ctrl) ->
+      checked = false
+      ele.on 'click', -> clickHandler() if !scope.disabled
+
+      clickHandler = ->
+        checked = !checked
+        scope.$apply -> ctrl.$setViewValue checked
+        ele.toggleClass 'checked', checked
+
   .directive 'diDropdown',  ->
     controller: ($scope) ->
       $scope.isOpened = false
@@ -192,7 +206,7 @@ do (angular) ->
         $rootScope.$on 'overlay.closed', ->
           scope.showed = false
 
-  .directive 'diShopGallery', (imports, config) ->
+  .directive 'diShopGallery', (IMPORTS, CONFIG) ->
     restrict: 'E'
     scope: true
     template: "
@@ -230,12 +244,12 @@ do (angular) ->
 
       fullSizeEleOffset = $('.shop-gallery__full-size', ele).offset()
       $popupEle = $('.shop-gallery__popup', ele)
-      urlPart = "#{imports.shopItem.category}/#{imports.shopItem.subcategory}/#{imports.shopItem.alias}"
+      urlPart = "#{IMPORTS.shopItem.category}/#{IMPORTS.shopItem.subcategory}/#{IMPORTS.shopItem.alias}"
       scope.activeImage = {}
 
       # add resized url
-      scope.images = _.reduce imports.shopItem.images, (memo, img) ->
-        img.resizedUrl = "#{config.previewsUrl.galleryPreview}item/#{urlPart}/#{img.tag}"
+      scope.images = _.reduce IMPORTS.shopItem.images, (memo, img) ->
+        img.resizedUrl = "#{CONFIG.previewsUrl.galleryPreview}item/#{urlPart}/#{img.tag}"
         img.url = "/i/item/#{urlPart}/#{img.tag}"
         memo.push img
         return memo

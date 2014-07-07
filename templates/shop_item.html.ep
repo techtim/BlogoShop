@@ -9,47 +9,8 @@
     window.xoxlovka.aliases = <%== $json_params_alias %>;
 </script>
 % }
-<script id='subitem' type='text/x-jquery-tmpl'>
 
-    <dl class='row clearfloat {{if name == 'color'}}color{{/if}}'>
-        <dt>
-            ${shop_item.get_alias(name)}
-        </dt>
-        <dd>
-           {{if name == 'price'}}
-                <span class='price'>
-           {{/if}}
-
-           {{if name == 'color'}}
-                <ul class='color'>
-                    {{each value}}
-                    <li class='color__item' style='background-color: #${$value}' data-color='${$value}'>
-                    	<input type='checkbox' />
-                    </li>
-                    {{/each}}
-                </ul>
-           {{else}}
-				{{if name != 'price'}}
-					${value}
-				{{else}}
-					{{if value.length > 1}}
-						{{each(key, prop) value}}
-							{{if key == 0}}<s>{{/if}}${prop}{{if key == 0}}</s>{{/if}}
-						{{/each}}
-					{{else}}
-						${value}
-					{{/if}}
-				{{/if}}
-           {{/if}}
-
-           {{if name == 'price'}}
-                </span>
-           {{/if}}
-        </dd>
-    </dl>
-</script>
-
-<div class='content__section shop__item__section'>
+<div class='content__section shop__item__section shop-item'>
 
     <ul class='breadcrumps__section clearfloat'>
         <li><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></li>
@@ -64,7 +25,7 @@
 
     <di-shop-gallery></di-shop-gallery>
 
-    <div class='shop__information__section shop-item' ng-cloak ng-controller="shopItem">
+    <div class='shop__information__section shop-item__description' ng-cloak ng-controller="shopItem">
 
         <div class='description__section row'>
             {{shopItem.main.descr}}
@@ -86,12 +47,16 @@
             </dd>
         </dl>
 
+
         <dl class="clearfloat row size">
             <dt>Размер:</dt>
             <dd>
-                <ul class='sizes__section clearfloat'>
-                    <li ng-bind="subitem.size"
+                <ul class='shop-item__sizes-list clearfloat'>
+                    <li class="shop-item__sizes-item"
+                        ng-bind="subitem.size"
+                        ng-class="{'shop-item__sizes-item--selected': $index == shopItemSvc.getSelectedSubitemId()}"
                         ng-click="shopItemSvc.selectSubitem($index)"
+                        ng-if="subitem.qty > 0"
                         ng-repeat="subitem in shopItem.main.subitems">?</li>
                 </ul>
             </dd>
@@ -134,11 +99,7 @@
         </dl>
 
         <dl class='clearfloat row submit'>
-            % if (grep {$_->{size} && $_->{qty} > 0} @$subitems) {
-            <a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
-            % } else {
-            <a href="#" class='submit__form'>Нет в наличии</a>
-            % }
+            <a ng-href="/{{shopItemSvc.shopItem.url}}" class='submit__form'>Добавить в корзину</a>
         </dl>
 
         <dl class='clearfloat row tags' ng-if="shopItem.main.tags">

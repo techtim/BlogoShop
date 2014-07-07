@@ -12,18 +12,18 @@ do (angular) ->
         else
           return sale.sale_value
 
-    .service 'shopItems', (config, imports, execTimeStamp) ->
-      shopItems = _.toArray imports.shopItems
+    .service 'shopItems', (CONFIG, IMPORTS, execTimeStamp) ->
+      shopItems = _.toArray IMPORTS.shopItems
 
       @list = ->
-        previewsUrl = config.previewsUrl.item
+        previewsUrl = CONFIG.previewsUrl.item
 
         _.each shopItems, (item) ->
           now = Math.round new Date()/1000
           saleIsActive = true if item.sale.sale_active == '1' && item.sale.sale_start_stamp <=now && item.sale.sale_end_stamp >= now
 
           _.extend item,
-            link: "http://#{config.domain}/#{ if item.sex then item.sex+'/' else ''}#{item.category}/#{item.subcategory}/#{item.alias}"
+            link: "http://#{CONFIG.domain}/#{ if item.sex then item.sex+'/' else ''}#{item.category}/#{item.subcategory}/#{item.alias}"
             preview: "#{previewsUrl}/item/#{item.category}/#{item.subcategory}/#{item.alias}/#{item.preview_image}"
             saleIsActive: saleIsActive
             timestamp: execTimeStamp item._id.$oid
@@ -32,37 +32,36 @@ do (angular) ->
 
       return
 
-    .service 'shopItemSvc', (calculateSale, imports) ->
-      aliases = imports.aliases
+    .service 'shopItemSvc', (calculateSale, IMPORTS) ->
+      aliases = IMPORTS.aliases
 
-      @shopItem = imports.shopItem
-
-      # remove subitems without quantity
-      @shopItem.subitems = _.reduce @shopItem.subitems, (memo, item) ->
-        memo.push item if item.qty > 0
-        return memo
-      , []
+      @shopItem = IMPORTS.shopItem
 
       @getItem = => @shopItem
 
       @getAliasName = (alias) ->
         return aliases[alias] ? ''
 
+      @getSelectedSubitemId = => @selectedSubitemId
+
       @selectSubitem = (key) =>
+        @selectedSubitemId = key
         selectedSubitem = @shopItem.subitems[key]
         _.extend @shopItem, selectedSubitem
+        @createItemUrl key
 
-        if (_.isArray selectedSubitem.price)
+        if ((_.isArray selectedSubitem.price) && selectedSubitem.price[0] != selectedSubitem.price[1])
           @shopItem.price = {}
           _.extend @shopItem, price:
             oldPrice: _.first selectedSubitem.price
             price: selectedSubitem.price[1]
-
-          console.log @shopItem
         else
-          @shopItem.price = selectedSubitem.price
+          @shopItem.price = if _.isArray selectedSubitem.price then selectedSubitem.price[0] else selectedSubitem.price
 
         removeEmptyFields()
+
+      @createItemUrl = (id) =>
+        _.extend @shopItem, url: "#{@shopItem.category}/#{@shopItem.subcategory}/#{@shopItem.alias}/buy/#{id}"
 
       recalculatePrice = =>
         now = Math.round +new Date()/1000

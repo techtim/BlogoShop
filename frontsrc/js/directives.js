@@ -116,6 +116,30 @@
         }
       }
     };
+  }).directive('diCheckbox', function() {
+    return {
+      require: 'ngModel',
+      restrict: 'E',
+      scope: {
+        disabled: '=ngDisabled'
+      },
+      link: function(scope, ele, attrs, ctrl) {
+        var checked, clickHandler;
+        checked = false;
+        ele.on('click', function() {
+          if (!scope.disabled) {
+            return clickHandler();
+          }
+        });
+        return clickHandler = function() {
+          checked = !checked;
+          scope.$apply(function() {
+            return ctrl.$setViewValue(checked);
+          });
+          return ele.toggleClass('checked', checked);
+        };
+      }
+    };
   }).directive('diDropdown', function() {
     return {
       controller: function($scope) {
@@ -229,7 +253,7 @@
         return scope.showed = false;
       });
     };
-  }).directive('diShopGallery', function(imports, config) {
+  }).directive('diShopGallery', function(IMPORTS, CONFIG) {
     return {
       restrict: 'E',
       scope: true,
@@ -239,10 +263,10 @@
         w1 = w2 = w4 = h1 = h2 = h4 = rw = rh = null;
         fullSizeEleOffset = $('.shop-gallery__full-size', ele).offset();
         $popupEle = $('.shop-gallery__popup', ele);
-        urlPart = "" + imports.shopItem.category + "/" + imports.shopItem.subcategory + "/" + imports.shopItem.alias;
+        urlPart = "" + IMPORTS.shopItem.category + "/" + IMPORTS.shopItem.subcategory + "/" + IMPORTS.shopItem.alias;
         scope.activeImage = {};
-        scope.images = _.reduce(imports.shopItem.images, function(memo, img) {
-          img.resizedUrl = "" + config.previewsUrl.galleryPreview + "item/" + urlPart + "/" + img.tag;
+        scope.images = _.reduce(IMPORTS.shopItem.images, function(memo, img) {
+          img.resizedUrl = "" + CONFIG.previewsUrl.galleryPreview + "item/" + urlPart + "/" + img.tag;
           img.url = "/i/item/" + urlPart + "/" + img.tag;
           memo.push(img);
           return memo;

@@ -14,9 +14,6 @@
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/main.minified.css' media='all' />
         % }
-
-        <script data-main='/j/config' src='/j/require.js'></script>
-        <script>requirejs(['app/global'])</script>
     </head>
 	<body ng-app="xoxlovka">
         <div class='wrap clearfloat'>

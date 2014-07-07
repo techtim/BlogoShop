@@ -180,7 +180,7 @@ strong, b
 	text-decoration: none
 	text-transform: uppercase
 
-	&:hover:not(.disabled)
+	&:hover:not(.disabled):not([disabled])
 		background-color: #ffffff
 		background-position: 30px -43px
 		color: $submit-button-bg
@@ -204,7 +204,6 @@ strong, b
 @import "blog"
 @import "post"
 
-@import "shop_item"
 @import "shop_information"
 @import "shop_lists"
 @import "shop_description"

@@ -135,10 +135,6 @@
 						color: #e60000
 
 
-
-
-
-
 	.price__section
 		clear: both
 		background: #f2ffea
@@ -149,10 +145,12 @@
 		&.hidden
 			display: none
 
-
 		&.total
 			border-top: 1px solid #d9d9d9
 			border-bottom: 1px solid #d9d9d9
+
+		&.no-border--top
+			border-top: 0
 
 
 		h3
@@ -169,12 +167,13 @@
 		.summ__section
 			float: right
 			margin-right: 4px
-			padding-right: 36px
-			background: url($img__dir + 'ico-rub-big.png') no-repeat right 15px
 			color: #7bd03c
 			font:
 				size: 32px
 				weight: bold
+
+			> .fa
+				margin-left: 20px
 
 
 
@@ -224,12 +223,9 @@
 
 			input
 				border: 1px solid #c1c1c1
-				transition: all .4s linear
+
 				&.error
 					border-color: #e60000
-
-
-
 
 		.clear
 			height: 1px
@@ -403,7 +399,6 @@
 					float: left
 					margin-left: 10px
 
-
 				&.addr
 					width: 198px
 					float: left
@@ -445,7 +440,7 @@
 
 		.pickup
 			height: 146px
-			transition: all .4s linear
+			transition: right .4s linear
 
 			&.active
 				margin-left: 0
@@ -454,11 +449,8 @@
 				.map
 					right: 0
 
-
-
 			.caption
 				display: inline-block
-
 
 			.pickup__checkbox
 				position: relative
@@ -545,25 +537,16 @@
 
 
 			.price
-				padding-right: 20px
 				float: right
-				background: url($img__dir + 'ico-rub.png') no-repeat right center
-				background-size: 11px 15px
 				color: #c8c8c8
 				font:
 					size: 20px
 					weight: 400
 				transition: color .2s linear
 
-
-
-		.pay__type
-			&.disabled
-				display: none
-
-
-			li
-				display: none
+				> .fa
+					margin-left: 10px
+					font-size: 18px
 
 	.finish__cart
 		@extend .submit__form
@@ -577,14 +560,13 @@
 		background-image: none
 		line-height: 28px
 
-		&:hover
+		&:hover:not([disabled])
 			background-image: none
 
-		&.disabled
+		&[disabled="disabled"]
 			background: rgba($submit-button-bg, .5)
 			border-color: rgba($submit-button-bg, .0)
 			cursor: default
-
 
 
 		&.hidden

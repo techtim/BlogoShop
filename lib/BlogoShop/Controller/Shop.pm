@@ -179,6 +179,7 @@ sub brand {
 		return $c->render(
 			host 	=> $c->req->url->base,
 			items 	=> $items,
+			items_json => $c->json->encode($items),
 			articles=> $c->articles->get_filtered_articles({brand => $brand->{_id}, active => 1}, 6),
 			%{$c->check_cart},
 			sex		=> '',

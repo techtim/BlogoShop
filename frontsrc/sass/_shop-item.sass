@@ -1,5 +1,36 @@
 .shop-item
 
+	&__description
+		margin-bottom: 20px
+		width: 240px
+		float: right
+
+	&__sizes-list
+		padding-top: 10px
+
+	&__sizes-item
+		margin-left: 4px
+		margin-bottom: 4px
+		padding: 0 7px
+		float: left
+		border: 1px solid #dadada
+		cursor: pointer
+		font-size: 11px
+		line-height: 23px
+		transition: all .4s linear
+
+		&:first-child
+			margin-left: 0
+
+		&:hover
+			@extend .shop-item__sizes-item--selected
+
+	&__sizes-item--selected
+		border-color: #323232
+		color: #323232
+		cursor: pointer
+
+
 	&__brand-link
 		color: #555555
 
@@ -14,3 +45,4 @@
 		margin-right: 6px
 		color: #e60000
 		font-size: 18px
+

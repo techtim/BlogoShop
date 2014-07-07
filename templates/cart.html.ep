@@ -3,7 +3,7 @@
 
 %= include 'includes/left_bar'
 
-<div class='content__section cart__items__list__section'>
+<div class='content__section cart__items__list__section' ng-controller="shopCart" ng-cloak>
 	<h2 class='caption'>Корзина</h2>
  % if (@$items > 0) {
  	%= form_for '/cart' => (method => 'post') => begin
@@ -53,37 +53,50 @@
 
 	<div class='price__section clearfloat'>
 		<h3>стоимость заказа:</h3>
-		<div class='summ__section'>
+		<div class='summ__section'
+            ng-init="cartPrice = <%= stash('cart_price') %>">
 			<%= stash('cart_price') %>
+            <i class="fa fa-rub"></i>
 		</div>
 	</div>
 
-	<a href='/cart/checkout' class='checkout__button'>оформить заказ</a>
+	<button type="button" class='checkout__button' ng-click="startOrder()" ng-hide="isOrdering">оформить заказ</button>
 
-	<div class='submit___section hidden clearfloat'>
+	<div class='submit___section clearfloat' ng-hide="!isOrdering">
 
-		<div class='left__section register item__block active'>
+		<div class='left__section register item__block active' ng-form="step1">
 			<h2 class='caption'>Регистрация:</h2>
 
 			<ul>
 				<li>
-					<input type='text' placeholder='Имя' name='name' value='<%= stash('name')%>' required />
+					<input type='text' placeholder='Имя' name='name' value="<%= stash('name')%>" required
+                        ng-init="stateModels[0].name = '<%= stash('name')%>'"
+                        ng-model="stateModels[0].name"/>
 				</li>
 				<li>
-					<input type='text' placeholder='Фамилия' name='surname' value='<%= stash('surname')%>' required />
+					<input type='text' placeholder='Фамилия' name='surname' value="<%= stash('surname')%>" required
+                       ng-init="stateModels[0].surname = '<%= stash('surname')%>'"
+                       ng-model="stateModels[0].surname"/>
 				</li>
 			</ul>
 
 			<ul>
 				<li>
-					<input type='text' placeholder='Телефон' name='phone' value='<%= stash('phone')%>' required />
+					<input type='phone' placeholder='Телефон' name='phone' value="<%= stash('phone')%>" required
+                       ng-init="stateModels[0].phone = '<%= stash('phone')%>'"
+                       ng-model="stateModels[0].phone"/>
 				</li>
 				<li>
-					<input type='email' placeholder='e-mail' name='email' value='<%= stash('email')%>' required />
+					<input type='text' placeholder='e-mail' name='email' value="<%= stash('email')%>" required
+                       ng-init="stateModels[0].email = '<%= stash('email')%>'"
+                       ng-model="stateModels[0].email"
+                       ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'/>
 				</li>
 			</ul>
-			<p class='message'>место под системное сообщение</p>
+
+            <span ng-if="!step1.$pristine && step1.$error.required.length" class='message clearfloat' ng-class="{'active': step1.$error.required.length}">Все поля должны быть заполнены.</span>
 		</div>
+
 		<div class='right__section login item__block hidden'>
 			<h2 class='caption light__gray'>Вход:</h2>
 			<a class='forgot' href='#'>забыт пароль</a>
@@ -102,28 +115,63 @@
 
 		<div class='clear'></div>
 
-		<div class='left__section address item__block disabled' >
+		<div class='left__section address item__block '
+             ng-class="{
+                'hidden': stateModels[1].self_delivery,
+                'disabled': !step1.$valid
+            }" ng-form="step2"
+        >
 			<h2 class='caption'>Адреc доставки:</h2>
 
 			<ul>
 				<li class='clearfloat'>
-					<input type='text' class='country' placeholder='Страна' name='country' value='<%= stash('country')%>' disabled required />
+					<input type='text' class='country' placeholder='Страна' name='country' value="<%= stash('country')%>" required
+                           ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                           ng-init="stateModels[1].country = '<%= stash('country')%>'"
+                           ng-model="stateModels[1].country"/>
 
-					<input type='text' class='city' placeholder='Город' name='city' value='<%= stash('city')%>' required disabled/>
+					<input type='text' class='city fl' placeholder='Город' name='city' value="<%= stash('city')%>" required
+                        ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                        ng-init="stateModels[1].city = '<%= stash('city')%>'"
+                        ng-model="stateModels[1].city"/>
 
-					<input type='text' class='index' placeholder='индекс' name='zip' value='<%= stash('zip')%>' required disabled/>
+					<input type='text' class='index' placeholder='индекс' name='zip' value="<%= stash('zip')%>" required
+                        ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                        ng-init="stateModels[1].zip = '<%= stash('zip')%>'"
+                        ng-model="stateModels[1].zip"/>
 				</li>
+
 				<li class='clearfloat'>
-					<input type='text' class='addr' placeholder='Адрес' name='address' value='<%= stash('address')%>' required disabled/>
-					<input type='text' class='house' placeholder='Дом' name='dom' value='<%= stash('dom')%>' required disabled/>
-					<input type='text' class='building' placeholder='Корп' name='korp' value='<%= stash('korp')%>' disabled/>
-					<input type='text' class='flat' placeholder='Кв' name='flat' value='<%= stash('flat')%>' disabled/>
+					<input type='text' class='addr' placeholder='Адрес' name='address' value="<%= stash('address')%>" required
+                        ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                        ng-init="stateModels[1].address = '<%= stash('address')%>'"
+                        ng-model="stateModels[1].address"/>
+
+					<input type='text' class='house' placeholder='Дом' name='dom' value="<%= stash('dom')%>" required
+                       ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                       ng-init="stateModels[1].dom = '<%= stash('dom')%>'"
+                       ng-model="stateModels[1].dom"/>
+
+					<input type='text' class='building' placeholder='Корп' name='korp' value="<%= stash('korp')%>"
+                       ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                       ng-init="stateModels[1].korp = '<%= stash('korp')%>'"
+                       ng-model="stateModels[1].korp"/>
+
+					<input type='text' class='flat' placeholder='Кв' name='flat' value="<%= stash('flat')%>"
+                       ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                       ng-init="stateModels[1].flat = '<%= stash('flat')%>'"
+                       ng-model="stateModels[1].flat"/>
 				</li>
+
 				<li class='clearfloat'>
-					<input type='text' class='receiver' placeholder='Получатель' name='receiver' value='<%= stash('receiver')%>' required disabled/>
-					<p class='message'>место под системное сообщение</p>
+					<input type='text' class='receiver' placeholder='Получатель' name='receiver' value="<%= stash('receiver')%>" required
+                        ng-disabled="!step1.$valid || stateModels[1].self_delivery"
+                        ng-init="stateModels[1].receiver = '<%= stash('receiver')%>'"
+                        ng-model="stateModels[1].receiver"/>
 				</li>
 			</ul>
+
+            <p class='message clearfloat'>место под системное сообщение</p>
 		</div>
 
 		% if (0) {
@@ -158,10 +206,17 @@
 			</ul>
 		</div>
 		% }
-		<div class='right__section pickup item__block disabled'>
+
+		<div class='right__section pickup item__block' ng-class="{
+		    'active': stateModels[1].self_delivery,
+		    'disabled': !step1.$valid
+        }">
 			<div class='fl'>
 				<h2 class='caption'>Самовывоз</h2>
-				<a class='pickup__checkbox fake__checkbox'><input type='checkbox' name='self_delivery' value='self' /></a>
+                <di-checkbox class="pickup__checkbox fake__checkbox"
+                    ng-disabled="!step1.$valid"
+                    ng-init="stateModels[1].self_delivery = false"
+                    ng-model="stateModels[1].self_delivery" ></di-checkbox>
 				<p>
 					Россия, Москва<br/>
 					М. Китай-город, Хохловский 7<br/>
@@ -175,113 +230,164 @@
 
 		<div class='clear'></div>
 
-		<div class='deliver__section item__block disabled'>
-			<h2 class='caption'>Способ доставки:</h2>
+        <div ng-form="step3">
+            <div class='deliver__section item__block'
+                 ng-class="{'disabled': !step2.$valid}"
+                 ng-hide="stateModels[1].self_delivery">
 
-			<ul class='types__list' data-type='deliver'>
-				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled' value='fast_courier' id='fast_courier' data-price='500' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'fast_courier' %> disabled />
-					<label for='fast_courier'>
-						Срочная доставка по Москве в пределах МКАД (в день заказа)
-					<span class='price'>500</span>
-					</label>
-				</li>
-				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled' value='courier' id='courier' data-price='350' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
-					<label for='courier'>
-						Доставка по Москве в пределах МКАД
-						<span class='price'>350</span>
-					</label>
-				</li>
-				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='russian_post' id='russian__post' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'russian_post' %> disabled />
-					<label for='russian__post'>
-						<img src='/i/logos/russian-post.png' alt='Почта России' />
-						<sup>Почта России.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.</sub>
-						<span class='price'></span>
-					</label>
-				</li>
-				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='ems' id='ems' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
-					<label for='ems'>
-						<img src='/i/logos/ems.png' alt='EMS' />
-						<sup>EMS.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
-						<span class='price'></span>
-					</label>
-				</li>
-				% if (0) {
-				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='logistics' id='logistics' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'logistics' %> disabled />
-					<label for='logistics'>
-						<!-- <img src='/i/logos/ems.png' alt='EMS' /> -->
-						<sup>Logistics.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
-						<span class='price'>
-						<input type='input' name='delivery_cost' class='delivery__cost disabled'  value='Выберите город' id=''>
-						</span>
-					</label>
-				</li>
-				% }
-			</ul>
-		</div>
+                <h2 class='caption'>Способ доставки:</h2>
 
-		<div class='pay__type item__block disabled'>
-			<h2 class='caption dark__gray'>Способы оплаты:</h2>
+                <ul class='types__list' data-type='deliver'>
+                    <li class='clearfloat'
+                        ng-class="{'selected': deliverType == 'fastCourier'}"
+                        ng-click="step2.$valid && selecetDeliverType('fastCourier')">
 
-			<ul class='types__list'>
-				<li class='clearfloat' data-type='cash'>
-					<input type='radio' name='pay_type' id='pay__courier' value='cash' disabled />
-					<label for='pay__courier'>Наличные курьеру</label>
-				</li>
-				<li class='clearfloat' data-type='cash'>
-					<input type='radio' name='pay_type' id='qiwi' value='yandex_money' disabled />
-					<label for='cash'>Yandex деньги (ссылка на оплату будем выслана на email)</label>
-				</li>
-				<li class='clearfloat' data-type='cash'>
-					<input type='radio' name='pay_type' id='qiwi' value='yandex_cart' disabled />
-					<label for='cash'>Пластиковая карта (ссылка на оплату будем выслана на email)</label>
-				</li>
-				<li class='clearfloat' data-type='cash'>
-					<input type='radio' name='pay_type' id='qiwi' value='yandex_cash' disabled />
-					<label for='cash'>Наличными через терминал (ссылка на оплату будем выслана на email)</label>
-				</li>
-				<li class='clearfloat' data-type='cash'>
-					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
-					<label for='nalog_payment'>QIWI платеж (счет будет выставлен на указанный телефон)</label>
-				</li>
-				<li class='clearfloat' data-type='nalog_payment'>
-					<input type='radio' name='pay_type' id='qiwi' value='yandex_money' disabled />
-					<label for='cash'>Yandex деньги (ссылка на оплату будем выслана на email)</label>
-				</li>
-				<li class='clearfloat' data-type='nalog_payment'>
-					<input type='radio' name='pay_type' id='qiwi' value='yandex_card' disabled />
-					<label for='cash'>Пластиковая карта (ссылка на оплату будем выслана на email)</label>
-				</li>
-				<li class='clearfloat' data-type='nalog_payment'>
-					<input type='radio' name='pay_type' id='qiwi' value='yandex_cash' disabled />
-					<label for='cash'>Наличными через терминал (ссылка на оплату будем выслана на email)</label>
-				</li>
-				<li class='clearfloat' data-type='nalog_payment'>
-					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
-					<label for='nalog_payment'>QIWI платеж (счет будет выставлен на указанный телефон)</label>
-				</li>
-			</ul>
-		</div>
+                        <input type='radio' name='delivery_type' class='deliver__type' value='fast_courier' id='fast_courier' data-price='500'
+                            ng-checked="deliverType == 'fastCourier'"
+                            ng-class="{'disabled': !step2.$valid}"
+                            ng-disabled="step2.$invalid || stateModels[1].self_delivery"
+                            <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'fast_courier' %>/>
 
-		<div class='price__section total clearfloat'>
+                        <label for='fast_courier'>
+                            Срочная доставка по Москве в пределах МКАД (в день заказа)
+                            <span class='price'>
+                                500<i class="fa fa-rub"></i>
+                            </span>
+                        </label>
+
+                    </li>
+                    <li class='clearfloat'
+                        ng-class="{'selected': deliverType == 'courier'}"
+                        ng-click="step2.$valid && selecetDeliverType('courier')">
+
+                        <input type='radio' name='delivery_type' class='deliver__type' value='courier' id='courier' data-price='350'
+                           ng-class="{'disabled': !step2.$valid}"
+                           ng-checked="deliverType == 'courier'"
+                           ng-disabled="step2.$invalid || stateModels[1].self_delivery"
+                           <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
+
+                        <label for='courier'>
+                            Доставка по Москве в пределах МКАД
+                            <span class='price'>350<i class="fa fa-rub"></i></span>
+                        </label>
+
+                    </li>
+                    <li class='clearfloat'
+                        ng-class="{'selected': deliverType == 'russian_post'}"
+                        ng-click="step2.$valid && selecetDeliverType('russian_post')">
+
+                        <input type='radio' name='delivery_type' class='deliver__type' value='russian_post' id='russian__post'
+                               ng-checked="deliverType == 'russian_post'"
+                               ng-class="{'disabled': !step2.$valid}"
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery"
+                               <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'russian_post' %> disabled />
+
+                        <label for='russian__post'>
+                            <img src='/i/logos/russian-post.png' alt='Почта России' />
+                            <sup>Почта России.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.</sub>
+                        </label>
+                    </li>
+
+                    <li class='clearfloat'
+                        ng-class="{'selected': deliverType == 'ems'}"
+                        ng-click="step2.$valid && selecetDeliverType('ems')">
+
+                        <input type='radio' name='delivery_type' class='deliver__type'  value='ems' id='ems'
+                               ng-checked="deliverType == 'ems'"
+                               ng-class="{'disabled': !step2.$valid}"
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery"
+                                <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
+
+                        <label for='ems'>
+                            <img src='/i/logos/ems.png' alt='EMS' />
+                            <sup>EMS.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.</sub>
+                        </label>
+
+                    </li>
+                    % if (0) {
+                    <li class='clearfloat'>
+                        <input type='radio' name='delivery_type' class='deliver__type disabled'  value='logistics' id='logistics' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'logistics' %> disabled />
+                        <label for='logistics'>
+                            <!-- <img src='/i/logos/ems.png' alt='EMS' /> -->
+                            <sup>Logistics.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
+                            <span class='price'>
+                            <input type='input' name='delivery_cost' class='delivery__cost disabled'  value='Выберите город' id=''>
+                            </span>
+                        </label>
+                    </li>
+                    % }
+                </ul>
+            </div>
+
+            <div class='pay__type item__block' ng-show="deliverType">
+                <h2 class='caption dark__gray'>Способы оплаты:</h2>
+
+                <ul class='types__list' ng-switch="paymentType">
+                    <li class='clearfloat' ng-switch-when="cash">
+                        <input type='radio' name='pay_type' id='pay__courier' value='cash'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for='pay__courier'>Наличные курьеру</label>
+                    </li>
+                    <li class='clearfloat' ng-switch-when="cash">
+                        <input type='radio' name='pay_type' id='yandex_money' value='yandex_money'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="qiwi">Yandex деньги (ссылка на оплату будем выслана на email)</label>
+                    </li>
+                    <li class='clearfloat' ng-switch-when="cash">
+                        <input type='radio' name='pay_type' id='yandex_cart' value='yandex_cart'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="yandex_cart">Пластиковая карта (ссылка на оплату будем выслана на email)</label>
+                    </li>
+                    <li class='clearfloat' ng-switch-when="cash">
+                        <input type='radio' name='pay_type' id='yandex_cash' value='yandex_cash'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="yandex_cash">Наличными через терминал (ссылка на оплату будем выслана на email)</label>
+                    </li>
+                    <li class='clearfloat' ng-switch-when="cash">
+                        <input type='radio' name='pay_type' id='qiwi' value='qiwi'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="qiwi">QIWI платеж (счет будет выставлен на указанный телефон)</label>
+                    </li>
+
+                    <li class='clearfloat' ng-switch-default>
+                        <input type='radio' name='pay_type' id='yandex_money_nalog' value='yandex_money'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="yandex_money_nalog">Yandex деньги (ссылка на оплату будет выслана на email)</label>
+                    </li>
+                    <li class='clearfloat' ng-switch-default>
+                        <input type='radio' name='pay_type' id='yandex_card' value='yandex_card'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="yandex_card">Пластиковая карта (ссылка на оплату будет выслана на email)</label>
+                    </li>
+                    <li class='clearfloat' ng-switch-default>
+                        <input type='radio' name='pay_type' id='yandex_cash_nalog' value='yandex_cash'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="yandex_cash_nalog">Наличными через терминал (ссылка на оплату будет выслана на email)</label>
+                    </li>
+                    <li class='clearfloat' ng-switch-default>
+                        <input type='radio' name='pay_type' id='qiwi_nalog' value='qiwi'
+                               ng-disabled="step2.$invalid || stateModels[1].self_delivery" />
+                        <label for="qiwi_nalog">QIWI платеж (счет будет выставлен на указанный телефон)</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+		<div class='price__section total clearfloat' ng-class="{'no-border--top': stateModels[1].self_delivery}">
 			<h3>итого:</h3>
 			<div class='summ__section'>
-				0
+				{{totalPrice}}
+                <i class="fa fa-rub"></i>
 			</div>
 		</div>
 	</div>
 
-	<input type='submit' name='check' value='Оформить' class='finish__cart disabled hidden' disabled/>
+	<input type='submit' name='check' value='Оформить' class='finish__cart'
+           ng-hide="!isOrdering"
+           ng-disabled="step1.$invalid"/>
 
 	%= end
 % } else {
 	В корзине еще ничего нет
 % }
 </div>
-
-
-<script>requirejs(['app/cart'])</script>
