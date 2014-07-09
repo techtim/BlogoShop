@@ -320,35 +320,3 @@
 	</div>
 
 </div>
-
-<script type="text/javascript">
-
-	$( "#add-image-upload-fields" ).click( function () {
-
-		var more_fields =
-			'<tr>' +
-				'<td width="100"></td>' +
-				'<td>' +
-					'<input type="text" name="image_descr" size=40/>' +
-				'</td>' +
-				'<td>' +
-					'<input type="file" name="image"/>' +
-				'</td>' +
-			'</tr>';
-
-		var $tbody = $("#new_upload_fields tbody");
-
-		function jack_in( to, what ) {
-			var $what = $(what);
-			to.append( what );
-		}
-
-		for ( var z = 0; z < 8; z++ ) {
-			jack_in( $tbody, more_fields );
-			console.log(z);
-			// $tbody.append( $more_fields );
-		}
-
-	});
-
-</script>
