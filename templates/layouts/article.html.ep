@@ -22,11 +22,6 @@
         % } else {
         <link rel='stylesheet' type='text/css' href='/css/main.minified.css' media='all' />
         % }
-
-        % if (config->{domain_name} eq 'xoxloveka.ru' ) {
-		<script data-main='/j/config' src='/j/require.js'></script>
-		<script>requirejs(['app/global', 'app/fotorama', 'app/equalHeight'])</script>
-		% }
 	</head>
 
 	<body ng-app="xoxlovka">

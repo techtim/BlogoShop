@@ -16,7 +16,7 @@
         % if (!stash('cart_count') || stash('cart_count') eq '0') {
         <span class='empty'>КОРЗИНА: ПУСТО</span>
         % } else {
-        <a href="http://shop.<%= config->{domain_name} %>/cart">КОРЗИНА: <%= stash 'cart_count' %> = <%= stash 'cart_price' %> Р</a>
+        <a href="http://shop.<%= config->{domain_name} %>/cart">КОРЗИНА: <%= stash 'cart_count' %> = <%= stash 'cart_price' %> <i class="fa fa-rub"></i></a>
         % }
     </div>
     % }

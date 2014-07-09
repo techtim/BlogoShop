@@ -11,14 +11,8 @@
 
     % if (stash('items')) {
     <div class='shop__items__list'>
-        <div class='fiters__section clearfloat'>
-
-        </div>
-
         <ul class='list__section clearfloat'>
-            %= include 'includes/list_items', items => stash 'items'
-            <!--<li class='scroll__helper shop' data-href='?price=brand' data-next='16'></li>
-            <script>requirejs(['app/scroll']);</script>-->
+            %= include 'includes/list_items', no_toolbar => '1' , items => stash 'items_json'
         </ul>
     </div>
     % }
@@ -84,11 +78,9 @@
     <div class='clear'></div>
     <ul class='blogs__section'>
         % foreach my $article (@$related_articles) {
-            %= include 'includes/preview_article', article => $article
+            %= include 'includes/preview_article'
         % }
     </ul>
 </div>
 
 <div class='clear'></div>
-
-<script>require(['app/equalHeight', 'app/itemsDescr'])</script>

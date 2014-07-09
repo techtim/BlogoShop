@@ -36,7 +36,7 @@
         </div>
 
         <ul>
-            %= include 'includes/list_articles'
+            %= include 'includes/list_articles', no_toolbar => '1' , items => stash 'items_json'
         </ul>
     </div>
     % }
