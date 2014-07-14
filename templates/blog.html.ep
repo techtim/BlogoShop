@@ -43,20 +43,3 @@
 </div>
 
 <div class='clear'></div>
-
-
-<!--
-		% my ($type, $tag) = (stash('type'), stash('tag'));
-        <ul id='pagination' class='clearfloat'>
-		% if (@$articles > 0 && $articles->[0]->{show_prev}) {
-			<li class='left'><a href='/<%== ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . (join '/', 'prev', $articles->[0]->{_id}) %>'>Назад</a></li>
-		% } else {
-			<li class='left'><a class='disabled'>Назад</a></li>
-		% }
-		% if (@$articles > 0 && $articles->[-1]->{show_fwd}) {
-			<li class='right'><a href='/<%== ($type ? "$type/" : '') . ($tag ? "$tag/" : '') . join '/', 'next', $articles->[-1]->{_id} %>'>Вперед</a></li>
-		% } else {
-			<li class='right'><a class='disabled'>Вперед</a></li>
-		% }
-		</ul>
--->

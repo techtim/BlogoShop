@@ -3,6 +3,8 @@ do (angular) ->
     .controller 'shopItems', ($scope, shopItems, Pagination, CONFIG) ->
       $scope.shopItems = shopItems.list()
 
+      $scope.hideList = $scope.shopItems.length == 0
+
       $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5)
       $scope.pagination.numPages = Math.ceil($scope.shopItems.length/$scope.pagination.perPage)
 
@@ -62,13 +64,11 @@ do (angular) ->
 
       shopItemSvc.selectSubitem 0
 
-      console.log $scope
-
     .controller 'shopCart', ($scope, DELIVER_PRICE) ->
       $scope.cartPrice = 0
       $scope.isOrdering = false
 
-      waitForPrice = $scope.$watch 'cartPrice', (newValue, oldValue) ->
+      waitForPrice = $scope.$watch 'cartPrice', (newValue) ->
         $scope.cartPrice = newValue
         $scope.totalPrice = newValue
         waitForPrice()

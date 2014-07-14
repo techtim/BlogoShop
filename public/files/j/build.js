@@ -4464,6 +4464,7 @@ window.Modernizr = (function( window, document, undefined ) {
 (function(angular) {
   return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($scope, shopItems, Pagination, CONFIG) {
     $scope.shopItems = shopItems.list();
+    $scope.hideList = $scope.shopItems.length === 0;
     $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5);
     $scope.pagination.numPages = Math.ceil($scope.shopItems.length / $scope.pagination.perPage);
     $scope.pagination.showAll = function() {
@@ -4494,13 +4495,12 @@ window.Modernizr = (function( window, document, undefined ) {
       };
     }, true);
     $scope.shopItemSvc = shopItemSvc;
-    shopItemSvc.selectSubitem(0);
-    return console.log($scope);
+    return shopItemSvc.selectSubitem(0);
   }).controller('shopCart', function($scope, DELIVER_PRICE) {
     var calculateTotalPrice, waitForPrice;
     $scope.cartPrice = 0;
     $scope.isOrdering = false;
-    waitForPrice = $scope.$watch('cartPrice', function(newValue, oldValue) {
+    waitForPrice = $scope.$watch('cartPrice', function(newValue) {
       $scope.cartPrice = newValue;
       $scope.totalPrice = newValue;
       return waitForPrice();
@@ -4922,7 +4922,7 @@ window.Modernizr = (function( window, document, undefined ) {
         selectedSubitem = _this.shopItem.subitems[key];
         _.extend(_this.shopItem, selectedSubitem);
         _this.createItemUrl(key);
-        if ((_.isArray(selectedSubitem.price)) && selectedSubitem.price[0] !== selectedSubitem.price[1]) {
+        if ((_.isArray(selectedSubitem.price)) && selectedSubitem.price.length > 1 && selectedSubitem.price[0] !== selectedSubitem.price[1]) {
           _this.shopItem.price = {};
           _.extend(_this.shopItem, {
             price: {

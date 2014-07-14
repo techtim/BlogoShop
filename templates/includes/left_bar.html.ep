@@ -6,14 +6,18 @@
 		<div class='caption__section clearfloat'>
 	    	<h2>Каталог</h2>
 
+            % if (!stash('is_brand')) {
 		    <a class='expand__items' href='#'
 		        ng-class="{'opened': isOpened}"
 		        ng-click="toggle()"
 		        di-prevent-default></a>
+            % }
 
 	    	% my $sex = stash('is_brand') ? '' : stash('sex')||'';
 		    <ul class='filters__section'>
-		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='all' <%== "class='current'" if !$sex && !stash('is_brand') %>>все</a></li>
+		    	<li><a href='http://<%= config->{domain_name} %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>'
+                    class="<%== "current" if !$sex && !stash('is_brand') %> <%== "big-button" if stash('is_brand') %>">
+                    <%== 'показать' if stash('is_brand') %>все</a></li>
 		    	% if (!stash('is_brand')) {
 		    	<li><a href='http://<%= config->{domain_name} .'/w' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='female' <%== "class='current'" if $sex eq 'w' %>>женское</a></li>
 		    	<li><a href='http://<%= config->{domain_name} .'/m' %><%= (stash('category') ne '' ? '/'.stash('category').'/'.stash('subcategory') : '') if stash('category') %>' data-type='male' <%== "class='current'" if $sex eq 'm' %>>мужское</a></li>

@@ -1,6 +1,7 @@
 (function(angular) {
   return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($scope, shopItems, Pagination, CONFIG) {
     $scope.shopItems = shopItems.list();
+    $scope.hideList = $scope.shopItems.length === 0;
     $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5);
     $scope.pagination.numPages = Math.ceil($scope.shopItems.length / $scope.pagination.perPage);
     $scope.pagination.showAll = function() {
@@ -31,13 +32,12 @@
       };
     }, true);
     $scope.shopItemSvc = shopItemSvc;
-    shopItemSvc.selectSubitem(0);
-    return console.log($scope);
+    return shopItemSvc.selectSubitem(0);
   }).controller('shopCart', function($scope, DELIVER_PRICE) {
     var calculateTotalPrice, waitForPrice;
     $scope.cartPrice = 0;
     $scope.isOrdering = false;
-    waitForPrice = $scope.$watch('cartPrice', function(newValue, oldValue) {
+    waitForPrice = $scope.$watch('cartPrice', function(newValue) {
       $scope.cartPrice = newValue;
       $scope.totalPrice = newValue;
       return waitForPrice();

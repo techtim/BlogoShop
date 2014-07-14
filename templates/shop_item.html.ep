@@ -19,7 +19,7 @@
     </ul>
 
     % if (session('admin')) {
-        <a class="fr" href="/admin/shop/<%= join '/', $category, $subcategory, $_id %>"><span style="color:green;">редактировать</span></a>
+        <a class="fr shop-item__edit-link" href="/admin/shop/<%= join '/', $category, $subcategory, $_id %>">редактировать</a>
         <div class="clear"></div>
     % }
 

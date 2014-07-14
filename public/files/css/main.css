@@ -1193,6 +1193,18 @@ strong, b {
 .sidebar__section .menu__section .filters__section a.current {
   cursor: default;
 }
+.sidebar__section .menu__section .filters__section a.big-button {
+  margin: -6px 0;
+  padding: 6px 10px;
+  border: 1px solid #4c950b;
+  color: #4c950b;
+  font-size: 10px;
+}
+.sidebar__section .menu__section .filters__section a.big-button:hover {
+  background: #4c950b;
+  border: 1px solid #4c950b;
+  color: white;
+}
 .sidebar__section .menu__section .item {
   display: block;
   clear: both;
@@ -1295,6 +1307,7 @@ strong, b {
 
 .breadcrumps__section {
   padding-bottom: 20px;
+  float: left;
 }
 .breadcrumps__section li {
   float: left;
@@ -2103,6 +2116,19 @@ strong, b {
   left: 0;
 }
 
+.shop-item__edit-link {
+  margin-top: -7px;
+  padding: 6px 10px;
+  border: 1px solid #4c950b;
+  color: #4c950b;
+  font-size: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.shop-item__edit-link:hover {
+  background: #4c950b;
+  color: white;
+}
 .shop-item__description {
   margin-bottom: 20px;
   width: 240px;

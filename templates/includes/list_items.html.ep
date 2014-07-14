@@ -4,7 +4,7 @@
 </script>
 % }
 
-<div class='shop__items__list' ng-controller="shopItems" ng-cloak>
+<div class='shop__items__list' ng-controller="shopItems" ng-cloak ng-hide="hideList">
 
     % unless (stash('no_toolbar')) {
     <div class="tools clearfloat">

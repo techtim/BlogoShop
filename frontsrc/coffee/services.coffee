@@ -50,7 +50,7 @@ do (angular) ->
         _.extend @shopItem, selectedSubitem
         @createItemUrl key
 
-        if ((_.isArray selectedSubitem.price) && selectedSubitem.price[0] != selectedSubitem.price[1])
+        if ((_.isArray selectedSubitem.price) && selectedSubitem.price.length > 1 && selectedSubitem.price[0] != selectedSubitem.price[1])
           @shopItem.price = {}
           _.extend @shopItem, price:
             oldPrice: _.first selectedSubitem.price

@@ -59,7 +59,7 @@
         selectedSubitem = _this.shopItem.subitems[key];
         _.extend(_this.shopItem, selectedSubitem);
         _this.createItemUrl(key);
-        if ((_.isArray(selectedSubitem.price)) && selectedSubitem.price[0] !== selectedSubitem.price[1]) {
+        if ((_.isArray(selectedSubitem.price)) && selectedSubitem.price.length > 1 && selectedSubitem.price[0] !== selectedSubitem.price[1]) {
           _this.shopItem.price = {};
           _.extend(_this.shopItem, {
             price: {
