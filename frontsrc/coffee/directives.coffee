@@ -148,7 +148,6 @@ do (angular) ->
     link: (scope, elem, attrs) ->
       if (attrs.ngClick)
         elem.on 'click', (e) ->
-          console.log 'click'
           e.preventDefault()
           return
         return
@@ -187,7 +186,7 @@ do (angular) ->
       leftSide = block.offset().left
       rightSide = leftSide + width*2
 
-      console.log rightSide, leftSide, width, documentWidth
+      # console.log rightSide, leftSide, width, documentWidth
 
       return rightSide > documentWidth
 

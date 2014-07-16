@@ -186,7 +186,6 @@
       link: function(scope, elem, attrs) {
         if (attrs.ngClick) {
           elem.on('click', function(e) {
-            console.log('click');
             e.preventDefault();
           });
         }
@@ -235,7 +234,6 @@
       width = block.width();
       leftSide = block.offset().left;
       rightSide = leftSide + width * 2;
-      console.log(rightSide, leftSide, width, documentWidth);
       return rightSide > documentWidth;
     };
     return function(scope, ele) {

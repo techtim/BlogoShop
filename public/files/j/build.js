@@ -4462,7 +4462,7 @@ window.Modernizr = (function( window, document, undefined ) {
 //# sourceMappingURL=app.js.map
 
 (function(angular) {
-  return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($scope, shopItems, Pagination, CONFIG) {
+  return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($window, $scope, shopItems, Pagination, CONFIG) {
     $scope.shopItems = shopItems.list();
     $scope.hideList = $scope.shopItems.length === 0;
     $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5);
@@ -4478,10 +4478,13 @@ window.Modernizr = (function( window, document, undefined ) {
         return this.perPage = this.oldPerPage;
       }
     };
-    $scope.sortHelper = function(field) {
+    $scope.showShopItem = function(link) {
+      return $window.location.href = link;
+    };
+    $scope.sortBy = '';
+    return $scope.sortHelper = function(field) {
       return $scope.sortBy = field;
     };
-    return $scope.sortBy = '';
   }).controller('shopItem', function($scope, shopItemSvc) {
     var extraFields, mainFields;
     mainFields = ['descr', 'brand_name', 'subitems', 'tags'];
@@ -4716,7 +4719,6 @@ window.Modernizr = (function( window, document, undefined ) {
       link: function(scope, elem, attrs) {
         if (attrs.ngClick) {
           elem.on('click', function(e) {
-            console.log('click');
             e.preventDefault();
           });
         }
@@ -4765,7 +4767,6 @@ window.Modernizr = (function( window, document, undefined ) {
       width = block.width();
       leftSide = block.offset().left;
       rightSide = leftSide + width * 2;
-      console.log(rightSide, leftSide, width, documentWidth);
       return rightSide > documentWidth;
     };
     return function(scope, ele) {
@@ -4862,7 +4863,9 @@ window.Modernizr = (function( window, document, undefined ) {
 //# sourceMappingURL=imports.js.map
 
 (function(angular) {
-  return angular.module('services', []).service('execTimeStamp', function() {
+  return angular.module('services', []).service('generateLink', function() {
+    return function(item) {};
+  }).service('execTimeStamp', function() {
     return function(id) {
       return parseInt(id.substr(0, 8), 16) * 1000;
     };
@@ -4889,7 +4892,7 @@ window.Modernizr = (function( window, document, undefined ) {
           saleIsActive = true;
         }
         return _.extend(item, {
-          link: "http://" + CONFIG.domain + "/" + (item.sex ? item.sex + '/' : '') + item.category + "/" + item.subcategory + "/" + item.alias,
+          link: "/" + (item.sex ? item.sex + '/' : '') + item.category + "/" + item.subcategory + "/" + item.alias,
           preview: "" + previewsUrl + "/item/" + item.category + "/" + item.subcategory + "/" + item.alias + "/" + item.preview_image,
           saleIsActive: saleIsActive,
           timestamp: execTimeStamp(item._id.$oid)

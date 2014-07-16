@@ -104,6 +104,9 @@
                                 </di-price>
                             </dd>
                         </dl>
+                        <dl class="shop-item-preview__row">
+                            <button class="shop-item__button" ng-click="showShopItem(item.link);">Подробнее</button>
+                        </dl>
                     </div>
                 </div>
             </div>

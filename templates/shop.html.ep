@@ -1,11 +1,6 @@
 % layout 'shop';
 % title 'магазин дизайнерской одежды и аксессуаров Хохловка: '. ($cur_category->{title} ? $cur_category->{title} : ($cur_category->{name}||stash('tags')||''));
 
-% if (stash("items_json") ne '') {
-<script>
-    window.shopItems = <%== $items_json %>;
-</script>
-% }
 %= include 'includes/left_bar'
 
 <div class='content__section post__page'>
@@ -25,7 +20,7 @@
 	% if ($cur_category->{descr}) {
 		<di-shop-description class='shop-description'>
 			<a class='shop-description__button expand__items'
-               ng-class="{'opened': opened}"
+               ng-class="{'shop-description__button--opened opened': opened}"
                ng-click="toggle()"
                href='#'></a>
 			<h4 class="shop-description__text ng-hide" ng-show="opened"><%= $cur_category->{descr} %></h4>
@@ -34,7 +29,7 @@
 
 	% if (@$banners > 0 && !stash('tags')) {
     % my $select_num = 1;
-        <di-carousel position="center" pagination="true">
+        <di-carousel position="center" pagination="true" class="is-hidden" ng-cloak>
         % foreach (@$banners) {
             <li class='carousel-item'>
                 <a href='<%= $_->{link} %>'>
@@ -46,124 +41,6 @@
     % }
 
 	<div class='shop__items__list' ng-controller="shopItems" ng-cloak>
-
-	    <div class="tools clearfloat">
-            <div class="filters" di-dropdown>
-
-                <h5 class="filters__caption"
-                    ng-class="{'is-opened': isOpened}"
-                    ng-click="toggleDropDown()">Сортировать</h5>
-
-                <ul class="filters__list" ng-class="{'is-opened': isOpened}">
-                    <li class="filters__type"
-                        ng-class="{'is-current': sortBy == 'timestamp'}"
-                        ng-click="sortHelper('timestamp'); toggleDropDown();">
-                        <i class="fa fa-circle"></i>Новые поступления
-                    </li>
-                    <li class="filters__type"
-                        ng-class="{'is-current': sortBy == 'price'}"
-                        ng-click="sortHelper('price'); toggleDropDown();">
-                        <i class="fa fa-circle"></i>Цена: Min/Max
-                    </li>
-                    <li class="filters__type"
-                        ng-class="{'is-current': sortBy == '-price'}"
-                        ng-click="sortHelper('-price'); toggleDropDown();">
-                        <i class="fa fa-circle"></i>Цена: Max/Min
-                    </li>
-                </ul>
-            </div>
-
-            <div class="filters__selected" ng-switch on="sortBy" ng-if="sortBy">
-                <span ng-switch-when="timestamp">Новые поступления</span>
-                <span ng-switch-when="price">Цена: Min/Max</span>
-                <span ng-switch-when="-price">Цена: Max/Min</span>
-                <button class="filters__remove-filters" ng-click="sortHelper('')">x</button>
-            </div>
-            <div class="shop-navigation">
-
-                <button class="shop-navigation__button--all"
-                    ng-class="{'is-active': pagination.showedAll}"
-                    ng-click="pagination.showAll()">Показать все</button>
-
-                <button class="shop-navigation__button"
-                    ng-click="pagination.prevPage()"
-                    ng-disabled="pagination.page == 0 || pagination.showedAll"></button>
-
-                <span class="shop-navigation__page-counter" ng-switch on="pagination.showedAll">
-                    <span ng-switch-default>{{pagination.page+1}} из {{pagination.numPages}}</span>
-                    <span ng-switch-when="true">1</span>
-                </span>
-
-                <button class="shop-navigation__button shop-navigation__button--next"
-                    ng-click="pagination.nextPage()"
-                    ng-disabled="pagination.page + 1 >= pagination.numPages || pagination.showedAll"></button>
-            </div>
-	    </div>
-
-        <ul class='list__section clearfloat'>
-            <li ng-repeat="item in shopItems  |
-                orderBy:sortBy |
-                startFrom: pagination.page * pagination.perPage |
-                limitTo: pagination.perPage"
-                ng-class="{'sale': item.saleIsActive}"
-                di-check-last>
-
-
-                <div di-shop-item-preview >
-                    <span ng-click="toggleDescription()" class="controls active preview__ico"></span>
-
-                    <div class="shop-item-preview {{class}}" ng-show="showed">
-                        <div class="helper">
-                            <div class="shop-item-preview__description shop-item-preview__row"
-                                 ng-bind-html="item.descr | unsafe"></div>
-
-                            <dl class='shop-item-preview__row'>
-                                <dt class="shop-item-preview__title">Бренд:</dt>
-                                <dd class="shop-item-preview__value" ng-bind="item.brand_name"></dd>
-                            </dl>
-                            <dl class='shop-item-preview__row' ng-if="item.size">
-                                <dt class="shop-item-preview__title">Размер:</dt>
-                                <dd class="shop-item-preview__value" ng-bind="item.size"></dd>
-                            </dl>
-                            <dl class='shop-item-preview__row' ng-if="item.consist">
-                                <dt class="shop-item-preview__title">Состав:</dt>
-                                <dd class="shop-item-preview__value" ng-bind="item.consist"></dd>
-                            </dl>
-                            <dl class="shop-item-preview__row">
-                                <dt class="shop-item-preview__title">Цена:</dt>
-                                <dd class="shop-item-preview__value">
-                                    <di-price class="price shop-item-preview__price" ng-model="item">
-                                        <span ng-if="item.oldPrice">
-                                            <s>{{item.oldPrice}}</s>
-                                            {{item.price}}
-                                        </span>
-                                        <span ng-if="!item.oldPrice">{{item.price}}</span>
-                                        <i class="fa fa-rub"></i>
-                                    </di-price>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </div>
-
-                <a ng-href="{{item.link}}">
-                    <span class="img__section"
-                        ng-style="{'background-image': 'url('+item.preview+')'}"
-                    >
-                        <span class='ico__sale' ng-if="item.saleIsActive"></span>
-                    </span>
-                    <span class="brand" ng-bind="item.brand_name"></span>
-                    <span class="item__caption" ng-bind="item.name"></span>
-                    <di-price class="price" ng-model="item">
-                        <span ng-if="item.oldPrice">
-                            <s>{{item.oldPrice}}</s>
-                            {{item.price}}
-                        </span>
-                        <span ng-if="!item.oldPrice">{{item.price}}</span>
-                        <i class="fa fa-rub"></i>
-                    </di-price>
-                </a>
-            </li>
-        </ul>
+        %= include 'includes/list_items', no_toolbar => '0' , items => stash 'items_json'
 	</div>
 </div>

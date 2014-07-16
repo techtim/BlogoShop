@@ -1,6 +1,6 @@
 do (angular) ->
   angular.module 'controllers', ['imports', 'simplePagination']
-    .controller 'shopItems', ($scope, shopItems, Pagination, CONFIG) ->
+    .controller 'shopItems', ($window, $scope, shopItems, Pagination, CONFIG) ->
       $scope.shopItems = shopItems.list()
 
       $scope.hideList = $scope.shopItems.length == 0
@@ -19,10 +19,10 @@ do (angular) ->
           @showedAll = false
           @perPage = @oldPerPage
 
-      $scope.sortHelper = (field) ->
-        $scope.sortBy = field
-
+      $scope.showShopItem = (link) -> $window.location.href = link
       $scope.sortBy = ''
+      $scope.sortHelper = (field) -> $scope.sortBy = field
+
 
     .controller 'shopItem', ($scope, shopItemSvc) ->
       mainFields = [

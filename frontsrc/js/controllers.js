@@ -1,5 +1,5 @@
 (function(angular) {
-  return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($scope, shopItems, Pagination, CONFIG) {
+  return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($window, $scope, shopItems, Pagination, CONFIG) {
     $scope.shopItems = shopItems.list();
     $scope.hideList = $scope.shopItems.length === 0;
     $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5);
@@ -15,10 +15,13 @@
         return this.perPage = this.oldPerPage;
       }
     };
-    $scope.sortHelper = function(field) {
+    $scope.showShopItem = function(link) {
+      return $window.location.href = link;
+    };
+    $scope.sortBy = '';
+    return $scope.sortHelper = function(field) {
       return $scope.sortBy = field;
     };
-    return $scope.sortBy = '';
   }).controller('shopItem', function($scope, shopItemSvc) {
     var extraFields, mainFields;
     mainFields = ['descr', 'brand_name', 'subitems', 'tags'];

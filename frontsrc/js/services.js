@@ -1,5 +1,7 @@
 (function(angular) {
-  return angular.module('services', []).service('execTimeStamp', function() {
+  return angular.module('services', []).service('generateLink', function() {
+    return function(item) {};
+  }).service('execTimeStamp', function() {
     return function(id) {
       return parseInt(id.substr(0, 8), 16) * 1000;
     };
@@ -26,7 +28,7 @@
           saleIsActive = true;
         }
         return _.extend(item, {
-          link: "http://" + CONFIG.domain + "/" + (item.sex ? item.sex + '/' : '') + item.category + "/" + item.subcategory + "/" + item.alias,
+          link: "/" + (item.sex ? item.sex + '/' : '') + item.category + "/" + item.subcategory + "/" + item.alias,
           preview: "" + previewsUrl + "/item/" + item.category + "/" + item.subcategory + "/" + item.alias + "/" + item.preview_image,
           saleIsActive: saleIsActive,
           timestamp: execTimeStamp(item._id.$oid)

@@ -1343,6 +1343,7 @@ strong, b {
 
 .carousel, di-carousel {
   position: relative;
+  clear: both;
 }
 .carousel.center, di-carousel.center {
   width: 680px;
@@ -1872,10 +1873,12 @@ strong, b {
 }
 .shop-description__button {
   position: absolute;
-  top: -32px;
   right: 0;
 }
-.shop-description.active h4 {
+.shop-description__button--opened {
+  top: -37px;
+}
+.shop-description.activ h4 {
   display: block;
 }
 .shop-description__text {
@@ -2171,6 +2174,22 @@ strong, b {
   margin-right: 6px;
   color: #e60000;
   font-size: 18px;
+}
+.shop-item__button {
+  height: 43px;
+  width: 100%;
+  padding: 6px 10px;
+  background: none;
+  border: 1px solid #4c950b;
+  color: #4c950b;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.shop-item__button:hover {
+  background: #4c950b;
+  border: 1px solid #4c950b;
+  color: white;
+  cursor: pointer;
 }
 
 .cart__items__list__section {
