@@ -13,7 +13,7 @@
     	<span class='controls active preview__ico'></span>
         <a href="http://<%= config->{domain_name} %>/<%= "$sex\/" if $sex %><%= 'brand/'.stash('brand').'/' if stash('is_brand') %><%= join '/', $item->{category}, $item->{subcategory}, $item->{alias} %>">
             <span class='img__section'
-                style="background-image: url(<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, $item->{alias}, $item->{preview_image} %>)">
+                style="background-image: url(<%= config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, $item->{subcategory}, uri_escape($item->{alias}), $item->{preview_image} %>)">
 
             	% if ($item->{sale}->{sale_active} && 
 				%	$item->{sale}->{sale_start_stamp} <= time() &&

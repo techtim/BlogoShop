@@ -6,6 +6,7 @@ use MongoDB;
 
 use JSON::XS;
 use Redis;
+use URI::Escape;
 
 use BlogoShop::Articles;
 use BlogoShop::Admins;
@@ -15,6 +16,11 @@ use BlogoShop::Qiwi;
 use BlogoShop::Logistics;
 use BlogoShop::Docs;
 use BlogoShop::Group;
+
+{
+	no warnings 'redefine'; 
+	*MongoDB::OID::TO_JSON = sub {$_[0]->value};
+}
 
 # This method will run once at server start
 sub startup {
@@ -69,7 +75,7 @@ sub startup {
 			});
 		}
 	);
-
+	
 	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
 	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
 	(ref $self)->attr(groups	=> sub {return BlogoShop::Group->new()});
@@ -92,13 +98,18 @@ sub startup {
 			controller => shift,
 	) } );
 
+	$self->helper(uri_escape => sub {return URI::Escape::uri_escape(pop)});
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();
 	$self->helper('utils' => sub {return $utils});
-	
-	my $json = JSON::XS->new();
-	$self->helper('json' => sub {return $json});
+
+	(ref $self)->attr(
+		json => sub {
+			JSON::XS->new->allow_blessed->convert_blessed;
+		}
+	);
+	$self->helper(json => sub { shift->app->json });
 
 
 	$self->plugin(mail => {
