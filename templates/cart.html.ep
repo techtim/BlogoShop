@@ -224,7 +224,7 @@
 				</p>
 			</div>
 			<div class='map'>
-				<div id="ymaps-map-id_134607452184377852671" style="width: 440px; height: 130px;"></div>
+                <img src="//api-maps.yandex.ru/services/constructor/1.0/static/?sid=J6oMCcMck26GwHPyiO2vVbsVv74VndfL&width=460&height=134" alt=""/>
 			</div>
 		</div>
 
@@ -270,7 +270,6 @@
                             Доставка по Москве в пределах МКАД
                             <span class='price'>350<i class="fa fa-rub"></i></span>
                         </label>
-
                     </li>
                     <li class='clearfloat'
                         ng-class="{'selected': deliverType == 'russian_post'}"
