@@ -98,7 +98,7 @@ sub startup {
 			controller => shift,
 	) } );
 
-	$self->helper(uri_escape => sub {return URI::Escape::uri_escape(pop)});
+	$self->helper(uri_escape => sub {return URI::Escape::uri_escape_utf8(pop)});
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();
