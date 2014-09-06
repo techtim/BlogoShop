@@ -1,7 +1,5 @@
 (function(angular) {
-  return angular.module('services', []).service('generateLink', function() {
-    return function(item) {};
-  }).service('execTimeStamp', function() {
+  return angular.module('services', []).service('execTimeStamp', function() {
     return function(id) {
       return parseInt(id.substr(0, 8), 16) * 1000;
     };
@@ -15,6 +13,51 @@
         return sale.sale_value;
       }
     };
+  }).factory('Pagination', function() {
+    var pagination;
+    pagination = {};
+    pagination.getNew = function(model, perPage) {
+      var paginator;
+      if (perPage == null) {
+        perPage = 5;
+      }
+      paginator = {
+        numPages: Math.floor(model.length / perPage),
+        perPage: perPage,
+        page: 0
+      };
+      paginator.allPagesShow = function() {
+        return this.page === this.numPages - 1;
+      };
+      paginator.nextPage = function() {
+        if (this.page < this.numPages - 1) {
+          return paginator.page += 1;
+        }
+      };
+      paginator.prevPage = function() {
+        if (this.page > 0) {
+          return paginator.page -= 1;
+        }
+      };
+      paginator.showAll = function() {
+        if (!this.showedAll) {
+          this.showedAll = true;
+          this.oldPerPage = this.perPage;
+          this.page = 0;
+          return this.perPage = this.perPage * this.numPages;
+        } else {
+          this.showedAll = false;
+          return this.perPage = this.oldPerPage;
+        }
+      };
+      paginator.toPageId = function(id) {
+        if (id >= 0 && id <= this.numPages) {
+          return paginator.page = id;
+        }
+      };
+      return paginator;
+    };
+    return pagination;
   }).service('shopItems', function(CONFIG, IMPORTS, execTimeStamp) {
     var shopItems;
     shopItems = _.toArray(IMPORTS.shopItems);

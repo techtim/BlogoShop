@@ -1,11 +1,7 @@
 do (angular) ->
   angular.module 'services', []
-    .service 'generateLink', ->
-      return (item) ->
-
     .service 'execTimeStamp', ->
-      return (id)->
-        parseInt(id.substr(0,8), 16) * 1000
+      return (id)-> parseInt(id.substr(0,8), 16) * 1000
 
     .service 'calculateSale', ->
       return (price, sale) ->
@@ -14,6 +10,41 @@ do (angular) ->
           return price*percent/100
         else
           return sale.sale_value
+
+    .factory 'Pagination', ->
+      pagination = {}
+
+      pagination.getNew = (model, perPage = 5) ->
+        paginator =
+          numPages: Math.floor(model.length/perPage)
+          perPage: perPage
+          page: 0
+
+        paginator.allPagesShow = -> @page == @numPages - 1
+
+        paginator.nextPage = ->
+          paginator.page += 1 if (@page < @numPages - 1)
+
+        paginator.prevPage = ->
+          paginator.page -= 1 if @page > 0
+
+        paginator.showAll = ->
+          if (!@showedAll)
+            @showedAll = true
+            @oldPerPage = @perPage
+
+            @page = 0
+            @perPage = @perPage * @numPages
+          else
+            @showedAll = false
+            @perPage = @oldPerPage
+
+        paginator.toPageId = (id) ->
+          paginator.page = id if (id >= 0 && id <= @numPages)
+
+        return paginator
+
+      return pagination
 
     .service 'shopItems', (CONFIG, IMPORTS, execTimeStamp) ->
       shopItems = _.toArray IMPORTS.shopItems
@@ -88,6 +119,8 @@ do (angular) ->
       recalculatePrice()
 
       return
+
+
 
 
 

@@ -1,0 +1,279 @@
+$img__dir: '../../i/other-layouts/intro/'
+$show-case-width: 881px
+
+@import url(http://fonts.googleapis.com/css?family=Arvo)
+@import url(http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic)
+@import url(http://fonts.googleapis.com/css?family=Roboto:100&subset=latin,cyrillic)
+
+@import "../mixins"
+@import "../reset"
+
+html.is-freezed
+	min-height: 100%
+
+	body
+		height: 100%
+		overflow: hidden
+
+body
+	background: #403c3d
+	font-family: 'Arvo', serif
+	font-size: 13px
+	line-height: 21px
+
+
+a
+	color: #ffffff
+
+	&:hover
+		text-decoration: none
+
+strong
+	font-weight: bold
+
+.is-hidden
+	display: none !important
+
+.is-fixed
+	position: fixed !important
+
+
+.showcase
+	position: absolute
+	left: 50%
+
+	margin-left: -$show-case-width/2
+	width: $show-case-width
+	overflow: hidden
+	z-index: 0
+
+	&:before
+		position: absolute
+
+		width: $show-case-width
+		height: 1323px
+		background: url($img__dir + 'showcase/mask.png') no-repeat
+		content: ''
+
+
+	&__wrapper
+		@extend .clearfloat
+		display: block
+
+	&__item
+		float: left
+		width: $show-case-width
+		height: auto
+
+
+.wrapper
+	position: relative
+
+	height: 660px
+
+	margin: 0 auto
+	padding-top: 84px
+	width: 1020px
+
+	z-index: 1
+
+
+.header
+	@extend .clearfloat
+	display: block
+	height: 112px
+
+.logo
+	position: absolute
+	float: left
+	width: 111px
+	height: 112px
+	display: block
+	background: url($img__dir + 'logo.svg') no-repeat
+
+
+.content
+	@extend .clearfloat
+	padding-top: 32px
+	display: block
+	overflow: hidden
+
+	&--contacts
+		height: 642px
+
+	&--showcase
+		position: absolute
+		width: 100%
+
+	&__item-description
+		width: 100%
+		height: 250px
+
+		&.skrollable-after
+			//transform: translateY(-436px)
+
+	&__layer
+		@extend .clearfloat
+		display: block
+
+	&__wrapper
+		@extend .clearfloat
+		display: block
+		
+	&__side-bar
+		margin-right: 36px
+		width: 305px
+		float: left
+
+		&:last-child
+			margin-right: 0
+
+		&--contacts
+			width: 338px
+
+		&--right
+			float: right
+
+		&--text-right
+			text-align: right
+
+		&--without-caption
+			padding-top: 74px
+
+	&__navigation
+		@extend .clearfloat
+		display: block
+
+	&__navigation-arrow
+		margin: 30px
+
+		float: left
+
+		width: 120px
+		height: 118px
+
+		display: block
+		background: url($img__dir + 'navigation-arrow.svg') no-repeat
+		transform: rotate(180deg)
+
+		&--right
+			float: right
+			transform: rotate(360deg)
+
+		&--disabled
+			cursor: default
+			opacity: .25
+
+
+.caption
+	&--title
+		color: #fff
+		font-size: 17px
+		font-weight: bold
+		line-height: 23px
+
+	&--sub-title
+		color: #fff
+		font-family: "Roboto"
+		font-size: 17px
+		font-weight: 400
+		line-height: 23px
+
+	&--with-bg
+		margin-bottom: 16px
+		padding: 10px 0 7px 0
+
+		width: 240px
+
+		background: #ffffff
+		color: #4F4B4D
+		font-family: "PT Sans"
+		font-size: 38px
+		font-weight: 700
+		line-height: 1
+
+		text-align: center
+		text-transform: uppercase
+
+
+.text
+	margin-bottom: 21px
+	
+	&--gray
+		color: #909090
+
+	&--white
+		color: #ffffff
+
+	&--big
+		font-size: 15px
+		-webkit-font-smoothing: antialiased
+
+
+.pseudo-button
+	position: absolute
+	padding: 3px 8px 0
+
+	height: 32px
+
+	display: block
+
+	background: #ffffff
+	border: 3px solid #fff
+	box-sizing: border-box
+	color: #3F3B3D
+	font-family: "PT Sans"
+	font-size: 14px
+	font-weight: 400
+	text-align: center
+	text-decoration: none
+	text-transform: uppercase
+	z-index: 10
+
+	&:hover
+		background: none
+		color: #fff
+
+
+	&--top
+		top: 276px
+
+	&--bottom
+		right: 4px
+
+	&--contacts
+		position: static
+		margin-top: 10px
+
+	&--intro
+		position: static
+		margin-top: 10px
+
+
+.button-wrapper
+	position: absolute
+	right: 0
+	z-index: 10
+
+
+.contacts
+
+	&__text
+		margin-bottom: 7px
+		margin-left: 14px
+
+		color: #ffffff
+		font-family: "Arvo"
+		font-size: 15px
+		font-weight: 400
+		-webkit-font-smoothing: antialiased
+
+		strong
+			font-weight: 700
+
+	&__wrapper
+		margin-top: -13px
+		padding-top: 14px
+		padding-right: 14px
+		padding-bottom: 8px
+		border: 2px solid #fff

@@ -18,10 +18,14 @@ module.exports = function(config) {
             paths.vendors + 'jquery/dist/jquery.js',
             paths.vendors + 'underscore/underscore.js',
             paths.vendors + 'jasmine-jquery/lib/*.js',
-            {pattern: 'frontsrc/test/unit/mocks/*', watched: true, served: true, included: false},
+            {
+                pattern: 'frontsrc/test/unit/mocks/*',
+                watched: true,
+                served: true,
+                included: false
+            },
             'frontsrc/js/*.js',
-            'frontsrc/js/*/*.js',
-            'frontsrc/tests/unit/*.spec.js'
+            'frontsrc/tests/unit/unit.spec.js'
         ],
 
         // list of files to exclude
@@ -38,8 +42,8 @@ module.exports = function(config) {
         ],
 
         preprocessors: {
-            'app/assets/js/*.js': 'coverage',
-            'app/assets/js/*/*.js': 'coverage'
+            'frontsrc/js/*.js': 'coverage',
+            'frontsrc/js/*/*.js': 'coverage'
         },
 
         coverageReporter: {

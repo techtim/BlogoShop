@@ -1,15 +1,16 @@
 module.exports = function (grunt) {
 
     var paths = {
-        public: './public/files/',
         assets: './frontsrc/',
-        vendors: './public/vendors/',
-        test: './frontsrc/tests/'
+        public: './public/files/',
+        test: './frontsrc/tests/',
+        vendors: './public/vendors/'
     };
 
     function getSassConfig(target) {
         var conf = {
             options: {
+                loadPath: paths.vendors,
                 spawn: false
             },
             files: [{
@@ -20,28 +21,25 @@ module.exports = function (grunt) {
                 ext: '.css'
             }]
         };
-        if ( target === 'development' ) {
-            conf.options = {
-                loadPath: paths.vendors,
-                style: 'expanded',
-                sourcemap: true
-            };
 
-            return conf;
-        } else {
+        if (target === 'development') {
+            conf.options.style = 'expanded';
+            conf.options.sourcemap = true;
+        } else if (target === 'production') {
             conf.files[0].ext = '.minified.css';
-            conf.options = {
-                loadPath: paths.vendors,
-                style: 'compressed'
-            };
-            return conf;
+            conf.options.loadPath = paths.vendors;
+            conf.options.style = 'compressed';
+        } else if (target === 'layouts') {
+            conf.files[0].cwd = 'frontsrc/sass/other-layouts';
+            conf.files[0].dest = paths.public + 'css/layouts';
         }
+
+        return conf;
     }
 
     var libsDeps = [
         paths.vendors + 'jquery/dist/jquery.min.js', // jquery should be the first
         paths.vendors + 'angular/angular.min.js',
-        paths.vendors + 'ng-simplePagination/simplePagination.js',
         paths.vendors + 'modernizr/modernizr.js',
         paths.vendors + 'jcarousel/dist/jquery.jcarousel.js',
         paths.vendors + 'underscore/underscore.js',
@@ -49,7 +47,7 @@ module.exports = function (grunt) {
     ];
 
     var app = [paths.assets + 'js/*.js'];
-    var unitCoffee = [paths.test+'unit/*.coffee', paths.test+'unit/*/**.coffee'];
+    var unitCoffee = [paths.test+'unit/specs/*.coffee', paths.test+'unit/specs/*/**.coffee'];
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -65,7 +63,12 @@ module.exports = function (grunt) {
             production: {
                 src: paths.public + 'css/main.minified.css',
                 dest: paths.public + 'css/main.minified.css'
+            },
+            introLayout: {
+                src: paths.public + 'css/layouts/intro.css',
+                dest: paths.public + 'css/layouts/intro.css'
             }
+
         },
 
         coffee: {
@@ -107,14 +110,16 @@ module.exports = function (grunt) {
                     spawn: false
                 },
                 files: {
-                    './public/files/css/main.minified.css': [ paths.public + 'css/main.minified.css']
+                    './public/files/css/main.minified.css': [ paths.public + 'css/main.minified.css'],
+                    './public/files/css/layouts/intro.css': [ paths.public + 'css/layouts/intro.css']
                 }
             }
         },
 
         sass: {
             development: getSassConfig('development'),
-            production: getSassConfig('production')
+            production: getSassConfig('production'),
+            production: getSassConfig('layouts')
         },
 
         watch: {
@@ -148,6 +153,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-ngmin');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('deploy', ['sass:production']);

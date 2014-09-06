@@ -1,23 +1,13 @@
 do (angular) ->
-  angular.module 'controllers', ['imports', 'simplePagination']
+  angular.module 'controllers', ['imports']
     .controller 'shopItems', ($window, $scope, shopItems, Pagination, CONFIG) ->
+
       $scope.shopItems = shopItems.list()
 
       $scope.hideList = $scope.shopItems.length == 0
 
-      $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5)
-      $scope.pagination.numPages = Math.ceil($scope.shopItems.length/$scope.pagination.perPage)
-
-      $scope.pagination.showAll = ->
-        if (!@showedAll)
-          @showedAll = true
-          @oldPerPage = @perPage
-
-          @page = 1
-          @perPage = @perPage * @numPages
-        else
-          @showedAll = false
-          @perPage = @oldPerPage
+      $scope.pagination = Pagination.getNew($scope.shopItems, CONFIG.itemsOnPage || 5)
+      $scope.paginationHide = $scope.pagination.page == $scope.pagination.numPages
 
       $scope.showShopItem = (link) -> $window.location.href = link
       $scope.sortBy = ''

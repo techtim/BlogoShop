@@ -11,3 +11,14 @@
 @mixin disabled
 	cursor: default
 	user-select: none
+
+
+.clearfloat
+	display: inline-block
+
+	&:after
+		content: "."
+		display: block
+		height: 0
+		clear: both  !important
+		visibility: hidden

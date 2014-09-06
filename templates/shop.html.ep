@@ -5,7 +5,6 @@
 
 <div class='content__section post__page'>
 	<ul class='breadcrumps__section clearfloat'>
-<!--		<li><a href='/'>ONLINE-МАГАЗИН</a></li> -->
 		% if (stash('category') ne '') {
 			<li <%= 'class=\'current\'' if stash('subcategory') eq '' %>><a href='/<%= stash('category') %>'><%= $categories_alias->{stash('category')} %></a></li>
 			% if (stash('subcategory') ne '') {
@@ -16,18 +15,17 @@
 		%}
 	</ul>
 
+    % if ($cur_category->{descr}) {
+        <di-shop-description class='shop-description'>
+    <a class='shop-description__button expand__items'
+       ng-class="{'shop-description__button--opened opened': opened}"
+       ng-click="toggle()"
+       href='#'></a>
+    <h4 class="shop-description__text ng-hide" ng-show="opened"><%= $cur_category->{descr} %></h4>
+    </di-shop-description>
+    % }
 
-	% if ($cur_category->{descr}) {
-		<di-shop-description class='shop-description'>
-			<a class='shop-description__button expand__items'
-               ng-class="{'shop-description__button--opened opened': opened}"
-               ng-click="toggle()"
-               href='#'></a>
-			<h4 class="shop-description__text ng-hide" ng-show="opened"><%= $cur_category->{descr} %></h4>
-		</di-shop-description>
-	% }
-
-	% if (@$banners > 0 && !stash('tags')) {
+    % if (@$banners > 0 && !stash('tags')) {
     % my $select_num = 1;
         <di-carousel position="center" pagination="true" class="is-hidden" ng-cloak>
         % foreach (@$banners) {
@@ -40,7 +38,7 @@
         </di-carousel>
     % }
 
-	<div class='shop__items__list' ng-controller="shopItems" ng-cloak>
+    <div class='shop__items__list' ng-controller="shopItems" ng-cloak>
         %= include 'includes/list_items', no_toolbar => '0' , items => stash 'items_json'
-	</div>
+    </div>
 </div>

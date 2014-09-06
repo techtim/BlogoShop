@@ -1,20 +1,9 @@
 (function(angular) {
-  return angular.module('controllers', ['imports', 'simplePagination']).controller('shopItems', function($window, $scope, shopItems, Pagination, CONFIG) {
+  return angular.module('controllers', ['imports']).controller('shopItems', function($window, $scope, shopItems, Pagination, CONFIG) {
     $scope.shopItems = shopItems.list();
     $scope.hideList = $scope.shopItems.length === 0;
-    $scope.pagination = Pagination.getNew(CONFIG.itemsOnPage || 5);
-    $scope.pagination.numPages = Math.ceil($scope.shopItems.length / $scope.pagination.perPage);
-    $scope.pagination.showAll = function() {
-      if (!this.showedAll) {
-        this.showedAll = true;
-        this.oldPerPage = this.perPage;
-        this.page = 1;
-        return this.perPage = this.perPage * this.numPages;
-      } else {
-        this.showedAll = false;
-        return this.perPage = this.oldPerPage;
-      }
-    };
+    $scope.pagination = Pagination.getNew($scope.shopItems, CONFIG.itemsOnPage || 5);
+    $scope.paginationHide = $scope.pagination.page === $scope.pagination.numPages;
     $scope.showShopItem = function(link) {
       return $window.location.href = link;
     };

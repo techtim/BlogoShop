@@ -1,8 +1,15 @@
 (function(angular) {
   return angular.module('filters', []).filter('unsafe', function($sce) {
     return function(val) {
-      console.log;
       return $sce.trustAsHtml(val);
+    };
+  }).filter('startFrom', function() {
+    return function(input, start) {
+      if (input === void 0) {
+        return input;
+      } else {
+        return input.slice(+start);
+      }
     };
   });
 })(angular);

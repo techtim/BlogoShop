@@ -1,0 +1,62 @@
+<div class="tools clearfloat"
+    % if (stash('bottom')) {
+        ng-hide="pagination.allPagesShow()"
+    % }
+>
+    <div class="filters" di-dropdown>
+
+        <h5 class="filters__caption"
+            ng-class="{'is-opened': isOpened}"
+            ng-click="toggleDropDown()">Сортировать</h5>
+
+        <ul class="filters__list" ng-class="{'is-opened': isOpened}">
+            <li class="filters__type"
+                ng-class="{'is-current': sortBy == 'timestamp'}"
+                ng-click="sortHelper('timestamp'); toggleDropDown();">
+                <i class="fa fa-circle"></i>Новые поступления
+            </li>
+            <li class="filters__type"
+                ng-class="{'is-current': sortBy == 'price'}"
+                ng-click="sortHelper('price'); toggleDropDown();">
+                <i class="fa fa-circle"></i>Цена: Min/Max
+            </li>
+            <li class="filters__type"
+                ng-class="{'is-current': sortBy == '-price'}"
+                ng-click="sortHelper('-price'); toggleDropDown();">
+                <i class="fa fa-circle"></i>Цена: Max/Min
+            </li>
+        </ul>
+    </div>
+
+    <div class="filters__selected" ng-switch on="sortBy" ng-if="sortBy">
+        <span ng-switch-when="timestamp">Новые поступления</span>
+        <span ng-switch-when="price">Цена: Min/Max</span>
+        <span ng-switch-when="-price">Цена: Max/Min</span>
+        <button class="filters__remove-filters" ng-click="sortHelper('')">x</button>
+    </div>
+
+    <div class="shop-navigation">
+
+        <button class="shop-navigation__button--all"
+                ng-class="{'is-active': pagination.showedAll}"
+                ng-click="pagination.showAll()"
+                ng-if="pagination.numPages > 1">
+            Показать все
+        </button>
+
+        <button class="shop-navigation__button"
+                ng-click="pagination.prevPage()"
+                ng-disabled="pagination.page == 0 || pagination.showedAll">
+        </button>
+
+        <span class="shop-navigation__page-counter" ng-switch on="pagination.showedAll">
+            <span ng-switch-default>{{pagination.page+1}} из {{pagination.numPages}}</span>
+            <span ng-switch-when="true">1</span>
+        </span>
+
+        <button class="shop-navigation__button shop-navigation__button--next"
+                ng-click="pagination.nextPage()"
+                ng-disabled="pagination.page + 1 >= pagination.numPages || pagination.showedAll">
+        </button>
+    </div>
+</div>
