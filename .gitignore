@@ -16,3 +16,5 @@ BlogoShop.yml
 /public/files/i/group/
 /public/files/i/new/
 /public/vendors/*
+/layouts/*
+/frontsrc/tests/unit/coverage/*
