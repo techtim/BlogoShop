@@ -4,7 +4,7 @@
     <div class='contacts__section fr'>
         <div class='row'>
             <label>АДРЕС:</label>
-            МОСКВА, Электрозаводская ул. 21
+            МОСКВА, Хохловский переулок д. 7
         </div>
         <div class='row'>
             <label>график работы:</label>
@@ -12,7 +12,7 @@
         </div>
         <div class='row'>
             <label>ТЕЛЕФОН:</label>
-            <span class='phone'>+7 (985) 172 4306, +7 (985) 229 1271 </span>
+            <span class='phone'>+7 (985) 172 4306</span>
         </div>
     </div>
 </div>
