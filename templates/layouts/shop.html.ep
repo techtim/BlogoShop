@@ -41,6 +41,6 @@
 
 		%= include 'includes/footer'
 
-		%# = include 'includes/yandex_metrika_shop'
+		%= include 'includes/yandex_metrika_shop'
 	</body>
 </html>

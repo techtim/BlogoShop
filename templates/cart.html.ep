@@ -102,25 +102,25 @@
 
 		<div class='clear'></div>
 
-		<div class='left__section address item__block disabled' >
+		<div class='left__section address item__block' >
 			<h2 class='caption'>Адреc доставки:</h2>
 
 			<ul>
 				<li class='clearfloat'>
-					<input type='text' class='country' placeholder='Страна' name='country' value='<%= stash('country')%>' disabled required />
+					<input type='text' class='country' placeholder='Страна' name='country' value='<%= stash('country')%>' required />
 
-					<input type='text' class='city' placeholder='Город' name='city' value='<%= stash('city')%>' required disabled/>
+					<input type='text' class='city' placeholder='Город' name='city' value='<%= stash('city')%>' required/>
 
-					<input type='text' class='index' placeholder='индекс' name='zip' value='<%= stash('zip')%>' required disabled/>
+					<input type='text' class='index' placeholder='индекс' name='zip' value='<%= stash('zip')%>' required/>
 				</li>
 				<li class='clearfloat'>
-					<input type='text' class='addr' placeholder='Адрес' name='address' value='<%= stash('address')%>' required disabled/>
-					<input type='text' class='house' placeholder='Дом' name='dom' value='<%= stash('dom')%>' required disabled/>
-					<input type='text' class='building' placeholder='Корп' name='korp' value='<%= stash('korp')%>' disabled/>
-					<input type='text' class='flat' placeholder='Кв' name='flat' value='<%= stash('flat')%>' disabled/>
+					<input type='text' class='addr' placeholder='Адрес' name='address' value='<%= stash('address')%>' required/>
+					<input type='text' class='house' placeholder='Дом' name='dom' value='<%= stash('dom')%>' required/>
+					<input type='text' class='building' placeholder='Корп' name='korp' value='<%= stash('korp')%>'/>
+					<input type='text' class='flat' placeholder='Кв' name='flat' value='<%= stash('flat')%>'/>
 				</li>
 				<li class='clearfloat'>
-					<input type='text' class='receiver' placeholder='Получатель' name='receiver' value='<%= stash('receiver')%>' required disabled/>
+					<input type='text' class='receiver' placeholder='Получатель' name='receiver' value='<%= stash('receiver')%>' required/>
 					<p class='message'>место под системное сообщение</p>
 				</li>
 			</ul>
@@ -132,8 +132,7 @@
 				<a class='pickup__checkbox fake__checkbox'><input type='checkbox' name='self_delivery' value='self' /></a>
 				<p>
 					Россия, Москва<br/>
-					ЭЛЕКТРОЗАВОДСКАЯ УЛ. 21<br/>
-					<span>старое здание завода "Электрон"</span>
+					Хохловский переулок д.7<br/>
 				</p>
 			</div>
 			<div class='map'>
@@ -147,11 +146,18 @@
 			<h2 class='caption'>Способ доставки:</h2>
 
 			<ul class='types__list' data-type='deliver'>
-				<li class='clearfloat'>
+				<!--<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled' value='fast_courier' id='fast_courier' data-price='500' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'fast_courier' %> disabled />
 					<label for='courier'>
 						Срочная доставка по Москве в пределах МКАД (в день заказа)
 					<span class='price'>500</span>
+					</label>
+				</li>-->
+				<li class='clearfloat'>
+					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='self_delivery' id='self_delivery' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
+					<label for='ems'>
+						Заберу самостоятельно
+						<span class='price'></span>
 					</label>
 				</li>
 				<li class='clearfloat'>
@@ -169,14 +175,14 @@
 						<span class='price'></span>
 					</label>
 				</li>
-				<li class='clearfloat'>
+				<!--<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='ems' id='ems' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
 					<label for='ems'>
 						<img src='/i/logos/ems.png' alt='EMS' />
 						<sup>EMS.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
 						<span class='price'></span>
 					</label>
-				</li>
+				</li>-->
 			</ul>
 		</div>
 
@@ -184,13 +190,13 @@
 			<h2 class='caption dark__gray'>Способы оплаты:</h2>
 
 			<ul class='types__list'>
-				<li class='clearfloat' data-type='cash'>
+				<!--<li class='clearfloat' data-type='cash'>
 					<input type='radio' name='pay_type' id='pay__courier' value='cash' disabled />
 					<label for='pay__courier'>Наличные курьеру</label>
-				</li>
+				</li>-->
 				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='nalog_payment' value='nalog_payment' disabled />
-					<label for='nalog_payment'>Наложенный платеж</label>
+					<label for='nalog_payment'>Безналичный платеж</label>
 				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
