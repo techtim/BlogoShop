@@ -266,6 +266,11 @@ sub get_active_categories {
 	return $hash;
 }
 
+sub get_article_types {
+	my ($self, $db) = @_;
+	return { map {$_->{_id} => $_->{name} } BlogoShop->db->types->find({})->all };
+}
+
 sub get_items_from_catalog {
 	my ($self, $ctrlr) = @_;
 

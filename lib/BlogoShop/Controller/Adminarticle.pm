@@ -251,9 +251,9 @@ sub list_statics {
 	my $page = $self->req->param('page') ? $self->req->param('page') : 1;
 	
 	my @statics = $self->app->db->statics->find({})->
-	skip(($page-1)*($self->config('articles_on_admin_page')||30))->
-	limit($self->config('articles_on_admin_page')||30)->
-	sort({'_id' => -1})->all;
+		skip(($page-1)*($self->config('articles_on_admin_page')||30))->
+		limit($self->config('articles_on_admin_page')||30)->
+		sort({'_id' => -1})->all;
 	
 	my $pages = $self->app->db->statics->find({})->count/($self->config('articles_on_admin_page')||30);
 	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
@@ -262,52 +262,6 @@ sub list_statics {
 		articles => \@statics,
 		pages => $pages || 0,
 		template => 'admin/list_statics',
-		format => 'html',
-	);
-}
-
-sub list_videos {
-	my $self = shift;
-	my $page = $self->req->param('page') ? $self->req->param('page') : 1;
-	my @videos = $self->app->db->vik_users->find({video_code => {'$exists' => 'true'}, stage => 0+$page})->sort({'_id' => 1})->all;
-	
-	if ($self->stash('post')) {
-		foreach (@videos) {
-			my $flag = $_->{active} || 'fresh';
-			$_->{active} = $self->req->param($_->{_id}) ? 1 : 0 ;
-			$_->{name} = $self->req->param('name_'.$_->{_id}) || '';
-			$_->{alias} = $self->utils->translit($_->{name}) if $_->{name};
-			
-			$self->app->db->vik_users->update({_id => 0+$_->{_id}}, {'$set' => {active => $_->{active}}});
-			my $ua = LWP::UserAgent->new();
-			my $res = $ua->get("http://iinlondon2012.vasmedia.ru/iin/add?msisdn=".$_->{_id}) if $_->{active} == 1 && $flag eq 'fresh'; 
-		}
-	}
-	
-	return $self->render(
-		videos => \@videos,
-		pages => 3,
-		template => 'admin/list_videos',
-		format => 'html',
-	);
-}
-
-sub list_big_games {
-	my $self= shift;
-	my $page = $self->req->param('page') ? $self->req->param('page') : 1;
-	
-	my @big_games_news = $self->app->db->big_games_news->find({})->
-		skip(($page-1)*($self->config('articles_on_admin_page')||30))->
-		limit($self->config('articles_on_admin_page')||30)->
-		sort({'_id' => -1})->all;
-	
-	my $pages = $self->app->db->big_games_news->find({})->count/($self->config('articles_on_admin_page')||30);
-	$pages = $pages - int($pages) > 0 ? int($pages)+1 : $pages;
-	
-	return $self->render(
-		articles => \@big_games_news,
-		pages => $pages || 0,
-		template => 'admin/list_big_games',
 		format => 'html',
 	);
 }

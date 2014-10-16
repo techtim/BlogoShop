@@ -154,8 +154,8 @@
 					</label>
 				</li>-->
 				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='self_delivery' id='self_delivery' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
-					<label for='ems'>
+					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='self_delivery' id='self_delivery' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'self_delivery' %> disabled />
+					<label for='self_delivery'>
 						Заберу самостоятельно
 						<span class='price'></span>
 					</label>

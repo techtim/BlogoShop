@@ -105,7 +105,7 @@
 							<option value="canceled" <%= 'selected' if $order->{status} eq 'canceled'%>>отменен</option>
 							<option value="changed" <%= 'selected' if $order->{status} eq 'changed' %>>изменен</option>
 
-							% if ($admin->{login} eq $config->{order_delete_power}) { 
+							% if ($admin->{type} eq 'super') { 
 							<option value="delete">удалить</option>
 							%}
 						<select>

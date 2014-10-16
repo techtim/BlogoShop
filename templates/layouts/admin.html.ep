@@ -30,6 +30,9 @@
 				<li><a href='/admin/' class='home' title='Главная страница админки'></a></li>
 				<li><%= link_to 'БЛОГ' => '/admin' %></li>
 				<li><%= link_to 'ШОП' => '/admin/shop' %></li>
+				<li><%= link_to 'КАТЕГОРИИ' => '/admin/categories' %></li>
+				<li><%= link_to 'БРЕНДЫ' => '/admin/brands' %></li>
+				<li><%= link_to 'СТАТИКА' => '/admin/statics' %></li>
 				 % if ($admin->{type} && $admin->{type} eq 'super') {
 					<li><%= link_to 'Добавить администратора' => '/admin/add_admin' %></li>
 				 	<li><%= link_to 'ЗАКАЗЫ' => '/admin/orders' %></li>

@@ -11,11 +11,11 @@
                 %= form_for '' => (method => 'get') => begin
                     <span>
                         Тип:
-                        %= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
+                        %= include 'includes/select_block', name => 'type', select => stash 'type', options => stash 'types'
                     </span>
                     <span>
                         Бренд:
-                        %= include 'includes/select_block', name => 'brand', select => $brand, options => stash 'brands'
+                        %= include 'includes/select_block', name => 'brand', select => stash 'brand', options => stash 'brands'
                     </span>
                     <span>
                         Таг:
@@ -31,7 +31,7 @@
 
 <div class='pager'>
     % foreach my $i (1..$pages) {
-        <a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
+        <a href='?<%== (stash 'type' ne '' ? 'type='.stash 'type'.'\&amp;' : '') . (stash 'tag' ne '' ? 'tag='.stash 'tag'.'\&amp;' : '')."page=$i"%>'><%= $i %></a>
     % }
 </div>
 

@@ -10,6 +10,7 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
     (w[c] = w[c] || []).push(function() {
         try {
             w.yaCounter23540551 = new Ya.Metrika({id:23540551,
+                    webvisor:true,
                     clickmap:true,
                     trackLinks:true,
                     accurateTrackBounce:true});
