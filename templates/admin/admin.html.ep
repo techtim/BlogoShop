@@ -1,7 +1,6 @@
 % layout 'admin';
 % title 'Админка';
 
-
 %= include 'includes/error_message', error_messages => stash 'error_message'
 %= include 'includes/info_message', message => stash 'message'
 
@@ -10,7 +9,7 @@
 	<div class='list__section'>
 		<h3 class='caption'>Посты:</h3>
 		<%= link_to 'Создать новый пост' => '/admin/article/edit', class => 'add', title => 'Создать новый пост' %>
-		%= include 'includes/admin_list_articles', articles => stash 'articles'
+		%= include 'includes/admin_list_articles', list_type => 'articles', articles => stash 'articles'
 
 	</div>
 
@@ -23,8 +22,6 @@
 		</div>
 	</div>
 
-	<%= link_to 'Редактирование категорий' => '/admin/categories' %>
-    <%= link_to 'Редактирование брендов' => '/admin/brands' %>
 </div>
 
 <div class='right__side__section'>

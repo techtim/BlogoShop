@@ -34,9 +34,6 @@ sub index {
 	my $filter = {};
 	$self->req->param($_) ? $filter->{$_} = $self->req->param($_) : () foreach ARTICLE_PARAMS;
 
-    $self->stash(brands => [$self->app->db->brands->find()->all] || []);
-    $self->stash(brands_alias => {map {$_->{_id} => $_->{name}} @{$self->stash('brands')}});
-
     my @arts = $self->app->db->articles->find($filter)->
     skip(($page-1)*($self->config('articles_on_admin_page')||30))->
     limit($self->config('articles_on_admin_page')||30)->
@@ -185,7 +182,7 @@ sub update_admin {
 	delete $edited_admin->{new_pass};
 	delete $edited_admin->{new_pass_ctrl};
 	delete $edited_admin->{old_pass};
-	delete $edited_admin->{type};
+	# delete $edited_admin->{type};
 
 	$self->admins->update($self,$edited_admin) if !$self->stash('error_message');
 	

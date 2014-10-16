@@ -220,7 +220,7 @@ sub check_existing_alias {
 		{"alias" => '1'} # fetch only alias
 	)->sort({alias => -1})->all;
 	
-	return ($#check > -1 ? ($check[0]->{alias} =~ /(\d?$)/)[0] + 1 : '');  
+	return ($#check > -1 ? ($check[0]->{alias} =~ /(\d+)$/ ? $1 + 1 : 1) : '');
 }
 
 sub block_article {

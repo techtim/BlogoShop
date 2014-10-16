@@ -110,18 +110,23 @@ sub items_update {
 	my $self = shift;
 	my $items = [$self->app->db->items->find({})->all];
 	foreach (@$items) {
+		next if $_->{brand} eq 'mazzer' || $_->{brand} eq 'anfim';
 		foreach (@{$_->{subitems}}) {
 			$_->{qty} eq '' || $_->{qty} eq '0' ?  $_->{qty}=0 : $_->{qty} += 0;
-			$_->{price} += 0;
+			$_->{price} = $_->{price}*1.1-($_->{price}*1.1%10);
 		}
+		
 		$_->{qty} eq '' || $_->{qty} eq '0' ?  $_->{qty}=0 : $_->{qty} += 0;
 		$_->{price} += 0;
 #		warn $self->dumper($_);
 		# $_->{brand_name} = $self->app->db->brands->find_one({_id => $_->{brand}}, {name => 1}) || '';
 		# $_->{brand_name} = $_->{brand_name}->{name} if $_->{brand_name};
 		
-		# $self->{app}->db->items->update({alias=> $_->{alias}} , 
+		# $self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$_->{_id}) , 
 		# 	{'$set' =>{qty => 0+$_->{qty}, price => $_->{price}, subitems => $_->{subitems}, brand_name => $_->{brand_name}}}); 
+		$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$_->{_id})}, 
+			{'$set' => { price => $_->{price}*1.1-($_->{price}*1.1%10), subitems => $_->{subitems} } } ) ; 
+		# 
 	}
 	return $self->render(
 		json => {ok => 1},

@@ -1,71 +1,36 @@
 % layout 'admin';
 % title 'Список статичных страниц';
 
-<div class="admin-container">
+%= include 'includes/error_message', error_messages => stash 'error_message'
+%= include 'includes/info_message', message => stash 'message'
 
-	<div class="main-heading section">
+<div class='left__side__section'>
 
-		<h1>
-			<a href="/admin">Админка</a>
-			&gt; Список статичных страниц
-		</h1>
+	<div class='list__section'>
+		<h3 class='caption'>Cтатичные страницы:</h3>
+		<%= link_to 'Добавить статичную страницу' => '/admin/statics/edit', class => 'add', title => 'Добавить статичную страницу' %>
+		<ul class='pager__section clearfloat'>
+			<li class='title'>страница:</li>
+			% foreach my $i (1..$pages) {
+			<li>
+				<a href='?<%== "page=$i" %>'><%= $i %></a>
+		   </li>
+			% }
+		</ul>
 
-		%= include 'includes/error_message', error_messages => stash 'error_message'
+		<ul class='items__list with__border__bottom'>
+			% foreach my $article (@$articles) {
+				<li data-id='<%== $article->{_id}->{value} %>'>
 
-		%= include 'includes/info_message', message => stash 'message'
+					<a href="/admin/statics/edit/<%== $article->{_id}->{value} %>"
+						 class='group__link'
+						 title='<%= $article->{name} %>'>
+						<%= $article->{name} %>
+					</a>
 
-	</div>
-
-	<div class="section articles-toolbox">
-
-		<table class="layout">
-			<tr>
-				<td>
-					<b>Инструменты:</b>
-						[<a href="/admin/statics/edit">Добавить страницу<a/>]
-				</td>
-			</tr>
-		</table>
-	</div>
-
-    <div class='pager'>
-	    % foreach my $i (1..$pages) {
-	    	<a href='?<%== "page=$i" %>'><%= $i %></a>
-	    % }
-	</div>
-
-	<div class="section article-list">
-		<table class="blackhead">
-			<thead>
-				<tr>
-					<td colspan="2">Название</td>
-				</tr>
-			</thead>
-			<tbody>
-				% foreach my $article (@$articles) {
-					<tr>
-						<td>
-							<a href="/<%== $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'">
-								<%= $article->{name} %> (<%= config->{domain_name}.'/'.$article->{alias} %>)
-							</a>
-						</td>
-						<td>
-							% if ( !$article->{block}->{time} || $article->{block}->{time} < time() || $article->{block}->{admin_id} eq session('admin')->{_id} ) {
-								[<i><a href="/admin/statics/edit/<%== $article->{_id}->{value} %>">править</a></i>]
-							% }
-						</td>
-					</tr>
-				% }
-			</tbody>
-		</table>
-    </div>
-    <!-- /article-list -->
-
-    <div class='pager'>
-
-		% foreach my $i (1..$pages) {
-			<a href='?<%== "page=$i" %>'><%= $i %></a>
-		% }
+					<a class='preview' href="/<%== $article->{alias} %>" TARGET='_blank' title="Предварительный просмотр '<%= $article->{name} %>'"></a>
+				</li>
+			% }
 
 	</div>
 

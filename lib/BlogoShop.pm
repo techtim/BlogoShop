@@ -5,13 +5,17 @@ use Mojo::Base 'Mojolicious';
 use MongoDB;
 
 use JSON::XS;
-use Redis;
 
 use BlogoShop::Articles;
 use BlogoShop::Admins;
 use BlogoShop::Utils;
 use BlogoShop::Item;
 use BlogoShop::Qiwi;
+
+{
+	no warnings 'redefine'; 
+	*MongoDB::OID::TO_JSON = sub {$_[0]->value};
+}
 
 # This method will run once at server start
 sub startup {
@@ -59,13 +63,6 @@ sub startup {
 			)->get_database($self->config('db_name'));
 		}
 	);
-	(ref $self)->attr(
-		memd => sub {
-			return Cache::Memcached::Fast->new({
-				servers => [ { address => 'localhost:11211', weight => 2.5 } ]
-			});
-		}
-	);
 
 	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
 	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
@@ -81,6 +78,7 @@ sub startup {
 	$self->helper(items 	=> sub { shift->app->items });
 	$self->helper(courier 	=> sub { shift->app->courier });
 	$self->helper(qiwi 	=> sub { shift->app->qiwi });
+	$self->helper(uri_escape => sub {return URI::Escape::uri_escape_utf8(pop)});
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new();
@@ -128,6 +126,10 @@ sub startup {
 	$self->hook(before_dispatch => sub {
 		my $c = shift;
 		$c->stash(%{$c->app->utils->check_cart($c)});
+		if($c->req->url->path =~ m!^(/soap)!){
+           $c->session('csrftoken' => 1);
+           $c->param('csrftoken' => 1); 
+		}
 	});
 
 	$self->hook(around_dispatch => sub {
@@ -139,6 +141,7 @@ sub startup {
 		$c->stash->{active_categories} = $c->app->utils->get_active_categories($c->app->db);
 		$c->stash->{list_brands} 	  	= $c->app->utils->get_list_brands($c->app->db);
 		$c->stash->{name_brands} 	  	= {map {$_->{_id} => $_->{name}} @{$c->stash->{list_brands}}};
+		$c->stash->{article_types}      = $c->app->utils->get_article_types();
 		$next->();
 	});
 
@@ -153,7 +156,8 @@ sub startup {
 	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
 	$r->route('/yandex_market')->to('controller-shop#yandex_market');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
-	# $r->route('/:type/:alias', type => qr/$bind_types/, alias => qr/[\d\w_]+/ )->to('controller-article#show');
+	$r->route('/bill')->to('controller-qiwi#bill');
+	$r->route('/soap')->to('controller-qiwi#soap');
 
 #    $self->routes->get('controller-shop#list')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
 
@@ -242,6 +246,9 @@ sub startup {
 		$admin_bridge->route('/logout')->to('controller-login#logout');
 		$admin_bridge->route('/*' => sub {shift->redirect_to('/')});
 
+		# Statistics 
+		$admin_bridge->route('/orders_emails')->to('controller-Ajax#orders_emails');
+
 	# --SHOP--
 
 	# make from array of hashes array of _ids and join ids to filter cuts in url
@@ -252,6 +259,12 @@ sub startup {
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
 	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
+	$r->route('/cart/ship_cost')->via('get')->to('controller-ajax#check_logist_cost');
+
+
+	$r->route('/checkout')->to('controller-shop#show_checkout');
+	$r->route('/checkout/:order_id', order_id => qr/[\d\w]+/)->to('controller-shop#show_checkout');
+
 	# list items 
 	$r->route('/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-shop#brand');
 	$r->route('/tag/:tags', tag => qr![^\{\}\[\]/]+!)->to('controller-shop#list');

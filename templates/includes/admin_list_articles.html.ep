@@ -6,7 +6,7 @@
     <li class='title'>страница:</li>
     % foreach my $i (1..$pages) {
     <li>
-        <a href='?<%== ($type ? "type=$type\&amp;" : '') . ($tag ? "tag=$tag\&amp;" : '')."page=$i"%>'><%= $i %></a>
+        <a href='?<%== (stash 'type' ne '' ? 'type='.stash 'type'.'\&amp;' : '') . (stash 'tag' ne '' ? 'tag='.stash 'tag'.'\&amp;' : '')."page=$i"%>'><%= $i %></a>
    </li>
     % }
 </ul>
@@ -15,7 +15,7 @@
 <div class='sort__strip__section clearfloat'>
     <h3>сортировать</h3>
     %= form_for '' => (method => 'get') => begin
-
+        % my ($type, $brand) = (stash('type'), stash('brand'));
         <label>Тип:</label>
         <div class='selects__section'>
             %= include 'includes/select_block', name => 'type', select => $type, options => stash 'types'
@@ -23,7 +23,7 @@
 
         <label>Бренд:</label>
         <div class='selects__section'>
-            %= include 'includes/select_block', name => 'brand', select => $brand, options => stash 'brands'
+            %= include 'includes/select_block', name => 'brand', select => $brand, options => stash 'list_brands'
         </div>
 
         <label>Таг:</label>
@@ -53,13 +53,13 @@
 
 			<div class='container brand'>
 			% if ( $article->{brand} ) {
-				<a href="/admin?brand=<%= $article->{brand} %>"><%= $brands_alias->{$article->{brand}} %></a>
+				<a href="/admin?brand=<%= $article->{brand} %>"><%= $name_brands->{$article->{brand}} %></a>
 			% }
 			</div>
 
 			<div class='container type'>
             % if ( $article->{type} ) {
-        		<a href="/admin/articles?type=<%= $article->{type} %>"><%= $types_alias->{$article->{type}} %></a>
+        		<a href="/admin?type=<%= $article->{type} %>"><%= $types_alias->{$article->{type}} %></a>
           	% }
             </div>
 
