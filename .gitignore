@@ -1,6 +1,7 @@
 *.log
 /log/
 BlogoShop.yml
+robots.txt
 /.settings/
 .project
 /public/files/i/item/
