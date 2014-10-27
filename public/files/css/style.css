@@ -122,7 +122,7 @@ body.overlayed #overlay {
 /* line 143, style.scss */
 .shopping__cart__section a {
   padding-top: 4px;
-  border-bottom: 4px solid #845730;
+  border-bottom: 4px solid #3C1E0A;
   color: #000;
   font-size: 13px;
   text-decoration: none;
@@ -241,7 +241,7 @@ body.overlayed #overlay {
 }
 /* line 274, style.scss */
 .navigation__section .main__nav__strip li.current a {
-  color: #845730;
+  color: #3C1E0A;
 }
 /* line 281, style.scss */
 .navigation__section .main__nav__strip a {
@@ -252,7 +252,7 @@ body.overlayed #overlay {
 }
 /* line 290, style.scss */
 .navigation__section .main__nav__strip a:hover {
-  color: #845730;
+  color: #3C1E0A;
   text-decoration: underline;
 }
 /* line 295, style.scss */
@@ -448,7 +448,7 @@ body.overlayed #overlay {
 }
 /* line 494, style.scss */
 .sidebar__section .menu__section .item.current .title a {
-  color: #845730;
+  color: #3C1E0A;
 }
 /* line 500, style.scss */
 .sidebar__section .menu__section .item.toggled .submenu {
@@ -487,7 +487,7 @@ body.overlayed #overlay {
 }
 /* line 543, style.scss */
 .sidebar__section .menu__section li.current a {
-  color: #845730;
+  color: #3C1E0A;
 }
 /* line 548, style.scss */
 .sidebar__section .menu__section li a {
@@ -500,7 +500,7 @@ body.overlayed #overlay {
 }
 /* line 560, style.scss */
 .sidebar__section .menu__section li a:hover {
-  color: #845730;
+  color: #3C1E0A;
   text-decoration: underline;
 }
 /* line 570, style.scss */
@@ -657,6 +657,7 @@ body.overlayed #overlay {
 /* line 724, style.scss */
 .breadcrumps__section {
   padding-bottom: 8px;
+  float: left;
 }
 /* line 727, style.scss */
 .breadcrumps__section li {
@@ -667,7 +668,7 @@ body.overlayed #overlay {
 }
 /* line 736, style.scss */
 .breadcrumps__section li.current a {
-  color: #845730;
+  color: #3C1E0A;
   text-decoration: underline;
 }
 /* line 742, style.scss */
@@ -982,7 +983,7 @@ body.overlayed #overlay {
 }
 /* line 1083, style.scss */
 .post__page .tags__section a:hover {
-  color: #845730;
+  color: #3C1E0A;
   text-decoration: underline;
 }
 /* line 1090, style.scss */
@@ -1169,6 +1170,20 @@ body.overlayed #overlay {
   text-transform: uppercase;
 }
 
+.shop-item__edit-link {
+  margin-top: -7px;
+  padding: 6px 10px;
+  border: 1px solid #3C1E0A;
+  color: #3C1E0A;
+  font-size: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.shop-item__edit-link:hover {
+  background: #3C1E0A;
+  color: white;
+}
+
 /* line 1257, style.scss */
 .shop__information__section .row {
   padding: 16px 0;
@@ -1209,7 +1224,7 @@ body.overlayed #overlay {
 }
 /* line 1299, style.scss */
 .shop__information__section .row.tags a:hover {
-  color: #845730;
+  color: #3C1E0A;
   text-decoration: underline;
 }
 /* line 1306, style.scss */
@@ -1287,7 +1302,7 @@ body.overlayed #overlay {
 }
 /* line 1373, style.scss */
 .shop__information__section .row .color li.selected {
-  border-color: #845730;
+  border-color: #3C1E0A;
 }
 /* line 1377, style.scss */
 .shop__information__section .row .color li input {
@@ -1305,7 +1320,7 @@ body.overlayed #overlay {
 /* line 1391, style.scss */
 .shop__information__section .row .price s {
   margin-right: 6px;
-  color: #845730;
+  color: #3C1E0A;
   font-size: 18px;
 }
 
@@ -1557,7 +1572,7 @@ body.overlayed #overlay {
 }
 /* line 1664, style.scss */
 .shop__items__list .list__section li s {
-  color: #845730;
+  color: #3C1E0A;
 }
 /* line 1669, style.scss */
 .shop__items__list .list__section .shop__information__section {
@@ -1642,6 +1657,7 @@ body.overlayed #overlay {
   line-height: 17px;
   padding-bottom: 10px;
   color: #434343;
+  float: left;
 }
 /* line 1748, style.scss */
 .shop__description .expand__items {
@@ -1796,8 +1812,17 @@ body.overlayed #overlay {
 }
 /* line 1914, style.scss */
 .cart__items__list__section .items__list li .info__section .price s {
-  color: #845730;
+  color: #3C1E0A;
 }
+
+.cart__items__list__section .items__list li .info__section .count {
+  padding-top: 10px;
+  padding-right: 14px;
+  margin-bottom: -10px;
+  color: #434343;
+  font-size: 20px;
+}
+
 /* line 1922, style.scss */
 .cart__items__list__section .price__section {
   clear: both;
@@ -1894,7 +1919,7 @@ body.overlayed #overlay {
 }
 /* line 2009, style.scss */
 .cart__items__list__section .submit___section .item__block input.error {
-  border-color: #845730;
+  border-color: #3C1E0A;
 }
 /* line 2015, style.scss */
 .cart__items__list__section .submit___section .clear {
@@ -1903,7 +1928,7 @@ body.overlayed #overlay {
 }
 /* line 2020, style.scss */
 .cart__items__list__section .submit___section .message {
-  color: #845730;
+  color: #3C1E0A;
   font-family: "PT Sans";
   font-size: 10px;
   text-align: center;
@@ -2009,7 +2034,7 @@ body.overlayed #overlay {
 /* line 16, style.scss */
 .cart__items__list__section .submit___section .login input::-webkit-input-placeholder {
   padding-left: 8px;
-  color: #c8c8c8;
+  color: #464646;
   font-family: "PT Sans";
   font-size: 12px;
   font-weight: bold;
@@ -2018,7 +2043,7 @@ body.overlayed #overlay {
 /* line 27, style.scss */
 .cart__items__list__section .submit___section .login input:-moz-placeholder {
   padding-left: 8px;
-  color: #c8c8c8;
+  color: #464646;
   font-family: "PT Sans";
   font-size: 12px;
   font-weight: bold;
@@ -2222,7 +2247,7 @@ body.overlayed #overlay {
 }
 /* line 2277, style.scss */
 .cart__items__list__section .submit___section .pickup p span {
-  color: #845730;
+  color: #3C1E0A;
 }
 /* line 2282, style.scss */
 .cart__items__list__section .submit___section .pickup .map {

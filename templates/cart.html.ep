@@ -21,7 +21,7 @@
 				</a>
 			</div>
 			<div class='description__section'>
-				<h3><a href=''><%= $item->{brand} %></a></h3>
+				<h3><a href=''><%= $name_brands->{$item->{brand}} %></a></h3>
 				<h4><%= $item->{name} %></h4>
 				% if ($item->{size}) {
 					<p class='size'>РАЗМЕР: <strong><%= $item->{size} %></strong></p>
@@ -84,6 +84,22 @@
 			</ul>
 			<p class='message'>место под системное сообщение</p>
 		</div>
+
+<!--
+		<div class='right__section login item__block '>
+			<h2 class='caption light__gray'>Для юридических лиц:</h2>
+
+			<ul>
+				<li>
+					<input type='text' placeholder='ИНН' name='inn'  />
+				</li>
+				<li>
+					<input type='text' placeholder='КПП' name='kpp'  />
+				</li>
+			</ul>
+
+		</div>
+		
 		<div class='right__section login item__block hidden'>
 			<h2 class='caption light__gray'>Вход:</h2>
 			<a class='forgot' href='#'>забыт пароль</a>
@@ -99,7 +115,7 @@
 
 			<a class='submit__form'>Войти</a>
 		</div>
-
+-->
 		<div class='clear'></div>
 
 		<div class='left__section address item__block' >
@@ -161,8 +177,8 @@
 					</label>
 				</li>
 				<li class='clearfloat'>
-					<input type='radio' name='delivery_type' class='deliver__type disabled' value='courier' id='courier' data-price='350' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
-					<label for='courier'>
+					<input type='radio' name='delivery_type' class='deliver__type disabled' value='courier' id='couriere' data-price='350' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'courier' %> disabled />
+					<label for='couriere'>
 						Доставка по Москве в пределах МКАД
 						<span class='price'>350</span>
 					</label>
@@ -193,14 +209,26 @@
 				<!--<li class='clearfloat' data-type='cash'>
 					<input type='radio' name='pay_type' id='pay__courier' value='cash' disabled />
 					<label for='pay__courier'>Наличные курьеру</label>
+					<li class='clearfloat' data-type='qiwi'>
+					<input type='radio' name='pay_type' id='qiwi' value='qiwi' />
+					<label for='qiwi'>QIWI платеж</label>
+					</li>
 				</li>-->
 				<li class='clearfloat' data-type='nalog_payment'>
-					<input type='radio' name='pay_type' id='nalog_payment' value='nalog_payment' disabled />
+					<input type='radio' name='pay_type' id='nalog_payment' value='nalog_payment' checked />
 					<label for='nalog_payment'>Безналичный платеж</label>
 				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
-					<input type='radio' name='pay_type' id='qiwi' value='qiwi' disabled />
-					<label for='nalog_payment'>QIWI платеж</label>
+					<input type='radio' name='pay_type' id='yandex_money' value='yandex_money' />
+					<label for="yandex_money">Yandex деньги (ссылка на оплату будет выслана на email)</label>
+				</li>
+				<li class='clearfloat' data-type='nalog_payment'>
+					<input type='radio' name='pay_type' id='yandex_card' value='yandex_card' />
+					<label for="yandex_card">Пластиковая карта (ссылка на оплату будет выслана на email)</label>
+				</li>
+				<li class='clearfloat' data-type='nalog_payment'>
+					<input type='radio' name='pay_type' id='yandex_cash' value='yandex_cash' />
+					<label for="yandex_cash">Наличными через терминал (ссылка на оплату будет выслана на email)</label>
 				</li>
 			</ul>
 		</div>
@@ -223,5 +251,7 @@
 % }
 </div>
 
-<script async type="text/javascript" src="http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&coordorder=longlat&load=package.full&wizard=constructor&onload=fid_134945918937914001744"></script>
+<!--
+<script async type="text/javascript" src="http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&coordorder=longlat&load=package.full&wizard=constructor&onload=fid_134945918937914001744"></script> -->
+
 <script>requirejs(['app/cart'])</script>

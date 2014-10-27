@@ -11,6 +11,7 @@ use BlogoShop::Admins;
 use BlogoShop::Utils;
 use BlogoShop::Item;
 use BlogoShop::Qiwi;
+use BlogoShop::Group;
 
 {
 	no warnings 'redefine'; 
@@ -67,6 +68,7 @@ sub startup {
 	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
 	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
 	(ref $self)->attr(items 	=> sub {return BlogoShop::Item->new($self, $self->stash('id'))});
+	(ref $self)->attr(groups	=> sub {return BlogoShop::Group->new()});
 	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new()});
 	(ref $self)->attr(conf 	=> sub {return $self->config});
 	(ref $self)->attr(qiwi 	=> sub {return BlogoShop::Qiwi->new()});
@@ -76,6 +78,7 @@ sub startup {
 	$self->helper(admins 	=> sub { shift->app->admins });
 	$self->helper(articles 	=> sub { shift->app->articles });
 	$self->helper(items 	=> sub { shift->app->items });
+	$self->helper(groups 	=> sub { shift->app->groups });
 	$self->helper(courier 	=> sub { shift->app->courier });
 	$self->helper(qiwi 	=> sub { shift->app->qiwi });
 	$self->helper(uri_escape => sub {return URI::Escape::uri_escape_utf8(pop)});
@@ -84,8 +87,12 @@ sub startup {
 	my $utils = BlogoShop::Utils->new();
 	$self->helper('utils' => sub {return $utils});
 	
-	my $json = JSON::XS->new();
-	$self->helper('json' => sub {return $json});
+	(ref $self)->attr(
+		json => sub {
+			JSON::XS->new->allow_blessed->convert_blessed;
+		}
+	);
+	$self->helper(json => sub { shift->app->json });
 	
 	$self->plugin(mail => {
 		from     => 'noreply@sport.megafon.ru',
@@ -153,9 +160,14 @@ sub startup {
 	$r->route('/import_cities')->to('controller-Ajax#import_cities');
 	$r->route('/update')->to('controller-Ajax#items_update_alias');
 
-	$r->route('/subscribe')->via('post')->to('controller-ajax#subscribe');
+# make from array of hashes array of _ids and join ids to filter cuts in url
+	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
+	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show') if $bind_static;
+
+	$r->route('/rss')->to('controller-article#rss');
 	$r->route('/yandex_market')->to('controller-shop#yandex_market');
 	$r->route('/get_items_banner')->to('controller-ajax#get_banner_xml');
+	$r->route('/orders_cities')->to('controller-ajax#orders_cities');
 	$r->route('/bill')->to('controller-qiwi#bill');
 	$r->route('/soap')->to('controller-qiwi#soap');
 
@@ -200,6 +212,13 @@ sub startup {
 		$admin_bridge->route('/articles')->via('get')->to('controller-Adminarticle#list');
 		$admin_bridge->route('/articles/render')->via('get')->to('controller-Adminarticle#render_all');
 		
+		# Group part
+		$admin_bridge->route('/group/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Admingroup#get', id => 'add');
+		$admin_bridge->route('/group/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Admingroup#post', id => 'add');
+
+		$admin_bridge->route('/groups')->via('get')->to('controller-Admingroup#list');
+		$admin_bridge->route('/update_groups_items')->via('get')->to('controller-Admingroup#update_items_make_group_array');
+
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/search')->to('controller-Adminshop#show', search => 1);
@@ -219,13 +238,14 @@ sub startup {
 		$admin_bridge->route('/orders/id/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminorders#list', status => '');
 		$admin_bridge->route('/orders/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminorders#update');
 		$admin_bridge->route('/orders/:status/:id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('post')->to('controller-Adminorders#update');
+		$admin_bridge->route('/orders/:id/action/:act/:item_id/:item_sub_id', id => qr/[\d\w]+/, act => qr/[\w]+/)->via('get')->to('controller-Adminorders#edit_order');
+		$admin_bridge->route('/orders/:status/:id/action/:act/:item_id/:item_sub_id', id => qr/[\d\w]+/, status => => qr/\w+/)->via('get')->to('controller-Adminorders#edit_order');
 
 		# Static pages
 		$admin_bridge->route('/statics')->via('get')->to('controller-Adminarticle#list_statics');
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('get')->to('controller-Adminarticle#get', id => 'add', collection => 'statics');
 		$admin_bridge->route('/statics/edit/:id', id => qr/[\d\w]+/)->via('post')->to('controller-Adminarticle#post', id => 'add', collection => 'statics');
 
-		
 		# Content
 		$admin_bridge->route('/categories')->via('get')->to('controller-Admincontent#list_categories');
 		$admin_bridge->route('/categories/save')->via('post')->to('controller-Admincontent#list_categories', save => 1);
@@ -233,6 +253,7 @@ sub startup {
 		$admin_bridge->route('/brands')->via('get')->to('controller-Admincontent#list_brands');
 		$admin_bridge->route('/brands/:do', do => qr/[\w]+/)->to('controller-Admincontent#list_brands');
 		$admin_bridge->route('/brands/:do/:brand', do => qr/[\w]+/, brand => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_brands');
+		$admin_bridge->route('/banners/:type/:do/:banner', type => qr/\d+/, do => qr/[\w_]+/, banner => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_banners');
 
 		$admin_bridge->route('/banners')->via('get')->to('controller-Admincontent#list_banners');
 		$admin_bridge->route('/banners/:type', type => qr/\d+/)->via('get')->to('controller-Admincontent#list_banners');
@@ -251,22 +272,28 @@ sub startup {
 
 	# --SHOP--
 
-	# make from array of hashes array of _ids and join ids to filter cuts in url
-	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;
-	$r->route('/:template', template => qr/$bind_static/)->to('controller-static#show') if $bind_static;
-
-	$r->route('/rss')->to('controller-article#rss');
 	$r->route('/cart')->via('get')->to('controller-shop#cart', act => '');
 	$r->route('/cart')->via('post')->to('controller-shop#cart', act => 'checkout');
-	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
 	$r->route('/cart/ship_cost')->via('get')->to('controller-ajax#check_logist_cost');
-
 
 	$r->route('/checkout')->to('controller-shop#show_checkout');
 	$r->route('/checkout/:order_id', order_id => qr/[\d\w]+/)->to('controller-shop#show_checkout');
+	$r->route('/cart/:act/:id/:sub_id')->to('controller-shop#cart', act => '', id => '', sub_id => '');
 
 	# list items 
+	# BRAND
 	$r->route('/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-shop#brand');
+	$r->route('/brand/:brand/:category/:subcategory', 
+		brand => qr![^\{\}\[\]/]+!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)
+			->to('controller-shop#list', sex => '', subcategory => '', move => '', id => '');
+	$r->route('/brand/:brand/:category/:subcategory',
+		brand => qr![^\{\}\[\]/]+!, category => qr![^\{\}\[\]/]{2,}!, subcategory => qr![^\{\}\[\]/]{2,}!)
+			->to('controller-shop#list', sex => '', category => '', subcategory => '', move => '', id => '');
+	$r->route('/brand/:brand/:category/:subcategory/:alias/:act/:subitem',
+		brand => qr![^\{\}\[\]/]+!, category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!, alias => qr![^\{\}\[\]/]+!, act => qr!\w+!, subitem => qr!\d+!)
+			->to('controller-shop#item', act => '', subitem => 0);
+
+	$r->route('/group/:group', group => qr![^\{\}\[\]/]+!)->to('controller-shop#group');
 	$r->route('/tag/:tags', tag => qr![^\{\}\[\]/]+!)->to('controller-shop#list');
 
 	$r->route('/:sex/:category/:subcategory',

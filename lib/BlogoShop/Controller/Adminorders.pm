@@ -143,7 +143,7 @@ sub update {
 		$self->app->db->orders->update({_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {status => $_}})
 			if $_ && $_ =~ /($status_regex)/;
 		$self->app->db->orders->remove({_id => MongoDB::OID->new(value => $self->stash('id'))}) 
-			if $_ && $_ eq 'delete' && $self->stash('admin')->{type} eq 'super';
+			if $_ && $_ eq 'deleted' && $self->stash('admin')->{type} eq 'super';
 	}
 	if ($self->req->param('comment.title') || $self->req->param('comment.text')) {
 		$self->app->db->orders->update(
@@ -153,7 +153,7 @@ sub update {
 				} }
 		);
 	}
-	if ($self->req->param('comment.title') || $self->req->param('comment.text') || $self->req->param('status') ne $old_order->{status}) {
+	if ($self->req->param('comment.title') || $self->req->param('comment.text') || $self->req->param('status') ne $old_order->{status} || $self->req->param('status') eq 'deleted') {
 		my $vars = {order_id => $self->stash('id'),
 					ord_сomment_title => ''.$self->req->param('comment.title'),
 					ord_comment_text  => ''.$self->req->param('comment.text')};
@@ -171,7 +171,7 @@ sub update {
 			subject => 'Hовый комментарий в заказе №'.($self->stash('id')=~/^(.{8})/)[0],
 			type 	=> 'text/html',
 			format => 'mail',
-			data => $self->render_mail(	template => 'admin/order_upd'),
+			data => $self->render_mail(	template => 'mails/admin_order_update'),
 			handler => 'mail',
 		);
 	}
@@ -190,97 +190,6 @@ sub update {
 	return $self->redirect_to('/admin/orders/'.($self->stash('status')||''));
 }
 
-
-sub update {
-	my $self = shift;
-
-	my $old_order;
-	for ($self->req->param('status')) { 
-		$old_order = $self->app->db->orders->find_one({_id => MongoDB::OID->new(value => $self->stash('id'))});
-		$self->app->db->orders->update({_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {status => $_}})
-			if $_ && $_ =~ /($status_regex)/;
-		$self->app->db->orders->remove({_id => MongoDB::OID->new(value => $self->stash('id'))}) 
-			if $_ && $_ eq 'delete' && $self->stash('admin')->{type} eq 'super';
-	}
-	if ($self->req->param('comment.title') || $self->req->param('comment.text')) {
-		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
-				{ '$push' => { comments => 
-					{ login => $self->stash('admin')->{login}, title => $self->req->param('comment.title'), text => $self->req->param('comment.text')} 
-				} }
-		);
-	}
-	# if ($self->req->param('comment.title') || $self->req->param('comment.text') || $self->req->param('status') ne $old_order->{status}) {
-	# 	my $vars = {order_id => $self->stash('id'),
-	# 				ord_сomment_title => ''.$self->req->param('comment.title'),
-	# 				ord_comment_text  => ''.$self->req->param('comment.text')};
-	# 	if ($self->req->param('status')) {
-	# 		$vars->{ord_status_new} = ORDER_STATUS_NAME->{$self->req->param('status')};
-	# 		$vars->{ord_status_old} = ORDER_STATUS_NAME->{$old_order->{status}};
-	# 	}
-	# 	$self->stash(%$vars);
-	# 	my $mail = $self->mail(
-	# 		to      => $self->config('superadmin_mail'),
-	# 		cc		=> 'xoxloveka.office@gmail.com',
-	# 		from    => 'noreply@'.$self->config('domain_name'),
-	# 		subject => 'Hовый комментарий в заказе №'.($self->stash('id')=~/^(.{8})/)[0],
-	# 		type 	=> 'text/html',
-	# 		format => 'mail',
-	# 		data => $self->render_mail(	template => 'admin/order_upd'),
-	# 		handler => 'mail',
-	# 	);
-	# }
-	if ($self->req->param('delivery_cost') && $self->req->param('delivery_cost') !~ m![^\d]+!) {
-		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}, {'$set' => {delivery_cost => $self->req->param('delivery_cost')}}
-		);
-	}
-
-	$self->call_courier() if $self->req->param('courier');
-
-	if ($self->req->param('create_qiwi')) {
-		my $order = $self->app->db->orders->find_one(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}
-		);
-		my $status = $self->qiwi->create_bill($order, $self);
-		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
-			{'$set' => {qiwi_status => $status}}
-		);
-		
-		delete $order->{status}; # status binded mojo var
-
-		$self->stash(%$order);
-
-		my $mail = $self->mail(
-			to      => $order->{email},
-			cc		=> $self->config('superadmin_mail'),
-			from    => 'noreply@'.$self->config('domain_name'),
-			subject => 'Оплата покупки на сайте Barista Shop.',
-			type 	=> 'text/html',
-			format => 'mail',
-			data => $self->render_mail(	template => 'mails/qiwi_order'),
-			handler => 'mail',
-		);
-
-		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
-	}
-
-	if ($self->req->param('cancel_qiwi')) {
-		my $order = $self->app->db->orders->find_one(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}
-		);
-		my $status = $self->qiwi->cancel_bill($order, $self);
-		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => $self->stash('id'))}, 
-			{'$set' => {qiwi_status => $status}}
-		);
-		return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));	
-	}
-
-	return $self->redirect_to('/admin/orders/'.$self->stash('status'));
-}
-
 sub yandex_update_order {
 	my $self = shift;
 
@@ -290,9 +199,9 @@ sub yandex_update_order {
 	$self->stash(order => $order);
 	my $mail = $self->mail(
 			to      => $order->{email},
-			cc		=> 'xoxloveka.office@gmail.com',
+			cc		=> $self->config('superadmin_mail'),
 			from    => 'noreply@'.$self->config('domain_name'),
-			subject => 'Уведомление об оплате покупки в магазине Хохловка',
+			subject => 'Уведомление об оплате покупки в магазине '.$self->config('site_name'),
 			type 	=> 'text/html',
 			format => 'mail',
 			data => $self->render_mail(	template => 'mails/yandex_order'),
@@ -330,6 +239,13 @@ sub edit_order {
 			{ _id => MongoDB::OID->new(value => ''.$self->stash('item_id')) }, 
 			{ '$inc' => { "subitems.".$self->stash('item_sub_id').".qty" => $order_item->{count} } }
 		);
+
+	} elsif ($self->stash('act') eq 'add_items_mode') {
+		# if no order id in admin session add id, else it'll be deleted
+		$self->session()->{admin}{add_items_to_order} = $self->stash('id')
+			if (!delete $self->session()->{admin}{add_items_to_order});
+		warn $self->dumper($self->session());
+		return $self->redirect_to('/');
 	}
 
 	return $self->redirect_to('/admin/orders/id/'.$self->stash('id'));
@@ -405,7 +321,7 @@ sub qiwi_update_bills {
 	my $orders = $self->qiwi->get_bill_list();
 	foreach (@$orders) {
 		$self->app->db->orders->update(
-			{_id => MongoDB::OID->new(value => delete $_->{_id})},
+			{qiwi_status => {txn => $_->{txn}}},
 			{'$set' => {qiwi_status => $_ }}
 		);
 	}

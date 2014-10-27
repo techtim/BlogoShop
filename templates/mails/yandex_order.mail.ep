@@ -1,0 +1,7 @@
+<html>
+<body>
+Спасибо за заказ в нашем интернет-магазине.<br><br>
+Ваш заказ подтвержден, пожалуйста пройдите на страницу для проверки и оплаты:<br>
+<a href="http://<%= config->{domain_name} %>/checkout/<%= $order->{_id}{value} %>"><%= config->{domain_name} %>/checkout/<%= $order->{_id}{value} %></a>
+</body>
+</html>

@@ -3,16 +3,21 @@ package BlogoShop::Controller::Shop;
 use Mojo::Base 'Mojolicious::Controller';
 use LWP::UserAgent ();
 use Hash::Merge qw( merge );
-use POSIX qw(strftime);
+use POSIX qw(strftime ceil);
 
 use utf8;
 
 use constant ITEM_FIELDS => qw(brand sale category subcategory tags sex);
 use constant CART_ITEM_FIELDS => ITEM_FIELDS, qw(name alias preview_image);
-use constant CHECKOUT_FIELDS => qw(	name surname phone email 
+use constant CHECKOUT_FIELDS => qw(	name surname phone email total_weight inn kpp
 									country city zip address dom korp flat receiver 
-									delivery_type self_delivery pay_type);
+									delivery_type delivery_cost self_delivery pay_type);
 use constant SORT_FIELDS => qw(time price);
+use constant YANDEX_TYPES => {
+	yandex_cash => 'GP',
+	yandex_card => 'AC',
+	yandex_money => 'PC'
+};
 
 sub index {
 	my $self = shift;
@@ -21,9 +26,7 @@ sub index {
 
 	my  $filter->{active} 		= 1;
 		$filter->{'subitems.qty'}= {'$gt' => 0};
-		$filter->{sale}->{sale_active} = 1;
-		$filter->{sale}->{sale_start_stamp} = {'$lt' => time()};
-		$filter->{sale}->{sale_end_stamp}   = {'$gt' => time()};
+
 
 	my $item 	= BlogoShop::Item->new($self);
 	# my $items 	= $item->list($filter, {}, int($self->config('items_on_startpage')/2));
@@ -55,10 +58,26 @@ sub list {
 		$filter->{'subitems.qty'}= {'$gt' => 0};
 		$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
 
+		defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
+		 # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
+		($filter->{$_} && $filter->{$_} ne '' ? () : (delete $filter->{$_}) ) for qw(category subcategory sex);
+
+	if ($filter->{category} && $filter->{subcategory}) {
+		for ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')}->{state}) {
+			return $self->redirect_to('/'.$filter->{category}) if $_ && $_ eq 'off';
+		}
+	}
+
 	if (!$filter->{'tags'}) {
 		$self->stash(page_name => '');
 		return $self->render_not_found if !$self->stash('categories_alias')->{$filter->{category}};
 		return $self->render_not_found if $filter->{subcategory} && !$self->stash('categories_alias')->{$filter->{subcategory}};
+	}
+
+	if ($filter->{category} && $filter->{subcategory}) {
+		for ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')}->{state}) {
+			return $self->redirect_to('/'.$filter->{category}) if $_ && $_ eq 'off';
+		}
 	}
 
 	my $sort 	= { price => -1 };
@@ -80,6 +99,9 @@ sub list {
 			},
 		);
 	} else {
+		# filter left catalog for brand if needed
+		$self->stash( active_categories => $self->app->utils->get_active_categories($self->app->db, {brand => $self->stash('brand')}) ) if $self->stash('brand');
+		$self->stash( 'is_brand' => 1 ) if $self->stash('brand');
 		return $self->render(
 			items 	=> $items,
 			%$filter,
@@ -100,9 +122,9 @@ sub item {
 	my $self = shift;
 
 	my $item = BlogoShop::Item->new($self);
-	return $self->redirect_to('/'. join '/', $item->{category}, $item->{subcategory}) if !$item->{_id};
+	return $self->redirect_to('/'. join '/', $item->{category}, $item->{subcategory}) if !$item->{_id} || !$item->{active};;
 
-	return $self->buy($item) if $self->stash('act') eq 'buy';
+	return $self->buy($item, {brand => $self->stash('brand')}) if $self->stash('act') eq 'buy';
 
 	my  $filter->{active} = 1;
 		$filter->{'subitems.qty'} = {'$gt' => 0};
@@ -118,9 +140,14 @@ sub item {
 
 	$self->utils->check_item_price($item);
 
+	# filter left catalog for brand if needed
+	$self->stash( active_categories => $self->app->utils->get_active_categories($self->app->db, {brand => $self->stash('brand')}) ) if $self->stash('brand');
+	$self->stash( 'is_brand' => 1 ) if $self->stash('brand');
+
 # warn $self->dumper($item);
 	return $self->render(
 		%{$item->as_hash},
+		item_json => $self->json->encode($item->as_hash),
 		json_subitems => $self->json->encode($item->{subitems}),
 		json_params_alias => $self->json->encode(BlogoShop::Item::OPT_SUBITEM_PARAMS),
 		items 	=> $recomend_items,
@@ -136,43 +163,45 @@ sub item {
 }
 
 sub brand {
-	my $self = shift;
+	my $c = shift;
 	my $filter = {active => 1};
 	$filter->{'subitems.qty'} = {'$gt' => 0};
-	my $brand = $self->app->db->brands->find_one({_id => $self->stash('brand')});
-	return $self->redirect_to('/') if !$brand;
-	$self->stash(brand => $brand);
+	my $brand = $c->app->db->brands->find_one({_id => $c->stash('brand')});
+	return $c->redirect_to('/') if !$brand;
+	$c->stash(brand_info => $brand);
 	$filter->{brand} = $brand->{_id};
-	my $item 	= BlogoShop::Item->new($self);
+	my $item 	= BlogoShop::Item->new($c);
 	my $sort 	= {};
-	$sort->{price} 	= $self->req->param('price') eq 'asc' ?  1 : -1 if $self->req->param('price');
-	$sort->{_id} 	= $self->req->param('time') eq 'asc' ?  1 : -1 if $self->req->param('time');
+	$sort->{price} 	= $c->req->param('price') eq 'asc' ?  1 : -1 if $c->req->param('price');
+	$sort->{_id} 	= $c->req->param('time') eq 'asc' ?  1 : -1 if $c->req->param('time');
 
 	# $item->list()
-	# warn $self->dumper([$self->app->db->items->find({brand => $brand->{_id}})->all]);
-	my $items = $item->list($filter, $sort, $self->req->param('next')?($self->req->param('next')=~/(\d+)/)[0]:0);
+	# warn $c->dumper([$c->app->db->items->find({brand => $brand->{_id}})->all]);
+	my $items = $item->list($filter, $sort, $c->req->param('next')?($c->req->param('next')=~/(\d+)/)[0]:0);
 
-	if ($self->req->headers->header('X-Requested-With')) {
+	if ($c->req->headers->header('X-Requested-With')) {
 		foreach (@$items) {
-			$_->{preview_image} = $self->config->{nginx_res_item_prev}.$self->config->{image_url}.
+			$_->{preview_image} = $c->config->{nginx_res_item_prev}.$c->config->{image_url}.
 				join '/', 'item', $_->{category}, $_->{subcategory}, $_->{alias},$_->{preview_image};
 			$_->{link} = ($filter->{sex} ? "\/$filter->{sex}\/": '/'). join '/', $_->{category}, $_->{subcategory}, $_->{alias};
 		}
-		return $self->render(
+		return $c->render(
 			json => {
 				items => $items
 			},
 		);
 	} else {
-		return $self->render(
-			host 	=> $self->req->url->base,
+		return $c->render(
+			host 	=> $c->req->url->base,
 			items 	=> $items,
-			articles=> $self->articles->get_filtered_articles({brand => $brand->{_id}, active => 1}, 6),
-			%{$self->check_cart},
+			items_json => $c->json->encode($items),
+			articles=> $c->articles->get_filtered_articles({brand => $brand->{_id}, active => 1}, 6),
+			%{$c->check_cart},
 			sex		=> '',
 			brand_id => $brand->{_id},
 			is_brand => 1,
-			banners_h => $self->utils->get_banners($self, '', 240),
+			banners_h => $c->utils->get_banners($c, '', 240),
+			active_categories => $c->app->utils->get_active_categories($c->app->db, {brand => $brand->{_id}}),
 			page_name => 'shop',
 			template=> 'brand', # return only
 			format 	=> 'html', 
@@ -180,10 +209,35 @@ sub brand {
 	}
 }
 
+sub group {
+	my $self = shift;
+
+	my $filter = {alias => $self->stash('group')};
+
+	my $group = BlogoShop::Group->new($self->stash('group'));
+
+	$filter = {active => 1};
+	$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];
+	my $items = $group->get_group_items($filter, {brand => 1}, 1000);
+
+	return $self->render(
+			%$group,
+			host 	=> $self->req->url->base,
+			items 	=> $items,
+			sex		=> '',
+			category=> '',
+			banners_h => $self->utils->get_banners($self, '', 240),
+			page_name => 'shop',
+			template=> 'group', # return only
+			format 	=> 'html', 
+	);
+}
+
+
 sub cart {
 	my $self = shift;
 	my $filter = {};
-	
+
 	return $self->unbuy({_id => $self->stash('id'), sub_id => $self->stash('sub_id')}) if $self->stash('act') eq 'unbuy';
 
 	my $cart = $self->check_cart(1);
@@ -194,7 +248,7 @@ sub cart {
 
 	my $item 	  = BlogoShop::Item->new($self);
 	my $sel_items = {map {$_->{_id} => $_ } @{$item->list($filter, {}, 0, 1000)}}; # big stupid limit num to fetch all
-
+	my $total_weight = 0;
 	my ($cnt, @failed_items) = (0, ());
 	foreach my $it (@{$cart->{cart_items}}) {
 		$it->{$_} = $sel_items->{ $it->{_id} }->{ $_ } for CART_ITEM_FIELDS;
@@ -203,6 +257,8 @@ sub cart {
 		my $h = merge( $it, $sel_items->{ $it->{_id} }->{subitems}->[$it->{sub_id}] );
 		$it = $h;
 		$it->{count} = $it->{qty} if $it->{count} > $it->{qty};
+		# get item weight or default subcategory weight
+		$total_weight += ($it->{weight} || $self->stash('categories_info')->{$it->{category}.'.'.$it->{subcategory}}->{weight} || 0.5); 
 		$cnt++;
 	}
 
@@ -216,23 +272,59 @@ sub cart {
 		splice (@{$cart->{cart_items}}, $_-$cnt, 1) if $_ ne '';
 		$cnt++ if $_ ne '';
 	}
-	$self->stash(%$cart) if !$self->stash('checkout_ok');
+
+	$self->flash(order_id => ''.$self->stash('checkout_ok')) if $self->stash('checkout_ok');
+	$self->redirect_to('/checkout/'.$self->stash('full_order_id')) if $self->stash('checkout_ok');
+
+	$self->stash(%$cart);
 
 	return $self->render(
-		items 	=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
-		sex 	=> '',
-		banners_h => $self->utils->get_banners($self, '', 240),
-		page_name => 'shop',
-		template=> 'cart',
-		format 	=> 'html',
+		items 		=> $self->stash('checkout_ok') ? [] : $cart->{cart_items},
+		total_weight => ceil($total_weight),
+		sex 		=> '',
+		banners_h 	=> $self->utils->get_banners($self, '', 240),
+		page_name 	=> 'shop',
+		template	=> 'cart',
+		format 		=> 'html',
+	);
+}
+
+sub show_checkout {
+	my $self = shift;
+	my $id = $self->stash('order_id') || 0;
+
+	$self->redirect_to('/cart') if !$id;
+	my $order = $self->app->db->orders->find_one({_id => MongoDB::OID->new(value => $id)});
+
+	my $item   = BlogoShop::Item->new($self);
+
+	foreach (@{$order->{items}}) {
+		$_->{info} = $item->get($_->{_id}, $_->{sub_id});
+		$order->{sum} += $_->{price}*$_->{count};
+	}
+	$order->{order_id} 	= ($order->{_id}->{value}=~/^(.{8})/)[0];
+	$order->{order_id_full} 	= $order->{_id}->{value};
+	$order->{total_sum} = $order->{sum} + ($order->{delivery_cost}||0);
+
+	delete $order->{status};
+
+	return $self->render(
+		%$order,
+		yandex_pay_types => YANDEX_TYPES,
+		pay_type	=> $order->{pay_type}||'cash',
+		sex 		=> '',
+		banners_h 	=> $self->utils->get_banners($self, '', 240),
+		page_name 	=> 'checkout',
+		template	=> 'checkout',
+		format 		=> 'html',
 	);
 }
 
 sub _checkout {
-	my ($self, $cart) = @_;
+	my ($c, $cart) = @_;
 
 	my $all_is_ok = 1;
-	my $co_params = {map {$_ => $self->req->param($_)||''} CHECKOUT_FIELDS};
+	my $co_params = {map {$_ => $c->req->param($_)||''} CHECKOUT_FIELDS};
 	$co_params->{items} = [];
 	$co_params->{$_} && $co_params->{$_} ne '' ? 
 		() : ($all_is_ok = 0)
@@ -240,23 +332,29 @@ sub _checkout {
 
 	my @not_enought_qty;
 	foreach my $it (@{$cart->{cart_items}}) {
-		$it->{count} = $self->req->param($it->{_id}.':'.$it->{sub_id}) || 0;
+		$it->{count} = $c->req->param($it->{_id}.':'.$it->{sub_id}) || 0;
 		if ($it->{count} > $it->{qty}) {
 			$all_is_ok = 0;
 			$it->{not_enought} = 1;
 			$it->{count} = $it->{qty};
 		}
-		# warn 'ITEM'.$self->dumper($it);
+		# warn 'ITEM'.$c->dumper($it);
 		push @{$co_params->{items}}, 
 			{_id => $it->{_id}, sub_id => $it->{sub_id}, count => $it->{count}, name => $it->{name}, price => $it->{price}[-1]} 
 				if $it->{count} > 0;
 	}
 	$all_is_ok = 0 if @{$co_params->{items}} == 0;
 
-	return $self->_proceed_checkout($co_params) 
+	# $co_params->{delivery_cost} = $c->logistics->check_cost({city => $co_params->{city}, weight => $co_params->{total_weight}})
+	$co_params->{delivery_cost} = ""
+		if !$co_params->{delivery_cost} || $co_params->{delivery_cost} =~ m![^\d]+!;
+	$co_params->{delivery_cost} = $c->config->{courier_delivery_cost} if $co_params->{delivery_type} eq 'courier';
+	$co_params->{delivery_cost} = 500 if $co_params->{delivery_type} eq 'fast_courier';
+
+	return $c->_proceed_checkout($co_params)
 		if $all_is_ok;
 
-	$self->stash(%$co_params);
+	$c->stash(%$co_params);
 	return 0;
 }
 
@@ -266,6 +364,7 @@ sub _proceed_checkout {
 	$co_params->{status} 	= 'new';
 	my $order_id 			= $self->app->db->orders->save($co_params);
 	$co_params->{order_id} 	= ($order_id=~/^(.{8})/)[0];
+	$co_params->{full_order_id} = $order_id;
 
 	delete $co_params->{status}; #status reserved name in Mojo stash
 	$self->stash(%$co_params);
@@ -273,7 +372,7 @@ sub _proceed_checkout {
 		to      => $co_params->{email},
 		cc		=> $self->config('superadmin_mail'),
 		from    => 'noreply@'.$self->config('domain_name'),
-	    subject => 'Ваша покупка в магазине Barista Shop',
+	    subject => 'Ваша покупка в магазине '.$self->config('site_name'),,
 	    type 	=> 'text/html',
 	    format => 'mail',
 	    data => $self->render_mail(template => 'order_mail'),
@@ -292,8 +391,7 @@ sub _proceed_checkout {
 	my $session = $self->session();
 	$session->{client}->{items} = {};
 
-	$order_id = $co_params->{order_id};
-	return $order_id;
+	return $co_params->{order_id};
 }
 
 ##
@@ -301,7 +399,7 @@ sub _proceed_checkout {
 ##
 
 sub buy {
-	my ($self, $item) = @_;
+	my ($self, $item, $params) = @_;
 
 	my $session = $self->session();
 
@@ -322,7 +420,9 @@ sub buy {
 	return
 		$self->req->headers->header('X-Requested-With') ?
 			$self->render(json => {ok => $item->{_id}}) :
-			$self->redirect_to('/'. join '/', $item->{category}, $item->{subcategory}, $item->{alias});
+			$self->redirect_to('/'. ($params->{brand} ? 'brand/'.$params->{brand}.'/' : '')
+				.join '/', $item->{category}, $item->{subcategory}, $item->{alias}
+			);
 }
 
 sub unbuy {

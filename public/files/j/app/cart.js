@@ -68,7 +68,7 @@ define(['jquery'], function($){
 			$('input:radio', $deliver_section).on('focus.payType change.payType', function(){
 
 				var $this = $(this),
-					_type = $this.attr('value') === 'courier' || $this.attr('value') === 'fast_courier' ? 'cash' : 'nalog_payment';
+					_type = $this.attr('value') === 'couriere' || $this.attr('value') === 'fast_couriere' ? 'cash' : 'nalog_payment';
 
 				$pay_type.find('li').hide();
 				$pay_type

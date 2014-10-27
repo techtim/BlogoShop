@@ -9,7 +9,7 @@ use constant NEW_ADMIN_PARAMS => qw(login name email type);
 use constant EDIT_ADMIN_PARAMS => (NEW_ADMIN_PARAMS, qw(old_pass new_pass new_pass_ctrl id));
 use constant ARTICLE_PARAMS => qw(brand sale type tag active);
 
-my @rndm_array = (0..9,'A'..'Z','a'..'z');
+my @rndm_array = ('A'..'Z', 0..9,'a'..'z');
 
 sub check_params {
 	my ($self, $params) = @_;
@@ -121,7 +121,7 @@ sub create_admin {
 	} else {
 		# Set random pass
 		$new_admin->{pass} = '';
-		$new_admin->{pass}.=$rndm_array[int(rand()*@rndm_array)] foreach (0..8);
+		$new_admin->{pass}.= $rndm_array[int(rand()*@rndm_array)] foreach (0..8);
         $new_admin->{email} =~ s/^\s+|\s+$//g;
 		$self->stash(%$new_admin);
 
@@ -135,7 +135,7 @@ sub create_admin {
             handler => 'mail',
 		);
 
-		$new_admin->{pass} = sha256_hex($new_admin->{pass});
+		$new_admin->{pass} = sha256	_hex($new_admin->{pass});
 
 		$self->admins->add_admin($new_admin);
 

@@ -86,6 +86,7 @@
 		        	<div class='cut'>
 			        		<div class='order__num'>Заказ № <span><a href="/admin/orders/id/<%= $order->{order_id_full} %>"><%= $order->{order_id} %></a></span> от <%== utils->date_time_from_mongoid($order->{_id}) %> &nbsp;&nbsp;&nbsp;<strong><%== $order->{sum} %>P</strong>
 			        		<%== '&nbsp;&nbsp;&nbsp;<strong>Q</strong>' if $order->{pay_type} eq 'qiwi' %>
+			        		<%== '&nbsp;&nbsp;&nbsp;<strong>Y</strong>' if index($order->{pay_type},'yandex')>-1 %>
 		        		</div>
 						<!-- <a href='#' class='submit__button'>Сохранить</a> -->
 
@@ -105,8 +106,8 @@
 							<option value="canceled" <%= 'selected' if $order->{status} eq 'canceled'%>>отменен</option>
 							<option value="changed" <%= 'selected' if $order->{status} eq 'changed' %>>изменен</option>
 
-							% if ($admin->{type} eq 'super') { 
-							<option value="delete">удалить</option>
+							% if ($admin->{type} eq "super") { 
+							<option value="deleted">удалить</option>
 							%}
 						<select>
 		        	</div>
@@ -117,8 +118,9 @@
 			        	<ul class='items__list__section clearfloat'>
 						% foreach (@{$order->{items}}) {
 							<li>
+								<a class='delete' href='/admin/orders/<%= (stash('status') ? stash('status').'/' : '') %><%= join ('/', $order->{_id}, 'action', 'remove', $_->{info}->{_id}, $_->{sub_id}) %>' title='Удалить товар из заказа'></a>
 								% if ($_->{info}->{alias}) {
-								<a href="http://shop.<%= config->{domain_name} %>/<%= join '/', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias} %>" target="_blank">
+								<a href="http://<%= config->{domain_name} %>/<%= join '/', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias} %>" target="_blank">
 									<img src="<%== config->{image_url}.join '/', 'item', $_->{info}->{category}, $_->{info}->{subcategory}, $_->{info}->{alias}, $_->{info}->{preview_image} %>">
 								</a>
 								<div class='description__section'>
@@ -126,11 +128,15 @@
 									<h4><%= $_->{info}->{name} %></h4>
 									<p>Размер: <%= $_->{info}->{size} %></p>
 									<p>Артикул: <%= $_->{info}->{articol} %></p>
+									% if ($_->{info}->{qty} == 0 ) {
+										<p style="color:red">Нет или последний товар</p>
+									% }
 								</div>
 								<div class='meta__section'>
 									<span class='count'><%= $_->{count} %></span>
 									<span class='price'><%= $_->{price}*$_->{count} %></span>
 								</div>
+								
 								% } else {
 									<div class='description__section'>
 										<h3>Товара удалён из магазина</h3>
@@ -142,10 +148,47 @@
 						% }
 						</ul>
 
+						<dl class='add__item clearfloat'>
+							<a class='add_items_mode' href='/admin/orders/<%= (stash('status') ? stash('status').'/' : '') %><%= join ('/', $order->{_id}, 'action', 'add_items_mode', 1) %>'>
+								<%= $admin->{add_items_to_order} ? 'выключить' : 'включить' %> режим добавления товара
+							</a>
+						</dl>
 						<dl class='price__section clearfloat'>
 							<dt>СТОИМОСТЬ ЗАКАЗА:</dt>
 							<dd>
 								<%= $sum %>
+							</dd>
+						</dl>
+
+						<dl class='row gray'>
+							<dt>СПОСОБ оплаты:</dt>
+							<dd>
+								% if ($order->{pay_type} eq 'cash') {
+									Наличными
+								% } elsif ($order->{pay_type} eq "qiwi") {
+									<div class='qiwi'>
+										<b>QIWI:</b>
+										% my $qiwi = $order->{qiwi_status};
+										% if ($qiwi) {
+											Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
+										% }
+						        			<input type='submit' name='create_qiwi' value='Выставить счет' >
+						        			<input type='submit' name='cancel_qiwi' value='Отменить счет'>
+						        		
+						        	</div>
+								% } elsif ($order->{pay_type} eq "yandex_money") {
+									Yandex деньги <%== "(<b>подтвержден</b>)" if $order->{checked} %>
+									<input type='submit' name='checked' value='Подтвердить наличие'>
+								% } elsif ($order->{pay_type} eq "yandex_card") {
+									Yandex карта <%== "(<b>подтвержден</b>)" if $order->{checked} %>
+									<input type='submit' name='checked' value='Подтвердить наличие'>
+								% } elsif ($order->{pay_type} eq "yandex_cash") {
+								 	Yandex наличные <%== '(<b>подтвержден</b>)' if $order->{checked} %>
+								 	<input type='submit' name='checked' value='Подтвердить наличие'>
+								% } elsif ($order->{pay_type} eq "nalog_payment") {
+								 	Yandex наличные <%== '(<b>подтвержден</b>)' if $order->{checked} %>
+								 	<input type='submit' name='checked' value='Подтвердить наличие'>
+								% }
 							</dd>
 						</dl>
 
@@ -156,13 +199,10 @@
 									Самовывоз
 								% } elsif ($order->{delivery_type} eq "courier") {
 									Курьерская доставка по указанному адресу (только Москва).
-									% $sum += 350;
 								% } elsif ($order->{delivery_type} eq "russian_post") {
 									Почта России 
-									% $sum += 430;
 								% } elsif ($order->{delivery_type} eq "ems") {
 									EMS
-									% $sum += 620;
 								% } elsif ($order->{delivery_type} eq "logistics") {
 								 	Logistics
 								% }
@@ -202,7 +242,7 @@
 							</dd>
 						</dl>
 
-						% if (0 && $order->{delivery_type} eq "logistics") {
+						% if ($order->{delivery_type} eq "logistics") {
 						<dl class='deliver__price__section gray__bg clearfloat'>
 							<dt>
 								Вызвать курьера: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -243,18 +283,6 @@
 							</div>
 						</div>
 
-						% if ($order->{pay_type} eq 'qiwi' ) {
-						<div class='qiwi'>
-							<b>Qiwi:</b>
-							% my $qiwi = $order->{qiwi_status};
-							% if (!$qiwi) {
-			        			<input type='submit' name='create_qiwi' value='Выставить счет' >
-			        		% } else {
-			        			Код статуса: <%= $qiwi->{status} %> &nbsp;&nbsp; Статус: "<%= $qiwi->{descr} %>"
-			        			<input type='submit' name='cancel_qiwi' value='Отменить выставленный счет'>
-			        		% }
-			        	</div>
-			        	% }
 					</div>
 	        	% end
 	        </li>
