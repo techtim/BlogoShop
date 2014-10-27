@@ -44,14 +44,19 @@
 
 <div class='content__section shop__item__section' itemscope itemtype="http://data-vocabulary.org/Product">
 
-<meta itemprop="currency" content="RUB" />
-<meta itemprop="condition" content="new" />
+	<meta itemprop="currency" content="RUB" />
+	<meta itemprop="condition" content="new" />
 
-<ul class='breadcrumps__section clearfloat'>
-	<li><span itemprop="category"><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></span></li>
-	<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
-	<li>/ <h2><span itemprop="name"><%= stash 'name' %></span></h2></li>
-</ul>
+	<ul class='breadcrumps__section clearfloat'>
+		<li><span itemprop="category"><a href='/<%= $category %>'><%= $categories_alias->{$category} %></a></span></li>
+		<li class='current'>/<a href='/<%= $category.'/'.$subcategory %>'><%= $categories_alias->{$subcategory} %></a></li>
+		<li>/ <h2><span itemprop="name"><%= stash 'name' %></span></h2></li>
+	</ul>
+
+	% if (session('admin')) {
+        <a class="fr shop-item__edit-link" href="/admin/shop/<%= join '/', $category, $subcategory, $_id %>">редактировать</a>
+        <div class="clear"></div>
+    % }
 
 % if (ref $images eq 'ARRAY') {
 	%= include  'includes/shop_gallery', gallery => $images

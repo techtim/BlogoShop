@@ -158,6 +158,26 @@ sub orders_update {
 	);	
 }
 
+sub orders_cities {
+	my $self = shift;
+	my @ord = $self->app->db->orders->find()->all;
+	my $res;
+	for (@ord) {
+		$res .= $_->{city} ."\t". $self->utils->date_from_mongoid($_->{_id}) ."\t". $_->{delivery_type}. "\n";
+	}
+	return $self->render(text => $res);
+}
+
+sub orders_emails {
+	my $self = shift;
+	my @ord = $self->app->db->orders->find()->fields({email=>1})->all;
+	my $res;
+	for (@ord) {
+		$res->{$_->{email}} = 1 if $_->{email} =~ m!.+\@.+\..+!;
+	}
+	return $self->render(text => (join "<br>", keys %$res));
+}
+
 sub write_file {
 	my $self= shift;
     
@@ -215,6 +235,26 @@ sub import_cities {
 #	warn "$_ \n" foreach @cit;
     
     return $self->render(json => {success => $rus});	
+}
+
+sub get_russian_post_delivery_price {
+	my $c = shift;
+
+	my $ua = Mojo::UserAgent->new();
+	my $tx = $ua->post($c->config('russian_post_api_url'), => {Accept => '*/*'} => form => {
+		hash => md5_hex($c->config('russian_post_api_key').$c->config('russian_post_api_pass')),
+		apikey => $c->config('russian_post_api_key'),
+		method => 'calc',
+		from_index => $c->config('russian_post_index'),
+		to_index => $c->req->param('index'),
+		weight => $c->req->param('weight'),
+		ob_cennost_rub => $c->req->param('cost')
+	});
+	if (my $res = $tx->success) {
+		warn $c->dumper($res->body);
+	}
+
+	return $c->render(json => $res->body);
 }
 
 1;

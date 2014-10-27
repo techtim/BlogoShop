@@ -191,7 +191,8 @@ sub _parse_data {
 
 	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS);
 
-	( $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : () ) foreach keys OPT_SUBITEM_PARAMS;
+	# ( $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : () ) foreach keys OPT_SUBITEM_PARAMS;
+	map {$self->{$_} = $ctrl->req->param($_)} grep {$ctrl->req->param($_)} keys OPT_SUBITEM_PARAMS;
 	$self->{recomend_items} = [$ctrl->req->param('recomend_items')];
 
 	# warn $ctrl->dumper($ctrl->req->params());
@@ -390,9 +391,10 @@ sub TO_JSON {
 sub as_hash {
 	my $self = shift;
 	my $tmp = {%{$self}};
-	delete $tmp->{app};
-	delete $tmp->{id};
-	return $tmp;
+    delete $tmp->{app};
+    delete $tmp->{id};
+    delete @$tmp{grep {/^\d/} keys %$tmp};
+    return $tmp;
 }
 
 1;

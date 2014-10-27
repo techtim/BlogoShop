@@ -8,3 +8,6 @@ sub new {
 
 	return bless $self, $class;
 }
+
+
+1;

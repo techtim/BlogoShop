@@ -6,6 +6,7 @@ db_name: 'coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
+site_name: 'Barista Shop'
 domain_name: 'barista-shop.ru'
 
 hypnotoad:

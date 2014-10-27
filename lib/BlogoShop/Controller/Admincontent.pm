@@ -16,8 +16,8 @@ sub list_categories {
     my $error_message = [];
     
     return $self->render(
-    	template => 'admin/categories',
-    	categories => [$self->app->db->categories->find()->sort({pos=>1})->all] || [],
+        template => 'admin/categories',
+        categories => [$self->app->db->categories->find()->sort({pos=>1})->all] || [],
     ) unless $self->stash('save');
     
     my $pars = $self->req->params();
@@ -46,10 +46,10 @@ sub list_categories {
             #            warn $self->dumper($act, $cat);
 
             $self->app->db->categories->update(
-	            {_id => $cat}, 
-	            {'$push' => {subcats => {
-	            	_id => $self->utils->translit($par->{$key}, 1), name => $par->{$key}}}
-	            }
+                {_id => $cat}, 
+                {'$push' => {subcats => {
+                    _id => $self->utils->translit($par->{$key}, 1), name => $par->{$key}}}
+                }
             ) if $act eq 'new_subcat';
 #            warn "DELETE $cat \-\> $par->{$key}";
             $self->app->db->categories->update({_id => $cat}, { '$pull' => {subcats => {_id => $par->{$key}}} }) if $act eq 'delete_subcat'
@@ -58,9 +58,9 @@ sub list_categories {
 
     my @cats = $self->app->db->categories->find()->sort({pos=>1})->all;
 
-	foreach my $cat (@cats) {
-		my $pos = 0+$self->req->param('pos.cat.'.$cat->{_id});
-		# warn $cat->{_id}.":  $cat->{pos} => $pos "; 
+    foreach my $cat (@cats) {
+        my $pos = 0+$self->req->param('pos.cat.'.$cat->{_id});
+        # warn $cat->{_id}.":  $cat->{pos} => $pos "; 
         if ($cat->{name} ne $self->req->param($cat->{_id})) {
             $self->app->db->categories->update(
                 {_id => $cat->{_id}}, 
@@ -69,31 +69,32 @@ sub list_categories {
         }
 
         if ($pos != $cat->{pos}) {
-			$self->app->db->categories->update(
-				{pos => $pos},
-				{'$set' => {pos => $cat->{pos}}}
-			);
-			$self->app->db->categories->update(
-	            {_id => $cat->{_id}}, 
-	            {'$set' => {pos => $pos}}
-	        );
-		}
-		foreach (@{$cat->{subcats}}) {
-			$_->{pos} = 0+$self->req->param("pos.cat.$cat->{_id}.subcat.$_->{_id}")||@{$cat->{subcats}};
-		}
-		@{$cat->{subcats}} = sort {$a->{pos} <=> $b->{pos}} @{$cat->{subcats}}; 
-		$self->app->db->categories->update(
+            $self->app->db->categories->update(
+                {pos => $pos},
+                {'$set' => {pos => $cat->{pos}}}
+            );
+            $self->app->db->categories->update(
+                {_id => $cat->{_id}}, 
+                {'$set' => {pos => $pos}}
+            );
+        }
+        foreach (@{$cat->{subcats}}) {
+            $_->{pos} = 0+$self->req->param("pos.cat.$cat->{_id}.subcat.$_->{_id}")||@{$cat->{subcats}};
+            $_->{weight} = 0+($self->req->param("weight.cat.$cat->{_id}.subcat.$_->{_id}")||1);
+        }
+        @{$cat->{subcats}} = sort {$a->{pos} <=> $b->{pos}} @{$cat->{subcats}}; 
+        $self->app->db->categories->update(
             {_id => $cat->{_id}}, 
             {'$set' => {subcats => $cat->{subcats}}}
         );
-		# $self->dumper( $self->app->db->categories->find()->fields({pos=>1, subcats=>1})->sort({pos=>1})->all);
-	}
+        # $self->dumper( $self->app->db->categories->find()->fields({pos=>1, subcats=>1})->sort({pos=>1})->all);
+    }
     $self->app->db->stuff->remove({_id => 'active_categories'}) if $self->req->method eq 'POST';
     $self->redirect_to('admin/categories');
 }
 
 sub list_brands {
-    my $self = shift;	
+    my $self = shift;   
     my $error_message = [];
     
     return $self->redirect_to('admin/brands') if $self->req->param('cancel');
@@ -108,7 +109,14 @@ sub list_brands {
         $brand = $self->app->db->brands->find_one({_id => $brand});
         return $self->redirect_to('admin/brands') if !$brand;
         $self->stash(%$brand);
-        
+    
+    } elsif ($self->stash('do') && $self->stash('do') eq 'active') {
+        my $brand = $self->stash('brand') || $self->req->param('brand') || '';
+        $brand = $self->app->db->brands->find_one({_id => $brand});
+        return $self->redirect_to('admin/brands') if !$brand;
+        $brand = $self->app->db->brands->update({_id => $brand->{_id}}, { '$set' => {active => $brand->{active}?0:1 }});
+        return $self->redirect_to('admin/brands');
+
     } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         my $brand = {};
         $brand->{$_} = $self->req->param($_) foreach BRAND_PARAMS;
@@ -180,6 +188,13 @@ sub list_banners {
         $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner_id)});
         return $self->redirect_to('admin/banners') if !$banner;
         $self->stash(%$banner);
+
+    } elsif ($self->stash('do') && $self->stash('do') eq 'active') {
+        my $brand = $self->stash('brand') || $self->req->param('brand') || '';
+        $brand = $self->app->db->brands->find_one({_id => $brand});
+        return $self->redirect_to('admin/brands') if !$brand;
+        $brand = $self->app->db->brands->update({_id => $brand->{_id}}, { '$set' => {active => $brand->{active}?0:1 }});
+        return $self->redirect_to('admin/brands');
 
     } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         $banner->{$_} = $self->req->param($_) foreach BANNER_PARAMS;

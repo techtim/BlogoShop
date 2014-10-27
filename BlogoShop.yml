@@ -6,7 +6,12 @@ db_name: 'coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
+<<<<<<< HEAD
 domain_name: 'barista-shop.ru'
+=======
+site_name: 'Barista Shop'
+domain_name: 'coffee.xoxloveka.ru'
+>>>>>>> bab0700f4df66c903a33101a2880f1851e6fb9f1
 
 hypnotoad:
   workers: 2
@@ -57,3 +62,17 @@ phone_for_courier: 89269309005
 
 qiwi_id: 231734
 qiwi_pass: '88original7'
+<<<<<<< HEAD
+=======
+
+courier_delivery_cost: 350
+
+ya_money_url: 'money.yandex.ru/eshop.xml'
+ya_shop_id: 22068
+ya_scid: 11413
+
+russian_post_api_key: '3b618f764380b8cb999c0e9a14de2ca4'
+russian_post_api_url: 'http://russianpostcalc.ru/api_v1.php'
+russian_post_api_pass: 'suck25'
+russian_post_index: 103070
+>>>>>>> bab0700f4df66c903a33101a2880f1851e6fb9f1

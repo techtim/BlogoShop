@@ -5,10 +5,11 @@
 %= include 'includes/info_message', message => stash 'message'
 
 <script>
-	requirejs(['app/equalHeight', 'app/admin/itemsList'])
+	requirejs(['app/equalHeight', 'app/shopFilters', 'app/admin/addItem'])
 </script>
 
     %= include 'includes/shop_admin_categories', categories => stash 'categories'
+    %= include 'includes/shop_admin_brands', brands => stash 'list_brands'
 
 <div class="shop__items__list">
 
@@ -31,27 +32,32 @@
 		<li>
 			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/add" class='add__item'>Добавить товар</a>
 		</li>
+
+		<li>
+			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/
+				<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
+					class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
+			<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." раздел" %>
+			</a>
+		</li>
+		% }
+		% if (0 && stash('brand') && stash('brand') ne '') {
+		<li>
+			<a href="/admin/shop/brand/<%== stash('brand') %>/
+				<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
+					class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
+			<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." бренд" %>
+			</a>
+		</li>			
 		% }
 	</ul>
 
 	
-		<script>requirejs(['app/admin/seoEditor']);</script>
-		<a class='toggle__seo__editor' href='#'>SEO</a>
-		<div class='seo__editor clearfloat'>
+	<script>requirejs(['app/admin/seoEditor']);</script>
+	<a class='toggle__seo__editor' href='#'>SEO</a>
+	<div class='seo__editor clearfloat'>
+		% if ($category || $subcategory) {
 			%= form_for '' => (method => 'post') => begin
-				<dl class='clearfloat'>
-					<dt><label for='meta__keys'>Мета слова:</label></dt>
-					<dd>
-						<input type='text' id='meta__keys' name="meta_keys.<%= $category.'.'.$subcategory %>" value="<%= $cur_category->{meta_keys} %>">
-					</dd>
-				</dl>
-				<dl class='clearfloat'>
-					<dt><label for='meta__description'>Мета описание:</label></dt>
-					<dd>
-						<textarea id='meta__description' name="meta_descr.<%= $category.'.'.$subcategory %>"><%= $cur_category->{meta_descr} %></textarea>
-					</dd>
-				</dl>
-				% if ($category || $subcategory) {
 				<dl class='clearfloat'>
 					<dt><label for='seo__title'>Заголовок:</label></dt>
 					<dd>
@@ -64,10 +70,10 @@
 						<textarea id='seo__description' name="descr.<%= $category.'.'.$subcategory %>"><%= $cur_category->{descr} %></textarea>
 					</dd>
 				</dl>
-				% }
 				<input type='submit' value='Сохранить' />
 			%= end
-		</div>
+		% }
+	</div>
 	
 
 	<div class="shop__search clearfloat">
@@ -84,11 +90,10 @@
 	</div>
 
 	<div class='fiters__section fl admin clearfloat'>
-		<ul class='price__filter'>
-			<li class='title'>товары:</li>
-    		<li><a href='#' data-type='all' class='current'>все</a></li>
-    		<li><a href='#' data-type='disabled'>неактивные</a></li>
-    		<li><a href='#' data-type='enabled'>активные</a></li>
+		<ul class='price__filter no-ajax'>
+			<li><a href='<%= $pager_url_no_state %>' <%== "class='current'" if !defined stash('active')|| stash('active') eq '' %>>все</a></li>
+			<li><a href='<%= $pager_url_no_state %>active=0' <%== "class='current'" if defined stash('active') && stash('active') eq '0' %>>неактивные</a></li>
+			<li><a href='<%= $pager_url_no_state %>active=1' <%== "class='current'" if defined stash('active') && stash('active') eq '1' %>>активные</a></li>
 		</ul>
 	</div>
 
@@ -101,35 +106,62 @@
 	</ul>
 	<div class='clear'></div>
 
+	%= form_for '/admin/shop/multi' => (method => 'post') => begin
+	<input type='hidden' name='category' value='<%= stash('category') %>'/>
+	<input type='hidden' name='subcategory' value='<%= stash('subcategory') %>'/>
+	<div class='multi__action dates__section'>
+		<span> групповое действие:
+		<select name="action">
+			<option value="off">выключть</option>
+			<option value="on">включть</option>
+			<option value="on_timer">включить по таймеру</option>
+			<option value="add_to_group">добавить в группу</option>
+			<option value="del_from_group">удалить из группы</option>
+			<option value="delete">удалить</option>
+			%# <option value="req_to_brand">заказать</option>
+			% if ($admin->{type} eq 'super') { 
+			<option value="undelete">востановить</option>
+			% }
+		</select>
+		дата:<input type="text" name="date" value="" />
+		%= include 'includes/select_block', name => 'group_id', select => '', options => stash 'groups'
+		<button type="submit" name="multi" value="1">сохранить</button>
+		</span>	
+	</div>
 	% if (@$items>0) {
     <ul class='list__section'>
         % foreach my $item (@$items) {
 
 		<li <%== 'class=\'disabled\'' if $item->{active} eq 0 %>>
 			<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
-				<span class='img__section'>
-					<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>">
+				<span class='img__section' style="background-image: url(<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>)">
+					% if ($item->{sale}->{sale_active} && 
+					%	$item->{sale}->{sale_start_stamp} <= time() &&
+					%	$item->{sale}->{sale_end_stamp} >= time()) {
+		            	<span class='ico__sale'></span>
+	            	% }
 				</span>
 			</a>
-
 			<!--
         	<a class='active controls' href=''></a>
         	<a class='delete controls' href=''></a>
 			-->
 
+			<span id='active_check' class='checkbox unchecked'><input type="checkbox" name="item" value="<%= $item->{_id} %>"> выбрать </span>
+
 			<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
 				<span class='articol'><%= $item->{articol} %></span>
-				<span class='brand'><%= $item->{brand} %></span>
+				<span class='brand'><%= stash('name_brands')->{$item->{brand}} if stash('name_brands')->{$item->{brand}} %></span>
 				<span class='item__caption'><%= $item->{name} %></span>
 				<span class='price'><%= $item->{price} %></span>
-				% if ($item->{total_qty} && $item->{total_qty} <= 0) {
-					<span class='item__caption'>нет в наличии</span>
+				% if (!grep {$_->{qty} > 0} @{$item->{subitems}}) {
+					<span class='item__caption' style="color:red">нет в наличии</span>
 				% }
 			</a>
 		</li>
 		% }
 	</ul>
 	% }
-
+	%= end
 
 </div>
