@@ -186,8 +186,9 @@
 								 	Yandex наличные <%== '(<b>подтвержден</b>)' if $order->{checked} %>
 								 	<input type='submit' name='checked' value='Подтвердить наличие'>
 								% } elsif ($order->{pay_type} eq "nalog_payment") {
-								 	Yandex наличные <%== '(<b>подтвержден</b>)' if $order->{checked} %>
-								 	<input type='submit' name='checked' value='Подтвердить наличие'>
+								 	Наложный платеж
+								 	<!--<%== '(<b>подтвержден</b>)' if $order->{checked} %>
+								 	<input type='submit' name='checked' value='Подтвердить наличие'>-->
 								% }
 							</dd>
 						</dl>
