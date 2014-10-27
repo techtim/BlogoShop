@@ -1,10 +1,10 @@
 % layout 'default';
-% title $brand->{name};
+% title $brand_info->{name};
 
 %= include 'includes/left_bar'
 
 <div class='content__section post__page'>
-	 % my $brand = stash('brand');
+	 % my $brand = stash('brand_info');
 	<h2><%= $brand->{name} %></h2>
 	<p><img src="<%= $brand->{logo} %>"><p>
 	<p><%== $brand->{descr} %></p>
@@ -16,7 +16,6 @@
 	</div>
 
 	<div class='shop__items__list'>
-
 		<div class='fiters__section clearfloat'>
 			<ul class='price__filter'>
 				<li class='title'>цена:</li>
@@ -36,13 +35,13 @@
 				<li><a href='?time=asc'>&uarr;</a></li>
 			</ul>
 
-			<script>requirejs(['app/shopFilters', 'app/equalHeight', 'app/itemsDescr']);</script>
+			<script>requirejs(['app/shopFilters']);</script>
 		</div>
 
 		<ul class='list__section clearfloat'>
 			%= include 'includes/list_items', items => stash 'items'
-			<li class='scroll__helper shop' data-href='?price=dsc' data-next='16'></li>
-			<script>requirejs(['app/scroll', 'app/itemsDescr']);</script>
+			<li class='scroll__helper shop' data-href='?price=brand' data-next='16'></li>
+			<script>requirejs(['app/scroll']);</script>
 		</ul>
 	</div>
 </div>
