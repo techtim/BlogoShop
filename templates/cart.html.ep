@@ -183,22 +183,22 @@
 						<span class='price'>350</span>
 					</label>
 				</li>
-				<li class='clearfloat'>
+				<!-- <li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='russian_post' id='russian__post' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'russian_post' %> disabled />
 					<label for='russian__post'>
 						<img src='/i/logos/russian-post.png' alt='Почта России' />
 						<sup>Почта России.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.</sub>
 						<span class='price'></span>
 					</label>
-				</li>
-				<!--<li class='clearfloat'>
+				</li> -->
+				<li class='clearfloat'>
 					<input type='radio' name='delivery_type' class='deliver__type disabled'  value='ems' id='ems' data-price='' <%= 'selected' if stash('delivery_type') && stash('delivery_type') eq 'ems' %> disabled />
 					<label for='ems'>
 						<img src='/i/logos/ems.png' alt='EMS' />
 						<sup>EMS.</sup> <sub>Стоимость доставки рассчитывается индивидуально для каждого заказа. После оформления заказа с вами свяжется наш менеджер.
 						<span class='price'></span>
 					</label>
-				</li>-->
+				</li>
 			</ul>
 		</div>
 
@@ -220,15 +220,23 @@
 				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='yandex_money' value='yandex_money' />
-					<label for="yandex_money">Yandex деньги (ссылка на оплату будет выслана на email)</label>
+					<label for="yandex_money">
+						<img src='/i/logos/ya-money.png' alt='Yandex деньги' />
+						Yandex деньги (ссылка на оплату будет выслана на email)
+					</label>
 				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='yandex_card' value='yandex_card' />
-					<label for="yandex_card">Пластиковая карта (ссылка на оплату будет выслана на email)</label>
+					<label for="yandex_card">
+						<img src='/i/logos/visa-mc.png' alt='Пластиковая карта' />
+						Пластиковая карта (ссылка на оплату будет выслана на email)
+					</label>
 				</li>
 				<li class='clearfloat' data-type='nalog_payment'>
 					<input type='radio' name='pay_type' id='yandex_cash' value='yandex_cash' />
-					<label for="yandex_cash">Наличными через терминал (ссылка на оплату будет выслана на email)</label>
+					<label for="yandex_cash">
+						Наличными через терминал (ссылка на оплату будет выслана на email)
+					</label>
 				</li>
 			</ul>
 		</div>

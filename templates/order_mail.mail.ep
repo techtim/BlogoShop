@@ -23,7 +23,7 @@
 % }
 <br>
 <b>Способ доставки:</b>
-% if (stash('self_delivery') ne '') {
+% if (stash('delivery_type') eq 'self_delivery') {
 	Самовывоз
 % } elsif (stash('delivery_type') eq "courier") {
 	Курьер + 350 Р

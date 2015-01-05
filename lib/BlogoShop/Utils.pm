@@ -271,6 +271,10 @@ sub get_article_types {
 	return { map {$_->{_id} => $_->{name} } BlogoShop->db->types->find({})->all };
 }
 
+sub get_items_for_index {
+	return [BlogoShop->db->items->find({show_on_main => {'$exists'=>1}})->sort({_id=>1})->all];
+}
+
 sub get_items_from_catalog {
 	my ($self, $ctrlr) = @_;
 

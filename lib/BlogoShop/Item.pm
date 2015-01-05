@@ -14,12 +14,14 @@ my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
 
 my $json  = Mojo::JSON->new;
 
+# flag show_on_main holds timestamp and set item to show on main, timestamp needs to filter the latest selected
+
 use constant ITEM_FIELDS => qw(id name alias descr active
 								category subcategory recomend_items 
 								brand tags total_qty
 								sale_start sale_end sale_value sale_active
 								preview_image images on_order
-								meta_descr meta_keys
+								meta_descr meta_keys show_on_main
 								);
 use constant LIST_FIELDS => map {$_ => 1} qw(name active alias brand brand_name category subcategory subitems total_qty articol
 											tags descr preview_image price sale);
@@ -122,6 +124,12 @@ sub undelete {
 	return 1;
 }
 
+sub show_on_main {
+	my ($self, $bShow) = (@_);
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, { ($bShow? '$set':'$unset') => {show_on_main => 0+time()} });
+	return 1;
+}
+
 sub copy {
 	my ($self, $ctrl) = @_;
 	my $item = $self;
@@ -198,6 +206,8 @@ sub _parse_data {
 	# warn $ctrl->dumper($ctrl->req->params());
 	
 	$self->{active} = $self->{active} eq '' ? 0 : 0+$self->{active}; 
+
+	$self->show_on_main(delete $self->{show_on_main});
 	
 	$self->{brand_name} = $ctrl->app->db->brands->find_one({_id => $self->{brand}}, {name => 1}) || '';
 	$self->{brand_name} = $self->{brand_name}->{name} if $self->{brand_name};

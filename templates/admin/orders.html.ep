@@ -196,7 +196,7 @@
 						<dl class='row gray'>
 							<dt>СПОСОБ доставки:</dt>
 							<dd>
-								% if ($order->{self_delivery} ne '') {
+								% if ($order->{delivery_type} eq 'self_delivery') {
 									Самовывоз
 								% } elsif ($order->{delivery_type} eq "courier") {
 									Курьерская доставка по указанному адресу (только Москва).

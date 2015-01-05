@@ -87,10 +87,17 @@
 				%= include 'includes/select_block', name => 'brand', select => $brand, must_fill => 'no', options => stash 'brands'
 				
 				<div class='specials__section'>
-					<strong>под заказ:</strong>
-					<input type="checkbox" name="on_order" value=1 <%== stash('on_order') ne '' ? 'checked="checked"' : ''%>>
+					<div class='custom-select'>
+						<strong>под заказ:</strong>
+						<input type="checkbox" name="on_order" value=1 <%== stash('on_order') ne '' ? 'checked="checked"' : ''%>>
+					</div>
+					<br>
+					<div class='custom-select'>
+						<strong>показыкать на главной:</strong>
+						<input type="checkbox" name="show_on_main" value=1 <%== stash('show_on_main') ne '' ? 'checked="checked"' : ''%>>
+					</div>
 				</div>
-			
+				
 			</div>
 
 			<div class='sale__section'>

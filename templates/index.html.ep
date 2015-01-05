@@ -25,16 +25,6 @@
         </div>
     % }
 
-    <div class='blogs__section clearfloat'>
-
-        <h2 class='dotted__caption'>
-            <span>блог</span>
-        </h2>
-        <ul class='clearfloat'>
-            %= include 'includes/list_articles'
-        </ul>
-    </div>
-
     % if (stash('items')) {
     <div class='shop__items__list'>
          <h2 class='dotted__caption'>
@@ -46,6 +36,16 @@
         </ul>
     </div>
     % }
+
+    <div class='blogs__section clearfloat'>
+
+        <h2 class='dotted__caption'>
+            <span>блог</span>
+        </h2>
+        <ul class='clearfloat'>
+            %= include 'includes/list_articles'
+        </ul>
+    </div>
 
     <script>
         requirejs(['app/equalHeight', 'app/carouselMain', 'app/itemsDescr']);
