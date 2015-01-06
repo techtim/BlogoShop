@@ -24,16 +24,8 @@ sub index {
 
 	my $art = $self->articles->get_filtered_articles({active => 1}, $self->config('articles_on_startpage'));
 
-	my  $filter->{active} 		= 1;
-		$filter->{'subitems.qty'}= {'$gt' => 0};
-
-
-	my $item 	= BlogoShop::Item->new($self);
-	# my $items 	= $item->list($filter, {}, int($self->config('items_on_startpage')/2));
-	delete $filter->{sale};
-
 	# @$items = ( @$items, @{$item->list( $filter, int($self->config('items_on_startpage')-@$items) )} );
-	my $items 	= $self->utils->get_items_from_catalog($self);
+	my $items 	= $self->utils->get_items_for_index();
 
 	return $self->render(
 		items => $items,
@@ -56,11 +48,11 @@ sub list {
 
 	my	$filter->{active} 		= 1;
 		$filter->{'subitems.qty'}= {'$gt' => 0};
-		$filter->{$_} 	 		= $self->stash($_)||'' foreach ITEM_FIELDS;
+		map {$filter->{$_} = $self->stash($_)} grep {$self->stash($_)} ITEM_FIELDS;
 
-		defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
+		# defined $self->stash($_) ? ($filter->{$_} = $self->stash($_)) : ()  foreach ITEM_FIELDS;
 		 # STUPID WAY TO LEAVE NEEDED PARAMS IN STASH
-		($filter->{$_} && $filter->{$_} ne '' ? () : (delete $filter->{$_}) ) for qw(category subcategory sex);
+		# ($filter->{$_} && $filter->{$_} ne '' ? () : (delete $filter->{$_}) ) for qw(category subcategory sex);
 
 	if ($filter->{category} && $filter->{subcategory}) {
 		for ($self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')}->{state}) {

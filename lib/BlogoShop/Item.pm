@@ -226,11 +226,13 @@ sub _parse_data {
 		
 	$self->{alias}  = lc($ctrl->utils->translit($self->{name}, 1));
 	$self->{alias} .= $self->check_existing_alias();
-# warn 'END:'.$self->{alias};
-	my @colors 	= $self->{color} ? split (',', $self->{color}) : ();
-	$self->{color} 	= \@colors; 
 
-		my @tags 	= $self->{tags} ? split (/\s*[;,]\s*/, $self->{tags}) : ();
+	delete $self->{color}; # no colors in Barista shop
+
+	# my @colors 	= $self->{color} && $self->{color} !~ /^(ARRAY)/ ? split (',', $self->{color}) : ();
+	# $self->{color} 	= $#colors>-1 ? \@colors : [];
+
+	my @tags 	= $self->{tags} ? split (/\s*[;,]\s*/, $self->{tags}) : ();
 	$self->{tags} 	= \@tags;
 
 	if ( $self->{sale_start} && $self->{sale_end} ){

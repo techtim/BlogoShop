@@ -134,7 +134,8 @@
 
 		<li <%== 'class=\'disabled\'' if $item->{active} eq 0 %>>
 			<a href="/admin/shop/<%= join '/', $item->{category}, ($item->{subcategory}||'item'), $item->{_id} %>">
-				<span class='img__section' style="background-image: url(<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>)">
+				<span class='img__section'>
+					<img src="<%== config->{nginx_res_item_prev}.config->{image_url}.join '/', 'item', $item->{category}, ($item->{subcategory}||'item'), $item->{alias}, $item->{preview_image} %>">
 					% if ($item->{sale}->{sale_active} && 
 					%	$item->{sale}->{sale_start_stamp} <= time() &&
 					%	$item->{sale}->{sale_end_stamp} >= time()) {

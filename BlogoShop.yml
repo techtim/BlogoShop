@@ -1,17 +1,13 @@
 ---
-mojo_mode: 'production' # 'development production'
-log_level: 'warn' # 'debug warn'
+mojo_mode: 'development' #development production'
+log_level: 'debug' # 'debug warn'
 
-db_name: 'coffee'
+db_name: 'dev_coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
-<<<<<<< HEAD
-domain_name: 'barista-shop.ru'
-=======
 site_name: 'Barista Shop'
 domain_name: 'coffee.xoxloveka.ru'
->>>>>>> bab0700f4df66c903a33101a2880f1851e6fb9f1
 
 hypnotoad:
   workers: 2
@@ -23,7 +19,7 @@ hypnotoad:
   group: techtim
   proxy: 1
 
-image_dir: '/opt/coffee/public/files/i/'
+image_dir: '/home/techtim/coffee/public/files/i/'
 default_img_dir: 'default'
 image_url: '/i/'
 nginx_img_resize: '/res/64'
@@ -33,14 +29,14 @@ nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
 cookie_name: 'BaristaShop'
-cookie_domain: '.barist-shop.ru'
+cookie_domain: '.coffee.xoxloveka.ru'
 cookie_expiration: 604800 # week
 cookie_secret: '$w3Etx0XC0ofFeKa'
 
 block_voter_ip_time: 180 # 3 min
 
 articles_on_page: 9
-articles_on_startpage: 6
+articles_on_startpage: 3
 articles_on_brandpage: 6
 related_articles_count: 3
 
@@ -50,7 +46,7 @@ items_recomends_count: 6
 
 articles_on_admin_page: 30
 
-superadmin_mail: 'timmy88@gmail.com, losbaristas@gmail.com'
+superadmin_mail: 'timmy88@gmail.com'
 order_delete_power: 'techtim' #'vladimir'
 
 recaptcha_public_key: '6Lc9jtISAAAAABMneliM7sxkpvWGa6yT7iuk_Nd6'
@@ -62,8 +58,6 @@ phone_for_courier: 89269309005
 
 qiwi_id: 231734
 qiwi_pass: '88original7'
-<<<<<<< HEAD
-=======
 
 courier_delivery_cost: 350
 
@@ -75,4 +69,3 @@ russian_post_api_key: '3b618f764380b8cb999c0e9a14de2ca4'
 russian_post_api_url: 'http://russianpostcalc.ru/api_v1.php'
 russian_post_api_pass: 'suck25'
 russian_post_index: 103070
->>>>>>> bab0700f4df66c903a33101a2880f1851e6fb9f1

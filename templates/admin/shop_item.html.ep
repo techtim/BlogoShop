@@ -78,7 +78,7 @@
 		</div>
 
 		<div class='row'>
-			<textarea type="text" name="meta_descr" placeholder='мета описание' rows=5><%= stash 'meta_descr' %></textarea>
+			<textarea type="text" class="meta-descr" name="meta_descr" placeholder='мета описание' rows=3><%= stash 'meta_descr' %></textarea>
 		</div>
 
 		<div class='row clearfloat'>
@@ -131,6 +131,22 @@
 			
 		</div>
     
+		<div class='row price'>
+			<div class='caption__strip'>
+				<h3 class='caption'>Цена</h3>
+			</div>
+
+			<input type="text" name="price" value="<%= stash('price') %>"/>
+
+			<div class='currency dropdown__section'>
+				<span class='current__text <%== $is_percent ? 'perc' : 'rub' %>'></span>
+				<ul class='dropdown'>
+					<li class='rub' data-type='rub'></li>
+					<li class='perc' data-type='perc'></li>
+				</ul>
+			</div>
+		</div>
+
 		<div class='row tags'>
 			<div class='caption__strip'>
 				<h3 class='caption'>Теги</h3>

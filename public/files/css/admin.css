@@ -790,6 +790,24 @@ body {
   -ms-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
+
+.shop__add__item form .meta-descr {
+  display: block;
+  height: 80px;
+  width: 100%;
+  background: #f6f6f6;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+  resize: vertical;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
 /* line 755, admin.scss */
 .shop__add__item form textarea:focus {
   background: #fff;
@@ -1103,6 +1121,35 @@ body {
   background: #fff;
   line-height: 20px;
 }
+
+.shop__add__item form .price {
+  padding-bottom: 6px;
+  background: #f2ffea;
+  border: 1px solid #d0d0d0;
+}
+
+.shop__add__item form .price .caption__strip {
+  background: #7bd03c;
+}
+/* line 1054, admin.scss */
+.shop__add__item form .price .caption__strip .caption {
+  padding-top: 6px;
+  padding-left: 8px;
+  color: #4b4b4b;
+  font-family: "PT Sans";
+  font-size: 15px;
+  font-weight: bold;
+}
+/* line 1069, admin.scss */
+.shop__add__item form .price input[type='text'] {
+  height: 25px;
+  width: 348px;
+  margin-top: 6px;
+  margin-left: 6px;
+  background: #fff;
+  line-height: 20px;
+}
+
 /* line 1079, admin.scss */
 .shop__add__item form .sub__items__section {
   padding-top: 10px;
