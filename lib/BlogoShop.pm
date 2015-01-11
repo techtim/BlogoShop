@@ -116,6 +116,9 @@ sub startup {
 	# Header plug for subdomains
 	$self->plugin('HeaderCondition');
 
+	# Setup default service collections in DB
+	$utils->setup_service_collections();
+
 	# Mongo connection for startup
 	my $mongo = MongoDB::Connection->new(
 		host => $self->config('db_host'), 
@@ -149,6 +152,7 @@ sub startup {
 		$c->stash->{list_brands} 	  	= $c->app->utils->get_list_brands($c->app->db);
 		$c->stash->{name_brands} 	  	= {map {$_->{_id} => $_->{name}} @{$c->stash->{list_brands}}};
 		$c->stash->{article_types}      = $c->app->utils->get_article_types();
+		$c->stash->{global_currencies}	= $c->app->utils->get_global_currencies();
 		$next->();
 	});
 

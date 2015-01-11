@@ -37,6 +37,8 @@
 					<li><%= link_to 'Добавить администратора' => '/admin/add_admin' %></li>
 				 	<li><%= link_to 'ЗАКАЗЫ' => '/admin/orders' %></li>
 				 % }
+				 <li><%= link_to 'удаленные товары' => '/admin/shop'.
+					(stash('category') && !ref stash('category') && stash('category') ne '' ? '/'.stash('category').'/'.(stash('subcategory')||'') : '').'?deleted=1' %></li>
 				 <li class='site__link'><a href='/' title='Вернуться на сайт'></a></li>				 	
 			</ul>
 

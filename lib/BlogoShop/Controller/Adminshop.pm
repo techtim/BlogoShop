@@ -62,7 +62,7 @@ sub show {
     }
     my $sort = $c->stash('brand') ? {articol => 1} : {brand => 1};
     # Paging
-    my $skip = $c->{app}->config->{items_on_admins_page} * 2 * 
+    my $skip = $c->{app}->config->{items_on_page} * 2 * 
         ($c->req->param('page') && $c->req->param('page') =~ /(\d+)/ ? ($1>0 ? $1-1 : 0) : 0);
 
     my $pager_url  = $c->req->url->path->to_string.'?'.$c->req->url->query->to_string;
@@ -73,7 +73,6 @@ sub show {
     my $pager_url_no_state = $pager_url;
     $pager_url_no_state =~ s!\&?active=.+\&?!!g;
 
-	# warn $c->dumper($filter);
 	return $c->render(
 		%$filter,
 		category => $filter->{category} ? $filter->{category} : '',
@@ -108,10 +107,9 @@ sub item {
         $item->undelete, return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory},$item->{_id}))
             if $c->req->param('undelete') && $item->{_id};
 		# save
-		my $id = $item->save($c); # save returns 0 if failed + puts error_message to controller and form data to item
+		my $id = $item->save($c); # save returns 0 if failed + puts error_message to controller and form data for item
 		return $c->redirect_to('/admin/shop/'.join('/',$item->{category},$item->{subcategory},$id)) if $id;
 	}
-
 
 	# to split required from opt for params dropdown
 	my %opt_subitem_params = %{&BlogoShop::Item::OPT_SUBITEM_PARAMS};
@@ -188,6 +186,10 @@ sub multi_act {
     }
     return $c->redirect_to("/admin/".$c->req->param('redirect_to')) if $c->req->param('redirect_to');
     return $c->redirect_to("/admin/shop/".$c->req->param('category').($c->req->param('subcategory') ? "/".$c->req->param('subcategory') : ''));
+}
+
+sub update_currency {
+
 }
 
 1;

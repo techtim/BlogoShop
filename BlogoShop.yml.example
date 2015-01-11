@@ -1,13 +1,13 @@
 ---
-mojo_mode: 'production' #development production'
+mojo_mode: 'production' # 'development production'
 log_level: 'warn' # 'debug warn'
 
 db_name: 'coffee'
 db_host: '127.0.0.1'
 db_port: 27017
 
-site_name: 'Barista Shop'
 domain_name: 'barista-shop.ru'
+site_name: 'Barista Shop'
 
 hypnotoad:
   workers: 2
@@ -29,7 +29,7 @@ nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
 cookie_name: 'BaristaShop'
-cookie_domain: '.barista-shop.ru'
+cookie_domain: '.barist-shop.ru'
 cookie_expiration: 604800 # week
 cookie_secret: '$w3Etx0XC0ofFeKa'
 
@@ -56,5 +56,31 @@ address_for_courier: 'м. Китай-Город, Хохловский пер. д
 descr_for_courier: 'С торца здания есть ворота, проходите через проходную, после проходной повернуть налево, за вывеской справа, в глубине арки, будет черная дверь.'
 phone_for_courier: 89269309005
 
-qiwi_id: 5931016
-qiwi_pass: 'hu6NE4kMsPC0pXNXJWNH'
+qiwi_id: 231734
+qiwi_pass: '88original7'
+
+courier_delivery_cost: 350
+
+ya_money_url: 'money.yandex.ru/eshop.xml'
+ya_shop_id: 22068
+ya_scid: 11413
+
+russian_post_api_key: '3b618f764380b8cb999c0e9a14de2ca4'
+russian_post_api_url: 'http://russianpostcalc.ru/api_v1.php'
+russian_post_api_pass: 'suck25'
+russian_post_index: 103070
+
+global_currencies:
+- _id: usd
+  value: 50
+- _id: eur
+  value: 60
+
+# --- Service structures  
+list_currencies:
+- _id: rub
+  name: рубли
+- _id: usd
+  name: доллары
+- _id: eur
+  name: евро

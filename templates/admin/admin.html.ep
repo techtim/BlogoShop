@@ -14,12 +14,14 @@
 	</div>
 
 	<div class='list__section'>
-		<h3 class='caption'>Cтатичные страницы:</h3>
-		<%= link_to 'Добавить статичную страницу' => '/admin/statics/edit', class => 'add', title => 'Добавить статичную страницу' %>
-
-		<div class='items__section'>
-			<%= link_to 'Cписок статичных страниц' => '/admin/statics' %>
-		</div>
+	%= form_for '' => (method => 'post') => begin
+		<h3 class='caption'>Курсы валют:</h3>
+		% foreach my $cur (@{config('list_currencies')}) {
+			% next if $cur->{_id} eq 'rub';
+			<%= $cur->{name} %>: <input type="text" name="$cur->{_id}" value="<%= $global_currencies->{$cur->{_id}} %>"/>
+		% }
+		<button type="submit" name="submit" value="1">Сохранить</button>
+	% end
 	</div>
 
 </div>

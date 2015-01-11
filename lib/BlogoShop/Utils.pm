@@ -15,6 +15,7 @@ use File::Path qw(make_path remove_tree);
 
 use constant {	
 	ARTICLES_COLLECTION => 'articles',
+	SERVICE_COLLECTIONS => [qw( global_currencies )],
 };
 
 sub new {
@@ -23,6 +24,20 @@ sub new {
 	# $self->{redis} = Redis->new;
 	$self->{months} = [qw(января февраля марта апреля мая июня июля августа сентября октября ноября декабря)];
 	bless $self, $class; 
+}
+
+sub setup_service_collections {
+
+	foreach my $col (@{+SERVICE_COLLECTIONS}) {
+		my $check = BlogoShop->db->get_collection($col)->count({});
+		unless ($check && ref BlogoShop->conf->{$col} eq 'ARRAY') {
+			warn 'SETUP SERVICE COLLECTION: '.$col;
+			foreach (@{BlogoShop->conf->{$col}}) {
+				BlogoShop->db->get_collection($col)->save($_) 
+			}
+		}
+	}
+
 }
 
 sub translit($)
@@ -398,6 +413,12 @@ sub check_cart {
 	} else { 
 		return {cart_count => 0};
 	}
+}
+
+sub get_global_currencies {
+	my ($self) = @_;
+
+	return { map { $_->{_id} => $_->{value} } BlogoShop->db->global_currencies->find({})->all };
 }
 
 1;

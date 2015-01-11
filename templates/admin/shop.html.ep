@@ -9,49 +9,50 @@
 </script>
 
     %= include 'includes/shop_admin_categories', categories => stash 'categories'
-    %= include 'includes/shop_admin_brands', brands => stash 'list_brands'
+    %# = include 'includes/shop_admin_brands', brands => stash 'list_brands'
 
 <div class="shop__items__list">
 
-	<ul class='breadcrumps__section clearfloat'>
-		<li><a href="/admin/shop">Шоп</a></li>
-		% if ($category) {
-		<li>
-			/<a href="/admin/shop/<%== $category %>"><%= $categories_alias->{$category} %></a>
-		</li>
-		% }
-		% if ($subcategory) {
-		<li>
-			/<a href="/admin/shop/<%== $category %>/<%== $subcategory %>"><%= $categories_alias->{$subcategory} %></a>
-		</li>
-		% }
-		<li>
-			<%== '&gt; '.stash('name_brands')->{stash('brand')} if stash('brand') && stash('brand') ne '' %>
-		</li>
-		% if ($category && $subcategory) {
-		<li>
-			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/add" class='add__item'>Добавить товар</a>
-		</li>
+	<div class="breadcrumps">
+		<ul class='breadcrumps__section clearfloat'>
+			<li><a href="/admin/shop">Шоп</a></li>
+			% if ($category) {
+			<li>
+				/<a href="/admin/shop/<%== $category %>"><%= $categories_alias->{$category} %></a>
+			</li>
+			% }
+			% if ($subcategory) {
+			<li>
+				/<a href="/admin/shop/<%== $category %>/<%== $subcategory %>"><%= $categories_alias->{$subcategory} %></a>
+			</li>
+			% }
+			<li>
+				<%== '&gt; '.stash('name_brands')->{stash('brand')} if stash('brand') && stash('brand') ne '' %>
+			</li>
+			% if ($category && $subcategory) {
+			<li>
+				<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/add" class='add__item'>Добавить товар</a>
+			</li>
 
-		<li>
-			<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/
-				<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
-					class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
-			<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." раздел" %>
-			</a>
-		</li>
-		% }
-		% if (0 && stash('brand') && stash('brand') ne '') {
-		<li>
-			<a href="/admin/shop/brand/<%== stash('brand') %>/
-				<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
-					class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
-			<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." бренд" %>
-			</a>
-		</li>			
-		% }
-	</ul>
-
+			<li>
+				<a href="/admin/shop/<%== $category.'/'.($subcategory||'item') %>/
+					<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
+						class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
+				<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." раздел" %>
+				</a>
+			</li>
+			% }
+			% if (0 && stash('brand') && stash('brand') ne '') {
+			<li>
+				<a href="/admin/shop/brand/<%== stash('brand') %>/
+					<%= $cur_category->{state} && $cur_category->{state} eq 'off' ? 'on' : 'off' %>"
+						class='<%= ($cur_category->{state}||'on').'__catalog' %>'>
+				<%= ($cur_category->{state} && $cur_category->{state} eq 'off' ? "включить" : "выключить") ." бренд" %>
+				</a>
+			</li>			
+			% }
+		</ul>
+	</div>
 	
 	<script>requirejs(['app/admin/seoEditor']);</script>
 	<a class='toggle__seo__editor' href='#'>SEO</a>
@@ -76,7 +77,7 @@
 	</div>
 	
 
-	<div class="shop__search clearfloat">
+	<div class="shop__search ">
 		%= form_for '/admin/shop/search' => (method => 'get') => begin
 			<input type='hidden' name='go' value='go' />
 			<input type='text' name='search' />

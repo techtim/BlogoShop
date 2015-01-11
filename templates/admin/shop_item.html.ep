@@ -74,7 +74,7 @@
 		</div>
 
 		<div class='row'>
-			<input type="text" name="meta_keys" value="<%= stash 'meta_keys' %>" placeholder='мета ключи (через ",")' required="required"/>
+			<input type="text" name="meta_keys" value="<%= stash 'meta_keys' %>" placeholder='мета ключи (через ",")' />
 		</div>
 
 		<div class='row'>
@@ -136,15 +136,11 @@
 				<h3 class='caption'>Цена</h3>
 			</div>
 
-			<input type="text" name="price" value="<%= stash('price') %>"/>
+			<input type="text" name="currency_price" value="<%= stash('currency_price') %>" required="required"/>
 
-			<div class='currency dropdown__section'>
-				<span class='current__text <%== $is_percent ? 'perc' : 'rub' %>'></span>
-				<ul class='dropdown'>
-					<li class='rub' data-type='rub'></li>
-					<li class='perc' data-type='perc'></li>
-				</ul>
-			</div>
+			%= include 'includes/select_block', must_fill => 1, name => 'currency', select => stash('currency'), options => config('list_currencies')
+			
+			<span><%= stash('currency_price')*$global_currencies->{stash('currency')} if stash('currency') %></span>
 		</div>
 
 		<div class='row tags'>
@@ -174,10 +170,10 @@
 				</dl>
 				
 		    	<dl class='params__item clearfloat'>
-		    		<dd>размер</dd>
+		    		<dd>количество</dd>
 		    		<dt>
-		    			<input type="text" name="size" class='size' value="<%= stash 'size' %>" placeholder='размер'/>
-		    			<input type="text" name="price" class='price' value="<%= stash 'price' %>" placeholder='цена'/>
+		    			<!-- <input type="text" name="size" class='size' value="<%= stash 'size' %>" placeholder='размер'/>
+		    			<input type="text" name="price" class='price' value="<%= stash 'price' %>" placeholder='цена'/> -->
 		    			<input type="text" name="qty" class='qty' value="<%= stash 'qty' %>" placeholder='кол-во'/>
 		    		</dt>
 		    	</dl>
@@ -358,20 +354,16 @@
 	   
         
 		<div class='submit__section'>
-			% if ($action_type  ne 'add') {
-	       		<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить товартовар');" class='button red delete__item'>Удалить товар!</button>
+	       	% if ($action_type  ne 'add') {
+				% if (stash('deleted') eq '') {
+					<button type="submit" name="delete" value="1" onCLick="return confirm('Удалить товартовар');" class='button red delete__item'>Удалить товар!</button>
+	       		% } else {
+					<button type="submit" name="undelete" value="1" onCLick="return confirm('Восстановить товартовар');" class='button green delete__item'>Восстановить товар!</button>
+	       		% }
 	       	% }
 	       	
 			<a class='button gray submit__form' href='#' data-role='submit'>Сохранить товар</a>
 		</div>
-		
-		<!--
-        <button type="submit" name="update" value="1">
-            <%== ($action_type  eq 'add' ? 'Добавить товар и продолжить редактуру' : 'Сохранить товар и продолжить редактуру') %>
-        </button>
-        <button type="submit" name="submit" value="1">
-            <%== ($action_type  eq 'add' ? 'Добавить товар и вернуться к списку' : 'Сохранить товар и вернуться к списку') %>
-        </button>-->
 
     % end
 </div>
