@@ -163,6 +163,7 @@ sub startup {
 	$r->route('/admin/article/:id/active/:bool', id => qr/[\d\w]+/, bool => qr/1|0/)->via('post')->to('controller-Ajax#activate_post', id => 'add');
 	$r->route('/import_cities')->to('controller-Ajax#import_cities');
 	$r->route('/update')->to('controller-Ajax#items_update_alias');
+	$r->route('/admin/update_currency')->to('controller-Ajax#update_currency_rub_prices');
 
 # make from array of hashes array of _ids and join ids to filter cuts in url
 	my $bind_static = join '|', map {$_->{alias}} $mongo->statics->find({})->fields({_id=>0,alias=>1})->all;

@@ -250,11 +250,42 @@ sub get_russian_post_delivery_price {
 		weight => $c->req->param('weight'),
 		ob_cennost_rub => $c->req->param('cost')
 	});
-	if (my $res = $tx->success) {
+	my $res;
+	if ($res = $tx->success) {
 		warn $c->dumper($res->body);
 	}
 
 	return $c->render(json => $res->body);
+}
+
+sub update_currency_rub_prices {
+	my $c = shift;
+
+	my $items = [$c->app->db->items->find({})->all];
+	foreach (@$items) {
+		# next if $_->{brand} eq 'mazzer' || $_->{brand} eq 'anfim';
+		foreach (@{$_->{subitems}}) {
+			$_->{qty} eq '' || $_->{qty} eq '0' ?  $_->{qty}=0 : $_->{qty} += 0;
+			$_->{currency_price} = 0+$_->{price};
+			$_->{currency} = 'rub';
+		}
+		
+		# $_->{qty} eq '' || $_->{qty} eq '0' ?  $_->{qty}=0 : $_->{qty} += 0;
+		# $_->{currency_price} = 0+$_->{price};;
+		# $_->{currency} = 'rub';
+#		warn $c->dumper($_);
+		# $_->{brand_name} = $c->app->db->brands->find_one({_id => $_->{brand}}, {name => 1}) || '';
+		# $_->{brand_name} = $_->{brand_name}->{name} if $_->{brand_name};
+		
+		# $c->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$_->{_id}) , 
+		# 	{'$set' =>{qty => 0+$_->{qty}, price => $_->{price}, subitems => $_->{subitems}, brand_name => $_->{brand_name}}}); 
+		$c->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$_->{_id})}, 
+			{'$set' => { currency_price => $_->{price}, currency => 'rub', subitems => $_->{subitems} } } ) ; 
+		# 
+	}
+	return $c->render(
+		json => {ok => 1},
+	);
 }
 
 1;

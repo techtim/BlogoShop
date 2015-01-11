@@ -75,6 +75,8 @@ global_currencies:
   value: 50
 - _id: eur
   value: 60
+- _id: rub
+  value: 1
 
 # --- Service structures  
 list_currencies:
