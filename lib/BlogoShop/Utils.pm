@@ -10,7 +10,7 @@ use utf8 qw(encode decode);
 use Time::Local;
 use Data::Dumper;
 use Digest::MD5 qw( md5_hex );
-use POSIX qw(strftime);
+use POSIX qw(strftime ceil);
 use File::Path qw(make_path remove_tree);
 
 use constant {	
@@ -419,6 +419,48 @@ sub get_global_currencies {
 	my ($self) = @_;
 
 	return { map { $_->{_id} => $_->{value} } BlogoShop->db->global_currencies->find({})->all };
+}
+
+sub update_global_currencies {
+	my ($self, $g_curr) = @_;
+
+	return if ref $g_curr ne 'HASH';
+
+	foreach (keys %$g_curr) {
+		BlogoShop->db->global_currencies->update( {_id => $_}, {'$set' => {value => 0+$g_curr->{$_}}} )
+			if $g_curr->{$_} =~ m!^([\d\.]+)$!;
+	}
+	$self->update_currency_prices();
+
+	return 1;
+}
+
+sub update_currency_prices {
+	my $self = shift;
+
+	my $items = [BlogoShop->db->items->find({})->all];
+
+	my $global_currencies = $self->get_global_currencies();
+
+	foreach my $it (@$items) {
+		my $new_price = ceil($it->{currency_price} * $global_currencies->{$it->{currency}}/10)*10;
+		foreach (@{$it->{subitems}}) {
+			$_->{price} = $new_price;
+		}
+# warn $it->{_id}.' : '. $it->{price} . ' -> curr pr: '. $it->{currency_price}. ' curr: ' . $global_currencies->{$it->{currency}}. ' = '.
+# ceil($it->{currency_price} * $global_currencies->{$it->{currency}}/10)*10;
+
+		BlogoShop->db->items->update(
+			{_id => MongoDB::OID->new(value => ''.$it->{_id})}, 
+			{'$set' => { 
+				price => $new_price,
+				subitems => $it->{subitems}
+			} }
+		); 
+
+	}
+
+	return 1;
 }
 
 1;

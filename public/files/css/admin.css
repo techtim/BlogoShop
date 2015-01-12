@@ -70,8 +70,8 @@ body {
 
 /* line 109, admin.scss */
 .parts__section {
-  margin-bottom: 28px;
-  padding-bottom: 12px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
   display: block;
   border-bottom: 1px solid #505050;
 }
@@ -97,10 +97,12 @@ body {
 }
 /* line 134, admin.scss */
 .parts__section .site__link a {
+  margin: -2px 0px;
+  padding: 0px 0px;
   display: block;
-  height: 9px;
-  width: 13px;
-  background: url(/i/admin/ico-corona.png) no-repeat;
+  height: 15px;
+  width: 15px;
+  background: url(/i/admin/settings-small.png) no-repeat;
 }
 /* line 143, admin.scss */
 .parts__section .home {
@@ -2538,4 +2540,61 @@ body {
 /* line 2514, admin.scss */
 .banners__cats input:checked + label {
   color: #05781B;
+}
+
+.shop__settings h3 {
+  display: inline-block;
+  padding-bottom: 10px;
+  color: #4b4b4b;
+  font: 14px "PT Sans";
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.shop__settings button {
+  float: left;
+  width: 100px;
+  height: 30px;
+  margin-top: 20px;
+  margin-right: 12px;
+  background: #444444;
+  border: 1px solid #757575;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: lowercase;
+  opacity: .5;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+/* line 479, admin.scss */
+.shop__settings button:hover {
+  opacity: 1;
+}
+
+.shop__settings__group {
+  padding-left: 10px;
+  display: block;
+  padding-bottom: 10px;
+  color: #4b4b4b;
+  font: 14px "PT Sans";
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.shop__settings__group li {
+  display: block;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  color: #4b4b4b;
+  font: 14px "PT Sans";
+  font-weight: normal;
+  text-transform: uppercase;
+  
 }

@@ -930,7 +930,7 @@ body.overlayed #overlay {
   display: block;
   max-width: 680px;
   margin-bottom: 0;
-  border: 1px solid #B2B2B2;
+  /*border: 1px solid #B2B2B2;*/
 }
 /* line 1028, style.scss */
 .post__page h3 {

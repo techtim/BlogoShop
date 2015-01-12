@@ -1,0 +1,32 @@
+% layout 'admin';
+% title 'Настройки магазина';
+
+<div class="admin-container">
+	<div class="section main-heading">
+		<h1 class="caption">Настройки магазина</h1>
+	</div>
+
+	<div class="section error-messages">
+		%= include 'includes/error_message', error_messages => stash 'error_message'
+	</div>
+
+	<div class="shop__settings">
+
+		%= form_for '/admin/settings' => (method => 'post') => begin
+        <div class="shop__settings__group">        
+            <h3>Курсы валют:</h3>
+            <ul>
+            % foreach my $cur (@{config('list_currencies')}) {
+                % next if $cur->{_id} eq config('main_currency');
+                <li>
+                    <%= $cur->{name} %>: <input type="text" name="<%= $cur->{_id} %>" value="<%= $global_currencies->{$cur->{_id}} %>"/>
+                </li>
+            % }
+            </ul>
+        </div>
+                
+        <button type="submit" name="save" value="1">Сохранить</button>
+		% end
+
+	</div>
+</div>

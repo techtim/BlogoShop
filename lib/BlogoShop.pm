@@ -265,6 +265,10 @@ sub startup {
 		$admin_bridge->route('/banners/:do', type => qr/\d+/, do => qr/[\w_]+/)->via('post')->to('controller-Admincontent#list_banners');
 		$admin_bridge->route('/banners/:type/:do/:banner', type => qr/\d+/, do => qr/[\w_]+/, banner => qr![^\{\}\[\]/]+!)->to('controller-Admincontent#list_banners');
 		
+		# Settings 
+		$admin_bridge->route('/settings')->via('get')->to('controller-Adminsettings#show');
+		$admin_bridge->route('/settings')->via('post')->to('controller-Adminsettings#update');
+
 		# Service
 		$admin_bridge->route('/update_articles')->to('controller-Ajax#articles_update');
 		$admin_bridge->route('/update_items')->to('controller-Ajax#items_update');

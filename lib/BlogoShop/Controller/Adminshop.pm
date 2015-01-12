@@ -14,7 +14,7 @@ sub show {
 	defined $c->stash($_) ? ($filter->{$_} = $c->stash($_)) : () foreach ITEM_FIELDS;
     $filter->{active} = 0+$c->req->param('active') if defined $c->req->param('active');
     $filter->{sale} = { sale_active => 0+$c->req->param('sale') } if defined $c->req->param('sale');
-    $filter->{deleted} = 1 if defined $c->req->param('deleted') && $c->stash('admin')->{login} eq $c->config->{order_delete_power};
+    $filter->{deleted} = 1 if defined $c->req->param('deleted'); # && $c->stash('admin')->{login} eq $c->config->{order_delete_power};
 
 	return $c->redirect_to('/admin/shop/')
 		if $filter->{category} && !($c->stash('categories_alias'))->{$filter->{category}};
