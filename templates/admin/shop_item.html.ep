@@ -45,7 +45,6 @@
 	    </ul>
 	    
 	    <div class='caption__row'>
-	    	<h2 class='caption fl'>Новый товар</h2>
 
 			<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#'>
 				<input type="checkbox" name="active" value='1' <%== "checked" if $active %>/>

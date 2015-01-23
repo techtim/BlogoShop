@@ -97,9 +97,9 @@ sub list {
 		return $self->render(
 			items 	=> $items,
 			%$filter,
-			cur_category => $self->stash('categories_info')->{$filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
-			banners => $self->utils->get_banners( $self, $filter->{category}. ($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 680 ),
-			banners_h => $self->utils->get_banners($self, $filter->{category}.($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 240),
+			cur_category=> $self->stash('categories_info')->{($filter->{category}||'') . ($filter->{subcategory} ? '.'.$filter->{subcategory} : '')} || {},
+			banners 	=> $self->utils->get_banners($self, ($filter->{category}||'') . ($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 680 ),
+			banners_h 	=> $self->utils->get_banners($self, ($filter->{category}||'') . ($filter->{subcategory} ? '.'.$filter->{subcategory} : ''), 240),
 			type 	=> '',
 			shop 	=> 1,
 			page_name => 'shop',

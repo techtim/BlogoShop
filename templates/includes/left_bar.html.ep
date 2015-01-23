@@ -11,7 +11,8 @@
 		</div>
 
 		% foreach my $cat (@$categories) {
-		% next if !$cat->{name};
+		% next unless $cat->{name};
+
 		<ul class='item<%= stash('category') && stash('category') eq $cat->{_id} ? ' current' : ' toggled' %>'>
 			<li class='title'>
 				<a href='http://<%= config->{domain_name} %>/<%= $cat->{_id} %>'><%= $cat->{name} %></a>
@@ -19,6 +20,7 @@
 			 <ul class='submenu'>
 
 			% foreach my $sub (@{$cat->{subcats}}) {
+			% next unless $active_categories->{$sub->{_id}.'.'.$cat->{_id}};
 				<li <%== 'class=\'current\'' if stash('subcategory') && stash('subcategory') eq $sub->{_id} %>><a href='/<%= $cat->{_id}.'/'.$sub->{_id}%>'><%= $sub->{name} %></a></li>
 			% }
 

@@ -6,9 +6,9 @@
 <div class='content__section post__page'>
 	<ul class='breadcrumps__section clearfloat'>
 <!--		<li><a href='/'>ONLINE-МАГАЗИН</a></li> -->
-		% if (stash('category') ne '') {
+		% if (stash('category')) {
 			<li <%= 'class=\'current\'' if stash('subcategory') eq '' %>><a href='/<%= stash('category') %>'><%= $categories_alias->{stash('category')} %></a></li>
-			% if (stash('subcategory') ne '') {
+			% if (stash('subcategory')) {
 				<li class='current'>/<a href='/<%= stash('category').'/'. stash('subcategory') %>'><%= $categories_alias->{stash('subcategory')} %></a></li>
 			% }
 		% } elsif (stash('tags') ne '') {
