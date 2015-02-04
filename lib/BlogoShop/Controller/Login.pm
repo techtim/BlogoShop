@@ -2,20 +2,20 @@ package BlogoShop::Controller::Login;
 
 use Mojo::Base 'Mojolicious::Controller';
 
-use Captcha::reCAPTCHA ();
+# use Captcha::reCAPTCHA ();
 use Digest::SHA qw(sha256_hex);
 
 use constant COLLECTION => 'admins';
 
-sub _recaptcha {
-	my $self = shift;
-    my $recaptcha_html = Captcha::reCAPTCHA->new->get_html(
-        $self->config('recaptcha_public_key'), undef, undef,
-        { lang => 'ru', theme => 'clean' }
-    );
-    $self->stash(recaptcha_html => $recaptcha_html);
-    #<%== $recaptcha_html %>
-}
+# sub _recaptcha {
+# 	my $self = shift;
+#     my $recaptcha_html = Captcha::reCAPTCHA->new->get_html(
+#         $self->config('recaptcha_public_key'), undef, undef,
+#         { lang => 'ru', theme => 'clean' }
+#     );
+#     $self->stash(recaptcha_html => $recaptcha_html);
+#     #<%== $recaptcha_html %>
+# }
 
 sub login {
 	my $self = shift;
@@ -59,7 +59,7 @@ sub check_login{
 #   		$self->stash(error_message => ['wrong_captcha']);
 #   	}
 
-    $self->_recaptcha;
+    # $self->_recaptcha;
 
 	$self->render(
 		template => 'login',

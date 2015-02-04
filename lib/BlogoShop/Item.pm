@@ -8,11 +8,8 @@ use Data::Dumper;
 use File::Path qw(make_path remove_tree);
 use File::Copy::Recursive qw( dircopy );
 $File::Copy::Recursive::MaxDepth = 1;
-use Mojo::JSON;
 use Hash::Merge qw( merge );
 my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
-
-my $json  = Mojo::JSON->new;
 
 # flag show_on_main holds timestamp and set item to show on main, timestamp needs to filter the latest selected
 
@@ -72,12 +69,12 @@ sub new {
 	$self->{app} = $ctrl->app if $ctrl;
 	if ($ctrl->stash('id') && $ctrl->stash('id') ne 'add') {
 		%$self = ( %$self, 
-			%{ BlogoShop->db->items->find_one({_id => MongoDB::OID->new(value => $ctrl->stash('id'))}) || {} } 
+			%{ $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $ctrl->stash('id'))}) || {} } 
 		);
 		$self->{$_} = $self->{subitems}->[0]{$_} foreach SUBITEM_PARAMS;
 	} elsif ($ctrl->stash('alias')) {
 		%$self = ( %$self, 
-			%{ BlogoShop->db->items->find_one({alias => $ctrl->stash('alias')}) || {} } 
+			%{ $self->{app}->db->items->find_one({alias => $ctrl->stash('alias')}) || {} } 
 		);
 	}
 	if (!$self->{_id}) {
@@ -103,10 +100,10 @@ sub save {
 			delete $self->{_id};
 			$self->_update($ctrl);
 			warn 'UPD:';#. $ctrl->dumper($self->as_hash);
-			BlogoShop->db->items->update({_id => MongoDB::OID->new(value => ''.delete $self->{id})}, {'$set' => {%{$self->as_hash}}});
+			$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.delete $self->{id})}, {'$set' => {%{$self->as_hash}}});
 		} else {
 			warn 'SAVE:';#.$ctrl->dumper($self->as_hash);
-			$self->{_id} = BlogoShop->db->items->save($self->as_hash);
+			$self->{_id} = $self->{app}->db->items->save($self->as_hash);
 		}
 	}
 
@@ -115,19 +112,19 @@ sub save {
 
 sub delete {
 	my ($self) = @_;
-	BlogoShop->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$set' => {deleted => 1}}); 
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$set' => {deleted => 1}}); 
 	return 1;
 }
 
 sub undelete {
 	my ($self) = @_;
-	BlogoShop->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$unset' => {deleted => ""}}); 
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, {'$unset' => {deleted => ""}}); 
 	return 1;
 }
 
 sub show_on_main {
 	my ($self, $bShow) = (@_);
-	BlogoShop->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, { ($bShow? '$set':'$unset') => {show_on_main => 0+time()} });
+	$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.$self->{_id})}, { ($bShow? '$set':'$unset') => {show_on_main => 0+time()} });
 	return 1;
 }
 
@@ -141,19 +138,19 @@ sub copy {
 	$item->_update($ctrl);
 	delete $item->{_id};
 	$item->{active} = 0;
-	return BlogoShop->db->items->save($item->as_hash);
+	return $self->{app}->db->items->save($item->as_hash);
 }
 
 sub get {
 	my ($self, $id, $sub_id) = @_;
-	my $it = BlogoShop->db->items->find_one({_id => MongoDB::OID->new(value => $id)});
+	my $it = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => $id)});
 	return $it ? $merge->merge( $it, $it->{subitems}->[$sub_id] ) : {};
 }
 
 sub list {
 	my ($self, $filt, $sort, $skip, $limit) = @_;
 	my %filter = ref $filt eq ref {} ? %$filt : ();
-	$limit ||= BlogoShop->conf->{items_on_page}; 
+	$limit ||= $self->{app}->conf->{items_on_page}; 
 	foreach (keys %filter) {
 		delete $filter{$_} unless defined $filter{$_};
 	}
@@ -165,7 +162,7 @@ sub list {
 # warn $filter->{tag};
 # warn Dumper($sort);
 
-	my @all = BlogoShop->db->items->find(\%filter)->sort($sort)->fields({LIST_FIELDS})->skip($skip)->limit($limit)->all;
+	my @all = $self->{app}->db->items->find(\%filter)->sort($sort)->fields({LIST_FIELDS})->skip($skip)->limit($limit)->all;
 	return \@all;
 }
 
@@ -175,7 +172,7 @@ sub dump_all {
 	$filter{deleted} = {'$exists' => 0};
 	$sort = {_id => 1} if ref $sort ne ref {} ||  keys %$sort == 0;
 
-	return [BlogoShop->db->items->find(\%filter)->sort($sort)->all];
+	return [$self->{app}->db->items->find(\%filter)->sort($sort)->all];
 }
 
 sub count {
@@ -190,7 +187,7 @@ sub count {
 	$filter{sale} = {sale_active => 1} if $filter{sale};
 	$sort = {price => -1} if ref $sort ne ref {} ||  keys %$sort == 0;
 
-	return BlogoShop->db->items->find(\%filter)->count;
+	return $self->{app}->db->items->find(\%filter)->count;
 }
 
 sub _parse_data {
@@ -215,7 +212,7 @@ sub _parse_data {
 
 	($self->{category}, $self->{subcategory}) = split '\.', $self->{subcategory}
 		if $self->{subcategory} =~ m/(\.+)/;
-	$self->{category} = BlogoShop->db->categories->find_one({_id => $self->{category}, 'subcats._id' => $self->{subcategory}}) if $self->{subcategory} ne '';
+	$self->{category} = $self->{app}->db->categories->find_one({_id => $self->{category}, 'subcats._id' => $self->{subcategory}}) if $self->{subcategory} ne '';
 	$self->{category} = $self->{category}->{_id} if $self->{subcategory} ne '';
 
 	$self->{descr} 	=~ s/\r|(\r?\n)+$|\ +$//g if $self->{descr};
@@ -345,7 +342,7 @@ sub _get_subitems {
 
 sub _update {
 	my ($self, $ctrl) = @_;
-	my $old_item = BlogoShop->db->items->find_one({_id => MongoDB::OID->new(value => ''.$self->{id})});
+	my $old_item = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => ''.$self->{id})});
 
 	if ($old_item->{alias} ne $self->{alias} || 
 		$self->{subcategory} ne $old_item->{subcategory} || 
@@ -374,17 +371,17 @@ sub check_existing_alias {
 	my $filter->{alias} = $self->{alias};
 	warn 'START:'.$self->{alias};
 	$filter->{_id} 		= {'$ne' => MongoDB::OID->new(value => ''.$self->{id})} if $self->{id};
-	my @full_match = BlogoShop->db->items->find($filter)->fields({alias => 1})->sort({alias => -1})->all;
+	my @full_match = $self->{app}->db->items->find($filter)->fields({alias => 1})->sort({alias => -1})->all;
 	return '' if 0+@full_match == 0;
 	$filter->{alias} 	= qr/^$self->{alias}\d*$/;
-	my @check = BlogoShop->db->items->find($filter)->fields({alias => 1})->sort({alias => -1})->all;
+	my @check = $self->{app}->db->items->find($filter)->fields({alias => 1})->sort({alias => -1})->all;
 	@check = sort {
 		my $ob = 0+($b->{alias}=~/(\d+)$/)[0]||0; my $oa = 0+($a->{alias}=~/(\d+)$/)[0]||0;
 		$ob <=> $oa;
 	} @check;
 
 	if ($self->{id} && 0+@full_match == 0) {
-		my $old_item = BlogoShop->db->items->find_one({_id => MongoDB::OID->new(value => ''.$self->{id})});
+		my $old_item = $self->{app}->db->items->find_one({_id => MongoDB::OID->new(value => ''.$self->{id})});
 		# warn 'RET OLD' if ($old_item->{alias} =~ /^(.+?)\d*$/)[0] eq ($self->{alias} =~ /^(.+?)\d*$/)[0];
 		return ($old_item->{alias} =~ /(\d*)$/)[0] if ($old_item->{alias} =~ /^(.+?)\d*$/)[0] eq ($self->{alias} =~ /^(.+?)\d*$/)[0];
 	}
@@ -397,7 +394,7 @@ sub check_existing_alias {
 sub TO_JSON {
 	my $self = shift;
 	my $tmp = \%{$self};
-	return $json->encode($tmp);
+	return $self->{app}->json->encode($tmp);
 }
 
 sub as_hash {

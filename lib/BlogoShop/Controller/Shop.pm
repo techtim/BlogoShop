@@ -206,7 +206,7 @@ sub group {
 
 	my $filter = {alias => $self->stash('group')};
 
-	my $group = BlogoShop::Group->new($self->stash('group'));
+	my $group = BlogoShop::Group->new($self);
 
 	$filter = {active => 1};
 	$filter->{'$or'} = [{'subitems.qty' => {'$gt' => 0}}, {'qty' => {'$gt' => 0}}];

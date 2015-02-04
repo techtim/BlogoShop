@@ -5,6 +5,7 @@ use Mojo::Base 'Mojolicious';
 use MongoDB;
 
 use JSON::XS;
+use YAML::XS;
 
 use BlogoShop::Articles;
 use BlogoShop::Admins;
@@ -12,7 +13,7 @@ use BlogoShop::Utils;
 use BlogoShop::Item;
 use BlogoShop::Qiwi;
 use BlogoShop::Group;
-
+use Data::Dumper;
 {
 	no warnings 'redefine'; 
 	*MongoDB::OID::TO_JSON = sub {$_[0]->value};
@@ -29,7 +30,11 @@ sub startup {
 		class     => 'YAML::XS',
 		helper	  => 'config'
 	});
-	
+	# my $conf = YAML::XS::LoadFile('BlogoShop.yml');
+	# $self->defaults(config => $self->config)->config(YAML::XS::LoadFile('BlogoShop.yml'))->config;
+	# (ref $self)->attr(config 	=> sub { return YAML::XS::LoadFile('BlogoShop.yml') } );
+	# $self->helper(config => sub { shift->app->config });
+# warn  $self->config('log_level');
 	# Log conf
 	$self->log->level($self->config('log_level'));
 	$self->log->path('log/development.log');
@@ -47,7 +52,7 @@ sub startup {
 	#	$self->plugin('request_timer') if $self->config('log_level') eq 'debug';
 
 	# Make signed cookies secure
-	$self->secret($self->config('cookie_secret'));
+	$self->secrets([$self->config('cookie_secret')]);
 	$self->sessions->cookie_name($self->config('cookie_name'));
 	$self->sessions->default_expiration($self->config('cookie_expiration'));
 	$self->sessions->cookie_domain('.'.$self->config('domain_name'));
@@ -68,10 +73,10 @@ sub startup {
 	(ref $self)->attr(admins 	=> sub {return BlogoShop::Admins->new($self->db, $self->config)});
 	(ref $self)->attr(articles 	=> sub {return BlogoShop::Articles->new($self->db, $self->config)}); 
 	(ref $self)->attr(items 	=> sub {return BlogoShop::Item->new($self, $self->stash('id'))});
-	(ref $self)->attr(groups	=> sub {return BlogoShop::Group->new()});
-	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new()});
+	(ref $self)->attr(groups	=> sub {return BlogoShop::Group->new($self)});
+	(ref $self)->attr(courier 	=> sub {return BlogoShop::Courier->new($self)});
 	(ref $self)->attr(conf 	=> sub {return $self->config});
-	(ref $self)->attr(qiwi 	=> sub {return BlogoShop::Qiwi->new()});
+	(ref $self)->attr(qiwi 	=> sub {return BlogoShop::Qiwi->new($self)});
 
 	# Helpers part
 	$self->helper(db 		=> sub { shift->app->db });
@@ -84,7 +89,7 @@ sub startup {
 	$self->helper(uri_escape => sub {return URI::Escape::uri_escape_utf8(pop)});
 	# $self->helper(config 	=> sub { shift->app->config });
 
-	my $utils = BlogoShop::Utils->new();
+	my $utils = BlogoShop::Utils->new($self);
 	$self->helper('utils' => sub {return $utils});
 	
 	(ref $self)->attr(
@@ -103,18 +108,18 @@ sub startup {
 	});
 
 	# Security stuff 
-	$self->plugin('CSRFProtect');
-	# turn of js in this plug, couse we make it better in j.js
-	$self->helper(jquery_ajax_csrf_protection => sub {
-		my $c = shift;
-		my $token = $c->session('csrftoken') || md5_sum( md5_sum( time() . {} . rand() . $$ ) );
-		$c->session( 'csrftoken' => $token );
-		my $js = '<meta name="csrftoken" content="' . $token . '"/>';
-		Mojo::ByteStream::b($js);
-	} );
+	# $self->plugin('CSRFProtect');
+	# # turn of js in this plug, couse we make it better in j.js
+	# $self->helper(jquery_ajax_csrf_protection => sub {
+	# 	my $c = shift;
+	# 	my $token = $c->session('csrftoken') || md5_sum( md5_sum( time() . {} . rand() . $$ ) );
+	# 	$c->session( 'csrftoken' => $token );
+	# 	my $js = '<meta name="csrftoken" content="' . $token . '"/>';
+	# 	Mojo::ByteStream::b($js);
+	# } );
 
 	# Header plug for subdomains
-	$self->plugin('HeaderCondition');
+	#$self->plugin('HeaderCondition');
 
 	# Setup default service collections in DB
 	$utils->setup_service_collections();
@@ -334,4 +339,4 @@ sub startup {
 #	    mojo             => $self,
 #	    template_options => { },
 #    );
-#    $self->renderer->add_handler(tx => $xslate);                                                                                                                    
+#    $self->renderer->add_handler(tx => $xslate);

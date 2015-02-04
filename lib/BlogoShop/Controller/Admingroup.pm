@@ -176,7 +176,7 @@ sub create {
 sub edit {
     my $c= shift;
 
-    my $group = BlogoShop::Group->new($c->stash('id'));
+    my $group = BlogoShop::Group->new($c);
     
     if (!$group->{_id}) {
         $c->flash('error_message' => ['no_group']);

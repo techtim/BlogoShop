@@ -19,21 +19,22 @@ use constant {
 };
 
 sub new {
-	my $class= shift;
-	my $self = {}; 
-	# $self->{redis} = Redis->new;
+	my ($class, $app) = @_;
+	my $self = {app => $app}; 
+
 	$self->{months} = [qw(января февраля марта апреля мая июня июля августа сентября октября ноября декабря)];
 	bless $self, $class; 
 }
 
 sub setup_service_collections {
+	my $self = shift;
 
 	foreach my $col (@{+SERVICE_COLLECTIONS}) {
-		my $check = BlogoShop->db->get_collection($col)->count({});
-		unless ($check && ref BlogoShop->conf->{$col} eq 'ARRAY') {
+		my $check = $self->{app}->db->get_collection($col)->count({});
+		unless ($check && ref $self->{app}->conf->{$col} eq 'ARRAY') {
 			warn 'SETUP SERVICE COLLECTION: '.$col;
-			foreach (@{BlogoShop->conf->{$col}}) {
-				BlogoShop->db->get_collection($col)->save($_) 
+			foreach (@{$self->{app}->conf->{$col}}) {
+				$self->{app}->db->get_collection($col)->save($_) 
 			}
 		}
 	}
@@ -283,11 +284,12 @@ sub get_active_categories {
 
 sub get_article_types {
 	my ($self, $db) = @_;
-	return { map {$_->{_id} => $_->{name} } BlogoShop->db->types->find({})->all };
+	return { map {$_->{_id} => $_->{name} } $self->{app}->db->types->find({})->all };
 }
 
 sub get_items_for_index {
-	return [BlogoShop->db->items->find({show_on_main => {'$exists'=>1}})->sort({_id=>1})->all];
+	my $self = shift;
+	return [$self->{app}->db->items->find({show_on_main => {'$exists'=>1}})->sort({_id=>1})->all];
 }
 
 sub get_items_from_catalog {
@@ -373,6 +375,7 @@ sub render_article {
 
 # pop controller
 sub is_mobile {
+	my $self = shift;
 	my $agent = pop->req->headers->{headers}->{'user-agent'}->[0]->[0];
 	return 0 if !$agent;
 	return ( 
@@ -418,7 +421,7 @@ sub check_cart {
 sub get_global_currencies {
 	my ($self) = @_;
 
-	return { map { $_->{_id} => $_->{value} } BlogoShop->db->global_currencies->find({})->all };
+	return { map { $_->{_id} => $_->{value} } $self->{app}->db->global_currencies->find({})->all };
 }
 
 sub update_global_currencies {
@@ -427,7 +430,7 @@ sub update_global_currencies {
 	return if ref $g_curr ne 'HASH';
 
 	foreach (keys %$g_curr) {
-		BlogoShop->db->global_currencies->update( {_id => $_}, {'$set' => {value => 0+$g_curr->{$_}}} )
+		$self->{app}->db->global_currencies->update( {_id => $_}, {'$set' => {value => 0+$g_curr->{$_}}} )
 			if $g_curr->{$_} =~ m!^([\d\.]+)$!;
 	}
 	$self->update_currency_prices();
@@ -438,7 +441,7 @@ sub update_global_currencies {
 sub update_currency_prices {
 	my $self = shift;
 
-	my $items = [BlogoShop->db->items->find({})->all];
+	my $items = [$self->{app}->db->items->find({})->all];
 
 	my $global_currencies = $self->get_global_currencies();
 
@@ -450,7 +453,7 @@ sub update_currency_prices {
 # warn $it->{_id}.' : '. $it->{price} . ' -> curr pr: '. $it->{currency_price}. ' curr: ' . $global_currencies->{$it->{currency}}. ' = '.
 # ceil($it->{currency_price} * $global_currencies->{$it->{currency}}/10)*10;
 
-		BlogoShop->db->items->update(
+		$self->{app}->db->items->update(
 			{_id => MongoDB::OID->new(value => ''.$it->{_id})}, 
 			{'$set' => { 
 				price => $new_price,

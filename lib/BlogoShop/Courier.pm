@@ -19,10 +19,10 @@ use constant {
 
 
 sub new {
-	my ($class, $config) = @_;
+	my ($class, $ctrl) = @_;
 	my $self = {};
 	$self->{ua} = Mojo::UserAgent->new();
-	$self->{config} = BlogoShop->conf;
+	$self->{config} = $ctrl->conf;
 
 	_auth($self);
 	bless $self, $class;
