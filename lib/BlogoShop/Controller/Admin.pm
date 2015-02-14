@@ -135,7 +135,7 @@ sub create_admin {
             handler => 'mail',
 		);
 
-		$new_admin->{pass} = sha256	_hex($new_admin->{pass});
+		$new_admin->{pass} = sha256_hex($new_admin->{pass});
 
 		$self->admins->add_admin($new_admin);
 

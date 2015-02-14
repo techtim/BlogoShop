@@ -108,15 +108,15 @@ sub startup {
 	});
 
 	# Security stuff 
-	# $self->plugin('CSRFProtect');
-	# # turn of js in this plug, couse we make it better in j.js
-	# $self->helper(jquery_ajax_csrf_protection => sub {
-	# 	my $c = shift;
-	# 	my $token = $c->session('csrftoken') || md5_sum( md5_sum( time() . {} . rand() . $$ ) );
-	# 	$c->session( 'csrftoken' => $token );
-	# 	my $js = '<meta name="csrftoken" content="' . $token . '"/>';
-	# 	Mojo::ByteStream::b($js);
-	# } );
+	$self->plugin('CSRFProtect');
+	# turn of js in this plug, couse we make it better in j.js
+	$self->helper(jquery_ajax_csrf_protection => sub {
+		my $c = shift;
+		my $token = $c->session('csrftoken') || md5_sum( md5_sum( time() . {} . rand() . $$ ) );
+		$c->session( 'csrftoken' => $token );
+		my $js = '<meta name="csrftoken" content="' . $token . '"/>';
+		Mojo::ByteStream::b($js);
+	} );
 
 	# Header plug for subdomains
 	#$self->plugin('HeaderCondition');

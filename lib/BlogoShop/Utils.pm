@@ -45,42 +45,43 @@ sub translit($)
 { 
 	my ($self, $str, $for_url) = @_;
 	return '' if !$str;
-	$_ = $for_url ? lc($str) : $str;
+	my $tmp = $str;
+    $_ = $for_url ? lc($tmp) : $tmp;
 
-	s/\s+|\//_/g if $for_url; 
-	s/\"|\'//g if $for_url; 
-	s/ъ|ь|Ъ|Ь|//g if $for_url;
-	
+    s/\"|\'|\&|\;//g if $for_url;
+    s/\s+|\//_/g if $for_url;
+    s/ъ|ь|Ъ|Ь|//g if $for_url;
+
 	s/Сх/Sh/; s/сх/sh/; s/СХ/SH/;
 	s/Ш/Sh/g; s/ш/sh/g;
-	
+
 	s/Сцх/Sch/; s/сцх/sch/; s/СЦХ/SCH/;
 	s/Щ/Sch/g; s/щ/sch/g;
-	
+
 	s/Цх/Ch/; s/цх/ch/; s/ЦХ/CH/;
 	s/Ч/Ch/g; s/ч/ch/g;
-	
+
 	s/Йа/Ja/; s/йа/ja/; s/ЙА/JA/;
 	s/Я/Ja/g; s/я/ja/g;
-	
+
 	s/Йо/Jo/; s/йо/jo/; s/ЙО/JO/;
 	s/Ё/Jo/g; s/ё/jo/g;
-	
+
 	s/Йу/Ju/; s/йу/ju/; s/ЙУ/JU/;
 	s/Ю/Ju/g; s/ю/ju/g;
-	
+
 	s/Э/E/g; s/э/e/g;
 	s/Е/E/g; s/е/e/g;
-	
+
 	s/Зх/Zh/g; s/зх/zh/g; s/ЗХ/ZH/g;
 	s/Ж/Zh/g; s/ж/zh/g;
-	
-	tr/
+
+    tr/
 	абвгдзийклмнопрстуфхцъыьАБВГДЗИЙКЛМНОПРСТУФХЦЪЫЬ/
 	abvgdzijklmnoprstufhc\"y\'ABVGDZIJKLMNOPRSTUFHC\"Y\'/;
-	
-	$str = $_;
-	return $str;
+
+	$tmp = $_;
+	return $tmp;
 }
 
 sub get_polls {

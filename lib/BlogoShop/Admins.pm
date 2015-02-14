@@ -76,7 +76,7 @@ sub add_admin {
 sub checkIsUnique {
 	my ($self, $new_admin) = @_;
 	return 'no params' if !$new_admin;
-	my $filter->{'$or'} = [map {$_ => $new_admin->{$_}} qw(login email)];
+	my $filter->{'$or'} = [map {{$_ => $new_admin->{$_}}} qw(login email)];
 	return 0 if $self->{db}->get_collection(COLLECTION)->find_one($filter);
 	return 1;
 }
