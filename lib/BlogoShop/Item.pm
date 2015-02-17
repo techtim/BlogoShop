@@ -99,10 +99,10 @@ sub save {
 			local $self->{_id};
 			delete $self->{_id};
 			$self->_update($ctrl);
-			warn 'UPD:';#. $ctrl->dumper($self->as_hash);
+			# warn 'UPD:';#. $ctrl->dumper($self->as_hash);
 			$self->{app}->db->items->update({_id => MongoDB::OID->new(value => ''.delete $self->{id})}, {'$set' => {%{$self->as_hash}}});
 		} else {
-			warn 'SAVE:';#.$ctrl->dumper($self->as_hash);
+			# warn 'SAVE:';#.$ctrl->dumper($self->as_hash);
 			$self->{_id} = $self->{app}->db->items->save($self->as_hash);
 		}
 	}
@@ -199,7 +199,7 @@ sub _parse_data {
 
 	# ( $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : () ) foreach keys OPT_SUBITEM_PARAMS;
 	map {$self->{$_} = $ctrl->req->param($_)} grep {$ctrl->req->param($_)} keys OPT_SUBITEM_PARAMS;
-	$self->{recomend_items} = [$ctrl->req->param('recomend_items')];
+	$self->{recomend_items} = @{$ctrl->req->every_param('recomend_items')};
 
 	# warn $ctrl->dumper($ctrl->req->params());
 	
@@ -242,6 +242,7 @@ sub _parse_data {
 	
 	$self->{qty} 		+= 0;
 	$self->{size} 		.= '';
+	$self->{currency}	||= $ctrl->config('main_currency');
 	$self->{price} 		= $ctrl->stash('global_currencies')->{$self->{currency}} * $self->{currency_price};
 	$self->{total_qty} 	= $self->{qty}; 
 	$self->{subitems}	= $self->_get_subitems($ctrl);
@@ -254,7 +255,10 @@ sub _parse_data {
 	push @$error_message, 'no_category' if !$self->{category};
 	push @$error_message, 'no_name' if !$self->{name};
 
+	
 	$self->{images} = @$error_message==0 ? $self->_get_images($ctrl, 'image') : [];
+	warn "images AFT". $ctrl->dumper($self->{images});
+
 	$self->{preview_image} = $self->{images}->[0]->{tag} if @{$self->{images}} > 0 && !$self->{preview_image};
 	push @$error_message, 'no_price' if !$self->{price};
 	push @$error_message, 'no_preview_image' if !$self->{preview_image};
@@ -269,10 +273,10 @@ sub _get_images {
 	my ($self, $ctrl, $name) = @_;
 	
 	my $images = [];
-	my @image_descr = $ctrl->req->param($name.'_descr');
-	my @image_size = $ctrl->req->param($name.'_size');
-	my @image_subitem = $ctrl->req->param($name.'_subitem');
-	my %image_delete = map {$_ => 1} $ctrl->req->param($name.'_delete');
+	my @image_descr = @{$ctrl->req->every_param($name.'_descr')};
+	my @image_size = @{$ctrl->req->every_param($name.'_size')};
+	my @image_subitem = @{$ctrl->req->every_param($name.'_subitem')};
+	my %image_delete = $ctrl->req->param($name.'_delete') ? map {$_ => 1} @{$ctrl->req->every_param($name.'_delete')} : ();
 
 	# Collect new files
 	foreach my $file ($ctrl->req->upload($name)) {
@@ -302,7 +306,7 @@ sub _get_images {
 	}
 	
 	# Collect already uploaded files
-	foreach ($ctrl->req->param($name.'_tag')) {
+	foreach (@{$ctrl->req->every_param($name.'_tag')}) {
 		my $tmp = {tag => $_, descr => shift @image_descr, size => 0 + shift @image_size, subitem => shift @image_subitem};
 		$tmp->{descr} =~ s/\"/&quot;/g if $tmp->{descr};
 		push @$images, $tmp unless $image_delete{$_}; 

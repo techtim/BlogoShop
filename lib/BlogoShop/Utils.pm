@@ -163,31 +163,31 @@ sub timestamp_from_date {
 }
 
 sub get_images {
-	my ($self, $controller, $name, $path) = @_;
+	my ($self, $ctrl, $name, $path) = @_;
 	
 	return 0 if !$path || !$name;
 	my $images = [];
-	my @image_descr = $controller->req->param($name.'_descr');
-	
-	my %image_delete = map {$_ => 1} $controller->req->param($name.'_delete');
-	
+	my @image_descr = @{$ctrl->req->every_param($name.'_descr')};
+	my %image_delete = $ctrl->req->param($name.'_delete') ?
+		map {$_ => 1} @{$ctrl->req->every_param($name.'_delete')} : ();
+
 	# Collect already uploaded files
-	foreach ($controller->req->param($name.'_tag')) {
+	foreach (@{$ctrl->req->every_param($name.'_tag')}) {
 		my $tmp = {tag => $_, descr => shift @image_descr};
 		$tmp->{descr} =~ s/\"/&quot;/g;
 		push @$images, $tmp unless $image_delete{$_}; 
 	}
-	
+
 	# Collect new files
-	foreach my $file ($controller->req->upload($name)) {
+	foreach my $file ($ctrl->req->upload($name)) {
 		next unless $file->filename || $file->filename =~ /\.(jpg|jpeg|bmp|gif|png|tif|swf|flv)$/i;;
 		
 		my $image = {};
 		$image->{tag} = (time() =~ /(\d{5})$/)[0].'_'.lc($self->translit($file->filename));
 		$image->{tag} =~ s![\s\/\\]+!_!g;
 		$image->{tag} =~ s![^\w\d\.\_]+!!g;
-		
-		my $folder_path = $controller->config('image_dir').$path;
+
+		my $folder_path = $ctrl->config('image_dir').$path;
 		$folder_path =~ s/\/?$/\//;
 		
 		make_path($folder_path) or die 'Error on creating image folder:'.$folder_path.' -> '.$! unless (-d $folder_path);

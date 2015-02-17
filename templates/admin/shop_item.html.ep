@@ -44,13 +44,12 @@
 			</li>
 	    </ul>
 	    
-	    <div class='caption__row'>
-	    	<h2 class='caption fl'>Новый товар</h2>
+	    <div class='caption__row active'>
 
 			<a class='fake__checkbox active <%== ($active ? 'checked' : 'inactive') %>' href='#'>
 				<input type="checkbox" name="active" value='1' <%== "checked" if $active %>/>
 			</a>
-		
+			<a class='button green fr with__margin__bottom right' href='#' data-role='submit'>Сохранить товар</a>
     		<a class='button gray light fr with__margin__bottom centered' href='<%== $url.'/copy' if $action_type ne 'add' %>' data-role='create__copy'>Создать копию</a>
     	</div>
 		
@@ -120,9 +119,9 @@
 						&mdash;
 						<input type="text" name="sale_end" value="<%= $sale->{sale_end} %>" />
 
-						<a class='fake__checkbox button gray <%== $sale->{sale_active} && $sale->{sale_active} ne '' ? 'checked' : '' %>' href='#'>
+						<a class='fake__checkbox button gray <%== $sale->{sale_active} ne '' ? 'checked' : '' %>' href='#'>
 							Старт
-							<input type="checkbox" name='sale_active' value='1' <%== $sale->{sale_active} && $sale->{sale_active} ne '' ? 'checked="checked"' : '' %> />
+							<input type="checkbox" name='sale_active' value='1' <%== $sale->{sale_active} ne '' ? 'checked="checked"' : '' %> />
 						</a>
 					</div>
 				</div>
@@ -362,7 +361,7 @@
 	       		% }
 	       	% }
 	       	
-			<a class='button gray submit__form' href='#' data-role='submit'>Сохранить товар</a>
+			<a class='button green submit__form' href='#' data-role='submit'>Сохранить товар</a>
 		</div>
 
     % end

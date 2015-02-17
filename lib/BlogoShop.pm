@@ -141,7 +141,7 @@ sub startup {
 	$self->hook(before_dispatch => sub {
 		my $c = shift;
 		$c->stash(%{$c->app->utils->check_cart($c)});
-		if($c->req->url->path =~ m!^(/soap)!){
+		if ($c->req->url->path =~ m!^(/soap)!){
            $c->session('csrftoken' => 1);
            $c->param('csrftoken' => 1); 
 		}
@@ -180,8 +180,6 @@ sub startup {
 	$r->route('/orders_cities')->to('controller-ajax#orders_cities');
 	$r->route('/bill')->to('controller-qiwi#bill');
 	$r->route('/soap')->to('controller-qiwi#soap');
-
-#    $self->routes->get('controller-shop#list')->over( headers => {Host => 'shop.'.$self->config('domain_name')} );
 
 	# --BLOG--
 	# my  $blog = $r->route->over( headers => {Host => 'blog.'.$self->config('domain_name')} );
@@ -232,6 +230,8 @@ sub startup {
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/search')->to('controller-Adminshop#show', search => 1);
+		$admin_bridge->route('/shop/multi')->via('post')->to('controller-Adminshop#multi_act');\
+		$admin_bridge->route('/shop/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/:category', category => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route(
 			'/shop/:category/:subcategory',	category => qr![^\{\}\[\]/]+!, subcategory => qr![^\{\}\[\]/]+!

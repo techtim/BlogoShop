@@ -100,12 +100,12 @@ sub get_images {
 	my ($self, $name, $article) = @_;
 	
 	my $images = [];
-	my @image_descr = $self->req->param($name.'_descr');
-	my @image_size = $self->req->param($name.'_size') || (0)x(0+@image_descr);
-	my %image_delete = map {$_ => 1} $self->req->param($name.'_delete');
+	my @image_descr = @{$self->req->every_param($name.'_descr')};
+	my @image_size = @{$self->req->every_param($name.'_size')};
+	my %image_delete = $self->req->param($name.'_delete') ? map {$_ => 1} @{$self->req->every_param($name.'_delete')} : ();
 
 	# Collect already uploaded files
-	foreach ($self->req->param($name.'_tag')) {
+	foreach (@{$self->req->every_param($name.'_tag')}) {
 		my $tmp = {tag => $_, descr => shift @image_descr, size => 0+shift @image_size};
 		$tmp->{descr} =~ s/\"/&quot;/g;
 		push @$images, $tmp unless $image_delete{$_}; 

@@ -147,7 +147,7 @@ sub multi_act {
     my ($c) = @_;
 
     my @ids = $c->req->param('item');
-
+warn 'ACT:'. $c->req->param('action'). $c->dumper(@ids);
     if ($c->req->param('action') && @ids > 0) {
         if ($c->req->param('action') =~ m/^(on|off)$/ ) {
             $c->db->items->update({ _id => {'$in' => [ map {MongoDB::OID->new(value => $_)} @ids]} }, 
