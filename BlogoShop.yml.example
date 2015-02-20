@@ -29,7 +29,7 @@ nginx_res_item_main: '/res/338'
 nginx_res_banner: '/res/400'
 
 cookie_name: 'BaristaShop'
-cookie_domain: '.barist-shop.ru'
+cookie_domain: '.barista-shop.ru'
 cookie_expiration: 604800 # week
 cookie_secret: '$w3Etx0XC0ofFeKa'
 
@@ -69,6 +69,8 @@ russian_post_api_key: '3b618f764380b8cb999c0e9a14de2ca4'
 russian_post_api_url: 'http://russianpostcalc.ru/api_v1.php'
 russian_post_api_pass: 'suck25'
 russian_post_index: 103070
+
+main_currency: rub
 
 global_currencies:
 - _id: usd

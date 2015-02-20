@@ -230,7 +230,7 @@ sub startup {
 		# Shop part
 		$admin_bridge->route('/shop')->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/search')->to('controller-Adminshop#show', search => 1);
-		$admin_bridge->route('/shop/multi')->via('post')->to('controller-Adminshop#multi_act');\
+		$admin_bridge->route('/shop/multi')->via('post')->to('controller-Adminshop#multi_act');
 		$admin_bridge->route('/shop/brand/:brand', brand => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route('/shop/:category', category => qr![^\{\}\[\]/]+!)->to('controller-Adminshop#show');
 		$admin_bridge->route(

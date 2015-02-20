@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use utf8;
 use Encode qw(decode_utf8);
-use XML::XPath;
+# use XML::XPath;
 use XML::Simple;
 use Digest::MD5 qw(md5_hex);
 use BlogoShop::Item;
