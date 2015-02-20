@@ -40,6 +40,7 @@
            {{/if}}
         </dd>
     </dl>
+
 </script>
 
 <div class='content__section shop__item__section' itemscope itemtype="http://data-vocabulary.org/Product">
