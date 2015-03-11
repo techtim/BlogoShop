@@ -6,6 +6,7 @@ use MongoDB;
 
 use JSON::XS;
 use YAML::XS;
+use POSIX qw(ceil);
 
 use BlogoShop::Articles;
 use BlogoShop::Admins;
@@ -85,8 +86,9 @@ sub startup {
 	$self->helper(items 	=> sub { shift->app->items });
 	$self->helper(groups 	=> sub { shift->app->groups });
 	$self->helper(courier 	=> sub { shift->app->courier });
-	$self->helper(qiwi 	=> sub { shift->app->qiwi });
+	$self->helper(qiwi  	=> sub { shift->app->qiwi });
 	$self->helper(uri_escape => sub {return URI::Escape::uri_escape_utf8(pop)});
+	$self->helper(ceil  	=> sub {return POSIX::ceil(pop)});
 	# $self->helper(config 	=> sub { shift->app->config });
 
 	my $utils = BlogoShop::Utils->new($self);

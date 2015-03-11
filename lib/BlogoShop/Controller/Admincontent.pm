@@ -90,32 +90,32 @@ sub list_categories {
         # $self->dumper( $self->app->db->categories->find()->fields({pos=>1, subcats=>1})->sort({pos=>1})->all);
     }
     $self->app->db->stuff->remove({_id => 'active_categories'}) if $self->req->method eq 'POST';
-    $self->redirect_to('admin/categories');
+    $self->redirect_to('/admin/categories');
 }
 
 sub list_brands {
     my $self = shift;   
     my $error_message = [];
     
-    return $self->redirect_to('admin/brands') if $self->req->param('cancel');
+    return $self->redirect_to('/admin/brands') if $self->req->param('cancel');
     
     if ($self->req->param('delete')) {
         $self->app->db->brands->remove({_id => ($self->req->param('delete')=~m/([^\{\}\[\]]+)/)[0]});
-        return $self->redirect_to('admin/brands');
+        return $self->redirect_to('/admin/brands');
     }
     
     if ($self->stash('do') && $self->stash('do') eq 'edit') {
         my $brand = $self->stash('brand') || $self->req->param('brand') || '';
         $brand = $self->app->db->brands->find_one({_id => $brand});
-        return $self->redirect_to('admin/brands') if !$brand;
+        return $self->redirect_to('/admin/brands') if !$brand;
         $self->stash(%$brand);
     
     } elsif ($self->stash('do') && $self->stash('do') eq 'active') {
         my $brand = $self->stash('brand') || $self->req->param('brand') || '';
         $brand = $self->app->db->brands->find_one({_id => $brand});
-        return $self->redirect_to('admin/brands') if !$brand;
+        return $self->redirect_to('/admin/brands') if !$brand;
         $brand = $self->app->db->brands->update({_id => $brand->{_id}}, { '$set' => {active => $brand->{active}?0:1 }});
-        return $self->redirect_to('admin/brands');
+        return $self->redirect_to('/admin/brands');
 
     } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         my $brand = {};
@@ -150,7 +150,7 @@ sub list_brands {
                 $brand->{_id} = $id;
                 $self->app->db->brands->save($brand);
             }
-            return $self->redirect_to('admin/brands/edit/'.$id);
+            return $self->redirect_to('/admin/brands/edit/'.$id);
         } else {
             $self->stash(error_message => $error_message);
             $self->stash(%$brand);
@@ -173,28 +173,28 @@ sub list_banners {
     my $self = shift;	
     my $error_message = [];
 
-    return $self->redirect_to('admin') if $self->req->param('cancel');
-    return $self->redirect_to('admin/banners/680') if !$self->stash('type') && $self->req->method ne 'POST';
+    return $self->redirect_to('/admin') if $self->req->param('cancel');
+    return $self->redirect_to('/admin/banners/680') if !$self->stash('type') && $self->req->method ne 'POST';
 
     my $banner = {};
 
     if ($self->req->param('delete')) {
         $self->app->db->banners->remove({_id => MongoDB::OID->new(value => ($self->req->param('delete')=~m/([^\{\}\[\]]+)/)[0])});
-        return $self->redirect_to('admin/banners');
+        return $self->redirect_to('/admin/banners');
     }
 
     if ($self->stash('do') && $self->stash('do') eq 'edit') {
         my $banner_id = $self->stash('banner') || $self->req->param('banner') || '';
         $banner = $self->app->db->banners->find_one({_id => MongoDB::OID->new(value => $banner_id)});
-        return $self->redirect_to('admin/banners') if !$banner;
+        return $self->redirect_to('/admin/banners') if !$banner;
         $self->stash(%$banner);
 
     } elsif ($self->stash('do') && $self->stash('do') eq 'active') {
         my $brand = $self->stash('brand') || $self->req->param('brand') || '';
         $brand = $self->app->db->brands->find_one({_id => $brand});
-        return $self->redirect_to('admin/brands') if !$brand;
+        return $self->redirect_to('/admin/brands') if !$brand;
         $brand = $self->app->db->brands->update({_id => $brand->{_id}}, { '$set' => {active => $brand->{active}?0:1 }});
-        return $self->redirect_to('admin/brands');
+        return $self->redirect_to('/admin/brands');
 
     } elsif ($self->stash('do') && $self->stash('do') eq 'save')  { 
         $banner->{$_} = $self->req->param($_) foreach BANNER_PARAMS;
@@ -220,7 +220,7 @@ sub list_banners {
                 $id = $self->app->db->banners->save($banner);
                 #                warn 'banner SAVE '. $self->dumper($banner);
             }
-            return $self->redirect_to('admin/banners/'.$banner->{type}.'/edit/'.$id);
+            return $self->redirect_to('/admin/banners/'.$banner->{type}.'/edit/'.$id);
         } else {
             $self->stash('error_message' => $error_message);
             $self->stash(%$banner);

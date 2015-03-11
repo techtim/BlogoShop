@@ -36,6 +36,7 @@
 <br><br>
 <b>Сумма заказа:</b> <%= $sum %> P
 <br><br>
+Телефон: stash('phone')<br>
 Адрес: <%= join ' ,' , (stash('country'), stash('city'), stash('zip'), stash('address')) %> &nbsp;<%= join ' - ' , (stash('dom'), stash('korp'), stash('flat')) %>
 </body>
 </html>

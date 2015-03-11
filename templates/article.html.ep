@@ -58,14 +58,14 @@
     <ul class='post__navigation clearfloat'>
        	% if ($prev_article->{name}) {
         <li>
-            <a class='prev' href='/<%== join '/', $prev_article->{type}, $prev_article->{alias} %>' class='clearfloat'>
+            <a class='prev' href='/<%== join '/blog/', $prev_article->{type}, $prev_article->{alias} %>' class='clearfloat'>
 				<%= $prev_article->{name} %>
             </a>
         </li>
         % }
         % if ($next_article -> {name}) {
         <li class='next'>
-            <a class='next' href='/<%== join '/', $next_article->{type}, $next_article->{alias} %>' class='clearfloat'>
+            <a class='next' href='/<%== join '/blog/', $next_article->{type}, $next_article->{alias} %>' class='clearfloat'>
             	<%= $next_article->{name} %>
             </a>
         </li>

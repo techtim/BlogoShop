@@ -363,13 +363,13 @@ sub render_article {
 		while ($text =~ s/<gallery>.+?<\/gallery>/$controller->render("includes\/gallery", partial => 1, img_url => $img_url, gallery => $galleries[$i++])/gse) {;} 
 	}
 	
-	$text =~ s/<img="([^"]+)">/$controller->render("includes\/image", partial => 1, img_url => $img_url.$1, img_descr => $images{$1}->{descr})/eg;
+	$text =~ s/<img="([^"]+)">/$controller->render_to_string("includes\/image", partial => 1, img_url => $img_url.$1, img_descr => $images{$1}->{descr})/eg;
 	
-	$text =~ s/<flash="([^"]+)" ?height="([\d%]+)">/$controller->render("includes\/flash", partial => 1, flash_url => $img_url.$1, obj_id => "id-$1", height => $2||100)/eg;
+	$text =~ s/<flash="([^"]+)" ?height="([\d%]+)">/$controller->render_to_string("includes\/flash", partial => 1, flash_url => $img_url.$1, obj_id => "id-$1", height => $2||100)/eg;
 	
-	$text =~ s/<video="([^"]+)">/$controller->render("includes\/video", partial => 1, video_src => $img_url.$1, video_id => md5_hex($1))/eg;
+	$text =~ s/<video="([^"]+)">/$controller->render_to_string("includes\/video", partial => 1, video_src => $img_url.$1, video_id => md5_hex($1))/eg;
 	
-	while ($text =~ s/<bq>(.+?)<\/bq>/$controller->render("includes\/blockquote", partial => 1, quote_text => $1)/sge) {;} 
+	while ($text =~ s/<bq>(.+?)<\/bq>/$controller->render_to_string("includes\/blockquote", partial => 1, quote_text => $1)/sge) {;} 
 	
 	return $text;
 }

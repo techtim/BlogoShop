@@ -129,7 +129,7 @@
                             <label>Тэги:</label>
                         </td>
                         <td>
-                            <input type="text" name="tags" size="120" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>" "/>(через&nbsp;","&nbsp;или&nbsp;";")
+                            <input type="text" name="tags" size="120" value="<%= join ', ', @$tags if ref $tags eq 'ARRAY' %>"/>(через&nbsp;","&nbsp;или&nbsp;";")
                         </td>
                     </tr>
                     <tr>
@@ -239,7 +239,7 @@
 					</thead>
 
 					<tbody>
-
+						% foreach (1..3) {
 							<tr>
 								<td width="100"></td>
 								<td>
@@ -249,11 +249,13 @@
 									<input type="file" name="image"/>
 								</td>
 							</tr>
+						% }
 					</tbody>
 				</table>
-				<p id="add-image-upload-fields-wrapper">
+
+				<!-- <p id="add-image-upload-fields-wrapper">
 					<span id="add-image-upload-fields">Добавить поля для заливки (8 штук!)</span>
-				</p>
+				</p> -->
 			</div>
 
 			<div class="section submit-buttons">
@@ -285,37 +287,6 @@
 		<!-- end FORM -->
 
 		<hr>
-		<!--
-		<div class="section ajax-images">
-
-			<h3>Добавить картинки (через Ajax):</h3>
-
-			<table class="blackhead">
-
-				<thead>
-					<tr>
-						<td width="100"></td>
-						<td width="330">описание</td>
-						<td>файл</td>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr>
-						<td width="100"></td>
-						<td>
-							<input type="text" name="image_descr" size="60"/>
-						</td>
-						<td>
-							<input type="file" name="image"/>
-							<span class="dashed">Добавить!</span>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-		</div>
-		-->
 
 	</div>
 

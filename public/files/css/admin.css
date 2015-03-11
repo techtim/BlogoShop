@@ -2280,6 +2280,7 @@ body {
 
 /* line 2251, admin.scss */
 .banners__list {
+  padding-top: 30px;
   margin-bottom: 20px;
 }
 /* line 2254, admin.scss */

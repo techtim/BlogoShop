@@ -87,7 +87,7 @@ sub list {
 sub add_admin {
 	my $self = shift;
 	
-	$self->redirect_to('admin') if !$self->session()->{admin}->{type} || $self->session()->{admin}->{type} ne 'super'; 
+	$self->redirect_to('/admin') if !$self->session()->{admin}->{type} || $self->session()->{admin}->{type} ne 'super'; 
 
 	$self->render(
 		template => 'admin/add_admin',
@@ -140,7 +140,7 @@ sub create_admin {
 		$self->admins->add_admin($new_admin);
 
 		$self->flash(message => "admin_added" );
-		return $self->redirect_to('admin');		
+		return $self->redirect_to('/admin');		
 	}
 
 }
@@ -195,7 +195,7 @@ sub update_admin {
 			format => 'html',
 		)
 	:	
-		$self->flash(message => 'admin_edited'), $self->redirect_to('admin')
+		$self->flash(message => 'admin_edited'), $self->redirect_to('/admin')
 	;
 }
 

@@ -4,15 +4,19 @@
     <div class='contacts__section fr'>
         <div class='row'>
             <label>АДРЕС:</label>
-            МОСКВА, Хохловский переулок д. 7
+            <span>МОСКВА, Хохловский переулок д. 7</span>
         </div>
         <div class='row'>
             <label>график работы:</label>
-            ПН-ПТ с 10 до 20
+            <span>ПН-ПТ с 10 до 20</span>
         </div>
         <div class='row'>
             <label>ТЕЛЕФОН:</label>
-            <span class='phone'>+7 (999) 807 8584, +7 (985) 172 4306</span>
+            <span class='phone'> +7 (999) 807 8584</span>
+        </div>
+        <div class='row'>
+            <label>Почта:</label>
+            <span class='email'>losbaristas@gmail.com</span>
         </div>
     </div>
 </div>

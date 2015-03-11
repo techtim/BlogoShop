@@ -67,17 +67,17 @@ body.overlayed #overlay {
 }
 /* line 94, style.scss */
 .header__section h1 {
-  height: 80px;
-  width: 350px;
+  height: 85px;
+  width: 360px;
   float: left;
-  margin-top: 12px;
+  margin-top: 5px;
   margin-left: 320px;
   margin-bottom: 6px;
 }
 /* line 102, style.scss */
 .header__section h1 a {
   display: block;
-  height: 77px;
+  height: 80px;
   background: url("../i/header/logo.png") no-repeat;
   text-indent: -9999px;
 }
@@ -99,12 +99,24 @@ body.overlayed #overlay {
 }
 /* line 127, style.scss */
 .header__section .contacts__section {
-  margin-top: 10px;
+  margin-top: 0px;
+}
+
+.header__section .contacts__section span {
+  float: right;
 }
 
 .header__section .contacts__section .phone {
+  margin-top: -2px;
   font-size: 13px;
   font-weight: bold;
+}
+
+.header__section .contacts__section .email {
+  font-size: 13px;
+  margin-top: -2px;
+  font-weight: bold;
+  text-transform: lowercase;
 }
 
 /* line 133, style.scss */
@@ -1256,6 +1268,12 @@ body.overlayed #overlay {
 .shop__information__section .row.on__order dt {
   padding-left: 80px;
 }
+
+.shop__information__section .row.on__call dt {
+  padding-left: 45px;
+  width: 100%;
+}
+
 /* line 1333, style.scss */
 .shop__information__section .row .sizes__section {
   padding-top: 10px;
@@ -1682,6 +1700,14 @@ body.overlayed #overlay {
 .cart__items__list__section {
   position: relative;
   overflow: hidden;
+}
+
+.cart__items__list__section .cart__text {
+  margin-bottom: 16px;
+  margin-left: 20px;
+  color: #333;
+  font-size: 13px;
+  line-height: 17px;
 }
 /* line 1775, style.scss */
 .cart__items__list__section .caption {
@@ -2346,6 +2372,14 @@ body.overlayed #overlay {
   display: none;
 }
 
+.cart__items__list__section .checkout__text {
+  margin-bottom: 16px;
+  color: #333;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+
 /* line 2387, style.scss */
 .footer__section {
   background: #444;
@@ -2420,6 +2454,8 @@ body.overlayed #overlay {
 /* line 2467, style.scss */
 .custom-select {
   position: relative;
+  float: left;
+  padding-right: 20px;
 }
 /* line 2471, style.scss */
 .custom-select.open_list .custom-text {

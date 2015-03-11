@@ -9,6 +9,7 @@ use File::Path qw(make_path remove_tree);
 use File::Copy::Recursive qw( dircopy );
 $File::Copy::Recursive::MaxDepth = 1;
 use Hash::Merge qw( merge );
+
 my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
 
 # flag show_on_main holds timestamp and set item to show on main, timestamp needs to filter the latest selected
@@ -16,9 +17,9 @@ my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
 use constant ITEM_FIELDS => qw(id name alias descr active
 								currency_price currency
 								category subcategory recomend_items 
-								brand tags total_qty
+								brand tags total_qty 
 								sale_start sale_end sale_value sale_active
-								preview_image images on_order
+								preview_image images on_order on_call
 								meta_descr meta_keys show_on_main
 								);
 use constant LIST_FIELDS => map {$_ => 1} qw(name active alias brand brand_name category subcategory subitems total_qty articol
@@ -197,8 +198,9 @@ sub _parse_data {
 
 	$self->{$_} = $ctrl->req->param($_)||$ctrl->stash($_)||'' foreach (ITEM_FIELDS);
 
-	# ( $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : () ) foreach keys OPT_SUBITEM_PARAMS;
-	map {$self->{$_} = $ctrl->req->param($_)} grep {$ctrl->req->param($_)} keys OPT_SUBITEM_PARAMS;
+	( $ctrl->req->param($_) ? $self->{$_} = $ctrl->req->param($_) : delete $self->{$_} ) foreach keys OPT_SUBITEM_PARAMS;
+	# map {$self->{$_} = $ctrl->req->param($_)} grep {$ctrl->req->param($_)} keys OPT_SUBITEM_PARAMS;
+
 	$self->{recomend_items} = @{$ctrl->req->every_param('recomend_items')};
 
 	# warn $ctrl->dumper($ctrl->req->params());
@@ -243,7 +245,7 @@ sub _parse_data {
 	$self->{qty} 		+= 0;
 	$self->{size} 		.= '';
 	$self->{currency}	||= $ctrl->config('main_currency');
-	$self->{price} 		= $ctrl->stash('global_currencies')->{$self->{currency}} * $self->{currency_price};
+	$self->{price} 		= $ctrl->ceil($ctrl->stash('global_currencies')->{$self->{currency}} * $self->{currency_price}/10)*10;
 	$self->{total_qty} 	= $self->{qty}; 
 	$self->{subitems}	= $self->_get_subitems($ctrl);
 

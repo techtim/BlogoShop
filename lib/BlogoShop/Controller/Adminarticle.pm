@@ -89,7 +89,7 @@ sub check_input {
 	push @$error_message, 'no_article_name' if !$article->{name} || $article->{name} eq '';
 	push @$error_message, 'no_article_text' if !$article->{article_text} || $article->{article_text} eq '';
 	$article->{active} = 0,	$self->stash('error_message' => $error_message) if @$error_message > 0; 
-	
+
 	if (@$error_message > 0) {
 		$self->flash('error_message' => $error_message);
 		$self->redirect_to('/admin/article/edit/'.$self->stash('id')) if $self->stash('id');
@@ -101,19 +101,19 @@ sub get_images {
 	
 	my $images = [];
 	my @image_descr = @{$self->req->every_param($name.'_descr')};
-	my @image_size = @{$self->req->every_param($name.'_size')};
+	my @image_size = @{$self->req->every_param($name.'_size')}||();
 	my %image_delete = $self->req->param($name.'_delete') ? map {$_ => 1} @{$self->req->every_param($name.'_delete')} : ();
 
 	# Collect already uploaded files
 	foreach (@{$self->req->every_param($name.'_tag')}) {
-		my $tmp = {tag => $_, descr => shift @image_descr, size => 0+shift @image_size};
+		my $tmp = {tag => $_, descr => shift @image_descr, size => 0+(shift @image_size)||100};
 		$tmp->{descr} =~ s/\"/&quot;/g;
 		push @$images, $tmp unless $image_delete{$_}; 
 	}
-	
+
 	# Collect new files
-	foreach my $file ($self->req->upload($name)) {
-		next unless $file->filename || $file->filename =~ /\.(jpg|jpeg|bmp|gif|png|tif|swf|flv)$/i;;
+	foreach my $file (@{$self->req->uploads($name)}) {
+		next unless $file->filename || $file->filename =~ /\.(jpg|jpeg|bmp|gif|png|tif|swf|flv)$/i;
 		
 		my $image = {};
 		$image->{tag} = (time() =~ /(\d{5})$/)[0].'_'.lc($self->utils->translit($file->filename));
@@ -123,8 +123,9 @@ sub get_images {
 		my $folder_path = $self->config('image_dir').
 		($article->{type} || $self->config('default_img_dir')).'/'.
 		($article->{alias} ? $article->{alias} : $self->config('default_img_dir')).'/';
-		
+		warn '$folder_path='.$folder_path;
 		make_path($folder_path) or die 'Error on creating article folder:'.$folder_path.' -> '.$! unless (-d $folder_path);
+		warn 'move='.$folder_path.$image->{tag};
 		$file->move_to($folder_path.$image->{tag});
 		$image->{size} = $file->size;
 		$image->{descr} = shift @image_descr;

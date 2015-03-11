@@ -5,7 +5,7 @@
 
 <div class='content__section cart__items__list__section'>
 	<h2 class='caption'>Заказ оформлен</h2> 
-	<div class='checkout_text'> 
+	<div class='checkout__text'> 
 		 % if (stash('pay_type') eq 'cash') {
 			Спасибо, что воспользовались услугами нашего интернет-магазина. Ваш заказ принят и отправлен на обработку. Наш менеджер свяжется с вами в ближайшее время для уточнения удобного времени доставки. Стандартный срок доставки нашего магазина 1-4 дня. <b> Оплата заказа производится наличными.</b>
 		% } elsif (stash('pay_type') eq 'yandex_card') {

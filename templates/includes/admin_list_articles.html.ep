@@ -6,7 +6,7 @@
     <li class='title'>страница:</li>
     % foreach my $i (1..$pages) {
     <li>
-        <a href='?<%== (stash 'type' ? 'type='.stash 'type'.'\&amp;' : '') . (stash 'tag' ? 'tag='.stash 'tag'.'\&amp;' : '')."page=$i"%>'><%= $i %></a>
+        <a href='?<%== (stash('type') ? 'type='.stash 'type'.'\&amp;' : '') . (stash('tag') ? 'tag='.stash 'tag'.'\&amp;' : '')."page=$i"%>'><%= $i %></a>
    </li>
     % }
 </ul>

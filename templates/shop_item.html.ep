@@ -95,11 +95,16 @@
 		<dl class="clearfloat row on__order">
 			<dt>Под заказ</dt>
 		</dl>
+	% } elsif (stash('on_call')) {
+		<dl class="clearfloat row on__call">
+			<dt>Для покупки звоните</dt>
+		</dl>
+	% } else {
+		<dl class='clearfloat row submit'>
+			<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
+		</dl>
 	% }
 
-	<dl class='clearfloat row submit'>
-		<a href="<%= $url.'/buy' %>" class='submit__form'>Добавить в корзину</a>
-	</dl>
 	% if (@$tags > 0) {
 	<dl class='clearfloat row tags'>
 		<dt>Таги:</dt>
